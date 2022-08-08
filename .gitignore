@@ -1,9 +1,6 @@
 # typescript
 lib
 
-# pkg
-dist
-
 # npm
 node_modules
 
@@ -15,7 +12,5 @@ node_modules
 *#*
 .#*
 
-.vercel
-
-# idea
-.idea
+# vscode
+.vscode
