@@ -26,3 +26,19 @@ export type Sigma = { kind: "Sigma"; name: string; carType: Exp; cdrType: Exp }
 export type Cons = { kind: "Cons"; car: Exp; cdr: Exp }
 export type Car = { kind: "Car"; target: Exp }
 export type Cdr = { kind: "Cdr"; target: Exp }
+
+export function Sigma(name: string, carType: Exp, cdrType: Exp) {
+  return { kind: "Sigma", name, carType, cdrType }
+}
+
+export function Cons(car: Exp, cdr: Exp) {
+  return { kind: "Cons", car, cdr }
+}
+
+export function Car(target: Exp) {
+  return { kind: "Car", target }
+}
+
+export function Cdr(target: Exp) {
+  return { kind: "Cdr", target }
+}

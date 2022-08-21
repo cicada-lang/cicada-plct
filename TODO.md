@@ -1,4 +1,3 @@
-Exp -- Sigma -- constructors
 Exp -- Clazz or Cls?
 Exp -- Datatype
 Exp -- TypeConstructor
