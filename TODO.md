@@ -1,7 +1,3 @@
-lang/utils/freshen.ts
-
-- remove example test, use `freshen` as example test
-
 Exp
 
 Core
