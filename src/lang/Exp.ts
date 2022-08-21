@@ -1,4 +1,15 @@
-export type Exp = Var | Pi | Ap | Fn | Sigma | Cons | Car | Cdr
+export type Exp =
+  | Var
+  | Pi
+  | Ap
+  | Fn
+  | Sigma
+  | Cons
+  | Car
+  | Cdr
+  | Cls
+  | Obj
+  | Dot
 
 export type Var = { kind: "Var"; name: string }
 
@@ -41,4 +52,31 @@ export function Car(target: Exp) {
 
 export function Cdr(target: Exp) {
   return { kind: "Cdr", target }
+}
+
+// NOTE We can not only use `name` we also need `realName`,
+//   because of `subst` might rename bound variables.
+export type Cls = ClsCons | ClsFulfilled | ClsNull
+export type Obj = { kind: "Obj"; properties: Record<string, Exp> }
+export type Dot = { kind: "Dot"; target: Exp; name: string }
+
+export type ClsCons = {
+  kind: "ClsCons"
+  name: string
+  realName: string
+  propertyType: Exp
+  rest: Cls
+}
+
+export type ClsFulfilled = {
+  kind: "ClsFulfilled"
+  name: string
+  realName: string
+  property: Exp
+  propertyType: Exp
+  rest: Cls
+}
+
+export type ClsNull = {
+  kind: "ClsNull"
 }
