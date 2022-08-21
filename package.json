@@ -1,7 +1,7 @@
 {
-  "name": "@cicada-lang/platinum",
+  "name": "@cicada-lang/cicada-next",
   "version": "0.2.0",
-  "repository": "github:cicada-lang/platinum",
+  "repository": "github:cicada-lang/cicada-next",
   "main": "lib/index.js",
   "files": [
     "lib"
