@@ -1,5 +1,3 @@
-- setup vitest
-
 - `Exp`
 - `Core`
 - `Value`
