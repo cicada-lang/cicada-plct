@@ -16,11 +16,11 @@ Cicada language is a *dependently typed programming language* and an *interactiv
 
 ## Development
 
-```
-npm install    // Install dependencies
-npm run build  // Compile `src/` to `lib/`
-npm run watch  // Watch the compilation
-npm run test   // Run test
+```shell
+npm install    # Install dependencies
+npm run build  # Compile `src/` to `lib/`
+npm run watch  # Watch the compilation
+npm run test   # Run test
 ```
 
 ## Community
