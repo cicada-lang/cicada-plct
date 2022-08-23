@@ -16,7 +16,7 @@ Cicada language is a *dependently typed programming language* and an *interactiv
 
 ## Development
 
-```
+```sh
 pnpm install    # Install dependencies
 pnpm run build  # Compile `src/` to `lib/`
 pnpm run watch  # Watch the compilation
