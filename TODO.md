@@ -1,6 +1,5 @@
 # data
 
-check(ctx: Ctx, exp: Exp, t: Value): Core
 infer(ctx: Ctx, exp: Exp): { t: Value, core: Core }
 
 evaluate(env: Env, core: Core): Value
