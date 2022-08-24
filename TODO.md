@@ -1,8 +1,5 @@
 # data
 
-Ctx -- placeholder
-Env -- placeholder
-
 check(ctx: Ctx, exp: Exp, t: Value): Core
 infer(ctx: Ctx, exp: Exp): { t: Value, core: Core }
 
