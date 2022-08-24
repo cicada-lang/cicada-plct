@@ -1,5 +1,7 @@
 # concrete syntax and test
 
+add Span to Exp
+
 Var -- grammar and matcher
 
 setup parser test
