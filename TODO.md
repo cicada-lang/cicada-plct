@@ -1,10 +1,12 @@
 # data
 
+cover(ctx: Ctx, s: Value, t: Value): Solution
+
+NotYetValue and Neutral
+
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
-
-NotYetValue and Neutral
 
 Core
 Value

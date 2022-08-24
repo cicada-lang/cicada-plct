@@ -1,14 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/node': ^18.7.11
+  '@types/node': ^18.7.13
   prettier: ^2.7.1
   prettier-plugin-organize-imports: ^3.1.0
   typescript: ^4.7.4
   vitest: ^0.22.1
 
 devDependencies:
-  '@types/node': 18.7.11
+  '@types/node': 18.7.13
   prettier: 2.7.1
   prettier-plugin-organize-imports: 3.1.0_gd3y7r3s3evy6b2vthd7dmacga
   typescript: 4.7.4
@@ -35,8 +35,8 @@ packages:
     resolution: {integrity: sha512-hC7OMnszpxhZPduX+m+nrx+uFoLkWOMiR4oa/AZF3MuSETYTZmFfJAHqZEM8MVlvfG7BEUcgvtwoCTxBp6hm3g==}
     dev: true
 
-  /@types/node/18.7.11:
-    resolution: {integrity: sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==}
+  /@types/node/18.7.13:
+    resolution: {integrity: sha512-46yIhxSe5xEaJZXWdIBP7GU4HDTG8/eo0qd9atdiL+lFpA03y8KS+lkTN834TWJj5767GbWv4n/P6efyTFt1Dw==}
     dev: true
 
   /assertion-error/1.1.0:
@@ -478,7 +478,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.3
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.7.11
+      '@types/node': 18.7.13
       chai: 4.3.6
       debug: 4.3.4
       local-pkg: 0.4.2
