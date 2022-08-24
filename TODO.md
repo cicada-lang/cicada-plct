@@ -1,20 +1,47 @@
+# data
+
+Value -- placeholder
+
+Ctx -- placeholder
+Env -- placeholder
+
+check(ctx: Ctx, exp: Exp, t: Value): Core
+infer(ctx: Ctx, exp: Exp): { t: Value, core: Core }
+
+evaluate(env: Env, core: Core): Value
+
+cover(ctx: Ctx, s: Value, t: Value): Solution
+
+NotYetValue and Neutral
+
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
 
 Core
-
 Value
+Ctx
+Env
 
-[maybe] extract Name class -- quit using string primitive
+# type checking
 
-- can implement Name.freshen
+check
+infer
+
+# evaluation
+
+evaluate
 
 # subtyping
+
+Solution
+
+cover
 
 use unification instead of equal for Value
 
 - unification v.s. algebraic subtyping (use lattice theory to handle inequality)
+- [problem] should we add `Union` and `Intersection` type?
 
 # recursion
 
