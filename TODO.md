@@ -1,7 +1,5 @@
 # data
 
-Value -- placeholder
-
 Ctx -- placeholder
 Env -- placeholder
 
