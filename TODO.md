@@ -1,5 +1,3 @@
-unify(solution: Solution, ctx: Ctx, t: Value, left: Value, right: Value): Solution
-
 Solution -- use null object pattern
 
 Ctx -- use null object pattern -- instead of a class wrap over `Map`
