@@ -1,5 +1,3 @@
-Solution -- constructors
-
 Ctx -- use null object pattern -- instead of a class wrap over `Map`
 
 - CtxCons
