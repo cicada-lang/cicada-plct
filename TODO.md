@@ -1,31 +1,51 @@
-Ctx -- use null object pattern -- instead of a class wrap over `Map`
-
-- CtxCons
-- CtxNull
-
-Env -- use null object pattern -- instead of a class wrap over `Map`
-
-- EnvCons
-- EnvNull
-
-NotYetValue and Neutral
-
 # concrete syntax and test
 
 use partech
 
 setup parser test
 
+# type checking
+
+infer -- Var
+
+checkType -- Pi
+infer -- Ap
+check -- Fn
+
+checkType -- Sigma
+check -- Cons
+infer -- Car
+infer -- Cdr
+
+checkType -- Cls
+check -- Obj
+infer -- Dot
+
+type checking test
+
+# ctx
+
+Ctx -- use null object pattern -- instead of a class wrap over `Map`
+
+- CtxCons
+- CtxNull
+
+# env
+
+Env -- use null object pattern -- instead of a class wrap over `Map`
+
+- EnvCons
+- EnvNull
+
+# value
+
+NotYetValue and Neutral
+
 # datatype
 
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
-
-# type checking
-
-check
-infer
 
 # evaluation
 
