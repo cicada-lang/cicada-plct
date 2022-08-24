@@ -1,5 +1,3 @@
-Exp -- Cls Obj Dot -- constructors
-
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
