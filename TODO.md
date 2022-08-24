@@ -1,7 +1,14 @@
-Solution -- use null object pattern
+Solution -- constructors
 
 Ctx -- use null object pattern -- instead of a class wrap over `Map`
+
+- CtxCons
+- CtxNull
+
 Env -- use null object pattern -- instead of a class wrap over `Map`
+
+- EnvCons
+- EnvNull
 
 NotYetValue and Neutral
 
