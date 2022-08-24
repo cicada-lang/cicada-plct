@@ -19,5 +19,8 @@
     "typescript": "^4.7.4",
     "vitest": "^0.22.1"
   },
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@cicada-lang/partech": "^0.1.20"
+  }
 }

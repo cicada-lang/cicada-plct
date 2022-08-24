@@ -1,8 +1,33 @@
 # concrete syntax and test
 
-use partech
+Var -- grammar and matcher
 
 setup parser test
+
+Pi -- grammar and matcher
+Fn -- grammar and matcher
+Ap -- grammar and matcher
+
+Sigma -- grammar and matcher
+Cons -- grammar and matcher
+Car -- grammar and matcher
+Cdr -- grammar and matcher
+
+note about operator v.s. operand
+
+- without operator v.s. operand
+  `(x) => f(x)` will be ambiguous
+
+  ```js
+  Fn("x", Ap(Var("f"), Var("x")))
+  Ap(Fn("x", Var("f")), Var("x"))
+  ```
+
+# stmt & mod
+
+Stmt
+
+Mod
 
 # type checking
 
