@@ -1,7 +1,5 @@
 # data
 
-infer(ctx: Ctx, exp: Exp): { t: Value, core: Core }
-
 evaluate(env: Env, core: Core): Value
 
 cover(ctx: Ctx, s: Value, t: Value): Solution
