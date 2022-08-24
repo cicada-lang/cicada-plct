@@ -1,17 +1,23 @@
-# data
+unify(solution: Solution, ctx: Ctx, t: Value, left: Value, right: Value): Solution
 
-cover(ctx: Ctx, s: Value, t: Value): Solution
+Solution -- use null object pattern
+
+Ctx -- use null object pattern -- instead of a class wrap over `Map`
+Env -- use null object pattern -- instead of a class wrap over `Map`
 
 NotYetValue and Neutral
+
+# concrete syntax and test
+
+use partech
+
+setup parser test
+
+# datatype
 
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
-
-Core
-Value
-Ctx
-Env
 
 # type checking
 
@@ -23,10 +29,6 @@ infer
 evaluate
 
 # subtyping
-
-Solution
-
-cover
 
 use unification instead of equal for Value
 
