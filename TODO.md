@@ -1,7 +1,5 @@
 # concrete syntax and test
 
-Var -- grammar and matcher
-
 setup parser test
 
 Pi -- grammar and matcher
