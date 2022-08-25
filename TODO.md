@@ -1,13 +1,11 @@
-remove Fn from Exp -- use MultiFn
-remove Pi from Exp -- use MultiPi
-
 Value -- Pi
 Neutral -- Pi
 
-Value -- NotYetValue
-
 Value -- Sigma
 Neutral -- Sigma
+
+remove Fn from Exp -- use MultiFn
+remove Pi from Exp -- use MultiPi
 
 # concrete syntax and test
 
