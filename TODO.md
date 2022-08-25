@@ -1,7 +1,5 @@
 # type checking
 
-[refactor] rename 'type: "Core"' to 'family: "Core"'
-
 [refactor] use "type" instead of "t"
 
 infer -- Var
