@@ -11,7 +11,7 @@ test("parse fn", () => {
   )
 })
 
-test("parse fn list", () => {
+test("parse fn multi", () => {
   expect(parseExp("(x, y) => x")).toMatchObject(
     deleteUndefined(Fn("x", Fn("y", Var("x"))))
   )

@@ -23,7 +23,7 @@ test("parse pi nameless", () => {
   )
 })
 
-test("parse pi list", () => {
+test("parse pi multi", () => {
   expect(parseExp("(T: Type, x: T) -> T")).toMatchObject(
     deleteUndefined(Pi("T", Var("Type"), Pi("x", Var("T"), Var("T"))))
   )
