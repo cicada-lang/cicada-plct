@@ -5,7 +5,6 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | Pi
-  | Ap
   | MultiAp
   | Fn
   | Sigma
@@ -37,12 +36,6 @@ export type Fn = { kind: "Fn"; name: string; ret: Exp } & ExpMeta
 
 export function Fn(name: string, ret: Exp, span?: Span): Fn {
   return { kind: "Fn", name, ret, span }
-}
-
-export type Ap = { kind: "Ap"; target: Exp; arg: Exp } & ExpMeta
-
-export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
-  return { kind: "Ap", target, arg, span }
 }
 
 export type ArgKind = "plain" // | "implicit" | "vague"
