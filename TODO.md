@@ -1,3 +1,8 @@
+remove Ap from Exp
+
+remove Fn from Exp -- use MultiFn
+remove Pi from Exp -- use MultiPi
+
 Value -- Pi
 Neutral -- Pi
 

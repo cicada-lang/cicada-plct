@@ -3,7 +3,7 @@ import { parseExp } from "../index"
 import { Var, MultiAp } from "../../Exp"
 import { deleteUndefined } from "./utils"
 
-test("parse ap", () => {
+test("parse MultiAp", () => {
   expect(parseExp("f(x)")).toMatchObject(
     deleteUndefined(MultiAp(Var("f"), [{ kind: "plain", exp: Var("x") }]))
   )
