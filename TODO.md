@@ -1,5 +1,3 @@
-Core -- add type: "Core"
-
 Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
 

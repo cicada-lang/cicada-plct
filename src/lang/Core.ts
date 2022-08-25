@@ -12,18 +12,21 @@ export type Core =
   | Dot
 
 export type Var = {
+  type: "Core",
   kind: "Var"
   name: string
 }
 
 export function Var(name: string): Var {
   return {
+  type: "Core",    
     kind: "Var",
     name,
   }
 }
 
 export type Pi = {
+    type: "Core",
   kind: "Pi"
   name: string
   argType: Core
@@ -32,6 +35,7 @@ export type Pi = {
 
 export function Pi(name: string, argType: Core, retType: Core): Pi {
   return {
+      type: "Core",
     kind: "Pi",
     name,
     argType,
@@ -40,6 +44,7 @@ export function Pi(name: string, argType: Core, retType: Core): Pi {
 }
 
 export type Fn = {
+    type: "Core",
   kind: "Fn"
   name: string
   ret: Core
@@ -47,6 +52,7 @@ export type Fn = {
 
 export function Fn(name: string, ret: Core): Fn {
   return {
+      type: "Core",
     kind: "Fn",
     name,
     ret,
@@ -54,6 +60,7 @@ export function Fn(name: string, ret: Core): Fn {
 }
 
 export type Ap = {
+    type: "Core",
   kind: "Ap"
   target: Core
   arg: Core
@@ -61,6 +68,7 @@ export type Ap = {
 
 export function Ap(target: Core, arg: Core): Ap {
   return {
+      type: "Core",
     kind: "Ap",
     target,
     arg,
@@ -68,6 +76,7 @@ export function Ap(target: Core, arg: Core): Ap {
 }
 
 export type Sigma = {
+    type: "Core",
   kind: "Sigma"
   name: string
   carType: Core
@@ -76,6 +85,7 @@ export type Sigma = {
 
 export function Sigma(name: string, carType: Core, cdrType: Core): Sigma {
   return {
+      type: "Core",
     kind: "Sigma",
     name,
     carType,
@@ -84,6 +94,7 @@ export function Sigma(name: string, carType: Core, cdrType: Core): Sigma {
 }
 
 export type Cons = {
+    type: "Core",
   kind: "Cons"
   car: Core
   cdr: Core
@@ -91,6 +102,7 @@ export type Cons = {
 
 export function Cons(car: Core, cdr: Core): Cons {
   return {
+      type: "Core",
     kind: "Cons",
     car,
     cdr,
@@ -98,24 +110,28 @@ export function Cons(car: Core, cdr: Core): Cons {
 }
 
 export type Car = {
+    type: "Core",
   kind: "Car"
   target: Core
 }
 
 export function Car(target: Core): Car {
   return {
+      type: "Core",
     kind: "Car",
     target,
   }
 }
 
 export type Cdr = {
+    type: "Core",
   kind: "Cdr"
   target: Core
 }
 
 export function Cdr(target: Core): Cdr {
   return {
+      type: "Core",
     kind: "Cdr",
     target,
   }
@@ -126,6 +142,7 @@ export function Cdr(target: Core): Cdr {
 export type Cls = ClsCons | ClsFulfilled | ClsNull
 
 export type ClsCons = {
+    type: "Core",
   kind: "ClsCons"
   name: string
   realName: string
@@ -140,6 +157,7 @@ export function ClsCons(
   rest: Cls
 ): ClsCons {
   return {
+      type: "Core",
     kind: "ClsCons",
     name,
     realName,
@@ -149,6 +167,7 @@ export function ClsCons(
 }
 
 export type ClsFulfilled = {
+    type: "Core",
   kind: "ClsFulfilled"
   name: string
   realName: string
@@ -165,6 +184,7 @@ export function ClsFulfilled(
   rest: Cls
 ): ClsFulfilled {
   return {
+      type: "Core",
     kind: "ClsFulfilled",
     name,
     realName,
@@ -175,28 +195,33 @@ export function ClsFulfilled(
 }
 
 export type ClsNull = {
+    type: "Core",
   kind: "ClsNull"
 }
 
 export function ClsNull(): ClsNull {
   return {
+      type: "Core",
     kind: "ClsNull",
   }
 }
 
 export type Obj = {
+    type: "Core",
   kind: "Obj"
   properties: Record<string, Core>
 }
 
 export function Obj(properties: Record<string, Core>): Obj {
   return {
+      type: "Core",
     kind: "Obj",
     properties,
   }
 }
 
 export type Dot = {
+    type: "Core",
   kind: "Dot"
   target: Core
   name: string
@@ -204,6 +229,7 @@ export type Dot = {
 
 export function Dot(target: Core, name: string): Dot {
   return {
+      type: "Core",
     kind: "Dot",
     target,
     name,
