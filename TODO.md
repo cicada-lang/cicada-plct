@@ -49,13 +49,6 @@ Stmt
 
 Mod
 
-# ctx
-
-Ctx -- use null object pattern -- instead of a class wrap over `Map`
-
-- CtxCons
-- CtxNull
-
 # datatype
 
 Exp -- Datatype
