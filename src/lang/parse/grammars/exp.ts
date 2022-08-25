@@ -1,3 +1,8 @@
+// NOTE We must separate exp to operator and operand,
+//   otherwise `(x) => f(x)` will be ambiguous:
+//   - `Fn("x", Ap(Var("f"), Var("x")))`
+//   - `Ap(Fn("x", Var("f")), Var("x"))`
+
 export const exp = {
   $grammar: {
     "exp:operator": [{ operator: "operator" }],

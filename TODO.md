@@ -5,16 +5,6 @@ Cons -- grammar and matcher
 Car -- grammar and matcher
 Cdr -- grammar and matcher
 
-note about operator v.s. operand
-
-- without operator v.s. operand
-  `(x) => f(x)` will be ambiguous
-
-  ```js
-  Fn("x", Ap(Var("f"), Var("x")))
-  Ap(Fn("x", Var("f")), Var("x"))
-  ```
-
 # stmt & mod
 
 Stmt
@@ -53,6 +43,10 @@ Env -- use null object pattern -- instead of a class wrap over `Map`
 
 - EnvCons
 - EnvNull
+
+# maybe
+
+[maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
 # value
 
