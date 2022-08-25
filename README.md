@@ -38,7 +38,8 @@ npm run test    # Run test
 - [TODO.md](TODO.md)
 - [STYLE-GUIDE.md](STYLE-GUIDE.md)
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
-- When contributing, add yourself to [AUTHORS](AUTHORS)
+- Remember to run `npm run format` to format the code.
+- Remember to add yourself to [AUTHORS](AUTHORS).
 
 ## License
 
