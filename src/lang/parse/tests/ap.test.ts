@@ -1,16 +1,16 @@
 import { expect, test } from "vitest"
 import { parseExp } from "../index"
-import { Var, MultiAp } from "../../Exp"
+import { Var, Ap } from "../../Exp"
 import { deleteUndefined } from "./utils"
 
-test("parse MultiAp", () => {
+test("parse Ap", () => {
   expect(parseExp("f(x)")).toMatchObject(
-    deleteUndefined(MultiAp(Var("f"), [{ kind: "plain", exp: Var("x") }]))
+    deleteUndefined(Ap(Var("f"), [{ kind: "plain", exp: Var("x") }]))
   )
 
   expect(parseExp("f(x, y)")).toMatchObject(
     deleteUndefined(
-      MultiAp(Var("f"), [
+      Ap(Var("f"), [
         { kind: "plain", exp: Var("x") },
         { kind: "plain", exp: Var("y") },
       ])
@@ -19,7 +19,7 @@ test("parse MultiAp", () => {
 
   expect(parseExp("f(x)(y)")).toMatchObject(
     deleteUndefined(
-      MultiAp(MultiAp(Var("f"), [{ kind: "plain", exp: Var("x") }]), [
+      Ap(Ap(Var("f"), [{ kind: "plain", exp: Var("x") }]), [
         { kind: "plain", exp: Var("y") },
       ])
     )

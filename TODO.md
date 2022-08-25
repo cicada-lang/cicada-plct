@@ -1,11 +1,22 @@
+format Exp to make the code thin
+format Core to make the code thin
+
+Exp -- rename kind to type
+Core -- rename kind to type
+
+Exp -- add kind: "Exp"
+Core -- add kind: "Core"
+
+Exps.Fn -- take multiple bindings
+Exps.Pi -- take multiple bindings
+
 Value -- Pi
 Neutral -- Pi
 
+Exps.Sigma -- take multiple bindings
+
 Value -- Sigma
 Neutral -- Sigma
-
-remove Fn from Exp -- use MultiFn
-remove Pi from Exp -- use MultiPi
 
 # concrete syntax and test
 

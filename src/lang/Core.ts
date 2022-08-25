@@ -40,23 +40,6 @@ export function Ap(target: Core, arg: Core): Ap {
   return { kind: "Ap", target, arg }
 }
 
-export type ArgKind = "plain" // | "implicit" | "vague"
-
-export type ArgEntry = {
-  kind: ArgKind
-  exp: Core
-}
-
-export type MultiAp = {
-  kind: "MultiAp"
-  target: Core
-  argEntries: Array<ArgEntry>
-}
-
-export function MultiAp(target: Core, argEntries: Array<ArgEntry>): MultiAp {
-  return { kind: "MultiAp", target, argEntries }
-}
-
 export type Sigma = {
   kind: "Sigma"
   name: string
