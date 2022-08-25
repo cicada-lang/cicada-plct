@@ -1,8 +1,29 @@
+import * as Cores from "./Core"
 import { Core } from "./Core"
-import { Ctx } from "./Ctx"
+import { Ctx, lookupCtxTypeOrFail } from "./Ctx"
 import { Exp } from "./Exp"
 import { Value } from "./Value"
 
-export function infer(ctx: Ctx, exp: Exp): { type: Value; core: Core } {
-  throw new Error("TODO")
+export type Inferred = {
+  type: Value
+  core: Core
+}
+
+export function Inferred(type: Value, core: Core): Inferred {
+  return {
+    type,
+    core,
+  }
+}
+
+export function infer(ctx: Ctx, exp: Exp): Inferred {
+  switch (exp.kind) {
+    case "Var": {
+      return Inferred(lookupCtxTypeOrFail(ctx, exp.name), Cores.Var(exp.name))
+    }
+
+    default: {
+      throw new Error("TODO")
+    }
+  }
 }

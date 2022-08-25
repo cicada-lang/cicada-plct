@@ -1,7 +1,5 @@
 # type checking
 
-infer -- Var
-
 `check` call `infer` and `inclusion` for those who can be inferred
 
 - for example Var
