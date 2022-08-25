@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
+import { Ap, Var } from "../../Exp"
 import { parseExp } from "../index"
-import { Var, Ap } from "../../Exp"
 import { deleteUndefined } from "./utils"
 
 test("parse Ap", () => {

@@ -1,6 +1,6 @@
+import { Ctx } from "./Ctx"
 import { Solution } from "./Solution"
 import { Value } from "./Value"
-import { Ctx } from "./Ctx"
 
 export function unify(
   solution: Solution,
