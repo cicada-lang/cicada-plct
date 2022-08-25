@@ -1,8 +1,4 @@
-Exp -- rename kind to type
-Core -- rename kind to type
-
-Exp -- add kind: "Exp"
-Core -- add kind: "Core"
+Core -- add type: "Core"
 
 Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
