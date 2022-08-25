@@ -1,16 +1,15 @@
 import { Value } from "./Value"
-import { Type } from "./Type"
 
 export type Ctx = CtxCons | CtxConsValue | CtxNull
 
 export type CtxCons = {
   kind: "CtxCons"
   name: string
-  type: Type
+  type: Value
   rest: Ctx
 }
 
-export function CtxCons(name: string, type: Type, rest: Ctx): CtxCons {
+export function CtxCons(name: string, type: Value, rest: Ctx): CtxCons {
   return {
     kind: "CtxCons",
     name,
@@ -22,12 +21,17 @@ export function CtxCons(name: string, type: Type, rest: Ctx): CtxCons {
 export type CtxConsValue = {
   kind: "CtxConsValue"
   name: string
-  type: Type
+  type: Value
   value: Value
   rest: Ctx
 }
 
-export function CtxConsValue(name: string, type: Type, value: Value, rest: Ctx): CtxConsValue {
+export function CtxConsValue(
+  name: string,
+  type: Value,
+  value: Value,
+  rest: Ctx
+): CtxConsValue {
   return {
     kind: "CtxConsValue",
     name,
@@ -47,7 +51,7 @@ export function CtxNull(): CtxNull {
   }
 }
 
-export function lookupCtxType(ctx: Ctx, name: string): Type | undefined {
+export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
   switch (ctx.kind) {
     case "CtxCons": {
       if (ctx.name === name) {
