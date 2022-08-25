@@ -1,25 +1,23 @@
 # type checking
 
-`check` call `infer` and `inclusion` for those who can be inferred
+test type checking
+Stmts.Let
+Stmts.Compute
+test type checking -- with stmt
 
-- for example Var
+note about subtyping
 
-- the inferred type should be a subtype of the given type
+- we use the word `inclusion` to name our function which implements subtyping
+
+  - compare to the word `conversion`
 
 - `inclusion` do not need `unify`
-
-inclusion
 
 - [question] attribute based subtyping v.s. algebraic subtyping (use lattice theory to handle inequality)
 
 - [question] should we add `Union` and `Intersection` type?
 
 - [question] why we can not (or should not) have un-tagged `Union` type?
-
-test type checking
-Stmts.Let
-Stmts.Compute
-test type checking -- with stmt
 
 # pi
 
