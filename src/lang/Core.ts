@@ -11,10 +11,16 @@ export type Core =
   | Obj
   | Dot
 
-export type Var = { kind: "Var"; name: string }
+export type Var = {
+  kind: "Var"
+  name: string
+}
 
 export function Var(name: string): Var {
-  return { kind: "Var", name }
+  return {
+    kind: "Var",
+    name,
+  }
 }
 
 export type Pi = {
@@ -25,19 +31,40 @@ export type Pi = {
 }
 
 export function Pi(name: string, argType: Core, retType: Core): Pi {
-  return { kind: "Pi", name, argType, retType }
+  return {
+    kind: "Pi",
+    name,
+    argType,
+    retType,
+  }
 }
 
-export type Fn = { kind: "Fn"; name: string; ret: Core }
+export type Fn = {
+  kind: "Fn"
+  name: string
+  ret: Core
+}
 
 export function Fn(name: string, ret: Core): Fn {
-  return { kind: "Fn", name, ret }
+  return {
+    kind: "Fn",
+    name,
+    ret,
+  }
 }
 
-export type Ap = { kind: "Ap"; target: Core; arg: Core }
+export type Ap = {
+  kind: "Ap"
+  target: Core
+  arg: Core
+}
 
 export function Ap(target: Core, arg: Core): Ap {
-  return { kind: "Ap", target, arg }
+  return {
+    kind: "Ap",
+    target,
+    arg,
+  }
 }
 
 export type Sigma = {
@@ -48,25 +75,50 @@ export type Sigma = {
 }
 
 export function Sigma(name: string, carType: Core, cdrType: Core): Sigma {
-  return { kind: "Sigma", name, carType, cdrType }
+  return {
+    kind: "Sigma",
+    name,
+    carType,
+    cdrType,
+  }
 }
 
-export type Cons = { kind: "Cons"; car: Core; cdr: Core }
+export type Cons = {
+  kind: "Cons"
+  car: Core
+  cdr: Core
+}
 
 export function Cons(car: Core, cdr: Core): Cons {
-  return { kind: "Cons", car, cdr }
+  return {
+    kind: "Cons",
+    car,
+    cdr,
+  }
 }
 
-export type Car = { kind: "Car"; target: Core }
+export type Car = {
+  kind: "Car"
+  target: Core
+}
 
 export function Car(target: Core): Car {
-  return { kind: "Car", target }
+  return {
+    kind: "Car",
+    target,
+  }
 }
 
-export type Cdr = { kind: "Cdr"; target: Core }
+export type Cdr = {
+  kind: "Cdr"
+  target: Core
+}
 
 export function Cdr(target: Core): Cdr {
-  return { kind: "Cdr", target }
+  return {
+    kind: "Cdr",
+    target,
+  }
 }
 
 // NOTE We can not only use `name` we also need `realName`,
@@ -87,7 +139,13 @@ export function ClsCons(
   propertyType: Core,
   rest: Cls
 ): ClsCons {
-  return { kind: "ClsCons", name, realName, propertyType, rest }
+  return {
+    kind: "ClsCons",
+    name,
+    realName,
+    propertyType,
+    rest,
+  }
 }
 
 export type ClsFulfilled = {
@@ -121,17 +179,33 @@ export type ClsNull = {
 }
 
 export function ClsNull(): ClsNull {
-  return { kind: "ClsNull" }
+  return {
+    kind: "ClsNull",
+  }
 }
 
-export type Obj = { kind: "Obj"; properties: Record<string, Core> }
+export type Obj = {
+  kind: "Obj"
+  properties: Record<string, Core>
+}
 
 export function Obj(properties: Record<string, Core>): Obj {
-  return { kind: "Obj", properties }
+  return {
+    kind: "Obj",
+    properties,
+  }
 }
 
-export type Dot = { kind: "Dot"; target: Core; name: string }
+export type Dot = {
+  kind: "Dot"
+  target: Core
+  name: string
+}
 
 export function Dot(target: Core, name: string): Dot {
-  return { kind: "Dot", target, name }
+  return {
+    kind: "Dot",
+    target,
+    name,
+  }
 }

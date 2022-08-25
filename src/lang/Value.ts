@@ -9,5 +9,9 @@ export type NotYetValue = {
 }
 
 export function NotYetValue(t: Value, Neutral: Neutral) {
-  return { kind: "NotYetValue", t, Neutral }
+  return {
+    kind: "NotYetValue",
+    t,
+    Neutral,
+  }
 }

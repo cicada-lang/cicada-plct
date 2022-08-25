@@ -1,5 +1,3 @@
-format Core to make the code thin
-
 Exp -- rename kind to type
 Core -- rename kind to type
 
