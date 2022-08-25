@@ -2,12 +2,31 @@
 
 infer -- Var
 
-type checking test
+`check` call `infer` and `inclusion` for those who can be inferred
+
+- for example Var
+
+- the inferred type should be a subtype of the given type
+
+- `inclusion` do not need `unify`
+
+inclusion
+
+- [question] attribute based subtyping v.s. algebraic subtyping (use lattice theory to handle inequality)
+
+- [question] should we add `Union` and `Intersection` type?
+
+- [question] why we can not (or should not) have un-tagged `Union` type?
+
+test type checking
+Stmts.Let
+Stmts.Compute
+test type checking -- with stmt
 
 # pi
 
-Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
+Exps.Fn -- take multiple bindings
 
 support annotated `Fn`
 
@@ -48,12 +67,13 @@ Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
 
-# subtyping
+# unification, implicit and vague
 
-use unification instead of equal for Value
+isNeutralVar
 
-- unification v.s. algebraic subtyping (use lattice theory to handle inequality)
-- [problem] should we add `Union` and `Intersection` type?
+- we will use NeutralVar as pattern variable (or say logic variable)
+
+NeutralVar constructor
 
 # recursion
 
