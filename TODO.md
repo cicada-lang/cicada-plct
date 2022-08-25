@@ -7,7 +7,8 @@ type checking test
 # pi
 
 Value -- Pi
-Neutral -- Pi
+Value -- Fn
+Neutral -- Ap
 
 Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
