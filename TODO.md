@@ -6,7 +6,6 @@ type checking test
 
 # pi
 
-Value -- Pi
 Value -- Fn
 Neutral -- Ap
 
