@@ -1,3 +1,5 @@
+lookupEnv
+
 # type checking
 
 infer -- Var
@@ -55,13 +57,6 @@ Ctx -- use null object pattern -- instead of a class wrap over `Map`
 
 - CtxCons
 - CtxNull
-
-# env
-
-Env -- use null object pattern -- instead of a class wrap over `Map`
-
-- EnvCons
-- EnvNull
 
 # datatype
 
