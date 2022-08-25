@@ -1,7 +1,3 @@
-[refactor] avoid using ArgKind, use ADT instead
-
-- with constructors for Exps.Arg
-
 Value -- Pi
 Neutral -- Pi
 

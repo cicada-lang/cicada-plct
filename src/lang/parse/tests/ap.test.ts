@@ -1,27 +1,20 @@
 import { expect, test } from "vitest"
-import { Ap, Var } from "../../Exp"
+import { Ap, ArgPlain, Var } from "../../Exp"
 import { parseExp } from "../index"
 import { deleteUndefined } from "./utils"
 
 test("parse Ap", () => {
   expect(parseExp("f(x)")).toMatchObject(
-    deleteUndefined(Ap(Var("f"), [{ kind: "plain", exp: Var("x") }]))
+    deleteUndefined(Ap(Var("f"), [ArgPlain(Var("x"))]))
   )
 
   expect(parseExp("f(x, y)")).toMatchObject(
-    deleteUndefined(
-      Ap(Var("f"), [
-        { kind: "plain", exp: Var("x") },
-        { kind: "plain", exp: Var("y") },
-      ])
-    )
+    deleteUndefined(Ap(Var("f"), [ArgPlain(Var("x")), ArgPlain(Var("y"))]))
   )
 
   expect(parseExp("f(x)(y)")).toMatchObject(
     deleteUndefined(
-      Ap(Ap(Var("f"), [{ kind: "plain", exp: Var("x") }]), [
-        { kind: "plain", exp: Var("y") },
-      ])
+      Ap(Ap(Var("f"), [ArgPlain(Var("x"))]), [ArgPlain(Var("y"))])
     )
   )
 })

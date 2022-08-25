@@ -187,10 +187,7 @@ export function arg_entries_matcher(tree: pt.Tree): Array<Exps.Arg> {
 
 export function arg_entry_matcher(tree: pt.Tree): Exps.Arg {
   return pt.matcher<Exps.Arg>({
-    "arg_entry:plain": ({ arg }) => ({
-      kind: "plain",
-      exp: exp_matcher(arg),
-    }),
+    "arg_entry:plain": ({ arg }) => Exps.ArgPlain(exp_matcher(arg)),
     // "arg_entry:implicit": ({ arg }) => ({
     //   kind: "implicit",
     //   exp: exp_matcher(arg),

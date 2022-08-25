@@ -66,11 +66,42 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
   }
 }
 
-export type ArgKind = "plain" // | "implicit" | "vague"
+export type Arg = ArgPlain | ArgImplicit | ArgVague
 
-export type Arg = {
-  kind: ArgKind
+export type ArgPlain = {
+  kind: "ArgPlain"
   exp: Exp
+}
+
+export function ArgPlain(exp: Exp): ArgPlain {
+  return {
+    kind: "ArgPlain",
+    exp,
+  }
+}
+
+export type ArgImplicit = {
+  kind: "ArgImplicit"
+  exp: Exp
+}
+
+export function ArgImplicit(exp: Exp): ArgImplicit {
+  return {
+    kind: "ArgImplicit",
+    exp,
+  }
+}
+
+export type ArgVague = {
+  kind: "ArgVague"
+  exp: Exp
+}
+
+export function ArgVague(exp: Exp): ArgVague {
+  return {
+    kind: "ArgVague",
+    exp,
+  }
 }
 
 export type Ap = {
