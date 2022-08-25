@@ -1,7 +1,5 @@
 # concrete syntax and test
 
-Ap -- grammar and matcher
-
 Sigma -- grammar and matcher
 Cons -- grammar and matcher
 Car -- grammar and matcher

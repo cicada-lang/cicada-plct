@@ -4,6 +4,7 @@ export type Exp =
   | Var
   | Pi
   | Ap
+  | MultiAp
   | Fn
   | Sigma
   | Cons
@@ -32,6 +33,19 @@ export type Fn = { kind: "Fn"; name: string; ret: Exp } & ExpMeta
 
 export type Ap = { kind: "Ap"; target: Exp; arg: Exp } & ExpMeta
 
+export type ArgKind = "plain" // | "implicit" | "vague"
+
+export type ArgEntry = {
+  kind: ArgKind
+  exp: Exp
+}
+
+export type MultiAp = {
+  kind: "MultiAp"
+  target: Exp
+  argEntries: Array<ArgEntry>
+} & ExpMeta
+
 export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   return { kind: "Pi", name, argType, retType, span }
 }
@@ -42,6 +56,14 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
 
 export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   return { kind: "Ap", target, arg, span }
+}
+
+export function MultiAp(
+  target: Exp,
+  argEntries: Array<ArgEntry>,
+  span?: Span
+): MultiAp {
+  return { kind: "MultiAp", target, argEntries, span }
 }
 
 export type Sigma = {

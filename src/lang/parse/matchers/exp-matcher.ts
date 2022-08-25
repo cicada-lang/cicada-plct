@@ -12,6 +12,14 @@ export function exp_matcher(tree: pt.Tree): Exp {
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operator:var": ({ name }, { span }) => Exps.Var(pt.str(name), span),
+    "operator:ap": ({ target, arg_entries_group }, { span }) =>
+      pt.matchers
+        .one_or_more_matcher(arg_entries_group)
+        .map((arg_entries) => arg_entries_matcher(arg_entries))
+        .reduce(
+          (result, arg_entries) => Exps.MultiAp(result, arg_entries, span),
+          operator_matcher(target)
+        ),
   })(tree)
 }
 
@@ -164,6 +172,32 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
     //   kind: "vague",
     //   name: pt.str(name),
     //   span,
+    // }),
+  })(tree)
+}
+
+export function arg_entries_matcher(tree: pt.Tree): Array<Exps.ArgEntry> {
+  return pt.matcher({
+    "arg_entries:arg_entries": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(arg_entry_matcher),
+      arg_entry_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
+  return pt.matcher<Exps.ArgEntry>({
+    "arg_entry:plain": ({ arg }) => ({
+      kind: "plain",
+      exp: exp_matcher(arg),
+    }),
+    // "arg_entry:implicit": ({ arg }) => ({
+    //   kind: "implicit",
+    //   exp: exp_matcher(arg),
+    // }),
+    // "arg_entry:vague": ({ arg }) => ({
+    //   kind: "vague",
+    //   exp: exp_matcher(arg),
     // }),
   })(tree)
 }
