@@ -1,6 +1,6 @@
 import { Value } from "./Value"
 
-export type Ctx = CtxCons | CtxConsValue | CtxNull
+export type Ctx = CtxCons | CtxFulfilled | CtxNull
 
 export type CtxCons = {
   kind: "CtxCons"
@@ -18,22 +18,22 @@ export function CtxCons(name: string, type: Value, rest: Ctx): CtxCons {
   }
 }
 
-export type CtxConsValue = {
-  kind: "CtxConsValue"
+export type CtxFulfilled = {
+  kind: "CtxFulfilled"
   name: string
   type: Value
   value: Value
   rest: Ctx
 }
 
-export function CtxConsValue(
+export function CtxFulfilled(
   name: string,
   type: Value,
   value: Value,
   rest: Ctx
-): CtxConsValue {
+): CtxFulfilled {
   return {
-    kind: "CtxConsValue",
+    kind: "CtxFulfilled",
     name,
     type,
     value,
@@ -61,7 +61,7 @@ export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
       }
     }
 
-    case "CtxConsValue": {
+    case "CtxFulfilled": {
       if (ctx.name === name) {
         return ctx.type
       } else {
@@ -85,7 +85,7 @@ export function lookupCtxValue(ctx: Ctx, name: string): Value | undefined {
       }
     }
 
-    case "CtxConsValue": {
+    case "CtxFulfilled": {
       if (ctx.name === name) {
         return ctx.value
       } else {
