@@ -1,6 +1,6 @@
 # concrete syntax and test
 
-make Exp span optional -- for testing
+parser test ignore span
 
 Pi -- grammar and matcher
 Fn -- grammar and matcher
