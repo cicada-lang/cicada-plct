@@ -1,6 +1,6 @@
 # type checking
 
-test type checking
+test type checking -- for Var
 Stmts.Let
 Stmts.Compute
 test type checking -- with stmt

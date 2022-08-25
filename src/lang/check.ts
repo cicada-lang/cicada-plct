@@ -7,7 +7,10 @@ import { Value } from "./Value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
-    case "Var": {
+    case "Var":
+    case "Ap":
+    case "Car":
+    case "Cdr": {
       const inferred = infer(ctx, exp)
       inclusion(ctx, inferred.type, type)
       return inferred.core
