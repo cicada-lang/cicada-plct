@@ -1,3 +1,13 @@
+Core -- Pi
+Value -- Pi
+Neutral -- Pi
+
+Value -- NotYetValue
+
+Core -- Sigma
+Value -- Sigma
+Neutral -- Sigma
+
 # concrete syntax and test
 
 Sigma -- grammar and matcher
@@ -15,6 +25,8 @@ Mod
 
 infer -- Var
 
+type checking test
+
 checkType -- Pi
 infer -- Ap
 check -- Fn
@@ -27,8 +39,6 @@ infer -- Cdr
 checkType -- Cls
 check -- Obj
 infer -- Dot
-
-type checking test
 
 # ctx
 
@@ -47,10 +57,6 @@ Env -- use null object pattern -- instead of a class wrap over `Map`
 # maybe
 
 [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
-
-# value
-
-NotYetValue and Neutral
 
 # datatype
 
