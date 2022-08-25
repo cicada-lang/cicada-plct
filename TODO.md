@@ -1,7 +1,5 @@
 # type checking
 
-[refactor] use "type" instead of "t"
-
 infer -- Var
 
 type checking test

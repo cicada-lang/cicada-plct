@@ -3,6 +3,6 @@ import { Ctx } from "./Ctx"
 import { Exp } from "./Exp"
 import { Value } from "./Value"
 
-export function check(ctx: Ctx, exp: Exp, t: Value): Core {
+export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   throw new Error("TODO")
 }

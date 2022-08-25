@@ -4,14 +4,14 @@ export type Value = NotYetValue
 
 export type NotYetValue = {
   kind: "NotYetValue"
-  t: Value
+  type: Value
   Neutral: Neutral
 }
 
-export function NotYetValue(t: Value, Neutral: Neutral) {
+export function NotYetValue(type: Value, Neutral: Neutral) {
   return {
     kind: "NotYetValue",
-    t,
+    type,
     Neutral,
   }
 }

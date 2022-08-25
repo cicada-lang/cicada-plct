@@ -5,7 +5,7 @@ import { Value } from "./Value"
 export function unify(
   solution: Solution,
   ctx: Ctx,
-  t: Value,
+  type: Value,
   left: Value,
   right: Value
 ): Solution {

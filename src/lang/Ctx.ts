@@ -5,15 +5,15 @@ export type Ctx = CtxCons | CtxFulfilled | CtxNull
 export type CtxCons = {
   kind: "CtxCons"
   name: string
-  t: Value
+  type: Value
   rest: Ctx
 }
 
-export function CtxCons(name: string, t: Value, rest: Ctx): CtxCons {
+export function CtxCons(name: string, type: Value, rest: Ctx): CtxCons {
   return {
     kind: "CtxCons",
     name,
-    t,
+    type,
     rest,
   }
 }
@@ -21,21 +21,21 @@ export function CtxCons(name: string, t: Value, rest: Ctx): CtxCons {
 export type CtxFulfilled = {
   kind: "CtxFulfilled"
   name: string
-  t: Value
+  type: Value
   value: Value
   rest: Ctx
 }
 
 export function CtxFulfilled(
   name: string,
-  t: Value,
+  type: Value,
   value: Value,
   rest: Ctx
 ): CtxFulfilled {
   return {
     kind: "CtxFulfilled",
     name,
-    t,
+    type,
     value,
     rest,
   }
@@ -55,7 +55,7 @@ export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
   switch (ctx.kind) {
     case "CtxCons": {
       if (ctx.name === name) {
-        return ctx.t
+        return ctx.type
       } else {
         return lookupCtxType(ctx.rest, name)
       }
@@ -63,7 +63,7 @@ export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
 
     case "CtxFulfilled": {
       if (ctx.name === name) {
-        return ctx.t
+        return ctx.type
       } else {
         return lookupCtxType(ctx.rest, name)
       }
