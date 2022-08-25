@@ -1,5 +1,3 @@
-lookupEnv
-
 # type checking
 
 infer -- Var
