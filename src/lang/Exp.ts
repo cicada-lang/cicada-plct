@@ -16,14 +16,14 @@ export type Exp =
   | Dot
 
 export type Var = {
-  type: "Exp"
+  family: "Exp"
   kind: "Var"
   name: string
 } & ExpMeta
 
 export function Var(name: string, span?: Span): Var {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Var",
     name,
     span,
@@ -31,7 +31,7 @@ export function Var(name: string, span?: Span): Var {
 }
 
 export type Pi = {
-  type: "Exp"
+  family: "Exp"
   kind: "Pi"
   name: string
   argType: Exp
@@ -40,7 +40,7 @@ export type Pi = {
 
 export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Pi",
     name,
     argType,
@@ -50,7 +50,7 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
 }
 
 export type Fn = {
-  type: "Exp"
+  family: "Exp"
   kind: "Fn"
   name: string
   ret: Exp
@@ -58,7 +58,7 @@ export type Fn = {
 
 export function Fn(name: string, ret: Exp, span?: Span): Fn {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Fn",
     name,
     ret,
@@ -105,7 +105,7 @@ export function ArgVague(exp: Exp): ArgVague {
 }
 
 export type Ap = {
-  type: "Exp"
+  family: "Exp"
   kind: "Ap"
   target: Exp
   args: Array<Arg>
@@ -113,7 +113,7 @@ export type Ap = {
 
 export function Ap(target: Exp, args: Array<Arg>, span?: Span): Ap {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Ap",
     target,
     args,
@@ -122,7 +122,7 @@ export function Ap(target: Exp, args: Array<Arg>, span?: Span): Ap {
 }
 
 export type Sigma = {
-  type: "Exp"
+  family: "Exp"
   kind: "Sigma"
   name: string
   carType: Exp
@@ -136,7 +136,7 @@ export function Sigma(
   span?: Span
 ): Sigma {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Sigma",
     name,
     carType,
@@ -146,7 +146,7 @@ export function Sigma(
 }
 
 export type Cons = {
-  type: "Exp"
+  family: "Exp"
   kind: "Cons"
   car: Exp
   cdr: Exp
@@ -154,7 +154,7 @@ export type Cons = {
 
 export function Cons(car: Exp, cdr: Exp, span?: Span): Cons {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Cons",
     car,
     cdr,
@@ -163,14 +163,14 @@ export function Cons(car: Exp, cdr: Exp, span?: Span): Cons {
 }
 
 export type Car = {
-  type: "Exp"
+  family: "Exp"
   kind: "Car"
   target: Exp
 } & ExpMeta
 
 export function Car(target: Exp, span?: Span): Car {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Car",
     target,
     span,
@@ -178,14 +178,14 @@ export function Car(target: Exp, span?: Span): Car {
 }
 
 export type Cdr = {
-  type: "Exp"
+  family: "Exp"
   kind: "Cdr"
   target: Exp
 } & ExpMeta
 
 export function Cdr(target: Exp, span?: Span): Cdr {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Cdr",
     target,
     span,
@@ -197,7 +197,7 @@ export function Cdr(target: Exp, span?: Span): Cdr {
 export type Cls = ClsCons | ClsFulfilled | ClsNull
 
 export type ClsCons = {
-  type: "Exp"
+  family: "Exp"
   kind: "ClsCons"
   name: string
   realName: string
@@ -213,7 +213,7 @@ export function ClsCons(
   span?: Span
 ): ClsCons {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "ClsCons",
     name,
     realName,
@@ -224,7 +224,7 @@ export function ClsCons(
 }
 
 export type ClsFulfilled = {
-  type: "Exp"
+  family: "Exp"
   kind: "ClsFulfilled"
   name: string
   realName: string
@@ -242,7 +242,7 @@ export function ClsFulfilled(
   span?: Span
 ): ClsFulfilled {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "ClsFulfilled",
     name,
     realName,
@@ -254,27 +254,27 @@ export function ClsFulfilled(
 }
 
 export type ClsNull = {
-  type: "Exp"
+  family: "Exp"
   kind: "ClsNull"
 } & ExpMeta
 
 export function ClsNull(span?: Span): ClsNull {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "ClsNull",
     span,
   }
 }
 
 export type Obj = {
-  type: "Exp"
+  family: "Exp"
   kind: "Obj"
   properties: Record<string, Exp>
 } & ExpMeta
 
 export function Obj(properties: Record<string, Exp>, span?: Span): Obj {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Obj",
     properties,
     span,
@@ -282,7 +282,7 @@ export function Obj(properties: Record<string, Exp>, span?: Span): Obj {
 }
 
 export type Dot = {
-  type: "Exp"
+  family: "Exp"
   kind: "Dot"
   target: Exp
   name: string
@@ -290,7 +290,7 @@ export type Dot = {
 
 export function Dot(target: Exp, name: string, span?: Span): Dot {
   return {
-    type: "Exp",
+    family: "Exp",
     kind: "Dot",
     target,
     name,
