@@ -1,8 +1,9 @@
 import { expect, test } from "vitest"
 import { parseExp } from "../index"
 import { Var } from "../../Exp"
+import { deleteUndefined } from "./utils"
 
 test("parse var", () => {
-  expect(parseExp("x")).toEqual(Var("x", { lo: 0, hi: 1 }))
-  expect(parseExp("abc")).toEqual(Var("abc", { lo: 0, hi: 3 }))
+  expect(parseExp("x")).toMatchObject(deleteUndefined(Var("x")))
+  expect(parseExp("abc")).toMatchObject(deleteUndefined(Var("abc")))
 })

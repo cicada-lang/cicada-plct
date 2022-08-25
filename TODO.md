@@ -1,7 +1,5 @@
 # concrete syntax and test
 
-parser test ignore span
-
 Pi -- grammar and matcher
 Fn -- grammar and matcher
 Ap -- grammar and matcher
