@@ -24,7 +24,7 @@
   let y = { return x }
   ```
 
-  which reads bad, because `return` sounds like a early return from function.
+  which reads bad, because `return` sounds like an early return from function.
 
 - What should we do?
 
