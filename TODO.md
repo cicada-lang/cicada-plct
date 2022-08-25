@@ -1,10 +1,8 @@
-Core -- Pi
 Value -- Pi
 Neutral -- Pi
 
 Value -- NotYetValue
 
-Core -- Sigma
 Value -- Sigma
 Neutral -- Sigma
 

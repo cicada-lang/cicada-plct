@@ -1,5 +1,7 @@
 import { Span } from "./Span"
 
+type ExpMeta = { span?: Span }
+
 export type Exp =
   | Var
   | Pi
@@ -13,8 +15,6 @@ export type Exp =
   | Cls
   | Obj
   | Dot
-
-type ExpMeta = { span?: Span }
 
 export type Var = { kind: "Var"; name: string } & ExpMeta
 

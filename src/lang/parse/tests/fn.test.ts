@@ -4,9 +4,7 @@ import { Var, Fn } from "../../Exp"
 import { deleteUndefined } from "./utils"
 
 test("parse fn", () => {
-  expect(parseExp("(x) => x")).toMatchObject(
-    deleteUndefined(Fn("x", Var("x")))
-  )
+  expect(parseExp("(x) => x")).toMatchObject(deleteUndefined(Fn("x", Var("x"))))
 
   expect(parseExp("function (x) x")).toMatchObject(
     deleteUndefined(Fn("x", Var("x")))
