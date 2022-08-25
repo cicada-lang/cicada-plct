@@ -19,39 +19,9 @@ export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": pi_handler,
     "operand:pi_forall": pi_handler,
+    "operand:fn": fn_handler,
+    "operand:fn_function": fn_handler,
   })(tree)
-}
-
-export function pi_handler(
-  body: { [key: string]: pt.Tree },
-  meta: { span: pt.Span }
-): Exp {
-  const { bindings, ret_t } = body
-
-  return bindings_matcher(bindings)
-    .reverse()
-    .reduce((result, binding) => {
-      switch (binding.kind) {
-        case "named": {
-          return Exps.Pi(
-            binding.name,
-            binding.exp,
-            result,
-            pt.span_closure([binding.span, ret_t.span])
-          )
-        }
-        // case "implicit": {
-        //   return new Exps.ImplicitPi(binding.name, binding.exp, result, {
-        //     span: pt.span_closure([binding.span, ret_t.span]),
-        //   })
-        // }
-        // case "vague": {
-        //   return new Exps.VaguePi(binding.name, binding.exp, result, {
-        //     span: pt.span_closure([binding.span, ret_t.span]),
-        //   })
-        // }
-      }
-    }, exp_matcher(ret_t))
 }
 
 type Binding = {
@@ -94,6 +64,105 @@ export function binding_matcher(tree: pt.Tree): Binding {
     //   kind: "vague",
     //   name: pt.str(name),
     //   exp: exp_matcher(exp),
+    //   span,
+    // }),
+  })(tree)
+}
+
+export function pi_handler(
+  body: { [key: string]: pt.Tree },
+  meta: { span: pt.Span }
+): Exp {
+  const { bindings, ret_t } = body
+
+  return bindings_matcher(bindings)
+    .reverse()
+    .reduce((result, binding) => {
+      switch (binding.kind) {
+        case "named": {
+          return Exps.Pi(
+            binding.name,
+            binding.exp,
+            result,
+            pt.span_closure([binding.span, ret_t.span])
+          )
+        }
+        // case "implicit": {
+        //   return new Exps.ImplicitPi(binding.name, binding.exp, result, {
+        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   })
+        // }
+        // case "vague": {
+        //   return new Exps.VaguePi(binding.name, binding.exp, result, {
+        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   })
+        // }
+      }
+    }, exp_matcher(ret_t))
+}
+
+export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
+  const { names, ret } = body
+
+  return names_matcher(names)
+    .reverse()
+    .reduce((result, name_entry) => {
+      switch (name_entry.kind) {
+        case "name": {
+          return Exps.Fn(
+            name_entry.name,
+            result,
+            pt.span_closure([name_entry.span, ret.span])
+          )
+        }
+        // case "implicit": {
+        //   return new Exps.ImplicitFn(name_entry.name, result, {
+        //     span: pt.span_closure([name_entry.span, ret.span]),
+        //   })
+        // }
+        // case "vague": {
+        //   return new Exps.VagueFn(name_entry.name, result, {
+        //     span: pt.span_closure([name_entry.span, ret.span]),
+        //   })
+        // }
+      }
+    }, exp_matcher(ret))
+}
+
+export function names_matcher(tree: pt.Tree): Array<NameEntry> {
+  return pt.matcher({
+    "names:names": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
+      name_entry_matcher(last_entry),
+    ],
+    "names:names_bracket_separated": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
+      name_entry_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+type NameEntry = {
+  kind: "name" // | "implicit" | "vague"
+  name: string
+  span: pt.Span
+}
+
+export function name_entry_matcher(tree: pt.Tree): NameEntry {
+  return pt.matcher<NameEntry>({
+    "name_entry:name_entry": ({ name }, { span }) => ({
+      kind: "name",
+      name: pt.str(name),
+      span,
+    }),
+    // "name_entry:implicit_name_entry": ({ name }, { span }) => ({
+    //   kind: "implicit",
+    //   name: pt.str(name),
+    //   span,
+    // }),
+    // "name_entry:vague_name_entry": ({ name }, { span }) => ({
+    //   kind: "vague",
+    //   name: pt.str(name),
     //   span,
     // }),
   })(tree)

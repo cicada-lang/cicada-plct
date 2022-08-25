@@ -1,6 +1,5 @@
 # concrete syntax and test
 
-Fn -- grammar and matcher
 Ap -- grammar and matcher
 
 Sigma -- grammar and matcher
