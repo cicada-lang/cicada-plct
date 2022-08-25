@@ -1,6 +1,5 @@
 # concrete syntax and test
 
-Pi -- grammar and matcher
 Fn -- grammar and matcher
 Ap -- grammar and matcher
 

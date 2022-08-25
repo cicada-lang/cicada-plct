@@ -17,6 +17,84 @@ export function operator_matcher(tree: pt.Tree): Exp {
 
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    // TODO
+    "operand:pi": pi_handler,
+    "operand:pi_forall": pi_handler,
+  })(tree)
+}
+
+export function pi_handler(
+  body: { [key: string]: pt.Tree },
+  meta: { span: pt.Span }
+): Exp {
+  const { bindings, ret_t } = body
+
+  return bindings_matcher(bindings)
+    .reverse()
+    .reduce((result, binding) => {
+      switch (binding.kind) {
+        case "named": {
+          return Exps.Pi(
+            binding.name,
+            binding.exp,
+            result,
+            pt.span_closure([binding.span, ret_t.span])
+          )
+        }
+        // case "implicit": {
+        //   return new Exps.ImplicitPi(binding.name, binding.exp, result, {
+        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   })
+        // }
+        // case "vague": {
+        //   return new Exps.VaguePi(binding.name, binding.exp, result, {
+        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   })
+        // }
+      }
+    }, exp_matcher(ret_t))
+}
+
+type Binding = {
+  kind: "named" // | "implicit" | "vague"
+  name: string
+  exp: Exp
+  span: pt.Span
+}
+
+export function bindings_matcher(tree: pt.Tree): Array<Binding> {
+  return pt.matcher({
+    "bindings:bindings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(binding_matcher),
+      binding_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+export function binding_matcher(tree: pt.Tree): Binding {
+  return pt.matcher<Binding>({
+    "binding:nameless": ({ exp }, { span }) => ({
+      kind: "named",
+      name: "_",
+      exp: exp_matcher(exp),
+      span,
+    }),
+    "binding:named": ({ name, exp }, { span }) => ({
+      kind: "named",
+      name: pt.str(name),
+      exp: exp_matcher(exp),
+      span,
+    }),
+    // "binding:implicit": ({ name, exp }, { span }) => ({
+    //   kind: "implicit",
+    //   name: pt.str(name),
+    //   exp: exp_matcher(exp),
+    //   span,
+    // }),
+    // "binding:vague": ({ name, exp }, { span }) => ({
+    //   kind: "vague",
+    //   name: pt.str(name),
+    //   exp: exp_matcher(exp),
+    //   span,
+    // }),
   })(tree)
 }
