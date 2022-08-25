@@ -1,7 +1,3 @@
-Mod has `env` and `ctx`
-
-- Closure do not need to have Mod
-
 # type checking
 
 infer -- Var
