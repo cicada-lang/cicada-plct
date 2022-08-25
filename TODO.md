@@ -1,3 +1,7 @@
+Mod has `env` and `ctx`
+
+- Closure do not need to have Mod
+
 # type checking
 
 infer -- Var
@@ -8,6 +12,8 @@ type checking test
 
 Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
+
+support annotated `Fn`
 
 checkType -- Pi
 infer -- Ap
@@ -39,12 +45,6 @@ Dot -- grammar and matcher
 checkType -- Cls
 check -- Obj
 infer -- Dot
-
-# stmt & mod
-
-Stmt
-
-Mod
 
 # datatype
 
