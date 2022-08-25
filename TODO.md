@@ -6,8 +6,6 @@ type checking test
 
 # pi
 
-Neutral -- Ap
-
 Exps.Fn -- take multiple bindings
 Exps.Pi -- take multiple bindings
 
