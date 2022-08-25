@@ -68,7 +68,7 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
 
 export type ArgKind = "plain" // | "implicit" | "vague"
 
-export type ArgEntry = {
+export type Arg = {
   kind: ArgKind
   exp: Exp
 }
@@ -77,15 +77,15 @@ export type Ap = {
   type: "Exp"
   kind: "Ap"
   target: Exp
-  argEntries: Array<ArgEntry>
+  args: Array<Arg>
 } & ExpMeta
 
-export function Ap(target: Exp, argEntries: Array<ArgEntry>, span?: Span): Ap {
+export function Ap(target: Exp, args: Array<Arg>, span?: Span): Ap {
   return {
     type: "Exp",
     kind: "Ap",
     target,
-    argEntries,
+    args,
     span,
   }
 }

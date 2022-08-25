@@ -1,8 +1,12 @@
-Exps.Fn -- take multiple bindings
-Exps.Pi -- take multiple bindings
+[refactor] avoid using ArgKind, use ADT instead
+
+- with constructors for Exps.Arg
 
 Value -- Pi
 Neutral -- Pi
+
+Exps.Fn -- take multiple bindings
+Exps.Pi -- take multiple bindings
 
 Exps.Sigma -- take multiple bindings
 

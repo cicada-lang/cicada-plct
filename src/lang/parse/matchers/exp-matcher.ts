@@ -176,7 +176,7 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
   })(tree)
 }
 
-export function arg_entries_matcher(tree: pt.Tree): Array<Exps.ArgEntry> {
+export function arg_entries_matcher(tree: pt.Tree): Array<Exps.Arg> {
   return pt.matcher({
     "arg_entries:arg_entries": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(arg_entry_matcher),
@@ -185,8 +185,8 @@ export function arg_entries_matcher(tree: pt.Tree): Array<Exps.ArgEntry> {
   })(tree)
 }
 
-export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
-  return pt.matcher<Exps.ArgEntry>({
+export function arg_entry_matcher(tree: pt.Tree): Exps.Arg {
+  return pt.matcher<Exps.Arg>({
     "arg_entry:plain": ({ arg }) => ({
       kind: "plain",
       exp: exp_matcher(arg),
