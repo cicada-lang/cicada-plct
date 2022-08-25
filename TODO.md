@@ -1,11 +1,45 @@
 # type checking
 
-test type checking -- for Var
-Stmts.Let
-Stmts.Compute
-test type checking -- with stmt
+[design] about sequence
 
-note about subtyping
+- We want to use `{ x, y, z }` for object literal sugar for `{ x: x, y: y, z: z }`
+
+- Thus `{ x }` is an object literal
+
+- We also want to use `{ ... }` for a sequence of code -- for example `let`
+
+  ```
+  {
+    let x = ...
+    f(x)
+  }
+  ```
+
+- If we do not use return statement in sequence,
+  we can not distinguish `{ x }` from `{ return x }`.
+
+- If we use `return` in sequence, we can write something like:
+
+  ```
+  let y = { return x }
+  ```
+
+  which reads bad, because `return` sounds like a early return from function.
+
+- What should we do?
+
+test type checking -- with stmt -- for Var
+
+- with Exps.Type
+
+- use Stmts.Declare
+
+  ```
+  declare t: Type
+  check t: Type
+  ```
+
+[note] about subtyping
 
 - we use the word `inclusion` to name our function which implements subtyping
 
