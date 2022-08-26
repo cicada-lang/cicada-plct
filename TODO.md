@@ -1,8 +1,8 @@
 # type checking
 
-Stmts.Declare
+note about stmt
 
-Stmts.Check
+Stmts.Declare & Stmts.Check
 
 Stmts.Declare -- grammar
 Stmts.Declare -- matcher
