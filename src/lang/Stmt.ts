@@ -2,7 +2,7 @@ import { Mod } from "./Mod"
 
 /**
 
-   # `Stmt` and Command Pattern
+   # Stmt and Command Pattern
 
    A `Stmt` is like a method of `Mod`,
    but implemented as an independent Command class.
