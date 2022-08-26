@@ -1,7 +1,7 @@
 import { Core } from "./Core"
 import { Ctx } from "./Ctx"
 import { Exp } from "./Exp"
-import { Type } from "./globals/Type"
+import * as Globals from "./globals"
 import { inclusion } from "./inclusion"
 import { infer } from "./infer"
 import { Value } from "./Value"
@@ -23,5 +23,5 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
 }
 
 export function checkType(ctx: Ctx, type: Exp): Core {
-  return check(ctx, type, Type)
+  return check(ctx, type, Globals.Type)
 }

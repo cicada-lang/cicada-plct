@@ -1,6 +1,6 @@
 import { Global } from "../Value"
 
-export class Globals {
+export class GlobalStore {
   map: Map<string, Global> = new Map()
 
   lookupValue(name: string): Global | undefined {
