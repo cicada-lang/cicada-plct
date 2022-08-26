@@ -1,19 +1,6 @@
 # type checking
 
-tests/infer-var
-
-- mod can run code
-
-  ```
-  await mod.run(`
-
-  declare t: Type
-  check t: Type
-
-  `)
-  ```
-
-checkType
+checkType -- making tests/infer-var.test.ts pass
 
 Stmts.Compute -- grammar & matcher
 Stmts.Let -- grammar & matcher
