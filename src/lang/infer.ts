@@ -3,7 +3,7 @@ import { Core } from "./Core"
 import { Ctx, lookupCtxType } from "./Ctx"
 import { ElaborationError } from "./errors/ElaborationError"
 import { Exp } from "./Exp"
-import { globals } from "./Globals"
+import { globals } from "./globals"
 import { Value } from "./Value"
 
 export type Inferred = {

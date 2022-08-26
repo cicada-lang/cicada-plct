@@ -192,8 +192,15 @@ export function Cdr(target: Exp, span?: Span): Cdr {
   }
 }
 
-// NOTE We can not only use `name` we also need `realName`,
-//   because of `subst` might rename bound variables.
+/**
+
+   # name v.s. realName in Cls
+
+   We can not only use `name` we also need `realName`,
+   because of `subst` might rename bound variables.
+
+*/
+
 export type Cls = ClsCons | ClsFulfilled | ClsNull
 
 export type ClsCons = {

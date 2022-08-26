@@ -1,7 +1,5 @@
 # type checking
 
-extract globals from Globals -- globals/index.ts
-
 tests/infer-var
 
 - mod can run code
