@@ -1,4 +1,6 @@
-import { Value } from "./Value"
+import { Value, NotYetValue } from "./Value"
+import { Env, EnvCons, EnvNull } from "./Env"
+import { Var } from "./Neutral"
 
 export type Ctx = CtxCons | CtxFulfilled | CtxNull
 
@@ -104,6 +106,22 @@ export function lookupCtxValue(ctx: Ctx, name: string): Value | undefined {
 
     case "CtxNull": {
       return undefined
+    }
+  }
+}
+
+export function ctx2Env(ctx: Ctx): Env {
+  switch (ctx.kind) {
+    case "CtxCons": {
+      return EnvCons(ctx.name, NotYetValue(ctx.type, Var(ctx.name)), ctx2Env(ctx.rest))
+    }
+
+    case "CtxFulfilled": {
+      return EnvCons(ctx.name, ctx.value, ctx2Env(ctx.rest))
+    }
+
+    case "CtxNull": {
+      return EnvNull()
     }
   }
 }
