@@ -6,4 +6,4 @@ export const optional = pt.grammars.optional
 
 export * from "./exp"
 export * from "./identifier"
-// export * from "./stmt"
+export * from "./stmt"

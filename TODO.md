@@ -1,15 +1,6 @@
 # type checking
 
 
-
-
-Stmts.Declare -- grammar
-Stmts.Declare -- matcher
-
-Stmts.Check -- grammar
-Stmts.Check -- matcher
-
-
 checkType
 
 test type checking -- with stmt -- for Var
@@ -22,6 +13,9 @@ test type checking -- with stmt -- for Var
   declare t: Type
   check t: Type
   ```
+
+Stmts.Compute -- grammar & matcher
+Stmts.Let -- grammar & matcher
 
 # pi
 
