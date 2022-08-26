@@ -1,7 +1,3 @@
-# type checking
-
-[refactor] [maybe] a better way to write cicada code in test
-
 Stmts.Compute -- grammar & matcher
 Stmts.Let -- grammar & matcher
 
