@@ -19,5 +19,5 @@ import { Span } from "./Span"
 
 export abstract class Stmt {
   abstract span?: Span
-  abstract execute(mod: Mod): void
+  abstract execute(mod: Mod): Promise<void>
 }

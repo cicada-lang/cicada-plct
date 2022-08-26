@@ -1,15 +1,21 @@
 # type checking
 
-setup type check testing
+extract globals from Globals -- globals/index.ts
+
+tests/infer-var
+
+- mod can run code
+
+  ```
+  await mod.run(`
+
+  declare t: Type
+  check t: Type
+
+  `)
+  ```
 
 checkType
-
-test `check` of `Var` with `Stmts`
-
-```
-declare t: Type
-check t: Type
-```
 
 Stmts.Compute -- grammar & matcher
 Stmts.Let -- grammar & matcher
