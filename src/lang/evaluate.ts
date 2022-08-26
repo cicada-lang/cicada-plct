@@ -1,7 +1,23 @@
 import { Core } from "./Core"
-import { Env } from "./Env"
+import { Env, lookupEnv } from "./Env"
 import { Value } from "./Value"
 
 export function evaluate(env: Env, core: Core): Value {
-  throw new Error("TODO")
+  switch (core.kind) {
+    case "Var": {
+      const value = lookupEnv(env, core.name)
+      if (value === undefined) {
+        throw new Error("TODO")
+      }
+
+      return value
+    }
+
+
+    default: {
+        throw new Error("TODO")
+    }
+
+  }
+
 }

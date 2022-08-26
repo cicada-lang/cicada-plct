@@ -1,38 +1,34 @@
 # type checking
 
-[design] about sequence
+errors/ElaborationError
 
-- We want to use `{ x, y, z }` for object literal sugar for `{ x: x, y: y, z: z }`
+evaluate -- Var use ElaborationError
 
-- Thus `{ x }` is an object literal
+remove lookupCtxTypeOrFail
 
-- We also want to use `{ ... }` for a sequence of code -- for example `let`
+- need to handle Builtin if not found
 
-  ```
-  {
-    let x = ...
-    f(x)
-  }
-  ```
+Cores.Builtin -- with `name` and `arity`
 
-- If we do not use return statement in sequence,
-  we can not distinguish `{ x }` from `{ return x }`.
+infer -- Var -- handle Builtin
 
-- If we use `return` in sequence, we can write something like:
+evaluate -- Builtin
 
-  ```
-  let y = { return x }
-  ```
+Values.Builtin
 
-  which reads bad, because `return` sounds like an early return from function.
+Type as Builtin
 
-- What should we do?
+Values.Type
+
+Stmts.Declare
+
+Stmts.Check
 
 test type checking -- with stmt -- for Var
 
 - with Exps.Type
 
-- use Stmts.Declare
+- use Stmts.Declare & Stmts.Check
 
   ```
   declare t: Type
@@ -108,3 +104,33 @@ NeutralVar constructor
 # recursion
 
 fixpoint and readback
+
+# questions
+
+[design] about sequence
+
+- We want to use `{ x, y, z }` for object literal sugar for `{ x: x, y: y, z: z }`
+
+- Thus `{ x }` is an object literal
+
+- We also want to use `{ ... }` for a sequence of code -- for example `let`
+
+  ```
+  {
+    let x = ...
+    f(x)
+  }
+  ```
+
+- If we do not use return statement in sequence,
+  we can not distinguish `{ x }` from `{ return x }`.
+
+- If we use `return` in sequence, we can write something like:
+
+  ```
+  let y = { return x }
+  ```
+
+  which reads bad, because `return` sounds like an early return from function.
+
+- What should we do?
