@@ -2,6 +2,20 @@ import { Span } from "./Span"
 
 type ExpMeta = { span?: Span }
 
+/**
+
+   # Exp
+
+   `Exp` is very close to the concrete syntax,
+   this is unlike `Core`, which is elaborated
+   and aiming to have a small "core".
+
+   For example, function with multiple arguments
+   is implemented in `Exp` and elaborated to `Core`
+   which does not support multiple arguments.
+
+**/
+
 export type Exp =
   | Var
   | Pi
@@ -194,12 +208,12 @@ export function Cdr(target: Exp, span?: Span): Cdr {
 
 /**
 
-   # name v.s. realName in Cls
+   ## name v.s. realName in Cls
 
    We can not only use `name` we also need `realName`,
    because of `subst` might rename bound variables.
 
-*/
+**/
 
 export type Cls = ClsCons | ClsFulfilled | ClsNull
 

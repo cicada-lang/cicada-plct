@@ -6,7 +6,7 @@ export type Solution = SolutionCons | SolutionNull | SolutionFailure
 
    TODO Should there be `SolutionFulfilled`, like `CtxFulfilled`?
 
-*/
+**/
 
 export type SolutionCons = {
   kind: "SolutionCons"

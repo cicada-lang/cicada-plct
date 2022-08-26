@@ -15,7 +15,7 @@ import { Span } from "./Span"
    Unlike functions about `Exp`, `Core`, `Value` and `Neutral`,
    which are pure, `stmt.execute` does side effects on `mod`.
 
- */
+**/
 
 export abstract class Stmt {
   abstract span?: Span

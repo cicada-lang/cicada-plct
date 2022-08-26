@@ -23,7 +23,7 @@ export function NotYetValue(type: Value, Neutral: Neutral): NotYetValue {
 
    TODO We will need `args: Array<Values.Arg>` for currying.
 
- */
+**/
 
 export type Global = {
   family: "Value"

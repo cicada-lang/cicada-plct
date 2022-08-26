@@ -22,7 +22,7 @@ import { Value } from "./Value"
    We only use tagged union (sum type in ADT),
    -- which will be implemented by our induction datatypes.
 
-*/
+**/
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Global" && type.kind === "Global") {

@@ -9,7 +9,7 @@
    Ap(Fn("x", Var("f")), Var("x"))
    ```
 
-*/
+**/
 
 export const exp = {
   $grammar: {
