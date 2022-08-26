@@ -1,5 +1,3 @@
-[note] about subtyping
-
 # type checking
 
 Stmts.Declare
