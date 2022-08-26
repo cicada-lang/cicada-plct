@@ -30,15 +30,13 @@ export type Builtin = {
   family: "Core"
   kind: "Builtin"
   name: string
-  arity: number
 }
 
-export function Builtin(name: string, arity: number): Builtin {
+export function Builtin(name: string): Builtin {
   return {
     family: "Core",
     kind: "Builtin",
     name,
-    arity,
   }
 }
 
