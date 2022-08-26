@@ -1,5 +1,6 @@
 export type Core =
   | Var
+  | Builtin
   | Pi
   | Ap
   | Fn
@@ -22,6 +23,22 @@ export function Var(name: string): Var {
     family: "Core",
     kind: "Var",
     name,
+  }
+}
+
+export type Builtin = {
+  family: "Core"
+  kind: "Builtin"
+  name: string
+  arity: number
+}
+
+export function Builtin(name: string, arity: number): Builtin {
+  return {
+    family: "Core",
+    kind: "Builtin",
+    name,
+    arity,
   }
 }
 

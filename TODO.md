@@ -1,7 +1,5 @@
 # type checking
 
-Cores.Builtin -- with `name` and `arity`
-
 infer -- Var -- handle Builtin
 
 evaluate -- Builtin
