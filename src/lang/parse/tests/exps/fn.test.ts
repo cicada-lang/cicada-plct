@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import { Fn, Var } from "../../Exp"
-import { parseExp } from "../index"
-import { deleteUndefined } from "./utils"
+import { Fn, Var } from "../../../Exp"
+import { parseExp } from "../../index"
+import { deleteUndefined } from "../utils"
 
 test("parse Fn", () => {
   expect(parseExp("(x) => x")).toMatchObject(deleteUndefined(Fn("x", Var("x"))))

@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import { Pi, Var } from "../../Exp"
-import { parseExp } from "../index"
-import { deleteUndefined } from "./utils"
+import { Pi, Var } from "../../../Exp"
+import { parseExp } from "../../index"
+import { deleteUndefined } from "../utils"
 
 test("parse Pi", () => {
   expect(parseExp("(n: Nat) -> Nat")).toMatchObject(

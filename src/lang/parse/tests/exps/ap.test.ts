@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import { Ap, ArgPlain, Var } from "../../Exp"
-import { parseExp } from "../index"
-import { deleteUndefined } from "./utils"
+import { Ap, ArgPlain, Var } from "../../../Exp"
+import { parseExp } from "../../index"
+import { deleteUndefined } from "../utils"
 
 test("parse Ap", () => {
   expect(parseExp("f(x)")).toMatchObject(

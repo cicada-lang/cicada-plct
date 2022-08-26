@@ -1,18 +1,19 @@
 # type checking
 
+test parse Declare
+
+test parse Check
+
+setup type check testing
 
 checkType
 
-test type checking -- with stmt -- for Var
+test `check` of `Var` with `Stmts`
 
-- with Exps.Type
-
-- use Stmts.Declare & Stmts.Check
-
-  ```
-  declare t: Type
-  check t: Type
-  ```
+```
+declare t: Type
+check t: Type
+```
 
 Stmts.Compute -- grammar & matcher
 Stmts.Let -- grammar & matcher

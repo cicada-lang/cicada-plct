@@ -8,3 +8,10 @@ export const parseExp = pt.gen_parse({
   grammar: pt.grammar_start(grammars, "exp"),
   matcher: matchers.exp_matcher,
 })
+
+export const parseStmts = pt.gen_parse({
+  preprocess: pt.preprocess.erase_comment,
+  lexer: pt.lexers.common,
+  grammar: pt.grammar_start(grammars, "stmts"),
+  matcher: matchers.stmts_matcher,
+})
