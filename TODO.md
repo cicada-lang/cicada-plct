@@ -1,7 +1,5 @@
 # type checking
 
-evaluate -- Var use EvaluationError
-
 remove lookupCtxTypeOrFail
 
 - need to handle Builtin if not found
