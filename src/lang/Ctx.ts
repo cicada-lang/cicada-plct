@@ -53,15 +53,6 @@ export function CtxNull(): CtxNull {
   }
 }
 
-export function lookupCtxTypeOrFail(ctx: Ctx, name: string): Value {
-  const type = lookupCtxType(ctx, name)
-  if (type === undefined) {
-    throw new Error(`Undefined name: ${name}`)
-  }
-
-  return type
-}
-
 export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
   switch (ctx.kind) {
     case "CtxCons": {

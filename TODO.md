@@ -1,9 +1,5 @@
 # type checking
 
-remove lookupCtxTypeOrFail
-
-- need to handle Builtin if not found
-
 Cores.Builtin -- with `name` and `arity`
 
 infer -- Var -- handle Builtin

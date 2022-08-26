@@ -1,6 +1,7 @@
 import * as Cores from "./Core"
 import { Core } from "./Core"
-import { Ctx, lookupCtxTypeOrFail } from "./Ctx"
+import { Ctx, lookupCtxType } from "./Ctx"
+import { ElaborationError } from "./errors/ElaborationError"
 import { Exp } from "./Exp"
 import { Value } from "./Value"
 
@@ -19,7 +20,12 @@ export function Inferred(type: Value, core: Core): Inferred {
 export function infer(ctx: Ctx, exp: Exp): Inferred {
   switch (exp.kind) {
     case "Var": {
-      return Inferred(lookupCtxTypeOrFail(ctx, exp.name), Cores.Var(exp.name))
+      const foundType = lookupCtxType(ctx, exp.name)
+      if (foundType === undefined) {
+        throw new ElaborationError(`Undefined name ${exp.name}`)
+      }
+
+      return Inferred(foundType, Cores.Var(exp.name))
     }
 
     default: {
