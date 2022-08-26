@@ -9,7 +9,7 @@ export type NotYetValue = {
   Neutral: Neutral
 }
 
-export function NotYetValue(type: Value, Neutral: Neutral) {
+export function NotYetValue(type: Value, Neutral: Neutral): NotYetValue {
   return {
     kind: "NotYetValue",
     type,
