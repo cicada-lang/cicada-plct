@@ -1,21 +1,19 @@
 # type checking
 
-rename Builtin to a single word
-
-Values.Builtin
+Values.Global
 
 - with `name`, `type` and `arity`
 - maybe need `args: Array<Values.Arg>` in the future for currying
 
-Builtins.ts
+Globals.ts
 
-- global variable for all the builtins
+- global variable for all the globals
 
-infer -- Var -- handle Builtin
+infer -- Var -- handle Global
 
-evaluate -- Builtins
+evaluate -- Globals
 
-Type as Builtin
+Type as Global
 
 Values.Type
 

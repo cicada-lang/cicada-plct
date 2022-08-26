@@ -1,6 +1,6 @@
 export type Core =
   | Var
-  | Builtin
+  | Global
   | Pi
   | Ap
   | Fn
@@ -26,16 +26,16 @@ export function Var(name: string): Var {
   }
 }
 
-export type Builtin = {
+export type Global = {
   family: "Core"
-  kind: "Builtin"
+  kind: "Global"
   name: string
 }
 
-export function Builtin(name: string): Builtin {
+export function Global(name: string): Global {
   return {
     family: "Core",
-    kind: "Builtin",
+    kind: "Global",
     name,
   }
 }
