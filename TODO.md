@@ -1,7 +1,5 @@
 # type checking
 
-note about stmt
-
 Stmts.Declare & Stmts.Check
 
 Stmts.Declare -- grammar

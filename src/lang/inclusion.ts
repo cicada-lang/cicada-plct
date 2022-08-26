@@ -3,7 +3,7 @@ import { Value } from "./Value"
 
 /**
 
-   # About subtyping
+   # Subtyping
 
    We use the word `inclusion` to name our function
    which implements the subtyping relation.
