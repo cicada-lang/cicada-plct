@@ -1,9 +1,12 @@
 # type checking
 
-infer -- Var -- use Global
-evaluate -- Var -- use Globals
+[refactor] rename `lookupEnv` to `lookupEnvValue`
+
+- to be symmetric with other functions
 
 Globals.Type
+
+- Globals.define
 
 Values.Type
 

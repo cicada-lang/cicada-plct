@@ -22,7 +22,7 @@ export function NotYetValue(type: Value, Neutral: Neutral): NotYetValue {
 // NOTE Maybe need `args: Array<Values.Arg>` for currying.
 // NOTE Maybe compute `arity` from `type`.
 export type Global = {
-  family: "Value"  
+  family: "Value"
   kind: "Global"
   name: string
   type: Value

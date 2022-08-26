@@ -3,6 +3,7 @@ import { Core } from "./Core"
 import { Ctx, lookupCtxType } from "./Ctx"
 import { ElaborationError } from "./errors/ElaborationError"
 import { Exp } from "./Exp"
+import { globals } from "./Globals"
 import { Value } from "./Value"
 
 export type Inferred = {
@@ -21,11 +22,16 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
   switch (exp.kind) {
     case "Var": {
       const foundType = lookupCtxType(ctx, exp.name)
-      if (foundType === undefined) {
-        throw new ElaborationError(`Undefined name ${exp.name}`)
+      if (foundType !== undefined) {
+        return Inferred(foundType, Cores.Var(exp.name))
       }
 
-      return Inferred(foundType, Cores.Var(exp.name))
+      const globalValue = globals.lookupValue(exp.name)
+      if (globalValue !== undefined) {
+        return Inferred(globalValue.type, Cores.Global(exp.name))
+      }
+
+      throw new ElaborationError(`Undefined name ${exp.name}`)
     }
 
     default: {
