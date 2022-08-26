@@ -1,10 +1,19 @@
 # type checking
 
-infer -- Var -- handle Builtin
-
-evaluate -- Builtin
+rename Builtin to a single word
 
 Values.Builtin
+
+- with `name`, `type` and `arity`
+- maybe need `args: Array<Values.Arg>` in the future for currying
+
+Builtins.ts
+
+- global variable for all the builtins
+
+infer -- Var -- handle Builtin
+
+evaluate -- Builtins
 
 Type as Builtin
 
