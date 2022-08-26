@@ -1,6 +1,10 @@
 # type checking
 
-Stmts.Declare & Stmts.Check
+Stmts.Check
+
+Stmt has span
+
+checkType
 
 Stmts.Declare -- grammar
 Stmts.Declare -- matcher

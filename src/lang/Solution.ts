@@ -2,7 +2,11 @@ import { Value } from "./Value"
 
 export type Solution = SolutionCons | SolutionNull | SolutionFailure
 
-// TODO Should `SolutionCons` also contains type of value -- like `CtxCons`?
+/**
+
+   TODO Should there be `SolutionFulfilled`, like `CtxFulfilled`?
+
+*/
 
 export type SolutionCons = {
   kind: "SolutionCons"

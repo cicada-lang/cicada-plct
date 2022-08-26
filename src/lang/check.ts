@@ -20,3 +20,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       throw new Error("TODO")
   }
 }
+
+export function checkType(ctx: Ctx, type: Exp): Core {
+  throw new Error("TODO")
+}
