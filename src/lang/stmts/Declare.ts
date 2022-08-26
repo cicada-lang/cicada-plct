@@ -7,7 +7,7 @@ import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class Declare extends Stmt {
-  constructor(public name: string, public type: Exp, public span: Span) {
+  constructor(public name: string, public type: Exp, public span?: Span) {
     super()
   }
 
