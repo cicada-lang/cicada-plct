@@ -1,9 +1,5 @@
 # type checking
 
-[refactor] rename `lookupEnv` to `lookupEnvValue`
-
-- to be symmetric with other functions
-
 Globals.Type
 
 - Globals.define
