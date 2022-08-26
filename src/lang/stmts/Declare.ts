@@ -3,10 +3,11 @@ import { CtxCons } from "../Ctx"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { Mod } from "../Mod"
+import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class Declare extends Stmt {
-  constructor(public name: string, public type: Exp) {
+  constructor(public name: string, public type: Exp, public span: Span) {
     super()
   }
 

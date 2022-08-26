@@ -1,14 +1,16 @@
 # type checking
 
-Stmt has span
 
-checkType
+
 
 Stmts.Declare -- grammar
 Stmts.Declare -- matcher
 
 Stmts.Check -- grammar
 Stmts.Check -- matcher
+
+
+checkType
 
 test type checking -- with stmt -- for Var
 

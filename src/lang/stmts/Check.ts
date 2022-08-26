@@ -2,10 +2,16 @@ import { check, checkType } from "../check"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { Mod } from "../Mod"
+import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class Check extends Stmt {
-  constructor(public name: string, public exp: Exp, public type: Exp) {
+  constructor(
+    public name: string,
+    public exp: Exp,
+    public type: Exp,
+    public span: Span
+  ) {
     super()
   }
 

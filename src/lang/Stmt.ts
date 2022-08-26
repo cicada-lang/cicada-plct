@@ -1,4 +1,5 @@
 import { Mod } from "./Mod"
+import { Span } from "./Span"
 
 /**
 
@@ -17,5 +18,6 @@ import { Mod } from "./Mod"
  */
 
 export abstract class Stmt {
+  abstract span: Span
   abstract execute(mod: Mod): void
 }
