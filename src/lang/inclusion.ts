@@ -25,5 +25,11 @@ import { Value } from "./Value"
 */
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
+  if (subtype.kind === "Global" && type.kind === "Global") {
+    if (subtype.name === "Type" && type.name === "Type") {
+      return
+    }
+  }
+
   throw new Error("TODO")
 }

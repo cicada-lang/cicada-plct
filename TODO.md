@@ -1,6 +1,8 @@
 # type checking
 
-checkType -- making tests/infer-var.test.ts pass
+[refactor] be able to import Globals.Type
+
+[refactor] [maybe] a better way to write cicada code in test
 
 Stmts.Compute -- grammar & matcher
 Stmts.Let -- grammar & matcher
