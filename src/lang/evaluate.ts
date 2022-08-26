@@ -13,11 +13,8 @@ export function evaluate(env: Env, core: Core): Value {
       return value
     }
 
-
     default: {
-        throw new Error("TODO")
+      throw new Error("TODO")
     }
-
   }
-
 }

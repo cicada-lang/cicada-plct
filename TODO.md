@@ -1,6 +1,6 @@
 # type checking
 
-evaluate -- Var use ElaborationError
+evaluate -- Var use EvaluationError
 
 remove lookupCtxTypeOrFail
 
