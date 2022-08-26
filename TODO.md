@@ -1,8 +1,16 @@
+[note] about subtyping
+
 # type checking
 
 Stmts.Declare
 
 Stmts.Check
+
+Stmts.Declare -- grammar
+Stmts.Declare -- matcher
+
+Stmts.Check -- grammar
+Stmts.Check -- matcher
 
 test type checking -- with stmt -- for Var
 
@@ -14,20 +22,6 @@ test type checking -- with stmt -- for Var
   declare t: Type
   check t: Type
   ```
-
-[note] about subtyping
-
-- we use the word `inclusion` to name our function which implements subtyping
-
-  - compare to the word `conversion`
-
-- `inclusion` do not need `unify`
-
-- [question] attribute based subtyping v.s. algebraic subtyping (use lattice theory to handle inequality)
-
-- [question] should we add `Union` and `Intersection` type?
-
-- [question] why we can not (or should not) have un-tagged `Union` type?
 
 # pi
 
