@@ -1,7 +1,5 @@
 # type checking
 
-test parse Check
-
 setup type check testing
 
 checkType
