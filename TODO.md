@@ -1,11 +1,5 @@
 # type checking
 
-Globals.Type
-
-- Globals.define
-
-Values.Type
-
 Stmts.Declare
 
 Stmts.Check
