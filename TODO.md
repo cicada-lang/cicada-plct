@@ -1,10 +1,5 @@
 # type checking
 
-Values.Global
-
-- with `name`, `type` and `arity`
-- maybe need `args: Array<Values.Arg>` in the future for currying
-
 Globals.ts
 
 - global variable for all the globals
