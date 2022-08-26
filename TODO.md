@@ -1,5 +1,10 @@
-Stmts.Compute -- grammar & matcher
+# statements and testing
+
 Stmts.Let -- grammar & matcher
+
+Stmts.Compute -- grammar & matcher
+
+- need `readback`
 
 # pi
 
