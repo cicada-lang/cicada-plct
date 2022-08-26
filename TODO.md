@@ -1,7 +1,5 @@
 # type checking
 
-Stmts.Check
-
 Stmt has span
 
 checkType
