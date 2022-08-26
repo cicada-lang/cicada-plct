@@ -1,14 +1,9 @@
 # type checking
 
-Globals.ts
+infer -- Var -- use Global
+evaluate -- Var -- use Globals
 
-- global variable for all the globals
-
-infer -- Var -- handle Global
-
-evaluate -- Globals
-
-Type as Global
+Globals.Type
 
 Values.Type
 
