@@ -112,6 +112,6 @@ export const fn_bindings = {
 
 export const fn_binding = {
   $grammar: {
-    "fn_binding:fn_binding": [{ name: "identifier" }],
+    "fn_binding:name": [{ name: "identifier" }],
   },
 }

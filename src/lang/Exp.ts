@@ -92,17 +92,48 @@ export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
 export type Fn = {
   family: "Exp"
   kind: "Fn"
-  name: string
+  bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
 
-export function Fn(name: string, ret: Exp, span?: Span): Fn {
+export function Fn(bindings: Array<FnBinding>, ret: Exp, span?: Span): Fn {
   return {
     family: "Exp",
     kind: "Fn",
-    name,
+    bindings,
     ret,
     span,
+  }
+}
+
+export type FnBinding = FnBindingName | FnBindingAnnotated
+
+export type FnBindingName = {
+  kind: "FnBindingName"
+  name: string
+}
+
+export function FnBindingName(name: string): FnBindingName {
+  return {
+    kind: "FnBindingName",
+    name,
+  }
+}
+
+export type FnBindingAnnotated = {
+  kind: "FnBindingAnnotated"
+  name: string
+  type: Exp
+}
+
+export function FnBindingAnnotated(
+  name: string,
+  type: Exp
+): FnBindingAnnotated {
+  return {
+    kind: "FnBindingAnnotated",
+    name,
+    type,
   }
 }
 

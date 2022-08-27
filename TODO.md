@@ -1,8 +1,6 @@
 # pi
 
-Exps.Fn -- take multiple bindings
-
-- support annotated `Fn`
+Exps.FnBindingAnnotated -- support annotated `Fn`
 
 [refactor] inline `fn_handler`
 

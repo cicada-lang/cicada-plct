@@ -54,23 +54,10 @@ export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
 
 export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
   const { fn_bindings, ret } = body
-
-  return fn_bindings_matcher(fn_bindings)
-    .reverse()
-    .reduce((result, fn_binding) => {
-      switch (fn_binding.kind) {
-        case "name": {
-          return Exps.Fn(
-            fn_binding.name,
-            result,
-            pt.span_closure([fn_binding.span, ret.span])
-          )
-        }
-      }
-    }, exp_matcher(ret))
+  return Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret))
 }
 
-export function fn_bindings_matcher(tree: pt.Tree): Array<FnBinding> {
+export function fn_bindings_matcher(tree: pt.Tree): Array<Exps.FnBinding> {
   return pt.matcher({
     "fn_bindings:fn_bindings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(fn_binding_matcher),
@@ -83,19 +70,9 @@ export function fn_bindings_matcher(tree: pt.Tree): Array<FnBinding> {
   })(tree)
 }
 
-type FnBinding = {
-  kind: "name"
-  name: string
-  span: pt.Span
-}
-
-export function fn_binding_matcher(tree: pt.Tree): FnBinding {
-  return pt.matcher<FnBinding>({
-    "fn_binding:fn_binding": ({ name }, { span }) => ({
-      kind: "name",
-      name: pt.str(name),
-      span,
-    }),
+export function fn_binding_matcher(tree: pt.Tree): Exps.FnBinding {
+  return pt.matcher<Exps.FnBinding>({
+    "fn_binding:name": ({ name }, { span }) => Exps.FnBindingName(pt.str(name)),
   })(tree)
 }
 

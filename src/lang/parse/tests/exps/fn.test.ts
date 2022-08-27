@@ -1,20 +1,22 @@
 import { expect, test } from "vitest"
-import { Fn, Var } from "../../../Exp"
+import { Fn, FnBindingName, Var } from "../../../Exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Fn", () => {
-  expect(parseExp("(x) => x")).toMatchObject(deleteUndefined(Fn("x", Var("x"))))
+  expect(parseExp("(x) => x")).toMatchObject(
+    deleteUndefined(Fn([FnBindingName("x")], Var("x")))
+  )
 
   expect(parseExp("function (x) x")).toMatchObject(
-    deleteUndefined(Fn("x", Var("x")))
+    deleteUndefined(Fn([FnBindingName("x")], Var("x")))
   )
 
   expect(parseExp("(x, y) => x")).toMatchObject(
-    deleteUndefined(Fn("x", Fn("y", Var("x"))))
+    deleteUndefined(Fn([FnBindingName("x"), FnBindingName("y")], Var("x")))
   )
 
   expect(parseExp("function (x, y) x")).toMatchObject(
-    deleteUndefined(Fn("x", Fn("y", Var("x"))))
+    deleteUndefined(Fn([FnBindingName("x"), FnBindingName("y")], Var("x")))
   )
 })
