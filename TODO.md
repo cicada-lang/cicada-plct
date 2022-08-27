@@ -1,7 +1,5 @@
 # pi
 
-Exps.MultiFn first transform to nested Exps.Fn then check
-
 check -- Fn
 
 - with the help of `assertValue`

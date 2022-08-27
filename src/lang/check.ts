@@ -23,8 +23,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "MultiFn": {
+      return check(ctx, simplifyMultiFn(exp.bindings, exp.ret), type)
+    }
+
+    case "Fn": {
       const pi = assertValue(ctx, type, Values.Pi)
-      return checkFn(ctx, exp.bindings, exp.ret, pi)
+      throw new Error("TODO")
     }
 
     case "Ap": {
@@ -62,11 +66,18 @@ export function checkType(ctx: Ctx, type: Exp): Core {
   return check(ctx, type, Globals.Type)
 }
 
-export function checkFn(
-  ctx: Ctx,
-  bindings: Array<Exps.FnBinding>,
-  ret: Exp,
-  pi: Values.Pi
-): Core {
-  throw new Error("TODO")
+function simplifyMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
+  if (bindings.length === 0) return ret
+
+  const [binding, ...restBindings] = bindings
+
+  switch (binding.kind) {
+    case "FnBindingName": {
+      return Exps.Fn(binding.name, simplifyMultiFn(restBindings, ret))
+    }
+
+    case "FnBindingAnnotated": {
+      throw new Error("TODO")
+    }
+  }
 }

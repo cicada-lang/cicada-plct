@@ -60,9 +60,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 }
 
 function simplifyMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
-  if (bindings.length === 0) {
-    return retType
-  }
+  if (bindings.length === 0) return retType
 
   const [binding, ...restBindings] = bindings
 
