@@ -20,7 +20,7 @@ export type Exp =
   | Var
   | Pi
   | MultiPi
-  // | Ap
+  | Ap
   | MultiAp
   | Fn
   | MultiFn
@@ -184,6 +184,40 @@ export function FnBindingAnnotated(
   }
 }
 
+export type Ap = {
+  family: "Exp"
+  kind: "Ap"
+  target: Exp
+  arg: Exp
+} & ExpMeta
+
+export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
+  return {
+    family: "Exp",
+    kind: "Ap",
+    target,
+    arg,
+    span,
+  }
+}
+
+export type MultiAp = {
+  family: "Exp"
+  kind: "MultiAp"
+  target: Exp
+  args: Array<Arg>
+} & ExpMeta
+
+export function MultiAp(target: Exp, args: Array<Arg>, span?: Span): MultiAp {
+  return {
+    family: "Exp",
+    kind: "MultiAp",
+    target,
+    args,
+    span,
+  }
+}
+
 export type Arg = ArgPlain | ArgImplicit | ArgVague
 
 export type ArgPlain = {
@@ -219,23 +253,6 @@ export function ArgVague(exp: Exp): ArgVague {
   return {
     kind: "ArgVague",
     exp,
-  }
-}
-
-export type MultiAp = {
-  family: "Exp"
-  kind: "MultiAp"
-  target: Exp
-  args: Array<Arg>
-} & ExpMeta
-
-export function MultiAp(target: Exp, args: Array<Arg>, span?: Span): MultiAp {
-  return {
-    family: "Exp",
-    kind: "MultiAp",
-    target,
-    args,
-    span,
   }
 }
 
