@@ -12,6 +12,6 @@ import { Value } from "./Value"
 
 **/
 
-export function readback(ctx: Ctx, t: Value, value: Type): Core {
+export function readback(ctx: Ctx, t: Value, value: Value): Core {
   throw new Error("TODO")
 }
