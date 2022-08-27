@@ -1,4 +1,5 @@
-import { checkType } from "./check"
+import { check, checkType } from "./check"
+import { applyClosure } from "./Closure"
 import * as Cores from "./Core"
 import { Core } from "./Core"
 import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "./Ctx"
@@ -8,7 +9,8 @@ import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 import * as Globals from "./globals"
 import { globals } from "./globals"
-import { Value } from "./Value"
+import * as Values from "./Value"
+import { assertValue, Value } from "./Value"
 
 export type Inferred = {
   type: Value
@@ -53,16 +55,20 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
     }
 
-    // case "Ap": {
-    //   const inferred = infer(ctx, exp.target)
-    //   const pi = assertValue(ctx, inferred.type, Values.Pi)
-    //   const argCore = check(ctx, exp.arg, pi.argType)
-    //   const argValue = evaluate(ctxToEnv(ctx), argCore)
-    //   return Inferred(
-    //     applyClosure(pi.retTypeClosure, argValue),
-    //     Cores.Ap(inferred.core, argCore)
-    //   )
-    // }
+    case "Ap": {
+      const inferred = infer(ctx, exp.target)
+      const pi = assertValue(ctx, inferred.type, Values.Pi)
+      const argCore = check(ctx, exp.arg, pi.argType)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      return Inferred(
+        applyClosure(pi.retTypeClosure, argValue),
+        Cores.Ap(inferred.core, argCore)
+      )
+    }
+
+    case "MultiAp": {
+      return infer(ctx, simplifyMultiAp(exp.target, exp.args))
+    }
 
     default: {
       throw new Error(`infer is not implemented for: ${exp.kind}`)
@@ -86,6 +92,26 @@ function simplifyMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
         binding.type,
         simplifyMultiPi(restBindings, retType)
       )
+    }
+  }
+}
+
+function simplifyMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
+  if (args.length === 0) return target
+
+  const [arg, ...restArgs] = args
+
+  switch (arg.kind) {
+    case "ArgPlain": {
+      return simplifyMultiAp(Exps.Ap(target, arg.exp), restArgs)
+    }
+
+    case "ArgImplicit": {
+      throw new Error("TODO")
+    }
+
+    case "ArgVague": {
+      throw new Error("TODO")
     }
   }
 }

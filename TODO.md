@@ -1,9 +1,5 @@
 # pi
 
-simplifyMultiAp then infer
-
-infer -- Ap
-
 evaluate -- Ap
 
 Exps.FnAnnotated -- can be inferred
