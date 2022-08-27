@@ -45,39 +45,40 @@ export function pi_bindings_matcher(tree: pt.Tree): Array<Exps.PiBinding> {
 
 export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
   return pt.matcher<Exps.PiBinding>({
-    "pi_binding:nameless": ({ exp }) => Exps.PiBindingNameless(exp_matcher(exp)),
+    "pi_binding:nameless": ({ exp }) =>
+      Exps.PiBindingNameless(exp_matcher(exp)),
     "pi_binding:named": ({ name, exp }) =>
       Exps.PiBindingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
 }
 
 export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
-  const { namings, ret } = body
+  const { fn_bindings, ret } = body
 
-  return namings_matcher(namings)
+  return fn_bindings_matcher(fn_bindings)
     .reverse()
-    .reduce((result, naming) => {
-      switch (naming.kind) {
+    .reduce((result, fn_binding) => {
+      switch (fn_binding.kind) {
         case "name": {
           return Exps.Fn(
-            naming.name,
+            fn_binding.name,
             result,
-            pt.span_closure([naming.span, ret.span])
+            pt.span_closure([fn_binding.span, ret.span])
           )
         }
       }
     }, exp_matcher(ret))
 }
 
-export function namings_matcher(tree: pt.Tree): Array<FnBinding> {
+export function fn_bindings_matcher(tree: pt.Tree): Array<FnBinding> {
   return pt.matcher({
-    "namings:namings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(naming_matcher),
-      naming_matcher(last_entry),
+    "fn_bindings:fn_bindings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(fn_binding_matcher),
+      fn_binding_matcher(last_entry),
     ],
-    "namings:namings_bracket_separated": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(naming_matcher),
-      naming_matcher(last_entry),
+    "fn_bindings:fn_bindings_bracket_separated": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(fn_binding_matcher),
+      fn_binding_matcher(last_entry),
     ],
   })(tree)
 }
@@ -88,9 +89,9 @@ type FnBinding = {
   span: pt.Span
 }
 
-export function naming_matcher(tree: pt.Tree): FnBinding {
+export function fn_binding_matcher(tree: pt.Tree): FnBinding {
   return pt.matcher<FnBinding>({
-    "naming:naming": ({ name }, { span }) => ({
+    "fn_binding:fn_binding": ({ name }, { span }) => ({
       kind: "name",
       name: pt.str(name),
       span,

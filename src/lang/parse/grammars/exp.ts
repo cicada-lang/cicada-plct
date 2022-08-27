@@ -51,7 +51,7 @@ export const operand = {
     ],
     "operand:fn": [
       '"("',
-      { namings: "namings" },
+      { fn_bindings: "fn_bindings" },
       '")"',
       '"="',
       '">"',
@@ -60,7 +60,7 @@ export const operand = {
     "operand:fn_function": [
       '"function"',
       '"("',
-      { namings: "namings" },
+      { fn_bindings: "fn_bindings" },
       '")"',
       { ret: "exp" },
     ],
@@ -100,18 +100,18 @@ export const pi_binding = {
   },
 }
 
-export const namings = {
+export const fn_bindings = {
   $grammar: {
-    "namings:namings": [
-      { entries: { $ap: ["zero_or_more", "naming", '","'] } },
-      { last_entry: "naming" },
+    "fn_bindings:fn_bindings": [
+      { entries: { $ap: ["zero_or_more", "fn_binding", '","'] } },
+      { last_entry: "fn_binding" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const naming = {
+export const fn_binding = {
   $grammar: {
-    "naming:naming": [{ name: "identifier" }],
+    "fn_binding:fn_binding": [{ name: "identifier" }],
   },
 }

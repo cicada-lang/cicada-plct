@@ -1,9 +1,5 @@
 # pi
 
-rename namings to fn_bindings
-
-rename naming to fn_binding
-
 Exps.Fn -- take multiple bindings
 
 - support annotated `Fn`
