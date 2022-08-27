@@ -14,8 +14,7 @@ import { Value } from "./Value"
    but also handles subtyping between classes,
    -- simple attribute based subtype relation.
 
-   `conversion` is like implementing
-   `readback` and `alphaEquivalence` at once.
+   `conversion` is implemented by `readback` and `alphaEquivalence`.
 
    We will not implement `Union` and `Intersection` types.
 
