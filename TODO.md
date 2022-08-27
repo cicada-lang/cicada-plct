@@ -2,13 +2,19 @@
 
 infer -- Ap
 
-evaluate -- Fn
 evaluate -- Ap
 
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated
 simplifyMultiFn -- return Exps.FnAnnotated
+
+# statements and testing
+
+Stmts.Compute -- grammar & matcher
+
+- need `readback`
+- need `formatCore`
 
 # sigma
 
@@ -56,13 +62,6 @@ infer -- Dot
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
-
-# statements and testing
-
-Stmts.Compute -- grammar & matcher
-
-- need `readback`
-- need `formatCore`
 
 # unification, implicit and vague
 

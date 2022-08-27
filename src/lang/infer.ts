@@ -54,7 +54,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     default: {
-      throw new Error("TODO")
+      throw new Error(`infer is not implemented for: ${exp.kind}`)
     }
   }
 }

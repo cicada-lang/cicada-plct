@@ -32,6 +32,11 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.Pi(argType, retTypeClosure)
     }
 
+    case "Fn": {
+      const retClosure = Closure(env, core.name, core.ret)
+      return Values.Fn(retClosure)
+    }
+
     default: {
       throw new Error(`evaluate is not implemented for core: ${core.kind}`)
     }
