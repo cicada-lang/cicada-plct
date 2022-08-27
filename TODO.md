@@ -1,6 +1,6 @@
 # pi
 
-extract -- checkPi
+infer-pi.test.ts
 
 infer -- Ap
 check -- Fn

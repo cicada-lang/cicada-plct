@@ -39,43 +39,39 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Pi": {
-      if (exp.bindings.length === 0) {
-        return Inferred(Globals.Type, checkType(ctx, exp.retType))
-      } else {
-        const [binding, ...restBindings] = exp.bindings
-        switch (binding.kind) {
-          case "PiBindingNameless": {
-            const argTypeCore = checkType(ctx, binding.type)
-            const inferredRetType = infer(
-              ctx,
-              Exps.Pi(restBindings, exp.retType)
-            )
-
-            return Inferred(
-              Globals.Type,
-              Cores.Pi("_", argTypeCore, inferredRetType.core)
-            )
-          }
-
-          case "PiBindingNamed": {
-            const argTypeCore = checkType(ctx, binding.type)
-            const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
-            const inferredRetType = infer(
-              CtxCons(binding.name, argTypeValue, ctx),
-              Exps.Pi(restBindings, exp.retType)
-            )
-
-            return Inferred(
-              Globals.Type,
-              Cores.Pi(binding.name, argTypeCore, inferredRetType.core)
-            )
-          }
-        }
-      }
+      return Inferred(Globals.Type, checkPi(ctx, exp.bindings, exp.retType))
     }
 
     default: {
       throw new Error("TODO")
+    }
+  }
+}
+
+function checkPi(
+  ctx: Ctx,
+  bindings: Array<Exps.PiBinding>,
+  retType: Exp
+): Core {
+  if (bindings.length === 0) {
+    return checkType(ctx, retType)
+  }
+
+  const [binding, ...restBindings] = bindings
+
+  switch (binding.kind) {
+    case "PiBindingNameless": {
+      const argTypeCore = checkType(ctx, binding.type)
+      const retTypeCore = checkType(ctx, Exps.Pi(restBindings, retType))
+      return Cores.Pi("_", argTypeCore, retTypeCore)
+    }
+
+    case "PiBindingNamed": {
+      const argTypeCore = checkType(ctx, binding.type)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(binding.name, argTypeValue, ctx)
+      const retTypeCore = checkType(ctx, Exps.Pi(restBindings, retType))
+      return Cores.Pi(binding.name, argTypeCore, retTypeCore)
     }
   }
 }
