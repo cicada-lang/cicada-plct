@@ -70,6 +70,8 @@ export function fn_bindings_matcher(tree: pt.Tree): Array<Exps.FnBinding> {
 export function fn_binding_matcher(tree: pt.Tree): Exps.FnBinding {
   return pt.matcher<Exps.FnBinding>({
     "fn_binding:name": ({ name }, { span }) => Exps.FnBindingName(pt.str(name)),
+    "fn_binding:annotated": ({ name, t }, { span }) =>
+      Exps.FnBindingAnnotated(pt.str(name), exp_matcher(t)),
   })(tree)
 }
 

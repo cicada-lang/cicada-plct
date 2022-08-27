@@ -113,5 +113,6 @@ export const fn_bindings = {
 export const fn_binding = {
   $grammar: {
     "fn_binding:name": [{ name: "identifier" }],
+    "fn_binding:annotated": [{ name: "identifier" }, '":"', { t: "exp" }],
   },
 }

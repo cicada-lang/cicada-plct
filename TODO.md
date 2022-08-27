@@ -1,7 +1,5 @@
 # pi
 
-Exps.FnBindingAnnotated -- support annotated `Fn`
-
 checkType -- Pi
 infer -- Ap
 check -- Fn
