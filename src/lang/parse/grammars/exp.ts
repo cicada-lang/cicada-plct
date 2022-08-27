@@ -2,12 +2,8 @@
 
    # We must separate exp into operator and operand
 
-   Otherwise `(x) => f(x)` will be ambiguous:
-
-   ```js
-   Fn("x", Ap(Var("f"), Var("x")))
-   Ap(Fn("x", Var("f")), Var("x"))
-   ```
+   Otherwise `(x) => f(x)` will be ambiguous,
+   -- maybe `Fn` maybe `Ap`.
 
 **/
 
@@ -67,22 +63,6 @@ export const operand = {
   },
 }
 
-export const arg_entries = {
-  $grammar: {
-    "arg_entries:arg_entries": [
-      { entries: { $ap: ["zero_or_more", "arg_entry", '","'] } },
-      { last_entry: "arg_entry" },
-      { $ap: ["optional", '","'] },
-    ],
-  },
-}
-
-export const arg_entry = {
-  $grammar: {
-    "arg_entry:plain": [{ arg: "exp" }],
-  },
-}
-
 export const pi_bindings = {
   $grammar: {
     "pi_bindings:pi_bindings": [
@@ -114,5 +94,21 @@ export const fn_binding = {
   $grammar: {
     "fn_binding:name": [{ name: "identifier" }],
     "fn_binding:annotated": [{ name: "identifier" }, '":"', { t: "exp" }],
+  },
+}
+
+export const arg_entries = {
+  $grammar: {
+    "arg_entries:arg_entries": [
+      { entries: { $ap: ["zero_or_more", "arg_entry", '","'] } },
+      { last_entry: "arg_entry" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const arg_entry = {
+  $grammar: {
+    "arg_entry:plain": [{ arg: "exp" }],
   },
 }
