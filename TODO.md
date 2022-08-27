@@ -1,9 +1,3 @@
-# statements and testing
-
-Stmts.Compute -- grammar & matcher
-
-- need `readback`
-
 # pi
 
 Exps.Pi -- take multiple bindings
@@ -47,6 +41,12 @@ infer -- Dot
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
+
+# statements and testing
+
+Stmts.Compute -- grammar & matcher
+
+- need `readback`
 
 # unification, implicit and vague
 
