@@ -62,7 +62,7 @@ function checkPi(
   switch (binding.kind) {
     case "PiBindingNameless": {
       const argTypeCore = checkType(ctx, binding.type)
-      const retTypeCore = checkType(ctx, Exps.Pi(restBindings, retType))
+      const retTypeCore = checkPi(ctx, restBindings, retType)
       return Cores.Pi("_", argTypeCore, retTypeCore)
     }
 
@@ -70,7 +70,7 @@ function checkPi(
       const argTypeCore = checkType(ctx, binding.type)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(binding.name, argTypeValue, ctx)
-      const retTypeCore = checkType(ctx, Exps.Pi(restBindings, retType))
+      const retTypeCore = checkPi(ctx, restBindings, retType)
       return Cores.Pi(binding.name, argTypeCore, retTypeCore)
     }
   }
