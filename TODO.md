@@ -1,5 +1,9 @@
 # pi
 
+define simple Exps.Ap
+
+simplifyMultiAp then infer
+
 infer -- Ap
 
 evaluate -- Ap

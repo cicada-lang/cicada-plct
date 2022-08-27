@@ -1,5 +1,5 @@
 import { test } from "vitest"
-import { expectCodeToFail, expectCodeToRun } from "./utils"
+import { expectCodeToRun } from "./utils"
 
 test("check Ap", async () => {
   await expectCodeToRun(`

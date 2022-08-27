@@ -53,6 +53,17 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
     }
 
+    // case "Ap": {
+    //   const inferred = infer(ctx, exp.target)
+    //   const pi = assertValue(ctx, inferred.type, Values.Pi)
+    //   const argCore = check(ctx, exp.arg, pi.argType)
+    //   const argValue = evaluate(ctxToEnv(ctx), argCore)
+    //   return Inferred(
+    //     applyClosure(pi.retTypeClosure, argValue),
+    //     Cores.Ap(inferred.core, argCore)
+    //   )
+    // }
+
     default: {
       throw new Error(`infer is not implemented for: ${exp.kind}`)
     }

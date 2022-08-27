@@ -20,7 +20,8 @@ export type Exp =
   | Var
   | Pi
   | MultiPi
-  | Ap
+  // | Ap
+  | MultiAp
   | Fn
   | MultiFn
   | Sigma
@@ -221,17 +222,17 @@ export function ArgVague(exp: Exp): ArgVague {
   }
 }
 
-export type Ap = {
+export type MultiAp = {
   family: "Exp"
-  kind: "Ap"
+  kind: "MultiAp"
   target: Exp
   args: Array<Arg>
 } & ExpMeta
 
-export function Ap(target: Exp, args: Array<Arg>, span?: Span): Ap {
+export function MultiAp(target: Exp, args: Array<Arg>, span?: Span): MultiAp {
   return {
     family: "Exp",
-    kind: "Ap",
+    kind: "MultiAp",
     target,
     args,
     span,

@@ -38,7 +38,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Fn(exp.name, retCore)
     }
 
-    case "Ap": {
+    case "MultiAp": {
       return checkByInfer(ctx, exp, type)
     }
 

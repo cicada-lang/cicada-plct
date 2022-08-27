@@ -17,7 +17,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .one_or_more_matcher(arg_entries_group)
         .map((arg_entries) => arg_entries_matcher(arg_entries))
         .reduce(
-          (result, arg_entries) => Exps.Ap(result, arg_entries, span),
+          (result, arg_entries) => Exps.MultiAp(result, arg_entries, span),
           operator_matcher(target)
         ),
   })(tree)
