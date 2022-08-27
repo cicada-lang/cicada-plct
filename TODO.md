@@ -1,6 +1,8 @@
 # pi
 
-infer-pi.test.ts
+pass -- check Pi is a Type -- nested
+
+- need evaluate Pi
 
 infer -- Ap
 check -- Fn

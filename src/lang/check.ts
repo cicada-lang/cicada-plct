@@ -12,6 +12,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
+    case "Pi": {
+      return checkByInfer(ctx, exp, type)
+    }
+
     case "Ap": {
       return checkByInfer(ctx, exp, type)
     }
@@ -25,7 +29,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     default:
-      throw new Error("TODO")
+      throw new Error(`check is not implemented for exp: ${exp.kind}`)
   }
 }
 
