@@ -1,3 +1,7 @@
+[refactor] rename names in grammar to naming
+
+- we will have typings vs namings
+
 # pi
 
 Exps.Pi -- take multiple bindings

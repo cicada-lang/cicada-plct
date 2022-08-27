@@ -32,43 +32,43 @@ export function operand_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-type Binding = {
+type Typing = {
   kind: "named" // | "implicit" | "vague"
   name: string
   exp: Exp
   span: pt.Span
 }
 
-export function bindings_matcher(tree: pt.Tree): Array<Binding> {
+export function typings_matcher(tree: pt.Tree): Array<Typing> {
   return pt.matcher({
-    "bindings:bindings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(binding_matcher),
-      binding_matcher(last_entry),
+    "typings:typings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(typing_matcher),
+      typing_matcher(last_entry),
     ],
   })(tree)
 }
 
-export function binding_matcher(tree: pt.Tree): Binding {
-  return pt.matcher<Binding>({
-    "binding:nameless": ({ exp }, { span }) => ({
+export function typing_matcher(tree: pt.Tree): Typing {
+  return pt.matcher<Typing>({
+    "typing:nameless": ({ exp }, { span }) => ({
       kind: "named",
       name: "_",
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:named": ({ name, exp }, { span }) => ({
+    "typing:named": ({ name, exp }, { span }) => ({
       kind: "named",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
     }),
-    // "binding:implicit": ({ name, exp }, { span }) => ({
+    // "typing:implicit": ({ name, exp }, { span }) => ({
     //   kind: "implicit",
     //   name: pt.str(name),
     //   exp: exp_matcher(exp),
     //   span,
     // }),
-    // "binding:vague": ({ name, exp }, { span }) => ({
+    // "typing:vague": ({ name, exp }, { span }) => ({
     //   kind: "vague",
     //   name: pt.str(name),
     //   exp: exp_matcher(exp),
@@ -81,28 +81,28 @@ export function pi_handler(
   body: { [key: string]: pt.Tree },
   meta: { span: pt.Span }
 ): Exp {
-  const { bindings, ret_t } = body
+  const { typings, ret_t } = body
 
-  return bindings_matcher(bindings)
+  return typings_matcher(typings)
     .reverse()
-    .reduce((result, binding) => {
-      switch (binding.kind) {
+    .reduce((result, typing) => {
+      switch (typing.kind) {
         case "named": {
           return Exps.Pi(
-            binding.name,
-            binding.exp,
+            typing.name,
+            typing.exp,
             result,
-            pt.span_closure([binding.span, ret_t.span])
+            pt.span_closure([typing.span, ret_t.span])
           )
         }
         // case "implicit": {
-        //   return new Exps.ImplicitPi(binding.name, binding.exp, result, {
-        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   return new Exps.ImplicitPi(typing.name, typing.exp, result, {
+        //     span: pt.span_closure([typing.span, ret_t.span]),
         //   })
         // }
         // case "vague": {
-        //   return new Exps.VaguePi(binding.name, binding.exp, result, {
-        //     span: pt.span_closure([binding.span, ret_t.span]),
+        //   return new Exps.VaguePi(typing.name, typing.exp, result, {
+        //     span: pt.span_closure([typing.span, ret_t.span]),
         //   })
         // }
       }
