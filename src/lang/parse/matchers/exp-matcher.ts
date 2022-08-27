@@ -110,65 +110,65 @@ export function pi_handler(
 }
 
 export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
-  const { names, ret } = body
+  const { namings, ret } = body
 
-  return names_matcher(names)
+  return namings_matcher(namings)
     .reverse()
-    .reduce((result, name_entry) => {
-      switch (name_entry.kind) {
+    .reduce((result, naming) => {
+      switch (naming.kind) {
         case "name": {
           return Exps.Fn(
-            name_entry.name,
+            naming.name,
             result,
-            pt.span_closure([name_entry.span, ret.span])
+            pt.span_closure([naming.span, ret.span])
           )
         }
         // case "implicit": {
-        //   return new Exps.ImplicitFn(name_entry.name, result, {
-        //     span: pt.span_closure([name_entry.span, ret.span]),
+        //   return new Exps.ImplicitFn(naming.name, result, {
+        //     span: pt.span_closure([naming.span, ret.span]),
         //   })
         // }
         // case "vague": {
-        //   return new Exps.VagueFn(name_entry.name, result, {
-        //     span: pt.span_closure([name_entry.span, ret.span]),
+        //   return new Exps.VagueFn(naming.name, result, {
+        //     span: pt.span_closure([naming.span, ret.span]),
         //   })
         // }
       }
     }, exp_matcher(ret))
 }
 
-export function names_matcher(tree: pt.Tree): Array<NameEntry> {
+export function namings_matcher(tree: pt.Tree): Array<Naming> {
   return pt.matcher({
-    "names:names": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
-      name_entry_matcher(last_entry),
+    "namings:namings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(naming_matcher),
+      naming_matcher(last_entry),
     ],
-    "names:names_bracket_separated": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
-      name_entry_matcher(last_entry),
+    "namings:namings_bracket_separated": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(naming_matcher),
+      naming_matcher(last_entry),
     ],
   })(tree)
 }
 
-type NameEntry = {
+type Naming = {
   kind: "name" // | "implicit" | "vague"
   name: string
   span: pt.Span
 }
 
-export function name_entry_matcher(tree: pt.Tree): NameEntry {
-  return pt.matcher<NameEntry>({
-    "name_entry:name_entry": ({ name }, { span }) => ({
+export function naming_matcher(tree: pt.Tree): Naming {
+  return pt.matcher<Naming>({
+    "naming:naming": ({ name }, { span }) => ({
       kind: "name",
       name: pt.str(name),
       span,
     }),
-    // "name_entry:implicit_name_entry": ({ name }, { span }) => ({
+    // "naming:implicit_naming": ({ name }, { span }) => ({
     //   kind: "implicit",
     //   name: pt.str(name),
     //   span,
     // }),
-    // "name_entry:vague_name_entry": ({ name }, { span }) => ({
+    // "naming:vague_naming": ({ name }, { span }) => ({
     //   kind: "vague",
     //   name: pt.str(name),
     //   span,
