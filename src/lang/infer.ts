@@ -38,7 +38,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       throw new ElaborationError(`Undefined name ${exp.name}`)
     }
 
-    case "Pi": {
+    case "MultiPi": {
       return Inferred(Globals.Type, checkPi(ctx, exp.bindings, exp.retType))
     }
 

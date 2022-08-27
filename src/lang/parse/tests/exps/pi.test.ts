@@ -1,22 +1,22 @@
 import { expect, test } from "vitest"
-import { Pi, PiBindingNamed, PiBindingNameless, Var } from "../../../Exp"
+import { MultiPi, PiBindingNamed, PiBindingNameless, Var } from "../../../Exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Pi", () => {
   expect(parseExp("(n: Nat) -> Nat")).toMatchObject(
-    deleteUndefined(Pi([PiBindingNamed("n", Var("Nat"))], Var("Nat")))
+    deleteUndefined(MultiPi([PiBindingNamed("n", Var("Nat"))], Var("Nat")))
   )
 
   expect(parseExp("forall (n: Nat) Nat")).toMatchObject(
-    deleteUndefined(Pi([PiBindingNamed("n", Var("Nat"))], Var("Nat")))
+    deleteUndefined(MultiPi([PiBindingNamed("n", Var("Nat"))], Var("Nat")))
   )
 })
 
 test("parse Pi -- multiple bindings", () => {
   expect(parseExp("(T: Type, x: T) -> T")).toMatchObject(
     deleteUndefined(
-      Pi(
+      MultiPi(
         [PiBindingNamed("T", Var("Type")), PiBindingNamed("x", Var("T"))],
         Var("T")
       )
@@ -25,7 +25,7 @@ test("parse Pi -- multiple bindings", () => {
 
   expect(parseExp("forall (T: Type, x: T) T")).toMatchObject(
     deleteUndefined(
-      Pi(
+      MultiPi(
         [PiBindingNamed("T", Var("Type")), PiBindingNamed("x", Var("T"))],
         Var("T")
       )
@@ -35,10 +35,10 @@ test("parse Pi -- multiple bindings", () => {
 
 test("parse Pi -- nameless binding", () => {
   expect(parseExp("(Nat) -> Nat")).toMatchObject(
-    deleteUndefined(Pi([PiBindingNameless(Var("Nat"))], Var("Nat")))
+    deleteUndefined(MultiPi([PiBindingNameless(Var("Nat"))], Var("Nat")))
   )
 
   expect(parseExp("forall (Nat) Nat")).toMatchObject(
-    deleteUndefined(Pi([PiBindingNameless(Var("Nat"))], Var("Nat")))
+    deleteUndefined(MultiPi([PiBindingNameless(Var("Nat"))], Var("Nat")))
   )
 })

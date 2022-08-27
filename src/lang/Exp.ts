@@ -18,7 +18,8 @@ type ExpMeta = { span?: Span }
 
 export type Exp =
   | Var
-  | Pi
+  | MultiPi
+  // | Pi
   | Ap
   | Fn
   | Sigma
@@ -44,17 +45,21 @@ export function Var(name: string, span?: Span): Var {
   }
 }
 
-export type Pi = {
+export type MultiPi = {
   family: "Exp"
-  kind: "Pi"
+  kind: "MultiPi"
   bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
 
-export function Pi(bindings: Array<PiBinding>, retType: Exp, span?: Span): Pi {
+export function MultiPi(
+  bindings: Array<PiBinding>,
+  retType: Exp,
+  span?: Span
+): MultiPi {
   return {
     family: "Exp",
-    kind: "Pi",
+    kind: "MultiPi",
     bindings,
     retType,
     span,

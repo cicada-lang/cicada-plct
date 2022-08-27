@@ -14,7 +14,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "Pi": {
+    case "MultiPi": {
       return checkByInfer(ctx, exp, type)
     }
 

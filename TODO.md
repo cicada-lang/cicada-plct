@@ -1,16 +1,14 @@
 # pi
 
-rename Exps.Pi to Exps.PiMultiple
-
 define simple Exps.Pi
 
-Exps.PiMultiple first transform to nested Exps.Pi then infer
+Exps.MultiPi first transform to nested Exps.Pi then infer
 
-rename Exps.Fn to Exps.FnMultiple
+rename Exps.Fn to Exps.MultiFn
 
 define simple Exps.Fn
 
-Exps.FnMultiple first transform to nested Exps.Fn then check
+Exps.MultiFn first transform to nested Exps.Fn then check
 
 check -- Fn
 
