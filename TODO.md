@@ -1,7 +1,5 @@
 # statements and testing
 
-Stmts.LetThe & Stmts.Let -- tests
-
 Stmts.Compute -- grammar & matcher
 
 - need `readback`
