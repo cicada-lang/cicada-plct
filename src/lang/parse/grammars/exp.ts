@@ -36,7 +36,7 @@ export const operand = {
   $grammar: {
     "operand:pi": [
       '"("',
-      { typings: "typings" },
+      { pi_bindings: "pi_bindings" },
       '")"',
       '"-"',
       '">"',
@@ -45,7 +45,7 @@ export const operand = {
     "operand:pi_forall": [
       '"forall"',
       '"("',
-      { typings: "typings" },
+      { pi_bindings: "pi_bindings" },
       '")"',
       { ret_t: "exp" },
     ],
@@ -85,27 +85,27 @@ export const arg_entry = {
   },
 }
 
-export const typings = {
+export const pi_bindings = {
   $grammar: {
-    "typings:typings": [
-      { entries: { $ap: ["zero_or_more", "typing", '","'] } },
-      { last_entry: "typing" },
+    "pi_bindings:pi_bindings": [
+      { entries: { $ap: ["zero_or_more", "pi_binding", '","'] } },
+      { last_entry: "pi_binding" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const typing = {
+export const pi_binding = {
   $grammar: {
-    "typing:nameless": [{ exp: "exp" }],
-    "typing:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    // "typing:implicit": [
+    "pi_binding:nameless": [{ exp: "exp" }],
+    "pi_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    // "pi_binding:implicit": [
     //   '"implicit"',
     //   { name: "identifier" },
     //   '":"',
     //   { exp: "exp" },
     // ],
-    // "typing:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
+    // "pi_binding:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

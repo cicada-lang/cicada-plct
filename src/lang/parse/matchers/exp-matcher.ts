@@ -25,28 +25,28 @@ export function operator_matcher(tree: pt.Tree): Exp {
 
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "operand:pi": ({ typings, ret_t }, { span }) =>
-      Exps.Pi(typings_matcher(typings), exp_matcher(ret_t), span),
-    "operand:pi_forall": ({ typings, ret_t }, { span }) =>
-      Exps.Pi(typings_matcher(typings), exp_matcher(ret_t), span),
+    "operand:pi": ({ pi_bindings, ret_t }, { span }) =>
+      Exps.Pi(pi_bindings_matcher(pi_bindings), exp_matcher(ret_t), span),
+    "operand:pi_forall": ({ pi_bindings, ret_t }, { span }) =>
+      Exps.Pi(pi_bindings_matcher(pi_bindings), exp_matcher(ret_t), span),
     "operand:fn": fn_handler,
     "operand:fn_function": fn_handler,
   })(tree)
 }
 
-export function typings_matcher(tree: pt.Tree): Array<Exps.PiBinding> {
+export function pi_bindings_matcher(tree: pt.Tree): Array<Exps.PiBinding> {
   return pt.matcher({
-    "typings:typings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(typing_matcher),
-      typing_matcher(last_entry),
+    "pi_bindings:pi_bindings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(pi_binding_matcher),
+      pi_binding_matcher(last_entry),
     ],
   })(tree)
 }
 
-export function typing_matcher(tree: pt.Tree): Exps.PiBinding {
+export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
   return pt.matcher<Exps.PiBinding>({
-    "typing:nameless": ({ exp }) => Exps.PiBindingNameless(exp_matcher(exp)),
-    "typing:named": ({ name, exp }) =>
+    "pi_binding:nameless": ({ exp }) => Exps.PiBindingNameless(exp_matcher(exp)),
+    "pi_binding:named": ({ name, exp }) =>
       Exps.PiBindingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
 }

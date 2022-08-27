@@ -1,9 +1,5 @@
 # pi
 
-rename typings to pi_bindings
-
-rename typing to pi_binding
-
 rename Naming to FnBinding
 
 rename namings to fn_bindings

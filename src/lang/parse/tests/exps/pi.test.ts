@@ -13,7 +13,7 @@ test("parse Pi", () => {
   )
 })
 
-test("parse Pi -- multiple typings", () => {
+test("parse Pi -- multiple bindings", () => {
   expect(parseExp("(T: Type, x: T) -> T")).toMatchObject(
     deleteUndefined(
       Pi(
@@ -33,7 +33,7 @@ test("parse Pi -- multiple typings", () => {
   )
 })
 
-test("parse Pi -- nameless typing", () => {
+test("parse Pi -- nameless binding", () => {
   expect(parseExp("(Nat) -> Nat")).toMatchObject(
     deleteUndefined(Pi([PiBindingNameless(Var("Nat"))], Var("Nat")))
   )

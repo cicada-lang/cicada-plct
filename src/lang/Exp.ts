@@ -47,15 +47,15 @@ export function Var(name: string, span?: Span): Var {
 export type Pi = {
   family: "Exp"
   kind: "Pi"
-  typings: Array<PiBinding>
+  bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
 
-export function Pi(typings: Array<PiBinding>, retType: Exp, span?: Span): Pi {
+export function Pi(bindings: Array<PiBinding>, retType: Exp, span?: Span): Pi {
   return {
     family: "Exp",
     kind: "Pi",
-    typings,
+    bindings,
     retType,
     span,
   }
