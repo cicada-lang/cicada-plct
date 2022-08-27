@@ -34,7 +34,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function typings_matcher(tree: pt.Tree): Array<Exps.Typing> {
+export function typings_matcher(tree: pt.Tree): Array<Exps.PiBinding> {
   return pt.matcher({
     "typings:typings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(typing_matcher),
@@ -43,11 +43,11 @@ export function typings_matcher(tree: pt.Tree): Array<Exps.Typing> {
   })(tree)
 }
 
-export function typing_matcher(tree: pt.Tree): Exps.Typing {
-  return pt.matcher<Exps.Typing>({
-    "typing:nameless": ({ exp }) => Exps.TypingNameless(exp_matcher(exp)),
+export function typing_matcher(tree: pt.Tree): Exps.PiBinding {
+  return pt.matcher<Exps.PiBinding>({
+    "typing:nameless": ({ exp }) => Exps.PiBindingNameless(exp_matcher(exp)),
     "typing:named": ({ name, exp }) =>
-      Exps.TypingNamed(pt.str(name), exp_matcher(exp)),
+      Exps.PiBindingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
 }
 

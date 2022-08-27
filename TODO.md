@@ -1,6 +1,16 @@
 # pi
 
-Exps.Fn -- take multiple namings
+rename typings to pi_bindings
+
+rename typing to pi_binding
+
+rename Naming to FnBinding
+
+rename namings to fn_bindings
+
+rename naming to fn_binding
+
+Exps.Fn -- take multiple bindings
 
 - support annotated `Fn`
 
@@ -48,6 +58,7 @@ Exp -- DataConstructor
 Stmts.Compute -- grammar & matcher
 
 - need `readback`
+- need `formatCore`
 
 # unification, implicit and vague
 
