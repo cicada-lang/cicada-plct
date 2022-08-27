@@ -30,5 +30,15 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     }
   }
 
-  throw new Error("TODO")
+  if (subtype.kind === "NotYetValue" && type.kind === "NotYetValue") {
+    if (subtype.neutral.kind === "Var" && type.neutral.kind === "Var") {
+      if (subtype.neutral.name === type.neutral.name) {
+        return
+      }
+    }
+  }
+
+  throw new Error(
+    `inclusion is not implemented for subtype: ${subtype.kind} and type: ${type.kind}`
+  )
 }

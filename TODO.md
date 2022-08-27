@@ -1,7 +1,5 @@
 # pi
 
-check-fn.test.ts
-
 infer -- Ap
 
 Exps.FnAnnotated -- can be inferred

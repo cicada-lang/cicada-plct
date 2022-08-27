@@ -9,15 +9,15 @@ export type NotYetValue = {
   family: "Value"
   kind: "NotYetValue"
   type: Value
-  Neutral: Neutral
+  neutral: Neutral
 }
 
-export function NotYetValue(type: Value, Neutral: Neutral): NotYetValue {
+export function NotYetValue(type: Value, neutral: Neutral): NotYetValue {
   return {
     family: "Value",
     kind: "NotYetValue",
     type,
-    Neutral,
+    neutral,
   }
 }
 
