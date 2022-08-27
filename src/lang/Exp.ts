@@ -28,7 +28,7 @@ export type Exp =
   | Car
   | Cdr
   | Clazz
-  | Object
+  | Objekt
   | Dot
 
 export type Var = {
@@ -390,16 +390,16 @@ export function ClazzNull(span?: Span): ClazzNull {
   }
 }
 
-export type Object = {
+export type Objekt = {
   family: "Exp"
-  kind: "Object"
+  kind: "Objekt"
   properties: Record<string, Exp>
 } & ExpMeta
 
-export function Object(properties: Record<string, Exp>, span?: Span): Object {
+export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
   return {
     family: "Exp",
-    kind: "Object",
+    kind: "Objekt",
     properties,
     span,
   }

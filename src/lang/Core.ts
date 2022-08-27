@@ -9,7 +9,7 @@ export type Core =
   | Car
   | Cdr
   | Clazz
-  | Object
+  | Objekt
   | Dot
 
 export type Var = {
@@ -221,16 +221,16 @@ export function ClazzNull(): ClazzNull {
   }
 }
 
-export type Object = {
+export type Objekt = {
   family: "Core"
-  kind: "Object"
+  kind: "Objekt"
   properties: Record<string, Core>
 }
 
-export function Object(properties: Record<string, Core>): Object {
+export function Objekt(properties: Record<string, Core>): Objekt {
   return {
     family: "Core",
-    kind: "Object",
+    kind: "Objekt",
     properties,
   }
 }

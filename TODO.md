@@ -43,12 +43,12 @@ evaluate -- Cdr
 define Exps.New
 
 Exps.Clazz -- grammar and matcher
-Exps.Object -- grammar and matcher
+Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
 Exps.New -- grammar and matcher
 
 checkType -- Clazz
-check -- Object
+check -- Objekt
 infer -- Dot
 
 # datatype
