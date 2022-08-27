@@ -21,7 +21,8 @@ export type Exp =
   | MultiPi
   | Pi
   | Ap
-  | Fn
+  | MultiFn
+  // | Fn
   | Sigma
   | Cons
   | Car
@@ -113,17 +114,21 @@ export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
   }
 }
 
-export type Fn = {
+export type MultiFn = {
   family: "Exp"
-  kind: "Fn"
+  kind: "MultiFn"
   bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
 
-export function Fn(bindings: Array<FnBinding>, ret: Exp, span?: Span): Fn {
+export function MultiFn(
+  bindings: Array<FnBinding>,
+  ret: Exp,
+  span?: Span
+): MultiFn {
   return {
     family: "Exp",
-    kind: "Fn",
+    kind: "MultiFn",
     bindings,
     ret,
     span,

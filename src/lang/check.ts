@@ -22,7 +22,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "Fn": {
+    case "MultiFn": {
       const pi = assertValue(ctx, type, Values.Pi)
       return checkFn(ctx, exp.bindings, exp.ret, pi)
     }

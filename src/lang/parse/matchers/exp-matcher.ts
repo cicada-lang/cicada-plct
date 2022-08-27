@@ -30,9 +30,9 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:pi_forall": ({ pi_bindings, ret_t }, { span }) =>
       Exps.MultiPi(pi_bindings_matcher(pi_bindings), exp_matcher(ret_t), span),
     "operand:fn": ({ fn_bindings, ret }, { span }) =>
-      Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
+      Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
     "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
-      Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
+      Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
   })(tree)
 }
 

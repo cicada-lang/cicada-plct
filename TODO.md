@@ -1,6 +1,6 @@
 # pi
 
-rename Exps.Fn to Exps.MultiFn
+tests should import Exps, instead of importing one by one
 
 define simple Exps.Fn
 
