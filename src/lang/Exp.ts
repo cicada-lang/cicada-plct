@@ -27,8 +27,8 @@ export type Exp =
   | Cons
   | Car
   | Cdr
-  | Cls
-  | Obj
+  | Clazz
+  | Object
   | Dot
 
 export type Var = {
@@ -311,34 +311,34 @@ export function Cdr(target: Exp, span?: Span): Cdr {
 
 /**
 
-   ## name v.s. realName in Cls
+   ## name v.s. realName in Clazz
 
    We can not only use `name` we also need `realName`,
    because of `subst` might rename bound variables.
 
 **/
 
-export type Cls = ClsCons | ClsFulfilled | ClsNull
+export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
 
-export type ClsCons = {
+export type ClazzCons = {
   family: "Exp"
-  kind: "ClsCons"
+  kind: "ClazzCons"
   name: string
   realName: string
   propertyType: Exp
-  rest: Cls
+  rest: Clazz
 } & ExpMeta
 
-export function ClsCons(
+export function ClazzCons(
   name: string,
   realName: string,
   propertyType: Exp,
-  rest: Cls,
+  rest: Clazz,
   span?: Span
-): ClsCons {
+): ClazzCons {
   return {
     family: "Exp",
-    kind: "ClsCons",
+    kind: "ClazzCons",
     name,
     realName,
     propertyType,
@@ -347,27 +347,27 @@ export function ClsCons(
   }
 }
 
-export type ClsFulfilled = {
+export type ClazzFulfilled = {
   family: "Exp"
-  kind: "ClsFulfilled"
+  kind: "ClazzFulfilled"
   name: string
   realName: string
   property: Exp
   propertyType: Exp
-  rest: Cls
+  rest: Clazz
 } & ExpMeta
 
-export function ClsFulfilled(
+export function ClazzFulfilled(
   name: string,
   realName: string,
   property: Exp,
   propertyType: Exp,
-  rest: Cls,
+  rest: Clazz,
   span?: Span
-): ClsFulfilled {
+): ClazzFulfilled {
   return {
     family: "Exp",
-    kind: "ClsFulfilled",
+    kind: "ClazzFulfilled",
     name,
     realName,
     property,
@@ -377,29 +377,29 @@ export function ClsFulfilled(
   }
 }
 
-export type ClsNull = {
+export type ClazzNull = {
   family: "Exp"
-  kind: "ClsNull"
+  kind: "ClazzNull"
 } & ExpMeta
 
-export function ClsNull(span?: Span): ClsNull {
+export function ClazzNull(span?: Span): ClazzNull {
   return {
     family: "Exp",
-    kind: "ClsNull",
+    kind: "ClazzNull",
     span,
   }
 }
 
-export type Obj = {
+export type Object = {
   family: "Exp"
-  kind: "Obj"
+  kind: "Object"
   properties: Record<string, Exp>
 } & ExpMeta
 
-export function Obj(properties: Record<string, Exp>, span?: Span): Obj {
+export function Object(properties: Record<string, Exp>, span?: Span): Object {
   return {
     family: "Exp",
-    kind: "Obj",
+    kind: "Object",
     properties,
     span,
   }

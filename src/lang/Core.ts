@@ -8,8 +8,8 @@ export type Core =
   | Cons
   | Car
   | Cdr
-  | Cls
-  | Obj
+  | Clazz
+  | Object
   | Dot
 
 export type Var = {
@@ -154,26 +154,26 @@ export function Cdr(target: Core): Cdr {
 
 // NOTE We can not only use `name` we also need `realName`,
 //   because of `subst` might rename bound variables.
-export type Cls = ClsCons | ClsFulfilled | ClsNull
+export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
 
-export type ClsCons = {
+export type ClazzCons = {
   family: "Core"
-  kind: "ClsCons"
+  kind: "ClazzCons"
   name: string
   realName: string
   propertyType: Core
-  rest: Cls
+  rest: Clazz
 }
 
-export function ClsCons(
+export function ClazzCons(
   name: string,
   realName: string,
   propertyType: Core,
-  rest: Cls
-): ClsCons {
+  rest: Clazz
+): ClazzCons {
   return {
     family: "Core",
-    kind: "ClsCons",
+    kind: "ClazzCons",
     name,
     realName,
     propertyType,
@@ -181,26 +181,26 @@ export function ClsCons(
   }
 }
 
-export type ClsFulfilled = {
+export type ClazzFulfilled = {
   family: "Core"
-  kind: "ClsFulfilled"
+  kind: "ClazzFulfilled"
   name: string
   realName: string
   property: Core
   propertyType: Core
-  rest: Cls
+  rest: Clazz
 }
 
-export function ClsFulfilled(
+export function ClazzFulfilled(
   name: string,
   realName: string,
   property: Core,
   propertyType: Core,
-  rest: Cls
-): ClsFulfilled {
+  rest: Clazz
+): ClazzFulfilled {
   return {
     family: "Core",
-    kind: "ClsFulfilled",
+    kind: "ClazzFulfilled",
     name,
     realName,
     property,
@@ -209,28 +209,28 @@ export function ClsFulfilled(
   }
 }
 
-export type ClsNull = {
+export type ClazzNull = {
   family: "Core"
-  kind: "ClsNull"
+  kind: "ClazzNull"
 }
 
-export function ClsNull(): ClsNull {
+export function ClazzNull(): ClazzNull {
   return {
     family: "Core",
-    kind: "ClsNull",
+    kind: "ClazzNull",
   }
 }
 
-export type Obj = {
+export type Object = {
   family: "Core"
-  kind: "Obj"
+  kind: "Object"
   properties: Record<string, Core>
 }
 
-export function Obj(properties: Record<string, Core>): Obj {
+export function Object(properties: Record<string, Core>): Object {
   return {
     family: "Core",
-    kind: "Obj",
+    kind: "Object",
     properties,
   }
 }

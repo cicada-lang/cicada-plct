@@ -2,6 +2,9 @@
 
 infer -- Ap
 
+evaluate -- Fn
+evaluate -- Ap
+
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated
@@ -11,7 +14,7 @@ simplifyMultiFn -- return Exps.FnAnnotated
 
 Exps.Sigma -- take multiple typings
 
-- with `bindings: SigmaBinding`
+- with `bindings: Array<SigmaBinding>`
 
 Sigma -- grammar and matcher
 Cons -- grammar and matcher
@@ -26,18 +29,25 @@ check -- Cons
 infer -- Car
 infer -- Cdr
 
+evaluate -- Sigma
+evaluate -- Cons
+evaluate -- Car
+evaluate -- Cdr
+
 # trivial
 
-# Str
+# String
 
-# cls
+# clazz
 
-Cls -- grammar and matcher
-Obj -- grammar and matcher
+define Exps.New
+
+Clazz -- grammar and matcher
+Object -- grammar and matcher
 Dot -- grammar and matcher
 
-checkType -- Cls
-check -- Obj
+checkType -- Clazz
+check -- Object
 infer -- Dot
 
 # datatype
