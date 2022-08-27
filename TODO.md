@@ -1,7 +1,26 @@
 # pi
 
-infer -- Ap
+rename Exps.Pi to Exps.PiMultiple
+
+define simple Exps.Pi
+
+Exps.PiMultiple first transform to nested Exps.Pi then infer
+
+rename Exps.Fn to Exps.FnMultiple
+
+define simple Exps.Fn
+
+Exps.FnMultiple first transform to nested Exps.Fn then check
+
 check -- Fn
+
+- with the help of `assertValue`
+
+- simple version that use name in the Fn to extend ctx
+
+  - which might be wrong
+
+infer -- Ap
 
 # sigma
 
@@ -21,6 +40,10 @@ infer -- Sigma -- to Type
 check -- Cons
 infer -- Car
 infer -- Cdr
+
+# trivial
+
+# Str
 
 # cls
 

@@ -1,4 +1,6 @@
 import { Closure } from "./Closure"
+import { Ctx } from "./Ctx"
+import { ElaborationError } from "./errors/ElaborationError"
 import { Neutral } from "./Neutral"
 
 export type Value = NotYetValue | Global | Pi | Fn
@@ -71,4 +73,22 @@ export function Fn(retClosure: Closure): Fn {
     kind: "Fn",
     retClosure,
   }
+}
+
+export function assertValue<
+  ValueConstructor extends (...args: Array<any>) => Value
+>(
+  ctx: Ctx,
+  value: Value,
+  valueConstructor: ValueConstructor
+): ReturnType<ValueConstructor> {
+  const kind = valueConstructor.name
+
+  if (value.kind === kind) {
+    return value as ReturnType<ValueConstructor>
+  }
+
+  throw new ElaborationError(
+    `expect value to have kind: ${kind}, instead of: ${value.kind}`
+  )
 }
