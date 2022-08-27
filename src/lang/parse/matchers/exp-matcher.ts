@@ -69,7 +69,7 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
     }, exp_matcher(ret))
 }
 
-export function namings_matcher(tree: pt.Tree): Array<Naming> {
+export function namings_matcher(tree: pt.Tree): Array<FnBinding> {
   return pt.matcher({
     "namings:namings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(naming_matcher),
@@ -82,14 +82,14 @@ export function namings_matcher(tree: pt.Tree): Array<Naming> {
   })(tree)
 }
 
-type Naming = {
+type FnBinding = {
   kind: "name"
   name: string
   span: pt.Span
 }
 
-export function naming_matcher(tree: pt.Tree): Naming {
-  return pt.matcher<Naming>({
+export function naming_matcher(tree: pt.Tree): FnBinding {
+  return pt.matcher<FnBinding>({
     "naming:naming": ({ name }, { span }) => ({
       kind: "name",
       name: pt.str(name),

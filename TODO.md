@@ -1,7 +1,5 @@
 # pi
 
-rename Naming to FnBinding
-
 rename namings to fn_bindings
 
 rename naming to fn_binding
