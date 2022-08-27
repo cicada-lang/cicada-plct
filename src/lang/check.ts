@@ -8,22 +8,10 @@ import { Value } from "./Value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
-    case "Var": {
-      return checkByInfer(ctx, exp, type)
-    }
-
-    case "Pi": {
-      return checkByInfer(ctx, exp, type)
-    }
-
-    case "Ap": {
-      return checkByInfer(ctx, exp, type)
-    }
-
-    case "Car": {
-      return checkByInfer(ctx, exp, type)
-    }
-
+    case "Var":
+    case "Pi":
+    case "Ap":
+    case "Car":
     case "Cdr": {
       return checkByInfer(ctx, exp, type)
     }
