@@ -1,12 +1,15 @@
 # pi
 
-checkType -- Pi
+extract -- checkPi
+
 infer -- Ap
 check -- Fn
 
 # sigma
 
 Exps.Sigma -- take multiple typings
+
+- with `bindings: SigmaBinding`
 
 Sigma -- grammar and matcher
 Cons -- grammar and matcher
@@ -16,7 +19,7 @@ Cdr -- grammar and matcher
 Value -- Sigma
 Neutral -- Sigma
 
-checkType -- Sigma
+infer -- Sigma -- to Type
 check -- Cons
 infer -- Car
 infer -- Cdr

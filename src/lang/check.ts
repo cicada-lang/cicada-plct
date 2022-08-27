@@ -8,18 +8,31 @@ import { Value } from "./Value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
-    case "Var":
-    case "Ap":
-    case "Car":
+    case "Var": {
+      return checkByInfer(ctx, exp, type)
+    }
+
+    case "Ap": {
+      return checkByInfer(ctx, exp, type)
+    }
+
+    case "Car": {
+      return checkByInfer(ctx, exp, type)
+    }
+
     case "Cdr": {
-      const inferred = infer(ctx, exp)
-      inclusion(ctx, inferred.type, type)
-      return inferred.core
+      return checkByInfer(ctx, exp, type)
     }
 
     default:
       throw new Error("TODO")
   }
+}
+
+export function checkByInfer(ctx: Ctx, exp: Exp, type: Value): Core {
+  const inferred = infer(ctx, exp)
+  inclusion(ctx, inferred.type, type)
+  return inferred.core
 }
 
 export function checkType(ctx: Ctx, type: Exp): Core {
