@@ -1,10 +1,10 @@
 # pi
 
-[refactor] inline `pi_handler`
-
 Exps.Fn -- take multiple namings
 
 - support annotated `Fn`
+
+[refactor] inline `fn_handler`
 
 checkType -- Pi
 infer -- Ap

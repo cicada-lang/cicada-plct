@@ -25,8 +25,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
 
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "operand:pi": pi_handler,
-    "operand:pi_forall": pi_handler,
+    "operand:pi": ({ typings, ret_t }, { span }) =>
+      Exps.Pi(typings_matcher(typings), exp_matcher(ret_t), span),
+    "operand:pi_forall": ({ typings, ret_t }, { span }) =>
+      Exps.Pi(typings_matcher(typings), exp_matcher(ret_t), span),
     "operand:fn": fn_handler,
     "operand:fn_function": fn_handler,
   })(tree)
@@ -47,14 +49,6 @@ export function typing_matcher(tree: pt.Tree): Exps.Typing {
     "typing:named": ({ name, exp }) =>
       Exps.TypingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
-}
-
-export function pi_handler(
-  body: { [key: string]: pt.Tree },
-  meta: { span: pt.Span }
-): Exp {
-  const { typings, ret_t } = body
-  return Exps.Pi(typings_matcher(typings), exp_matcher(ret_t), meta.span)
 }
 
 export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
