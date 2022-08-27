@@ -1,6 +1,6 @@
 # statements and testing
 
-Stmts.LetThe & Stmts.Let -- grammar & matcher
+Stmts.LetThe & Stmts.Let -- tests
 
 Stmts.Compute -- grammar & matcher
 
