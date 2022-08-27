@@ -1,10 +1,13 @@
+import { applyClosure } from "./Closure"
+import * as Cores from "./Core"
 import { Core } from "./Core"
-import { Ctx } from "./Ctx"
+import { Ctx, CtxFulfilled } from "./Ctx"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 import * as Globals from "./globals"
 import { inclusion } from "./inclusion"
 import { infer } from "./infer"
+import * as Neutrals from "./Neutral"
 import * as Values from "./Value"
 import { assertValue, Value } from "./Value"
 
@@ -27,8 +30,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
-      const pi = assertValue(ctx, type, Values.Pi)
-      throw new Error("TODO")
+      const { argType, retTypeClosure } = assertValue(ctx, type, Values.Pi)
+      const argValue = Values.NotYetValue(argType, Neutrals.Var(exp.name))
+      const retTypeValue = applyClosure(retTypeClosure, argValue)
+      ctx = CtxFulfilled(exp.name, argType, argValue, ctx)
+      const retCore = check(ctx, exp.ret, retTypeValue)
+      return Cores.Fn(exp.name, retCore)
     }
 
     case "Ap": {

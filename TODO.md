@@ -1,16 +1,13 @@
 # pi
 
-check -- Fn
-
-- with the help of `assertValue`
-
-- simple version that use name in the Fn to extend ctx
-
-  - which might be wrong
+check-fn.test.ts
 
 infer -- Ap
 
 Exps.FnAnnotated -- can be inferred
+check -- Exps.FnAnnotated -- checkByInfer
+infer -- Exps.FnAnnotated
+simplifyMultiFn -- return Exps.FnAnnotated
 
 # sigma
 
