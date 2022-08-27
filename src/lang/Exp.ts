@@ -47,19 +47,45 @@ export function Var(name: string, span?: Span): Var {
 export type Pi = {
   family: "Exp"
   kind: "Pi"
-  name: string
-  argType: Exp
+  typings: Array<Typing>
   retType: Exp
 } & ExpMeta
 
-export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
+export function Pi(typings: Array<Typing>, retType: Exp, span?: Span): Pi {
   return {
     family: "Exp",
     kind: "Pi",
-    name,
-    argType,
+    typings,
     retType,
     span,
+  }
+}
+
+export type Typing = TypingNameless | TypingNamed
+
+export type TypingNameless = {
+  kind: "TypingNameless"
+  type: Exp
+}
+
+export function TypingNameless(type: Exp): TypingNameless {
+  return {
+    kind: "TypingNameless",
+    type,
+  }
+}
+
+export type TypingNamed = {
+  kind: "TypingNamed"
+  name: string
+  type: Exp
+}
+
+export function TypingNamed(name: string, type: Exp): TypingNamed {
+  return {
+    kind: "TypingNamed",
+    name,
+    type,
   }
 }
 

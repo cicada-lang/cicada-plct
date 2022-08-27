@@ -1,9 +1,10 @@
 # pi
 
-Exps.Pi -- take multiple typings
+[refactor] inline `pi_handler`
+
 Exps.Fn -- take multiple namings
 
-support annotated `Fn`
+- support annotated `Fn`
 
 checkType -- Pi
 infer -- Ap
@@ -11,12 +12,12 @@ check -- Fn
 
 # sigma
 
+Exps.Sigma -- take multiple typings
+
 Sigma -- grammar and matcher
 Cons -- grammar and matcher
 Car -- grammar and matcher
 Cdr -- grammar and matcher
-
-Exps.Sigma -- take multiple typings
 
 Value -- Sigma
 Neutral -- Sigma
