@@ -1,7 +1,9 @@
+import { Closure } from "./Closure"
 import { Core } from "./Core"
 import { Env, lookupEnvValue } from "./Env"
 import { EvaluationError } from "./errors/EvaluationError"
 import { globals } from "./globals"
+import * as Values from "./Value"
 import { Value } from "./Value"
 
 export function evaluate(env: Env, core: Core): Value {
@@ -13,6 +15,12 @@ export function evaluate(env: Env, core: Core): Value {
       }
 
       return foundValue
+    }
+
+    case "Pi": {
+      const argType = evaluate(env, core.argType)
+      const retTypeClosure = Closure(env, core.name, core.retType)
+      return Values.Pi(argType, retTypeClosure)
     }
 
     case "Global": {

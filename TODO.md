@@ -1,9 +1,5 @@
 # pi
 
-pass -- check Pi is a Type -- nested
-
-- need evaluate Pi
-
 infer -- Ap
 check -- Fn
 
