@@ -37,5 +37,3 @@ export function evaluate(env: Env, core: Core): Value {
     }
   }
 }
-
-const String = 1

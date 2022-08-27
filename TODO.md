@@ -16,10 +16,10 @@ Exps.Sigma -- take multiple typings
 
 - with `bindings: Array<SigmaBinding>`
 
-Sigma -- grammar and matcher
-Cons -- grammar and matcher
-Car -- grammar and matcher
-Cdr -- grammar and matcher
+Exps.Sigma -- grammar and matcher
+Exps.Cons -- grammar and matcher
+Exps.Car -- grammar and matcher
+Exps.Cdr -- grammar and matcher
 
 Value -- Sigma
 Neutral -- Sigma
@@ -42,9 +42,10 @@ evaluate -- Cdr
 
 define Exps.New
 
-Clazz -- grammar and matcher
-Object -- grammar and matcher
-Dot -- grammar and matcher
+Exps.Clazz -- grammar and matcher
+Exps.Object -- grammar and matcher
+Exps.Dot -- grammar and matcher
+Exps.New -- grammar and matcher
 
 checkType -- Clazz
 check -- Object
