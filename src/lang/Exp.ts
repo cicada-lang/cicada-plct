@@ -18,11 +18,11 @@ type ExpMeta = { span?: Span }
 
 export type Exp =
   | Var
-  | MultiPi
   | Pi
+  | MultiPi
   | Ap
+  | Fn
   | MultiFn
-  // | Fn
   | Sigma
   | Cons
   | Car
@@ -111,6 +111,23 @@ export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
     kind: "PiBindingNamed",
     name,
     type,
+  }
+}
+
+export type Fn = {
+  family: "Exp"
+  kind: "Fn"
+  name: string
+  ret: Exp
+} & ExpMeta
+
+export function Fn(name: string, ret: Exp, span?: Span): Fn {
+  return {
+    family: "Exp",
+    kind: "Fn",
+    name,
+    ret,
+    span,
   }
 }
 

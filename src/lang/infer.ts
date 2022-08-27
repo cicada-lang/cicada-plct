@@ -38,10 +38,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       throw new ElaborationError(`Undefined name ${exp.name}`)
     }
 
-    case "MultiPi": {
-      return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
-    }
-
     case "Pi": {
       const argTypeCore = checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
@@ -51,6 +47,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         Globals.Type,
         Cores.Pi(exp.name, argTypeCore, retTypeCore)
       )
+    }
+
+    case "MultiPi": {
+      return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
     }
 
     default: {

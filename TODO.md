@@ -1,9 +1,5 @@
 # pi
 
-tests should import Exps, instead of importing one by one
-
-define simple Exps.Fn
-
 Exps.MultiFn first transform to nested Exps.Fn then check
 
 check -- Fn
@@ -15,6 +11,8 @@ check -- Fn
   - which might be wrong
 
 infer -- Ap
+
+Exps.FnAnnotated -- can be inferred
 
 # sigma
 
