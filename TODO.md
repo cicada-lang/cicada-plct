@@ -1,7 +1,5 @@
 # pi
 
-define simple Exps.Pi
-
 Exps.MultiPi first transform to nested Exps.Pi then infer
 
 rename Exps.Fn to Exps.MultiFn

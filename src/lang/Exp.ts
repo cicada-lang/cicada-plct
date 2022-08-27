@@ -19,7 +19,7 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | MultiPi
-  // | Pi
+  | Pi
   | Ap
   | Fn
   | Sigma
@@ -41,6 +41,25 @@ export function Var(name: string, span?: Span): Var {
     family: "Exp",
     kind: "Var",
     name,
+    span,
+  }
+}
+
+export type Pi = {
+  family: "Exp"
+  kind: "Pi"
+  name: string
+  argType: Exp
+  retType: Exp
+} & ExpMeta
+
+export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
+  return {
+    family: "Exp",
+    kind: "Pi",
+    name,
+    argType,
+    retType,
     span,
   }
 }
