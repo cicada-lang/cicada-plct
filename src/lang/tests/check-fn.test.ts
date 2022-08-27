@@ -1,9 +1,8 @@
-import { expect, test } from "vitest"
-import { Mod } from "../Mod"
+import { test } from "vitest"
+import { expectCodeToFail, expectCodeToRun } from "./utils"
 
 test("check Fn", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (T) => T: (Type) -> Type
 
@@ -11,8 +10,7 @@ check (T) => T: (Type) -> Type
 })
 
 test("check Fn -- multiple bindings", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (A, B) => A: (A: Type, B: Type) -> Type
 
@@ -20,8 +18,7 @@ check (A, B) => A: (A: Type, B: Type) -> Type
 })
 
 test("check Fn -- dependent", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (A, a) => a: (A: Type, A) -> A
 
@@ -29,12 +26,9 @@ check (A, a) => a: (A: Type, A) -> A
 })
 
 test("check Fn -- dependent error", async () => {
-  const mod = new Mod()
-  await expect(
-    mod.run(`
+  await expectCodeToFail(`
 
 check (A, B) => A: (A: Type, A) -> A
 
 `)
-  ).rejects.toThrow()
 })

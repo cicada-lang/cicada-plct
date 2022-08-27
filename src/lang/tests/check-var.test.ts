@@ -1,9 +1,8 @@
-import { expect, test } from "vitest"
-import { Mod } from "../Mod"
+import { test } from "vitest"
+import { expectCodeToFail, expectCodeToRun } from "./utils"
 
 test("check Var", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 declare t: Type
 check t: Type
@@ -12,12 +11,9 @@ check t: Type
 })
 
 test("check Var -- fail to check undefined variable", async () => {
-  const mod = new Mod()
-  await expect(
-    mod.run(`
+  await expectCodeToFail(`
 
 check t: Type
 
 `)
-  ).rejects.toThrow()
 })

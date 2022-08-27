@@ -1,9 +1,8 @@
 import { test } from "vitest"
-import { Mod } from "../Mod"
+import { expectCodeToRun } from "./utils"
 
 test("check Pi is a Type", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (A: Type) -> Type: Type
 
@@ -11,8 +10,7 @@ check (A: Type) -> Type: Type
 })
 
 test("check Pi is a Type -- multiple bindings", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (A: Type, B: Type) -> Type: Type
 
@@ -20,8 +18,7 @@ check (A: Type, B: Type) -> Type: Type
 })
 
 test("check Pi is a Type -- telescope", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (A: Type, B: Type, x: A) -> B: Type
 
@@ -29,8 +26,7 @@ check (A: Type, B: Type, x: A) -> B: Type
 })
 
 test("check Pi is a Type -- nested", async () => {
-  const mod = new Mod()
-  await mod.run(`
+  await expectCodeToRun(`
 
 check (
   A: Type,
