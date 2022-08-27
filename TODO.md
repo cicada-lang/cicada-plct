@@ -1,7 +1,7 @@
 # pi
 
-Exps.Pi -- take multiple bindings
-Exps.Fn -- take multiple bindings
+Exps.Pi -- take multiple typings
+Exps.Fn -- take multiple namings
 
 support annotated `Fn`
 
@@ -16,7 +16,7 @@ Cons -- grammar and matcher
 Car -- grammar and matcher
 Cdr -- grammar and matcher
 
-Exps.Sigma -- take multiple bindings
+Exps.Sigma -- take multiple typings
 
 Value -- Sigma
 Neutral -- Sigma
