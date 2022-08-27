@@ -16,8 +16,20 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
+    case "Fn": {
+      throw new Error("TODO")
+    }
+
     case "Ap": {
       return checkByInfer(ctx, exp, type)
+    }
+
+    case "Sigma": {
+      throw new Error("TODO")
+    }
+
+    case "Cons": {
+      throw new Error("TODO")
     }
 
     case "Car": {
