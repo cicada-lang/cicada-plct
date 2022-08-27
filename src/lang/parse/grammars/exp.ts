@@ -80,8 +80,6 @@ export const arg_entries = {
 export const arg_entry = {
   $grammar: {
     "arg_entry:plain": [{ arg: "exp" }],
-    // "arg_entry:implicit": ['"implicit"', { arg: "exp" }],
-    // "arg_entry:vague": ['"vague"', { arg: "exp" }],
   },
 }
 
@@ -99,13 +97,6 @@ export const pi_binding = {
   $grammar: {
     "pi_binding:nameless": [{ exp: "exp" }],
     "pi_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    // "pi_binding:implicit": [
-    //   '"implicit"',
-    //   { name: "identifier" },
-    //   '":"',
-    //   { exp: "exp" },
-    // ],
-    // "pi_binding:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 
@@ -122,7 +113,5 @@ export const namings = {
 export const naming = {
   $grammar: {
     "naming:naming": [{ name: "identifier" }],
-    // "naming:implicit_naming": ['"implicit"', { name: "identifier" }],
-    // "naming:vague_naming": ['"vague"', { name: "identifier" }],
   },
 }
