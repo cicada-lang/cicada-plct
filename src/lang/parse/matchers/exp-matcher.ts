@@ -29,8 +29,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.Pi(pi_bindings_matcher(pi_bindings), exp_matcher(ret_t), span),
     "operand:pi_forall": ({ pi_bindings, ret_t }, { span }) =>
       Exps.Pi(pi_bindings_matcher(pi_bindings), exp_matcher(ret_t), span),
-    "operand:fn": fn_handler,
-    "operand:fn_function": fn_handler,
+    "operand:fn": ({ fn_bindings, ret }, { span }) =>
+      Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
+    "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
+      Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
   })(tree)
 }
 
@@ -50,11 +52,6 @@ export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
     "pi_binding:named": ({ name, exp }) =>
       Exps.PiBindingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
-}
-
-export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
-  const { fn_bindings, ret } = body
-  return Exps.Fn(fn_bindings_matcher(fn_bindings), exp_matcher(ret))
 }
 
 export function fn_bindings_matcher(tree: pt.Tree): Array<Exps.FnBinding> {

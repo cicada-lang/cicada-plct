@@ -2,8 +2,6 @@
 
 Exps.FnBindingAnnotated -- support annotated `Fn`
 
-[refactor] inline `fn_handler`
-
 checkType -- Pi
 infer -- Ap
 check -- Fn
