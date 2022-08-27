@@ -39,7 +39,18 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiPi": {
-      return Inferred(Globals.Type, checkPi(ctx, exp.bindings, exp.retType))
+      return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
+    }
+
+    case "Pi": {
+      const argTypeCore = checkType(ctx, exp.argType)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(exp.name, argTypeValue, ctx)
+      const retTypeCore = checkType(ctx, exp.retType)
+      return Inferred(
+        Globals.Type,
+        Cores.Pi(exp.name, argTypeCore, retTypeCore)
+      )
     }
 
     default: {
@@ -48,30 +59,24 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
   }
 }
 
-function checkPi(
-  ctx: Ctx,
-  bindings: Array<Exps.PiBinding>,
-  retType: Exp
-): Core {
+function simplifyMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
   if (bindings.length === 0) {
-    return checkType(ctx, retType)
+    return retType
   }
 
   const [binding, ...restBindings] = bindings
 
   switch (binding.kind) {
     case "PiBindingNameless": {
-      const argTypeCore = checkType(ctx, binding.type)
-      const retTypeCore = checkPi(ctx, restBindings, retType)
-      return Cores.Pi("_", argTypeCore, retTypeCore)
+      return Exps.Pi("_", binding.type, simplifyMultiPi(restBindings, retType))
     }
 
     case "PiBindingNamed": {
-      const argTypeCore = checkType(ctx, binding.type)
-      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
-      ctx = CtxCons(binding.name, argTypeValue, ctx)
-      const retTypeCore = checkPi(ctx, restBindings, retType)
-      return Cores.Pi(binding.name, argTypeCore, retTypeCore)
+      return Exps.Pi(
+        binding.name,
+        binding.type,
+        simplifyMultiPi(restBindings, retType)
+      )
     }
   }
 }

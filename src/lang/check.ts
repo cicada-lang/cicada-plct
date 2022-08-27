@@ -18,6 +18,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
+    case "Pi": {
+      return checkByInfer(ctx, exp, type)
+    }
+
     case "Fn": {
       const pi = assertValue(ctx, type, Values.Pi)
       return checkFn(ctx, exp.bindings, exp.ret, pi)
