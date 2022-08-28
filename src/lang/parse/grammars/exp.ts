@@ -63,9 +63,7 @@ export const operand = {
     "operand:sigma_exists": [
       '"exists"',
       '"("',
-      { car_n: "identifier" },
-      '":"',
-      { car_t: "exp" },
+      { sigma_bindings: "sigma_bindings" },
       '")"',
       { cdr_t: "exp" },
     ],
@@ -103,6 +101,23 @@ export const fn_binding = {
   $grammar: {
     "fn_binding:name": [{ name: "identifier" }],
     "fn_binding:annotated": [{ name: "identifier" }, '":"', { t: "exp" }],
+  },
+}
+
+export const sigma_bindings = {
+  $grammar: {
+    "sigma_bindings:sigma_bindings": [
+      { entries: { $ap: ["zero_or_more", "sigma_binding", '","'] } },
+      { last_entry: "sigma_binding" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const sigma_binding = {
+  $grammar: {
+    "sigma_binding:nameless": [{ exp: "exp" }],
+    "sigma_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

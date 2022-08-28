@@ -4,9 +4,9 @@ title: Style Guide
 
 **In general, observe the style of existing code and respect it.**
 
-# About `framewrok/`
+# About `framework/`
 
-Modules in `framewrok/` directory are independent helper modules
+Modules in `framework/` directory are independent helper modules
 that might be extracted to their own packages.
 
 # Hierarchy of resources
@@ -14,7 +14,7 @@ that might be extracted to their own packages.
 Think of the system as a hierarchy of resources:
 
 ```
-Library -> Mod -> Stmt -> Exp
+Project -> Mod -> Stmt -> Exp
 ```
 
 Top-level syntax of module is statement oriented -- `Stmt`.

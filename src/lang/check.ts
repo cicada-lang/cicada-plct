@@ -40,7 +40,8 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "Sigma": {
+    case "Sigma":
+    case "MultiSigma": {
       return checkByInfer(ctx, exp, type)
     }
 
@@ -48,10 +49,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       throw new Error("TODO")
     }
 
-    case "Car": {
-      return checkByInfer(ctx, exp, type)
-    }
-
+    case "Car":
     case "Cdr": {
       return checkByInfer(ctx, exp, type)
     }

@@ -81,6 +81,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "MultiSigma": {
+      return infer(ctx, simplifyMultiSigma(exp.bindings, exp.cdrType))
+    }
+
     default: {
       throw new Error(`infer is not implemented for: ${exp.kind}`)
     }
@@ -123,6 +127,33 @@ function simplifyMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
 
     case "ArgVague": {
       throw new Error("TODO")
+    }
+  }
+}
+
+export function simplifyMultiSigma(
+  bindings: Array<Exps.SigmaBinding>,
+  cdrType: Exp
+): Exp {
+  if (bindings.length === 0) return cdrType
+
+  const [binding, ...restBindings] = bindings
+
+  switch (binding.kind) {
+    case "SigmaBindingNameless": {
+      return Exps.Sigma(
+        "_",
+        binding.type,
+        simplifyMultiSigma(restBindings, cdrType)
+      )
+    }
+
+    case "SigmaBindingNamed": {
+      return Exps.Sigma(
+        binding.name,
+        binding.type,
+        simplifyMultiSigma(restBindings, cdrType)
+      )
     }
   }
 }

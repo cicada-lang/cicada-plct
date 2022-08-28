@@ -16,11 +16,6 @@ Stmts.Compute -- grammar & matcher
 
 # sigma
 
-Exps.Sigma -- take multiple typings
-
-- with `bindings: Array<SigmaBinding>`
-
-Exps.Sigma -- grammar and matcher
 Exps.Cons -- grammar and matcher
 Exps.Car -- grammar and matcher
 Exps.Cdr -- grammar and matcher
@@ -28,7 +23,6 @@ Exps.Cdr -- grammar and matcher
 Value -- Sigma
 Neutral -- Sigma
 
-infer -- Sigma -- to Type
 check -- Cons
 infer -- Car
 infer -- Cdr
