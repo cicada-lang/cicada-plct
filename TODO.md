@@ -66,33 +66,3 @@ NeutralVar constructor
 # recursion
 
 fixpoint and readback
-
-# questions
-
-[design] about sequence
-
-- We want to use `{ x, y, z }` for object literal sugar for `{ x: x, y: y, z: z }`
-
-- Thus `{ x }` is an object literal
-
-- We also want to use `{ ... }` for a sequence of code -- for example `let`
-
-  ```
-  {
-    let x = ...
-    f(x)
-  }
-  ```
-
-- If we do not use return statement in sequence,
-  we can not distinguish `{ x }` from `{ return x }`.
-
-- If we use `return` in sequence, we can write something like:
-
-  ```
-  let y = { return x }
-  ```
-
-  which reads bad, because `return` sounds like an early return from function.
-
-- What should we do?
