@@ -25,6 +25,7 @@ export type Exp =
   | Fn
   | MultiFn
   | Sigma
+  | MultiSigma
   | Cons
   | Car
   | Cdr
@@ -277,6 +278,55 @@ export function Sigma(
     carType,
     cdrType,
     span,
+  }
+}
+
+export type MultiSigma = {
+  family: "Exp"
+  kind: "MultiSigma"
+  bindings: Array<SigmaBinding>
+  cdrType: Exp
+} & ExpMeta
+
+export function MultiSigma(
+  bindings: Array<SigmaBinding>,
+  cdrType: Exp,
+  span?: Span
+): MultiSigma {
+  return {
+    family: "Exp",
+    kind: "MultiSigma",
+    bindings,
+    cdrType,
+    span,
+  }
+}
+
+export type SigmaBinding = SigmaBindingNameless | SigmaBindingNamed
+
+export type SigmaBindingNameless = {
+  kind: "SigmaBindingNameless"
+  type: Exp
+}
+
+export function SigmaBindingNameless(type: Exp): SigmaBindingNameless {
+  return {
+    kind: "SigmaBindingNameless",
+    type,
+  }
+}
+
+export type SigmaBindingNamed = {
+  kind: "SigmaBindingNamed"
+  name: string
+  type: Exp
+}
+
+export function SigmaBindingNamed(name: string, type: Exp): SigmaBindingNamed {
+  return {
+    kind: "SigmaBindingNamed",
+    name,
+    type,
   }
 }
 
