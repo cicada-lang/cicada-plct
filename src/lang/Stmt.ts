@@ -10,7 +10,7 @@ import { Span } from "./Span"
 
    Unlike `Exp`, `Core`, `Value` and `Neutral`,
    which are closed ADT that will **not** be extended often.
-   `Stmt` is an open abstract class that will be extend more often.
+   `Stmt` is an open abstract class that will be extended more often.
 
    Unlike functions about `Exp`, `Core`, `Value` and `Neutral`,
    which are pure, `stmt.execute` does side effects on `mod`.
