@@ -48,10 +48,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       throw new Error("TODO")
     }
 
-    case "Car": {
-      return checkByInfer(ctx, exp, type)
-    }
-
+    case "Car": 
     case "Cdr": {
       return checkByInfer(ctx, exp, type)
     }
