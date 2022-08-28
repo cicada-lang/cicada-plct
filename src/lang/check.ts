@@ -40,7 +40,8 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "Sigma": {
+    case "Sigma":
+    case "MultiSigma": {
       return checkByInfer(ctx, exp, type)
     }
 
