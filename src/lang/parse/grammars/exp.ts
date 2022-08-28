@@ -60,6 +60,15 @@ export const operand = {
       '")"',
       { ret: "exp" },
     ],
+    "operand:sigma_exists": [
+      '"exists"',
+      '"("',
+      { car_n: "identifier" },
+      '":"',
+      { car_t: "exp" },
+      '")"',
+      { cdr_t: "exp" },
+    ],
   },
 }
 

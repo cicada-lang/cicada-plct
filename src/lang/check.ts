@@ -41,7 +41,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Sigma": {
-      throw new Error("TODO")
+      return checkByInfer(ctx, exp, type)
     }
 
     case "Cons": {

@@ -33,6 +33,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
     "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
       Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
+    "operand:sigma_exists": ({ car_n, car_t, cdr_t }, { span }) =>
+      Exps.Sigma(pt.str(car_n), exp_matcher(car_t), exp_matcher(cdr_t), span),
   })(tree)
 }
 

@@ -70,6 +70,17 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, simplifyMultiAp(exp.target, exp.args))
     }
 
+    case "Sigma": {
+      const carTypeCore = checkType(ctx, exp.carType)
+      const carTypeValue = evaluate(ctxToEnv(ctx), carTypeCore)
+      ctx = CtxCons(exp.name, carTypeValue, ctx)
+      const cdrTypeCore = checkType(ctx, exp.cdrType)
+      return Inferred(
+        Globals.Type,
+        Cores.Sigma(exp.name, carTypeCore, cdrTypeCore)
+      )
+    }
+
     default: {
       throw new Error(`infer is not implemented for: ${exp.kind}`)
     }
