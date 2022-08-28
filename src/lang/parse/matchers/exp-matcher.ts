@@ -33,8 +33,12 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
     "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
       Exps.MultiFn(fn_bindings_matcher(fn_bindings), exp_matcher(ret), span),
-    "operand:sigma_exists": ({ car_n, car_t, cdr_t }, { span }) =>
-      Exps.Sigma(pt.str(car_n), exp_matcher(car_t), exp_matcher(cdr_t), span),
+    "operand:sigma_exists": ({ sigma_bindings, cdr_t }, { span }) =>
+      Exps.MultiSigma(
+        sigma_bindings_matcher(sigma_bindings),
+        exp_matcher(cdr_t),
+        span
+      ),
   })(tree)
 }
 
@@ -74,6 +78,26 @@ export function fn_binding_matcher(tree: pt.Tree): Exps.FnBinding {
     "fn_binding:name": ({ name }, { span }) => Exps.FnBindingName(pt.str(name)),
     "fn_binding:annotated": ({ name, t }, { span }) =>
       Exps.FnBindingAnnotated(pt.str(name), exp_matcher(t)),
+  })(tree)
+}
+
+export function sigma_bindings_matcher(
+  tree: pt.Tree
+): Array<Exps.SigmaBinding> {
+  return pt.matcher({
+    "sigma_bindings:sigma_bindings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(sigma_binding_matcher),
+      sigma_binding_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+export function sigma_binding_matcher(tree: pt.Tree): Exps.SigmaBinding {
+  return pt.matcher<Exps.SigmaBinding>({
+    "sigma_binding:nameless": ({ exp }) =>
+      Exps.SigmaBindingNameless(exp_matcher(exp)),
+    "sigma_binding:named": ({ name, exp }) =>
+      Exps.SigmaBindingNamed(pt.str(name), exp_matcher(exp)),
   })(tree)
 }
 
