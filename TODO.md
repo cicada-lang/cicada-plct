@@ -1,7 +1,5 @@
 # pi
 
-move doAp to where? -- should not be in `core/`
-
 doAp
 
 tests/compute-ap.test.ts

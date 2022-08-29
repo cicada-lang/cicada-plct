@@ -1,10 +1,10 @@
+import * as Actions from "../actions"
 import { Env, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
 import { globals } from "../globals"
 import * as Values from "../value"
 import { Closure, Value } from "../value"
 import { Core } from "./Core"
-import { doAp } from "./doAp"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
@@ -38,7 +38,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Ap": {
-      return doAp(evaluate(env, core.target), evaluate(env, core.arg))
+      return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 
     default: {
