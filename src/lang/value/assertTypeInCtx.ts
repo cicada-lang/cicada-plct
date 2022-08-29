@@ -1,8 +1,8 @@
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
-import { Value } from "./Value"
+import { AlreadyType, Value } from "./Value"
 
-type ValueConstructor = (...args: Array<any>) => Value
+type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
 
 /**
 
@@ -13,16 +13,16 @@ type ValueConstructor = (...args: Array<any>) => Value
 
 **/
 
-export function assertTypeInCtx<T extends ValueConstructor>(
+export function assertTypeInCtx<T extends AlreadyTypeConstructor>(
   ctx: Ctx,
   value: Value,
-  valueConstructor: T
+  alreadyTypeConstructor: T
 ): asserts value is ReturnType<T> {
-  const kind = valueConstructor.name
+  const kind = alreadyTypeConstructor.name
 
   if (value.kind !== kind) {
     throw new ElaborationError(
-      `expect value to have kind: ${kind}, instead of: ${value.kind}`
+      `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`
     )
   }
 }

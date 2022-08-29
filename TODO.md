@@ -1,9 +1,5 @@
 # pi
 
-Type as a subtype of Value
-
-limit assertTypeInCtx's input type
-
 tests/compute-ap.test.ts -- let it fail for now
 
 making tests/compute-ap.test.ts pass
