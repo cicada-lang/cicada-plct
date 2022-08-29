@@ -2,7 +2,7 @@
 
 Type as a subtype of Value
 
-[refactor] doAp -- is not + throw = assert
+limit assertTypeInCtx's input type
 
 tests/compute-ap.test.ts -- let it fail for now
 

@@ -1,30 +1,18 @@
-import * as Values from "../value"
 import * as Neutrals from "../neutral"
-import { applyClosure, isValue, TypedValue, Value } from "../value"
+import * as Values from "../value"
+import { applyClosure, assertValue, isValue, TypedValue, Value } from "../value"
 
 export function doAp(target: Value, arg: Value): Value {
   if (isValue(target, Values.Fn)) {
     return applyClosure(target.retClosure, arg)
   }
 
-  if (!isValue(target, Values.TypedNeutral)) {
-    throw new Error("TODO")
-    // throw InternalError.wrong_target(target, {
-    //   expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
-    // })
-  }
+  assertValue(target, Values.TypedNeutral)
 
-  if (!isValue(target.type, Values.Pi)) {
-    throw new Error("TODO")
-    // throw InternalError.wrong_target_t(target.t, {
-    //   expected: [Exps.PiValue],
-    // })
-  }
+  assertValue(target.type, Values.Pi)
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),
     Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg))
   )
-
-
 }
