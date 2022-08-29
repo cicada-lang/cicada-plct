@@ -1,5 +1,5 @@
 import { Core } from "./Core"
-import { Env, EnvCons } from "./Env"
+import { Env, EnvCons } from "./env"
 import { evaluate } from "./evaluate"
 import { Value } from "./Value"
 

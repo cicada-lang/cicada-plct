@@ -1,6 +1,6 @@
 import { Closure } from "./Closure"
 import { Core } from "./Core"
-import { Env, lookupEnvValue } from "./Env"
+import { Env, lookupEnvValue } from "./env"
 import { EvaluationError } from "./errors/EvaluationError"
 import { globals } from "./globals"
 import * as Values from "./Value"

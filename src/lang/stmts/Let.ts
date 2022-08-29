@@ -1,5 +1,5 @@
 import { CtxFulfilled } from "../Ctx"
-import { EnvCons } from "../Env"
+import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { infer } from "../infer"

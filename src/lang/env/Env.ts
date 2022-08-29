@@ -1,4 +1,4 @@
-import { Value } from "./Value"
+import { Value } from "../Value"
 
 export type Env = EnvCons | EnvNull
 

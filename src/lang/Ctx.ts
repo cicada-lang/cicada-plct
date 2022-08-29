@@ -1,4 +1,4 @@
-import { Env, EnvCons, EnvNull } from "./Env"
+import { Env, EnvCons, EnvNull } from "./env"
 import { Var } from "./Neutral"
 import { NotYetValue, Value } from "./Value"
 

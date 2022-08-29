@@ -1,6 +1,6 @@
 import { check, checkType } from "../check"
 import { CtxFulfilled } from "../Ctx"
-import { EnvCons } from "../Env"
+import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { Mod } from "../Mod"

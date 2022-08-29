@@ -1,5 +1,5 @@
 import { Ctx, CtxNull } from "./Ctx"
-import { Env, EnvNull } from "./Env"
+import { Env, EnvNull } from "./env"
 import { parseStmts } from "./parse"
 
 export class Mod {

@@ -1,5 +1,11 @@
 # pi
 
+move Ctx to `ctx/`
+move Mod to `mod/`
+move Span Exp infer check to `exp/`
+move Core evaluate to `core/`
+move Value Neutral Solution readback inclusion to `value/`
+
 evaluate -- Ap
 
 Exps.FnAnnotated -- can be inferred
