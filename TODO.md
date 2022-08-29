@@ -1,6 +1,5 @@
 # pi
 
-add errors/index.ts
 move Mod to `mod/`
 move Span Exp infer check to `exp/`
 move Core evaluate to `core/`

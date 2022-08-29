@@ -1,6 +1,6 @@
 import { Closure } from "./Closure"
 import { Ctx } from "./ctx"
-import { ElaborationError } from "./errors/ElaborationError"
+import { ElaborationError } from "./errors"
 import { Neutral } from "./Neutral"
 
 export type Value = NotYetValue | Global | Pi | Fn
