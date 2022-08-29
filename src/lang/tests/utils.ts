@@ -1,5 +1,5 @@
 import { expect } from "vitest"
-import { Mod } from "../Mod"
+import { Mod } from "../mod"
 
 export async function expectCodeToRun(code: string): Promise<void> {
   const mod = new Mod()

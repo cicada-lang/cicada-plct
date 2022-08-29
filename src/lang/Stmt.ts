@@ -1,4 +1,4 @@
-import { Mod } from "./Mod"
+import { Mod } from "./mod"
 import { Span } from "./Span"
 
 /**

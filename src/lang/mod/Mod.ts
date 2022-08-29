@@ -1,6 +1,6 @@
-import { Ctx, CtxNull } from "./ctx"
-import { Env, EnvNull } from "./env"
-import { parseStmts } from "./parse"
+import { Ctx, CtxNull } from "../ctx"
+import { Env, EnvNull } from "../env"
+import { parseStmts } from "../parse"
 
 export class Mod {
   ctx: Ctx = CtxNull()

@@ -3,7 +3,7 @@ import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { infer } from "../infer"
-import { Mod } from "../Mod"
+import { Mod } from "../mod"
 import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 

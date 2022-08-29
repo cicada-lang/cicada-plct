@@ -1,7 +1,7 @@
 import { check, checkType } from "../check"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
-import { Mod } from "../Mod"
+import { Mod } from "../mod"
 import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
