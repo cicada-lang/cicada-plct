@@ -1,3 +1,4 @@
+export * from "./assertTypeInCtx"
 export * from "./assertValue"
 export * from "./Closure"
 export * from "./inclusion"

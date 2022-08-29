@@ -4,7 +4,7 @@ import { Ctx, CtxFulfilled } from "../ctx"
 import * as Globals from "../globals"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, assertValue, inclusion, Value } from "../value"
+import { applyClosure, assertTypeInCtx, inclusion, Value } from "../value"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 import { infer } from "./infer"
@@ -25,7 +25,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
-      assertValue(ctx, type, Values.Pi)
+      assertTypeInCtx(ctx, type, Values.Pi)
       const { argType, retTypeClosure } = type
       const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
       const retTypeValue = applyClosure(retTypeClosure, argValue)

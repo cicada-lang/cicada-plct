@@ -1,5 +1,7 @@
 # pi
 
+Type as a subtype of Value
+
 [refactor] doAp -- is not + throw = assert
 
 tests/compute-ap.test.ts -- let it fail for now

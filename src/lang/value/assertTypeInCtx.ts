@@ -1,9 +1,20 @@
+import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import { Value } from "./Value"
 
 type ValueConstructor = (...args: Array<any>) => Value
 
-export function assertValue<T extends ValueConstructor>(
+/**
+
+   # assertTypeInCtx
+
+   Given the `ctx`, we have the opportunity
+   to `readback` the `value` and print it in error report.
+
+**/
+
+export function assertTypeInCtx<T extends ValueConstructor>(
+  ctx: Ctx,
   value: Value,
   valueConstructor: T
 ): asserts value is ReturnType<T> {
