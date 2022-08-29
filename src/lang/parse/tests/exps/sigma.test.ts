@@ -4,7 +4,7 @@ import {
   SigmaBindingNamed,
   SigmaBindingNameless,
   Var,
-} from "../../../Exp"
+} from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 

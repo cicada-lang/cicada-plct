@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { ArgPlain, MultiAp, Var } from "../../../Exp"
+import { ArgPlain, MultiAp, Var } from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 

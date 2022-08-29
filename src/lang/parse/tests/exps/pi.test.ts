@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { MultiPi, PiBindingNamed, PiBindingNameless, Var } from "../../../Exp"
+import { MultiPi, PiBindingNamed, PiBindingNameless, Var } from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 

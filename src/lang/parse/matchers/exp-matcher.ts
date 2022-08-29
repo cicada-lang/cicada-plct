@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
-import * as Exps from "../../Exp"
-import { Exp } from "../../Exp"
+import * as Exps from "../../exp"
+import { Exp } from "../../exp"
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({

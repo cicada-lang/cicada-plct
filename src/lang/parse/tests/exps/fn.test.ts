@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { FnBindingAnnotated, FnBindingName, MultiFn, Var } from "../../../Exp"
+import { FnBindingAnnotated, FnBindingName, MultiFn, Var } from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 

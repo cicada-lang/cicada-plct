@@ -1,10 +1,8 @@
 import { CtxFulfilled } from "../ctx"
 import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
-import { Exp } from "../Exp"
-import { infer } from "../infer"
+import { Exp, infer, Span } from "../exp"
 import { Mod } from "../mod"
-import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class Let extends Stmt {

@@ -1,10 +1,8 @@
-import { check, checkType } from "../check"
 import { CtxFulfilled } from "../ctx"
 import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
-import { Exp } from "../Exp"
+import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class LetThe extends Stmt {

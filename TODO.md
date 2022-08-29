@@ -1,9 +1,8 @@
 # pi
 
-move Mod to `mod/`
-move Span Exp infer check to `exp/`
 move Core evaluate to `core/`
-move Value Neutral Solution readback inclusion to `value/`
+move Value Solution readback inclusion to `value/`
+move Neutral to `neutral/`
 
 evaluate -- Ap
 

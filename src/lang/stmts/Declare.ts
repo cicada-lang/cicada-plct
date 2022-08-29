@@ -1,9 +1,7 @@
-import { checkType } from "../check"
 import { CtxCons } from "../ctx"
 import { evaluate } from "../evaluate"
-import { Exp } from "../Exp"
+import { checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { Span } from "../Span"
 import { Stmt } from "../Stmt"
 
 export class Declare extends Stmt {

@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { Var } from "../../../Exp"
+import { Var } from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
