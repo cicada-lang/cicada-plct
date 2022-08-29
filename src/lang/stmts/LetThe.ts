@@ -3,7 +3,7 @@ import { CtxFulfilled } from "../ctx"
 import { EnvCons } from "../env"
 import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { Stmt } from "../Stmt"
+import { Stmt } from "../stmt"
 
 export class LetThe extends Stmt {
   constructor(

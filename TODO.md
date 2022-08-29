@@ -1,7 +1,5 @@
 # pi
 
-move Stmt to `stmt/`
-
 evaluate -- Ap
 
 Exps.FnAnnotated -- can be inferred

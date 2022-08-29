@@ -1,5 +1,5 @@
 import pt from "@cicada-lang/partech"
-import { Stmt } from "../../Stmt"
+import { Stmt } from "../../stmt"
 import * as Stmts from "../../stmts"
 import { exp_matcher } from "../matchers"
 

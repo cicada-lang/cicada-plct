@@ -1,7 +1,7 @@
 import { evaluate } from "../core"
 import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { Stmt } from "../Stmt"
+import { Stmt } from "../stmt"
 
 export class Check extends Stmt {
   constructor(public exp: Exp, public type: Exp, public span?: Span) {

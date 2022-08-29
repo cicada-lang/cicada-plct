@@ -2,7 +2,7 @@ import { evaluate } from "../core"
 import { CtxCons } from "../ctx"
 import { checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { Stmt } from "../Stmt"
+import { Stmt } from "../stmt"
 
 export class Declare extends Stmt {
   constructor(public name: string, public type: Exp, public span?: Span) {
