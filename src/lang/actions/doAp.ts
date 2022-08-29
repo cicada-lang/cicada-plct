@@ -7,7 +7,7 @@ export function doAp(target: Value, arg: Value): Value {
     return applyClosure(target.retClosure, arg)
   }
 
-  if (!isValue(target, Values.NotYetValue)) {
+  if (!isValue(target, Values.TypedNeutral)) {
     throw new Error("TODO")
     // throw InternalError.wrong_target(target, {
     //   expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
@@ -21,7 +21,7 @@ export function doAp(target: Value, arg: Value): Value {
     // })
   }
 
-  return Values.NotYetValue(
+  return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),
     Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg))
   )

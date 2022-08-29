@@ -1,6 +1,6 @@
 import { Env, EnvCons, EnvNull } from "../env"
 import { Var } from "../neutral"
-import { NotYetValue, Value } from "../value"
+import { TypedNeutral, Value } from "../value"
 
 export type Ctx = CtxCons | CtxFulfilled | CtxNull
 
@@ -106,7 +106,7 @@ export function ctxToEnv(ctx: Ctx): Env {
     case "CtxCons": {
       return EnvCons(
         ctx.name,
-        NotYetValue(ctx.type, Var(ctx.name)),
+        TypedNeutral(ctx.type, Var(ctx.name)),
         ctxToEnv(ctx.rest)
       )
     }

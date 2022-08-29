@@ -1,19 +1,19 @@
 import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
 
-export type Value = NotYetValue | Global | Pi | Fn
+export type Value = TypedNeutral | Global | Pi | Fn
 
-export type NotYetValue = {
+export type TypedNeutral = {
   family: "Value"
-  kind: "NotYetValue"
+  kind: "TypedNeutral"
   type: Value
   neutral: Neutral
 }
 
-export function NotYetValue(type: Value, neutral: Neutral): NotYetValue {
+export function TypedNeutral(type: Value, neutral: Neutral): TypedNeutral {
   return {
     family: "Value",
-    kind: "NotYetValue",
+    kind: "TypedNeutral",
     type,
     neutral,
   }

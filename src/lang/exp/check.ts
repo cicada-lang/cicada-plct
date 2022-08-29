@@ -26,7 +26,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Fn": {
       const { argType, retTypeClosure } = assertValue(ctx, type, Values.Pi)
-      const argValue = Values.NotYetValue(argType, Neutrals.Var(exp.name))
+      const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
       const retTypeValue = applyClosure(retTypeClosure, argValue)
       ctx = CtxFulfilled(exp.name, argType, argValue, ctx)
       const retCore = check(ctx, exp.ret, retTypeValue)

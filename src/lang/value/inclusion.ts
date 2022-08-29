@@ -30,7 +30,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     }
   }
 
-  if (subtype.kind === "NotYetValue" && type.kind === "NotYetValue") {
+  if (subtype.kind === "TypedNeutral" && type.kind === "TypedNeutral") {
     if (subtype.neutral.kind === "Var" && type.neutral.kind === "Var") {
       if (subtype.neutral.name === type.neutral.name) {
         return

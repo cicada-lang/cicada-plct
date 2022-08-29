@@ -2,10 +2,6 @@
 
 [refactor] doAp -- is not + throw = assert
 
-rename NotYetValue to NotYet
-
-- ambr NotYetValue NotYet
-
 tests/compute-ap.test.ts -- let it fail for now
 
 making tests/compute-ap.test.ts pass
