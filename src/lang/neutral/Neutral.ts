@@ -1,4 +1,4 @@
-import { Value } from "../value"
+import { TypedValue } from "../value"
 
 export type Neutral = Var | Ap
 
@@ -20,10 +20,10 @@ export type Ap = {
   family: "Neutral"
   kind: "Ap"
   target: Neutral
-  arg: Value
+  arg: TypedValue
 }
 
-export function Ap(target: Neutral, arg: Value): Ap {
+export function Ap(target: Neutral, arg: TypedValue): Ap {
   return {
     family: "Neutral",
     kind: "Ap",

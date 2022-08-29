@@ -1,9 +1,5 @@
 # pi
 
-Neutrals take Normal instead of Value
-
-- maybe not Normal but some other name
-
 doAp
 
 Normal
