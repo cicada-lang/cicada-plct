@@ -1,6 +1,6 @@
 import { applyClosure } from "../Closure"
-import * as Cores from "../Core"
-import { Core } from "../Core"
+import * as Cores from "../core"
+import { Core } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
 import * as Globals from "../globals"
 import { inclusion } from "../inclusion"

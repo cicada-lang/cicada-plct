@@ -1,6 +1,5 @@
 # pi
 
-move Core evaluate to `core/`
 move Value Solution readback inclusion to `value/`
 move Neutral to `neutral/`
 

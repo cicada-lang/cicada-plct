@@ -1,6 +1,6 @@
+import { evaluate } from "../core"
 import { CtxFulfilled } from "../ctx"
 import { EnvCons } from "../env"
-import { evaluate } from "../evaluate"
 import { Exp, infer, Span } from "../exp"
 import { Mod } from "../mod"
 import { Stmt } from "../Stmt"

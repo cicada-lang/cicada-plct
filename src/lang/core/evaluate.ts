@@ -1,10 +1,10 @@
-import { Closure } from "./Closure"
+import { Closure } from "../Closure"
+import { Env, lookupEnvValue } from "../env"
+import { EvaluationError } from "../errors"
+import { globals } from "../globals"
+import * as Values from "../Value"
+import { Value } from "../Value"
 import { Core } from "./Core"
-import { Env, lookupEnvValue } from "./env"
-import { EvaluationError } from "./errors"
-import { globals } from "./globals"
-import * as Values from "./Value"
-import { Value } from "./Value"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {

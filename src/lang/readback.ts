@@ -1,4 +1,4 @@
-import { Core } from "./Core"
+import { Core } from "./core"
 import { Ctx } from "./ctx"
 import { Value } from "./Value"
 

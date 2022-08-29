@@ -1,5 +1,5 @@
+import { evaluate } from "../core"
 import { CtxCons } from "../ctx"
-import { evaluate } from "../evaluate"
 import { checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
 import { Stmt } from "../Stmt"
