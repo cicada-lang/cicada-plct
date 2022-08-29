@@ -1,5 +1,13 @@
 import { Core } from "./Core"
 
 export function formatCore(core: Core): string {
-  throw new Error("TODO")
+  switch (core.kind) {
+    case "Var": {
+      return core.name
+    }
+
+    default: {
+      throw new Error(`formatCore is not implemented for ${core.kind}`)
+    }
+  }
 }

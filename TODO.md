@@ -4,7 +4,6 @@ doAp
 
 tests/compute-ap.test.ts
 
-formatCore -- Var
 formatCore -- Pi
 formatCore -- Fn
 formatCore -- Ap
@@ -54,7 +53,7 @@ readbackNeutral -- Car
 
 # trivial
 
-# String
+# string
 
 # clazz
 
