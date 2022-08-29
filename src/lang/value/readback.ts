@@ -1,5 +1,6 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import * as Globals from "../globals"
 import { Value } from "./Value"
 
 /**
@@ -13,11 +14,15 @@ import { Value } from "./Value"
 
    We will use `readback` to implement `conversion` between values.
 
-   Be careful about the order of arguments of readback,
+   Be careful about the order of arguments of `readback`,
    first the `type`, then the `value`.
 
 **/
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
   throw new Error("TODO")
+}
+
+export function readbackType(ctx: Ctx, type: Value): Core {
+  return readback(ctx, Globals.Type, type)
 }

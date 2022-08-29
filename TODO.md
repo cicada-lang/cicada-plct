@@ -11,12 +11,6 @@ simplifyMultiFn -- return Exps.FnAnnotated
 
 Stmts.Compute -- grammar & matcher
 
-Stmts.Compute
-
-- need `readback`
-- need `formatCore`
-
-
 core/formatCore
 
 value/readback

@@ -1,4 +1,5 @@
 export * from "./Check"
+export * from "./Compute"
 export * from "./Declare"
 export * from "./Let"
 export * from "./LetThe"
