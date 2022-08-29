@@ -55,7 +55,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       const inferred = infer(ctx, exp.target)
-      const pi = assertValue(ctx, inferred.type, Values.Pi)
+      assertValue(ctx, inferred.type, Values.Pi)
+      const pi = inferred.type
       const argCore = check(ctx, exp.arg, pi.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(

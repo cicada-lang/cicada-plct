@@ -8,14 +8,12 @@ export function assertValue<T extends ValueConstructor>(
   ctx: Ctx,
   value: Value,
   valueConstructor: T
-): ReturnType<T> {
+): asserts value is ReturnType<T> {
   const kind = valueConstructor.name
 
-  if (value.kind === kind) {
-    return value as ReturnType<T>
+  if (value.kind !== kind) {
+    throw new ElaborationError(
+      `expect value to have kind: ${kind}, instead of: ${value.kind}`
+    )
   }
-
-  throw new ElaborationError(
-    `expect value to have kind: ${kind}, instead of: ${value.kind}`
-  )
 }
