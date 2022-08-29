@@ -24,8 +24,11 @@ Exps.Cons -- grammar and matcher
 Exps.Car -- grammar and matcher
 Exps.Cdr -- grammar and matcher
 
-Value -- Sigma
-Neutral -- Sigma
+Values.Sigma
+Values.Cons
+
+Neutrals.Car
+Neutrals.Cdr
 
 check -- Cons
 infer -- Car
