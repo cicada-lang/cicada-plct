@@ -1,5 +1,5 @@
-import { Core, evaluate } from "./core"
-import { Env, EnvCons } from "./env"
+import { Core, evaluate } from "../core"
+import { Env, EnvCons } from "../env"
 import { Value } from "./Value"
 
 export type Closure = {

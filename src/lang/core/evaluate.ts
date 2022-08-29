@@ -1,9 +1,8 @@
-import { Closure } from "../Closure"
 import { Env, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
 import { globals } from "../globals"
-import * as Values from "../Value"
-import { Value } from "../Value"
+import * as Values from "../value"
+import { Closure, Value } from "../value"
 import { Core } from "./Core"
 
 export function evaluate(env: Env, core: Core): Value {

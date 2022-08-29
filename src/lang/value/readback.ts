@@ -1,5 +1,5 @@
-import { Core } from "./core"
-import { Ctx } from "./ctx"
+import { Core } from "../core"
+import { Ctx } from "../ctx"
 import { Value } from "./Value"
 
 /**

@@ -1,4 +1,4 @@
-import { Global, Value } from "../Value"
+import { Global, Value } from "../value"
 
 function buildTheType(): Global {
   const theType: Omit<Global, "type"> & { type?: Value } = {

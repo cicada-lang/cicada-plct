@@ -1,7 +1,6 @@
 # pi
 
-move Value Solution readback inclusion to `value/`
-move Neutral to `neutral/`
+move Stmt to `stmt/`
 
 evaluate -- Ap
 

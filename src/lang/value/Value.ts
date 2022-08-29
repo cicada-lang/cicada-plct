@@ -1,7 +1,7 @@
+import { Ctx } from "../ctx"
+import { ElaborationError } from "../errors"
+import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
-import { Ctx } from "./ctx"
-import { ElaborationError } from "./errors"
-import { Neutral } from "./Neutral"
 
 export type Value = NotYetValue | Global | Pi | Fn
 

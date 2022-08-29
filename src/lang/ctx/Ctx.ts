@@ -1,6 +1,6 @@
 import { Env, EnvCons, EnvNull } from "../env"
-import { Var } from "../Neutral"
-import { NotYetValue, Value } from "../Value"
+import { Var } from "../neutral"
+import { NotYetValue, Value } from "../value"
 
 export type Ctx = CtxCons | CtxFulfilled | CtxNull
 

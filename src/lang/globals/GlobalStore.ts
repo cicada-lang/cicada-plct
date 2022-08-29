@@ -1,4 +1,4 @@
-import { Global } from "../Value"
+import { Global } from "../value"
 
 export class GlobalStore {
   map: Map<string, Global> = new Map()
