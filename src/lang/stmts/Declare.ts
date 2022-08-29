@@ -1,5 +1,5 @@
 import { checkType } from "../check"
-import { CtxCons } from "../Ctx"
+import { CtxCons } from "../ctx"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"
 import { Mod } from "../Mod"

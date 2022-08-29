@@ -1,4 +1,4 @@
-import { CtxFulfilled } from "../Ctx"
+import { CtxFulfilled } from "../ctx"
 import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
 import { Exp } from "../Exp"

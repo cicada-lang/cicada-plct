@@ -1,5 +1,5 @@
 import { Closure } from "./Closure"
-import { Ctx } from "./Ctx"
+import { Ctx } from "./ctx"
 import { ElaborationError } from "./errors/ElaborationError"
 import { Neutral } from "./Neutral"
 

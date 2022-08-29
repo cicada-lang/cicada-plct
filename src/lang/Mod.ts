@@ -1,4 +1,4 @@
-import { Ctx, CtxNull } from "./Ctx"
+import { Ctx, CtxNull } from "./ctx"
 import { Env, EnvNull } from "./env"
 import { parseStmts } from "./parse"
 

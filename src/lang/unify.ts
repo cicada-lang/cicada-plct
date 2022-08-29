@@ -1,4 +1,4 @@
-import { Ctx } from "./Ctx"
+import { Ctx } from "./ctx"
 import { Solution } from "./Solution"
 import { Value } from "./Value"
 

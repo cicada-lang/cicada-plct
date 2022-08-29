@@ -1,7 +1,7 @@
 import { applyClosure } from "./Closure"
 import * as Cores from "./Core"
 import { Core } from "./Core"
-import { Ctx, CtxFulfilled } from "./Ctx"
+import { Ctx, CtxFulfilled } from "./ctx"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 import * as Globals from "./globals"
