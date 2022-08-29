@@ -6,7 +6,7 @@ import { Stmt } from "../stmt"
 import { readback, readbackType } from "../value"
 
 export class Compute extends Stmt {
-  constructor(public name: string, public exp: Exp, public span?: Span) {
+  constructor(public exp: Exp, public span?: Span) {
     super()
   }
 

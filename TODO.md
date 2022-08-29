@@ -1,3 +1,5 @@
+neutral/readbackNeutral -- placeholder
+
 # pi
 
 evaluate -- Ap
@@ -7,13 +9,16 @@ check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated
 simplifyMultiFn -- return Exps.FnAnnotated
 
-# statements and testing
+formatCore -- Var
+formatCore -- Pi
+formatCore -- Fn
+formatCore -- Ap
 
-Stmts.Compute -- grammar & matcher
+readback -- Fn
+readback -- Pi
 
-core/formatCore
-
-value/readback
+readbackNeutral -- Var
+readbackNeutral -- Ap
 
 # sigma
 
@@ -32,6 +37,17 @@ evaluate -- Sigma
 evaluate -- Cons
 evaluate -- Car
 evaluate -- Cdr
+
+formatCore -- Sigma
+formatCore -- Cons
+formatCore -- Car
+formatCore -- Cdr
+
+readback -- Sigma
+readback -- Cons
+
+readbackNeutral -- Car
+readbackNeutral -- Car
 
 # trivial
 
