@@ -1,8 +1,10 @@
 # pi
 
-doAp
+[refactor] doAp -- is not + throw = assert
 
-Normal
+rename NotYetValue to NotYet
+
+- ambr NotYetValue NotYet
 
 tests/compute-ap.test.ts -- let it fail for now
 
