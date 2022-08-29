@@ -13,8 +13,11 @@ import { Value } from "./Value"
 
    We will use `readback` to implement `conversion` between values.
 
+   Be careful about the order of arguments of readback,
+   first the `type`, then the `value`.
+
 **/
 
-export function readback(ctx: Ctx, t: Value, value: Value): Core {
+export function readback(ctx: Ctx, type: Value, value: Value): Core {
   throw new Error("TODO")
 }
