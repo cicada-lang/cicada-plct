@@ -1,6 +1,9 @@
 # typescript
 lib
 
+# vitest
+coverage
+
 # npm
 node_modules
 

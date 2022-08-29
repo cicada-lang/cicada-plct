@@ -9,7 +9,9 @@
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
-    "test": "vitest --run --dir src",
+    "test": "vitest run --dir src",
+    "test:watch": "vitest watch --dir src",
+    "test:coverage": "vitest run --dir src --coverage",
     "format": "npx prettier src --write"
   },
   "dependencies": {
@@ -17,6 +19,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
+    "@vitest/coverage-c8": "^0.22.1",
+    "@vitest/coverage-istanbul": "^0.22.1",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.0",
     "typescript": "^4.8.2",
