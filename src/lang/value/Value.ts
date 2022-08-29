@@ -74,21 +74,3 @@ export function Fn(retClosure: Closure): Fn {
     retClosure,
   }
 }
-
-export function assertValue<
-  ValueConstructor extends (...args: Array<any>) => Value
->(
-  ctx: Ctx,
-  value: Value,
-  valueConstructor: ValueConstructor
-): ReturnType<ValueConstructor> {
-  const kind = valueConstructor.name
-
-  if (value.kind === kind) {
-    return value as ReturnType<ValueConstructor>
-  }
-
-  throw new ElaborationError(
-    `expect value to have kind: ${kind}, instead of: ${value.kind}`
-  )
-}
