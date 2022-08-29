@@ -1,11 +1,10 @@
 # pi
 
-evaluate -- Ap
+move doAp to where? -- should not be in `core/`
 
-Exps.FnAnnotated -- can be inferred
-check -- Exps.FnAnnotated -- checkByInfer
-infer -- Exps.FnAnnotated
-simplifyMultiFn -- return Exps.FnAnnotated
+doAp
+
+tests/compute-ap.test.ts
 
 formatCore -- Var
 formatCore -- Pi
@@ -17,6 +16,11 @@ readback -- Pi
 
 readbackNeutral -- Var
 readbackNeutral -- Ap
+
+Exps.FnAnnotated -- can be inferred
+check -- Exps.FnAnnotated -- checkByInfer
+infer -- Exps.FnAnnotated
+simplifyMultiFn -- return Exps.FnAnnotated
 
 # sigma
 
@@ -66,6 +70,8 @@ Exps.New -- grammar and matcher
 checkType -- Clazz
 check -- Objekt
 infer -- Dot
+
+doDot
 
 # datatype
 

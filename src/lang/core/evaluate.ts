@@ -4,6 +4,7 @@ import { globals } from "../globals"
 import * as Values from "../value"
 import { Closure, Value } from "../value"
 import { Core } from "./Core"
+import { doAp } from "./doAp"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
@@ -34,6 +35,10 @@ export function evaluate(env: Env, core: Core): Value {
     case "Fn": {
       const retClosure = Closure(env, core.name, core.ret)
       return Values.Fn(retClosure)
+    }
+
+    case "Ap": {
+      return doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 
     default: {
