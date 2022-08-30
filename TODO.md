@@ -1,12 +1,21 @@
 # pi
 
+
+
+formatCore -- Pi
+
+- tests/compute-pi.test.ts
+
+formatCore -- Fn
+formatCore -- Ap
+
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`
 formatCore -- Fn -- fold continued `Fn` to `MultiFn`
 formatCore -- Ap -- fold continued `Ap` to `MultiAp`
 
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
-tests/compute-ap.test.ts -- use snapshot testing
+tests/compute-ap.test.ts -- test output
 
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer

@@ -7,6 +7,12 @@ export function formatCore(core: Core): string {
       return core.name
     }
 
+    case "Pi": {
+      const argType = formatCore(core.argType)
+      const retType = formatCore(core.retType)
+      return `(${core.name}: ${argType}) -> ${retType}`
+    }
+
     default: {
       throw new EvaluationError(
         `formatCore is not implemented for ${core.kind}`

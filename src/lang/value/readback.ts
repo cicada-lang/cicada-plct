@@ -4,6 +4,7 @@ import { Core } from "../core"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
+import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
 import { applyClosure, isValue, Value } from "../value"
 
@@ -58,6 +59,14 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
   }
 
   switch (value.kind) {
+    case "TypedNeutral": {
+      /**
+         The `type` and `value.type` are ignored here, maybe we should use them to debug.
+      **/
+
+      return readbackNeutral(ctx, value.neutral)
+    }
+
     default: {
       throw new ElaborationError(
         `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`
@@ -84,6 +93,14 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       **/
 
       return Cores.Var("Type")
+    }
+
+    case "TypedNeutral": {
+      /**
+         The `type.type` are ignored here, maybe we should use them to debug.
+      **/
+
+      return readbackNeutral(ctx, type.neutral)
     }
 
     case "Pi": {
