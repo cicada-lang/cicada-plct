@@ -1,4 +1,6 @@
 export * from "./Ctx"
+export * from "./ctxNames"
 export * from "./ctxToEnv"
+export * from "./freshenInCtx"
 export * from "./lookupCtxType"
 export * from "./lookupCtxValue"

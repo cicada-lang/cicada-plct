@@ -1,7 +1,3 @@
-freshenInCtx
-
-import { freshenInCtx } from "../utils/freshen"
-
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 # pi
