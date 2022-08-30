@@ -17,6 +17,6 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
-    // "stmt:compute": ['"compute"', { exp: "exp" }],
+    "stmt:compute": ['"compute"', { exp: "exp" }],
   },
 }
