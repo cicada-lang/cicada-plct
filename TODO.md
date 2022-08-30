@@ -21,12 +21,8 @@ simplifyMultiFn -- return Exps.FnAnnotated
 
 # sigma
 
-Exps.Cons -- grammar and matcher
 Exps.Car -- grammar and matcher
 Exps.Cdr -- grammar and matcher
-
-Values.Sigma
-Values.Cons
 
 Neutrals.Car
 Neutrals.Cdr
