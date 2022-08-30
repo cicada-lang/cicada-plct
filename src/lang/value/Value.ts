@@ -3,7 +3,7 @@ import { Closure } from "./Closure"
 
 export type Value = TypedNeutral | Global | Pi | Fn | Sigma | Cons
 
-export type AlreadyType = Pi
+export type AlreadyType = Pi | Sigma
 
 export type TypedNeutral = {
   family: "Value"

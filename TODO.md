@@ -1,6 +1,8 @@
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
-[desgin] Globals.Type
+fix the design of Globals
+
+- Global should not be a case of Value
 
 # pi
 

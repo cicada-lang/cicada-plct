@@ -5,13 +5,7 @@ import { ElaborationError } from "../errors"
 import * as Globals from "../globals"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  applyClosure,
-  assertTypeInCtx,
-  assertValue,
-  inclusion,
-  Value,
-} from "../value"
+import { applyClosure, assertTypeInCtx, inclusion, Value } from "../value"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 import { infer } from "./infer"
@@ -52,11 +46,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Cons": {
-      assertValue(type, Values.Sigma)
-
-      const carCore = check(ctx, exp.car, type.carType)
+      assertTypeInCtx(ctx, type, Values.Sigma)
+      const { carType, cdrTypeClosure } = type
+      const carCore = check(ctx, exp.car, carType)
       const carValue = evaluate(ctxToEnv(ctx), carCore)
-      const cdrTypeValue = applyClosure(type.cdrTypeClosure, carValue)
+      const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
       const cdrCore = check(ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)
     }
