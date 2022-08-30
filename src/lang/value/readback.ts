@@ -19,17 +19,11 @@ import { Value } from "./Value"
 **/
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
-  /**
+  // Type-directed readback first.
 
-     TODO Type-directed readback first.
+  // TODO
 
-  **/
-
-  /**
-
-     Value-directed readback then.
-
-  **/
+  // Value-directed readback then.
 
   switch (value.kind) {
     default: {

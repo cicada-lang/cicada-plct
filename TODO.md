@@ -1,3 +1,7 @@
+Stmts.Compute should save output to `Mod`, instead using of `console.log`
+
+[desgin] Globals.Type
+
 # pi
 
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`
