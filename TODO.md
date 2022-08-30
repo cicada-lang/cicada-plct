@@ -1,3 +1,5 @@
+add prettier to git pre-commit hooks
+
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 # pi
@@ -8,8 +10,6 @@ formatCore -- Ap -- fold continued `Ap` to `MultiAp`
 
 readback -- Fn
 readback -- Pi
-
-making tests/compute-ap.test.ts pass
 
 tests/compute-ap.test.ts -- use snapshot testing
 

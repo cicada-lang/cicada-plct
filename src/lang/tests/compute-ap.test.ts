@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToRun } from "./utils"
 
-test.todo("compute Ap", async () => {
+test("compute Ap", async () => {
   await expectCodeToRun(`
 
 let id: (T: Type, x: T) -> T = (T, x) => x

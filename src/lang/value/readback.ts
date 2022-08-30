@@ -1,8 +1,8 @@
+import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
-import * as Values from "./Value"
-import { Value } from "./Value"
+import { Value } from "../value"
 
 /**
 
@@ -21,9 +21,15 @@ import { Value } from "./Value"
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
   // Type-directed readback first.
 
-  // TODO
+  switch (type.kind) {
+    case "Type": {
+      return readbackType(ctx, value)
+    }
 
-  // Value-directed readback then.
+    default: {
+      // Value-directed readback then.
+    }
+  }
 
   switch (value.kind) {
     default: {
@@ -35,5 +41,33 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
 }
 
 export function readbackType(ctx: Ctx, type: Value): Core {
-  return readback(ctx, Values.Type(), type)
+  switch (type.kind) {
+    case "Type": {
+      /**
+
+         TODO Maybe a scope bug.
+
+         let U = Type
+
+         function f(Type: (Type) -> Type) {
+
+         // In this scope,
+         // `U` is `readback` to `Cores.Var("Type")`,
+         // `Type` is also `readback` to `Cores.Var("Type")`,
+         // but they should not be equal.
+
+         // (If we implement equal by NbE.)
+
+         }
+
+       **/
+      return Cores.Var("Type")
+    }
+
+    default: {
+      throw new ElaborationError(
+        `readbackType is not implemented for type: ${type.kind}`
+      )
+    }
+  }
 }
