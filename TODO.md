@@ -1,5 +1,3 @@
-[refactor] extract module lookupCtxType
-[refactor] extract module lookupCtxValue
 [refactor] extract module ctxToEnv
 freshenInCtx
 
