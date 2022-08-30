@@ -1,7 +1,7 @@
 import { Ctx, CtxNull } from "../ctx"
 import { Env, EnvNull } from "../env"
-import { globals } from "../globals"
 import { parseStmts } from "../parse"
+import { globals } from "./globals"
 
 export class Mod {
   ctx: Ctx = CtxNull()
