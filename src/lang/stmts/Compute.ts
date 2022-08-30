@@ -16,6 +16,8 @@ export class Compute extends Stmt {
     const core = readback(mod.ctx, inferred.type, value)
     const typeCore = readbackType(mod.ctx, inferred.type)
 
+    // TODO should save output to `Mod`, instead using of `console.log`
+
     console.log(`${formatCore(typeCore)}: ${formatCore(core)}`)
   }
 }

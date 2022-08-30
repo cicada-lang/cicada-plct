@@ -64,6 +64,9 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       return Cores.Var("Type")
     }
 
+    case "Pi": {
+    }
+
     default: {
       throw new ElaborationError(
         `readbackType is not implemented for type: ${type.kind}`
