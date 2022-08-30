@@ -2,7 +2,6 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
-import * as Globals from "../globals"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import { applyClosure, assertTypeInCtx, inclusion, Value } from "../value"
@@ -74,7 +73,7 @@ export function checkByInfer(ctx: Ctx, exp: Exp, type: Value): Core {
 }
 
 export function checkType(ctx: Ctx, type: Exp): Core {
-  return check(ctx, type, Globals.Type)
+  return check(ctx, type, Values.Type())
 }
 
 function simplifyMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {

@@ -1,6 +1,5 @@
 export type Core =
   | Var
-  | Global
   | Pi
   | Ap
   | Fn
@@ -22,20 +21,6 @@ export function Var(name: string): Var {
   return {
     family: "Core",
     kind: "Var",
-    name,
-  }
-}
-
-export type Global = {
-  family: "Core"
-  kind: "Global"
-  name: string
-}
-
-export function Global(name: string): Global {
-  return {
-    family: "Core",
-    kind: "Global",
     name,
   }
 }

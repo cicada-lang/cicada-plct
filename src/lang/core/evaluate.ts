@@ -1,7 +1,6 @@
 import * as Actions from "../actions"
 import { Env, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
-import { globals } from "../globals"
 import * as Values from "../value"
 import { Closure, Value } from "../value"
 import { Core } from "./Core"
@@ -15,15 +14,6 @@ export function evaluate(env: Env, core: Core): Value {
       }
 
       return foundValue
-    }
-
-    case "Global": {
-      const globalValue = globals.lookupValue(core.name)
-      if (globalValue === undefined) {
-        throw new EvaluationError(`Undefined global name: ${name}`)
-      }
-
-      return globalValue
     }
 
     case "Pi": {

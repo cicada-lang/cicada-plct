@@ -1,13 +1,19 @@
-import { Global } from "../value"
+import { CtxFulfilled } from "../ctx"
+import { EnvCons } from "../env"
+import { Mod } from "../mod"
+import { Value } from "../value"
 
 export class GlobalStore {
-  map: Map<string, Global> = new Map()
+  map: Map<string, { type: Value; value: Value }> = new Map()
 
-  lookupValue(name: string): Global | undefined {
-    return this.map.get(name)
+  register(name: string, global: { type: Value; value: Value }): void {
+    this.map.set(name, global)
   }
 
-  register(globalValue: Global): void {
-    this.map.set(globalValue.name, globalValue)
+  mount(mod: Mod): void {
+    for (const [name, { type, value }] of this.map.entries()) {
+      mod.ctx = CtxFulfilled(name, type, value, mod.ctx)
+      mod.env = EnvCons(name, value, mod.env)
+    }
   }
 }

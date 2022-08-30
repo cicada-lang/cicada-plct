@@ -25,10 +25,8 @@ import { Value } from "../value"
 **/
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
-  if (subtype.kind === "Global" && type.kind === "Global") {
-    if (subtype.name === "Type" && type.name === "Type") {
-      return
-    }
+  if (subtype.kind === "Type" && type.kind === "Type") {
+    return
   }
 
   if (subtype.kind === "TypedNeutral" && type.kind === "TypedNeutral") {

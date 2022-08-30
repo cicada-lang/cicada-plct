@@ -1,8 +1,3 @@
-fix the design of Globals
-
-- Global should not be a case of Value
-- Globals.mount -- add global names to mod
-
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 # pi

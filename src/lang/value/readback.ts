@@ -1,7 +1,7 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
-import * as Globals from "../globals"
+import * as Values from "./Value"
 import { Value } from "./Value"
 
 /**
@@ -35,5 +35,5 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
 }
 
 export function readbackType(ctx: Ctx, type: Value): Core {
-  return readback(ctx, Globals.Type, type)
+  return readback(ctx, Values.Type(), type)
 }

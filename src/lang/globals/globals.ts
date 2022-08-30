@@ -1,6 +1,9 @@
+import * as Values from "../value"
 import { GlobalStore } from "./GlobalStore"
-import { Type } from "./Type"
 
 export const globals = new GlobalStore()
 
-globals.register(Type)
+globals.register("Type", {
+  type: Values.Type(),
+  value: Values.Type(),
+})

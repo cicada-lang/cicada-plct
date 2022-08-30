@@ -1,9 +1,9 @@
 import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
 
-export type Value = TypedNeutral | Global | Type | Pi | Fn | Sigma | Cons
+export type Value = TypedNeutral | Type | Pi | Fn | Sigma | Cons
 
-export type AlreadyType = Pi | Sigma
+export type AlreadyType = Type | Pi | Sigma
 
 export type TypedNeutral = {
   family: "Value"
@@ -18,30 +18,6 @@ export function TypedNeutral(type: Value, neutral: Neutral): TypedNeutral {
     kind: "TypedNeutral",
     type,
     neutral,
-  }
-}
-
-/**
-
-   TODO We will need `args: Array<Values.Arg>` for currying.
-
-**/
-
-export type Global = {
-  family: "Value"
-  kind: "Global"
-  name: string
-  type: Value
-  arity: number
-}
-
-export function Global(name: string, type: Value, arity: number): Global {
-  return {
-    family: "Value",
-    kind: "Global",
-    name,
-    type,
-    arity,
   }
 }
 

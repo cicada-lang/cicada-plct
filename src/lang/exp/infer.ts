@@ -2,8 +2,6 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "../ctx"
 import { ElaborationError } from "../errors"
-import * as Globals from "../globals"
-import { globals } from "../globals"
 import * as Values from "../value"
 import { applyClosure, assertTypeInCtx, Value } from "../value"
 import { check, checkType } from "./check"
@@ -30,11 +28,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         return Inferred(foundType, Cores.Var(exp.name))
       }
 
-      const globalValue = globals.lookupValue(exp.name)
-      if (globalValue !== undefined) {
-        return Inferred(globalValue.type, Cores.Global(exp.name))
-      }
-
       throw new ElaborationError(`Undefined name ${exp.name}`)
     }
 
@@ -44,7 +37,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = checkType(ctx, exp.retType)
       return Inferred(
-        Globals.Type,
+        Values.Type(),
         Cores.Pi(exp.name, argTypeCore, retTypeCore)
       )
     }
@@ -75,7 +68,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = checkType(ctx, exp.cdrType)
       return Inferred(
-        Globals.Type,
+        Values.Type(),
         Cores.Sigma(exp.name, carTypeCore, cdrTypeCore)
       )
     }
