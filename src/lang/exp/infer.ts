@@ -5,7 +5,7 @@ import { ElaborationError } from "../errors"
 import * as Globals from "../globals"
 import { globals } from "../globals"
 import * as Values from "../value"
-import { applyClosure, assertTypeInCtx, coreToClosure, Value } from "../value"
+import { applyClosure, assertTypeInCtx, Value } from "../value"
 import { check, checkType } from "./check"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
@@ -84,16 +84,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, simplifyMultiSigma(exp.bindings, exp.cdrType))
     }
 
-    case "Cons": {
-      const carInferred = infer(ctx, exp.car)
-      const cdrInferred = infer(ctx, exp.cdr)
-
-      return Inferred(
-        Values.Sigma(carInferred.type, coreToClosure(cdrInferred.core)),
-        Cores.Cons(carInferred.core, cdrInferred.core)
-      )
-    }
-
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
@@ -137,7 +127,9 @@ function simplifyMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
     }
 
     case "ArgVague": {
-      throw new ElaborationError(`simplifyMultiAp is not implemented for exp: ${arg.kind}`)
+      throw new ElaborationError(
+        `simplifyMultiAp is not implemented for exp: ${arg.kind}`
+      )
     }
   }
 }

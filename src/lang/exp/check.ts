@@ -1,6 +1,6 @@
 import * as Cores from "../core"
-import { Core } from "../core"
-import { Ctx, CtxFulfilled } from "../ctx"
+import { Core, evaluate } from "../core"
+import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Globals from "../globals"
 import * as Neutrals from "../neutral"
@@ -46,7 +46,20 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Cons": {
-      return checkByInfer(ctx, exp, type)
+      if (type.kind !== "Sigma") {
+        throw new ElaborationError(
+          `can't check a Cons exp with type: ${type.kind}`
+        )
+      }
+
+      const carType = type.carType
+      const carCore = check(ctx, exp.car, carType)
+      const env = ctxToEnv(ctx)
+      const carValue = evaluate(env, carCore)
+      const cdrType = applyClosure(type.cdrTypeClosure, carValue)
+      const cdrCore = check(ctx, exp.cdr, cdrType)
+
+      return Cores.Cons(carCore, cdrCore)
     }
 
     case "Car":
