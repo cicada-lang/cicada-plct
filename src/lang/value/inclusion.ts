@@ -1,6 +1,5 @@
-import { Ctx, CtxCons } from "../ctx"
+import { Ctx } from "../ctx"
 import { Value } from "../value"
-import { evaluate } from "../core"
 
 /**
 

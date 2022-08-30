@@ -74,7 +74,7 @@ export const operand = {
       '","',
       { cdr_e: "exp" },
       '")"',
-    ]
+    ],
   },
 }
 
