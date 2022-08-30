@@ -1,5 +1,3 @@
-add prettier to git pre-commit hooks
-
 Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 # pi
