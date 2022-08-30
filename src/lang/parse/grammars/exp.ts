@@ -67,6 +67,14 @@ export const operand = {
       '")"',
       { cdr_t: "exp" },
     ],
+    "operand:cons_cons": [
+      '"cons"',
+      '"("',
+      { car_e: "exp" },
+      '","',
+      { cdr_e: "exp" },
+      '")"',
+    ]
   },
 }
 

@@ -1,5 +1,6 @@
-import { Ctx } from "../ctx"
+import { Ctx, CtxCons } from "../ctx"
 import { Value } from "../value"
+import { evaluate } from "../core"
 
 /**
 
@@ -36,6 +37,10 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
         return
       }
     }
+  }
+
+  if (subtype.kind === "Sigma" && type.kind === "Sigma") {
+    return
   }
 
   throw new Error(

@@ -16,3 +16,11 @@ check exists (T: Type) T: Type
 
 `)
 })
+
+test("check Sigma is a Type -- nameless", async () => {
+  await expectCodeToRun(`
+
+check exists (Type) Type: Type
+
+`)
+})
