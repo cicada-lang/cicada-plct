@@ -44,9 +44,9 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
         : freshenInCtx(ctx, type.retTypeClosure.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const retValue = Actions.doAp(value, typedNeutral)
+      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
       const retCore = readback(ctx, retTypeValue, retValue)
       return Cores.Fn(freshName, retCore)
     }
