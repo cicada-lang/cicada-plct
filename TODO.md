@@ -1,13 +1,12 @@
-Stmts.Compute should save output to `Mod`, instead using of `console.log`
-
 # pi
+
+readback -- Fn
 
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`
 formatCore -- Fn -- fold continued `Fn` to `MultiFn`
 formatCore -- Ap -- fold continued `Ap` to `MultiAp`
 
-readback -- Fn
-readback -- Pi
+Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 tests/compute-ap.test.ts -- use snapshot testing
 

@@ -1,8 +1,10 @@
 import * as Cores from "../core"
 import { Core } from "../core"
-import { Ctx } from "../ctx"
+import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
-import { Value } from "../value"
+import * as Neutrals from "../neutral"
+import * as Values from "../value"
+import { applyClosure, Value } from "../value"
 
 /**
 
@@ -62,6 +64,19 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
        **/
       return Cores.Var("Type")
+    }
+
+    case "Pi": {
+      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const variable = Values.TypedNeutral(
+        type.argType,
+        Neutrals.Var(freshName)
+      )
+      const argType = readback(ctx, Values.Type(), type.argType)
+      ctx = CtxCons(freshName, type.argType, ctx)
+      const retTypeValue = applyClosure(type.retTypeClosure, variable)
+      const retType = readbackType(ctx, retTypeValue)
+      return Cores.Pi(freshName, argType, retType)
     }
 
     default: {
