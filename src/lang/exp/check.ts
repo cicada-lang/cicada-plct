@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -29,7 +29,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       const { argType, retTypeClosure } = type
       const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
       const retTypeValue = applyClosure(retTypeClosure, argValue)
-      ctx = CtxFulfilled(exp.name, argType, argValue, ctx)
+      ctx = CtxCons(exp.name, argType, ctx)
       const retCore = check(ctx, exp.ret, retTypeValue)
       return Cores.Fn(exp.name, retCore)
     }
