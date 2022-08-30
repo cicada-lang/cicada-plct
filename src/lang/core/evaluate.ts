@@ -41,6 +41,12 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 
+    case "Sigma": {
+      const argType = evaluate(env, core.carType)
+      const retTypeClosure = Closure(env, core.name, core.cdrType)
+      return Values.Sigma(argType, retTypeClosure)
+    }
+
     default: {
       throw new Error(`evaluate is not implemented for core: ${core.kind}`)
     }
