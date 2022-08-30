@@ -18,6 +18,12 @@ export function formatCore(core: Core): string {
       return `(${core.name}) => ${ret}`
     }
 
+    case "Ap": {
+      const target = formatCore(core.target)
+      const arg = formatCore(core.arg)
+      return `${target}(${arg})`
+    }
+
     default: {
       throw new EvaluationError(
         `formatCore is not implemented for ${core.kind}`
