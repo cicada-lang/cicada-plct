@@ -1,12 +1,5 @@
 # pi
 
-
-
-formatCore -- Pi
-
-- tests/compute-pi.test.ts
-
-formatCore -- Fn
 formatCore -- Ap
 
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`

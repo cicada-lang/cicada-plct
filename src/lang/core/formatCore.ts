@@ -13,6 +13,11 @@ export function formatCore(core: Core): string {
       return `(${core.name}: ${argType}) -> ${retType}`
     }
 
+    case "Fn": {
+      const ret = formatCore(core.ret)
+      return `(${core.name}) => ${ret}`
+    }
+
     default: {
       throw new EvaluationError(
         `formatCore is not implemented for ${core.kind}`
