@@ -1,7 +1,6 @@
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
 import { readback } from "../value"
 import { Neutral } from "./Neutral"
 

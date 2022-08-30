@@ -48,7 +48,9 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     default: {
-      throw new EvaluationError(`evaluate is not implemented for core: ${core.kind}`)
+      throw new EvaluationError(
+        `evaluate is not implemented for core: ${core.kind}`
+      )
     }
   }
 }
