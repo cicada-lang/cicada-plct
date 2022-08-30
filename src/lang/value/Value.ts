@@ -1,7 +1,7 @@
 import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
 
-export type Value = TypedNeutral | Global | Pi | Fn | Sigma | Cons
+export type Value = TypedNeutral | Global | Type | Pi | Fn | Sigma | Cons
 
 export type AlreadyType = Pi | Sigma
 
@@ -42,6 +42,18 @@ export function Global(name: string, type: Value, arity: number): Global {
     name,
     type,
     arity,
+  }
+}
+
+export type Type = {
+  family: "Value"
+  kind: "Type"
+}
+
+export function Type(): Type {
+  return {
+    family: "Value",
+    kind: "Type",
   }
 }
 
