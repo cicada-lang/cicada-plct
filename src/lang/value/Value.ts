@@ -1,7 +1,7 @@
 import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
 
-export type Value = TypedNeutral | Global | Pi | Fn
+export type Value = TypedNeutral | Global | Pi | Fn | Sigma
 
 export type AlreadyType = Pi
 
@@ -72,5 +72,21 @@ export function Fn(retClosure: Closure): Fn {
     family: "Value",
     kind: "Fn",
     retClosure,
+  }
+}
+
+export type Sigma = {
+  family: "Value"
+  kind: "Sigma"
+  carType: Value
+  cdrTypeClosure: Closure
+}
+
+export function Sigma(carType: Value, cdrTypeClosure: Closure): Sigma {
+  return {
+    family: "Value",
+    kind: "Sigma",
+    carType,
+    cdrTypeClosure,
   }
 }
