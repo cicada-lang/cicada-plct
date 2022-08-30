@@ -1,6 +1,7 @@
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
+import { ElaborationError } from "../errors"
 import * as Globals from "../globals"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -54,7 +55,9 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     default:
-      throw new Error(`check is not implemented for exp: ${exp.kind}`)
+      throw new ElaborationError(
+        `check is not implemented for exp: ${exp.kind}`
+      )
   }
 }
 
@@ -79,7 +82,9 @@ function simplifyMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingAnnotated": {
-      throw new Error("TODO")
+      throw new ElaborationError(
+        `simplifyMultiFn is not implemented for exp: ${binding.kind}`
+      )
     }
   }
 }

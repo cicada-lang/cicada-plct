@@ -1,13 +1,12 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { ElaborationError } from "../errors"
 import * as Globals from "../globals"
 import { Value } from "./Value"
 
 /**
 
    # readback
-
-   Type-directed readback.
 
    Note that we view "readback" as one word,
    thus we write `readback` instead of `readBack`.
@@ -20,7 +19,25 @@ import { Value } from "./Value"
 **/
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
-  throw new Error("TODO")
+  /**
+
+     TODO Type-directed readback first.
+
+  **/
+
+  /**
+
+     Value-directed readback then.
+
+  **/
+
+  switch (value.kind) {
+    default: {
+      throw new ElaborationError(
+        `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`
+      )
+    }
+  }
 }
 
 export function readbackType(ctx: Ctx, type: Value): Core {

@@ -1,5 +1,6 @@
 import { Ctx } from "../ctx"
 import { Value } from "../value"
+import { ElaborationError } from "../errors"
 
 /**
 
@@ -42,7 +43,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     return
   }
 
-  throw new Error(
+  throw new ElaborationError(
     `inclusion is not implemented for subtype: ${subtype.kind} and type: ${type.kind}`
   )
 }

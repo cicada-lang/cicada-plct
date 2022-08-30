@@ -95,7 +95,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     default: {
-      throw new Error(`infer is not implemented for: ${exp.kind}`)
+      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
   }
 }
@@ -131,11 +131,13 @@ function simplifyMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
     }
 
     case "ArgImplicit": {
-      throw new Error("TODO")
+      throw new ElaborationError(
+        `simplifyMultiAp is not implemented for exp: ${arg.kind}`
+      )
     }
 
     case "ArgVague": {
-      throw new Error("TODO")
+      throw new ElaborationError(`simplifyMultiAp is not implemented for exp: ${arg.kind}`)
     }
   }
 }
