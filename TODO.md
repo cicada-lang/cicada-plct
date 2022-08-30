@@ -1,6 +1,5 @@
 # pi
 
-readbackNeutral -- Ap
 tests/compute-ap.test.ts -- let it fail for now
 
 making tests/compute-ap.test.ts pass
