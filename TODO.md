@@ -1,5 +1,6 @@
 # pi
 
+readbackNeutral -- Ap
 tests/compute-ap.test.ts -- let it fail for now
 
 making tests/compute-ap.test.ts pass
@@ -10,9 +11,6 @@ formatCore -- Ap -- fold continued `Ap` to `MultiAp`
 
 readback -- Fn
 readback -- Pi
-
-readbackNeutral -- Var
-readbackNeutral -- Ap
 
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
