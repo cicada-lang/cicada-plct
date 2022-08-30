@@ -1,8 +1,6 @@
 # pi
 
-tests/compute-ap.test.ts -- let it fail for now
-
-making tests/compute-ap.test.ts pass
+Stmts.Compute -- syntax
 
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`
 formatCore -- Fn -- fold continued `Fn` to `MultiFn`
@@ -10,6 +8,10 @@ formatCore -- Ap -- fold continued `Ap` to `MultiAp`
 
 readback -- Fn
 readback -- Pi
+
+making tests/compute-ap.test.ts pass
+
+tests/compute-ap.test.ts -- use snapshot testing
 
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
