@@ -1,8 +1,8 @@
-Stmts.Compute should save output to `Mod`, instead using of `console.log`
-
 fix the design of Globals
 
 - Global should not be a case of Value
+
+Stmts.Compute should save output to `Mod`, instead using of `console.log`
 
 # pi
 
