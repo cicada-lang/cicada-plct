@@ -18,9 +18,8 @@ readbackNeutral -- Car
 Exps.Quote
 Cores.Quote
 Values.Quote
-
-check-quote.test.ts
-compute-quote.test.ts
+pass check-quote.test.ts
+pass compute-quote.test.ts
 
 # clazz
 
