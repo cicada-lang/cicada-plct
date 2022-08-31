@@ -7,6 +7,7 @@ export type Core =
   | Cons
   | Car
   | Cdr
+  | Quote
   | Clazz
   | Objekt
   | Dot
@@ -137,8 +138,20 @@ export function Cdr(target: Core): Cdr {
   }
 }
 
-// NOTE We can not only use `name` we also need `realName`,
-//   because of `subst` might rename bound variables.
+export type Quote = {
+  family: "Core"
+  kind: "Quote"
+  literal: string
+}
+
+export function Quote(literal: string): Quote {
+  return {
+    family: "Core",
+    kind: "Quote",
+    literal,
+  }
+}
+
 export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
 
 export type ClazzCons = {
