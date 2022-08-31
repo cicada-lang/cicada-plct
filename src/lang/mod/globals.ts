@@ -7,3 +7,8 @@ globals.register("Type", {
   type: Values.Type(),
   value: Values.Type(),
 })
+
+globals.register("String", {
+  type: Values.Type(),
+  value: Values.String(),
+})

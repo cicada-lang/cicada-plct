@@ -1,3 +1,5 @@
+compute-test.test.ts
+
 # sigma
 
 Exps.Car -- grammar and matcher
@@ -42,10 +44,9 @@ typeDirectedReadback -- Trivial
 
 # string
 
-globals.register("String", ...)
+readbackType -- String
 
-check-string.test.ts
-compute-string.test.ts
+- compute-string.test.ts
 
 Exps.Quote
 Cores.Quote
