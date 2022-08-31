@@ -10,9 +10,6 @@ formatCore -- Cdr
 readback -- Sigma
 readback -- Cons
 
-readbackNeutral -- Car
-readbackNeutral -- Car
-
 # clazz
 
 define Exps.New
