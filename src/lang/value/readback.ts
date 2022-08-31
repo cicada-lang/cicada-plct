@@ -29,6 +29,16 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
   )
 }
 
+/**
+
+   # typeDirectedReadback
+
+   The eta-rules are implemented here.
+
+   a.k.a. η-rule and eta-expansion.
+
+**/
+
 export function typeDirectedReadback(
   ctx: Ctx,
   type: Value,
@@ -42,8 +52,8 @@ export function typeDirectedReadback(
     case "Pi": {
       /**
          Everything with a `Pi` type is immediately
-         `readback` as having a lambda (`Fn`) on top.
-         This implements the η-rule for functions.
+         `readback` as having a `Fn` on top.
+         This implements the eta-rule for `Fn`.
       **/
 
       const freshName = isValue(value, Values.Fn)

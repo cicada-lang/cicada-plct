@@ -1,10 +1,3 @@
-# pi
-
-Exps.FnAnnotated -- can be inferred
-check -- Exps.FnAnnotated -- checkByInfer
-infer -- Exps.FnAnnotated
-simplifyMultiFn -- return Exps.FnAnnotated
-
 # sigma
 
 Exps.Car -- grammar and matcher
@@ -35,7 +28,35 @@ readbackNeutral -- Car
 
 # trivial
 
+Values.Trivial
+
+globals.register("Trivial", ...)
+
+check-trivial.test.ts
+compute-trivial.test.ts
+
+Values.Sole
+
+check-sole.test.ts
+compute-sole.test.ts
+
+typeDirectedReadback -- Trivial
+
 # string
+
+Values.String
+
+globals.register("String", ...)
+
+check-string.test.ts
+compute-string.test.ts
+
+Exps.Quote
+Cores.Quote
+Values.Quote
+
+check-quote.test.ts
+compute-quote.test.ts
 
 # clazz
 
@@ -57,6 +78,17 @@ doDot
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
+
+# pi
+
+Exps.FnAnnotated -- can be inferred
+check -- Exps.FnAnnotated -- checkByInfer
+infer -- Exps.FnAnnotated
+simplifyMultiFn -- return Exps.FnAnnotated
+
+MultiApWithReturnType
+Exps.FnWithReturnType
+Exps.FnAnnotatedWithReturnType
 
 # unification, implicit and vague
 
