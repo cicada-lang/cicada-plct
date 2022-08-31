@@ -1,5 +1,3 @@
-compute-test.test.ts
-
 # sigma
 
 Exps.Car -- grammar and matcher

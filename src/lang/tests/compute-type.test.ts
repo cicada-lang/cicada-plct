@@ -1,12 +1,12 @@
 import { expect, test } from "vitest"
 import { runCode } from "./utils"
 
-test("compute String", async () => {
+test("compute Type", async () => {
   const output = await runCode(`
 
-compute String
+compute Type
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"String: Type"')
+  expect(output).toMatchInlineSnapshot('"Type: Type"')
 })
