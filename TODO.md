@@ -44,10 +44,6 @@ typeDirectedReadback -- Trivial
 
 # string
 
-readbackType -- String
-
-- compute-string.test.ts
-
 Exps.Quote
 Cores.Quote
 Values.Quote

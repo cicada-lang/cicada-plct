@@ -27,6 +27,10 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       return Cores.Var("Type")
     }
 
+    case "String": {
+      return Cores.Var("String")
+    }
+
     case "TypedNeutral": {
       /**
          The `type.type` are ignored here, maybe we should use them to debug.
