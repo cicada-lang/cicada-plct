@@ -25,6 +25,8 @@ export const operator = {
         },
       },
     ],
+    "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
+    "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
   },
 }
 
@@ -75,8 +77,6 @@ export const operand = {
       { cdr: "exp" },
       '")"',
     ],
-    "operand:car": ['"car"', '"("', { target: "exp" }, '")"'],
-    "operand:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
   },
 }
 
