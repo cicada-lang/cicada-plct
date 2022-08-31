@@ -10,6 +10,7 @@ export type Value =
   | Cons
   | String
   | Trivial
+  | Sole
 
 export type AlreadyType = Type | Pi | Sigma | String | Trivial
 
@@ -124,5 +125,17 @@ export function Trivial(): Trivial {
   return {
     family: "Value",
     kind: "Trivial",
+  }
+}
+
+export type Sole = {
+  family: "Value"
+  kind: "Sole"
+}
+
+export function Sole(): Sole {
+  return {
+    family: "Value",
+    kind: "Sole",
   }
 }

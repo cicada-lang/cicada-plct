@@ -15,8 +15,6 @@ readbackNeutral -- Car
 
 # trivial
 
-Values.Sole
-
 typeDirectedReadback -- Trivial
 
 ```

@@ -38,6 +38,11 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
+    // TODO handle Sigma for real.
+    return
+  }
+
+  if (subtype.kind === "Trivial" && type.kind === "Trivial") {
     return
   }
 
