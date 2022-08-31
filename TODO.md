@@ -13,10 +13,6 @@ readback -- Cons
 readbackNeutral -- Car
 readbackNeutral -- Car
 
-# string
-
-pass compute-quote.test.ts
-
 # clazz
 
 define Exps.New

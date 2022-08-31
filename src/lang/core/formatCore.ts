@@ -22,6 +22,10 @@ export function formatCore(core: Core): string {
       return `${target}(${args.join(", ")})`
     }
 
+    case "Quote": {
+      return `"${core.literal}"`
+    }
+
     default: {
       throw new EvaluationError(
         `formatCore is not implemented for ${core.kind}`

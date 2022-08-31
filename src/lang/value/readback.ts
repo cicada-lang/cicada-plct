@@ -96,6 +96,10 @@ function valueDirectedReadback(ctx: Ctx, type: Value, value: Value): Core {
       return readbackNeutral(ctx, value.neutral)
     }
 
+    case "Quote": {
+      return Cores.Quote(value.literal)
+    }
+
     default: {
       throw new ElaborationError(
         `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`

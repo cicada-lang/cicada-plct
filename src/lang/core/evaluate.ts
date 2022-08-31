@@ -49,6 +49,10 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doCdr(evaluate(env, core.target))
     }
 
+    case "Quote": {
+      return Values.Quote(core.literal)
+    }
+
     default: {
       throw new EvaluationError(
         `evaluate is not implemented for core: ${core.kind}`
