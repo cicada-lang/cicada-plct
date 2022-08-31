@@ -15,10 +15,6 @@ readbackNeutral -- Car
 
 # trivial
 
-typeDirectedReadback -- Trivial
-
-- compute-trivial.test.ts
-
 Values.Sole
 
 check-sole.test.ts

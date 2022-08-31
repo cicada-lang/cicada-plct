@@ -16,11 +16,12 @@ export function readbackType(ctx: Ctx, type: Value): Core {
          let U = Type
 
          function f(Type: (Type) -> Type) {
-         // In this scope,
+         // Problem: In this scope,
          // `U` is `readback` to `Cores.Var("Type")`,
          // `Type` is also `readback` to `Cores.Var("Type")`,
-         // but they should not be equal.
-         // (If we implement equal by NbE.)
+         // but they should not be equal (if we implement equal by NbE).
+
+         // Solution: `Type` should not be `readback` to `Cores.Var("Type")`.
          }
       **/
 
@@ -29,6 +30,10 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     case "String": {
       return Cores.Var("String")
+    }
+
+    case "Trivial": {
+      return Cores.Var("Trivial")
     }
 
     case "TypedNeutral": {
