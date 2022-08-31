@@ -10,10 +10,10 @@
     "prepare": "husky install",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
-    "test": "vitest run --dir src",
-    "test:watch": "vitest watch --dir src",
-    "test:coverage": "vitest run --dir src --coverage",
-    "test:gui": "vitest watch --dir src --ui",
+    "test": "vitest run --dir src --threads false",
+    "test:watch": "vitest watch --dir src --threads false",
+    "test:coverage": "vitest run --dir src --threads false --coverage",
+    "test:gui": "vitest watch --dir src --threads false --ui",
     "format": "npx prettier src --write"
   },
   "dependencies": {
