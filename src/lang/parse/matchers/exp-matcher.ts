@@ -41,6 +41,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
       ),
     "operand:cons": ({ car, cdr }, { span }) =>
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
+    "operand:car": ({ target }, { span }) =>
+      Exps.Car(exp_matcher(target), span),
+    "operand:cdr": ({ target }, { span }) =>
+      Exps.Cdr(exp_matcher(target), span),
   })(tree)
 }
 

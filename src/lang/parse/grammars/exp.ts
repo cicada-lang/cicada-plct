@@ -75,6 +75,8 @@ export const operand = {
       { cdr: "exp" },
       '")"',
     ],
+    "operand:car": ['"car"', '"("', { target: "exp" }, '")"'],
+    "operand:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
   },
 }
 

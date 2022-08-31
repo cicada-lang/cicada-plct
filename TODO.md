@@ -1,19 +1,6 @@
 # sigma
 
-Exps.Car -- grammar and matcher
-Exps.Cdr -- grammar and matcher
-
-Neutrals.Car
-Neutrals.Cdr
-
-check -- Cons
-infer -- Car
-infer -- Cdr
-
 evaluate -- Sigma
-evaluate -- Cons
-evaluate -- Car
-evaluate -- Cdr
 
 formatCore -- Sigma
 formatCore -- Cons

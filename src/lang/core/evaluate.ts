@@ -37,6 +37,18 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.Sigma(argType, retTypeClosure)
     }
 
+    case "Cons": {
+      return Values.Cons(evaluate(env, core.car), evaluate(env, core.cdr))
+    }
+
+    case "Car": {
+      return Actions.doCar(evaluate(env, core.target))
+    }
+
+    case "Cdr": {
+      return Actions.doCdr(evaluate(env, core.target))
+    }
+
     default: {
       throw new EvaluationError(
         `evaluate is not implemented for core: ${core.kind}`

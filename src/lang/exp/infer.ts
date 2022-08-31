@@ -77,6 +77,23 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, simplifyMultiSigma(exp.bindings, exp.cdrType))
     }
 
+    case "Car": {
+      const inferred = infer(ctx, exp.target)
+      assertTypeInCtx(ctx, inferred.type, Values.Sigma)
+      return Inferred(inferred.type.carType, Cores.Car(inferred.core))
+    }
+
+    case "Cdr": {
+      const inferred = infer(ctx, exp.target)
+      assertTypeInCtx(ctx, inferred.type, Values.Sigma)
+      const sigma = inferred.type
+      const carValue = evaluate(ctxToEnv(ctx), Cores.Car(inferred.core))
+      return Inferred(
+        applyClosure(sigma.cdrTypeClosure, carValue),
+        Cores.Cdr(inferred.core)
+      )
+    }
+
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }

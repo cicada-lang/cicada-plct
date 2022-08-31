@@ -1,6 +1,6 @@
 import { TypedValue } from "../value"
 
-export type Neutral = Var | Ap
+export type Neutral = Var | Ap | Car | Cdr
 
 export type Var = {
   family: "Neutral"
@@ -29,5 +29,33 @@ export function Ap(target: Neutral, arg: TypedValue): Ap {
     kind: "Ap",
     target,
     arg,
+  }
+}
+
+export type Car = {
+  family: "Neutral"
+  kind: "Car"
+  target: Neutral
+}
+
+export function Car(target: Neutral): Car {
+  return {
+    family: "Neutral",
+    kind: "Car",
+    target,
+  }
+}
+
+export type Cdr = {
+  family: "Neutral"
+  kind: "Cdr"
+  target: Neutral
+}
+
+export function Cdr(target: Neutral): Cdr {
+  return {
+    family: "Neutral",
+    kind: "Cdr",
+    target,
   }
 }

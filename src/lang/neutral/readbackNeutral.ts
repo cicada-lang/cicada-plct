@@ -1,6 +1,7 @@
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { ElaborationError } from "../errors"
 import { readback } from "../value"
 import { Neutral } from "./Neutral"
 
@@ -17,10 +18,10 @@ export function readbackNeutral(ctx: Ctx, neutral: Neutral): Core {
       )
     }
 
-    // default: {
-    //   throw new ElaborationError(
-    //     `readbackNeutral is not implemented for ${neutral.kind}`
-    //   )
-    // }
+    default: {
+      throw new ElaborationError(
+        `readbackNeutral is not implemented for ${neutral.kind}`
+      )
+    }
   }
 }
