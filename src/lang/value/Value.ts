@@ -9,6 +9,7 @@ export type Value =
   | Sigma
   | Cons
   | String
+  | Quote
   | Trivial
   | Sole
 
@@ -113,6 +114,20 @@ export function String(): String {
   return {
     family: "Value",
     kind: "String",
+  }
+}
+
+export type Quote = {
+  family: "Value"
+  kind: "Quote"
+  literal: string
+}
+
+export function Quote(literal: string): Quote {
+  return {
+    family: "Value",
+    kind: "Quote",
+    literal,
   }
 }
 
