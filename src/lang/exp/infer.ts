@@ -43,7 +43,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiPi": {
-      return infer(ctx, simplifyMultiPi(exp.bindings, exp.retType))
+      return infer(ctx, foldMultiPi(exp.bindings, exp.retType))
     }
 
     case "Ap": {
@@ -59,7 +59,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiAp": {
-      return infer(ctx, simplifyMultiAp(exp.target, exp.args))
+      return infer(ctx, foldMultiAp(exp.target, exp.args))
     }
 
     case "Sigma": {
@@ -74,7 +74,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiSigma": {
-      return infer(ctx, simplifyMultiSigma(exp.bindings, exp.cdrType))
+      return infer(ctx, foldMultiSigma(exp.bindings, exp.cdrType))
     }
 
     case "Car": {
@@ -100,51 +100,51 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
   }
 }
 
-function simplifyMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
+function foldMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
   if (bindings.length === 0) return retType
 
   const [binding, ...restBindings] = bindings
 
   switch (binding.kind) {
     case "PiBindingNameless": {
-      return Exps.Pi("_", binding.type, simplifyMultiPi(restBindings, retType))
+      return Exps.Pi("_", binding.type, foldMultiPi(restBindings, retType))
     }
 
     case "PiBindingNamed": {
       return Exps.Pi(
         binding.name,
         binding.type,
-        simplifyMultiPi(restBindings, retType)
+        foldMultiPi(restBindings, retType)
       )
     }
   }
 }
 
-function simplifyMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
+function foldMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
   if (args.length === 0) return target
 
   const [arg, ...restArgs] = args
 
   switch (arg.kind) {
     case "ArgPlain": {
-      return simplifyMultiAp(Exps.Ap(target, arg.exp), restArgs)
+      return foldMultiAp(Exps.Ap(target, arg.exp), restArgs)
     }
 
     case "ArgImplicit": {
       throw new ElaborationError(
-        `simplifyMultiAp is not implemented for exp: ${arg.kind}`
+        `foldMultiAp is not implemented for exp: ${arg.kind}`
       )
     }
 
     case "ArgVague": {
       throw new ElaborationError(
-        `simplifyMultiAp is not implemented for exp: ${arg.kind}`
+        `foldMultiAp is not implemented for exp: ${arg.kind}`
       )
     }
   }
 }
 
-export function simplifyMultiSigma(
+export function foldMultiSigma(
   bindings: Array<Exps.SigmaBinding>,
   cdrType: Exp
 ): Exp {
@@ -157,7 +157,7 @@ export function simplifyMultiSigma(
       return Exps.Sigma(
         "_",
         binding.type,
-        simplifyMultiSigma(restBindings, cdrType)
+        foldMultiSigma(restBindings, cdrType)
       )
     }
 
@@ -165,7 +165,7 @@ export function simplifyMultiSigma(
       return Exps.Sigma(
         binding.name,
         binding.type,
-        simplifyMultiSigma(restBindings, cdrType)
+        foldMultiSigma(restBindings, cdrType)
       )
     }
   }

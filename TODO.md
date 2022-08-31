@@ -15,6 +15,10 @@ readbackNeutral -- Car
 
 # trivial
 
+extract Exps.foldMultiFn
+extract Exps.foldMultiPi
+extract Exps.foldMultiAp
+
 globals.register("Trivial", ...)
 
 check-trivial.test.ts
@@ -62,7 +66,7 @@ Exp -- DataConstructor
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated
-simplifyMultiFn -- return Exps.FnAnnotated
+foldMultiFn -- return Exps.FnAnnotated
 
 MultiApWithReturnType
 Exps.FnWithReturnType

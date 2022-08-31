@@ -21,7 +21,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "MultiFn": {
-      return check(ctx, simplifyMultiFn(exp.bindings, exp.ret), type)
+      return check(ctx, foldMultiFn(exp.bindings, exp.ret), type)
     }
 
     case "Fn": {
@@ -76,19 +76,19 @@ export function checkType(ctx: Ctx, type: Exp): Core {
   return check(ctx, type, Values.Type())
 }
 
-function simplifyMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
+function foldMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
   if (bindings.length === 0) return ret
 
   const [binding, ...restBindings] = bindings
 
   switch (binding.kind) {
     case "FnBindingName": {
-      return Exps.Fn(binding.name, simplifyMultiFn(restBindings, ret))
+      return Exps.Fn(binding.name, foldMultiFn(restBindings, ret))
     }
 
     case "FnBindingAnnotated": {
       throw new ElaborationError(
-        `simplifyMultiFn is not implemented for exp: ${binding.kind}`
+        `foldMultiFn is not implemented for exp: ${binding.kind}`
       )
     }
   }
