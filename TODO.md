@@ -1,8 +1,5 @@
 # pi
 
-formatCore -- Fn -- fold continued `Fn` to `MultiFn`
-formatCore -- Ap -- fold continued `Ap` to `MultiAp`
-
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated

@@ -11,8 +11,8 @@ compute id(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T: Type, x: T) -> T: (T, x) =>> x
-    (x: Type) -> Type: (x) =>> x"
+    "(T: Type, x: T) -> T: (T, x) => x
+    (x: Type) -> Type: (x) => x"
   `)
 })
 
@@ -29,7 +29,51 @@ compute id2(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T: Type, x: T) -> T: (T, x) =>> x
-    (x: Type) -> Type: (x) =>> x"
+    "(T: Type, x: T) -> T: (T, x) => x
+    (x: Type) -> Type: (x) => x"
+  `)
+})
+
+test("compute Fn -- evaluation blocked by variable", async () => {
+  const output = await runCode(`
+
+let apply: (T: Type, x: T, f: (T) -> T) -> T =
+  (T, x, f) => f(x)
+
+compute apply
+compute apply(Type)
+compute apply(Type, Type)
+compute apply(Type, Type, (x) => x)
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "(T: Type, x: T, f: (_: T) -> T) -> T: (T, x, f) => f(x)
+    (x: Type, f: (_: Type) -> Type) -> Type: (x, f) => f(x)
+    (f: (_: Type) -> Type) -> Type: (f) => f(Type)
+    Type: Type"
+  `)
+})
+
+test("compute Fn -- evaluation blocked by variable -- MultiAp", async () => {
+  const output = await runCode(`
+
+let apply2: (T: Type, x: T, y: T, f: (T, T) -> T) -> T =
+  (T, x, y, f) => f(x, y)
+
+compute apply2 
+compute apply2(Type)
+compute apply2(Type, Type)
+compute apply2(Type, Type, Type)
+compute apply2(Type, Type, Type, (x, y) => x)
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "(T: Type, x: T, y: T, f: (_: T, _1: T) -> T) -> T: (T, x, y, f) => f(x, y)
+    (x: Type, y: Type, f: (_: Type, _1: Type) -> Type) -> Type: (x, y, f) => f(x, y)
+    (y: Type, f: (_: Type, _1: Type) -> Type) -> Type: (y, f) => f(Type, y)
+    (f: (_: Type, _1: Type) -> Type) -> Type: (f) => f(Type, Type)
+    Type: Type"
   `)
 })

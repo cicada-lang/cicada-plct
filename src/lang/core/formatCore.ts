@@ -14,13 +14,12 @@ export function formatCore(core: Core): string {
 
     case "Fn": {
       const { bindings, ret } = unfoldFn(core)
-      return `(${bindings.join(", ")}) =>> ${ret}`
+      return `(${bindings.join(", ")}) => ${ret}`
     }
 
     case "Ap": {
-      const target = formatCore(core.target)
-      const arg = formatCore(core.arg)
-      return `${target}(${arg})`
+      const { target, args } = unfoldAp(core)
+      return `${target}(${args.join(", ")})`
     }
 
     default: {
@@ -56,6 +55,20 @@ function unfoldFn(core: Core): { bindings: Array<string>; ret: string } {
 
     default: {
       return { bindings: [], ret: formatCore(core) }
+    }
+  }
+}
+
+function unfoldAp(core: Core): { target: string; args: Array<string> } {
+  switch (core.kind) {
+    case "Ap": {
+      const arg = formatCore(core.arg)
+      const { target, args } = unfoldAp(core.target)
+      return { target, args: [...args, arg] }
+    }
+
+    default: {
+      return { target: formatCore(core), args: [] }
     }
   }
 }
