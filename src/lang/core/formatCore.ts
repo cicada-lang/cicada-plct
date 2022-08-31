@@ -8,17 +8,17 @@ export function formatCore(core: Core): string {
     }
 
     case "Pi": {
-      const { bindings, retType } = unfoldPi(core)
+      const { bindings, retType } = foldPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }
 
     case "Fn": {
-      const { bindings, ret } = unfoldFn(core)
+      const { bindings, ret } = foldFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
     case "Ap": {
-      const { target, args } = unfoldAp(core)
+      const { target, args } = foldAp(core)
       return `${target}(${args.join(", ")})`
     }
 
@@ -30,12 +30,12 @@ export function formatCore(core: Core): string {
   }
 }
 
-function unfoldPi(core: Core): { bindings: Array<string>; retType: string } {
+function foldPi(core: Core): { bindings: Array<string>; retType: string } {
   switch (core.kind) {
     case "Pi": {
       const argType = formatCore(core.argType)
       const binding = `${core.name}: ${argType}`
-      const { bindings, retType } = unfoldPi(core.retType)
+      const { bindings, retType } = foldPi(core.retType)
       return { bindings: [binding, ...bindings], retType }
     }
 
@@ -45,11 +45,11 @@ function unfoldPi(core: Core): { bindings: Array<string>; retType: string } {
   }
 }
 
-function unfoldFn(core: Core): { bindings: Array<string>; ret: string } {
+function foldFn(core: Core): { bindings: Array<string>; ret: string } {
   switch (core.kind) {
     case "Fn": {
       const binding = `${core.name}`
-      const { bindings, ret } = unfoldFn(core.ret)
+      const { bindings, ret } = foldFn(core.ret)
       return { bindings: [binding, ...bindings], ret }
     }
 
@@ -59,11 +59,11 @@ function unfoldFn(core: Core): { bindings: Array<string>; ret: string } {
   }
 }
 
-function unfoldAp(core: Core): { target: string; args: Array<string> } {
+function foldAp(core: Core): { target: string; args: Array<string> } {
   switch (core.kind) {
     case "Ap": {
       const arg = formatCore(core.arg)
-      const { target, args } = unfoldAp(core.target)
+      const { target, args } = foldAp(core.target)
       return { target, args: [...args, arg] }
     }
 
