@@ -1,5 +1,3 @@
-tests/compute-ap.test.ts -- snapshot testing
-
 # pi
 
 formatCore -- Pi -- fold continued `Pi` to `MultiPi`

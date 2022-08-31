@@ -1,11 +1,13 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { runCode } from "./utils"
 
 test("compute Ap", async () => {
-  await runCode(`
+  const output = await runCode(`
 
 let id: (T: Type, x: T) -> T = (T, x) => x
 compute id(Type, Type)
 
 `)
+
+  expect(output).toMatchInlineSnapshot('"Type: Type"')
 })
