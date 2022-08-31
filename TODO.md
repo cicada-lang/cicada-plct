@@ -1,3 +1,6 @@
+extract Exps.foldMultiPi
+extract Exps.foldMultiAp
+
 # sigma
 
 evaluate -- Sigma
@@ -14,10 +17,6 @@ readbackNeutral -- Car
 readbackNeutral -- Car
 
 # trivial
-
-extract Exps.foldMultiFn
-extract Exps.foldMultiPi
-extract Exps.foldMultiAp
 
 globals.register("Trivial", ...)
 

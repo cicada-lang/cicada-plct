@@ -1,4 +1,5 @@
 export * from "./check"
 export * from "./Exp"
+export * from "./fold"
 export * from "./infer"
 export * from "./Span"

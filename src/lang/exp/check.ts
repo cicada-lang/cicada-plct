@@ -2,12 +2,11 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
+import * as Exps from "../exp"
+import { Exp, infer } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import { applyClosure, assertTypeInCtx, inclusion, Value } from "../value"
-import * as Exps from "./Exp"
-import { Exp } from "./Exp"
-import { infer } from "./infer"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -21,7 +20,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "MultiFn": {
-      return check(ctx, foldMultiFn(exp.bindings, exp.ret), type)
+      return check(ctx, Exps.foldMultiFn(exp.bindings, exp.ret), type)
     }
 
     case "Fn": {
@@ -74,22 +73,4 @@ export function checkByInfer(ctx: Ctx, exp: Exp, type: Value): Core {
 
 export function checkType(ctx: Ctx, type: Exp): Core {
   return check(ctx, type, Values.Type())
-}
-
-function foldMultiFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
-  if (bindings.length === 0) return ret
-
-  const [binding, ...restBindings] = bindings
-
-  switch (binding.kind) {
-    case "FnBindingName": {
-      return Exps.Fn(binding.name, foldMultiFn(restBindings, ret))
-    }
-
-    case "FnBindingAnnotated": {
-      throw new ElaborationError(
-        `foldMultiFn is not implemented for exp: ${binding.kind}`
-      )
-    }
-  }
 }
