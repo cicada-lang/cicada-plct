@@ -68,6 +68,18 @@ export function typeDirectedReadback(
       return Cores.Fn(freshName, retCore)
     }
 
+    case "Trivial": {
+      /**
+         The η-rule for `Trivial` states that,
+         all of its inhabitants are the same as `sole`.
+         This is implemented by reading all the
+         values of type `Trivial` back to `sole`,
+         even the value is `TypedNeutral`.
+      **/
+
+      return Cores.Var("sole")
+    }
+
     default: {
       return undefined
     }
