@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToRun } from "./utils"
+import { runCode } from "./utils"
 
 test("check Cons", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check cons(Type, Type): exists (Type) Type
 

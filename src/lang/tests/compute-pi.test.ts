@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToRun } from "./utils"
+import { runCode } from "./utils"
 
 test("compute Pi", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 compute (T: Type, x: T) -> T
 

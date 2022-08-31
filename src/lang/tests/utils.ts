@@ -2,7 +2,7 @@ import { expect } from "vitest"
 import { Mod } from "../mod"
 import { parseStmts } from "../parse"
 
-export async function expectCodeToRun(code: string): Promise<void> {
+export async function runCode(code: string): Promise<void> {
   const stmts = parseStmts(code)
   const mod = new Mod({ stmts })
   await mod.run()

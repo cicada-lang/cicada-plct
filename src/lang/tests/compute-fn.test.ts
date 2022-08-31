@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToRun } from "./utils"
+import { runCode } from "./utils"
 
 test("compute Fn", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 let id: (T: Type, x: T) -> T = (T, x) => x
 compute id
@@ -12,7 +12,7 @@ compute id(Type)
 })
 
 test("compute Fn -- partial evaluation", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 let id: (T: Type, x: T) -> T = (T, x) => x
 

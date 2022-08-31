@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToRun } from "./utils"
+import { runCode } from "./utils"
 
 test("check Type in Type", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check Type: Type
 
@@ -10,7 +10,7 @@ check Type: Type
 })
 
 test("check Type in Type -- with Let", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 let U = Type
 check U: U
@@ -19,7 +19,7 @@ check U: U
 })
 
 test("check Type in Type -- with LetThe", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 let U: Type = Type
 check U: U

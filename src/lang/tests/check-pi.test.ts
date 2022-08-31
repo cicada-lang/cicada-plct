@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToRun } from "./utils"
+import { runCode } from "./utils"
 
 test("check Pi is a Type", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (A: Type) -> Type: Type
 
@@ -10,7 +10,7 @@ check (A: Type) -> Type: Type
 })
 
 test("check Pi is a Type -- multiple bindings", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (A: Type, B: Type) -> Type: Type
 
@@ -18,7 +18,7 @@ check (A: Type, B: Type) -> Type: Type
 })
 
 test("check Pi is a Type -- telescope", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (A: Type, B: Type, x: A) -> B: Type
 
@@ -26,7 +26,7 @@ check (A: Type, B: Type, x: A) -> B: Type
 })
 
 test("check Pi is a Type -- nested", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (
   A: Type,

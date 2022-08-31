@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToFail, expectCodeToRun } from "./utils"
+import { expectCodeToFail, runCode } from "./utils"
 
 test("check Fn", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (T) => T: (Type) -> Type
 
@@ -10,7 +10,7 @@ check (T) => T: (Type) -> Type
 })
 
 test("check Fn -- multiple bindings", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (A, B) => A: (A: Type, B: Type) -> Type
 
@@ -18,7 +18,7 @@ check (A, B) => A: (A: Type, B: Type) -> Type
 })
 
 test("check Fn -- dependent", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 check (A, a) => a: (A: Type, A) -> A
 

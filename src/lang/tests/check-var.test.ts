@@ -1,8 +1,8 @@
 import { test } from "vitest"
-import { expectCodeToFail, expectCodeToRun } from "./utils"
+import { expectCodeToFail, runCode } from "./utils"
 
 test("check Var", async () => {
-  await expectCodeToRun(`
+  await runCode(`
 
 declare t: Type
 check t: Type
