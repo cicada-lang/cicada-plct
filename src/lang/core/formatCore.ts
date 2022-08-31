@@ -13,8 +13,8 @@ export function formatCore(core: Core): string {
     }
 
     case "Fn": {
-      const ret = formatCore(core.ret)
-      return `(${core.name}) => ${ret}`
+      const { bindings, ret } = unfoldFn(core)
+      return `(${bindings.join(", ")}) =>> ${ret}`
     }
 
     case "Ap": {
@@ -42,6 +42,20 @@ function unfoldPi(core: Core): { bindings: Array<string>; retType: string } {
 
     default: {
       return { bindings: [], retType: formatCore(core) }
+    }
+  }
+}
+
+function unfoldFn(core: Core): { bindings: Array<string>; ret: string } {
+  switch (core.kind) {
+    case "Fn": {
+      const binding = `${core.name}`
+      const { bindings, ret } = unfoldFn(core.ret)
+      return { bindings: [binding, ...bindings], ret }
+    }
+
+    default: {
+      return { bindings: [], ret: formatCore(core) }
     }
   }
 }
