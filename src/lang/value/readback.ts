@@ -23,10 +23,17 @@ import { applyClosure, isValue, readbackType, Value } from "../value"
 **/
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
-  /**
-     Type-directed readback first.
-  **/
+  return (
+    typeDirectedReadback(ctx, type, value) ||
+    valueDirectedReadback(ctx, type, value)
+  )
+}
 
+export function typeDirectedReadback(
+  ctx: Ctx,
+  type: Value,
+  value: Value
+): Core | undefined {
   switch (type.kind) {
     case "Type": {
       return readbackType(ctx, value)
@@ -52,12 +59,12 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
     }
 
     default: {
-      /**
-         Value-directed readback then.
-      **/
+      return undefined
     }
   }
+}
 
+function valueDirectedReadback(ctx: Ctx, type: Value, value: Value): Core {
   switch (value.kind) {
     case "TypedNeutral": {
       /**
