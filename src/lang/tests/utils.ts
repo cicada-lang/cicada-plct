@@ -9,7 +9,5 @@ export async function runCode(code: string): Promise<void> {
 }
 
 export async function expectCodeToFail(code: string): Promise<void> {
-  const stmts = parseStmts(code)
-  const mod = new Mod({ stmts })
-  await expect(mod.run()).rejects.toThrow()
+  await expect(runCode(code)).rejects.toThrow()
 }
