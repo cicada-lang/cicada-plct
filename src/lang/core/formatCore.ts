@@ -8,9 +8,8 @@ export function formatCore(core: Core): string {
     }
 
     case "Pi": {
-      const argType = formatCore(core.argType)
-      const retType = formatCore(core.retType)
-      return `(${core.name}: ${argType}) -> ${retType}`
+      const { bindings, retType } = unfoldPi(core)
+      return `(${bindings.join(", ")}) -> ${retType}`
     }
 
     case "Fn": {
@@ -28,6 +27,21 @@ export function formatCore(core: Core): string {
       throw new EvaluationError(
         `formatCore is not implemented for ${core.kind}`
       )
+    }
+  }
+}
+
+function unfoldPi(core: Core): { bindings: Array<string>; retType: string } {
+  switch (core.kind) {
+    case "Pi": {
+      const argType = formatCore(core.argType)
+      const binding = `${core.name}: ${argType}`
+      const { bindings, retType } = unfoldPi(core.retType)
+      return { bindings: [binding, ...bindings], retType }
+    }
+
+    default: {
+      return { bindings: [], retType: formatCore(core) }
     }
   }
 }
