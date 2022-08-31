@@ -77,6 +77,7 @@ export const operand = {
       { cdr: "exp" },
       '")"',
     ],
+    "operand:quote": [{ literal: { $pattern: ["string"] } }],
   },
 }
 

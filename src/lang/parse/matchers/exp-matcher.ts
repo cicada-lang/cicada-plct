@@ -45,6 +45,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
       ),
     "operand:cons": ({ car, cdr }, { span }) =>
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
+    "operand:quote": ({ literal }, { span }) =>
+      Exps.Quote(pt.trim_boundary(pt.str(literal), 1), span),
   })(tree)
 }
 

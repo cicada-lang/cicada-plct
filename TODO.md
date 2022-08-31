@@ -15,12 +15,10 @@ readbackNeutral -- Car
 
 # string
 
-Exps.Quote -- syntax
-
-- pass parse/tests/quote.test.ts
-
 infer -- Quote
-pass check-quote.test.ts
+
+- pass check-quote.test.ts
+
 pass compute-quote.test.ts
 
 # clazz
