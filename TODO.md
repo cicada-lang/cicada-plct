@@ -1,6 +1,3 @@
-extract Exps.foldMultiPi
-extract Exps.foldMultiAp
-
 # sigma
 
 evaluate -- Sigma

@@ -2,11 +2,10 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "../ctx"
 import { ElaborationError } from "../errors"
+import * as Exps from "../exp"
+import { check, checkType, Exp } from "../exp"
 import * as Values from "../value"
 import { applyClosure, assertTypeInCtx, Value } from "../value"
-import { check, checkType } from "./check"
-import * as Exps from "./Exp"
-import { Exp } from "./Exp"
 
 export type Inferred = {
   type: Value
@@ -43,7 +42,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiPi": {
-      return infer(ctx, foldMultiPi(exp.bindings, exp.retType))
+      return infer(ctx, Exps.foldMultiPi(exp.bindings, exp.retType))
     }
 
     case "Ap": {
@@ -59,7 +58,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiAp": {
-      return infer(ctx, foldMultiAp(exp.target, exp.args))
+      return infer(ctx, Exps.foldMultiAp(exp.target, exp.args))
     }
 
     case "Sigma": {
@@ -74,7 +73,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "MultiSigma": {
-      return infer(ctx, foldMultiSigma(exp.bindings, exp.cdrType))
+      return infer(ctx, Exps.foldMultiSigma(exp.bindings, exp.cdrType))
     }
 
     case "Car": {
@@ -96,77 +95,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
-    }
-  }
-}
-
-function foldMultiPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
-  if (bindings.length === 0) return retType
-
-  const [binding, ...restBindings] = bindings
-
-  switch (binding.kind) {
-    case "PiBindingNameless": {
-      return Exps.Pi("_", binding.type, foldMultiPi(restBindings, retType))
-    }
-
-    case "PiBindingNamed": {
-      return Exps.Pi(
-        binding.name,
-        binding.type,
-        foldMultiPi(restBindings, retType)
-      )
-    }
-  }
-}
-
-function foldMultiAp(target: Exp, args: Array<Exps.Arg>): Exp {
-  if (args.length === 0) return target
-
-  const [arg, ...restArgs] = args
-
-  switch (arg.kind) {
-    case "ArgPlain": {
-      return foldMultiAp(Exps.Ap(target, arg.exp), restArgs)
-    }
-
-    case "ArgImplicit": {
-      throw new ElaborationError(
-        `foldMultiAp is not implemented for exp: ${arg.kind}`
-      )
-    }
-
-    case "ArgVague": {
-      throw new ElaborationError(
-        `foldMultiAp is not implemented for exp: ${arg.kind}`
-      )
-    }
-  }
-}
-
-export function foldMultiSigma(
-  bindings: Array<Exps.SigmaBinding>,
-  cdrType: Exp
-): Exp {
-  if (bindings.length === 0) return cdrType
-
-  const [binding, ...restBindings] = bindings
-
-  switch (binding.kind) {
-    case "SigmaBindingNameless": {
-      return Exps.Sigma(
-        "_",
-        binding.type,
-        foldMultiSigma(restBindings, cdrType)
-      )
-    }
-
-    case "SigmaBindingNamed": {
-      return Exps.Sigma(
-        binding.name,
-        binding.type,
-        foldMultiSigma(restBindings, cdrType)
-      )
     }
   }
 }
