@@ -15,10 +15,6 @@ readbackNeutral -- Car
 
 # string
 
-infer -- Quote
-
-- pass check-quote.test.ts
-
 pass compute-quote.test.ts
 
 # clazz

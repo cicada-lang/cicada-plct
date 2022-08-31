@@ -93,6 +93,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "Quote": {
+      return Inferred(Values.String(), Cores.Quote(exp.literal))
+    }
+
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
