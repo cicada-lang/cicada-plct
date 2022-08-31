@@ -15,10 +15,9 @@ readbackNeutral -- Car
 
 # trivial
 
-globals.register("Trivial", ...)
+typeDirectedReadback -- Trivial
 
-check-trivial.test.ts
-compute-trivial.test.ts
+- compute-trivial.test.ts
 
 Values.Sole
 
