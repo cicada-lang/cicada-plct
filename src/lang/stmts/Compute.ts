@@ -2,7 +2,7 @@ import { evaluate, formatCore } from "../core"
 import { ctxToEnv } from "../ctx"
 import { Exp, infer, Span } from "../exp"
 import { Mod } from "../mod"
-import { Stmt } from "../stmt"
+import { Stmt, StmtOutput } from "../stmt"
 import { readback, readbackType } from "../value"
 
 export class Compute extends Stmt {
@@ -10,14 +10,11 @@ export class Compute extends Stmt {
     super()
   }
 
-  async execute(mod: Mod): Promise<void> {
+  async execute(mod: Mod): Promise<StmtOutput> {
     const inferred = infer(mod.ctx, this.exp)
     const value = evaluate(ctxToEnv(mod.ctx), inferred.core)
     const core = readback(mod.ctx, inferred.type, value)
     const typeCore = readbackType(mod.ctx, inferred.type)
-
-    // TODO should save output to `Mod`, instead using of `console.log`
-
-    console.log(`${formatCore(typeCore)}: ${formatCore(core)}`)
+    return `${formatCore(typeCore)}: ${formatCore(core)}`
   }
 }

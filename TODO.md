@@ -1,7 +1,3 @@
-Mod has `outputs: Map<number, string>`
-
-Stmts.Compute should save output to `Mod`, instead using of `console.log`
-
 tests/compute-ap.test.ts -- snapshot testing
 
 # pi
