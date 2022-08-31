@@ -1,3 +1,5 @@
+extract checkByInfer
+
 # sigma
 
 evaluate -- Sigma

@@ -74,7 +74,3 @@ export function checkByInfer(ctx: Ctx, exp: Exp, type: Value): Core {
   inclusion(ctx, inferred.type, type)
   return inferred.core
 }
-
-export function checkType(ctx: Ctx, type: Exp): Core {
-  return check(ctx, type, Values.Type())
-}
