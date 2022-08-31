@@ -20,7 +20,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "MultiFn": {
-      return check(ctx, Exps.foldMultiFn(exp.bindings, exp.ret), type)
+      return check(ctx, Exps.unfoldMultiFn(exp.bindings, exp.ret), type)
     }
 
     case "Fn": {

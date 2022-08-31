@@ -1,7 +1,7 @@
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 
-export function foldMultiPi(
+export function unfoldMultiPi(
   bindings: Array<Exps.PiBinding>,
   retType: Exp
 ): Exp {
@@ -11,14 +11,14 @@ export function foldMultiPi(
 
   switch (binding.kind) {
     case "PiBindingNameless": {
-      return Exps.Pi("_", binding.type, foldMultiPi(restBindings, retType))
+      return Exps.Pi("_", binding.type, unfoldMultiPi(restBindings, retType))
     }
 
     case "PiBindingNamed": {
       return Exps.Pi(
         binding.name,
         binding.type,
-        foldMultiPi(restBindings, retType)
+        unfoldMultiPi(restBindings, retType)
       )
     }
   }

@@ -36,7 +36,7 @@ Exp -- DataConstructor
 Exps.FnAnnotated -- can be inferred
 check -- Exps.FnAnnotated -- checkByInfer
 infer -- Exps.FnAnnotated
-foldMultiFn -- return Exps.FnAnnotated
+unfoldMultiFn -- return Exps.FnAnnotated
 
 MultiApWithReturnType
 Exps.FnWithReturnType
