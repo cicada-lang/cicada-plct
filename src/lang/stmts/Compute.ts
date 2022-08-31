@@ -15,6 +15,6 @@ export class Compute extends Stmt {
     const value = evaluate(ctxToEnv(mod.ctx), inferred.core)
     const core = readback(mod.ctx, inferred.type, value)
     const typeCore = readbackType(mod.ctx, inferred.type)
-    return `${formatCore(typeCore)}: ${formatCore(core)}`
+    return `${formatCore(core)}: ${formatCore(typeCore)}`
   }
 }

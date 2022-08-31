@@ -8,5 +8,5 @@ compute String
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"Type: String"')
+  expect(output).toMatchInlineSnapshot('"String: Type"')
 })
