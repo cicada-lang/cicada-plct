@@ -3,7 +3,6 @@
 Exps.Car -- grammar and matcher
 Exps.Cdr -- grammar and matcher
 
-Neutrals.Car
 Neutrals.Cdr
 
 check -- Cons
