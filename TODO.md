@@ -44,8 +44,6 @@ typeDirectedReadback -- Trivial
 
 # string
 
-Values.String
-
 globals.register("String", ...)
 
 check-string.test.ts
