@@ -3,10 +3,10 @@ import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { Exp, infer } from "../exp"
+import { checkByInfer, Exp } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, assertTypeInCtx, inclusion, Value } from "../value"
+import { applyClosure, assertTypeInCtx, Value } from "../value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -67,10 +67,4 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
         `check is not implemented for exp: ${exp.kind}`
       )
   }
-}
-
-export function checkByInfer(ctx: Ctx, exp: Exp, type: Value): Core {
-  const inferred = infer(ctx, exp)
-  inclusion(ctx, inferred.type, type)
-  return inferred.core
 }

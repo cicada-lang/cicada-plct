@@ -1,4 +1,5 @@
 export * from "./check"
+export * from "./checkByInfer"
 export * from "./checkType"
 export * from "./Exp"
 export * from "./infer"
