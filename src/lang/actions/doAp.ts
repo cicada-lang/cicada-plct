@@ -7,12 +7,6 @@ export function doAp(target: Value, arg: Value): Value {
     return applyClosure(target.retClosure, arg)
   }
 
-  // TODO Why `doAp` need to handle `Values.Pi`?
-
-  if (isValue(target, Values.Pi)) {
-    return applyClosure(target.retTypeClosure, arg)
-  }
-
   assertValue(target, Values.TypedNeutral)
   assertValue(target.type, Values.Pi)
 

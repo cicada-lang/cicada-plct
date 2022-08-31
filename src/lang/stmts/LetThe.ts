@@ -21,6 +21,6 @@ export class LetThe extends Stmt {
     const core = check(mod.ctx, this.exp, typeValue)
     const value = evaluate(mod.env, core)
     mod.ctx = CtxFulfilled(this.name, typeValue, value, mod.ctx)
-    mod.env = EnvCons(this.name, typeValue, mod.env)
+    mod.env = EnvCons(this.name, value, mod.env)
   }
 }
