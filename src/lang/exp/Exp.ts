@@ -29,6 +29,7 @@ export type Exp =
   | Cons
   | Car
   | Cdr
+  | Quote
   | Clazz
   | Objekt
   | Dot
@@ -373,6 +374,21 @@ export function Cdr(target: Exp, span?: Span): Cdr {
     family: "Exp",
     kind: "Cdr",
     target,
+    span,
+  }
+}
+
+export type Quote = {
+  family: "Exp"
+  kind: "Quote"
+  literal: string
+} & ExpMeta
+
+export function Quote(literal: string, span?: Span): Quote {
+  return {
+    family: "Exp",
+    kind: "Quote",
+    literal,
     span,
   }
 }

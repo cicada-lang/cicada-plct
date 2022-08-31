@@ -15,9 +15,9 @@ readbackNeutral -- Car
 
 # string
 
-Exps.Quote
 Cores.Quote
 Values.Quote
+Exps.Quote -- syntax
 pass check-quote.test.ts
 pass compute-quote.test.ts
 
