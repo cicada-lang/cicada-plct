@@ -10,7 +10,6 @@ infer -- Car
 infer -- Cdr
 
 evaluate -- Sigma
-evaluate -- Cons
 evaluate -- Car
 evaluate -- Cdr
 
