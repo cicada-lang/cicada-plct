@@ -1,9 +1,17 @@
 import { Neutral } from "../neutral"
 import { Closure } from "./Closure"
 
-export type Value = TypedNeutral | Type | Pi | Fn | Sigma | Cons | String
+export type Value =
+  | TypedNeutral
+  | Type
+  | Pi
+  | Fn
+  | Sigma
+  | Cons
+  | String
+  | Trivial
 
-export type AlreadyType = Type | Pi | Sigma | String
+export type AlreadyType = Type | Pi | Sigma | String | Trivial
 
 export type TypedNeutral = {
   family: "Value"
@@ -104,5 +112,17 @@ export function String(): String {
   return {
     family: "Value",
     kind: "String",
+  }
+}
+
+export type Trivial = {
+  family: "Value"
+  kind: "Trivial"
+}
+
+export function Trivial(): Trivial {
+  return {
+    family: "Value",
+    kind: "Trivial",
   }
 }

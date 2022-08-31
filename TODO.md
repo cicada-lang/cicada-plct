@@ -28,8 +28,6 @@ readbackNeutral -- Car
 
 # trivial
 
-Values.Trivial
-
 globals.register("Trivial", ...)
 
 check-trivial.test.ts
