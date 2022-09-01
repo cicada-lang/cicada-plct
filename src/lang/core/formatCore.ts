@@ -23,8 +23,8 @@ export function formatCore(core: Core): string {
     }
 
     case "Sigma": {
-      const { bindings, cdr } = foldSigma(core)
-      return `exists (${bindings.join(", ")}) ${cdr}`
+      const { bindings, cdrType } = foldSigma(core)
+      return `exists (${bindings.join(", ")}) ${cdrType}`
     }
 
     case "Cons": {
@@ -94,16 +94,16 @@ function foldAp(core: Core): { target: string; args: Array<string> } {
   }
 }
 
-function foldSigma(core: Core): { bindings: Array<string>; cdr: string } {
+function foldSigma(core: Core): { bindings: Array<string>; cdrType: string } {
   switch (core.kind) {
     case "Sigma": {
-      const car = formatCore(core.carType)
-      const { bindings, cdr } = foldSigma(core.cdrType)
-      return { bindings: [car, ...bindings], cdr }
+      const carType = formatCore(core.carType)
+      const { bindings, cdrType } = foldSigma(core.cdrType)
+      return { bindings: [carType, ...bindings], cdrType }
     }
 
     default: {
-      return { bindings: [], cdr: formatCore(core) }
+      return { bindings: [], cdrType: formatCore(core) }
     }
   }
 }
