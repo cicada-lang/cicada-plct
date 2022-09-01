@@ -22,6 +22,23 @@ export function formatCore(core: Core): string {
       return `${target}(${args.join(", ")})`
     }
 
+    case "Sigma": {
+      const { bindings, cdr } = foldSigma(core)
+      return `exists (${bindings.join(", ")}) ${cdr}`
+    }
+
+    case "Cons": {
+      return `cons(${formatCore(core.car)}, ${formatCore(core.cdr)})`
+    }
+
+    case "Car": {
+      return `car(${formatCore(core.target)})`
+    }
+
+    case "Cdr": {
+      return `cdr(${formatCore(core.target)})`
+    }
+
     case "Quote": {
       return `"${core.literal}"`
     }
@@ -73,6 +90,20 @@ function foldAp(core: Core): { target: string; args: Array<string> } {
 
     default: {
       return { target: formatCore(core), args: [] }
+    }
+  }
+}
+
+function foldSigma(core: Core): { bindings: Array<string>; cdr: string } {
+  switch (core.kind) {
+    case "Sigma": {
+      const car = formatCore(core.carType)
+      const { bindings, cdr } = foldSigma(core.cdrType)
+      return { bindings: [car, ...bindings], cdr }
+    }
+
+    default: {
+      return { bindings: [], cdr: formatCore(core) }
     }
   }
 }

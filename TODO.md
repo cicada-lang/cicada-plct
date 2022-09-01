@@ -1,15 +1,3 @@
-# sigma
-
-evaluate -- Sigma
-
-formatCore -- Sigma
-formatCore -- Cons
-formatCore -- Car
-formatCore -- Cdr
-
-readback -- Sigma
-readback -- Cons
-
 # clazz
 
 define Exps.New

@@ -55,6 +55,17 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       return Cores.Pi(freshName, argTypeCore, retTypeCore)
     }
 
+    case "Sigma": {
+      const freshName = freshenInCtx(ctx, type.cdrTypeClosure.name)
+      const variable = Neutrals.Var(freshName)
+      const typedNeutral = Values.TypedNeutral(type.carType, variable)
+      const carTypeCore = readback(ctx, Values.Type(), type.carType)
+      const cdrTypeValue = applyClosure(type.cdrTypeClosure, typedNeutral)
+      ctx = CtxCons(freshName, type.carType, ctx)
+      const cdrTypeCore = readbackType(ctx, cdrTypeValue)
+      return Cores.Sigma(freshName, carTypeCore, cdrTypeCore)
+    }
+
     default: {
       throw new ElaborationError(
         `readbackType is not implemented for type: ${type.kind}`
