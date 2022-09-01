@@ -27,6 +27,18 @@ export function formatCore(core: Core): string {
       return `exists (${bindings.join(", ")}) ${cdr}`
     }
 
+    case "Cons": {
+      return `cons(${formatCore(core.car)}, ${formatCore(core.cdr)})`
+    }
+
+    case "Car": {
+      return `car(${formatCore(core.target)})`
+    }
+
+    case "Cdr": {
+      return `cdr(${formatCore(core.target)})`
+    }
+
     case "Quote": {
       return `"${core.literal}"`
     }
