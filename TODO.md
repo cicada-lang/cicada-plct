@@ -1,9 +1,3 @@
-# sigma
-
-formatCore -- Cons
-formatCore -- Car
-formatCore -- Cdr
-
 # clazz
 
 define Exps.New
