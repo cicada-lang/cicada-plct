@@ -68,6 +68,17 @@ export function typeDirectedReadback(
       return Cores.Fn(freshName, retCore)
     }
 
+    case "Sigma": {
+      const carValue = Actions.doCar(value)
+      const cdrValue = Actions.doCdr(value)
+      const cdrType = applyClosure(type.cdrTypeClosure, carValue)
+
+      return Cores.Cons(
+        readback(ctx, type.carType, carValue),
+        readback(ctx, cdrType, cdrValue)
+      )
+    }
+
     case "Trivial": {
       /**
          The η-rule for `Trivial` states that,
