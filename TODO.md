@@ -1,8 +1,5 @@
 # clazz
 
-ClazzBinding
-ClazzBinding -- constructor
-
 Exps.Clazz -- matcher
 
 Exps.Objekt -- grammar and matcher

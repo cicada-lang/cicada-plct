@@ -424,15 +424,15 @@ export type ClazzFulfilled = {
   family: "Exp"
   kind: "ClazzFulfilled"
   name: string
-  property: Exp
   propertyType: Exp
+  property: Exp
   rest: Clazz
 } & ExpMeta
 
 export function ClazzFulfilled(
   name: string,
-  property: Exp,
   propertyType: Exp,
+  property: Exp,
   rest: Clazz,
   span?: Span
 ): ClazzFulfilled {
@@ -440,8 +440,8 @@ export function ClazzFulfilled(
     family: "Exp",
     kind: "ClazzFulfilled",
     name,
-    property,
     propertyType,
+    property,
     rest,
     span,
   }
@@ -478,7 +478,44 @@ export function FoldedClazz(
   }
 }
 
-export type ClazzBinding = "TODO"
+export type ClazzBinding = ClazzBindingAbstract | ClazzBindingFulfilled
+
+export type ClazzBindingAbstract = {
+  kind: "ClazzBindingAbstract"
+  name: string
+  propertyType: Exp
+}
+
+export function ClazzBindingAbstract(
+  name: string,
+  propertyType: Exp
+): ClazzBindingAbstract {
+  return {
+    kind: "ClazzBindingAbstract",
+    name,
+    propertyType,
+  }
+}
+
+export type ClazzBindingFulfilled = {
+  kind: "ClazzBindingFulfilled"
+  name: string
+  propertyType: Exp
+  property: Exp
+}
+
+export function ClazzBindingFulfilled(
+  name: string,
+  propertyType: Exp,
+  property: Exp
+): ClazzBindingFulfilled {
+  return {
+    kind: "ClazzBindingFulfilled",
+    name,
+    propertyType,
+    property,
+  }
+}
 
 export type Objekt = ObjektCons | ObjektNull
 
