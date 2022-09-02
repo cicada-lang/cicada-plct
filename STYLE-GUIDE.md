@@ -40,3 +40,12 @@ and use functional style for closed types.
 For open types: one class, one file.
 
 For closed types: almost one function, one file, except for constructors.
+
+## About file name
+
+File name should be the same as class or function name,
+to avoid name casting when editing the code.
+
+## About directory name
+
+Use `lisp-case` for directory name.
