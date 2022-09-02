@@ -1,5 +1,3 @@
-import { Exp } from "../exp"
-
 export type Core =
   | Var
   | Pi
@@ -228,14 +226,14 @@ export type ObjektCons = {
   kind: "ObjektCons"
   name: string
   realName: string
-  property: Exp
+  property: Core
   rest: Objekt
 }
 
 export function ObjektCons(
   name: string,
   realName: string,
-  property: Exp,
+  property: Core,
   rest: Objekt
 ): ObjektCons {
   return {
