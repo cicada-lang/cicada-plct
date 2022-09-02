@@ -6,8 +6,6 @@
 
 [refactor] parse/matchers -- one file one matcher
 
-- file name follows matcher name
-
 Exps.Clazz -- grammar and matcher
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
