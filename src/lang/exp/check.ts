@@ -3,10 +3,15 @@ import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { checkByInfer, Exp } from "../exp"
+import { checkByInfer, checkProperties, Exp } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, assertTypeInCtx, Value } from "../value"
+import {
+  applyClosure,
+  assertTypeInCtx,
+  assertTypesInCtx,
+  Value,
+} from "../value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -62,45 +67,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    // case "ObjektNull": {
-    //   if (type.kind === "ClazzNull") {
-    //     return Cores.ObjektNull()
-    //   }
-
-    //   assertTypeInCtx(ctx, type, Values.ClazzFulfilled)
-    //   const rest = applyClosure(type.restClosure, type.property)
-    //   return check(ctx, exp, rest)
-    // }
-
-    // case "ObjektCons": {
-    //   if (type.kind === "ClazzFulfilled") {
-    //     if (type.name === exp.name) {
-    //       const propertyCore = check(ctx, exp.property, type.property)
-    //       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-    //       conversion(ctx, type.propertyType, propertyValue, type.property)
-    //       const restType = applyClosure(type.restClosure, propertyValue)
-    //       const restCore = check(ctx, exp.rest, restType)
-    //       return Cores.ObjektCons(exp.name, exp.name, propertyCore, restCore)
-    //     } else {
-    //       const restType = applyClosure(type.restClosure, type.property)
-    //       ctx = CtxCons(exp.name, type.propertyType, ctx)
-    //       return check(ctx, exp.rest, restType)
-    //     }
-    //   }
-
-    //   assertTypeInCtx(ctx, type, Values.ClazzCons)
-    //   if (exp.name !== type.name) {
-    //     throw new ElaborationError(
-    //       `missing property: ${type.name}, in object: ${exp.name}`
-    //     )
-    //   }
-    //   const propertyCore = check(ctx, exp.property, type.propertyType)
-    //   const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-    //   ctx = CtxCons(exp.name, type.propertyType, ctx)
-    //   const restType = applyClosure(type.restClosure, propertyValue)
-    //   const restCore = check(ctx, exp.rest, restType)
-    //   return Cores.ObjektCons(exp.name, exp.name, propertyCore, restCore)
-    // }
+    case "Objekt": {
+      assertTypesInCtx(ctx, type, [Values.ClazzNull, Values.ClazzCons])
+      return Cores.Objekt(checkProperties(ctx, exp.properties, type))
+    }
 
     default:
       throw new ElaborationError(
