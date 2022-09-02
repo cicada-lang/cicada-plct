@@ -408,14 +408,12 @@ export type ClazzCons = {
   family: "Exp"
   kind: "ClazzCons"
   name: string
-  realName: string
   propertyType: Exp
   rest: Clazz
 } & ExpMeta
 
 export function ClazzCons(
   name: string,
-  realName: string,
   propertyType: Exp,
   rest: Clazz,
   span?: Span
@@ -424,7 +422,6 @@ export function ClazzCons(
     family: "Exp",
     kind: "ClazzCons",
     name,
-    realName,
     propertyType,
     rest,
     span,
@@ -435,7 +432,6 @@ export type ClazzFulfilled = {
   family: "Exp"
   kind: "ClazzFulfilled"
   name: string
-  realName: string
   property: Exp
   propertyType: Exp
   rest: Clazz
@@ -443,7 +439,6 @@ export type ClazzFulfilled = {
 
 export function ClazzFulfilled(
   name: string,
-  realName: string,
   property: Exp,
   propertyType: Exp,
   rest: Clazz,
@@ -453,7 +448,6 @@ export function ClazzFulfilled(
     family: "Exp",
     kind: "ClazzFulfilled",
     name,
-    realName,
     property,
     propertyType,
     rest,
@@ -474,17 +468,41 @@ export function ClazzNull(span?: Span): ClazzNull {
   }
 }
 
-export type Objekt = {
+export type Objekt = ObjektCons | ObjektNull
+
+export type ObjektCons = {
   family: "Exp"
-  kind: "Objekt"
-  properties: Record<string, Exp>
+  kind: "ObjektCons"
+  name: string
+  property: Exp
+  rest: Objekt
 } & ExpMeta
 
-export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
+export function ObjektCons(
+  name: string,
+  property: Exp,
+  rest: Objekt,
+  span?: Span
+): ObjektCons {
   return {
     family: "Exp",
-    kind: "Objekt",
-    properties,
+    kind: "ObjektCons",
+    name,
+    property,
+    rest,
+    span,
+  }
+}
+
+export type ObjektNull = {
+  family: "Exp"
+  kind: "ObjektNull"
+} & ExpMeta
+
+export function ObjektNull(span?: Span): ObjektNull {
+  return {
+    family: "Exp",
+    kind: "ObjektNull",
     span,
   }
 }
