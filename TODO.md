@@ -1,9 +1,5 @@
 # clazz
 
-Exps.FoldedClazz
-
-Exps.FoldedClazz -- constructor
-
 ClazzBinding
 ClazzBinding -- constructor
 

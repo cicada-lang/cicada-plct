@@ -466,6 +466,18 @@ export type FoldedClazz = {
   bindings: Array<ClazzBinding>
 } & ExpMeta
 
+export function FoldedClazz(
+  bindings: Array<ClazzBinding>,
+  span?: Span
+): FoldedClazz {
+  return {
+    family: "Exp",
+    kind: "FoldedClazz",
+    bindings,
+    span,
+  }
+}
+
 export type ClazzBinding = "TODO"
 
 export type Objekt = ObjektCons | ObjektNull
