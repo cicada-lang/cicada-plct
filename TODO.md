@@ -1,7 +1,6 @@
 # clazz
 
-check-objekt.test.ts -- test dependent
-
+check-objekt.test.ts -- test pre-filled
 evaluate -- Clazz
 
 compute-clazz.test.ts
