@@ -6,8 +6,6 @@ check-objekt.test.ts -- pass
 
 Stmts.Class
 
-unfoldClazz
-
 parse -- stmts/class.test.ts
 
 define Exps.New

@@ -97,6 +97,22 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(Values.String(), Cores.Quote(exp.literal))
     }
 
+    case "ClazzNull": {
+      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+    }
+
+    case "ClazzCons": {
+      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+    }
+
+    case "ClazzFulfilled": {
+      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+    }
+
+    case "FoldedClazz": {
+      return infer(ctx, Exps.unfoldClazz(exp.bindings))
+    }
+
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
