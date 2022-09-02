@@ -1,7 +1,10 @@
 # clazz
 
 compute-clazz.test.ts
+
 Clazz -- formatCore
+
+- [maybe] pretty print
 
 Objekt -- evaluate
 Objekt -- formatCore
