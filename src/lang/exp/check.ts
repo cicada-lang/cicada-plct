@@ -81,9 +81,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
         Values.ClazzFulfilled,
         Values.ClazzNull,
       ])
-      return Cores.Objekt(checkProperties(ctx, exp.properties, type))
+
       // TODO We should infer the properties that are not checked.
       //   This require us to handle off-order `Values.Clazz` in `inclusion`.
+      return Cores.Objekt(checkProperties(ctx, exp.properties, type))
     }
 
     default:

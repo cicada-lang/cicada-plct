@@ -1,7 +1,7 @@
 # clazz
 
-Stmts.Class
-parse -- stmts/class.test.ts
+Stmts.Clazz
+parse -- stmts/clazz.test.ts
 compute-clazz.test.ts
 compute-objekt.test.ts
 Clazz -- formatCore

@@ -42,8 +42,10 @@ export function checkProperties(
 
       const propertyCore = check(ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+
       // NOTE The only line different from the above case:
       conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
+
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertTypesInCtx(ctx, rest, [
