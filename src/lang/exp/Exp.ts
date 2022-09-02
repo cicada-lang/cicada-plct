@@ -393,15 +393,6 @@ export function Quote(literal: string, span?: Span): Quote {
   }
 }
 
-/**
-
-   ## name v.s. realName in Clazz
-
-   We can not only use `name` we also need `realName`,
-   because of `subst` might rename bound variables.
-
-**/
-
 export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
 
 export type ClazzCons = {

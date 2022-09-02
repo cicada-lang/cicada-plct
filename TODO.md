@@ -1,6 +1,15 @@
 # clazz
 
-Exps.Clazz -- grammar and matcher
+rename Multi to Folded
+
+add Exps.FoldedClazz
+
+- with ClazzBindings
+
+Exps.Clazz -- grammar rename `clazz_entry` to `clazz_binding`
+
+Exps.Clazz -- matcher
+
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
 Exps.New -- grammar and matcher

@@ -78,5 +78,11 @@ export const operand = {
       '")"',
     ],
     "operand:quote": [{ literal: { $pattern: ["string"] } }],
+    "operand:clazz": [
+      '"class"',
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "clazz_entry"] } },
+      '"}"',
+    ],
   },
 }

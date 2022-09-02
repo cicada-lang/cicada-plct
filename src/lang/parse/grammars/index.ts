@@ -5,6 +5,7 @@ export const one_or_more = pt.grammars.one_or_more
 export const optional = pt.grammars.optional
 
 export * from "./arg_entry"
+export * from "./clazz_entry"
 export * from "./exp"
 export * from "./fn_binding"
 export * from "./identifier"
