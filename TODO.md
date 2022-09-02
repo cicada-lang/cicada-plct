@@ -3,25 +3,26 @@
 Stmts.Clazz
 parse -- stmts/clazz.test.ts
 compute-clazz.test.ts
-compute-objekt.test.ts
 Clazz -- formatCore
+
 Objekt -- evaluate
 Objekt -- formatCore
+compute-objekt.test.ts
 
 check-objekt.test.ts -- test duplicated name
 check-objekt.test.ts -- test extra property -- disallow for now
-
-Exps.New
-Exps.New -- grammar and matcher
-New -- check
-New -- evaluate
-New -- formatCore
 
 Neutrals.Dot
 Dot -- infer
 Dot -- evaluate
 Dot -- doDot
 Dot -- formatCore
+
+Exps.New
+Exps.New -- grammar and matcher
+New -- check
+New -- evaluate
+New -- formatCore
 
 # syntax
 
@@ -44,6 +45,10 @@ error report for ElaborationError
 Exp -- Datatype
 Exp -- TypeConstructor
 Exp -- DataConstructor
+
+# sigma
+
+Add Pair as a global
 
 # pi
 
