@@ -1,9 +1,9 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, CtxFulfilled, ctxToEnv, lookupCtxType } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { check, checkType, Exp } from "../exp"
+import { check, checkClazz, checkType, Exp } from "../exp"
 import * as Values from "../value"
 import { applyClosure, assertTypeInCtx, Value } from "../value"
 
@@ -97,43 +97,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(Values.String(), Cores.Quote(exp.literal))
     }
 
-    case "ClazzNull": {
-      return Inferred(Values.Type(), Cores.ClazzNull())
-    }
-
-    case "ClazzCons": {
-      const propertyTypeCore = checkType(ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
-      ctx = CtxCons(exp.name, propertyTypeValue, ctx)
-      const restInfferd = infer(ctx, exp.rest)
-      return Inferred(
-        Values.Type(),
-        Cores.ClazzCons(
-          exp.name,
-          exp.name,
-          propertyTypeCore,
-          restInfferd.core as Cores.Clazz
-        )
-      )
-    }
-
+    case "ClazzNull":
+    case "ClazzCons":
     case "ClazzFulfilled": {
-      const propertyTypeCore = checkType(ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
-      const propertyCore = check(ctx, exp.property, propertyTypeValue)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-      ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
-      const restInfferd = infer(ctx, exp.rest)
-      return Inferred(
-        Values.Type(),
-        Cores.ClazzFulfilled(
-          exp.name,
-          exp.name,
-          propertyTypeCore,
-          propertyCore,
-          restInfferd.core as Cores.Clazz
-        )
-      )
+      return Inferred(Values.Type(), checkClazz(ctx, exp))
     }
 
     case "FoldedClazz": {

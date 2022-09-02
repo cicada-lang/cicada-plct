@@ -1,7 +1,5 @@
 # clazz
 
-extract checkClazz -- for better typing during recursion
-
 evaluate -- Clazz
 
 check-objekt.test.ts -- pass
