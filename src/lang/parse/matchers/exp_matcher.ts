@@ -18,7 +18,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .one_or_more_matcher(arg_entries_group)
         .map((arg_entries) => matchers.arg_entries_matcher(arg_entries))
         .reduce(
-          (result, arg_entries) => Exps.MultiAp(result, arg_entries, span),
+          (result, arg_entries) => Exps.FoldedAp(result, arg_entries, span),
           operator_matcher(target)
         ),
     "operator:car": ({ target }, { span }) =>
@@ -31,31 +31,31 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": ({ pi_bindings, ret_t }, { span }) =>
-      Exps.MultiPi(
+      Exps.FoldedPi(
         matchers.pi_bindings_matcher(pi_bindings),
         exp_matcher(ret_t),
         span
       ),
     "operand:pi_forall": ({ pi_bindings, ret_t }, { span }) =>
-      Exps.MultiPi(
+      Exps.FoldedPi(
         matchers.pi_bindings_matcher(pi_bindings),
         exp_matcher(ret_t),
         span
       ),
     "operand:fn": ({ fn_bindings, ret }, { span }) =>
-      Exps.MultiFn(
+      Exps.FoldedFn(
         matchers.fn_bindings_matcher(fn_bindings),
         exp_matcher(ret),
         span
       ),
     "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
-      Exps.MultiFn(
+      Exps.FoldedFn(
         matchers.fn_bindings_matcher(fn_bindings),
         exp_matcher(ret),
         span
       ),
     "operand:sigma_exists": ({ sigma_bindings, cdr_t }, { span }) =>
-      Exps.MultiSigma(
+      Exps.FoldedSigma(
         matchers.sigma_bindings_matcher(sigma_bindings),
         matchers.exp_matcher(cdr_t),
         span

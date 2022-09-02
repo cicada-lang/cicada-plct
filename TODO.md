@@ -1,7 +1,5 @@
 # clazz
 
-rename Multi to Folded
-
 add Exps.FoldedClazz
 
 - with ClazzBindings

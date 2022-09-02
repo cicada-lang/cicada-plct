@@ -55,7 +55,7 @@ compute apply(Type, Type, (x) => x)
   `)
 })
 
-test("compute Fn -- evaluation blocked by variable -- MultiAp", async () => {
+test("compute Fn -- evaluation blocked by variable -- FoldedAp", async () => {
   const output = await runCode(`
 
 let apply2: (T: Type, x: T, y: T, f: (T, T) -> T) -> T =

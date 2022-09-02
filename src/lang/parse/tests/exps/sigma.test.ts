@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
 import {
-  MultiSigma,
+  FoldedSigma,
   SigmaBindingNamed,
   SigmaBindingNameless,
   Var,
@@ -11,7 +11,7 @@ import { deleteUndefined } from "../utils"
 test("parse Sigma", () => {
   expect(parseExp("exists (n: Nat) Nat")).toMatchObject(
     deleteUndefined(
-      MultiSigma([SigmaBindingNamed("n", Var("Nat"))], Var("Nat"))
+      FoldedSigma([SigmaBindingNamed("n", Var("Nat"))], Var("Nat"))
     )
   )
 })
@@ -19,7 +19,7 @@ test("parse Sigma", () => {
 test("parse Sigma -- multiple bindings", () => {
   expect(parseExp("exists (n: Nat, m: Nat) Nat")).toMatchObject(
     deleteUndefined(
-      MultiSigma(
+      FoldedSigma(
         [
           SigmaBindingNamed("n", Var("Nat")),
           SigmaBindingNamed("m", Var("Nat")),
@@ -32,6 +32,6 @@ test("parse Sigma -- multiple bindings", () => {
 
 test("parse Sigma -- nameless binding", () => {
   expect(parseExp("exists (Nat) Nat")).toMatchObject(
-    deleteUndefined(MultiSigma([SigmaBindingNameless(Var("Nat"))], Var("Nat")))
+    deleteUndefined(FoldedSigma([SigmaBindingNameless(Var("Nat"))], Var("Nat")))
   )
 })

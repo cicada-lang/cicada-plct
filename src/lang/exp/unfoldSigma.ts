@@ -1,7 +1,7 @@
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 
-export function unfoldMultiSigma(
+export function unfoldSigma(
   bindings: Array<Exps.SigmaBinding>,
   cdrType: Exp
 ): Exp {
@@ -11,18 +11,14 @@ export function unfoldMultiSigma(
 
   switch (binding.kind) {
     case "SigmaBindingNameless": {
-      return Exps.Sigma(
-        "_",
-        binding.type,
-        unfoldMultiSigma(restBindings, cdrType)
-      )
+      return Exps.Sigma("_", binding.type, unfoldSigma(restBindings, cdrType))
     }
 
     case "SigmaBindingNamed": {
       return Exps.Sigma(
         binding.name,
         binding.type,
-        unfoldMultiSigma(restBindings, cdrType)
+        unfoldSigma(restBindings, cdrType)
       )
     }
   }

@@ -41,8 +41,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "MultiPi": {
-      return infer(ctx, Exps.unfoldMultiPi(exp.bindings, exp.retType))
+    case "FoldedPi": {
+      return infer(ctx, Exps.unfoldPi(exp.bindings, exp.retType))
     }
 
     case "Ap": {
@@ -57,8 +57,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "MultiAp": {
-      return infer(ctx, Exps.unfoldMultiAp(exp.target, exp.args))
+    case "FoldedAp": {
+      return infer(ctx, Exps.unfoldAp(exp.target, exp.args))
     }
 
     case "Sigma": {
@@ -72,8 +72,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "MultiSigma": {
-      return infer(ctx, Exps.unfoldMultiSigma(exp.bindings, exp.cdrType))
+    case "FoldedSigma": {
+      return infer(ctx, Exps.unfoldSigma(exp.bindings, exp.cdrType))
     }
 
     case "Car": {

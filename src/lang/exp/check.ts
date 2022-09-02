@@ -16,12 +16,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
-    case "MultiPi": {
+    case "FoldedPi": {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "MultiFn": {
-      return check(ctx, Exps.unfoldMultiFn(exp.bindings, exp.ret), type)
+    case "FoldedFn": {
+      return check(ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
     }
 
     case "Fn": {
@@ -35,12 +35,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Ap":
-    case "MultiAp": {
+    case "FoldedAp": {
       return checkByInfer(ctx, exp, type)
     }
 
     case "Sigma":
-    case "MultiSigma": {
+    case "FoldedSigma": {
       return checkByInfer(ctx, exp, type)
     }
 

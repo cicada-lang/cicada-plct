@@ -19,13 +19,13 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | Pi
-  | MultiPi
+  | FoldedPi
   | Ap
-  | MultiAp
+  | FoldedAp
   | Fn
-  | MultiFn
+  | FoldedFn
   | Sigma
-  | MultiSigma
+  | FoldedSigma
   | Cons
   | Car
   | Cdr
@@ -68,21 +68,21 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   }
 }
 
-export type MultiPi = {
+export type FoldedPi = {
   family: "Exp"
-  kind: "MultiPi"
+  kind: "FoldedPi"
   bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
 
-export function MultiPi(
+export function FoldedPi(
   bindings: Array<PiBinding>,
   retType: Exp,
   span?: Span
-): MultiPi {
+): FoldedPi {
   return {
     family: "Exp",
-    kind: "MultiPi",
+    kind: "FoldedPi",
     bindings,
     retType,
     span,
@@ -134,21 +134,21 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
   }
 }
 
-export type MultiFn = {
+export type FoldedFn = {
   family: "Exp"
-  kind: "MultiFn"
+  kind: "FoldedFn"
   bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
 
-export function MultiFn(
+export function FoldedFn(
   bindings: Array<FnBinding>,
   ret: Exp,
   span?: Span
-): MultiFn {
+): FoldedFn {
   return {
     family: "Exp",
-    kind: "MultiFn",
+    kind: "FoldedFn",
     bindings,
     ret,
     span,
@@ -203,17 +203,17 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   }
 }
 
-export type MultiAp = {
+export type FoldedAp = {
   family: "Exp"
-  kind: "MultiAp"
+  kind: "FoldedAp"
   target: Exp
   args: Array<Arg>
 } & ExpMeta
 
-export function MultiAp(target: Exp, args: Array<Arg>, span?: Span): MultiAp {
+export function FoldedAp(target: Exp, args: Array<Arg>, span?: Span): FoldedAp {
   return {
     family: "Exp",
-    kind: "MultiAp",
+    kind: "FoldedAp",
     target,
     args,
     span,
@@ -282,21 +282,21 @@ export function Sigma(
   }
 }
 
-export type MultiSigma = {
+export type FoldedSigma = {
   family: "Exp"
-  kind: "MultiSigma"
+  kind: "FoldedSigma"
   bindings: Array<SigmaBinding>
   cdrType: Exp
 } & ExpMeta
 
-export function MultiSigma(
+export function FoldedSigma(
   bindings: Array<SigmaBinding>,
   cdrType: Exp,
   span?: Span
-): MultiSigma {
+): FoldedSigma {
   return {
     family: "Exp",
-    kind: "MultiSigma",
+    kind: "FoldedSigma",
     bindings,
     cdrType,
     span,
