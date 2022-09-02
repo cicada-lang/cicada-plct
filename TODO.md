@@ -1,14 +1,14 @@
 # clazz
 
-check-objekt.test.ts
+checkType -- Clazz
+
+check-objekt.test.ts -- pass
 
 Stmts.Class
 
 unfoldClazz
 
 parse -- stmts/class.test.ts
-
-checkType -- Clazz
 
 define Exps.New
 
