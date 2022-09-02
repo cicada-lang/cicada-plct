@@ -11,9 +11,8 @@ export function doCdr(target: Value): Value {
   assertValue(target, Values.TypedNeutral)
   assertValue(target.type, Values.Sigma)
 
-  const carValue = doCar(target)
   return Values.TypedNeutral(
-    applyClosure(target.type.cdrTypeClosure, carValue),
+    applyClosure(target.type.cdrTypeClosure, doCar(target)),
     Neutrals.Cdr(target.neutral)
   )
 }
