@@ -1,6 +1,5 @@
 # clazz
 
-[refactor] rename functions about `fold*` to `foldFormat*`
 [refactor] extract functions about `foldFormat*`
 
 Stmts.Clazz

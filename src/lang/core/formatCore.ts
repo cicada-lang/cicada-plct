@@ -8,22 +8,22 @@ export function formatCore(core: Core): string {
     }
 
     case "Pi": {
-      const { bindings, retType } = foldPi(core)
+      const { bindings, retType } = foldFormatPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }
 
     case "Fn": {
-      const { bindings, ret } = foldFn(core)
+      const { bindings, ret } = foldFormatFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
     case "Ap": {
-      const { target, args } = foldAp(core)
+      const { target, args } = foldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }
 
     case "Sigma": {
-      const { bindings, cdrType } = foldSigma(core)
+      const { bindings, cdrType } = foldFormatSigma(core)
       return `exists (${bindings.join(", ")}) ${cdrType}`
     }
 
@@ -51,12 +51,15 @@ export function formatCore(core: Core): string {
   }
 }
 
-function foldPi(core: Core): { bindings: Array<string>; retType: string } {
+function foldFormatPi(core: Core): {
+  bindings: Array<string>
+  retType: string
+} {
   switch (core.kind) {
     case "Pi": {
       const argType = formatCore(core.argType)
       const binding = `${core.name}: ${argType}`
-      const { bindings, retType } = foldPi(core.retType)
+      const { bindings, retType } = foldFormatPi(core.retType)
       return { bindings: [binding, ...bindings], retType }
     }
 
@@ -66,11 +69,11 @@ function foldPi(core: Core): { bindings: Array<string>; retType: string } {
   }
 }
 
-function foldFn(core: Core): { bindings: Array<string>; ret: string } {
+function foldFormatFn(core: Core): { bindings: Array<string>; ret: string } {
   switch (core.kind) {
     case "Fn": {
       const binding = `${core.name}`
-      const { bindings, ret } = foldFn(core.ret)
+      const { bindings, ret } = foldFormatFn(core.ret)
       return { bindings: [binding, ...bindings], ret }
     }
 
@@ -80,11 +83,11 @@ function foldFn(core: Core): { bindings: Array<string>; ret: string } {
   }
 }
 
-function foldAp(core: Core): { target: string; args: Array<string> } {
+function foldFormatAp(core: Core): { target: string; args: Array<string> } {
   switch (core.kind) {
     case "Ap": {
       const arg = formatCore(core.arg)
-      const { target, args } = foldAp(core.target)
+      const { target, args } = foldFormatAp(core.target)
       return { target, args: [...args, arg] }
     }
 
@@ -94,11 +97,14 @@ function foldAp(core: Core): { target: string; args: Array<string> } {
   }
 }
 
-function foldSigma(core: Core): { bindings: Array<string>; cdrType: string } {
+function foldFormatSigma(core: Core): {
+  bindings: Array<string>
+  cdrType: string
+} {
   switch (core.kind) {
     case "Sigma": {
       const carType = formatCore(core.carType)
-      const { bindings, cdrType } = foldSigma(core.cdrType)
+      const { bindings, cdrType } = foldFormatSigma(core.cdrType)
       return { bindings: [carType, ...bindings], cdrType }
     }
 
