@@ -1,7 +1,5 @@
 # clazz
 
-Dot -- doDot
-
 compute-clazz.test.ts
 Clazz -- formatCore
 
@@ -11,6 +9,8 @@ compute-objekt.test.ts
 
 check-objekt.test.ts -- test duplicated name
 check-objekt.test.ts -- test extra property -- disallowed for now
+
+lookupClazzPropertyType -- for doDot
 
 Dot -- infer
 Dot -- formatCore
