@@ -4,8 +4,6 @@ compute-clazz.test.ts
 
 Clazz -- formatCore
 
-- [maybe] pretty print
-
 Objekt -- evaluate
 Objekt -- formatCore
 compute-objekt.test.ts
@@ -72,3 +70,12 @@ NeutralVar constructor
 # recursion
 
 fixpoint and readback
+
+# format
+
+> For pretty print Support.
+
+[maybe] learn from https://prettier.io/docs/en/plugins.html
+
+formatExp
+formatStmt
