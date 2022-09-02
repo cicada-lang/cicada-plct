@@ -31,6 +31,7 @@ export type Exp =
   | Cdr
   | Quote
   | Clazz
+  | FoldedClazz
   | Objekt
   | Dot
 
@@ -458,6 +459,14 @@ export function ClazzNull(span?: Span): ClazzNull {
     span,
   }
 }
+
+export type FoldedClazz = {
+  family: "Exp"
+  kind: "FoldedClazz"
+  bindings: Array<ClazzBinding>
+} & ExpMeta
+
+export type ClazzBinding = "TODO"
 
 export type Objekt = ObjektCons | ObjektNull
 

@@ -1,8 +1,11 @@
 # clazz
 
-add Exps.FoldedClazz
+Exps.FoldedClazz
 
-- with ClazzBindings
+Exps.FoldedClazz -- constructor
+
+ClazzBinding
+ClazzBinding -- constructor
 
 Exps.Clazz -- matcher
 
