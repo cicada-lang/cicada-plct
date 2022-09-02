@@ -222,7 +222,7 @@ export function ClazzNull(): ClazzNull {
 export type Objekt = ObjektCons | ObjektNull
 
 export type ObjektCons = {
-  family: "Exp"
+  family: "Core"
   kind: "ObjektCons"
   name: string
   realName: string
@@ -237,7 +237,7 @@ export function ObjektCons(
   rest: Objekt
 ): ObjektCons {
   return {
-    family: "Exp",
+    family: "Core",
     kind: "ObjektCons",
     name,
     realName,
@@ -247,13 +247,13 @@ export function ObjektCons(
 }
 
 export type ObjektNull = {
-  family: "Exp"
+  family: "Core"
   kind: "ObjektNull"
 }
 
 export function ObjektNull(): ObjektNull {
   return {
-    family: "Exp",
+    family: "Core",
     kind: "ObjektNull",
   }
 }
