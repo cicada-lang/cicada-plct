@@ -1,39 +1,35 @@
 # clazz
 
+Stmts.Class
+parse -- stmts/class.test.ts
 compute-clazz.test.ts
 compute-objekt.test.ts
-
-Stmts.Class
-
-parse -- stmts/class.test.ts
-
-define Exps.New
-
-Exps.New -- grammar and matcher
-
-check -- New
-infer -- Dot
-
-Values.Clazz
-Neutrals.Dot
-
-Values.Objekt
-Values.Clazz
-Neutrals.Dot
-
-evaluate -- Objekt
-evaluate -- New
-evaluate -- Dot
-
-formatCore -- Clazz
-formatCore -- Objekt
-formatCore -- New
-formatCore -- Dot
+Clazz -- formatCore
+Objekt -- evaluate
+Objekt -- formatCore
 
 check-objekt.test.ts -- test duplicated name
-check-objekt.test.ts -- test extra property
+check-objekt.test.ts -- test extra property -- disallow for now
 
-doDot
+Exps.New
+Exps.New -- grammar and matcher
+New -- check
+New -- evaluate
+New -- formatCore
+
+Neutrals.Dot
+Dot -- infer
+Dot -- evaluate
+Dot -- doDot
+Dot -- formatCore
+
+# syntax
+
+syntax about "sequence"
+
+Exps.Objekt -- syntax -- handle "property:method"
+Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
+Exps.Objekt -- syntax -- handle "property:spread"
 
 # error report
 
@@ -71,21 +67,3 @@ NeutralVar constructor
 # recursion
 
 fixpoint and readback
-
-# later
-
-Exps.Objekt -- grammar and matcher
-
-- handle "property:method"
-
-  - need syntax about "sequence"
-
-Exps.Objekt -- grammar and matcher
-
-- handle "property:spread"
-
-Exps.Clazz -- grammar and matcher
-
-- handle "clazz_binding:method_fulfilled"
-
-  - need syntax about "sequence"
