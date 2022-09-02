@@ -64,5 +64,12 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
     "operand:quote": ({ literal }, { span }) =>
       Exps.Quote(pt.trim_boundary(pt.str(literal), 1), span),
+    "operand:clazz": ({ clazz_bindings }, { span }) =>
+      Exps.FoldedClazz(
+        pt.matchers
+          .zero_or_more_matcher(clazz_bindings)
+          .map(matchers.clazz_binding_matcher),
+        span
+      ),
   })(tree)
 }

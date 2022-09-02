@@ -81,7 +81,7 @@ export const operand = {
     "operand:clazz": [
       '"class"',
       '"{"',
-      { entries: { $ap: ["zero_or_more", "clazz_binding"] } },
+      { clazz_bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
   },

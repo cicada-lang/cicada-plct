@@ -1,6 +1,6 @@
 # clazz
 
-parse/tests/clazz.test.ts
+[refactor] simplify grammar arguments naming
 
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
