@@ -9,7 +9,22 @@ define Exps.New
 
 checkType -- Clazz
 check -- Objekt
+check -- New
 infer -- Dot
+
+Values.Clazz
+Values.Objekt
+Neutrals.Dot
+
+formatCore -- Clazz
+formatCore -- Objekt
+formatCore -- New
+formatCore -- Dot
+
+evaluate -- Clazz
+evaluate -- Objekt
+evaluate -- New
+evaluate -- Dot
 
 doDot
 
