@@ -16,7 +16,7 @@ export const stmt = {
       '"class"',
       { name: "identifier" },
       '"{"',
-      { entries: { $ap: ["zero_or_more", "binding"] } },
+      { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
   },
