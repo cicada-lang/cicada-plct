@@ -34,7 +34,7 @@ export const operand = {
   $grammar: {
     "operand:pi": [
       '"("',
-      { pi_bindings: "pi_bindings" },
+      { bindings: "pi_bindings" },
       '")"',
       '"-"',
       '">"',
@@ -43,13 +43,13 @@ export const operand = {
     "operand:pi_forall": [
       '"forall"',
       '"("',
-      { pi_bindings: "pi_bindings" },
+      { bindings: "pi_bindings" },
       '")"',
       { ret_t: "exp" },
     ],
     "operand:fn": [
       '"("',
-      { fn_bindings: "fn_bindings" },
+      { bindings: "fn_bindings" },
       '")"',
       '"="',
       '">"',
@@ -58,14 +58,14 @@ export const operand = {
     "operand:fn_function": [
       '"function"',
       '"("',
-      { fn_bindings: "fn_bindings" },
+      { bindings: "fn_bindings" },
       '")"',
       { ret: "exp" },
     ],
     "operand:sigma_exists": [
       '"exists"',
       '"("',
-      { sigma_bindings: "sigma_bindings" },
+      { bindings: "sigma_bindings" },
       '")"',
       { cdr_t: "exp" },
     ],
@@ -81,7 +81,7 @@ export const operand = {
     "operand:clazz": [
       '"class"',
       '"{"',
-      { clazz_bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
+      { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
   },

@@ -1,7 +1,5 @@
 # clazz
 
-[refactor] simplify grammar arguments naming
-
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
 Exps.New -- grammar and matcher

@@ -30,33 +30,33 @@ export function operator_matcher(tree: pt.Tree): Exp {
 
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "operand:pi": ({ pi_bindings, ret_t }, { span }) =>
+    "operand:pi": ({ bindings, ret_t }, { span }) =>
       Exps.FoldedPi(
-        matchers.pi_bindings_matcher(pi_bindings),
+        matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span
       ),
-    "operand:pi_forall": ({ pi_bindings, ret_t }, { span }) =>
+    "operand:pi_forall": ({ bindings, ret_t }, { span }) =>
       Exps.FoldedPi(
-        matchers.pi_bindings_matcher(pi_bindings),
+        matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span
       ),
-    "operand:fn": ({ fn_bindings, ret }, { span }) =>
+    "operand:fn": ({ bindings, ret }, { span }) =>
       Exps.FoldedFn(
-        matchers.fn_bindings_matcher(fn_bindings),
+        matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
         span
       ),
-    "operand:fn_function": ({ fn_bindings, ret }, { span }) =>
+    "operand:fn_function": ({ bindings, ret }, { span }) =>
       Exps.FoldedFn(
-        matchers.fn_bindings_matcher(fn_bindings),
+        matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
         span
       ),
-    "operand:sigma_exists": ({ sigma_bindings, cdr_t }, { span }) =>
+    "operand:sigma_exists": ({ bindings, cdr_t }, { span }) =>
       Exps.FoldedSigma(
-        matchers.sigma_bindings_matcher(sigma_bindings),
+        matchers.sigma_bindings_matcher(bindings),
         matchers.exp_matcher(cdr_t),
         span
       ),
@@ -64,10 +64,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
     "operand:quote": ({ literal }, { span }) =>
       Exps.Quote(pt.trim_boundary(pt.str(literal), 1), span),
-    "operand:clazz": ({ clazz_bindings }, { span }) =>
+    "operand:clazz": ({ bindings }, { span }) =>
       Exps.FoldedClazz(
         pt.matchers
-          .zero_or_more_matcher(clazz_bindings)
+          .zero_or_more_matcher(bindings)
           .map(matchers.clazz_binding_matcher),
         span
       ),
