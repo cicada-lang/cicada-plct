@@ -1,7 +1,5 @@
 # clazz
 
-[refactor] parse/matchers -- one file one matcher
-
 Exps.Clazz -- grammar and matcher
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
