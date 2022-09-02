@@ -4,26 +4,22 @@ title: Style Guide
 
 **In general, observe the style of existing code and respect it.**
 
-# About `framework/`
+# About commits and pull requests
 
-Modules in `framework/` directory are independent helper modules
-that might be extracted to their own packages.
+Do commits and pull requests in small steps.
 
-# Hierarchy of resources
+We loosely follows: https://rfc.zeromq.org/spec/42
 
-Think of the system as a hierarchy of resources:
+We do not force any commit message style,
+just write clear and easy to understand messages.
 
-```
-Project -> Mod -> Stmt -> Exp
-```
+# About documentation
 
-Top-level syntax of module is statement oriented -- `Stmt`.
+## Use of abbreviations
 
-# Semantics architecture
+Do not use to much abbreviations.
 
-Use first-order syntax to implement `Exp`.
-
-When necessary, use `subst` to do substitution.
+If you must, explain them before using.
 
 # Open v.s. closed types
 
@@ -49,3 +45,24 @@ to avoid name casting when editing the code.
 ## About directory name
 
 Use `lisp-case` for directory name.
+
+# About `framework/`
+
+Modules in `framework/` directory are independent helper modules
+that might be extracted to their own packages.
+
+# Hierarchy of resources
+
+Think of the system as a hierarchy of resources:
+
+```
+Project -> Mod -> Stmt -> Exp
+```
+
+Top-level syntax of module is statement oriented -- `Stmt`.
+
+# Semantics architecture
+
+Use first-order syntax to implement `Exp`.
+
+When necessary, use `subst` to do substitution.
