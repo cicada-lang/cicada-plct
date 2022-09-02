@@ -24,3 +24,19 @@ Top-level syntax of module is statement oriented -- `Stmt`.
 Use first-order syntax to implement `Exp`.
 
 When necessary, use `subst` to do substitution.
+
+# Open v.s. closed types
+
+Beware of open v.s. closed types,
+
+- Open types: `Stmt`, ...
+- Closed types: `Exp`, `Core`, ...
+
+We use object-oriented style for open types,
+and use functional style for closed types.
+
+## About modules
+
+For open types: one class, one file.
+
+For closed types: almost one function, one file, except for constructors.
