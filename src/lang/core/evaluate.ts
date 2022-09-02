@@ -61,7 +61,7 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.ClazzCons(
         core.name,
         evaluate(env, core.propertyType),
-        Closure(env, core.name, core.rest)
+        Closure(env, core.localName, core.rest)
       )
     }
 
@@ -70,7 +70,7 @@ export function evaluate(env: Env, core: Core): Value {
         core.name,
         evaluate(env, core.propertyType),
         evaluate(env, core.property),
-        Closure(env, core.name, core.rest)
+        Closure(env, core.localName, core.rest)
       )
     }
 

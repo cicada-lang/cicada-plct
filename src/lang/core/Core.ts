@@ -154,9 +154,9 @@ export function Quote(literal: string): Quote {
 
 /**
 
-   ## name v.s. realName in Clazz
+   ## name v.s. localName in Clazz
 
-   We can not only use `name` we also need `realName`,
+   We can not only use `name` we also need `localName`,
    because of `subst` might rename bound variables.
 
 **/
@@ -167,14 +167,14 @@ export type ClazzCons = {
   family: "Core"
   kind: "ClazzCons"
   name: string
-  realName: string
+  localName: string
   propertyType: Core
   rest: Clazz
 }
 
 export function ClazzCons(
   name: string,
-  realName: string,
+  localName: string,
   propertyType: Core,
   rest: Clazz
 ): ClazzCons {
@@ -182,7 +182,7 @@ export function ClazzCons(
     family: "Core",
     kind: "ClazzCons",
     name,
-    realName,
+    localName,
     propertyType,
     rest,
   }
@@ -192,7 +192,7 @@ export type ClazzFulfilled = {
   family: "Core"
   kind: "ClazzFulfilled"
   name: string
-  realName: string
+  localName: string
   property: Core
   propertyType: Core
   rest: Clazz
@@ -200,7 +200,7 @@ export type ClazzFulfilled = {
 
 export function ClazzFulfilled(
   name: string,
-  realName: string,
+  localName: string,
   property: Core,
   propertyType: Core,
   rest: Clazz
@@ -209,7 +209,7 @@ export function ClazzFulfilled(
     family: "Core",
     kind: "ClazzFulfilled",
     name,
-    realName,
+    localName,
     property,
     propertyType,
     rest,

@@ -1,7 +1,5 @@
 # clazz
 
-rename realName to localName
-
 compute-clazz.test.ts
 compute-objekt.test.ts
 
