@@ -1,3 +1,7 @@
 export * from "./Core"
 export * from "./evaluate"
+export * from "./foldFormatAp"
+export * from "./foldFormatFn"
+export * from "./foldFormatPi"
+export * from "./foldFormatSigma"
 export * from "./formatCore"

@@ -1,9 +1,9 @@
 import * as Actions from "../actions"
+import { Core } from "../core"
 import { Env, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
 import * as Values from "../value"
 import { Closure, Value } from "../value"
-import { Core } from "./Core"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {

@@ -1,7 +1,5 @@
 # clazz
 
-[refactor] extract functions about `foldFormat*`
-
 Stmts.Clazz
 parse -- stmts/clazz.test.ts
 compute-clazz.test.ts
