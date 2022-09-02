@@ -1,6 +1,5 @@
 # clazz
 
-assertValues -- first used in doDot
 Dot -- doDot
 
 compute-clazz.test.ts
