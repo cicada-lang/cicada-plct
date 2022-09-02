@@ -10,7 +10,6 @@ compute-objekt.test.ts
 check-objekt.test.ts -- test duplicated name
 check-objekt.test.ts -- test extra property -- disallow for now
 
-Neutrals.Dot
 Dot -- infer
 Dot -- evaluate
 Dot -- doDot

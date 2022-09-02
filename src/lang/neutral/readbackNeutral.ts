@@ -25,10 +25,8 @@ export function readbackNeutral(ctx: Ctx, neutral: Neutral): Core {
       return Cores.Cdr(readbackNeutral(ctx, neutral.target))
     }
 
-    // default: {
-    //   throw new ElaborationError(
-    //     `readbackNeutral is not implemented for ${neutral.kind}`
-    //   )
-    // }
+    case "Dot": {
+      return Cores.Dot(readbackNeutral(ctx, neutral.target), neutral.name)
+    }
   }
 }
