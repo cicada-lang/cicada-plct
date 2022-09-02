@@ -53,6 +53,24 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.Quote(core.literal)
     }
 
+    case "ClazzNull": {
+      return Values.ClazzNull()
+    }
+
+    case "ClazzCons": {
+      return Values.ClazzCons(
+        core.name,
+        evaluate(env, core.propertyType),
+        Closure(env, core.name, core.rest)
+      )
+    }
+
+    case "ClazzFulfilled": {
+      throw new EvaluationError(
+        `evaluate is not implemented for core: ${core.kind}`
+      )
+    }
+
     default: {
       throw new EvaluationError(
         `evaluate is not implemented for core: ${core.kind}`

@@ -1,8 +1,13 @@
 # clazz
 
+check-objekt.test.ts -- test dependent
+
 evaluate -- Clazz
 
-check-objekt.test.ts -- pass
+compute-clazz.test.ts
+compute-objekt.test.ts
+
+[refactor] evaluate -- inline trivial variables
 
 Stmts.Class
 
@@ -30,6 +35,9 @@ formatCore -- Clazz
 formatCore -- Objekt
 formatCore -- New
 formatCore -- Dot
+
+check-objekt.test.ts -- test duplicated name
+check-objekt.test.ts -- test extra property
 
 doDot
 

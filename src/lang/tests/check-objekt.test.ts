@@ -4,11 +4,11 @@ import { expectCodeToFail, runCode } from "./utils"
 test("check Objekt", async () => {
   await runCode(`
 
-let abc: class { a: String, b: String, c: String } = {
+check {
   a: "a",
   b: "b",
   c: "c",
-}
+}: class { a: String, b: String, c: String }
 
 `)
 })
@@ -16,11 +16,11 @@ let abc: class { a: String, b: String, c: String } = {
 test("check Objekt -- missing property", async () => {
   await expectCodeToFail(`
 
-let abc: class { a: String, b: String, c: String } = {
+check {
   a: "a",
   b: "b",
   // c: "c",
-}
+}: class { a: String, b: String, c: String }
 
 `)
 })
