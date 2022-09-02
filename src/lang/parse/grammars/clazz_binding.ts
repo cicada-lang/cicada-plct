@@ -1,6 +1,6 @@
 export const clazz_binding = {
   $grammar: {
-    "clazz_binding:field_demanded": [
+    "clazz_binding:field_abstract": [
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -14,7 +14,7 @@ export const clazz_binding = {
       { exp: "exp" },
       { $ap: ["optional", '","'] },
     ],
-    "clazz_binding:method_demanded": [
+    "clazz_binding:method_abstract": [
       { name: "identifier" },
       '"("',
       { pi_bindings: "pi_bindings" },

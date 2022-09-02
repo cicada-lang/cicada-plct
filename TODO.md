@@ -1,6 +1,6 @@
 # clazz
 
-Exps.Clazz -- matcher
+parse/tests/clazz.test.ts
 
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
@@ -57,3 +57,11 @@ NeutralVar constructor
 # recursion
 
 fixpoint and readback
+
+# later
+
+Exps.Clazz -- grammar and matcher
+
+- handle "clazz_binding:method_fulfilled"
+
+  - need syntax about "sequence"
