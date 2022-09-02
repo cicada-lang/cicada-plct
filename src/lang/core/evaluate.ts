@@ -66,8 +66,11 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ClazzFulfilled": {
-      throw new EvaluationError(
-        `evaluate is not implemented for core: ${core.kind}`
+      return Values.ClazzFulfilled(
+        core.name,
+        evaluate(env, core.propertyType),
+        evaluate(env, core.property),
+        Closure(env, core.name, core.rest)
       )
     }
 

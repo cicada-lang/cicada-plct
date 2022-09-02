@@ -1,7 +1,6 @@
 # clazz
 
-check-objekt.test.ts -- test pre-filled
-evaluate -- Clazz
+rename realName to localName
 
 compute-clazz.test.ts
 compute-objekt.test.ts

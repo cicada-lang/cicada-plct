@@ -44,3 +44,25 @@ check {
 
 `)
 })
+
+test("check Objekt -- prefilled", async () => {
+  await runCode(`
+
+check {
+  a: "a",
+  b: "b",
+  c: "c",
+}: class { a: String = "a", b: String, c: String }
+
+`)
+
+  await expectCodeToFail(`
+
+check {
+  a: "b",
+  b: "b",
+  c: "c",
+}: class { a: String = "a", b: String, c: String }
+
+`)
+})
