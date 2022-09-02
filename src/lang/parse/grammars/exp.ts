@@ -20,8 +20,8 @@ export const operator = {
     "operator:ap": [
       { target: "operator" },
       {
-        arg_entries_group: {
-          $ap: ["one_or_more", '"("', "arg_entries", '")"'],
+        args_group: {
+          $ap: ["one_or_more", '"("', "args", '")"'],
         },
       },
     ],
