@@ -1,3 +1,5 @@
+import { Exp } from "../exp"
+
 export type Core =
   | Var
   | Pi
@@ -219,17 +221,42 @@ export function ClazzNull(): ClazzNull {
   }
 }
 
-export type Objekt = {
-  family: "Core"
-  kind: "Objekt"
-  properties: Record<string, Core>
+export type Objekt = ObjektCons | ObjektNull
+
+export type ObjektCons = {
+  family: "Exp"
+  kind: "ObjektCons"
+  name: string
+  realName: string
+  property: Exp
+  rest: Objekt
 }
 
-export function Objekt(properties: Record<string, Core>): Objekt {
+export function ObjektCons(
+  name: string,
+  realName: string,
+  property: Exp,
+  rest: Objekt
+): ObjektCons {
   return {
-    family: "Core",
-    kind: "Objekt",
-    properties,
+    family: "Exp",
+    kind: "ObjektCons",
+    name,
+    realName,
+    property,
+    rest,
+  }
+}
+
+export type ObjektNull = {
+  family: "Exp"
+  kind: "ObjektNull"
+}
+
+export function ObjektNull(): ObjektNull {
+  return {
+    family: "Exp",
+    kind: "ObjektNull",
   }
 }
 
