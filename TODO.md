@@ -1,7 +1,8 @@
 # clazz
 
-Stmts.Clazz
+Stmts.Clazz -- syntax
 parse -- stmts/clazz.test.ts
+
 compute-clazz.test.ts
 Clazz -- formatCore
 
