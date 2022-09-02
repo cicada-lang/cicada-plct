@@ -227,14 +227,14 @@ export type ObjektCons = {
   name: string
   realName: string
   property: Core
-  rest: Objekt
+  rest: Core
 }
 
 export function ObjektCons(
   name: string,
   realName: string,
   property: Core,
-  rest: Objekt
+  rest: Core
 ): ObjektCons {
   return {
     family: "Core",
