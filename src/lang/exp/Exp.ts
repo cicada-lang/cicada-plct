@@ -517,41 +517,17 @@ export function ClazzBindingFulfilled(
   }
 }
 
-export type Objekt = ObjektCons | ObjektNull
-
-export type ObjektCons = {
+export type Objekt = {
   family: "Exp"
-  kind: "ObjektCons"
-  name: string
-  property: Exp
-  rest: Objekt
+  kind: "Objekt"
+  properties: Record<string, Exp>
 } & ExpMeta
 
-export function ObjektCons(
-  name: string,
-  property: Exp,
-  rest: Objekt,
-  span?: Span
-): ObjektCons {
+export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
   return {
     family: "Exp",
-    kind: "ObjektCons",
-    name,
-    property,
-    rest,
-    span,
-  }
-}
-
-export type ObjektNull = {
-  family: "Exp"
-  kind: "ObjektNull"
-} & ExpMeta
-
-export function ObjektNull(span?: Span): ObjektNull {
-  return {
-    family: "Exp",
-    kind: "ObjektNull",
+    kind: "Objekt",
+    properties,
     span,
   }
 }

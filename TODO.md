@@ -1,12 +1,25 @@
 # clazz
 
 Exps.Objekt -- grammar and matcher
-Exps.New -- grammar and matcher
+
+parse -- objekt.test.ts
+
+check -- Objekt
+
+- checkProperties
+
+Stmts.Class
+
+unfoldClazz
+
+parse -- stmts/class.test.ts
+
+checkType -- Clazz
 
 define Exps.New
 
-checkType -- Clazz
-check -- Objekt
+Exps.New -- grammar and matcher
+
 check -- New
 infer -- Dot
 
@@ -14,15 +27,19 @@ Values.Clazz
 Values.Objekt
 Neutrals.Dot
 
-formatCore -- Clazz
-formatCore -- Objekt
-formatCore -- New
-formatCore -- Dot
+Values.Objekt
+Values.Clazz
+Neutrals.Dot
 
 evaluate -- Clazz
 evaluate -- Objekt
 evaluate -- New
 evaluate -- Dot
+
+formatCore -- Clazz
+formatCore -- Objekt
+formatCore -- New
+formatCore -- Dot
 
 doDot
 

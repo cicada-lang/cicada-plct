@@ -228,42 +228,17 @@ export function ClazzNull(): ClazzNull {
   }
 }
 
-export type Objekt = ObjektCons | ObjektNull
-
-export type ObjektCons = {
+export type Objekt = {
   family: "Core"
-  kind: "ObjektCons"
-  name: string
-  realName: string
-  property: Core
-  rest: Core
+  kind: "Objekt"
+  properties: Record<string, Core>
 }
 
-export function ObjektCons(
-  name: string,
-  realName: string,
-  property: Core,
-  rest: Core
-): ObjektCons {
+export function Objekt(properties: Record<string, Core>): Objekt {
   return {
     family: "Core",
-    kind: "ObjektCons",
-    name,
-    realName,
-    property,
-    rest,
-  }
-}
-
-export type ObjektNull = {
-  family: "Core"
-  kind: "ObjektNull"
-}
-
-export function ObjektNull(): ObjektNull {
-  return {
-    family: "Core",
-    kind: "ObjektNull",
+    kind: "Objekt",
+    properties,
   }
 }
 
