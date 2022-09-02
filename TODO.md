@@ -1,9 +1,5 @@
 # clazz
 
-[refactor] parse/grammars -- one file one grammar
-
-- file name follows grammar name
-
 [refactor] parse/matchers -- one file one matcher
 
 Exps.Clazz -- grammar and matcher
