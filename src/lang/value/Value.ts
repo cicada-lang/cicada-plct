@@ -156,18 +156,63 @@ export function Sole(): Sole {
   }
 }
 
-export type Clazz = {
+export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
+
+export type ClazzCons = {
   family: "Value"
-  kind: "Clazz"
-  fieldType: Value
+  kind: "ClazzCons"
+  name: string
+  propertyType: Value
   restClosure: Closure
 }
 
-export function Clazz(fieldType: Value, restClosure: Closure): Clazz {
+export function ClazzCons(
+  name: string,
+  propertyType: Value,
+  restClosure: Closure
+): ClazzCons {
   return {
     family: "Value",
-    kind: "Clazz",
-    fieldType,
+    kind: "ClazzCons",
+    name,
+    propertyType,
     restClosure,
+  }
+}
+
+export type ClazzFulfilled = {
+  family: "Value"
+  kind: "ClazzFulfilled"
+  name: string
+  property: Value
+  propertyType: Value
+  restClosure: Closure
+}
+
+export function ClazzFulfilled(
+  name: string,
+  property: Value,
+  propertyType: Value,
+  restClosure: Closure
+): ClazzFulfilled {
+  return {
+    family: "Value",
+    kind: "ClazzFulfilled",
+    name,
+    property,
+    propertyType,
+    restClosure,
+  }
+}
+
+export type ClazzNull = {
+  family: "Value"
+  kind: "ClazzNull"
+}
+
+export function ClazzNull(): ClazzNull {
+  return {
+    family: "Value",
+    kind: "ClazzNull",
   }
 }
