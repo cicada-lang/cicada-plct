@@ -5,6 +5,10 @@ import { TypedNeutral } from "../value"
 
 export function ctxToEnv(ctx: Ctx): Env {
   switch (ctx.kind) {
+    case "CtxNull": {
+      return EnvNull()
+    }
+
     case "CtxCons": {
       return EnvCons(
         ctx.name,
@@ -15,10 +19,6 @@ export function ctxToEnv(ctx: Ctx): Env {
 
     case "CtxFulfilled": {
       return EnvCons(ctx.name, ctx.value, ctxToEnv(ctx.rest))
-    }
-
-    case "CtxNull": {
-      return EnvNull()
     }
   }
 }

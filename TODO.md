@@ -1,5 +1,11 @@
 # clazz
 
+[refactor] reorder sum types -- null at the first -- Exp, Core
+[refactor] reorder sum types -- null at the first -- Value
+
+assertValues -- first used in doDot
+Dot -- doDot
+
 compute-clazz.test.ts
 Clazz -- formatCore
 
@@ -8,12 +14,9 @@ Objekt -- formatCore
 compute-objekt.test.ts
 
 check-objekt.test.ts -- test duplicated name
-check-objekt.test.ts -- test extra property -- disallow for now
-
-assertValues -- first used in doDot
+check-objekt.test.ts -- test extra property -- disallowed for now
 
 Dot -- infer
-Dot -- doDot
 Dot -- formatCore
 
 Exps.New

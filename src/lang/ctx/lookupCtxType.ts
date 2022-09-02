@@ -3,6 +3,10 @@ import { Value } from "../value"
 
 export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
   switch (ctx.kind) {
+    case "CtxNull": {
+      return undefined
+    }
+
     case "CtxCons": {
       if (ctx.name === name) {
         return ctx.type
@@ -17,10 +21,6 @@ export function lookupCtxType(ctx: Ctx, name: string): Value | undefined {
       } else {
         return lookupCtxType(ctx.rest, name)
       }
-    }
-
-    case "CtxNull": {
-      return undefined
     }
   }
 }

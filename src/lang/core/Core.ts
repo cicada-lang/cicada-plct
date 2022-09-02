@@ -161,7 +161,19 @@ export function Quote(literal: string): Quote {
 
 **/
 
-export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
+export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
+
+export type ClazzNull = {
+  family: "Core"
+  kind: "ClazzNull"
+}
+
+export function ClazzNull(): ClazzNull {
+  return {
+    family: "Core",
+    kind: "ClazzNull",
+  }
+}
 
 export type ClazzCons = {
   family: "Core"
@@ -213,18 +225,6 @@ export function ClazzFulfilled(
     property,
     propertyType,
     rest,
-  }
-}
-
-export type ClazzNull = {
-  family: "Core"
-  kind: "ClazzNull"
-}
-
-export function ClazzNull(): ClazzNull {
-  return {
-    family: "Core",
-    kind: "ClazzNull",
   }
 }
 

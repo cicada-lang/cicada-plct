@@ -1,6 +1,16 @@
 import { Value } from "../value"
 
-export type Env = EnvCons | EnvNull
+export type Env = EnvNull | EnvCons
+
+export type EnvNull = {
+  kind: "EnvNull"
+}
+
+export function EnvNull(): EnvNull {
+  return {
+    kind: "EnvNull",
+  }
+}
 
 export type EnvCons = {
   kind: "EnvCons"
@@ -15,15 +25,5 @@ export function EnvCons(name: string, value: Value, rest: Env): EnvCons {
     name,
     value,
     rest,
-  }
-}
-
-export type EnvNull = {
-  kind: "EnvNull"
-}
-
-export function EnvNull(): EnvNull {
-  return {
-    kind: "EnvNull",
   }
 }

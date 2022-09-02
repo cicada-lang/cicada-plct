@@ -1,6 +1,16 @@
 import { Value } from "../value"
 
-export type Ctx = CtxCons | CtxFulfilled | CtxNull
+export type Ctx = CtxNull | CtxCons | CtxFulfilled
+
+export type CtxNull = {
+  kind: "CtxNull"
+}
+
+export function CtxNull(): CtxNull {
+  return {
+    kind: "CtxNull",
+  }
+}
 
 export type CtxCons = {
   kind: "CtxCons"
@@ -38,15 +48,5 @@ export function CtxFulfilled(
     type,
     value,
     rest,
-  }
-}
-
-export type CtxNull = {
-  kind: "CtxNull"
-}
-
-export function CtxNull(): CtxNull {
-  return {
-    kind: "CtxNull",
   }
 }
