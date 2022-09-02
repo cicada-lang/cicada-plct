@@ -13,6 +13,7 @@ export type Value =
   | Trivial
   | Sole
   | Clazz
+  | Objekt
 
 export type AlreadyType = Type | Pi | Sigma | String | Trivial | Clazz
 
@@ -214,5 +215,19 @@ export function ClazzNull(): ClazzNull {
   return {
     family: "Value",
     kind: "ClazzNull",
+  }
+}
+
+export type Objekt = {
+  family: "Value"
+  kind: "Objekt"
+  properties: Record<string, Value>
+}
+
+export function Objekt(properties: Record<string, Value>): Objekt {
+  return {
+    family: "Value",
+    kind: "Objekt",
+    properties,
   }
 }

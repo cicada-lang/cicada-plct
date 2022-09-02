@@ -24,7 +24,6 @@ check -- New
 infer -- Dot
 
 Values.Clazz
-Values.Objekt
 Neutrals.Dot
 
 Values.Objekt
