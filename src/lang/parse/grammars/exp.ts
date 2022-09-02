@@ -19,14 +19,21 @@ export const operator = {
     "operator:var": [{ name: "identifier" }],
     "operator:ap": [
       { target: "operator" },
-      {
-        args_group: {
-          $ap: ["one_or_more", '"("', "args", '")"'],
-        },
-      },
+      { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
+    "operator:dot_field": [
+      { target: "operator" },
+      '"."',
+      { name: "identifier" },
+    ],
+    "operator:dot_method": [
+      { target: "operator" },
+      '"."',
+      { name: "identifier" },
+      { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
+    ],
   },
 }
 

@@ -1,7 +1,8 @@
 # clazz
 
+parse -- dot.test.ts
+
 Exps.Objekt -- grammar and matcher
-Exps.Dot -- grammar and matcher
 Exps.New -- grammar and matcher
 
 define Exps.New
