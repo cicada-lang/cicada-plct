@@ -12,8 +12,9 @@ export type Value =
   | Quote
   | Trivial
   | Sole
+  | Clazz
 
-export type AlreadyType = Type | Pi | Sigma | String | Trivial
+export type AlreadyType = Type | Pi | Sigma | String | Trivial | Clazz
 
 export type TypedNeutral = {
   family: "Value"
@@ -152,5 +153,21 @@ export function Sole(): Sole {
   return {
     family: "Value",
     kind: "Sole",
+  }
+}
+
+export type Clazz = {
+  family: "Value"
+  kind: "Clazz"
+  fieldType: Value
+  restClosure: Closure
+}
+
+export function Clazz(fieldType: Value, restClosure: Closure): Clazz {
+  return {
+    family: "Value",
+    kind: "Clazz",
+    fieldType,
+    restClosure,
   }
 }
