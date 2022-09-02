@@ -7,5 +7,5 @@ export function conversion(
   left: Value,
   right: Value
 ): void {
-  throw "TODO"
+  throw new Error("TODO")
 }

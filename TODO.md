@@ -1,8 +1,6 @@
 # clazz
 
-check -- Objekt
-
-- checkProperties
+check-objekt.test.ts
 
 Stmts.Class
 
@@ -37,6 +35,14 @@ formatCore -- New
 formatCore -- Dot
 
 doDot
+
+# error report
+
+> We should setup an error report framework (and test it) as soon as possible.
+
+error for report
+
+error report for ElaborationError
 
 # datatype
 

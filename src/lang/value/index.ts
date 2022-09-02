@@ -1,6 +1,7 @@
 export * from "./assertTypeInCtx"
 export * from "./assertValue"
 export * from "./Closure"
+export * from "./conversion"
 export * from "./inclusion"
 export * from "./isValue"
 export * from "./readback"
