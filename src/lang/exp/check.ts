@@ -77,9 +77,9 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     case "Objekt": {
       // TODO We should check that there are no duplicated names in properties.
       assertTypesInCtx(ctx, type, [
+        Values.ClazzNull,
         Values.ClazzCons,
         Values.ClazzFulfilled,
-        Values.ClazzNull,
       ])
 
       // TODO We should infer the properties that are not checked.

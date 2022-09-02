@@ -11,6 +11,10 @@ export function checkProperties(
   clazz: Values.Clazz
 ): Record<string, Core> {
   switch (clazz.kind) {
+    case "ClazzNull": {
+      return {}
+    }
+
     case "ClazzCons": {
       const property = properties[clazz.name]
       if (property === undefined) {
@@ -57,10 +61,6 @@ export function checkProperties(
         [clazz.name]: propertyCore,
         ...checkProperties(ctx, properties, rest),
       }
-    }
-
-    case "ClazzNull": {
-      return {}
     }
   }
 }

@@ -1,8 +1,5 @@
 # clazz
 
-[refactor] reorder sum types -- null at the first -- Exp, Core
-[refactor] reorder sum types -- null at the first -- Value
-
 assertValues -- first used in doDot
 Dot -- doDot
 

@@ -157,7 +157,19 @@ export function Sole(): Sole {
   }
 }
 
-export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
+export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
+
+export type ClazzNull = {
+  family: "Value"
+  kind: "ClazzNull"
+}
+
+export function ClazzNull(): ClazzNull {
+  return {
+    family: "Value",
+    kind: "ClazzNull",
+  }
+}
 
 export type ClazzCons = {
   family: "Value"
@@ -203,18 +215,6 @@ export function ClazzFulfilled(
     property,
     propertyType,
     restClosure,
-  }
-}
-
-export type ClazzNull = {
-  family: "Value"
-  kind: "ClazzNull"
-}
-
-export function ClazzNull(): ClazzNull {
-  return {
-    family: "Value",
-    kind: "ClazzNull",
   }
 }
 

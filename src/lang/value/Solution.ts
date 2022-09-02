@@ -1,6 +1,6 @@
 import { Value } from "./Value"
 
-export type Solution = SolutionCons | SolutionNull | SolutionFailure
+export type Solution = SolutionNull | SolutionCons | SolutionFailure
 
 /**
 
@@ -8,20 +8,21 @@ export type Solution = SolutionCons | SolutionNull | SolutionFailure
 
 **/
 
+export type SolutionNull = {
+  kind: "SolutionNull"
+}
+
+export function SolutionNull(): SolutionNull {
+  return {
+    kind: "SolutionNull",
+  }
+}
+
 export type SolutionCons = {
   kind: "SolutionCons"
   name: string
   value: Value
   rest: Solution
-}
-
-export type SolutionNull = {
-  kind: "SolutionNull"
-}
-
-export type SolutionFailure = {
-  kind: "SolutionFailure"
-  message: string
 }
 
 export function SolutionCons(
@@ -37,10 +38,9 @@ export function SolutionCons(
   }
 }
 
-export function SolutionNull(): SolutionNull {
-  return {
-    kind: "SolutionNull",
-  }
+export type SolutionFailure = {
+  kind: "SolutionFailure"
+  message: string
 }
 
 export function SolutionFailure(message: string): SolutionFailure {

@@ -394,7 +394,20 @@ export function Quote(literal: string, span?: Span): Quote {
   }
 }
 
-export type Clazz = ClazzCons | ClazzFulfilled | ClazzNull
+export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
+
+export type ClazzNull = {
+  family: "Exp"
+  kind: "ClazzNull"
+} & ExpMeta
+
+export function ClazzNull(span?: Span): ClazzNull {
+  return {
+    family: "Exp",
+    kind: "ClazzNull",
+    span,
+  }
+}
 
 export type ClazzCons = {
   family: "Exp"
@@ -443,19 +456,6 @@ export function ClazzFulfilled(
     propertyType,
     property,
     rest,
-    span,
-  }
-}
-
-export type ClazzNull = {
-  family: "Exp"
-  kind: "ClazzNull"
-} & ExpMeta
-
-export function ClazzNull(span?: Span): ClazzNull {
-  return {
-    family: "Exp",
-    kind: "ClazzNull",
     span,
   }
 }
