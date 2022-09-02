@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "../ctx"
+import { Ctx, CtxCons, CtxFulfilled, ctxToEnv, lookupCtxType } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkType, Exp } from "../exp"
@@ -98,15 +98,42 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ClazzNull": {
-      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+      return Inferred(Values.Type(), Cores.ClazzNull())
     }
 
     case "ClazzCons": {
-      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+      const propertyTypeCore = checkType(ctx, exp.propertyType)
+      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
+      ctx = CtxCons(exp.name, propertyTypeValue, ctx)
+      const restInfferd = infer(ctx, exp.rest)
+      return Inferred(
+        Values.Type(),
+        Cores.ClazzCons(
+          exp.name,
+          exp.name,
+          propertyTypeCore,
+          restInfferd.core as Cores.Clazz
+        )
+      )
     }
 
     case "ClazzFulfilled": {
-      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+      const propertyTypeCore = checkType(ctx, exp.propertyType)
+      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
+      const propertyCore = check(ctx, exp.property, propertyTypeValue)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
+      const restInfferd = infer(ctx, exp.rest)
+      return Inferred(
+        Values.Type(),
+        Cores.ClazzFulfilled(
+          exp.name,
+          exp.name,
+          propertyTypeCore,
+          propertyCore,
+          restInfferd.core as Cores.Clazz
+        )
+      )
     }
 
     case "FoldedClazz": {

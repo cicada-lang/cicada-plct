@@ -1,6 +1,8 @@
 # clazz
 
-checkType -- Clazz
+extract checkClazz -- for better typing during recursion
+
+evaluate -- Clazz
 
 check-objekt.test.ts -- pass
 
@@ -22,7 +24,6 @@ Values.Objekt
 Values.Clazz
 Neutrals.Dot
 
-evaluate -- Clazz
 evaluate -- Objekt
 evaluate -- New
 evaluate -- Dot
