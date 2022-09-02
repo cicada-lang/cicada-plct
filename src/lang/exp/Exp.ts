@@ -468,17 +468,41 @@ export function ClazzNull(span?: Span): ClazzNull {
   }
 }
 
-export type Objekt = {
+export type Objekt = ObjektCons | ObjektNull
+
+export type ObjektCons = {
   family: "Exp"
-  kind: "Objekt"
-  properties: Record<string, Exp>
+  kind: "ObjektCons"
+  name: string
+  property: Exp
+  rest: Objekt
 } & ExpMeta
 
-export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
+export function ObjektCons(
+  name: string,
+  property: Exp,
+  rest: Objekt,
+  span?: Span
+): ObjektCons {
   return {
     family: "Exp",
-    kind: "Objekt",
-    properties,
+    kind: "ObjektCons",
+    name,
+    property,
+    rest,
+    span,
+  }
+}
+
+export type ObjektNull = {
+  family: "Exp"
+  kind: "ObjektNull"
+} & ExpMeta
+
+export function ObjektNull(span?: Span): ObjektNull {
+  return {
+    family: "Exp",
+    kind: "ObjektNull",
     span,
   }
 }
