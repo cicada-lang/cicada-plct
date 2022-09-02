@@ -22,9 +22,9 @@ export function Inferred(type: Value, core: Core): Inferred {
 export function infer(ctx: Ctx, exp: Exp): Inferred {
   switch (exp.kind) {
     case "Var": {
-      const foundType = lookupCtxType(ctx, exp.name)
-      if (foundType !== undefined) {
-        return Inferred(foundType, Cores.Var(exp.name))
+      const type = lookupCtxType(ctx, exp.name)
+      if (type !== undefined) {
+        return Inferred(type, Cores.Var(exp.name))
       }
 
       throw new ElaborationError(`Undefined name ${exp.name}`)

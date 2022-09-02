@@ -8,23 +8,23 @@ import { Core } from "./Core"
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
-      const foundValue = lookupEnvValue(env, core.name)
-      if (foundValue === undefined) {
+      const value = lookupEnvValue(env, core.name)
+      if (value === undefined) {
         throw new EvaluationError(`Undefined name: ${name}`)
       }
 
-      return foundValue
+      return value
     }
 
     case "Pi": {
-      const argType = evaluate(env, core.argType)
-      const retTypeClosure = Closure(env, core.name, core.retType)
-      return Values.Pi(argType, retTypeClosure)
+      return Values.Pi(
+        evaluate(env, core.argType),
+        Closure(env, core.name, core.retType)
+      )
     }
 
     case "Fn": {
-      const retClosure = Closure(env, core.name, core.ret)
-      return Values.Fn(retClosure)
+      return Values.Fn(Closure(env, core.name, core.ret))
     }
 
     case "Ap": {
@@ -32,9 +32,10 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Sigma": {
-      const argType = evaluate(env, core.carType)
-      const retTypeClosure = Closure(env, core.name, core.cdrType)
-      return Values.Sigma(argType, retTypeClosure)
+      return Values.Sigma(
+        evaluate(env, core.carType),
+        Closure(env, core.name, core.cdrType)
+      )
     }
 
     case "Cons": {

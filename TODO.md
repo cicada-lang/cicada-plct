@@ -3,8 +3,6 @@
 compute-clazz.test.ts
 compute-objekt.test.ts
 
-[refactor] evaluate -- inline trivial variables
-
 Stmts.Class
 
 parse -- stmts/class.test.ts
