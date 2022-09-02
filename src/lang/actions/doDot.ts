@@ -1,9 +1,15 @@
+import { ElaborationError } from "../errors"
 import * as Values from "../value"
 import { assertValue, assertValues, isValue, Value } from "../value"
 
 export function doDot(target: Value, name: string): Value {
   if (isValue(target, Values.Objekt)) {
-    throw new Error("TODO")
+    const property = target.properties[name]
+    if (property === undefined) {
+      throw new ElaborationError(`Undefined property name: ${name}`)
+    }
+
+    return property
   }
 
   assertValue(target, Values.TypedNeutral)
