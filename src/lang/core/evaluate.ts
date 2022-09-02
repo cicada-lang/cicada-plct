@@ -75,6 +75,10 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
+    case "Dot": {
+      return Actions.doDot(evaluate(env, core.target), core.name)
+    }
+
     default: {
       throw new EvaluationError(
         `evaluate is not implemented for core: ${core.kind}`
