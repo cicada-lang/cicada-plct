@@ -1,9 +1,3 @@
-export const stmts = {
-  $grammar: {
-    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
-  },
-}
-
 export const stmt = {
   $grammar: {
     "stmt:declare": ['"declare"', { name: "identifier" }, '":"', { t: "exp" }],
@@ -18,5 +12,11 @@ export const stmt = {
       { exp: "exp" },
     ],
     "stmt:compute": ['"compute"', { exp: "exp" }],
+  },
+}
+
+export const stmts = {
+  $grammar: {
+    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
   },
 }

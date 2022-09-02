@@ -69,6 +69,13 @@ export function typeDirectedReadback(
     }
 
     case "Sigma": {
+      /**
+         `Sigma`s are also η-expanded.
+         Every value with a `Sigma` type,
+         whether it is neutral or not,
+         will be `readback` with a `cons` at the top.
+      **/
+
       const carValue = Actions.doCar(value)
       const cdrValue = Actions.doCdr(value)
       const cdrType = applyClosure(type.cdrTypeClosure, carValue)

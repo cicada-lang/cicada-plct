@@ -1,23 +1,30 @@
 # clazz
 
-define Exps.New
-
-[refactor] parse/grammars -- one file one grammar
-
-- file name follows grammar name
-
-[refactor] parse/matchers -- one file one matcher
-
-- file name follows matcher name
-
 Exps.Clazz -- grammar and matcher
 Exps.Objekt -- grammar and matcher
 Exps.Dot -- grammar and matcher
 Exps.New -- grammar and matcher
 
+define Exps.New
+
 checkType -- Clazz
 check -- Objekt
+check -- New
 infer -- Dot
+
+Values.Clazz
+Values.Objekt
+Neutrals.Dot
+
+formatCore -- Clazz
+formatCore -- Objekt
+formatCore -- New
+formatCore -- Dot
+
+evaluate -- Clazz
+evaluate -- Objekt
+evaluate -- New
+evaluate -- Dot
 
 doDot
 
