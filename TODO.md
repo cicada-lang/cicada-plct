@@ -1,6 +1,6 @@
 # clazz
 
-Exps.Objekt -- grammar and matcher
+Exps.Objekt -- matcher
 
 parse -- objekt.test.ts
 
@@ -72,6 +72,16 @@ NeutralVar constructor
 fixpoint and readback
 
 # later
+
+Exps.Objekt -- grammar and matcher
+
+- handle "property:method"
+
+  - need syntax about "sequence"
+
+Exps.Objekt -- grammar and matcher
+
+- handle "property:spread"
 
 Exps.Clazz -- grammar and matcher
 

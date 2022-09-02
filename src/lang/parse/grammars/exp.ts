@@ -91,5 +91,12 @@ export const operand = {
       { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
+    "operand:objekt": [
+      '"{"',
+      { properties: { $ap: ["zero_or_more", "property", '","'] } },
+      { last_property: "property" },
+      { $ap: ["optional", '","'] },
+      '"}"',
+    ],
   },
 }
