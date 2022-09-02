@@ -12,6 +12,13 @@ export const stmt = {
       { exp: "exp" },
     ],
     "stmt:compute": ['"compute"', { exp: "exp" }],
+    "stmt:clazz": [
+      '"class"',
+      { name: "identifier" },
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "binding"] } },
+      '"}"',
+    ],
   },
 }
 
