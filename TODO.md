@@ -4,8 +4,6 @@ add Exps.FoldedClazz
 
 - with ClazzBindings
 
-Exps.Clazz -- grammar rename `clazz_entry` to `clazz_binding`
-
 Exps.Clazz -- matcher
 
 Exps.Objekt -- grammar and matcher
