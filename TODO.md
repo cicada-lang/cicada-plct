@@ -1,7 +1,5 @@
 # clazz
 
-parse -- objekt.test.ts
-
 check -- Objekt
 
 - checkProperties
