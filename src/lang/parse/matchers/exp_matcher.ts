@@ -39,6 +39,16 @@ export function operator_matcher(tree: pt.Tree): Exp {
             pt.span_closure([target.span, name.span])
           )
         ),
+    "operand:objekt": ({ properties, last_property }, { span }) =>
+      Exps.Objekt(
+        Object.fromEntries([
+          ...pt.matchers
+            .zero_or_more_matcher(properties)
+            .map(matchers.property_matcher),
+          matchers.property_matcher(last_property),
+        ]),
+        span
+      ),
   })(tree)
 }
 

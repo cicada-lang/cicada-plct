@@ -1,7 +1,5 @@
 # clazz
 
-Exps.Objekt -- matcher
-
 parse -- objekt.test.ts
 
 check -- Objekt
