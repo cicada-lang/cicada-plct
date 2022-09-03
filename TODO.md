@@ -1,7 +1,5 @@
 # syntax
 
-parse -- sequence.test.ts
-
 unfoldSequence to `Exps.Let` and `Exps.LetThe`
 
 Exps.Let -- with `ret`
