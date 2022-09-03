@@ -14,7 +14,7 @@ import {
   ClazzNull,
   Value,
 } from "../value"
-import { lookupClazzPropertyType } from "./lookupClazzPropertyType"
+import { lookupClazzPropertyType } from "../value/lookupClazzPropertyType"
 
 export type Inferred = {
   type: Value
