@@ -1,6 +1,5 @@
 # syntax
 
-Exps.Let -- with `ret`
 Exps.Let -- check
 Cores.Let
 Cores.Let -- evaluate
@@ -97,11 +96,11 @@ Exps.FnAnnotatedWithReturnType
 
 Equal
 
-replace
+Replace
 
-refl
+Refl
 
-same
+Same
 
 # unification, implicit and vague
 
@@ -113,11 +112,11 @@ NeutralVar constructor
 
 # datatype
 
-Exp -- Datatype
+Datatype
 
-Exp -- TypeConstructor
+TypeConstructor
 
-Exp -- DataConstructor
+DataConstructor
 
 # recursion
 

@@ -36,6 +36,7 @@ export type Exp =
   | FoldedObjekt
   | Dot
   | Sequence
+  | Let
 
 export type Var = {
   family: "Exp"
@@ -653,5 +654,24 @@ export function SequenceCheck(exp: Exp, type: Exp): SequenceCheck {
     kind: "SequenceCheck",
     exp,
     type,
+  }
+}
+
+export type Let = {
+  family: "Exp"
+  kind: "Let"
+  name: string
+  exp: Exp
+  ret: Exp
+} & ExpMeta
+
+export function Let(name: string, exp: Exp, ret: Exp, span?: Span): Let {
+  return {
+    family: "Exp",
+    kind: "Let",
+    name,
+    exp,
+    ret,
+    span,
   }
 }
