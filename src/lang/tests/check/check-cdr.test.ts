@@ -1,11 +1,11 @@
 import { test } from "vitest"
-import { runCode } from "./utils"
+import { runCode } from "../utils"
 
-test("check car", async () => {
+test("check cdr", async () => {
   await runCode(`
 
 let pair: exists (Type) Type = cons(Type, Type)
-check car(pair): Type
+check cdr(pair): Type
 
 `)
 })
