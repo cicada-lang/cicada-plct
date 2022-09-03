@@ -606,7 +606,7 @@ export function Sequence(
   }
 }
 
-export type SequenceEntry = SequenceLet | SequenceLetThe
+export type SequenceEntry = SequenceLet | SequenceLetThe | SequenceCheck
 
 export type SequenceLet = {
   kind: "SequenceLet"
@@ -639,5 +639,25 @@ export function SequenceLetThe(
     name,
     type,
     exp,
+  }
+}
+
+export type SequenceCheck = {
+  kind: "SequenceCheck"
+  name: string
+  exp: Exp
+  type: Exp
+}
+
+export function SequenceCheck(
+  name: string,
+  exp: Exp,
+  type: Exp
+): SequenceCheck {
+  return {
+    kind: "SequenceCheck",
+    name,
+    exp,
+    type,
   }
 }

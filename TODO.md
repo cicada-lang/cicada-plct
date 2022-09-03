@@ -1,12 +1,29 @@
 # syntax
 
+prettier always ending comma
+
+parse sequence.test.ts -- with check
+
 Exps.Let -- with `ret`
+Exps.Let -- check
+Cores.Let
+Cores.Let -- evaluate
 
 Exps.LetThe -- with `ret`
+Exps.LetThe -- check
+Cores.LetThe
+Cores.LetThe -- evaluate
 
-unfoldSequence to `Exps.Let` and `Exps.LetThe`
+Exps.Check -- with `ret`
+Exps.Check -- check
+Cores.Check
+Cores.Check -- evaluate
 
-new SequenceEntry -- SequenceCheck
+unfoldSequence to `Exps.Let` and `Exps.LetThe` and `Exps.Check`
+
+check-sequence.test.ts
+
+compute-sequence.test.ts
 
 Exps.Objekt -- syntax -- handle "property:method"
 

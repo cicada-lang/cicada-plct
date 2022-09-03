@@ -26,5 +26,6 @@ export const sequence_entry = {
       '"="',
       { exp: "exp" },
     ],
+    "sequence_entry:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
   },
 }

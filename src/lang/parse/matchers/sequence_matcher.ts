@@ -23,5 +23,11 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceEntry {
         matchers.exp_matcher(t),
         matchers.exp_matcher(exp)
       ),
+    "sequence_entry:check": ({ name, exp, t }, { span }) =>
+      Exps.SequenceCheck(
+        pt.str(name),
+        matchers.exp_matcher(exp),
+        matchers.exp_matcher(t)
+      ),
   })(tree)
 }
