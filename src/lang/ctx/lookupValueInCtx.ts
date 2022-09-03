@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 
-export function lookupCtxValue(ctx: Ctx, name: string): Value | undefined {
+export function lookupValueInCtx(ctx: Ctx, name: string): Value | undefined {
   switch (ctx.kind) {
     case "CtxNull": {
       return undefined
@@ -11,7 +11,7 @@ export function lookupCtxValue(ctx: Ctx, name: string): Value | undefined {
       if (ctx.name === name) {
         return undefined
       } else {
-        return lookupCtxValue(ctx.rest, name)
+        return lookupValueInCtx(ctx.rest, name)
       }
     }
 
@@ -19,7 +19,7 @@ export function lookupCtxValue(ctx: Ctx, name: string): Value | undefined {
       if (ctx.name === name) {
         return ctx.value
       } else {
-        return lookupCtxValue(ctx.rest, name)
+        return lookupValueInCtx(ctx.rest, name)
       }
     }
   }
