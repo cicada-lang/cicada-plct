@@ -16,11 +16,21 @@ export function conversion(
     if (left.neutral.kind === "Var" && right.neutral.kind === "Var") {
       if (left.neutral.name === right.neutral.name) {
         return
+      } else {
+        throw new ElaborationError(
+          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`
+        )
       }
     }
+
+    // TODO handle other neutral cases.
   }
 
   if (left.kind === "Trivial" && right.kind === "Trivial") {
+    return
+  }
+
+  if (left.kind === "Sole" && right.kind === "Sole") {
     return
   }
 

@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
-import { Value } from "../value"
+import * as Values from "../value"
+import { conversion, Value } from "../value"
 
 /**
 
@@ -15,7 +15,8 @@ import { Value } from "../value"
    but also handles subtyping between classes,
    -- simple attribute based subtype relation.
 
-   `conversion` is implemented by `readback` and `alphaEquivalence`.
+   `conversion` might be implemented directly,
+   or implemented by `readback` and `alphaEquivalence`,
 
    We will not implement `Union` and `Intersection` types.
 
@@ -25,32 +26,20 @@ import { Value } from "../value"
 **/
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
-  if (subtype.kind === "Type" && type.kind === "Type") {
+  if (subtype.kind === "Pi" && type.kind === "Pi") {
+    // TODO handle Pi
     return
-  }
-
-  if (subtype.kind === "TypedNeutral" && type.kind === "TypedNeutral") {
-    if (subtype.neutral.kind === "Var" && type.neutral.kind === "Var") {
-      if (subtype.neutral.name === type.neutral.name) {
-        return
-      }
-    }
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
-    // TODO handle Sigma for real
+    // TODO handle Sigma
     return
   }
 
-  if (subtype.kind === "Trivial" && type.kind === "Trivial") {
-    return
-  }
+  // if (isClazz(subtype) && isClazz(type)) {
+  //   // TODO handle Clazz
+  //   return
+  // }
 
-  if (subtype.kind === "String" && type.kind === "String") {
-    return
-  }
-
-  throw new ElaborationError(
-    `inclusion is not implemented for subtype: ${subtype.kind} and type: ${type.kind}`
-  )
+  conversion(ctx, Values.Type(), subtype, type)
 }

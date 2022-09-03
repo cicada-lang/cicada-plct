@@ -36,6 +36,16 @@ New -- evaluate
 
 New -- formatCore
 
+# inclusion
+
+inclusion -- Pi
+inclusion -- Sigma
+inclusion -- Clazz
+
+# conversion
+
+conversion for all values
+
 # error report
 
 > We should setup an error report framework (and test it) as soon as possible.
