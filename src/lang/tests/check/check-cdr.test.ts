@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test("check cdr", async () => {
+test("check Cdr", async () => {
   await runCode(`
 
 let pair: exists (Type) Type = cons(Type, Type)

@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test("check quote is String", async () => {
+test("check Quote is String", async () => {
   await runCode(`
 
 check "": String

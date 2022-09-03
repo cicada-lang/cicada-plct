@@ -1,28 +1,25 @@
-# clazz
-
-compute-clazz.test.ts
-
 Clazz -- formatCore
-
+compute-clazz.test.ts
 Objekt -- formatCore
 compute-objekt.test.ts
-
 check-objekt.test.ts -- test duplicated name
 check-objekt.test.ts -- test extra property -- disallowed for now
 
-Exps.New
-Exps.New -- grammar and matcher
-New -- check
-New -- evaluate
-New -- formatCore
-
-# sigma
+# pair
 
 Add `Pair` as a global
 
 # the
 
 Add `the` as a global
+
+# new
+
+Exps.New
+Exps.New -- grammar and matcher
+New -- check
+New -- evaluate
+New -- formatCore
 
 # syntax
 
