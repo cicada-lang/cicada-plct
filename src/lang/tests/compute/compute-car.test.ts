@@ -1,10 +1,11 @@
 import { expect, test } from "vitest"
-import { runCode } from "./utils"
+import { runCode } from "../utils"
 
-test("compute Type", async () => {
+test("compute car", async () => {
   const output = await runCode(`
 
-compute Type
+let pair: exists (Type) Type = cons(Type, Type)
+compute car(pair)
 
 `)
 

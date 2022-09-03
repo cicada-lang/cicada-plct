@@ -2,6 +2,9 @@
 
 [refactor] rename readbackObjekt to readbackProperties
 
+[refactor] move `tests/check-*` to `tests/check/`
+
+check-clazz.test.ts
 compute-clazz.test.ts
 
 Clazz -- formatCore
