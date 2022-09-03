@@ -74,7 +74,7 @@ error for report
 
 error report for ElaborationError
 
-# pi
+# fn annotated
 
 Exps.FnAnnotated -- can be inferred
 
@@ -82,13 +82,11 @@ check -- Exps.FnAnnotated -- checkByInfer
 
 infer -- Exps.FnAnnotated
 
-unfoldMultiFn -- return Exps.FnAnnotated
+unfoldFn -- return Exps.FnAnnotated
 
-MultiApWithReturnType
+# FoldedFnWithReturnType
 
-Exps.FnWithReturnType
-
-Exps.FnAnnotatedWithReturnType
+FoldedFnWithReturnType
 
 # equal
 
