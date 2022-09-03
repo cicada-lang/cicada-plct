@@ -2,12 +2,12 @@ import * as Actions from "../actions"
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import * as Values from "../value"
-import { assertTypesInCtx, readback } from "../value"
+import { assertTypesInCtx, readback, Value } from "../value"
 
 export function readbackObjekt(
   ctx: Ctx,
   type: Values.Clazz,
-  value: Values.Objekt
+  value: Value
 ): Cores.Objekt {
   switch (type.kind) {
     case "ClazzNull": {

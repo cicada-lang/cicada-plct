@@ -1,10 +1,9 @@
 # clazz
 
-[refactor] extract assertClazzInCtx
-
-[refactor] readbackObjekt to readbackProperties
-
-[refactor] evaluate -- inline variables
+[refactor] extract assertClazz module
+[refactor] extract assertValues module
+[refactor] extract assertClazzInCtx module
+[refactor] extract assertTypesInCtx module
 
 compute-clazz.test.ts
 
