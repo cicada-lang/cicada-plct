@@ -1,15 +1,15 @@
 import { expect, test } from "vitest"
-import { Objekt, Var } from "../../../exp"
+import { FoldedObjekt, PropertyPlain, Var } from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Objekt", () => {
   expect(parseExp("{ T: Type, x: T }")).toMatchObject(
     deleteUndefined(
-      Objekt({
-        T: Var("Type"),
-        x: Var("T"),
-      })
+      FoldedObjekt([
+        PropertyPlain("T", Var("Type")),
+        PropertyPlain("x", Var("T")),
+      ])
     )
   )
 })
@@ -17,10 +17,10 @@ test("parse Objekt", () => {
 test("parse Objekt -- optional ending comma", () => {
   expect(parseExp("{ T: Type, x: T, }")).toMatchObject(
     deleteUndefined(
-      Objekt({
-        T: Var("Type"),
-        x: Var("T"),
-      })
+      FoldedObjekt([
+        PropertyPlain("T", Var("Type")),
+        PropertyPlain("x", Var("T")),
+      ])
     )
   )
 })
@@ -28,21 +28,17 @@ test("parse Objekt -- optional ending comma", () => {
 test("parse Objekt -- shorthand", () => {
   expect(parseExp("{ x, y, z }")).toMatchObject(
     deleteUndefined(
-      Objekt({
-        x: Var("x"),
-        y: Var("y"),
-        z: Var("z"),
-      })
+      FoldedObjekt([
+        PropertyPlain("x", Var("x")),
+        PropertyPlain("y", Var("y")),
+        PropertyPlain("z", Var("z")),
+      ])
     )
   )
 })
 
 test("parse Objekt -- shorthand -- single one", () => {
   expect(parseExp("{ x }")).toMatchObject(
-    deleteUndefined(
-      Objekt({
-        x: Var("x"),
-      })
-    )
+    deleteUndefined(FoldedObjekt([PropertyPlain("x", Var("x"))]))
   )
 })

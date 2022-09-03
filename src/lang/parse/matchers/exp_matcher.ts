@@ -86,13 +86,13 @@ export function operand_matcher(tree: pt.Tree): Exp {
         span
       ),
     "operand:objekt": ({ properties, last_property }, { span }) =>
-      Exps.Objekt(
-        Object.fromEntries([
+      Exps.FoldedObjekt(
+        [
           ...pt.matchers
             .zero_or_more_matcher(properties)
             .map(matchers.property_matcher),
           matchers.property_matcher(last_property),
-        ]),
+        ].map(([name, exp]) => Exps.PropertyPlain(name, exp)),
         span
       ),
   })(tree)

@@ -1,5 +1,3 @@
-FoldedObjekt -- grammar and matcher
-
 assertNoDuplicateProperties -- pass check-objekt.test.ts
 
 check-objekt.test.ts -- test extra property -- disallowed for now
