@@ -7,8 +7,8 @@ import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import {
   applyClosure,
+  assertClazzInCtx,
   assertTypeInCtx,
-  assertTypesInCtx,
   Value,
 } from "../value"
 
@@ -75,11 +75,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Objekt": {
       // TODO We should check that there are no duplicated names in properties.
-      assertTypesInCtx(ctx, type, [
-        Values.ClazzNull,
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-      ])
+      assertClazzInCtx(ctx, type)
 
       // TODO We should infer the properties that are not checked.
       //   This require us to handle off-order `Values.Clazz` in `inclusion`.

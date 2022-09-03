@@ -7,8 +7,8 @@ import { check, checkClazz, checkType, Exp } from "../exp"
 import * as Values from "../value"
 import {
   applyClosure,
+  assertClazzInCtx,
   assertTypeInCtx,
-  assertTypesInCtx,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
@@ -119,11 +119,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
 
-      assertTypesInCtx(ctx, inferred.type, [
-        Values.ClazzNull,
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-      ])
+      assertClazzInCtx(ctx, inferred.type)
 
       const propertyType = lookupPropertyTypeOrFail(
         inferred.type,

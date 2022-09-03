@@ -2,7 +2,7 @@ import * as Actions from "../actions"
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import * as Values from "../value"
-import { assertTypesInCtx, readback, Value } from "../value"
+import { assertClazzInCtx, readback, Value } from "../value"
 
 export function readbackObjekt(
   ctx: Ctx,
@@ -17,11 +17,7 @@ export function readbackObjekt(
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, type.name)
       const rest = Values.applyClosure(type.restClosure, propertyValue)
-      assertTypesInCtx(ctx, rest, [
-        Values.ClazzNull,
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-      ])
+      assertClazzInCtx(ctx, rest)
 
       const propertyCore = readback(ctx, type.propertyType, propertyValue)
       const restCore = readbackObjekt(ctx, rest, value)
@@ -35,11 +31,6 @@ export function readbackObjekt(
     case "ClazzFulfilled": {
       const propertyValue = Actions.doDot(value, type.name)
       const rest = type.rest
-      assertTypesInCtx(ctx, rest, [
-        Values.ClazzNull,
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-      ])
 
       const propertyCore = readback(ctx, type.propertyType, propertyValue)
       const restCore = readbackObjekt(ctx, rest, value)

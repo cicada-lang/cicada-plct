@@ -3,7 +3,7 @@ import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import { check, Exp } from "../exp"
 import * as Values from "../value"
-import { applyClosure, assertTypesInCtx, conversion } from "../value"
+import { applyClosure, assertClazzInCtx, conversion } from "../value"
 
 export function checkProperties(
   ctx: Ctx,
@@ -26,11 +26,7 @@ export function checkProperties(
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      assertTypesInCtx(ctx, rest, [
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-        Values.ClazzNull,
-      ])
+      assertClazzInCtx(ctx, rest)
       return {
         [clazz.name]: propertyCore,
         ...checkProperties(ctx, properties, rest),
@@ -46,19 +42,11 @@ export function checkProperties(
 
       const propertyCore = check(ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-
       conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
-
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
-      const rest = clazz.rest
-      assertTypesInCtx(ctx, rest, [
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-        Values.ClazzNull,
-      ])
       return {
         [clazz.name]: propertyCore,
-        ...checkProperties(ctx, properties, rest),
+        ...checkProperties(ctx, properties, clazz.rest),
       }
     }
   }

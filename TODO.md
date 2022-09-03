@@ -2,8 +2,6 @@
 
 [refactor] rename readbackObjekt to readbackProperties
 
-[refactor] extract assertClazzInCtx module
-
 compute-clazz.test.ts
 
 Clazz -- formatCore
