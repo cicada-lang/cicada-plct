@@ -1,7 +1,7 @@
 import * as Actions from "../actions"
 import { ElaborationError } from "../errors"
 import * as Values from "../value"
-import { applyClosure, assertValues, Value } from "../value"
+import { applyClosure, assertClazz, Value } from "../value"
 
 export function lookupPropertyType(
   clazz: Values.Clazz,
@@ -21,11 +21,7 @@ export function lookupPropertyType(
         Actions.doDot(target, clazz.name)
       )
 
-      assertValues(rest, [
-        Values.ClazzNull,
-        Values.ClazzCons,
-        Values.ClazzFulfilled,
-      ])
+      assertClazz(rest)
 
       return lookupPropertyType(rest, target, name)
     }

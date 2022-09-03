@@ -1,6 +1,10 @@
 # clazz
 
-[refactor] extract clazzClosure to avoid type casting
+[refactor] extract assertClazzInCtx
+
+[refactor] readbackObjekt to readbackProperties
+
+[refactor] evaluate -- inline variables
 
 compute-clazz.test.ts
 

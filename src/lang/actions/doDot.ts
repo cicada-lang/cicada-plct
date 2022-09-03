@@ -2,8 +2,8 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import {
+  assertClazz,
   assertValue,
-  assertValues,
   isValue,
   lookupPropertyTypeOrFail,
   Value,
@@ -20,11 +20,7 @@ export function doDot(target: Value, name: string): Value {
   }
 
   assertValue(target, Values.TypedNeutral)
-  assertValues(target.type, [
-    Values.ClazzNull,
-    Values.ClazzCons,
-    Values.ClazzFulfilled,
-  ])
+  assertClazz(target.type)
 
   return Values.TypedNeutral(
     lookupPropertyTypeOrFail(target.type, target, name),
