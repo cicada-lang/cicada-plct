@@ -82,9 +82,14 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       assertClazzInCtx(ctx, type)
 
       const properties = checkProperties(ctx, exp.properties, type)
-      // TODO We should infer the properties that are not checked.
-      //   This require us to handle off-order `Values.Clazz` in `inclusion`.
-      // disallowExtraProperty(ctx, properties)
+
+      /**
+         TODO We disallow extra property for now.
+         We might `infer` the properties that are not checked.
+         This require us to handle off-order `Values.Clazz` in `inclusion`.
+       **/
+
+      Exps.disallowExtraProperty(ctx, properties, exp.properties)
 
       return Cores.Objekt(properties)
     }

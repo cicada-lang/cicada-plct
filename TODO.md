@@ -1,5 +1,3 @@
-disallowExtraProperty -- pass check-objekt.test.ts
-
 # syntax
 
 Exps.Sequence -- syntax
