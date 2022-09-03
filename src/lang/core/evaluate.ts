@@ -75,14 +75,25 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
+    case "Objekt": {
+      // TODO: How do we handle the order of calculation of properties?
+      const properties = Object.entries(core.properties).reduce<
+        Record<string, Value>
+      >((acc, [name, core]) => {
+        return { [name]: evaluate(env, core), ...acc }
+      }, {})
+
+      return Values.Objekt(properties)
+    }
+
     case "Dot": {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
-    default: {
-      throw new EvaluationError(
-        `evaluate is not implemented for core: ${core.kind}`
-      )
-    }
+    // default: {
+    //   throw new EvaluationError(
+    //     `evaluate is not implemented for core: ${core.kind}`
+    //   )
+    // }
   }
 }
