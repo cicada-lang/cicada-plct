@@ -1,7 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
-import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, checkProperties, Exp } from "../exp"
 import * as Neutrals from "../neutral"
@@ -87,9 +86,13 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Objekt(checkProperties(ctx, exp.properties, type))
     }
 
-    default:
-      throw new ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`
-      )
+    case "Dot": {
+      return checkByInfer(ctx, exp, type)
+    }
+
+    // default:
+    // throw new ElaborationError(
+    // `check is not implemented for exp: ${exp.kind}`
+    // )
   }
 }
