@@ -1,20 +1,16 @@
 # syntax
 
-Exps.Sequence -- syntax
+Exps.Sequence -- grammar
 
-- require leading keyword `begin` to use sequence
-
-  ```
-  let x = begin {
-    return
-  }
-  ```
+parse -- sequence.test.ts
 
 unfoldSequence to `Exps.Let` and `Exps.LetThe`
 
 Exps.Let
 
 Exps.LetThe
+
+SequenceCheck
 
 Exps.Objekt -- syntax -- handle "property:method"
 
