@@ -9,9 +9,6 @@ import {
   applyClosure,
   assertTypeInCtx,
   assertTypesInCtx,
-  ClazzCons,
-  ClazzFulfilled,
-  ClazzNull,
   Value,
 } from "../value"
 import { lookupClazzPropertyType } from "../value/lookupClazzPropertyType"
@@ -117,13 +114,22 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Dot": {
-      const { core, type } = infer(ctx, exp.target)
-      assertTypesInCtx(ctx, type, [ClazzNull, ClazzCons, ClazzFulfilled])
+      const inferred = infer(ctx, exp.target)
+      assertTypesInCtx(ctx, inferred.type, [
+        Values.ClazzNull,
+        Values.ClazzCons,
+        Values.ClazzFulfilled,
+      ])
+
       let propertyType = undefined
       let propertyCore = undefined
-      if (core.kind === "Objekt") {
-        propertyType = lookupClazzPropertyType(ctx, exp.name, core, type)
-        propertyCore = core.properties[exp.name]
+      if (inferred.core.kind === "Objekt") {
+        propertyType = lookupClazzPropertyType(
+          inferred.type,
+          evaluate(ctxToEnv(ctx), inferred.core),
+          exp.name
+        )
+        propertyCore = inferred.core.properties[exp.name]
       }
 
       if (propertyType === undefined || propertyCore === undefined) {

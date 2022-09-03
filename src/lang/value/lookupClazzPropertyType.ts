@@ -1,43 +1,38 @@
-import * as Cores from "../core"
-import { evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv } from "../ctx"
+import * as Actions from "../actions"
 import * as Values from "../value"
-import { applyClosure, assertTypesInCtx, Value } from "../value"
+import { applyClosure, assertValues, Value } from "../value"
 
 export function lookupClazzPropertyType(
-  ctx: Ctx,
-  name: string,
-  core: Cores.Objekt,
-  clazz: Values.Clazz
+  clazz: Values.Clazz,
+  target: Value,
+  name: string
 ): Value | undefined {
-  if (clazz.kind === "ClazzNull") {
-    return undefined
-  } else {
-    if (clazz.name === name) {
-      return clazz.propertyType
-    } else {
-      let value = undefined
-      if (clazz.kind === "ClazzFulfilled") {
-        value = clazz.property
-      } else {
-        let propertyValue = core.properties[name]
-        if (propertyValue !== undefined) {
-          value = evaluate(ctxToEnv(ctx), core.properties[name])
-        }
-      }
+  switch (clazz.kind) {
+    case "ClazzNull": {
+      return undefined
+    }
 
-      if (value === undefined) {
-        return undefined
-      } else {
-        ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
-        const restClazz = applyClosure(clazz.restClosure, value)
-        assertTypesInCtx(ctx, restClazz, [
-          Values.ClazzNull,
-          Values.ClazzCons,
-          Values.ClazzFulfilled,
-        ])
-        return lookupClazzPropertyType(ctx, name, core, restClazz)
-      }
+    case "ClazzCons": {
+      if (clazz.name === name) return clazz.propertyType
+
+      const rest = applyClosure(
+        clazz.restClosure,
+        Actions.doDot(target, clazz.name)
+      )
+
+      assertValues(rest, [
+        Values.ClazzNull,
+        Values.ClazzCons,
+        Values.ClazzFulfilled,
+      ])
+
+      return lookupClazzPropertyType(rest, target, name)
+    }
+
+    case "ClazzFulfilled": {
+      if (clazz.name === name) return clazz.propertyType
+
+      throw new Error("TODO")
     }
   }
 }

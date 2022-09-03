@@ -26,7 +26,7 @@ export function doDot(target: Value, name: string): Value {
     Values.ClazzFulfilled,
   ])
 
-  const propertyType = lookupClazzPropertyType(target.type, name)
+  const propertyType = lookupClazzPropertyType(target.type, target, name)
   if (propertyType === undefined) {
     throw new ElaborationError(`Undefined property type name: ${name}`)
   }

@@ -1,5 +1,9 @@
 # clazz
 
+Values.ClazzFulfilled -- should have `rest` instead of `restClosure`
+
+fix lookupClazzPropertyType -- case "ClazzFulfilled"
+
 compute-clazz.test.ts
 
 Clazz -- formatCore
