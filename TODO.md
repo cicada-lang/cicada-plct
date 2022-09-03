@@ -1,14 +1,12 @@
 # syntax
 
-Exps.Sequence -- grammar
-
 parse -- sequence.test.ts
 
 unfoldSequence to `Exps.Let` and `Exps.LetThe`
 
-Exps.Let
+Exps.Let -- with `ret`
 
-Exps.LetThe
+Exps.LetThe -- with `ret`
 
 SequenceCheck
 

@@ -26,16 +26,5 @@ export const sequence_entry = {
       '"="',
       { exp: "exp" },
     ],
-    // "sequence_entry:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
-    // "sequence_entry:let_fn": [
-    //   '"function"',
-    //   { name: "identifier" },
-    //   '"("',
-    //   { typings: "typings" },
-    //   '")"',
-    //   '":"',
-    //   { ret_t: "exp" },
-    //   { sequence: "sequence" },
-    // ],
   },
 }
