@@ -1,6 +1,5 @@
 # clazz
 
-check-clazz.test.ts
 compute-clazz.test.ts
 
 Clazz -- formatCore
@@ -16,6 +15,14 @@ Exps.New -- grammar and matcher
 New -- check
 New -- evaluate
 New -- formatCore
+
+# sigma
+
+Add `Pair` as a global
+
+# the
+
+Add `the` as a global
 
 # syntax
 
@@ -33,16 +40,6 @@ error for report
 
 error report for ElaborationError
 
-# datatype
-
-Exp -- Datatype
-Exp -- TypeConstructor
-Exp -- DataConstructor
-
-# sigma
-
-Add Pair as a global
-
 # pi
 
 Exps.FnAnnotated -- can be inferred
@@ -54,6 +51,13 @@ MultiApWithReturnType
 Exps.FnWithReturnType
 Exps.FnAnnotatedWithReturnType
 
+# equal
+
+Equal
+replace
+refl
+same
+
 # unification, implicit and vague
 
 isNeutralVar
@@ -61,6 +65,12 @@ isNeutralVar
 - we will use NeutralVar as pattern variable (or say logic variable)
 
 NeutralVar constructor
+
+# datatype
+
+Exp -- Datatype
+Exp -- TypeConstructor
+Exp -- DataConstructor
 
 # recursion
 
