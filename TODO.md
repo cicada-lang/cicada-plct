@@ -1,24 +1,20 @@
-Objekt syntax with list of property
+FoldedObjekt -- syntax with a list of properties
 
-assertNoDuplicateProperties
-
-- pass check-objekt.test.ts
+assertNoDuplicateProperties -- pass check-objekt.test.ts
 
 check-objekt.test.ts -- test extra property -- disallowed for now
 
-disallowExtraProperty
-
-- pass check-objekt.test.ts
+disallowExtraProperty -- pass check-objekt.test.ts
 
 # syntax
 
-syntax about "sequence"
+Exps.Sequence -- syntax
 
 Exps.Objekt -- syntax -- handle "property:method"
 
 Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
 
-Exps.Objekt -- syntax -- handle "property:spread"
+FoldedObjekt -- handle "property:spread"
 
 # pair
 
