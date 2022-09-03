@@ -76,12 +76,12 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Objekt": {
-      // TODO: How do we handle the order of calculation of properties?
-      const properties = Object.entries(core.properties).reduce<
-        Record<string, Value>
-      >((acc, [name, core]) => {
-        return { [name]: evaluate(env, core), ...acc }
-      }, {})
+      const properties = Object.fromEntries(
+        Object.entries(core.properties).map(([name, core]) => [
+          name,
+          evaluate(env, core),
+        ])
+      )
 
       return Values.Objekt(properties)
     }
