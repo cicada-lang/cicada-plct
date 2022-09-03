@@ -1,5 +1,11 @@
 import { expect, test } from "vitest"
-import { Sequence, SequenceLet, SequenceLetThe, Var } from "../../../exp"
+import {
+  Sequence,
+  SequenceCheck,
+  SequenceLet,
+  SequenceLetThe,
+  Var,
+} from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
@@ -9,6 +15,7 @@ test("parse Sequence", () => {
       `
 begin {
   let x: Trivial = sole
+  check sole: Trivial
   let y = sole
   let z = sole
   return x
@@ -20,6 +27,7 @@ begin {
       Sequence(
         [
           SequenceLetThe("x", Var("Trivial"), Var("sole")),
+          SequenceCheck(Var("sole"), Var("Trivial")),
           SequenceLet("y", Var("sole")),
           SequenceLet("z", Var("sole")),
         ],

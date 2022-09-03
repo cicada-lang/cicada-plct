@@ -644,19 +644,13 @@ export function SequenceLetThe(
 
 export type SequenceCheck = {
   kind: "SequenceCheck"
-  name: string
   exp: Exp
   type: Exp
 }
 
-export function SequenceCheck(
-  name: string,
-  exp: Exp,
-  type: Exp,
-): SequenceCheck {
+export function SequenceCheck(exp: Exp, type: Exp): SequenceCheck {
   return {
     kind: "SequenceCheck",
-    name,
     exp,
     type,
   }

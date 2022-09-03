@@ -1,7 +1,5 @@
 # syntax
 
-parse sequence.test.ts -- with check
-
 Exps.Let -- with `ret`
 Exps.Let -- check
 Cores.Let
