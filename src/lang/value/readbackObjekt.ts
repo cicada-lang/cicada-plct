@@ -9,23 +9,45 @@ export function readbackObjekt(
   type: Values.Clazz,
   value: Values.Objekt
 ): Cores.Objekt {
-  if (type.kind === "ClazzNull") {
-    return Cores.Objekt({})
-  } else {
-    const propertyValue = Actions.doDot(value, type.name)
-    const restType = Values.applyClosure(type.restClosure, propertyValue)
-    assertTypesInCtx(ctx, restType, [
-      Values.ClazzNull,
-      Values.ClazzCons,
-      Values.ClazzFulfilled,
-    ])
+  switch (type.kind) {
+    case "ClazzNull": {
+      return Cores.Objekt({})
+    }
 
-    const propertyCore = readback(ctx, type.propertyType, propertyValue)
-    const restCore = readbackObjekt(ctx, restType, value)
+    case "ClazzCons": {
+      const propertyValue = Actions.doDot(value, type.name)
+      const rest = Values.applyClosure(type.restClosure, propertyValue)
+      assertTypesInCtx(ctx, rest, [
+        Values.ClazzNull,
+        Values.ClazzCons,
+        Values.ClazzFulfilled,
+      ])
 
-    return Cores.Objekt({
-      [type.name]: propertyCore,
-      ...restCore.properties,
-    })
+      const propertyCore = readback(ctx, type.propertyType, propertyValue)
+      const restCore = readbackObjekt(ctx, rest, value)
+
+      return Cores.Objekt({
+        [type.name]: propertyCore,
+        ...restCore.properties,
+      })
+    }
+
+    case "ClazzFulfilled": {
+      const propertyValue = Actions.doDot(value, type.name)
+      const rest = type.rest
+      assertTypesInCtx(ctx, rest, [
+        Values.ClazzNull,
+        Values.ClazzCons,
+        Values.ClazzFulfilled,
+      ])
+
+      const propertyCore = readback(ctx, type.propertyType, propertyValue)
+      const restCore = readbackObjekt(ctx, rest, value)
+
+      return Cores.Objekt({
+        [type.name]: propertyCore,
+        ...restCore.properties,
+      })
+    }
   }
 }

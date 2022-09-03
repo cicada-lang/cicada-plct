@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Env, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
 import * as Values from "../value"
-import { Closure, Value } from "../value"
+import { assertValues, Closure, Value } from "../value"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
@@ -67,11 +67,19 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ClazzFulfilled": {
+      const rest = evaluate(env, core.rest)
+
+      assertValues(rest, [
+        Values.ClazzNull,
+        Values.ClazzCons,
+        Values.ClazzFulfilled,
+      ])
+
       return Values.ClazzFulfilled(
         core.name,
         evaluate(env, core.propertyType),
         evaluate(env, core.property),
-        Closure(env, core.localName, core.rest)
+        rest
       )
     }
 
