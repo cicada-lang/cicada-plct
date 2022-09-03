@@ -1,5 +1,8 @@
 # clazz
 
+[refactor] rename lookupCtxType to lookupTypeInCtx
+[refactor] rename lookupCtxValue to lookupValueInCtx
+
 [refactor] rename readbackObjekt to readbackProperties
 
 compute-clazz.test.ts

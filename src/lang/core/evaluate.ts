@@ -1,6 +1,6 @@
 import * as Actions from "../actions"
 import { Core } from "../core"
-import { Env, EnvCons, lookupEnvValue } from "../env"
+import { Env, EnvCons, lookupValueInEnv } from "../env"
 import { EvaluationError } from "../errors"
 import * as Values from "../value"
 import { assertClazz, Closure, Value } from "../value"
@@ -8,7 +8,7 @@ import { assertClazz, Closure, Value } from "../value"
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
-      const value = lookupEnvValue(env, core.name)
+      const value = lookupValueInEnv(env, core.name)
       if (value === undefined) {
         throw new EvaluationError(`Undefined name: ${name}`)
       }
