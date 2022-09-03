@@ -86,6 +86,42 @@ export function typeDirectedReadback(
       )
     }
 
+    case "ClazzNull": {
+      return Cores.Objekt({})
+    }
+
+    case "ClazzCons": {
+      const propertyValue = Actions.doDot(value, type.name)
+      const restType = applyClosure(type.restClosure, propertyValue)
+      const rest = readback(ctx, restType, value)
+
+      if (rest.kind === "Objekt") {
+        return Cores.Objekt({
+          [type.name]: readback(ctx, type.propertyType, propertyValue),
+          ...rest.properties,
+        })
+      } else {
+        // This branch is unreached.
+        return undefined
+      }
+    }
+
+    case "ClazzFulfilled": {
+      const propertyValue = type.property
+      const restType = applyClosure(type.restClosure, propertyValue)
+      const rest = readback(ctx, restType, value)
+
+      if (rest.kind === "Objekt") {
+        return Cores.Objekt({
+          [type.name]: readback(ctx, type.propertyType, propertyValue),
+          ...rest.properties,
+        })
+      } else {
+        // This branch is unreached too.
+        return undefined
+      }
+    }
+
     case "Trivial": {
       /**
          The η-rule for `Trivial` states that,
