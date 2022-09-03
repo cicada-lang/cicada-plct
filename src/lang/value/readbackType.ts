@@ -7,24 +7,28 @@ import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
 import { applyClosure, readback, Value } from "../value"
 
+/**
+
+   TODO Maybe a scope bug.
+
+   Take Type as a example.
+
+   let U = Type
+
+   function f(Type: (Type) -> Type) {
+   // Problem: In this scope,
+   // `U` is `readback` to `Cores.Var("Type")`,
+   // `Type` is also `readback` to `Cores.Var("Type")`,
+   // but they should not be equal (if we implement equal by NbE).
+
+   // Solution: `Type` should not be `readback` to `Cores.Var("Type")`.
+   }
+
+**/
+
 export function readbackType(ctx: Ctx, type: Value): Core {
   switch (type.kind) {
     case "Type": {
-      /**
-         TODO Maybe a scope bug.
-
-         let U = Type
-
-         function f(Type: (Type) -> Type) {
-         // Problem: In this scope,
-         // `U` is `readback` to `Cores.Var("Type")`,
-         // `Type` is also `readback` to `Cores.Var("Type")`,
-         // but they should not be equal (if we implement equal by NbE).
-
-         // Solution: `Type` should not be `readback` to `Cores.Var("Type")`.
-         }
-      **/
-
       return Cores.Var("Type")
     }
 
@@ -64,6 +68,22 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       ctx = CtxCons(freshName, type.carType, ctx)
       const cdrTypeCore = readbackType(ctx, cdrTypeValue)
       return Cores.Sigma(freshName, carTypeCore, cdrTypeCore)
+    }
+
+    case "ClazzNull": {
+      return Cores.ClazzNull()
+    }
+
+    case "ClazzCons": {
+      throw new ElaborationError(
+        `readbackType is not implemented for type: ${type.kind}`
+      )
+    }
+
+    case "ClazzFulfilled": {
+      throw new ElaborationError(
+        `readbackType is not implemented for type: ${type.kind}`
+      )
     }
 
     default: {

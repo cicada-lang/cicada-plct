@@ -44,6 +44,12 @@ export function formatCore(core: Core): string {
       return `"${core.literal}"`
     }
 
+    case "ClazzNull":
+    case "ClazzCons":
+    case "ClazzFulfilled": {
+      return `class { TODO }`
+    }
+
     case "Dot": {
       return `${formatCore(core.target)}.${core.name}`
     }

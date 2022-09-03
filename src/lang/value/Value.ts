@@ -197,23 +197,23 @@ export type ClazzFulfilled = {
   family: "Value"
   kind: "ClazzFulfilled"
   name: string
-  property: Value
   propertyType: Value
+  property: Value
   rest: Clazz
 }
 
 export function ClazzFulfilled(
   name: string,
-  property: Value,
   propertyType: Value,
+  property: Value,
   rest: Clazz
 ): ClazzFulfilled {
   return {
     family: "Value",
     kind: "ClazzFulfilled",
     name,
-    property,
     propertyType,
+    property,
     rest,
   }
 }

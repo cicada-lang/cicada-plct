@@ -204,23 +204,23 @@ export type ClazzFulfilled = {
   family: "Core"
   kind: "ClazzFulfilled"
   name: string
-  property: Core
   propertyType: Core
+  property: Core
   rest: Clazz
 }
 
 export function ClazzFulfilled(
   name: string,
-  property: Core,
   propertyType: Core,
+  property: Core,
   rest: Clazz
 ): ClazzFulfilled {
   return {
     family: "Core",
     kind: "ClazzFulfilled",
     name,
-    property,
     propertyType,
+    property,
     rest,
   }
 }
