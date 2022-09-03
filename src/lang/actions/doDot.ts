@@ -5,7 +5,7 @@ import {
   assertValue,
   assertValues,
   isValue,
-  lookupClazzPropertyType,
+  lookupClazzPropertyTypeOrFail,
   Value,
 } from "../value"
 
@@ -26,10 +26,8 @@ export function doDot(target: Value, name: string): Value {
     Values.ClazzFulfilled,
   ])
 
-  const propertyType = lookupClazzPropertyType(target.type, target, name)
-  if (propertyType === undefined) {
-    throw new ElaborationError(`Undefined property type name: ${name}`)
-  }
-
-  return Values.TypedNeutral(propertyType, Neutrals.Dot(target.neutral, name))
+  return Values.TypedNeutral(
+    lookupClazzPropertyTypeOrFail(target.type, target, name),
+    Neutrals.Dot(target.neutral, name)
+  )
 }

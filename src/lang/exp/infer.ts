@@ -9,9 +9,11 @@ import {
   applyClosure,
   assertTypeInCtx,
   assertTypesInCtx,
+  lookupClazzPropertyOrFail,
+  lookupClazzPropertyTypeOrFail,
+  readback,
   Value,
 } from "../value"
-import { lookupClazzPropertyType } from "../value/lookupClazzPropertyType"
 
 export type Inferred = {
   type: Value
@@ -115,26 +117,28 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Dot": {
       const inferred = infer(ctx, exp.target)
+      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+
       assertTypesInCtx(ctx, inferred.type, [
         Values.ClazzNull,
         Values.ClazzCons,
         Values.ClazzFulfilled,
       ])
 
-      let propertyType = undefined
-      let propertyCore = undefined
-      if (inferred.core.kind === "Objekt") {
-        propertyType = lookupClazzPropertyType(
-          inferred.type,
-          evaluate(ctxToEnv(ctx), inferred.core),
-          exp.name
-        )
-        propertyCore = inferred.core.properties[exp.name]
-      }
+      const propertyType = lookupClazzPropertyTypeOrFail(
+        inferred.type,
+        targetValue,
+        exp.name
+      )
 
-      if (propertyType === undefined || propertyCore === undefined) {
-        throw new ElaborationError(`missing property: ${exp.name}`)
-      }
+      const property = lookupClazzPropertyOrFail(
+        inferred.type,
+        targetValue,
+        exp.name
+      )
+
+      const propertyCore = readback(ctx, propertyType, property)
+
       return Inferred(propertyType, propertyCore)
     }
 
