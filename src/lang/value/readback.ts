@@ -6,7 +6,14 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, isValue, readbackType, Value } from "../value"
+import {
+  applyClosure,
+  assertValue,
+  isValue,
+  readbackType,
+  Value,
+} from "../value"
+import { readbackObjekt } from "./readbackObjekt"
 
 /**
 
@@ -84,6 +91,13 @@ export function typeDirectedReadback(
         readback(ctx, type.carType, carValue),
         readback(ctx, cdrType, cdrValue)
       )
+    }
+
+    case "ClazzNull":
+    case "ClazzCons":
+    case "ClazzFulfilled": {
+      assertValue(value, Values.Objekt)
+      return readbackObjekt(ctx, type, value)
     }
 
     case "Trivial": {

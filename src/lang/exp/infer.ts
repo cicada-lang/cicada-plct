@@ -5,7 +5,16 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
 import * as Values from "../value"
-import { applyClosure, assertTypeInCtx, Value } from "../value"
+import {
+  applyClosure,
+  assertTypeInCtx,
+  assertTypesInCtx,
+  ClazzCons,
+  ClazzFulfilled,
+  ClazzNull,
+  Value,
+} from "../value"
+import { lookupClazzPropertyType } from "../value/lookupClazzPropertyType"
 
 export type Inferred = {
   type: Value
@@ -105,6 +114,22 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "FoldedClazz": {
       return infer(ctx, Exps.unfoldClazz(exp.bindings))
+    }
+
+    case "Dot": {
+      const { core, type } = infer(ctx, exp.target)
+      assertTypesInCtx(ctx, type, [ClazzNull, ClazzCons, ClazzFulfilled])
+      let propertyType = undefined
+      let propertyCore = undefined
+      if (core.kind === "Objekt") {
+        propertyType = lookupClazzPropertyType(ctx, exp.name, core, type)
+        propertyCore = core.properties[exp.name]
+      }
+
+      if (propertyType === undefined || propertyCore === undefined) {
+        throw new ElaborationError(`missing property: ${exp.name}`)
+      }
+      return Inferred(propertyType, propertyCore)
     }
 
     default: {

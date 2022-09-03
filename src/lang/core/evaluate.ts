@@ -75,14 +75,25 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
+    case "Objekt": {
+      const properties = Object.fromEntries(
+        Object.entries(core.properties).map(([name, core]) => [
+          name,
+          evaluate(env, core),
+        ])
+      )
+
+      return Values.Objekt(properties)
+    }
+
     case "Dot": {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
-    default: {
-      throw new EvaluationError(
-        `evaluate is not implemented for core: ${core.kind}`
-      )
-    }
+    // default: {
+    //   throw new EvaluationError(
+    //     `evaluate is not implemented for core: ${core.kind}`
+    //   )
+    // }
   }
 }
