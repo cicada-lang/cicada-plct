@@ -1,5 +1,6 @@
 export * from "./assertClazz"
 export * from "./assertTypeInCtx"
+export * from "./assertTypesInCtx"
 export * from "./assertValue"
 export * from "./assertValues"
 export * from "./Closure"
