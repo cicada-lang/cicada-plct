@@ -8,7 +8,6 @@ Exps.LetThe -- check
 Cores.LetThe
 Cores.LetThe -- evaluate
 
-Exps.Check -- with `ret`
 Exps.Check -- check
 Cores.Check
 Cores.Check -- evaluate

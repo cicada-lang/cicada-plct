@@ -38,6 +38,7 @@ export type Exp =
   | Sequence
   | Let
   | LetThe
+  | Check
 
 export type Var = {
   family: "Exp"
@@ -699,6 +700,25 @@ export function LetThe(
     name,
     t,
     exp,
+    ret,
+    span,
+  }
+}
+
+export type Check = {
+  family: "Exp"
+  kind: "Check"
+  exp: Exp
+  t: Exp
+  ret: Exp
+} & ExpMeta
+
+export function Check(exp: Exp, t: Exp, ret: Exp, span?: Span): Check {
+  return {
+    family: "Exp",
+    kind: "Check",
+    exp,
+    t,
     ret,
     span,
   }
