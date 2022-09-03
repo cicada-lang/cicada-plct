@@ -6,7 +6,14 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, isValue, readbackType, Value } from "../value"
+import {
+  applyClosure,
+  assertValue,
+  isValue,
+  readbackType,
+  Value,
+} from "../value"
+import { readbackObjekt } from "./readbackObjekt"
 
 /**
 
@@ -86,40 +93,11 @@ export function typeDirectedReadback(
       )
     }
 
-    case "ClazzNull": {
-      return Cores.Objekt({})
-    }
-
-    case "ClazzCons": {
-      const propertyValue = Actions.doDot(value, type.name)
-      const restType = applyClosure(type.restClosure, propertyValue)
-      const rest = readback(ctx, restType, value)
-
-      if (rest.kind === "Objekt") {
-        return Cores.Objekt({
-          [type.name]: readback(ctx, type.propertyType, propertyValue),
-          ...rest.properties,
-        })
-      } else {
-        // This branch is unreached.
-        return undefined
-      }
-    }
-
+    case "ClazzNull":
+    case "ClazzCons":
     case "ClazzFulfilled": {
-      const propertyValue = type.property
-      const restType = applyClosure(type.restClosure, propertyValue)
-      const rest = readback(ctx, restType, value)
-
-      if (rest.kind === "Objekt") {
-        return Cores.Objekt({
-          [type.name]: readback(ctx, type.propertyType, propertyValue),
-          ...rest.properties,
-        })
-      } else {
-        // This branch is unreached too.
-        return undefined
-      }
+      assertValue(value, Values.Objekt)
+      return readbackObjekt(ctx, type, value)
     }
 
     case "Trivial": {
