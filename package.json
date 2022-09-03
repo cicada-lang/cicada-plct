@@ -2,7 +2,9 @@
   "name": "@cicada-lang/cicada-next",
   "version": "0.2.1",
   "repository": "github:cicada-lang/cicada-next",
-  "main": "lib/index.js",
+  "exports": {
+    "./": "./lib/"
+  },
   "files": [
     "lib"
   ],
