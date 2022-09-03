@@ -1,7 +1,5 @@
 # clazz
 
-[refactor] rename readbackObjekt to readbackProperties
-
 check-clazz.test.ts
 compute-clazz.test.ts
 

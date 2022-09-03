@@ -7,7 +7,7 @@ import * as Neutrals from "../neutral"
 import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
 import { applyClosure, isValue, readbackType, Value } from "../value"
-import { readbackObjekt } from "./readbackObjekt"
+import { readbackProperties } from "./readbackProperties"
 
 /**
 
@@ -90,7 +90,7 @@ export function typeDirectedReadback(
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
-      return readbackObjekt(ctx, type, value)
+      return Cores.Objekt(readbackProperties(ctx, type, value))
     }
 
     case "Trivial": {
