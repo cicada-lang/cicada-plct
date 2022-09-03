@@ -1,4 +1,3 @@
-readbackClazz
 Clazz -- formatCore
 compute-clazz.test.ts -- pass
 Objekt -- formatCore
