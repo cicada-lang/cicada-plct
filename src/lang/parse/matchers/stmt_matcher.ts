@@ -17,7 +17,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         matchers.exp_matcher(t),
         matchers.exp_matcher(exp),
-        span
+        span,
       ),
     "stmt:compute": ({ exp }, { span }) =>
       new Stmts.Compute(matchers.exp_matcher(exp), span),
@@ -28,9 +28,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers
             .zero_or_more_matcher(bindings)
             .map(matchers.clazz_binding_matcher),
-          span
+          span,
         ),
-        span
+        span,
       ),
   })(tree)
 }

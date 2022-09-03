@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 
 test("parse Clazz", () => {
   expect(
-    parseStmts("class ABC { a: String, b: String, c: String }")
+    parseStmts("class ABC { a: String, b: String, c: String }"),
   ).toMatchObject(
     deleteUndefined([
       new Clazz(
@@ -15,8 +15,8 @@ test("parse Clazz", () => {
           ClazzBindingAbstract("a", Var("String")),
           ClazzBindingAbstract("b", Var("String")),
           ClazzBindingAbstract("c", Var("String")),
-        ])
+        ]),
       ),
-    ])
+    ]),
   )
 })

@@ -188,7 +188,7 @@ export function ClazzCons(
   name: string,
   localName: string,
   propertyType: Core,
-  rest: Clazz
+  rest: Clazz,
 ): ClazzCons {
   return {
     family: "Core",
@@ -213,7 +213,7 @@ export function ClazzFulfilled(
   name: string,
   propertyType: Core,
   property: Core,
-  rest: Clazz
+  rest: Clazz,
 ): ClazzFulfilled {
   return {
     family: "Core",

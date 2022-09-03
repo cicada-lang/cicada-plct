@@ -13,8 +13,8 @@ begin {
   let z = sole
   return x
 }
-`
-    )
+`,
+    ),
   ).toMatchObject(
     deleteUndefined(
       Sequence(
@@ -23,9 +23,9 @@ begin {
           SequenceLet("y", Var("sole")),
           SequenceLet("z", Var("sole")),
         ],
-        Var("x")
-      )
-    )
+        Var("x"),
+      ),
+    ),
   )
 })
 
@@ -36,7 +36,7 @@ test("parse Sequence -- only return", () => {
 begin {
   return x
 }
-`
-    )
+`,
+    ),
   ).toMatchObject(deleteUndefined(Sequence([], Var("x"))))
 })

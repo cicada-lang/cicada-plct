@@ -5,25 +5,25 @@ import { deleteUndefined } from "../utils"
 
 test("parse Fn", () => {
   expect(parseExp("(x) => x")).toMatchObject(
-    deleteUndefined(FoldedFn([FnBindingName("x")], Var("x")))
+    deleteUndefined(FoldedFn([FnBindingName("x")], Var("x"))),
   )
 
   expect(parseExp("function (x) x")).toMatchObject(
-    deleteUndefined(FoldedFn([FnBindingName("x")], Var("x")))
+    deleteUndefined(FoldedFn([FnBindingName("x")], Var("x"))),
   )
 })
 
 test("parse Fn -- multiple bindings", () => {
   expect(parseExp("(x, y) => x")).toMatchObject(
     deleteUndefined(
-      FoldedFn([FnBindingName("x"), FnBindingName("y")], Var("x"))
-    )
+      FoldedFn([FnBindingName("x"), FnBindingName("y")], Var("x")),
+    ),
   )
 
   expect(parseExp("function (x, y) x")).toMatchObject(
     deleteUndefined(
-      FoldedFn([FnBindingName("x"), FnBindingName("y")], Var("x"))
-    )
+      FoldedFn([FnBindingName("x"), FnBindingName("y")], Var("x")),
+    ),
   )
 })
 
@@ -35,17 +35,17 @@ test("parse Fn -- annotated", () => {
           FnBindingAnnotated("x", Var("Type")),
           FnBindingAnnotated("y", Var("Type")),
         ],
-        Var("x")
-      )
-    )
+        Var("x"),
+      ),
+    ),
   )
 
   expect(parseExp("(x: Type, y) => x")).toMatchObject(
     deleteUndefined(
       FoldedFn(
         [FnBindingAnnotated("x", Var("Type")), FnBindingName("y")],
-        Var("x")
-      )
-    )
+        Var("x"),
+      ),
+    ),
   )
 })

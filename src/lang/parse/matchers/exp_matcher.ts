@@ -19,7 +19,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .map((args) => matchers.args_matcher(args))
         .reduce(
           (result, args) => Exps.FoldedAp(result, args, span),
-          operator_matcher(target)
+          operator_matcher(target),
         ),
     "operator:car": ({ target }, { span }) =>
       Exps.Car(exp_matcher(target), span),
@@ -36,8 +36,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
           Exps.Dot(
             operator_matcher(target),
             pt.str(name),
-            pt.span_closure([target.span, name.span])
-          )
+            pt.span_closure([target.span, name.span]),
+          ),
         ),
     "operator:sequence_begin": ({ sequence }, { span }) =>
       matchers.sequence_matcher(sequence),
@@ -50,31 +50,31 @@ export function operand_matcher(tree: pt.Tree): Exp {
       Exps.FoldedPi(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
-        span
+        span,
       ),
     "operand:pi_forall": ({ bindings, ret_t }, { span }) =>
       Exps.FoldedPi(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
-        span
+        span,
       ),
     "operand:fn": ({ bindings, ret }, { span }) =>
       Exps.FoldedFn(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
-        span
+        span,
       ),
     "operand:fn_function": ({ bindings, ret }, { span }) =>
       Exps.FoldedFn(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
-        span
+        span,
       ),
     "operand:sigma_exists": ({ bindings, cdr_t }, { span }) =>
       Exps.FoldedSigma(
         matchers.sigma_bindings_matcher(bindings),
         matchers.exp_matcher(cdr_t),
-        span
+        span,
       ),
     "operand:cons": ({ car, cdr }, { span }) =>
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
@@ -85,7 +85,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         pt.matchers
           .zero_or_more_matcher(bindings)
           .map(matchers.clazz_binding_matcher),
-        span
+        span,
       ),
     "operand:objekt": ({ properties, last_property }, { span }) =>
       Exps.FoldedObjekt(
@@ -95,7 +95,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
             .map(matchers.property_matcher),
           matchers.property_matcher(last_property),
         ].map(([name, exp]) => Exps.PropertyPlain(name, exp)),
-        span
+        span,
       ),
   })(tree)
 }

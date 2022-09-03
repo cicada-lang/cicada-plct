@@ -19,13 +19,13 @@ type ElementReturnTypeUnion<T extends Array<AlreadyTypeConstructor>> =
 export function assertTypesInCtx<T extends Array<AlreadyTypeConstructor>>(
   ctx: Ctx,
   value: Value,
-  alreadyTypeConstructors: T
+  alreadyTypeConstructors: T,
 ): asserts value is ElementReturnTypeUnion<T> {
   const kinds = alreadyTypeConstructors.map((x) => x.name)
 
   if (!kinds.includes(value.kind)) {
     throw new ElaborationError(
-      `expect value to be type and to have kind: ${kinds}, instead of: ${value.kind}`
+      `expect value to be type and to have kind: ${kinds}, instead of: ${value.kind}`,
     )
   }
 }

@@ -8,7 +8,7 @@ export function sequence_matcher(tree: pt.Tree): Exps.Sequence {
       Exps.Sequence(
         pt.matchers.zero_or_more_matcher(entries).map(sequence_entry_matcher),
         matchers.exp_matcher(ret),
-        span
+        span,
       ),
   })(tree)
 }
@@ -21,13 +21,13 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceEntry {
       Exps.SequenceLetThe(
         pt.str(name),
         matchers.exp_matcher(t),
-        matchers.exp_matcher(exp)
+        matchers.exp_matcher(exp),
       ),
     "sequence_entry:check": ({ name, exp, t }, { span }) =>
       Exps.SequenceCheck(
         pt.str(name),
         matchers.exp_matcher(exp),
-        matchers.exp_matcher(t)
+        matchers.exp_matcher(t),
       ),
   })(tree)
 }

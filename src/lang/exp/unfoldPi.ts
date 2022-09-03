@@ -15,7 +15,7 @@ export function unfoldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
       return Exps.Pi(
         binding.name,
         binding.type,
-        unfoldPi(restBindings, retType)
+        unfoldPi(restBindings, retType),
       )
     }
   }

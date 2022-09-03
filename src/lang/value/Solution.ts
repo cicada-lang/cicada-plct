@@ -28,7 +28,7 @@ export type SolutionCons = {
 export function SolutionCons(
   name: string,
   value: Value,
-  rest: Solution
+  rest: Solution,
 ): SolutionCons {
   return {
     kind: "SolutionCons",

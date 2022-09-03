@@ -5,7 +5,7 @@ import * as Exps from "../exp"
 export function assertNoDuplicateProperties(
   ctx: Ctx,
   properties: Array<Exps.Property>,
-  found: Array<Exps.Property> = []
+  found: Array<Exps.Property> = [],
 ): void {
   if (properties.length === 0) return
 

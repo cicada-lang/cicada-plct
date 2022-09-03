@@ -19,7 +19,7 @@ export function evaluate(env: Env, core: Core): Value {
     case "Pi": {
       return Values.Pi(
         evaluate(env, core.argType),
-        Closure(env, core.name, core.retType)
+        Closure(env, core.name, core.retType),
       )
     }
 
@@ -34,7 +34,7 @@ export function evaluate(env: Env, core: Core): Value {
     case "Sigma": {
       return Values.Sigma(
         evaluate(env, core.carType),
-        Closure(env, core.name, core.cdrType)
+        Closure(env, core.name, core.cdrType),
       )
     }
 
@@ -62,7 +62,7 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.ClazzCons(
         core.name,
         evaluate(env, core.propertyType),
-        Closure(env, core.localName, core.rest)
+        Closure(env, core.localName, core.rest),
       )
     }
 
@@ -81,7 +81,7 @@ export function evaluate(env: Env, core: Core): Value {
         Object.entries(core.properties).map(([name, core]) => [
           name,
           evaluate(env, core),
-        ])
+        ]),
       )
 
       return Values.Objekt(properties)

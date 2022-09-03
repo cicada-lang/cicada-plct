@@ -7,7 +7,7 @@ import { assertClazzInCtx, readback, Value } from "../value"
 export function readbackProperties(
   ctx: Ctx,
   type: Values.Clazz,
-  value: Value
+  value: Value,
 ): Record<string, Cores.Core> {
   switch (type.kind) {
     case "ClazzNull": {

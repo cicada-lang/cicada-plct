@@ -10,7 +10,7 @@ export class Clazz extends Stmt {
   constructor(
     public name: string,
     public clazz: Exps.FoldedClazz,
-    public span?: Span
+    public span?: Span,
   ) {
     super()
   }

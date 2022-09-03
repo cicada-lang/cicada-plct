@@ -6,12 +6,12 @@ import { deleteUndefined } from "../utils"
 
 test("parse Let", () => {
   expect(parseStmts("let U = Type")).toMatchObject(
-    deleteUndefined([new Let("U", Var("Type"))])
+    deleteUndefined([new Let("U", Var("Type"))]),
   )
 })
 
 test("parse LetThe", () => {
   expect(parseStmts("let U: Type = Type")).toMatchObject(
-    deleteUndefined([new LetThe("U", Var("Type"), Var("Type"))])
+    deleteUndefined([new LetThe("U", Var("Type"), Var("Type"))]),
   )
 })

@@ -6,6 +6,6 @@ import { deleteUndefined } from "../utils"
 
 test("parse Declare", () => {
   expect(parseStmts("declare t: Type")).toMatchObject(
-    deleteUndefined([new Declare("t", Var("Type"))])
+    deleteUndefined([new Declare("t", Var("Type"))]),
   )
 })

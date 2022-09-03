@@ -6,7 +6,7 @@ export function conversion(
   ctx: Ctx,
   type: Value,
   left: Value,
-  right: Value
+  right: Value,
 ): void {
   if (left.kind === "Type" && right.kind === "Type") {
     return
@@ -18,7 +18,7 @@ export function conversion(
         return
       } else {
         throw new ElaborationError(
-          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`
+          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`,
         )
       }
     }
@@ -43,12 +43,12 @@ export function conversion(
       return
     } else {
       throw new ElaborationError(
-        `String literal are not equal left: ${left.literal}. right: ${right.literal}`
+        `String literal are not equal left: ${left.literal}. right: ${right.literal}`,
       )
     }
   }
 
   throw new ElaborationError(
-    `conversion is not implemented for type: {type.kind}, left: ${left.kind} and right: ${right.kind}`
+    `conversion is not implemented for type: {type.kind}, left: ${left.kind} and right: ${right.kind}`,
   )
 }

@@ -8,13 +8,13 @@ type ElementReturnTypeUnion<T extends Array<ValueConstructor>> =
 
 export function assertValues<T extends Array<ValueConstructor>>(
   value: Value,
-  valueConstructors: T
+  valueConstructors: T,
 ): asserts value is ElementReturnTypeUnion<T> {
   const kinds = valueConstructors.map((x) => x.name)
 
   if (!kinds.includes(value.kind)) {
     throw new ElaborationError(
-      `expect value to have kind: ${kinds}, instead of: ${value.kind}`
+      `expect value to have kind: ${kinds}, instead of: ${value.kind}`,
     )
   }
 }

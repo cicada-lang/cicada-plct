@@ -101,7 +101,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
 
     default: {
       throw new ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`
+        `check is not implemented for exp: ${exp.kind}`,
       )
     }
   }

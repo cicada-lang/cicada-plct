@@ -9,8 +9,8 @@ test("parse Objekt", () => {
       FoldedObjekt([
         PropertyPlain("T", Var("Type")),
         PropertyPlain("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 })
 
@@ -20,8 +20,8 @@ test("parse Objekt -- optional ending comma", () => {
       FoldedObjekt([
         PropertyPlain("T", Var("Type")),
         PropertyPlain("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 })
 
@@ -32,14 +32,14 @@ test("parse Objekt -- shorthand", () => {
         PropertyPlain("x", Var("x")),
         PropertyPlain("y", Var("y")),
         PropertyPlain("z", Var("z")),
-      ])
-    )
+      ]),
+    ),
   )
 })
 
 test("parse Objekt -- shorthand -- single one", () => {
   expect(parseExp("{ x }")).toMatchObject(
-    deleteUndefined(FoldedObjekt([PropertyPlain("x", Var("x"))]))
+    deleteUndefined(FoldedObjekt([PropertyPlain("x", Var("x"))])),
   )
 })
 
@@ -50,7 +50,7 @@ test("parse Objekt -- duplicate", () => {
         PropertyPlain("x", Var("x")),
         PropertyPlain("x", Var("x")),
         PropertyPlain("x", Var("x")),
-      ])
-    )
+      ]),
+    ),
   )
 })

@@ -45,7 +45,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const retTypeCore = checkType(ctx, exp.retType)
       return Inferred(
         Values.Type(),
-        Cores.Pi(exp.name, argTypeCore, retTypeCore)
+        Cores.Pi(exp.name, argTypeCore, retTypeCore),
       )
     }
 
@@ -61,7 +61,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
         applyClosure(pi.retTypeClosure, argValue),
-        Cores.Ap(inferred.core, argCore)
+        Cores.Ap(inferred.core, argCore),
       )
     }
 
@@ -76,7 +76,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const cdrTypeCore = checkType(ctx, exp.cdrType)
       return Inferred(
         Values.Type(),
-        Cores.Sigma(exp.name, carTypeCore, cdrTypeCore)
+        Cores.Sigma(exp.name, carTypeCore, cdrTypeCore),
       )
     }
 
@@ -97,7 +97,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const carValue = evaluate(ctxToEnv(ctx), Cores.Car(inferred.core))
       return Inferred(
         applyClosure(sigma.cdrTypeClosure, carValue),
-        Cores.Cdr(inferred.core)
+        Cores.Cdr(inferred.core),
       )
     }
 
@@ -124,13 +124,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const propertyType = lookupPropertyTypeOrFail(
         inferred.type,
         targetValue,
-        exp.name
+        exp.name,
       )
 
       const property = lookupPropertyOrFail(
         inferred.type,
         targetValue,
-        exp.name
+        exp.name,
       )
 
       const propertyCore = readback(ctx, propertyType, property)

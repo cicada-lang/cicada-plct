@@ -14,7 +14,7 @@ export function unfoldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
 
     case "FnBindingAnnotated": {
       throw new ElaborationError(
-        `unfoldFn is not implemented for exp: ${binding.kind}`
+        `unfoldFn is not implemented for exp: ${binding.kind}`,
       )
     }
   }

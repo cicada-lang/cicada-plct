@@ -6,7 +6,7 @@ import { applyClosure, assertClazz, Value } from "../value"
 export function lookupPropertyType(
   clazz: Values.Clazz,
   target: Value,
-  name: string
+  name: string,
 ): Value | undefined {
   switch (clazz.kind) {
     case "ClazzNull": {
@@ -18,7 +18,7 @@ export function lookupPropertyType(
 
       const rest = applyClosure(
         clazz.restClosure,
-        Actions.doDot(target, clazz.name)
+        Actions.doDot(target, clazz.name),
       )
 
       assertClazz(rest)
@@ -37,7 +37,7 @@ export function lookupPropertyType(
 export function lookupPropertyTypeOrFail(
   clazz: Values.Clazz,
   target: Value,
-  name: string
+  name: string,
 ): Value {
   const propertyType = lookupPropertyType(clazz, target, name)
   if (propertyType === undefined) {

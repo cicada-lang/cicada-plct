@@ -5,18 +5,18 @@ import { deleteUndefined } from "../utils"
 
 test("parse Ap", () => {
   expect(parseExp("f(x)")).toMatchObject(
-    deleteUndefined(FoldedAp(Var("f"), [ArgPlain(Var("x"))]))
+    deleteUndefined(FoldedAp(Var("f"), [ArgPlain(Var("x"))])),
   )
 
   expect(parseExp("f(x, y)")).toMatchObject(
     deleteUndefined(
-      FoldedAp(Var("f"), [ArgPlain(Var("x")), ArgPlain(Var("y"))])
-    )
+      FoldedAp(Var("f"), [ArgPlain(Var("x")), ArgPlain(Var("y"))]),
+    ),
   )
 
   expect(parseExp("f(x)(y)")).toMatchObject(
     deleteUndefined(
-      FoldedAp(FoldedAp(Var("f"), [ArgPlain(Var("x"))]), [ArgPlain(Var("y"))])
-    )
+      FoldedAp(FoldedAp(Var("f"), [ArgPlain(Var("x"))]), [ArgPlain(Var("y"))]),
+    ),
   )
 })

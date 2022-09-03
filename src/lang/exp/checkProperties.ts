@@ -8,7 +8,7 @@ import { applyClosure, assertClazzInCtx, conversion } from "../value"
 export function checkProperties(
   ctx: Ctx,
   properties: Record<string, Exp>,
-  clazz: Values.Clazz
+  clazz: Values.Clazz,
 ): Record<string, Core> {
   switch (clazz.kind) {
     case "ClazzNull": {

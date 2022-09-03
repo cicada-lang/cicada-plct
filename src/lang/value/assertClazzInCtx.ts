@@ -4,7 +4,7 @@ import { assertTypesInCtx, Value } from "../value"
 
 export function assertClazzInCtx(
   ctx: Ctx,
-  value: Value
+  value: Value,
 ): asserts value is Values.Clazz {
   assertTypesInCtx(ctx, value, [
     Values.ClazzNull,

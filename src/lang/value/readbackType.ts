@@ -78,7 +78,7 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     default: {
       throw new ElaborationError(
-        `readbackType is not implemented for type: ${type.kind}`
+        `readbackType is not implemented for type: ${type.kind}`,
       )
     }
   }

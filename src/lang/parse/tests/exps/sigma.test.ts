@@ -11,8 +11,8 @@ import { deleteUndefined } from "../utils"
 test("parse Sigma", () => {
   expect(parseExp("exists (n: Nat) Nat")).toMatchObject(
     deleteUndefined(
-      FoldedSigma([SigmaBindingNamed("n", Var("Nat"))], Var("Nat"))
-    )
+      FoldedSigma([SigmaBindingNamed("n", Var("Nat"))], Var("Nat")),
+    ),
   )
 })
 
@@ -24,14 +24,16 @@ test("parse Sigma -- multiple bindings", () => {
           SigmaBindingNamed("n", Var("Nat")),
           SigmaBindingNamed("m", Var("Nat")),
         ],
-        Var("Nat")
-      )
-    )
+        Var("Nat"),
+      ),
+    ),
   )
 })
 
 test("parse Sigma -- nameless binding", () => {
   expect(parseExp("exists (Nat) Nat")).toMatchObject(
-    deleteUndefined(FoldedSigma([SigmaBindingNameless(Var("Nat"))], Var("Nat")))
+    deleteUndefined(
+      FoldedSigma([SigmaBindingNameless(Var("Nat"))], Var("Nat")),
+    ),
   )
 })

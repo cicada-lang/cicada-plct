@@ -12,6 +12,6 @@ export function doAp(target: Value, arg: Value): Value {
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),
-    Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg))
+    Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg)),
   )
 }

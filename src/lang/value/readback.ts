@@ -43,7 +43,7 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
 export function typeDirectedReadback(
   ctx: Ctx,
   type: Value,
-  value: Value
+  value: Value,
 ): Core | undefined {
   switch (type.kind) {
     case "Type": {
@@ -83,7 +83,7 @@ export function typeDirectedReadback(
 
       return Cores.Cons(
         readback(ctx, type.carType, carValue),
-        readback(ctx, cdrType, cdrValue)
+        readback(ctx, cdrType, cdrValue),
       )
     }
 
@@ -127,7 +127,7 @@ function valueDirectedReadback(ctx: Ctx, type: Value, value: Value): Core {
 
     default: {
       throw new ElaborationError(
-        `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`
+        `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`,
       )
     }
   }

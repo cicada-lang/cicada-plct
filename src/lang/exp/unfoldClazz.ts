@@ -10,7 +10,7 @@ export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
       return Exps.ClazzCons(
         binding.name,
         binding.propertyType,
-        unfoldClazz(restBindings)
+        unfoldClazz(restBindings),
       )
     }
 
@@ -19,7 +19,7 @@ export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.name,
         binding.propertyType,
         binding.property,
-        unfoldClazz(restBindings)
+        unfoldClazz(restBindings),
       )
     }
   }

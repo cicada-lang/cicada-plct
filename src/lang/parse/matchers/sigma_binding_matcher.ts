@@ -12,7 +12,7 @@ export function sigma_binding_matcher(tree: pt.Tree): Exps.SigmaBinding {
 }
 
 export function sigma_bindings_matcher(
-  tree: pt.Tree
+  tree: pt.Tree,
 ): Array<Exps.SigmaBinding> {
   return pt.matcher({
     "sigma_bindings:sigma_bindings": ({ entries, last_entry }) => [

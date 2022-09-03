@@ -52,7 +52,7 @@ export function formatCore(core: Core): string {
 
     case "Objekt": {
       const properties = Object.entries(core.properties).map(
-        ([name, property]) => `${name}: ${formatCore(property)}`
+        ([name, property]) => `${name}: ${formatCore(property)}`,
       )
 
       return `{ ${properties.join(", ")} }`

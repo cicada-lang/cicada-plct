@@ -81,7 +81,7 @@ export type FoldedPi = {
 export function FoldedPi(
   bindings: Array<PiBinding>,
   retType: Exp,
-  span?: Span
+  span?: Span,
 ): FoldedPi {
   return {
     family: "Exp",
@@ -147,7 +147,7 @@ export type FoldedFn = {
 export function FoldedFn(
   bindings: Array<FnBinding>,
   ret: Exp,
-  span?: Span
+  span?: Span,
 ): FoldedFn {
   return {
     family: "Exp",
@@ -180,7 +180,7 @@ export type FnBindingAnnotated = {
 
 export function FnBindingAnnotated(
   name: string,
-  type: Exp
+  type: Exp,
 ): FnBindingAnnotated {
   return {
     kind: "FnBindingAnnotated",
@@ -273,7 +273,7 @@ export function Sigma(
   name: string,
   carType: Exp,
   cdrType: Exp,
-  span?: Span
+  span?: Span,
 ): Sigma {
   return {
     family: "Exp",
@@ -295,7 +295,7 @@ export type FoldedSigma = {
 export function FoldedSigma(
   bindings: Array<SigmaBinding>,
   cdrType: Exp,
-  span?: Span
+  span?: Span,
 ): FoldedSigma {
   return {
     family: "Exp",
@@ -423,7 +423,7 @@ export function ClazzCons(
   name: string,
   propertyType: Exp,
   rest: Clazz,
-  span?: Span
+  span?: Span,
 ): ClazzCons {
   return {
     family: "Exp",
@@ -449,7 +449,7 @@ export function ClazzFulfilled(
   propertyType: Exp,
   property: Exp,
   rest: Clazz,
-  span?: Span
+  span?: Span,
 ): ClazzFulfilled {
   return {
     family: "Exp",
@@ -470,7 +470,7 @@ export type FoldedClazz = {
 
 export function FoldedClazz(
   bindings: Array<ClazzBinding>,
-  span?: Span
+  span?: Span,
 ): FoldedClazz {
   return {
     family: "Exp",
@@ -490,7 +490,7 @@ export type ClazzBindingAbstract = {
 
 export function ClazzBindingAbstract(
   name: string,
-  propertyType: Exp
+  propertyType: Exp,
 ): ClazzBindingAbstract {
   return {
     kind: "ClazzBindingAbstract",
@@ -509,7 +509,7 @@ export type ClazzBindingFulfilled = {
 export function ClazzBindingFulfilled(
   name: string,
   propertyType: Exp,
-  property: Exp
+  property: Exp,
 ): ClazzBindingFulfilled {
   return {
     kind: "ClazzBindingFulfilled",
@@ -542,7 +542,7 @@ export type FoldedObjekt = {
 
 export function FoldedObjekt(
   properties: Array<Property>,
-  span?: Span
+  span?: Span,
 ): FoldedObjekt {
   return {
     family: "Exp",
@@ -595,7 +595,7 @@ export type Sequence = {
 export function Sequence(
   entries: Array<SequenceEntry>,
   ret: Exp,
-  span?: Span
+  span?: Span,
 ): Sequence {
   return {
     family: "Exp",
@@ -632,7 +632,7 @@ export type SequenceLetThe = {
 export function SequenceLetThe(
   name: string,
   type: Exp,
-  exp: Exp
+  exp: Exp,
 ): SequenceLetThe {
   return {
     kind: "SequenceLetThe",
@@ -652,7 +652,7 @@ export type SequenceCheck = {
 export function SequenceCheck(
   name: string,
   exp: Exp,
-  type: Exp
+  type: Exp,
 ): SequenceCheck {
   return {
     kind: "SequenceCheck",

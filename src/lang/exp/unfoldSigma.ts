@@ -3,7 +3,7 @@ import { Exp } from "./Exp"
 
 export function unfoldSigma(
   bindings: Array<Exps.SigmaBinding>,
-  cdrType: Exp
+  cdrType: Exp,
 ): Exp {
   if (bindings.length === 0) return cdrType
 
@@ -18,7 +18,7 @@ export function unfoldSigma(
       return Exps.Sigma(
         binding.name,
         binding.type,
-        unfoldSigma(restBindings, cdrType)
+        unfoldSigma(restBindings, cdrType),
       )
     }
   }

@@ -13,7 +13,7 @@ export function readbackNeutral(ctx: Ctx, neutral: Neutral): Core {
     case "Ap": {
       return Cores.Ap(
         readbackNeutral(ctx, neutral.target),
-        readback(ctx, neutral.arg.type, neutral.arg.value)
+        readback(ctx, neutral.arg.type, neutral.arg.value),
       )
     }
 

@@ -14,8 +14,8 @@ test("parse Clazz", () => {
       FoldedClazz([
         ClazzBindingAbstract("T", Var("Type")),
         ClazzBindingAbstract("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 
   expect(parseExp("class { T: Type = String, x: T }")).toMatchObject(
@@ -23,8 +23,8 @@ test("parse Clazz", () => {
       FoldedClazz([
         ClazzBindingFulfilled("T", Var("Type"), Var("String")),
         ClazzBindingAbstract("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 })
 
@@ -34,14 +34,14 @@ test("parse Clazz -- without comma", () => {
 class {
   T: Type
   x: T
-}`)
+}`),
   ).toMatchObject(
     deleteUndefined(
       FoldedClazz([
         ClazzBindingAbstract("T", Var("Type")),
         ClazzBindingAbstract("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 
   expect(
@@ -49,13 +49,13 @@ class {
 class {
   T: Type = String
   x: T
-}`)
+}`),
   ).toMatchObject(
     deleteUndefined(
       FoldedClazz([
         ClazzBindingFulfilled("T", Var("Type"), Var("String")),
         ClazzBindingAbstract("x", Var("T")),
-      ])
-    )
+      ]),
+    ),
   )
 })

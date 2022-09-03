@@ -6,7 +6,7 @@ import { Exp } from "../exp"
 export function disallowExtraProperty(
   ctx: Ctx,
   coreProperties: Record<string, Core>,
-  properties: Record<string, Exp>
+  properties: Record<string, Exp>,
 ): void {
   const extraNames = []
   for (const [name, property] of Object.entries(properties)) {

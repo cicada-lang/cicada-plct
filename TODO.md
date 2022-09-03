@@ -1,7 +1,5 @@
 # syntax
 
-prettier always ending comma
-
 parse sequence.test.ts -- with check
 
 Exps.Let -- with `ret`

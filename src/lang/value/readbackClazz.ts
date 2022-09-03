@@ -27,7 +27,7 @@ export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
         clazz.name,
         freshName,
         readbackType(ctx, clazz.propertyType),
-        restCore
+        restCore,
       )
     }
 
@@ -36,7 +36,7 @@ export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
         clazz.name,
         readbackType(ctx, clazz.propertyType),
         readback(ctx, clazz.propertyType, clazz.property),
-        readbackClazz(ctx, clazz.rest)
+        readbackClazz(ctx, clazz.rest),
       )
     }
   }

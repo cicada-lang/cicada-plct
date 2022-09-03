@@ -29,7 +29,7 @@ export function checkClazz(ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
         exp.name,
         propertyTypeCore,
         propertyCore,
-        restCore
+        restCore,
       )
     }
   }

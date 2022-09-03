@@ -182,7 +182,7 @@ export type ClazzCons = {
 export function ClazzCons(
   name: string,
   propertyType: Value,
-  restClosure: Closure
+  restClosure: Closure,
 ): ClazzCons {
   return {
     family: "Value",
@@ -206,7 +206,7 @@ export function ClazzFulfilled(
   name: string,
   propertyType: Value,
   property: Value,
-  rest: Clazz
+  rest: Clazz,
 ): ClazzFulfilled {
   return {
     family: "Value",

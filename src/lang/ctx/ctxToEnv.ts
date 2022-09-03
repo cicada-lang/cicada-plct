@@ -13,7 +13,7 @@ export function ctxToEnv(ctx: Ctx): Env {
       return EnvCons(
         ctx.name,
         TypedNeutral(ctx.type, Var(ctx.name)),
-        ctxToEnv(ctx.rest)
+        ctxToEnv(ctx.rest),
       )
     }
 

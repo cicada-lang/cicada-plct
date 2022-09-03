@@ -16,13 +16,13 @@ type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
 export function assertTypeInCtx<T extends AlreadyTypeConstructor>(
   ctx: Ctx,
   value: Value,
-  alreadyTypeConstructor: T
+  alreadyTypeConstructor: T,
 ): asserts value is ReturnType<T> {
   const kind = alreadyTypeConstructor.name
 
   if (value.kind !== kind) {
     throw new ElaborationError(
-      `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`
+      `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`,
     )
   }
 }

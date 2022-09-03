@@ -8,9 +8,9 @@ export function unify(
   ctx: Ctx,
   type: Value,
   left: Value,
-  right: Value
+  right: Value,
 ): Solution {
   throw new ElaborationError(
-    `unify is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`
+    `unify is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }

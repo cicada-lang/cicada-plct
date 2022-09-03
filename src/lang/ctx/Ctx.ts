@@ -40,7 +40,7 @@ export function CtxFulfilled(
   name: string,
   type: Value,
   value: Value,
-  rest: Ctx
+  rest: Ctx,
 ): CtxFulfilled {
   return {
     kind: "CtxFulfilled",
