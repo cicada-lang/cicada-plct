@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv, lookupCtxType } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
@@ -30,7 +30,7 @@ export function Inferred(type: Value, core: Core): Inferred {
 export function infer(ctx: Ctx, exp: Exp): Inferred {
   switch (exp.kind) {
     case "Var": {
-      const type = lookupCtxType(ctx, exp.name)
+      const type = lookupTypeInCtx(ctx, exp.name)
       if (type !== undefined) {
         return Inferred(type, Cores.Var(exp.name))
       }
