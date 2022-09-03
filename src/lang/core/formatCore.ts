@@ -47,7 +47,8 @@ export function formatCore(core: Core): string {
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
-      return `class { TODO }`
+      const { bindings } = Cores.foldFormatClazz(core)
+      return `class { ${bindings.join(", ")} }`
     }
 
     case "Dot": {

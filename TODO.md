@@ -1,5 +1,3 @@
-Clazz -- formatCore
-compute-clazz.test.ts -- pass
 Objekt -- formatCore
 compute-objekt.test.ts
 check-objekt.test.ts -- test duplicated name
