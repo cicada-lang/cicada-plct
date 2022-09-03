@@ -5,7 +5,7 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, readback, Value } from "../value"
+import { applyClosure, readback, readbackClazz, Value } from "../value"
 
 /**
 
@@ -70,20 +70,10 @@ export function readbackType(ctx: Ctx, type: Value): Core {
       return Cores.Sigma(freshName, carTypeCore, cdrTypeCore)
     }
 
-    case "ClazzNull": {
-      return Cores.ClazzNull()
-    }
-
-    case "ClazzCons": {
-      throw new ElaborationError(
-        `readbackType is not implemented for type: ${type.kind}`
-      )
-    }
-
+    case "ClazzNull":
+    case "ClazzCons":
     case "ClazzFulfilled": {
-      throw new ElaborationError(
-        `readbackType is not implemented for type: ${type.kind}`
-      )
+      return readbackClazz(ctx, type)
     }
 
     default: {
