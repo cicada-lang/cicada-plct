@@ -42,3 +42,15 @@ test("parse Objekt -- shorthand -- single one", () => {
     deleteUndefined(FoldedObjekt([PropertyPlain("x", Var("x"))]))
   )
 })
+
+test("parse Objekt -- duplicate", () => {
+  expect(parseExp("{ x, x, x }")).toMatchObject(
+    deleteUndefined(
+      FoldedObjekt([
+        PropertyPlain("x", Var("x")),
+        PropertyPlain("x", Var("x")),
+        PropertyPlain("x", Var("x")),
+      ])
+    )
+  )
+})
