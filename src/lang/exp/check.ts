@@ -74,12 +74,15 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Objekt": {
-      // TODO We should check that there are no duplicated names in properties.
+      // assertNoDuplicateProperties(ctx, exp.properties)
       assertClazzInCtx(ctx, type)
 
+      const properties = checkProperties(ctx, exp.properties, type)
       // TODO We should infer the properties that are not checked.
       //   This require us to handle off-order `Values.Clazz` in `inclusion`.
-      return Cores.Objekt(checkProperties(ctx, exp.properties, type))
+      // disallowExtraProperty(ctx, properties)
+
+      return Cores.Objekt(properties)
     }
 
     case "Dot": {

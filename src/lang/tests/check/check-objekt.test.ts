@@ -66,3 +66,16 @@ check {
 
 `)
 })
+
+test("check Objekt -- duplicate properties", async () => {
+  await expectCodeToFail(`
+
+check {
+  a: "a",
+  b: "b",
+  c: "c",
+  a: "c",
+}: class { a: String, b: String, c: String }
+
+`)
+})

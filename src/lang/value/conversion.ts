@@ -31,6 +31,10 @@ export function conversion(
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.literal === right.literal) {
       return
+    } else {
+      throw new ElaborationError(
+        `String literal are not equal left: ${left.literal}. right: ${right.literal}`
+      )
     }
   }
 

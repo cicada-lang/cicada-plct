@@ -1,12 +1,14 @@
-check-objekt.test.ts -- test duplicated name
-
 Objekt syntax with list of property
 
-pass check-objekt.test.ts
+assertNoDuplicateProperties
+
+- pass check-objekt.test.ts
 
 check-objekt.test.ts -- test extra property -- disallowed for now
 
-pass check-objekt.test.ts
+disallowExtraProperty
+
+- pass check-objekt.test.ts
 
 # syntax
 
