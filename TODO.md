@@ -1,16 +1,26 @@
-compute-objekt.test.ts
-
 Objekt -- formatCore
 
 - pass compute-objekt.test.ts
 
 check-objekt.test.ts -- test duplicated name
 
+Objekt syntax with list of property
+
 pass check-objekt.test.ts
 
 check-objekt.test.ts -- test extra property -- disallowed for now
 
 pass check-objekt.test.ts
+
+# syntax
+
+syntax about "sequence"
+
+Exps.Objekt -- syntax -- handle "property:method"
+
+Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
+
+Exps.Objekt -- syntax -- handle "property:spread"
 
 # pair
 
@@ -39,16 +49,6 @@ New -- check
 New -- evaluate
 
 New -- formatCore
-
-# syntax
-
-syntax about "sequence"
-
-Exps.Objekt -- syntax -- handle "property:method"
-
-Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
-
-Exps.Objekt -- syntax -- handle "property:spread"
 
 # error report
 
