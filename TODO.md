@@ -4,7 +4,6 @@ Exps.Let -- check
 Cores.Let
 Cores.Let -- evaluate
 
-Exps.LetThe -- with `ret`
 Exps.LetThe -- check
 Cores.LetThe
 Cores.LetThe -- evaluate

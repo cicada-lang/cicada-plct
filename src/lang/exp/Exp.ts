@@ -37,6 +37,7 @@ export type Exp =
   | Dot
   | Sequence
   | Let
+  | LetThe
 
 export type Var = {
   family: "Exp"
@@ -670,6 +671,33 @@ export function Let(name: string, exp: Exp, ret: Exp, span?: Span): Let {
     family: "Exp",
     kind: "Let",
     name,
+    exp,
+    ret,
+    span,
+  }
+}
+
+export type LetThe = {
+  family: "Exp"
+  kind: "LetThe"
+  name: string
+  t: Exp
+  exp: Exp
+  ret: Exp
+} & ExpMeta
+
+export function LetThe(
+  name: string,
+  t: Exp,
+  exp: Exp,
+  ret: Exp,
+  span?: Span,
+): LetThe {
+  return {
+    family: "Exp",
+    kind: "LetThe",
+    name,
+    t,
     exp,
     ret,
     span,
