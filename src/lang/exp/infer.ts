@@ -14,7 +14,7 @@ import {
   ClazzNull,
   Value,
 } from "../value"
-import { lookupPropertyType } from "./lookupPropertyType"
+import { lookupClazzPropertyType } from "./lookupClazzPropertyType"
 
 export type Inferred = {
   type: Value
@@ -122,7 +122,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       let propertyType = undefined
       let propertyCore = undefined
       if (core.kind === "Objekt") {
-        propertyType = lookupPropertyType(ctx, exp.name, core, type)
+        propertyType = lookupClazzPropertyType(ctx, exp.name, core, type)
         propertyCore = core.properties[exp.name]
       }
 

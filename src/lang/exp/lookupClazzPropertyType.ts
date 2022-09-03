@@ -10,7 +10,7 @@ import {
   Value,
 } from "../value"
 
-export function lookupPropertyType(
+export function lookupClazzPropertyType(
   ctx: Ctx,
   name: string,
   core: Objekt,
@@ -38,7 +38,7 @@ export function lookupPropertyType(
         ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
         const restClazz = applyClosure(clazz.restClosure, value)
         assertTypesInCtx(ctx, restClazz, [ClazzNull, ClazzCons, ClazzFulfilled])
-        return lookupPropertyType(ctx, name, core, restClazz)
+        return lookupClazzPropertyType(ctx, name, core, restClazz)
       }
     }
   }
