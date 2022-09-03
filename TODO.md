@@ -2,6 +2,20 @@
 
 Exps.Sequence -- syntax
 
+- require leading keyword `begin` to use sequence
+
+  ```
+  let x = begin {
+    return
+  }
+  ```
+
+unfoldSequence to `Exps.Let` and `Exps.LetThe`
+
+Exps.Let
+
+Exps.LetThe
+
 Exps.Objekt -- syntax -- handle "property:method"
 
 Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
@@ -37,6 +51,8 @@ New -- evaluate
 New -- formatCore
 
 # inclusion
+
+Stmts.Subtype -- for testing
 
 inclusion -- Pi
 inclusion -- Sigma

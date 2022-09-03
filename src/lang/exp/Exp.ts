@@ -35,6 +35,7 @@ export type Exp =
   | Objekt
   | FoldedObjekt
   | Dot
+  | Sequence
 
 export type Var = {
   family: "Exp"
@@ -581,5 +582,62 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
     target,
     name,
     span,
+  }
+}
+
+export type Sequence = {
+  family: "Exp"
+  kind: "Sequence"
+  entries: Array<SequenceEntry>
+  ret: Exp
+} & ExpMeta
+
+export function Sequence(
+  entries: Array<SequenceEntry>,
+  ret: Exp,
+  span?: Span
+): Sequence {
+  return {
+    family: "Exp",
+    kind: "Sequence",
+    entries,
+    ret,
+    span,
+  }
+}
+
+export type SequenceEntry = SequenceLet | SequenceLetThe
+
+export type SequenceLet = {
+  kind: "SequenceLet"
+  name: string
+  exp: Exp
+}
+
+export function SequenceLet(name: string, exp: Exp): SequenceLet {
+  return {
+    kind: "SequenceLet",
+    name,
+    exp,
+  }
+}
+
+export type SequenceLetThe = {
+  kind: "SequenceLetThe"
+  name: string
+  type: Exp
+  exp: Exp
+}
+
+export function SequenceLetThe(
+  name: string,
+  type: Exp,
+  exp: Exp
+): SequenceLetThe {
+  return {
+    kind: "SequenceLetThe",
+    name,
+    type,
+    exp,
   }
 }
