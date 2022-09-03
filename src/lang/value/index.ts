@@ -1,5 +1,7 @@
+export * from "./assertClazz"
 export * from "./assertTypeInCtx"
 export * from "./assertValue"
+export * from "./assertValues"
 export * from "./Closure"
 export * from "./conversion"
 export * from "./inclusion"

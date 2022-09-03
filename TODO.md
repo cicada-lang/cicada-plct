@@ -2,8 +2,6 @@
 
 [refactor] rename readbackObjekt to readbackProperties
 
-[refactor] extract assertClazz module
-[refactor] extract assertValues module
 [refactor] extract assertClazzInCtx module
 [refactor] extract assertTypesInCtx module
 
