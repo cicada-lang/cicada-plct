@@ -204,7 +204,6 @@ export type ClazzFulfilled = {
   family: "Core"
   kind: "ClazzFulfilled"
   name: string
-  localName: string
   property: Core
   propertyType: Core
   rest: Clazz
@@ -212,7 +211,6 @@ export type ClazzFulfilled = {
 
 export function ClazzFulfilled(
   name: string,
-  localName: string,
   property: Core,
   propertyType: Core,
   rest: Clazz
@@ -221,7 +219,6 @@ export function ClazzFulfilled(
     family: "Core",
     kind: "ClazzFulfilled",
     name,
-    localName,
     property,
     propertyType,
     rest,

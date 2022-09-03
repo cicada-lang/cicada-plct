@@ -27,7 +27,6 @@ export function checkClazz(ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
       const restCore = checkClazz(ctx, exp.rest)
       return Cores.ClazzFulfilled(
         exp.name,
-        exp.name,
         propertyTypeCore,
         propertyCore,
         restCore
