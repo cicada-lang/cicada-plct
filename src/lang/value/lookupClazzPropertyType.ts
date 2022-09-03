@@ -1,20 +1,14 @@
-import { evaluate, Objekt } from "../core"
+import * as Cores from "../core"
+import { evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
-import {
-  applyClosure,
-  assertTypesInCtx,
-  Clazz,
-  ClazzCons,
-  ClazzFulfilled,
-  ClazzNull,
-  Value,
-} from "../value"
+import * as Values from "../value"
+import { applyClosure, assertTypesInCtx, Value } from "../value"
 
 export function lookupClazzPropertyType(
   ctx: Ctx,
   name: string,
-  core: Objekt,
-  clazz: Clazz
+  core: Cores.Objekt,
+  clazz: Values.Clazz
 ): Value | undefined {
   if (clazz.kind === "ClazzNull") {
     return undefined
@@ -37,7 +31,11 @@ export function lookupClazzPropertyType(
       } else {
         ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
         const restClazz = applyClosure(clazz.restClosure, value)
-        assertTypesInCtx(ctx, restClazz, [ClazzNull, ClazzCons, ClazzFulfilled])
+        assertTypesInCtx(ctx, restClazz, [
+          Values.ClazzNull,
+          Values.ClazzCons,
+          Values.ClazzFulfilled,
+        ])
         return lookupClazzPropertyType(ctx, name, core, restClazz)
       }
     }
