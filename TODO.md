@@ -1,7 +1,3 @@
-Objekt -- formatCore
-
-- pass compute-objekt.test.ts
-
 check-objekt.test.ts -- test duplicated name
 
 Objekt syntax with list of property

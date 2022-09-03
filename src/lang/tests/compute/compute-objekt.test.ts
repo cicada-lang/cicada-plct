@@ -10,7 +10,9 @@ compute abc
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String, b: String, c: String }"'
+  )
 })
 
 test("compute Objekt -- prefilled", async () => {
@@ -22,5 +24,7 @@ compute abc
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String, b: String = \\"b\\", c: String }"'
+  )
 })

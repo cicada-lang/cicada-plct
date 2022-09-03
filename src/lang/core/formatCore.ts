@@ -1,6 +1,5 @@
 import * as Cores from "../core"
 import { Core } from "../core"
-import { EvaluationError } from "../errors"
 
 export function formatCore(core: Core): string {
   switch (core.kind) {
@@ -51,14 +50,22 @@ export function formatCore(core: Core): string {
       return `class { ${bindings.join(", ")} }`
     }
 
+    case "Objekt": {
+      const properties = Object.entries(core.properties).map(
+        ([name, property]) => `${name}: ${formatCore(property)}`
+      )
+
+      return `{ ${properties.join(", ")} }`
+    }
+
     case "Dot": {
       return `${formatCore(core.target)}.${core.name}`
     }
 
-    default: {
-      throw new EvaluationError(
-        `formatCore is not implemented for ${core.kind}`
-      )
-    }
+    // default: {
+    //   throw new EvaluationError(
+    //     `formatCore is not implemented for ${core.kind}`
+    //   )
+    // }
   }
 }
