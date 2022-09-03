@@ -13,7 +13,7 @@ export function assertNoDuplicateProperties(
 
   if (found.find(({ name }) => name === property.name)) {
     throw new ElaborationError(`duplicate properties: ${property.name}`)
-  } else {
-    assertNoDuplicateProperties(ctx, restProperties, [...found, property])
   }
+
+  assertNoDuplicateProperties(ctx, restProperties, [...found, property])
 }

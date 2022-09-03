@@ -79,3 +79,18 @@ check {
 
 `)
 })
+
+test("check Objekt -- extra property", async () => {
+  // NOTE Disallowed for now, maybe will allow in the future.
+
+  await expectCodeToFail(`
+
+check {
+  a: "a",
+  b: "b",
+  c: "c",
+  x: "x",
+}: class { a: String, b: String, c: String }
+
+`)
+})
