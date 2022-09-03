@@ -32,7 +32,7 @@ export function lookupClazzPropertyType(
     case "ClazzFulfilled": {
       if (clazz.name === name) return clazz.propertyType
 
-      throw new Error("TODO")
+      return lookupClazzPropertyType(clazz.rest, target, name)
     }
   }
 }

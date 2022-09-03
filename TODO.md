@@ -1,7 +1,5 @@
 # clazz
 
-fix lookupClazzPropertyType -- case "ClazzFulfilled"
-
 compute-clazz.test.ts
 
 Clazz -- formatCore
