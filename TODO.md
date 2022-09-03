@@ -1,18 +1,16 @@
 # syntax
 
-unfoldSequence to `Exps.Let` and `Exps.LetThe`
-
 Exps.Let -- with `ret`
 
 Exps.LetThe -- with `ret`
 
-SequenceCheck
+unfoldSequence to `Exps.Let` and `Exps.LetThe`
+
+new SequenceEntry -- SequenceCheck
 
 Exps.Objekt -- syntax -- handle "property:method"
 
 Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
-
-FoldedObjekt -- handle "property:spread"
 
 # pair
 
@@ -29,6 +27,10 @@ Add `the` as a global
 check-the.test.ts
 
 compute-the.test.ts
+
+# syntax
+
+FoldedObjekt -- handle "property:spread"
 
 # new
 

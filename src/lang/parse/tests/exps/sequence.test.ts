@@ -28,3 +28,15 @@ begin {
     )
   )
 })
+
+test("parse Sequence -- only return", () => {
+  expect(
+    parseExp(
+      `
+begin {
+  return x
+}
+`
+    )
+  ).toMatchObject(deleteUndefined(Sequence([], Var("x"))))
+})
