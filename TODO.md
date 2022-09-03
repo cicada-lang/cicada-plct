@@ -1,6 +1,6 @@
 # clazz
 
-extract clazzClosure to avoid type casting
+[refactor] extract clazzClosure to avoid type casting
 
 compute-clazz.test.ts
 

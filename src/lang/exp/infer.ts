@@ -9,8 +9,8 @@ import {
   applyClosure,
   assertTypeInCtx,
   assertTypesInCtx,
-  lookupClazzPropertyOrFail,
-  lookupClazzPropertyTypeOrFail,
+  lookupPropertyOrFail,
+  lookupPropertyTypeOrFail,
   readback,
   Value,
 } from "../value"
@@ -125,13 +125,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         Values.ClazzFulfilled,
       ])
 
-      const propertyType = lookupClazzPropertyTypeOrFail(
+      const propertyType = lookupPropertyTypeOrFail(
         inferred.type,
         targetValue,
         exp.name
       )
 
-      const property = lookupClazzPropertyOrFail(
+      const property = lookupPropertyOrFail(
         inferred.type,
         targetValue,
         exp.name

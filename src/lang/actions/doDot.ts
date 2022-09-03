@@ -5,7 +5,7 @@ import {
   assertValue,
   assertValues,
   isValue,
-  lookupClazzPropertyTypeOrFail,
+  lookupPropertyTypeOrFail,
   Value,
 } from "../value"
 
@@ -27,7 +27,7 @@ export function doDot(target: Value, name: string): Value {
   ])
 
   return Values.TypedNeutral(
-    lookupClazzPropertyTypeOrFail(target.type, target, name),
+    lookupPropertyTypeOrFail(target.type, target, name),
     Neutrals.Dot(target.neutral, name)
   )
 }

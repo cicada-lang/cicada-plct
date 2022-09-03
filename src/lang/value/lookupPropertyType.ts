@@ -3,7 +3,7 @@ import { ElaborationError } from "../errors"
 import * as Values from "../value"
 import { applyClosure, assertValues, Value } from "../value"
 
-export function lookupClazzPropertyType(
+export function lookupPropertyType(
   clazz: Values.Clazz,
   target: Value,
   name: string
@@ -27,23 +27,23 @@ export function lookupClazzPropertyType(
         Values.ClazzFulfilled,
       ])
 
-      return lookupClazzPropertyType(rest, target, name)
+      return lookupPropertyType(rest, target, name)
     }
 
     case "ClazzFulfilled": {
       if (clazz.name === name) return clazz.propertyType
 
-      return lookupClazzPropertyType(clazz.rest, target, name)
+      return lookupPropertyType(clazz.rest, target, name)
     }
   }
 }
 
-export function lookupClazzPropertyTypeOrFail(
+export function lookupPropertyTypeOrFail(
   clazz: Values.Clazz,
   target: Value,
   name: string
 ): Value {
-  const propertyType = lookupClazzPropertyType(clazz, target, name)
+  const propertyType = lookupPropertyType(clazz, target, name)
   if (propertyType === undefined) {
     throw new ElaborationError(`Undefined property type name: ${name}`)
   }
