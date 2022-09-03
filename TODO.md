@@ -12,8 +12,6 @@ compute-objekt.test.ts
 check-objekt.test.ts -- test duplicated name
 check-objekt.test.ts -- test extra property -- disallowed for now
 
-Dot -- formatCore
-
 Exps.New
 Exps.New -- grammar and matcher
 New -- check
