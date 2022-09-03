@@ -1,4 +1,4 @@
-FoldedObjekt -- syntax with a list of properties
+FoldedObjekt -- grammar and matcher
 
 assertNoDuplicateProperties -- pass check-objekt.test.ts
 

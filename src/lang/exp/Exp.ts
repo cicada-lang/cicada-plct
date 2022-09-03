@@ -33,6 +33,7 @@ export type Exp =
   | Clazz
   | FoldedClazz
   | Objekt
+  | FoldedObjekt
   | Dot
 
 export type Var = {
@@ -529,6 +530,40 @@ export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
     kind: "Objekt",
     properties,
     span,
+  }
+}
+
+export type FoldedObjekt = {
+  family: "Exp"
+  kind: "FoldedObjekt"
+  properties: Array<Property>
+} & ExpMeta
+
+export function FoldedObjekt(
+  properties: Array<Property>,
+  span?: Span
+): FoldedObjekt {
+  return {
+    family: "Exp",
+    kind: "FoldedObjekt",
+    properties,
+    span,
+  }
+}
+
+export type Property = PropertyPlain
+
+export type PropertyPlain = {
+  kind: "PropertyPlain"
+  name: string
+  exp: Exp
+}
+
+export function PropertyPlain(name: string, exp: Exp): PropertyPlain {
+  return {
+    kind: "PropertyPlain",
+    name,
+    exp,
   }
 }
 
