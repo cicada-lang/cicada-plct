@@ -1,5 +1,7 @@
 # clazz
 
+extract clazzClosure to avoid type casting
+
 compute-clazz.test.ts
 
 Clazz -- formatCore

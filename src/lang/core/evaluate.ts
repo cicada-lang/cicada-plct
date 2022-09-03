@@ -1,6 +1,6 @@
 import * as Actions from "../actions"
 import { Core } from "../core"
-import { Env, lookupEnvValue } from "../env"
+import { Env, EnvCons, lookupEnvValue } from "../env"
 import { EvaluationError } from "../errors"
 import * as Values from "../value"
 import { assertValues, Closure, Value } from "../value"
@@ -67,7 +67,9 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ClazzFulfilled": {
-      const rest = evaluate(env, core.rest)
+      const propertyType = evaluate(env, core.propertyType)
+      const property = evaluate(env, core.property)
+      const rest = evaluate(EnvCons(core.name, property, env), core.rest)
 
       assertValues(rest, [
         Values.ClazzNull,
@@ -75,12 +77,7 @@ export function evaluate(env: Env, core: Core): Value {
         Values.ClazzFulfilled,
       ])
 
-      return Values.ClazzFulfilled(
-        core.name,
-        evaluate(env, core.propertyType),
-        evaluate(env, core.property),
-        rest
-      )
+      return Values.ClazzFulfilled(core.name, propertyType, property, rest)
     }
 
     case "Objekt": {
