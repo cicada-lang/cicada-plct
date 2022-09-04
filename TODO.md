@@ -1,19 +1,12 @@
-# syntax
+compute-sequence.test.ts -- Let
 
 Cores.LetThe -- evaluate
 Cores.Check -- evaluate
 
-Cores.Let -- formatCore
+compute-sequence.test.ts -- LetThe
+compute-sequence.test.ts -- Check
 
-- compute-sequence.test.ts -- Let
-
-Cores.LetThe -- formatCore
-
-- compute-sequence.test.ts -- LetThe
-
-Cores.Check -- formatCore
-
-- compute-sequence.test.ts -- Check
+# syntax
 
 Exps.Objekt -- syntax -- handle "property:method"
 

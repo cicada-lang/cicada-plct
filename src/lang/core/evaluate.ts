@@ -92,7 +92,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Let": {
-      const value = evaluate(env, core.exp)
+      const value = evaluate(env, core.core)
       env = EnvCons(core.name, value, env)
       return evaluate(env, core.ret)
     }

@@ -1,6 +1,5 @@
 import * as Cores from "../core"
 import { Core } from "../core"
-import { EvaluationError } from "../errors"
 
 export function formatCore(core: Core): string {
   switch (core.kind) {
@@ -63,10 +62,17 @@ export function formatCore(core: Core): string {
       return `${formatCore(core.target)}.${core.name}`
     }
 
-    default: {
-      throw new EvaluationError(
-        `formatCore is not implemented for ${core.kind}`,
-      )
+    case "Let":
+    case "LetThe":
+    case "Check": {
+      const { entries, ret } = Cores.foldFormatSequence(core)
+      return `begin { ${entries.join("  ")}  return ${ret} }`
     }
+
+    // default: {
+    //   throw new EvaluationError(
+    //     `formatCore is not implemented for ${core.kind}`,
+    //   )
+    // }
   }
 }
