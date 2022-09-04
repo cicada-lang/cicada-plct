@@ -1,7 +1,6 @@
 import { Span } from "./Span"
-import { Var } from "./Var"
 
-export type ExpMeta = { span?: Span }
+type ExpMeta = { span?: Span }
 
 /**
 
@@ -41,6 +40,21 @@ export type Exp =
   | Let
   | LetThe
   | Check
+
+export type Var = {
+  family: "Exp"
+  kind: "Var"
+  name: string
+} & ExpMeta
+
+export function Var(name: string, span?: Span): Var {
+  return {
+    family: "Exp",
+    kind: "Var",
+    name,
+    span,
+  }
+}
 
 export type Pi = {
   family: "Exp"
