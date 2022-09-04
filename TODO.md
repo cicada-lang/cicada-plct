@@ -1,4 +1,6 @@
-# new
+# Subtyping
+
+## New
 
 FoldedNew
 
@@ -16,7 +18,11 @@ New -- evaluate
 
 New -- formatCore
 
-# inclusion
+## conversion
+
+conversion for all values
+
+## inclusion
 
 Stmts.Subtype -- for testing
 
@@ -26,37 +32,9 @@ inclusion -- Sigma
 
 inclusion -- Clazz
 
-# conversion
+# Equivalence
 
-conversion for all values
-
-# syntax
-
-syntax -- "property:spread"
-
-# error report
-
-> We should setup an error report framework (and test it) as soon as possible.
-
-error for report
-
-error report for ElaborationError
-
-# fn annotated
-
-Exps.FnAnnotated -- can be inferred
-
-check -- Exps.FnAnnotated -- checkByInfer
-
-infer -- Exps.FnAnnotated
-
-unfoldFn -- return Exps.FnAnnotated
-
-# FoldedFnWithReturnType
-
-FoldedFnWithReturnType
-
-# equal
+## Equal
 
 Equal
 
@@ -66,7 +44,29 @@ Refl
 
 Same
 
-# unification, implicit and vague
+# Syntax
+
+## Objekt and New
+
+syntax -- "property:spread"
+
+## FnAnnotated
+
+Exps.FnAnnotated -- can be inferred
+
+check -- Exps.FnAnnotated -- checkByInfer
+
+infer -- Exps.FnAnnotated
+
+unfoldFn -- return Exps.FnAnnotated
+
+## FoldedFnWithReturnType
+
+FoldedFnWithReturnType
+
+# Inductive datatype
+
+## implicit Pi and vague Pi
 
 isNeutralVar
 
@@ -74,7 +74,7 @@ isNeutralVar
 
 NeutralVar constructor
 
-# datatype
+## Datatype
 
 Datatype
 
@@ -82,11 +82,13 @@ TypeConstructor
 
 DataConstructor
 
-# recursion
+## Recursion
 
 fixpoint and readback
 
-# format
+# Developer experience
+
+## Standard formatter
 
 > For pretty print Support.
 
@@ -95,3 +97,11 @@ fixpoint and readback
 formatExp
 
 formatStmt
+
+## Error report
+
+> We should setup an error report framework (and test it) as soon as possible.
+
+error for report
+
+error report for ElaborationError
