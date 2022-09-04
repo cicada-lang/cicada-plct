@@ -2,8 +2,6 @@
 
 Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
 
-Exps.Sequence -- syntax -- handle "sequence_entry:let_fn"
-
 # pair
 
 global from cic code -- string in js
