@@ -27,7 +27,7 @@ export const sequence_entry = {
       { exp: "exp" },
     ],
     "sequence_entry:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
-    "sequence_entry:let_fn": [
+    "sequence_entry:let_function": [
       '"function"',
       { name: "identifier" },
       '"("',

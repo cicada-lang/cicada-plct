@@ -25,7 +25,10 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceEntry {
       ),
     "sequence_entry:check": ({ exp, t }, { span }) =>
       Exps.SequenceCheck(matchers.exp_matcher(exp), matchers.exp_matcher(t)),
-    "sequence_entry:let_fn": ({ name, bindings, ret_t, sequence }, { span }) =>
+    "sequence_entry:let_function": (
+      { name, bindings, ret_t, sequence },
+      { span },
+    ) =>
       Exps.SequenceLetThe(
         pt.str(name),
         Exps.FoldedPi(

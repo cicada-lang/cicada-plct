@@ -19,7 +19,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         matchers.exp_matcher(exp),
         span,
       ),
-    "stmt:let_fn": ({ name, bindings, ret_t, sequence }, { span }) =>
+    "stmt:let_function": ({ name, bindings, ret_t, sequence }, { span }) =>
       new Stmts.LetThe(
         pt.str(name),
         Exps.FoldedPi(

@@ -11,7 +11,7 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
-    "stmt:let_fn": [
+    "stmt:let_function": [
       '"function"',
       { name: "identifier" },
       '"("',
