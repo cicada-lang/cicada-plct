@@ -5,8 +5,8 @@ test("check Sequence -- single return", async () => {
   await runCode(`
 
 check begin {
-  return Trivial
-}: Type
+  return sole
+}: Trivial
 
 `)
 })
@@ -15,9 +15,31 @@ test("check Sequence -- Let", async () => {
   await runCode(`
 
 check begin {
-  let x = Trivial
+  let x = sole
   return x
-}: Type
+}: Trivial
+
+`)
+})
+
+test("check Sequence -- LetThe", async () => {
+  await runCode(`
+
+check begin {
+  let x: Trivial = sole
+  return x
+}: Trivial
+
+`)
+})
+
+test("check Sequence -- Check", async () => {
+  await runCode(`
+
+check begin {
+  check sole: Trivial
+  return sole
+}: Trivial
 
 `)
 })

@@ -2,11 +2,9 @@
 
 Exps.LetThe -- infer
 Cores.LetThe -- evaluate
-check-sequence.test.ts -- LetThe
 
 Exps.Check -- infer
 Cores.Check -- evaluate
-check-sequence.test.ts -- Check
 
 Cores.Let -- formatCore
 
