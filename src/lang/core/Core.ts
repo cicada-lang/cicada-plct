@@ -10,7 +10,6 @@ export type Core =
   | Quote
   | Clazz
   | Objekt
-  | New
   | Dot
   | Let
   | LetThe
@@ -239,22 +238,6 @@ export function Objekt(properties: Record<string, Core>): Objekt {
   return {
     family: "Core",
     kind: "Objekt",
-    properties,
-  }
-}
-
-export type New = {
-  family: "Core"
-  kind: "New"
-  name: string
-  properties: Record<string, Core>
-}
-
-export function New(name: string, properties: Record<string, Core>): New {
-  return {
-    family: "Core",
-    kind: "New",
-    name,
     properties,
   }
 }
