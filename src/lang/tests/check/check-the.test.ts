@@ -1,5 +1,5 @@
 import { test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("check the", async () => {
   await runCode(`
@@ -7,6 +7,14 @@ test("check the", async () => {
 check the(Trivial, sole): Trivial
 
 check the: (T: Type, T) -> T
+
+`)
+})
+
+test("check the -- fail", async () => {
+  await expectCodeToFail(`
+
+check the(Trivial, "abc"): Trivial
 
 `)
 })

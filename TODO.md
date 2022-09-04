@@ -1,10 +1,6 @@
-# pair
-
 check-pair.test.ts
 
 compute-pair.test.ts
-
-compute-the.test.ts
 
 # new
 
