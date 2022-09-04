@@ -1,5 +1,3 @@
-compute-sequence.test.ts -- Let
-
 Cores.LetThe -- evaluate
 Cores.Check -- evaluate
 

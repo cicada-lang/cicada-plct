@@ -138,6 +138,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
+    case "Sequence": {
+      return infer(ctx, Exps.unfoldSequence(exp.entries, exp.ret))
+    }
+
     case "Let": {
       const inferred = infer(ctx, exp.exp)
       const value = evaluate(ctxToEnv(ctx), inferred.core)
