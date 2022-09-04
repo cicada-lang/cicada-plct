@@ -1,6 +1,6 @@
 # syntax
 
-Exps.Let -- check
+Exps.Let -- infer
 
 Cores.Let
 
