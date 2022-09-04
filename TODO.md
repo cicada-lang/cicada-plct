@@ -1,9 +1,3 @@
-Cores.LetThe -- evaluate
-Cores.Check -- evaluate
-
-compute-sequence.test.ts -- LetThe
-compute-sequence.test.ts -- Check
-
 # syntax
 
 Exps.Objekt -- syntax -- handle "property:method"

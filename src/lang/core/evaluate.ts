@@ -97,10 +97,20 @@ export function evaluate(env: Env, core: Core): Value {
       return evaluate(env, core.ret)
     }
 
-    default: {
-      throw new EvaluationError(
-        `evaluate is not implemented for core: ${core.kind}`,
-      )
+    case "LetThe": {
+      const value = evaluate(env, core.core)
+      env = EnvCons(core.name, value, env)
+      return evaluate(env, core.ret)
     }
+
+    case "Check": {
+      return evaluate(env, core.ret)
+    }
+
+    // default: {
+    //   throw new EvaluationError(
+    //     `evaluate is not implemented for core: ${core.kind}`,
+    //   )
+    // }
   }
 }

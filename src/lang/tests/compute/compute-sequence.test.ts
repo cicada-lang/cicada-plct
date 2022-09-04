@@ -26,7 +26,7 @@ compute begin {
   expect(output).toMatchInlineSnapshot('"sole: Trivial"')
 })
 
-test.todo("compute Sequence -- LetThe", async () => {
+test("compute Sequence -- LetThe", async () => {
   const output = await runCode(`
 
 compute begin {
@@ -36,10 +36,10 @@ compute begin {
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
 })
 
-test.todo("compute Sequence -- Check", async () => {
+test("compute Sequence -- Check", async () => {
   const output = await runCode(`
 
 compute begin {
@@ -49,5 +49,5 @@ compute begin {
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
 })
