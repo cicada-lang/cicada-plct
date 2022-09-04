@@ -156,7 +156,19 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const value = evaluate(ctxToEnv(ctx), core)
       ctx = CtxFulfilled(exp.name, typeValue, value, ctx)
       const retInferred = infer(ctx, exp.ret)
-      return Inferred(typeValue, Cores.Let(exp.name, core, retInferred.core))
+      return Inferred(
+        typeValue,
+        Cores.LetThe(exp.name, typeCore, core, retInferred.core),
+      )
+    }
+
+    case "Check": {
+      const typeCore = checkType(ctx, exp.type)
+      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
+      const core = check(ctx, exp.exp, typeValue)
+      const value = evaluate(ctxToEnv(ctx), core)
+      const retInferred = infer(ctx, exp.ret)
+      return Inferred(typeValue, Cores.Check(typeCore, core, retInferred.core))
     }
 
     default: {

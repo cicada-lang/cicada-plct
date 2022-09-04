@@ -1,7 +1,5 @@
 # syntax
 
-Exps.Check -- infer
-
 Cores.LetThe -- evaluate
 Cores.Check -- evaluate
 
