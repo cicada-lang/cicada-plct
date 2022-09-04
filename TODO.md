@@ -1,17 +1,16 @@
 # syntax
 
-remove Cores.Let, only keep Cores.LetThe
+[maybe] remove Cores.Let, only keep Cores.LetThe
 
-[maybe] Cores.Check
+Cores.Check
 
-Exps.Let -- infer
 Cores.Let -- evaluate
 Cores.Let -- formatCore
 
-Exps.LetThe -- check
+Exps.LetThe -- infer
 Cores.LetThe -- evaluate
 
-Exps.Check -- check
+Exps.Check -- infer
 Cores.Check -- evaluate
 
 unfoldSequence to `Exps.Let` and `Exps.LetThe` and `Exps.Check`

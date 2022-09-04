@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import { Ctx, CtxCons, CtxFulfilled, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
@@ -138,12 +138,16 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
-    // case "Let": {
-    //   const inferred = infer(ctx, exp.exp)
-    //   const value = evaluate(ctxToEnv(ctx), inferred.core)
-    //   ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
-    //   return infer(ctx, exp.ret)
-    // }
+    case "Let": {
+      const inferred = infer(ctx, exp.exp)
+      const value = evaluate(ctxToEnv(ctx), inferred.core)
+      ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
+      const retInferred = infer(ctx, exp.ret)
+      return Inferred(
+        retInferred.type,
+        Cores.Let(exp.name, inferred.core, retInferred.core),
+      )
+    }
 
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
