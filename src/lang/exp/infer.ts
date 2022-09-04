@@ -138,6 +138,25 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
+    case "FoldedNew": {
+      Exps.assertNoDuplicateProperties(ctx, exp.properties)
+      return infer(ctx, Exps.unfoldNew(exp.name, exp.properties))
+    }
+
+    case "New": {
+      const clazz = lookupTypeInCtx(ctx, exp.name)
+      if (clazz === undefined) {
+        throw new ElaborationError(`${exp.name} should be a class`)
+      }
+
+      assertClazzInCtx(ctx, clazz)
+      const properties = Exps.inferNewProperties(ctx, exp.properties, clazz)
+
+      Exps.disallowExtraProperty(ctx, properties, exp.properties)
+
+      return Inferred(clazz, Cores.Objekt(properties))
+    }
+
     case "Sequence": {
       return infer(ctx, Exps.unfoldSequence(exp.entries, exp.ret))
     }
