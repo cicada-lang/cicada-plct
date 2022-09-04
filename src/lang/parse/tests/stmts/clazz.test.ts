@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { ClazzBindingAbstract, FoldedClazz, Var } from "../../../exp"
+import * as Exps from "../../../exp"
 import * as Stmts from "../../../stmts"
 import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
@@ -11,10 +11,10 @@ test("parse Clazz", () => {
     deleteUndefined([
       new Stmts.Clazz(
         "ABC",
-        FoldedClazz([
-          ClazzBindingAbstract("a", Var("String")),
-          ClazzBindingAbstract("b", Var("String")),
-          ClazzBindingAbstract("c", Var("String")),
+        Exps.FoldedClazz([
+          Exps.ClazzBindingAbstract("a", Exps.Var("String")),
+          Exps.ClazzBindingAbstract("b", Exps.Var("String")),
+          Exps.ClazzBindingAbstract("c", Exps.Var("String")),
         ]),
       ),
     ]),

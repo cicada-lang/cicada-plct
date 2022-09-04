@@ -1,4 +1,4 @@
-perse tests should `import * Exps`
+perse tests should `import * Exps` -- exps
 
 # syntax
 
