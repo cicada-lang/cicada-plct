@@ -11,7 +11,7 @@ check begin {
 `)
 })
 
-test.todo("check Sequence -- Let", async () => {
+test("check Sequence -- Let", async () => {
   await runCode(`
 
 check begin {
