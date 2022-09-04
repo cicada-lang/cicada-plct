@@ -1,5 +1,11 @@
 import { expect, test } from "vitest"
-import { FoldedObjekt, PropertyPlain, Var } from "../../../exp"
+import {
+  FnBindingName,
+  FoldedFn,
+  FoldedObjekt,
+  PropertyPlain,
+  Var,
+} from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
@@ -50,6 +56,30 @@ test("parse Objekt -- duplicate", () => {
         PropertyPlain("x", Var("x")),
         PropertyPlain("x", Var("x")),
         PropertyPlain("x", Var("x")),
+      ]),
+    ),
+  )
+})
+
+test("parse Objekt -- method", () => {
+  expect(parseExp("{ f: (x) => x }")).toMatchObject(
+    deleteUndefined(
+      FoldedObjekt([
+        PropertyPlain("f", FoldedFn([FnBindingName("x")], Var("x"))),
+      ]),
+    ),
+  )
+
+  expect(parseExp("{ f: (x, y, z) => x }")).toMatchObject(
+    deleteUndefined(
+      FoldedObjekt([
+        PropertyPlain(
+          "f",
+          FoldedFn(
+            [FnBindingName("x"), FnBindingName("y"), FnBindingName("z")],
+            Var("x"),
+          ),
+        ),
       ]),
     ),
   )
