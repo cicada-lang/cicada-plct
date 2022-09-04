@@ -1,8 +1,10 @@
 # new
 
-Exps.New
+New -- Core
 
-Exps.New -- grammar and matcher
+FoldedNew
+
+New -- grammar and matcher
 
 New -- check
 
@@ -15,7 +17,9 @@ New -- formatCore
 Stmts.Subtype -- for testing
 
 inclusion -- Pi
+
 inclusion -- Sigma
+
 inclusion -- Clazz
 
 # conversion

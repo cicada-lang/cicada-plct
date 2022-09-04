@@ -34,6 +34,7 @@ export type Exp =
   | FoldedClazz
   | Objekt
   | FoldedObjekt
+  | New
   | Dot
   | Sequence
   | Let
@@ -568,6 +569,27 @@ export function PropertyPlain(name: string, exp: Exp): PropertyPlain {
     kind: "PropertyPlain",
     name,
     exp,
+  }
+}
+
+export type New = {
+  family: "Exp"
+  kind: "New"
+  name: string
+  properties: Record<string, Exp>
+} & ExpMeta
+
+export function New(
+  name: string,
+  properties: Record<string, Exp>,
+  span?: Span,
+): New {
+  return {
+    family: "Exp",
+    kind: "New",
+    name,
+    properties,
+    span,
   }
 }
 
