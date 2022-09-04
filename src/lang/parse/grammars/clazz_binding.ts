@@ -17,11 +17,20 @@ export const clazz_binding = {
     "clazz_binding:method_abstract": [
       { name: "identifier" },
       '"("',
-      { pi_bindings: "pi_bindings" },
+      { bindings: "pi_bindings" },
       '")"',
       '":"',
       { ret_t: "exp" },
       { $ap: ["optional", '","'] },
+    ],
+    "clazz_binding:method_fulfilled": [
+      { name: "identifier" },
+      '"("',
+      { bindings: "pi_bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      { sequence: "sequence" },
     ],
   },
 }

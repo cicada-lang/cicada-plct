@@ -12,11 +12,11 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
         matchers.exp_matcher(t),
         matchers.exp_matcher(exp),
       ),
-    "clazz_binding:method_abstract": ({ name, pi_bindings, ret_t }, { span }) =>
+    "clazz_binding:method_abstract": ({ name, bindings, ret_t }, { span }) =>
       Exps.ClazzBindingAbstract(
         pt.str(name),
         Exps.FoldedPi(
-          matchers.pi_bindings_matcher(pi_bindings),
+          matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
           span,
         ),

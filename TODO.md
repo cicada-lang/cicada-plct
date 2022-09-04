@@ -1,6 +1,8 @@
 # syntax
 
-Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"
+syntax -- "clazz_binding:method_fulfilled"
+
+syntax -- "stmt:let_fn"
 
 # pair
 
@@ -22,7 +24,7 @@ compute-the.test.ts
 
 # syntax
 
-FoldedObjekt -- handle "property:spread"
+syntax -- "property:spread"
 
 # new
 
