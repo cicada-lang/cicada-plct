@@ -1,5 +1,3 @@
-check-pair.test.ts
-
 compute-pair.test.ts
 
 # new
