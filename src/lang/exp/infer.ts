@@ -138,6 +138,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
+    // case "Let": {
+    //   const inferred = infer(ctx, exp.exp)
+    //   const value = evaluate(ctxToEnv(ctx), inferred.core)
+    //   ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
+    //   return infer(ctx, exp.ret)
+    // }
+
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }

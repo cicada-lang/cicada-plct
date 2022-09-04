@@ -11,6 +11,7 @@ export type Core =
   | Clazz
   | Objekt
   | Dot
+  | Let
 
 export type Var = {
   family: "Core"
@@ -252,5 +253,23 @@ export function Dot(target: Core, name: string): Dot {
     kind: "Dot",
     target,
     name,
+  }
+}
+
+export type Let = {
+  family: "Core"
+  kind: "Let"
+  name: string
+  exp: Core
+  ret: Core
+}
+
+export function Let(name: string, exp: Core, ret: Core): Let {
+  return {
+    family: "Core",
+    kind: "Let",
+    name,
+    exp,
+    ret,
   }
 }
