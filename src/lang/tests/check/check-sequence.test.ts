@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test.todo("check Sequence -- single return", async () => {
+test("check Sequence -- single return", async () => {
   await runCode(`
 
 check begin {

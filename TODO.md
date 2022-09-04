@@ -1,24 +1,26 @@
 # syntax
 
 Cores.Let -- formatCore
+unfoldSequence to `Exps.Let`
+compute-sequence.test.ts -- Let
+
+unfoldSequence to `Exps.LetThe`
 
 Exps.LetThe -- infer
 Cores.LetThe -- evaluate
 Cores.LetThe -- formatCore
 
+check-sequence.test.ts -- LetThe
+compute-sequence.test.ts -- LetThe
+
 Exps.Check -- infer
 Cores.Check -- evaluate
 Cores.Check -- formatCore
 
-unfoldSequence to `Exps.Let`
-unfoldSequence to `Exps.LetThe`
 unfoldSequence to `Exps.Check`
 
-check-sequence.test.ts -- LetThe
-check-sequence.test.ts -- Let
 check-sequence.test.ts -- Check
-
-compute-sequence.test.ts
+compute-sequence.test.ts -- Check
 
 Exps.Objekt -- syntax -- handle "property:method"
 

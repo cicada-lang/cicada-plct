@@ -99,6 +99,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
+    case "Sequence": {
+      return check(ctx, Exps.unfoldSequence(exp.entries, exp.ret), type)
+    }
+
     case "Let": {
       return checkByInfer(ctx, exp, type)
     }
