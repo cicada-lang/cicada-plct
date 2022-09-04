@@ -2,8 +2,6 @@
 
 ## New
 
-FoldedNew
-
 New -- grammar and matcher
 
 unfoldNew
