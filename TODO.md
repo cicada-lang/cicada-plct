@@ -1,3 +1,5 @@
+perse tests should `import * Exps`
+
 # syntax
 
 Exps.Clazz -- syntax -- handle "clazz_binding:method_fulfilled"

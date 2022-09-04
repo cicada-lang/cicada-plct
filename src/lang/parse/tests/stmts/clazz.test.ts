@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
 import { ClazzBindingAbstract, FoldedClazz, Var } from "../../../exp"
-import { Clazz } from "../../../stmts"
+import * as Stmts from "../../../stmts"
 import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
@@ -9,7 +9,7 @@ test("parse Clazz", () => {
     parseStmts("class ABC { a: String, b: String, c: String }"),
   ).toMatchObject(
     deleteUndefined([
-      new Clazz(
+      new Stmts.Clazz(
         "ABC",
         FoldedClazz([
           ClazzBindingAbstract("a", Var("String")),
