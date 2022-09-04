@@ -1,7 +1,8 @@
 # syntax
 
-Cores.LetThe
-Cores.Check
+remove Cores.Let, only keep Cores.LetThe
+
+[maybe] Cores.Check
 
 Exps.Let -- infer
 Cores.Let -- evaluate

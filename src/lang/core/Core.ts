@@ -12,6 +12,7 @@ export type Core =
   | Objekt
   | Dot
   | Let
+  | LetThe
 
 export type Var = {
   family: "Core"
@@ -269,6 +270,26 @@ export function Let(name: string, exp: Core, ret: Core): Let {
     family: "Core",
     kind: "Let",
     name,
+    exp,
+    ret,
+  }
+}
+
+export type LetThe = {
+  family: "Core"
+  kind: "LetThe"
+  name: string
+  t: Core
+  exp: Core
+  ret: Core
+}
+
+export function LetThe(name: string, t: Core, exp: Core, ret: Core): LetThe {
+  return {
+    family: "Core",
+    kind: "LetThe",
+    name,
+    t,
     exp,
     ret,
   }
