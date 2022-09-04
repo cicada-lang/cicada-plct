@@ -1,9 +1,5 @@
 # syntax
 
-[maybe] remove Cores.Let, only keep Cores.LetThe
-
-Cores.Check
-
 Cores.Let -- evaluate
 Cores.Let -- formatCore
 
