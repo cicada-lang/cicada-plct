@@ -5,7 +5,7 @@ import { deleteUndefined } from "../utils"
 
 test("parse Dot", () => {
   expect(parseExp("object.x")).toMatchObject(
-    Exps.deleteUndefined(Exps.Dot(Exps.Var("object"), "x")),
+    deleteUndefined(Exps.Dot(Exps.Var("object"), "x")),
   )
 
   expect(parseExp("object.f(x, y)")).toMatchObject(
