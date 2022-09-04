@@ -7,6 +7,7 @@ test("parse Sequence", () => {
   expect(
     parseExp(
       `
+
 begin {
   let x: Trivial = sole
   check sole: Trivial
@@ -14,6 +15,7 @@ begin {
   let z = sole
   return x
 }
+
 `,
     ),
   ).toMatchObject(
@@ -35,9 +37,11 @@ test("parse Sequence -- only return", () => {
   expect(
     parseExp(
       `
+
 begin {
   return x
 }
+
 `,
     ),
   ).toMatchObject(deleteUndefined(Exps.Sequence([], Exps.Var("x"))))
@@ -47,6 +51,7 @@ test("parse Sequence -- let function", () => {
   expect(
     parseExp(
       `
+
 begin {
   function id(T: Type, x: T): T {
     return x
@@ -54,6 +59,7 @@ begin {
 
   return id
 }
+
 `,
     ),
   ).toMatchObject(

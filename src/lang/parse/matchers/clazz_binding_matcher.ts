@@ -21,5 +21,24 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
           span,
         ),
       ),
+    "clazz_binding:method_fulfilled": (
+      { name, bindings, ret_t, sequence },
+      { span },
+    ) =>
+      Exps.ClazzBindingFulfilled(
+        pt.str(name),
+        Exps.FoldedPi(
+          matchers.pi_bindings_matcher(bindings),
+          matchers.exp_matcher(ret_t),
+          span,
+        ),
+        Exps.FoldedFn(
+          matchers
+            .pi_bindings_matcher(bindings)
+            .map(Exps.piBindingtoFnBindingFrom),
+          matchers.sequence_matcher(sequence),
+          span,
+        ),
+      ),
   })(tree)
 }

@@ -1,7 +1,5 @@
 # syntax
 
-syntax -- "clazz_binding:method_fulfilled"
-
 syntax -- "stmt:let_fn"
 
 # pair
