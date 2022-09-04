@@ -597,13 +597,19 @@ export function New(
 export type FoldedNew = {
   family: "Exp"
   kind: "FoldedNew"
+  name: string
   properties: Array<Property>
 } & ExpMeta
 
-export function FoldedNew(properties: Array<Property>, span?: Span): FoldedNew {
+export function FoldedNew(
+  name: string,
+  properties: Array<Property>,
+  span?: Span,
+): FoldedNew {
   return {
     family: "Exp",
     kind: "FoldedNew",
+    name,
     properties,
     span,
   }
