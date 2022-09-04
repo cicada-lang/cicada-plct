@@ -1,15 +1,21 @@
 # syntax
 
 Exps.Let -- check
+
 Cores.Let
+
 Cores.Let -- evaluate
 
 Exps.LetThe -- check
+
 Cores.LetThe
+
 Cores.LetThe -- evaluate
 
 Exps.Check -- check
+
 Cores.Check
+
 Cores.Check -- evaluate
 
 unfoldSequence to `Exps.Let` and `Exps.LetThe` and `Exps.Check`
