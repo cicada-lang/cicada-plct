@@ -1,10 +1,8 @@
 # syntax
 
 Cores.Let -- formatCore
-unfoldSequence to `Exps.Let`
-compute-sequence.test.ts -- Let
 
-unfoldSequence to `Exps.LetThe`
+compute-sequence.test.ts -- Let
 
 Exps.LetThe -- infer
 Cores.LetThe -- evaluate
@@ -16,8 +14,6 @@ compute-sequence.test.ts -- LetThe
 Exps.Check -- infer
 Cores.Check -- evaluate
 Cores.Check -- formatCore
-
-unfoldSequence to `Exps.Check`
 
 check-sequence.test.ts -- Check
 compute-sequence.test.ts -- Check

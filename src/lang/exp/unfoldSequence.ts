@@ -11,15 +11,15 @@ export function unfoldSequence(
 
   switch (entry.kind) {
     case "SequenceLet": {
-      throw new Error("TODO")
+      return Exps.Let(entry.name, entry.exp, ret)
     }
 
     case "SequenceLetThe": {
-      throw new Error("TODO")
+      return Exps.LetThe(entry.name, entry.type, entry.exp, ret)
     }
 
     case "SequenceCheck": {
-      throw new Error("TODO")
+      return Exps.Check(entry.exp, entry.type, ret)
     }
   }
 }
