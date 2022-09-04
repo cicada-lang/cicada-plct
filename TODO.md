@@ -1,5 +1,3 @@
-compute-pair.test.ts
-
 # new
 
 Exps.New
