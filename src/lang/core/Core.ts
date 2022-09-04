@@ -280,17 +280,17 @@ export type LetThe = {
   family: "Core"
   kind: "LetThe"
   name: string
-  t: Core
+  type: Core
   exp: Core
   ret: Core
 }
 
-export function LetThe(name: string, t: Core, exp: Core, ret: Core): LetThe {
+export function LetThe(name: string, type: Core, exp: Core, ret: Core): LetThe {
   return {
     family: "Core",
     kind: "LetThe",
     name,
-    t,
+    type,
     exp,
     ret,
   }
@@ -300,16 +300,16 @@ export type Check = {
   family: "Core"
   kind: "Check"
   exp: Core
-  t: Core
+  type: Core
   ret: Core
 }
 
-export function Check(exp: Core, t: Core, ret: Core): Check {
+export function Check(exp: Core, type: Core, ret: Core): Check {
   return {
     family: "Core",
     kind: "Check",
     exp,
-    t,
+    type,
     ret,
   }
 }

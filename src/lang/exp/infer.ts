@@ -149,6 +149,16 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "LetThe": {
+      const typeCore = checkType(ctx, exp.type)
+      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
+      const core = check(ctx, exp.exp, typeValue)
+      const value = evaluate(ctxToEnv(ctx), core)
+      ctx = CtxFulfilled(exp.name, typeValue, value, ctx)
+      const retInferred = infer(ctx, exp.ret)
+      return Inferred(typeValue, Cores.Let(exp.name, core, retInferred.core))
+    }
+
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }

@@ -1,9 +1,8 @@
 # syntax
 
-Exps.LetThe -- infer
-Cores.LetThe -- evaluate
-
 Exps.Check -- infer
+
+Cores.LetThe -- evaluate
 Cores.Check -- evaluate
 
 Cores.Let -- formatCore

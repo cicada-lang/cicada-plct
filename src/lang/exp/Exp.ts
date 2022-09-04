@@ -682,14 +682,14 @@ export type LetThe = {
   family: "Exp"
   kind: "LetThe"
   name: string
-  t: Exp
+  type: Exp
   exp: Exp
   ret: Exp
 } & ExpMeta
 
 export function LetThe(
   name: string,
-  t: Exp,
+  type: Exp,
   exp: Exp,
   ret: Exp,
   span?: Span,
@@ -698,7 +698,7 @@ export function LetThe(
     family: "Exp",
     kind: "LetThe",
     name,
-    t,
+    type,
     exp,
     ret,
     span,
@@ -709,16 +709,16 @@ export type Check = {
   family: "Exp"
   kind: "Check"
   exp: Exp
-  t: Exp
+  type: Exp
   ret: Exp
 } & ExpMeta
 
-export function Check(exp: Exp, t: Exp, ret: Exp, span?: Span): Check {
+export function Check(exp: Exp, type: Exp, ret: Exp, span?: Span): Check {
   return {
     family: "Exp",
     kind: "Check",
     exp,
-    t,
+    type,
     ret,
     span,
   }
