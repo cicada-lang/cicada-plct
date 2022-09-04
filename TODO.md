@@ -1,7 +1,5 @@
 # new
 
-New -- Core
-
 FoldedNew
 
 New -- grammar and matcher
