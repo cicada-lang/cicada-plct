@@ -1,24 +1,10 @@
 # pair
 
-global from cic code -- string in js
-
-Add `Pair` as a global
-
 check-pair.test.ts
 
 compute-pair.test.ts
 
-# the
-
-Add `the` as a global
-
-check-the.test.ts
-
 compute-the.test.ts
-
-# syntax
-
-syntax -- "property:spread"
 
 # new
 
@@ -43,6 +29,10 @@ inclusion -- Clazz
 # conversion
 
 conversion for all values
+
+# syntax
+
+syntax -- "property:spread"
 
 # error report
 

@@ -28,11 +28,13 @@ import { conversion, Value } from "../value"
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     // TODO handle Pi
+    console.log("[warning] inclusion for Pi is not implemented.")
     return
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
     // TODO handle Sigma
+    console.log("[warning] inclusion for Sigma is not implemented.")
     return
   }
 
