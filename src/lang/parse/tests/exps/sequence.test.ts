@@ -1,15 +1,5 @@
 import { expect, test } from "vitest"
-import {
-  FnBindingName,
-  FoldedFn,
-  FoldedPi,
-  PiBindingNamed,
-  Sequence,
-  SequenceCheck,
-  SequenceLet,
-  SequenceLetThe,
-  Var,
-} from "../../../exp"
+import * as Exps from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
@@ -28,14 +18,14 @@ begin {
     ),
   ).toMatchObject(
     deleteUndefined(
-      Sequence(
+      Exps.Sequence(
         [
-          SequenceLetThe("x", Var("Trivial"), Var("sole")),
-          SequenceCheck(Var("sole"), Var("Trivial")),
-          SequenceLet("y", Var("sole")),
-          SequenceLet("z", Var("sole")),
+          Exps.SequenceLetThe("x", Exps.Var("Trivial"), Exps.Var("sole")),
+          Exps.SequenceCheck(Exps.Var("sole"), Exps.Var("Trivial")),
+          Exps.SequenceLet("y", Exps.Var("sole")),
+          Exps.SequenceLet("z", Exps.Var("sole")),
         ],
-        Var("x"),
+        Exps.Var("x"),
       ),
     ),
   )
@@ -50,7 +40,7 @@ begin {
 }
 `,
     ),
-  ).toMatchObject(deleteUndefined(Sequence([], Var("x"))))
+  ).toMatchObject(deleteUndefined(Exps.Sequence([], Exps.Var("x"))))
 })
 
 test("parse Sequence -- let function", () => {
@@ -68,21 +58,24 @@ begin {
     ),
   ).toMatchObject(
     deleteUndefined(
-      Sequence(
+      Exps.Sequence(
         [
-          SequenceLetThe(
+          Exps.SequenceLetThe(
             "id",
-            FoldedPi(
-              [PiBindingNamed("T", Var("Type")), PiBindingNamed("x", Var("T"))],
-              Var("T"),
+            Exps.FoldedPi(
+              [
+                Exps.PiBindingNamed("T", Exps.Var("Type")),
+                Exps.PiBindingNamed("x", Exps.Var("T")),
+              ],
+              Exps.Var("T"),
             ),
-            FoldedFn(
-              [FnBindingName("T"), FnBindingName("x")],
-              Sequence([], Var("x")),
+            Exps.FoldedFn(
+              [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
+              Exps.Sequence([], Exps.Var("x")),
             ),
           ),
         ],
-        Var("id"),
+        Exps.Var("id"),
       ),
     ),
   )

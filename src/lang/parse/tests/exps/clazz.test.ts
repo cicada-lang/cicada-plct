@@ -1,28 +1,23 @@
 import { expect, test } from "vitest"
-import {
-  ClazzBindingAbstract,
-  ClazzBindingFulfilled,
-  FoldedClazz,
-  Var,
-} from "../../../exp"
+import * as Exps from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Clazz", () => {
   expect(parseExp("class { T: Type, x: T }")).toMatchObject(
     deleteUndefined(
-      FoldedClazz([
-        ClazzBindingAbstract("T", Var("Type")),
-        ClazzBindingAbstract("x", Var("T")),
+      Exps.FoldedClazz([
+        Exps.ClazzBindingAbstract("T", Exps.Var("Type")),
+        Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
     ),
   )
 
   expect(parseExp("class { T: Type = String, x: T }")).toMatchObject(
     deleteUndefined(
-      FoldedClazz([
-        ClazzBindingFulfilled("T", Var("Type"), Var("String")),
-        ClazzBindingAbstract("x", Var("T")),
+      Exps.FoldedClazz([
+        Exps.ClazzBindingFulfilled("T", Exps.Var("Type"), Exps.Var("String")),
+        Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
     ),
   )
@@ -37,9 +32,9 @@ class {
 }`),
   ).toMatchObject(
     deleteUndefined(
-      FoldedClazz([
-        ClazzBindingAbstract("T", Var("Type")),
-        ClazzBindingAbstract("x", Var("T")),
+      Exps.FoldedClazz([
+        Exps.ClazzBindingAbstract("T", Exps.Var("Type")),
+        Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
     ),
   )
@@ -52,9 +47,9 @@ class {
 }`),
   ).toMatchObject(
     deleteUndefined(
-      FoldedClazz([
-        ClazzBindingFulfilled("T", Var("Type"), Var("String")),
-        ClazzBindingAbstract("x", Var("T")),
+      Exps.FoldedClazz([
+        Exps.ClazzBindingFulfilled("T", Exps.Var("Type"), Exps.Var("String")),
+        Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
     ),
   )
