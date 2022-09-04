@@ -310,7 +310,6 @@ export function Check(exp: Core, t: Core, ret: Core): Check {
     kind: "Check",
     exp,
     t,
-    exp,
     ret,
   }
 }

@@ -91,6 +91,12 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
+    case "Let": {
+      const value = evaluate(env, core.exp)
+      env = EnvCons(core.name, value, env)
+      return evaluate(env, core.ret)
+    }
+
     default: {
       throw new EvaluationError(
         `evaluate is not implemented for core: ${core.kind}`,

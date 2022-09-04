@@ -1,17 +1,22 @@
 # syntax
 
-Cores.Let -- evaluate
 Cores.Let -- formatCore
 
 Exps.LetThe -- infer
 Cores.LetThe -- evaluate
+Cores.LetThe -- formatCore
 
 Exps.Check -- infer
 Cores.Check -- evaluate
+Cores.Check -- formatCore
 
-unfoldSequence to `Exps.Let` and `Exps.LetThe` and `Exps.Check`
+unfoldSequence to `Exps.Let`
+unfoldSequence to `Exps.LetThe`
+unfoldSequence to `Exps.Check`
 
-check-sequence.test.ts
+check-sequence.test.ts -- LetThe
+check-sequence.test.ts -- Let
+check-sequence.test.ts -- Check
 
 compute-sequence.test.ts
 
