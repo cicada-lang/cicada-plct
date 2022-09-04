@@ -11,6 +11,16 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
+    "stmt:let_fn": [
+      '"function"',
+      { name: "identifier" },
+      '"("',
+      { bindings: "pi_bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      { sequence: "sequence" },
+    ],
     "stmt:compute": ['"compute"', { exp: "exp" }],
     "stmt:clazz": [
       '"class"',

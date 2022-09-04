@@ -19,6 +19,23 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         matchers.exp_matcher(exp),
         span,
       ),
+    "stmt:let_fn": ({ name, bindings, ret_t, sequence }, { span }) =>
+      new Stmts.LetThe(
+        pt.str(name),
+        Exps.FoldedPi(
+          matchers.pi_bindings_matcher(bindings),
+          matchers.exp_matcher(ret_t),
+          span,
+        ),
+        Exps.FoldedFn(
+          matchers
+            .pi_bindings_matcher(bindings)
+            .map(Exps.piBindingtoFnBindingFrom),
+          matchers.sequence_matcher(sequence),
+          span,
+        ),
+        span,
+      ),
     "stmt:compute": ({ exp }, { span }) =>
       new Stmts.Compute(matchers.exp_matcher(exp), span),
     "stmt:clazz": ({ name, bindings }, { span }) =>

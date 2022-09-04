@@ -1,7 +1,3 @@
-# syntax
-
-syntax -- "stmt:let_fn"
-
 # pair
 
 global from cic code -- string in js
