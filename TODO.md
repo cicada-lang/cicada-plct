@@ -20,16 +20,6 @@ conversion for all values
 
 ## inclusion
 
-Stmts.Inclusion -- syntax
-
-```
-inclusion {
-  <value>
-  <value>
-  <value>
-}
-```
-
 parse inclusion.test.ts
 
 tests/inclusion/
