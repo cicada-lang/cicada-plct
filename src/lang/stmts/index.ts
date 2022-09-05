@@ -1,6 +1,7 @@
 export * from "./Check"
 export * from "./Clazz"
 export * from "./Compute"
+export * from "./Conversion"
 export * from "./Declare"
 export * from "./Let"
 export * from "./LetThe"

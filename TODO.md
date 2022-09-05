@@ -14,8 +14,6 @@ doAp -- Clazz
 
 ## conversion
 
-Stmts.Conversion -- for testing
-
 Stmts.Conversion -- syntax
 
 ```
@@ -35,7 +33,7 @@ Stmts.Inclusion -- for testing
 Stmts.Inclusion -- syntax
 
 ```
-inclusion (<type>) {
+inclusion {
   <value>
   <value>
   <value>
