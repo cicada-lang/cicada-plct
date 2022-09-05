@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "npx tsc",
-    "watch": "npx tsc --watch",
+    "build:watch": "npx tsc --watch",
     "test": "vitest --dir src --threads false --run",
     "test:watch": "vitest --dir src --threads false",
     "test:coverage": "vitest --dir src --threads false --run --coverage ",
