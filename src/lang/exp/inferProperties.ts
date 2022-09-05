@@ -38,13 +38,13 @@ export function inferProperties(
     }
 
     case "ClazzFulfilled": {
-      const expProperty = properties[clazz.name]
-      if (expProperty !== undefined) {
-        const expPropertyType = clazz.propertyType
-        const expPropertyCore = Exps.check(ctx, expProperty, expPropertyType)
-        const expPropertyValue = evaluate(ctxToEnv(ctx), expPropertyCore)
+      const property = properties[clazz.name]
+      if (property !== undefined) {
+        const propertyType = clazz.propertyType
+        const propertyCore = Exps.check(ctx, property, propertyType)
+        const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
 
-        conversion(ctx, expPropertyType, expPropertyValue, clazz.property)
+        conversion(ctx, propertyType, propertyValue, clazz.property)
       }
 
       const propertyCore = Values.readback(
