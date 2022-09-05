@@ -12,20 +12,6 @@ export function conversion(
     return
   }
 
-  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
-    if (left.neutral.kind === "Var" && right.neutral.kind === "Var") {
-      if (left.neutral.name === right.neutral.name) {
-        return
-      } else {
-        throw new ElaborationError(
-          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`,
-        )
-      }
-    }
-
-    // TODO handle other neutral cases.
-  }
-
   if (left.kind === "Trivial" && right.kind === "Trivial") {
     return
   }
@@ -48,9 +34,33 @@ export function conversion(
     }
   }
 
-  if (left.kind === "ClazzCons" && right.kind === "ClazzCons") {
-    // TODO add a fake conversion check for now.
+  if (left.kind === "Pi" && right.kind === "Pi") {
+    // TODO handle Pi
     return
+  }
+
+  if (left.kind === "Sigma" && right.kind === "Sigma") {
+    // TODO handle Pi
+    return
+  }
+
+  if (left.kind === "ClazzCons" && right.kind === "ClazzCons") {
+    // TODO handle ClazzCons
+    return
+  }
+
+  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+    if (left.neutral.kind === "Var" && right.neutral.kind === "Var") {
+      if (left.neutral.name === right.neutral.name) {
+        return
+      } else {
+        throw new ElaborationError(
+          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`,
+        )
+      }
+    }
+
+    // TODO handle other neutral cases.
   }
 
   throw new ElaborationError(

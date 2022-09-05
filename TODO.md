@@ -14,9 +14,8 @@ doAp -- Clazz
 
 ## conversion
 
-conversion for all values
+conversion Pi
 
-conversion-pi.test.ts
 conversion-fn.test.ts
 conversion-sigma.test.ts
 conversion-cons.test.ts
