@@ -14,15 +14,9 @@ doAp -- Clazz
 
 ## conversion
 
-Stmts.Conversion -- syntax
+parse tests/inclusion.test.ts
 
-```
-conversion (<type>) {
-  <value>
-  <value>
-  <value>
-}
-```
+tests/conversion/
 
 conversion for all values
 
@@ -37,6 +31,10 @@ inclusion {
   <value>
 }
 ```
+
+parse tests/conversion.test.ts
+
+tests/inclusion/
 
 inclusion -- Pi
 

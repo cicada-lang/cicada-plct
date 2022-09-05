@@ -29,6 +29,19 @@ export const stmt = {
       { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
+    "stmt:conversion": [
+      '"("',
+      { type: "exp" },
+      '")"',
+      '"{"',
+      { exps: { $ap: ["zero_or_more", "exp"] } },
+      '"}"',
+    ],
+    "stmt:inclusion": [
+      '"{"',
+      { types: { $ap: ["zero_or_more", "exp"] } },
+      '"}"',
+    ],
   },
 }
 

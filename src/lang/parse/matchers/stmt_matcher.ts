@@ -49,6 +49,12 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ),
         span,
       ),
+    "stmt:conversion": ({ type, exps }, { span }) =>
+      new Stmts.Conversion(
+        matchers.exp_matcher(type),
+        pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),
+        span,
+      ),
   })(tree)
 }
 
