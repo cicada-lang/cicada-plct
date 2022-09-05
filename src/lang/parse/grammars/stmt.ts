@@ -30,6 +30,7 @@ export const stmt = {
       '"}"',
     ],
     "stmt:conversion": [
+      '"conversion"',
       '"("',
       { type: "exp" },
       '")"',
@@ -38,6 +39,7 @@ export const stmt = {
       '"}"',
     ],
     "stmt:inclusion": [
+      '"inclusion"',
       '"{"',
       { types: { $ap: ["zero_or_more", "exp"] } },
       '"}"',

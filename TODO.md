@@ -14,8 +14,6 @@ doAp -- Clazz
 
 ## conversion
 
-parse tests/inclusion.test.ts
-
 tests/conversion/
 
 conversion for all values
@@ -32,7 +30,7 @@ inclusion {
 }
 ```
 
-parse tests/conversion.test.ts
+parse inclusion.test.ts
 
 tests/inclusion/
 
