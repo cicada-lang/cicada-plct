@@ -51,3 +51,71 @@ check new AB {
 
 `)
 })
+
+test("check New -- dependent", async () => {
+  await runCode(`
+
+class TX {
+  T: Type
+  x: T
+}
+
+check new TX {
+  T: String,
+  x: "x",
+}: TX
+
+  `)
+
+  await expectCodeToFail(`
+
+class TX {
+  T: Type
+  x: T
+}
+
+check new TX {
+  T: String,
+  x: Type,
+}: TX
+
+`)
+})
+
+test("check New -- duplicate properties", async () => {
+  await expectCodeToFail(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+check new ABC {
+  a: "a",
+  b: "b",
+  c: "c",
+  a: "a",
+}: ABC
+
+`)
+})
+
+test("check New -- extra properties", async () => {
+  await expectCodeToFail(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+    
+check new ABC {
+  a: "a",
+  b: "b",
+  c: "c",
+  d: "d",
+}: ABC
+
+`)
+})
