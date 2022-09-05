@@ -28,8 +28,6 @@ conversion for all values
 
 ## inclusion
 
-Stmts.Inclusion -- for testing
-
 Stmts.Inclusion -- syntax
 
 ```
