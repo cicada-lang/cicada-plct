@@ -1,6 +1,5 @@
 import * as Cores from "../core"
 import { Core } from "../core"
-import { EvaluationError } from "../errors"
 
 export function formatCore(core: Core): string {
   switch (core.kind) {
@@ -70,10 +69,10 @@ export function formatCore(core: Core): string {
       return `begin { ${entries.join("  ")}  return ${ret} }`
     }
 
-    default: {
-      throw new EvaluationError(
-        `formatCore is not implemented for ${core.kind}`,
-      )
-    }
+    // default: {
+    //   throw new EvaluationError(
+    //     `formatCore is not implemented for ${core.kind}`,
+    //   )
+    // }
   }
 }
