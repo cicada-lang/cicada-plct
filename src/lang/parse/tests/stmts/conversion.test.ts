@@ -39,3 +39,17 @@ conversion (Trivial) {
     ]),
   )
 })
+
+test("parse Conversion -- empty", () => {
+  expect(
+    parseStmts(`
+
+conversion (Trivial) {
+
+}
+
+`),
+  ).toMatchObject(
+    deleteUndefined([new Stmts.Conversion(Exps.Var("Trivial"), [])]),
+  )
+})

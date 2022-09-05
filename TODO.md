@@ -20,8 +20,6 @@ conversion for all values
 
 ## inclusion
 
-parse inclusion.test.ts
-
 tests/inclusion/
 
 inclusion -- Pi
