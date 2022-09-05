@@ -48,6 +48,11 @@ export function conversion(
     }
   }
 
+  if (left.kind === "ClazzCons" && right.kind === "ClazzCons") {
+    // TODO add a fake conversion check for now.
+    return
+  }
+
   throw new ElaborationError(
     `conversion is not implemented for type: ${type.kind}, left: ${left.kind} and right: ${right.kind}`,
   )
