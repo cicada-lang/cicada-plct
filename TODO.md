@@ -14,11 +14,33 @@ doAp -- Clazz
 
 ## conversion
 
+Stmts.Conversion -- for testing
+
+Stmts.Conversion -- syntax
+
+```
+conversion (<type>) {
+  <value>
+  <value>
+  <value>
+}
+```
+
 conversion for all values
 
 ## inclusion
 
-Stmts.Subtype -- for testing
+Stmts.Inclusion -- for testing
+
+Stmts.Inclusion -- syntax
+
+```
+inclusion (<type>) {
+  <value>
+  <value>
+  <value>
+}
+```
 
 inclusion -- Pi
 
