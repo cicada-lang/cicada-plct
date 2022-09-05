@@ -1,7 +1,5 @@
 # Subtyping
 
-infer New -- fix error message of
-
 ## New
 
 New -- evaluate
