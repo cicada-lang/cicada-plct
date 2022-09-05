@@ -49,6 +49,6 @@ export function conversion(
   }
 
   throw new ElaborationError(
-    `conversion is not implemented for type: {type.kind}, left: ${left.kind} and right: ${right.kind}`,
+    `conversion is not implemented for type: ${type.kind}, left: ${left.kind} and right: ${right.kind}`,
   )
 }
