@@ -16,7 +16,6 @@ doAp -- Clazz
 
 conversion for all values
 
-conversion-string.test.ts
 conversion-quote.test.ts
 conversion-trivial.test.ts
 conversion-sole.test.ts
