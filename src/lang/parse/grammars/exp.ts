@@ -99,5 +99,14 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
+    "operand:new": [
+      '"new"',
+      { clazz: "identifier" },
+      '"{"',
+      { properties: { $ap: ["zero_or_more", "property", '","'] } },
+      { last_property: "property" },
+      { $ap: ["optional", '","'] },
+      '"}"',
+    ],
   },
 }

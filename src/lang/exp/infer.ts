@@ -1,6 +1,13 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, CtxFulfilled, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import {
+  Ctx,
+  CtxCons,
+  CtxFulfilled,
+  ctxToEnv,
+  lookupTypeInCtx,
+  lookupValueInCtx,
+} from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
@@ -136,6 +143,25 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const propertyCore = readback(ctx, propertyType, property)
 
       return Inferred(propertyType, propertyCore)
+    }
+
+    case "FoldedNew": {
+      Exps.assertNoDuplicateProperties(ctx, exp.properties)
+      return infer(ctx, Exps.unfoldNew(exp.name, exp.properties))
+    }
+
+    case "New": {
+      const clazz = lookupValueInCtx(ctx, exp.name)
+      if (clazz === undefined) {
+        throw new ElaborationError(`${exp.name} should be a class`)
+      }
+
+      assertClazzInCtx(ctx, clazz)
+      const properties = Exps.inferNewProperties(ctx, exp.properties, clazz)
+
+      Exps.disallowExtraProperty(ctx, properties, exp.properties)
+
+      return Inferred(clazz, Cores.Objekt(properties))
     }
 
     case "Sequence": {

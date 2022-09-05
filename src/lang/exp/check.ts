@@ -1,7 +1,6 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
-import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, checkProperties, Exp } from "../exp"
 import * as Neutrals from "../neutral"
@@ -99,6 +98,15 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
+    case "FoldedNew": {
+      Exps.assertNoDuplicateProperties(ctx, exp.properties)
+      return check(ctx, Exps.unfoldNew(exp.name, exp.properties), type)
+    }
+
+    case "New": {
+      return checkByInfer(ctx, exp, type)
+    }
+
     case "Sequence":
     case "Let":
     case "LetThe":
@@ -106,10 +114,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    default: {
-      throw new ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`,
-      )
-    }
+    // default: {
+    //   throw new ElaborationError(
+    //     `check is not implemented for exp: ${exp.kind}`,
+    //   )
+    // }
   }
 }

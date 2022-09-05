@@ -35,6 +35,7 @@ export type Exp =
   | Objekt
   | FoldedObjekt
   | New
+  | FoldedNew
   | Dot
   | Sequence
   | Let
@@ -587,6 +588,27 @@ export function New(
   return {
     family: "Exp",
     kind: "New",
+    name,
+    properties,
+    span,
+  }
+}
+
+export type FoldedNew = {
+  family: "Exp"
+  kind: "FoldedNew"
+  name: string
+  properties: Array<Property>
+} & ExpMeta
+
+export function FoldedNew(
+  name: string,
+  properties: Array<Property>,
+  span?: Span,
+): FoldedNew {
+  return {
+    family: "Exp",
+    kind: "FoldedNew",
     name,
     properties,
     span,

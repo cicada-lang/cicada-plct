@@ -2,18 +2,6 @@
 
 ## New
 
-FoldedNew
-
-New -- grammar and matcher
-
-unfoldNew
-
-New -- check
-
-FoldedNew -- check
-
-- disallowExtraProperty
-
 New -- evaluate
 
 New -- formatCore

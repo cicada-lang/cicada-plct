@@ -97,5 +97,16 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ].map(([name, exp]) => Exps.PropertyPlain(name, exp)),
         span,
       ),
+    "operand:new": ({ clazz, properties, last_property }, { span }) =>
+      Exps.FoldedNew(
+        pt.str(clazz),
+        [
+          ...pt.matchers
+            .zero_or_more_matcher(properties)
+            .map(matchers.property_matcher),
+          matchers.property_matcher(last_property),
+        ].map(([name, exp]) => Exps.PropertyPlain(name, exp)),
+        span,
+      ),
   })(tree)
 }
