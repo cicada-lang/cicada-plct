@@ -6,7 +6,7 @@ import { Exp } from "../exp"
 import * as Values from "../value"
 import { assertClazzInCtx, conversion } from "../value"
 
-export function inferNewProperties(
+export function inferProperties(
   ctx: Ctx,
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
@@ -33,7 +33,7 @@ export function inferNewProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferNewProperties(ctx, properties, rest),
+        ...inferProperties(ctx, properties, rest),
       }
     }
 
@@ -59,7 +59,7 @@ export function inferNewProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferNewProperties(ctx, properties, clazz.rest),
+        ...inferProperties(ctx, properties, clazz.rest),
       }
     }
   }

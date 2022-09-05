@@ -158,7 +158,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
       assertClazzInCtx(ctx, clazz)
 
-      const properties = Exps.inferNewProperties(ctx, exp.properties, clazz)
+      const properties = Exps.inferProperties(ctx, exp.properties, clazz)
 
       Exps.disallowExtraProperty(ctx, properties, exp.properties)
 
