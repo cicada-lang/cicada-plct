@@ -8,7 +8,7 @@ test("parse Conversion", () => {
   expect(
     parseStmts(`
 
-conversion (Trivial) {
+conversion Trivial {
   sole
   sole
 }
@@ -28,7 +28,7 @@ test("parse Conversion -- single", () => {
   expect(
     parseStmts(`
 
-conversion (Trivial) {
+conversion Trivial {
   sole
 }
 
@@ -44,7 +44,7 @@ test("parse Conversion -- empty", () => {
   expect(
     parseStmts(`
 
-conversion (Trivial) {
+conversion Trivial {
 
 }
 

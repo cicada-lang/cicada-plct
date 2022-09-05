@@ -14,18 +14,27 @@ doAp -- Clazz
 
 ## conversion
 
-tests/conversion/
-
 conversion for all values
+
+conversion-string.test.ts
+conversion-quote.test.ts
+conversion-trivial.test.ts
+conversion-sole.test.ts
+conversion-pi.test.ts
+conversion-fn.test.ts
+conversion-sigma.test.ts
+conversion-cons.test.ts
+conversion-clazz.test.ts
+conversion-objekt.test.ts
 
 ## inclusion
 
-tests/inclusion/
+inclusion-pi.test.ts
+inclusion-sigma.test.ts
+inclusion-clazz.test.ts
 
 inclusion -- Pi
-
 inclusion -- Sigma
-
 inclusion -- Clazz
 
 # Equivalence
