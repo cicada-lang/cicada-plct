@@ -153,13 +153,18 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "New": {
       const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
-        throw new ElaborationError(`${exp.name} should be a class`)
+        throw new ElaborationError(`undefined class: ${exp.name}`)
       }
 
       assertClazzInCtx(ctx, clazz)
+
       const properties = Exps.inferNewProperties(ctx, exp.properties, clazz)
 
       Exps.disallowExtraProperty(ctx, properties, exp.properties)
+
+      /**
+         TODO The inferred type might be a subtype to the `clazz`.
+       **/
 
       return Inferred(clazz, Cores.Objekt(properties))
     }
