@@ -101,7 +101,7 @@ export const operand = {
     ],
     "operand:new": [
       '"new"',
-      { clazz: "identifier" },
+      { name: "identifier" },
       '"{"',
       { properties: { $ap: ["zero_or_more", "property", '","'] } },
       { last_property: "property" },
