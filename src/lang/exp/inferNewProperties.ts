@@ -20,7 +20,6 @@ export function inferNewProperties(
       const property = properties[clazz.name]
       if (property === undefined) {
         // TODO improve error report
-        // Maybe we should define a function called `getProperty`
         throw new ElaborationError(`missing property: ${clazz.name}`)
       }
 
@@ -57,6 +56,7 @@ export function inferNewProperties(
       )
 
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, clazzProperty, ctx)
+
       return {
         [clazz.name]: propertyCore,
         ...inferNewProperties(ctx, properties, clazz.rest),
