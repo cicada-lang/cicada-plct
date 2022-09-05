@@ -1,6 +1,13 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, CtxFulfilled, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import {
+  Ctx,
+  CtxCons,
+  CtxFulfilled,
+  ctxToEnv,
+  lookupTypeInCtx,
+  lookupValueInCtx,
+} from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
@@ -144,7 +151,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "New": {
-      const clazz = lookupTypeInCtx(ctx, exp.name)
+      const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
         throw new ElaborationError(`${exp.name} should be a class`)
       }
