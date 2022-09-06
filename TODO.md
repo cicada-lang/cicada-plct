@@ -14,6 +14,10 @@ doAp -- Clazz
 
 ## conversion
 
+extract typeDirectedConversion & valueDirectedConversion
+
+extract conversionNeutral
+
 conversion Pi
 
 conversion-fn.test.ts

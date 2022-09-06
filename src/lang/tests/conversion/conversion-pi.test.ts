@@ -9,10 +9,15 @@ conversion Type {
   (T: Type, y: T) -> T
 }
 
+conversion Type {
+  (A: Type, x: A, B: Type, y: B) -> A
+  (B: Type, y: B, A: Type, x: A) -> B
+}
+
 `)
 })
 
-test("conversion Pi -- fail", async () => {
+test.todo("conversion Pi -- fail", async () => {
   await expectCodeToFail(`
 
 conversion Type {
