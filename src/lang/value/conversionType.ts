@@ -1,6 +1,7 @@
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
+import { conversionNeutral } from "../neutral"
 import * as Values from "../value"
 import { applyClosure, Value } from "../value"
 
@@ -63,17 +64,13 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   }
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
-    if (left.neutral.kind === "Var" && right.neutral.kind === "Var") {
-      if (left.neutral.name === right.neutral.name) {
-        return
-      } else {
-        throw new ElaborationError(
-          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`,
-        )
-      }
-    }
+    /**
+       The `left.type` and `right.type` are ignored here,
+       maybe we should use them to debug.
+      **/
 
-    // TODO handle other neutral cases.
+    conversionNeutral(ctx, left.neutral, right.neutral)
+    return
   }
 
   throw new ElaborationError(

@@ -25,7 +25,7 @@ export function conversionByValue(
        maybe we should use them to debug.
       **/
 
-    conversionNeutral(ctx, left.neutral, left.neutral)
+    conversionNeutral(ctx, left.neutral, right.neutral)
     return
   }
 
