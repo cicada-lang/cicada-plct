@@ -10,8 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-conversionNeutral -- trivial to implement, just recurse down
-
 conversion Pi
 
 conversion-fn.test.ts

@@ -1,8 +1,8 @@
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { Neutral } from "../neutral"
 import { readback } from "../value"
-import { Neutral } from "./Neutral"
 
 export function readbackNeutral(ctx: Ctx, neutral: Neutral): Core {
   switch (neutral.kind) {
