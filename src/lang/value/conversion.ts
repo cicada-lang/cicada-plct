@@ -14,7 +14,7 @@ export function conversion(
     return
   }
 
-  valueDirectedConversion(ctx, type, left, right)
+  conversionByValue(ctx, type, left, right)
 }
 
 export function conversionByType(
@@ -35,7 +35,7 @@ export function conversionByType(
   }
 }
 
-export function valueDirectedConversion(
+export function conversionByValue(
   ctx: Ctx,
   type: Value,
   left: Value,

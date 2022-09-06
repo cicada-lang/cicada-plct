@@ -10,8 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-[refactor] rename valueDirectedReadback to conversionByValue
-
 [refactor] extract readbackByType
 [refactor] extract readbackByValue
 [refactor] extract conversionByType
