@@ -10,6 +10,10 @@ doAp -- Clazz
 
 ## conversion
 
+conversion-clazz.test.ts
+
+- let us try to implement a version where the order does not matters
+
 conversionType Clazz
 
 - pass conversion-clazz.test.ts

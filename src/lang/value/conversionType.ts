@@ -57,8 +57,8 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
     return
   }
 
-  if (left.kind === "ClazzCons" && right.kind === "ClazzCons") {
-    // TODO handle ClazzCons
+  if (Values.isClazz(left) && Values.isClazz(right)) {
+    // TODO handle Clazz
     return
   }
 

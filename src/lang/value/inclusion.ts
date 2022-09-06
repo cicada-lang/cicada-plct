@@ -38,10 +38,10 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     return
   }
 
-  // if (isClazz(subtype) && isClazz(type)) {
-  //   // TODO handle Clazz
-  //   return
-  // }
+  if (Values.isClazz(subtype) && Values.isClazz(type)) {
+    // TODO handle Clazz
+    return
+  }
 
   conversion(ctx, Values.Type(), subtype, type)
 }
