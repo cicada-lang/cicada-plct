@@ -24,9 +24,7 @@ import { readbackProperties } from "./readbackProperties"
 **/
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
-  return (
-    readbackByType(ctx, type, value) || valueDirectedReadback(ctx, type, value)
-  )
+  return readbackByType(ctx, type, value) || readbackByValue(ctx, type, value)
 }
 
 /**
@@ -110,7 +108,7 @@ export function readbackByType(
   }
 }
 
-function valueDirectedReadback(ctx: Ctx, type: Value, value: Value): Core {
+function readbackByValue(ctx: Ctx, type: Value, value: Value): Core {
   switch (value.kind) {
     case "TypedNeutral": {
       /**
