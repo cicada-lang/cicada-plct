@@ -2,10 +2,6 @@
 
 ## New
 
-New -- evaluate
-
-New -- formatCore
-
 NewNameless
 
 ## fulfilling type
@@ -13,8 +9,6 @@ NewNameless
 doAp -- Clazz
 
 ## conversion
-
-extract typeDirectedConversion & valueDirectedConversion
 
 extract conversionNeutral
 
