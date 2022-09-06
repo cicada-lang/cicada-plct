@@ -55,9 +55,12 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),
         span,
       ),
-    "stmt:inclusion": ({ types }, { span }) =>
+    "stmt:inclusion": ({ types, last_type }, { span }) =>
       new Stmts.Inclusion(
-        pt.matchers.zero_or_more_matcher(types).map(matchers.exp_matcher),
+        [
+          ...pt.matchers.zero_or_more_matcher(types).map(matchers.exp_matcher),
+          matchers.exp_matcher(last_type),
+        ],
         span,
       ),
   })(tree)

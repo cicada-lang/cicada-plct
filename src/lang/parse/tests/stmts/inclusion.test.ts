@@ -8,10 +8,27 @@ test("parse Inclusion", () => {
   expect(
     parseStmts(`
 
-inclusion {
+inclusion [
+  Trivial,
+  Trivial,
+]
+
+`),
+  ).toMatchObject(
+    deleteUndefined([
+      new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")]),
+    ]),
+  )
+})
+
+test("parse Inclusion -- without last comma", () => {
+  expect(
+    parseStmts(`
+
+inclusion [
+  Trivial,
   Trivial
-  Trivial
-}
+]
 
 `),
   ).toMatchObject(
@@ -25,22 +42,10 @@ test("parse Inclusion -- single", () => {
   expect(
     parseStmts(`
 
-inclusion {
-  Trivial
-}
+inclusion [
+  Trivial,
+]
 
 `),
   ).toMatchObject(deleteUndefined([new Stmts.Inclusion([Exps.Var("Trivial")])]))
-})
-
-test("parse Inclusion -- empty", () => {
-  expect(
-    parseStmts(`
-
-inclusion {
-
-}
-
-`),
-  ).toMatchObject(deleteUndefined([new Stmts.Inclusion([])]))
 })

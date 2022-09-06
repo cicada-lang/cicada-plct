@@ -10,7 +10,7 @@ doAp -- Clazz
 
 ## conversion
 
-fix ambiguous grammar about Stmts.Conversion and Stmts.Inclusion
+fix ambiguous grammar about Stmts.Conversion
 
 conversion-clazz.test.ts
 
