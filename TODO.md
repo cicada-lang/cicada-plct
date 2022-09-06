@@ -10,6 +10,8 @@ doAp -- Clazz
 
 ## conversion
 
+fix ambiguous grammar about Stmts.Conversion and Stmts.Inclusion
+
 conversion-clazz.test.ts
 
 - let us try to implement a version where the order does not matters
