@@ -10,12 +10,28 @@ doAp -- Clazz
 
 ## conversion
 
-conversion Pi
+conversionType Pi
 
-conversion-sigma.test.ts
-conversion-fn.test.ts
-conversion-cons.test.ts
-conversion-clazz.test.ts
+- pass conversion-pi.test.ts
+
+conversionType Sigma
+
+- conversion-sigma.test.ts
+
+conversionType Clazz
+
+- conversion-clazz.test.ts
+
+typeDirectedConversion Pi
+
+- conversion-fn.test.ts
+
+typeDirectedConversion Sigma
+
+- conversion-cons.test.ts
+
+typeDirectedConversion Clazz
+
 conversion-objekt.test.ts
 
 ## inclusion
