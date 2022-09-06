@@ -10,10 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-conversionType Sigma
-
-- pass conversion-sigma.test.ts
-
 conversionType Clazz
 
 - pass conversion-clazz.test.ts

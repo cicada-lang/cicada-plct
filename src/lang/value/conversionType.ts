@@ -25,7 +25,8 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
     const freshName = freshenInCtx(ctx, name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
-    ctx = CtxCons(freshName, left.argType, ctx)
+
+    ctx = CtxCons(freshName, argType, ctx)
 
     conversionType(
       ctx,
@@ -37,7 +38,22 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    // TODO handle Pi
+    conversionType(ctx, left.carType, right.carType)
+    const name = left.cdrTypeClosure.name
+    const carType = left.carType
+
+    const freshName = freshenInCtx(ctx, name)
+    const variable = Neutrals.Var(freshName)
+    const typedNeutral = Values.TypedNeutral(carType, variable)
+
+    ctx = CtxCons(freshName, carType, ctx)
+
+    conversionType(
+      ctx,
+      applyClosure(left.cdrTypeClosure, typedNeutral),
+      applyClosure(right.cdrTypeClosure, typedNeutral),
+    )
+
     return
   }
 

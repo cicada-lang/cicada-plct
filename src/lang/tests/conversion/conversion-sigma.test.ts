@@ -17,7 +17,7 @@ conversion Type {
 `)
 })
 
-test.todo("conversion Sigma -- fail", async () => {
+test("conversion Sigma -- fail", async () => {
   await expectCodeToFail(`
 
 conversion Type {
