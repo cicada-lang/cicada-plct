@@ -28,6 +28,10 @@ export function typeDirectedConversion(
       conversionType(ctx, left, right)
       return "ok"
     }
+
+    case "Trivial": {
+      return "ok"
+    }
   }
 }
 
@@ -37,11 +41,6 @@ export function valueDirectedConversion(
   left: Value,
   right: Value,
 ): void {
-  if (left.kind === "Sole" && right.kind === "Sole") {
-    // TODO should be handled in typeDirectedConversion
-    return
-  }
-
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.literal === right.literal) {
       return

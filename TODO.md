@@ -10,7 +10,7 @@ doAp -- Clazz
 
 ## conversion
 
-sole should be handled in typeDirectedConversion
+conversionNeutral -- trivial to implement, just recurse down
 
 conversion Pi
 
