@@ -9,7 +9,7 @@ export function conversion(
   left: Value,
   right: Value,
 ): void {
-  const result = typeDirectedConversion(ctx, type, left, right)
+  const result = conversionByType(ctx, type, left, right)
   if (result === "ok") {
     return
   }
@@ -17,7 +17,7 @@ export function conversion(
   valueDirectedConversion(ctx, type, left, right)
 }
 
-export function typeDirectedConversion(
+export function conversionByType(
   ctx: Ctx,
   type: Value,
   left: Value,
