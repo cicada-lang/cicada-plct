@@ -10,7 +10,9 @@ doAp -- Clazz
 
 ## conversion
 
-extract freshenInClazz
+clazzPropertyNames
+
+prepareNameMap
 
 conversionClazz
 
