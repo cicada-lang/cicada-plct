@@ -10,9 +10,13 @@ doAp -- Clazz
 
 ## conversion
 
-conversionType Clazz
+extract freshenInClazz
+
+conversionClazz
 
 - pass conversion-clazz.test.ts
+
+add computation to conversion-clazz.test.ts
 
 conversionByType Pi
 

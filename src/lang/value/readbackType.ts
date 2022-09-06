@@ -28,6 +28,14 @@ import { applyClosure, readback, readbackClazz, Value } from "../value"
 
 export function readbackType(ctx: Ctx, type: Value): Core {
   switch (type.kind) {
+    case "TypedNeutral": {
+      /**
+         The `type.type` are ignored here, maybe we should use them to debug.
+      **/
+
+      return readbackNeutral(ctx, type.neutral)
+    }
+
     case "Type": {
       return Cores.Var("Type")
     }
@@ -38,14 +46,6 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     case "Trivial": {
       return Cores.Var("Trivial")
-    }
-
-    case "TypedNeutral": {
-      /**
-         The `type.type` are ignored here, maybe we should use them to debug.
-      **/
-
-      return readbackNeutral(ctx, type.neutral)
     }
 
     case "Pi": {

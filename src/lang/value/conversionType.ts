@@ -3,9 +3,19 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { conversionNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, Value } from "../value"
+import { applyClosure, conversionClazz, Value } from "../value"
 
 export function conversionType(ctx: Ctx, left: Value, right: Value): void {
+  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+    /**
+       The `left.type` and `right.type` are ignored here,
+       maybe we should use them to debug.
+      **/
+
+    conversionNeutral(ctx, left.neutral, right.neutral)
+    return
+  }
+
   if (left.kind === "Type" && right.kind === "Type") {
     return
   }
@@ -59,17 +69,7 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   }
 
   if (Values.isClazz(left) && Values.isClazz(right)) {
-    // TODO handle Clazz
-    return
-  }
-
-  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
-    /**
-       The `left.type` and `right.type` are ignored here,
-       maybe we should use them to debug.
-      **/
-
-    conversionNeutral(ctx, left.neutral, right.neutral)
+    conversionClazz(ctx, left, right)
     return
   }
 
