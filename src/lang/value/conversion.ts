@@ -1,5 +1,6 @@
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
+import { conversionNeutral } from "../neutral"
 import { conversionType, Value } from "../value"
 
 export function conversion(
@@ -37,6 +38,7 @@ export function valueDirectedConversion(
   right: Value,
 ): void {
   if (left.kind === "Sole" && right.kind === "Sole") {
+    // TODO should be handled in typeDirectedConversion
     return
   }
 
@@ -51,17 +53,13 @@ export function valueDirectedConversion(
   }
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
-    if (left.neutral.kind === "Var" && right.neutral.kind === "Var") {
-      if (left.neutral.name === right.neutral.name) {
-        return
-      } else {
-        throw new ElaborationError(
-          `expect variable: ${left.neutral.name} to be equal to variable: ${right.neutral.name}`,
-        )
-      }
-    }
+    /**
+       The `type`, `left.type` and `right.type` are ignored here,
+       maybe we should use them to debug.
+      **/
 
-    // TODO handle other neutral cases.
+    conversionNeutral(ctx, left.neutral, left.neutral)
+    return
   }
 
   throw new ElaborationError(

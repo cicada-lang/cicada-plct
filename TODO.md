@@ -10,7 +10,7 @@ doAp -- Clazz
 
 ## conversion
 
-extract conversionNeutral
+sole should be handled in typeDirectedConversion
 
 conversion Pi
 
