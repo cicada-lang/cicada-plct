@@ -10,8 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-[refactor] extract conversionByType & conversionByValue
-
 conversionType Pi
 
 - pass conversion-pi.test.ts
