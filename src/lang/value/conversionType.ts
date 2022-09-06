@@ -1,6 +1,8 @@
-import { Ctx } from "../ctx"
+import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
-import { Value } from "../value"
+import * as Neutrals from "../neutral"
+import * as Values from "../value"
+import { applyClosure, Value } from "../value"
 
 export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   if (left.kind === "Type" && right.kind === "Type") {
@@ -16,7 +18,21 @@ export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   }
 
   if (left.kind === "Pi" && right.kind === "Pi") {
-    // TODO handle Pi
+    conversionType(ctx, left.argType, right.argType)
+    const name = left.retTypeClosure.name
+    const argType = left.argType
+
+    const freshName = freshenInCtx(ctx, name)
+    const variable = Neutrals.Var(freshName)
+    const typedNeutral = Values.TypedNeutral(argType, variable)
+    ctx = CtxCons(freshName, left.argType, ctx)
+
+    conversionType(
+      ctx,
+      applyClosure(left.retTypeClosure, typedNeutral),
+      applyClosure(right.retTypeClosure, typedNeutral),
+    )
+
     return
   }
 

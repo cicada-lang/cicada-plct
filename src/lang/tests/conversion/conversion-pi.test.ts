@@ -17,7 +17,7 @@ conversion Type {
 `)
 })
 
-test.todo("conversion Pi -- fail", async () => {
+test("conversion Pi -- fail", async () => {
   await expectCodeToFail(`
 
 conversion Type {
