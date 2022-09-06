@@ -615,6 +615,61 @@ export function FoldedNew(
   }
 }
 
+export type NewNameless = {
+  family: "Exp"
+  kind: "NewNameless"
+  name: string
+  body: NewNamelessCons | NewNamelessNull
+} & ExpMeta
+
+export function NewNameless(
+  name: string,
+  body: NewNamelessCons | NewNamelessNull,
+  span?: Span,
+): NewNameless {
+  return {
+    family: "Exp",
+    kind: "NewNameless",
+    name,
+    body,
+    span,
+  }
+}
+
+export type NewNamelessCons = {
+  family: "Exp"
+  kind: "NewNamelessCons"
+  property: Exp
+  rest: NewNameless
+} & ExpMeta
+
+export function NewNamelessCons(
+  property: Exp,
+  rest: NewNameless,
+  span?: Span,
+): NewNamelessCons {
+  return {
+    family: "Exp",
+    kind: "NewNamelessCons",
+    property,
+    rest,
+    span,
+  }
+}
+
+export type NewNamelessNull = {
+  family: "Exp"
+  kind: "NewNamelessNull"
+} & ExpMeta
+
+export function NewNamelessNull(span?: Span): NewNamelessNull {
+  return {
+    family: "Exp",
+    kind: "NewNamelessNull",
+    span,
+  }
+}
+
 export type Dot = {
   family: "Exp"
   kind: "Dot"
