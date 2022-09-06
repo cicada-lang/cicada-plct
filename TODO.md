@@ -12,23 +12,23 @@ doAp -- Clazz
 
 conversionType Sigma
 
-- conversion-sigma.test.ts
+- pass conversion-sigma.test.ts
 
 conversionType Clazz
 
-- conversion-clazz.test.ts
+- pass conversion-clazz.test.ts
 
 conversionByType Pi
 
-- conversion-fn.test.ts
+- pass conversion-fn.test.ts
 
 conversionByType Sigma
 
-- conversion-cons.test.ts
+- pass conversion-cons.test.ts
 
 conversionByType Clazz
 
-- conversion-objekt.test.ts
+- pass conversion-objekt.test.ts
 
 ## inclusion
 
@@ -99,16 +99,6 @@ DataConstructor
 fixpoint and readback
 
 # Developer experience
-
-## Standard formatter
-
-> For pretty print Support.
-
-[maybe] learn from https://prettier.io/docs/en/plugins.html
-
-formatExp
-
-formatStmt
 
 ## Error report
 
