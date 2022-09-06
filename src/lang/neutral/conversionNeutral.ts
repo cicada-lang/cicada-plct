@@ -9,13 +9,11 @@ export function conversionNeutral(
   right: Neutral,
 ): void {
   if (left.kind === "Var" && right.kind === "Var") {
-    if (left.name === right.name) {
-      return
-    } else {
-      throw new ElaborationError(
-        `expect variable: ${left.name} to be equal to variable: ${right.name}`,
-      )
-    }
+    if (left.name === right.name) return
+
+    throw new ElaborationError(
+      `expect variable: ${left.name} to be equal to variable: ${right.name}`,
+    )
   }
 
   if (left.kind === "Ap" && right.kind === "Ap") {
@@ -35,13 +33,11 @@ export function conversionNeutral(
 
   if (left.kind === "Dot" && right.kind === "Dot") {
     conversionNeutral(ctx, right.target, left.target)
-    if (left.name === right.name) {
-      return
-    } else {
-      throw new ElaborationError(
-        `expect property name: ${left.name} to be equal to property name: ${right.name}`,
-      )
-    }
+    if (left.name === right.name) return
+
+    throw new ElaborationError(
+      `expect property name: ${left.name} to be equal to property name: ${right.name}`,
+    )
   }
 
   throw new ElaborationError(

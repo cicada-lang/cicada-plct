@@ -12,8 +12,8 @@ doAp -- Clazz
 
 conversion Pi
 
-conversion-fn.test.ts
 conversion-sigma.test.ts
+conversion-fn.test.ts
 conversion-cons.test.ts
 conversion-clazz.test.ts
 conversion-objekt.test.ts
