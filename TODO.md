@@ -12,7 +12,7 @@ doAp -- Clazz
 
 conversionType Pi
 
-- pass conversion-pi.test.ts
+- conversion-pi.test.ts
 
 conversionType Sigma
 
@@ -36,13 +36,17 @@ conversionByType Clazz
 
 ## inclusion
 
-inclusion-pi.test.ts
-inclusion-sigma.test.ts
-inclusion-clazz.test.ts
-
 inclusion -- Pi
+
+- inclusion-pi.test.ts
+
 inclusion -- Sigma
+
+- inclusion-sigma.test.ts
+
 inclusion -- Clazz
+
+- inclusion-clazz.test.ts
 
 # Equivalence
 
