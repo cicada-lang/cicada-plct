@@ -10,6 +10,15 @@ doAp -- Clazz
 
 ## conversion
 
+[refactor] rename valueDirectedReadback to readbackByValue
+[refactor] rename typeDirectedConversion to conversionByType
+[refactor] rename valueDirectedReadback to conversionByValue
+
+[refactor] extract readbackByType
+[refactor] extract readbackByValue
+[refactor] extract conversionByType
+[refactor] extract conversionByValue
+
 conversionType Pi
 
 - pass conversion-pi.test.ts

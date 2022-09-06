@@ -25,14 +25,13 @@ import { readbackProperties } from "./readbackProperties"
 
 export function readback(ctx: Ctx, type: Value, value: Value): Core {
   return (
-    typeDirectedReadback(ctx, type, value) ||
-    valueDirectedReadback(ctx, type, value)
+    readbackByType(ctx, type, value) || valueDirectedReadback(ctx, type, value)
   )
 }
 
 /**
 
-   # typeDirectedReadback
+   # readbackByType
 
    The eta-rules are implemented here.
 
@@ -40,7 +39,7 @@ export function readback(ctx: Ctx, type: Value, value: Value): Core {
 
 **/
 
-export function typeDirectedReadback(
+export function readbackByType(
   ctx: Ctx,
   type: Value,
   value: Value,
