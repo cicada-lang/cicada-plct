@@ -10,10 +10,7 @@ doAp -- Clazz
 
 ## conversion
 
-[refactor] extract readbackByType
-[refactor] extract readbackByValue
-[refactor] extract conversionByType
-[refactor] extract conversionByValue
+[refactor] extract conversionByType & conversionByValue
 
 conversionType Pi
 
