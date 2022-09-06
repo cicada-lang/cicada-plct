@@ -32,9 +32,11 @@ export const stmt = {
     "stmt:conversion": [
       '"conversion"',
       { type: "exp" },
-      '"{"',
-      { exps: { $ap: ["zero_or_more", "exp"] } },
-      '"}"',
+      '"["',
+      { exps: { $ap: ["zero_or_more", "exp", '","'] } },
+      { last_exp: "exp" },
+      { $ap: ["optional", '","'] },
+      '"]"',
     ],
     "stmt:inclusion": [
       '"inclusion"',

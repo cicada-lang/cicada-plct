@@ -8,10 +8,30 @@ test("parse Conversion", () => {
   expect(
     parseStmts(`
 
-conversion Trivial {
+conversion Trivial [
+  sole,
+  sole,
+]
+
+`),
+  ).toMatchObject(
+    deleteUndefined([
+      new Stmts.Conversion(Exps.Var("Trivial"), [
+        Exps.Var("sole"),
+        Exps.Var("sole"),
+      ]),
+    ]),
+  )
+})
+
+test("parse Conversion -- without last comma", () => {
+  expect(
+    parseStmts(`
+
+conversion Trivial [
+  sole,
   sole
-  sole
-}
+]
 
 `),
   ).toMatchObject(
@@ -28,28 +48,14 @@ test("parse Conversion -- single", () => {
   expect(
     parseStmts(`
 
-conversion Trivial {
-  sole
-}
+conversion Trivial [
+  sole,
+]
 
 `),
   ).toMatchObject(
     deleteUndefined([
       new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")]),
     ]),
-  )
-})
-
-test("parse Conversion -- empty", () => {
-  expect(
-    parseStmts(`
-
-conversion Trivial {
-
-}
-
-`),
-  ).toMatchObject(
-    deleteUndefined([new Stmts.Conversion(Exps.Var("Trivial"), [])]),
   )
 })

@@ -49,10 +49,13 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ),
         span,
       ),
-    "stmt:conversion": ({ type, exps }, { span }) =>
+    "stmt:conversion": ({ type, exps, last_exp }, { span }) =>
       new Stmts.Conversion(
         matchers.exp_matcher(type),
-        pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),
+        [
+          ...pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),
+          matchers.exp_matcher(last_exp),
+        ],
         span,
       ),
     "stmt:inclusion": ({ types, last_type }, { span }) =>

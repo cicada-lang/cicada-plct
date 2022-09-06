@@ -4,11 +4,11 @@ import { expectCodeToFail, runCode } from "../utils"
 test("conversion Quote", async () => {
   await runCode(`
 
-conversion String {
-  "abc"
-  "abc"
-  "abc"
-}
+conversion String [
+  "abc",
+  "abc",
+  "abc",
+]
 
 `)
 })
@@ -16,11 +16,11 @@ conversion String {
 test("conversion Quote -- empty string", async () => {
   await runCode(`
 
-conversion String {
-  ""
-  ""
-  ""
-}
+conversion String [
+  "",
+  "",
+  "",
+]
 
 `)
 })
@@ -28,11 +28,11 @@ conversion String {
 test("conversion Quote -- fail", async () => {
   await expectCodeToFail(`
 
-conversion String {
-  "abc"
-  "abc"
-  "xyz"
-}
+conversion String [
+  "abc",
+  "abc",
+  "xyz",
+]
 
 `)
 })

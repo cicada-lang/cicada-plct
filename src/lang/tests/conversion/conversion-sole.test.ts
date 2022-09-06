@@ -4,10 +4,10 @@ import { expectCodeToFail, runCode } from "../utils"
 test("conversion Sole", async () => {
   await runCode(`
 
-conversion Trivial {
-  sole
-  sole
-}
+conversion Trivial [
+  sole,
+  sole,
+]
 
 `)
 })
@@ -15,11 +15,11 @@ conversion Trivial {
 test("conversion Sole -- fail", async () => {
   await expectCodeToFail(`
 
-conversion Trivial {
-  sole
-  sole
-  Trivial
-}
+conversion Trivial [
+  sole,
+  sole,
+  Trivial,
+]
 
 `)
 })
