@@ -22,17 +22,17 @@ conversionType Clazz
 
 - conversion-clazz.test.ts
 
-typeDirectedConversion Pi
+conversionByType Pi
 
 - conversion-fn.test.ts
 
-typeDirectedConversion Sigma
+conversionByType Sigma
 
 - conversion-cons.test.ts
 
-typeDirectedConversion Clazz
+conversionByType Clazz
 
-conversion-objekt.test.ts
+- conversion-objekt.test.ts
 
 ## inclusion
 
