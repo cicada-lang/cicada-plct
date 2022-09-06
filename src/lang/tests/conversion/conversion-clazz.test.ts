@@ -17,6 +17,17 @@ conversion Type [
 `)
 })
 
+test("conversion Clazz -- out of order", async () => {
+  await runCode(`
+
+conversion Type [
+  class { A: Type, B: Type, pair: Pair(A, B) },
+  class { B: Type, A: Type, pair: Pair(A, B) },
+]
+
+`)
+})
+
 test.todo("conversion Clazz -- fail", async () => {
   await expectCodeToFail(`
 
