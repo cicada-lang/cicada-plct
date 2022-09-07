@@ -30,6 +30,8 @@ conversionByType Clazz
 
 ## inclusion
 
+> follow conversionType
+
 inclusion -- Pi
 
 - inclusion-pi.test.ts
@@ -41,6 +43,8 @@ inclusion -- Sigma
 inclusion -- Clazz
 
 - inclusion-clazz.test.ts
+
+delete conversionType
 
 # Equivalence
 

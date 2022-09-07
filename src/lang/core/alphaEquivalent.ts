@@ -5,40 +5,66 @@ import { ElaborationError } from "../errors"
 export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   if (left.kind === "Var" && right.kind === "Var") {
     ctx.assertEqualNames(left.name, right.name)
-  } else if (left.kind === "Pi" && right.kind === "Pi") {
+    return
+  }
+
+  if (left.kind === "Pi" && right.kind === "Pi") {
     alphaEquivalent(ctx, left.argType, right.argType)
-    alphaEquivalent(
-      ctx.cons(left.name, right.name),
-      left.retType,
-      right.retType,
-    )
-  } else if (left.kind === "Fn" && right.kind === "Fn") {
-    alphaEquivalent(ctx.cons(left.name, right.name), left.ret, right.ret)
-  } else if (left.kind === "Ap" && right.kind === "Ap") {
+    ctx = ctx.cons(left.name, right.name)
+    alphaEquivalent(ctx, left.retType, right.retType)
+    return
+  }
+
+  if (left.kind === "Fn" && right.kind === "Fn") {
+    ctx = ctx.cons(left.name, right.name)
+    alphaEquivalent(ctx, left.ret, right.ret)
+    return
+  }
+
+  if (left.kind === "Ap" && right.kind === "Ap") {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.arg, right.arg)
-  } else if (left.kind === "Sigma" && right.kind === "Sigma") {
+    return
+  }
+
+  if (left.kind === "Sigma" && right.kind === "Sigma") {
     alphaEquivalent(ctx, left.carType, right.carType)
-    alphaEquivalent(
-      ctx.cons(left.name, right.name),
-      left.cdrType,
-      right.cdrType,
-    )
-  } else if (left.kind === "Car" && right.kind === "Car") {
+    ctx = ctx.cons(left.name, right.name)
+    alphaEquivalent(ctx, left.cdrType, right.cdrType)
+    return
+  }
+
+  if (left.kind === "Car" && right.kind === "Car") {
     alphaEquivalent(ctx, left.target, right.target)
-  } else if (left.kind === "Cdr" && right.kind === "Cdr") {
+    return
+  }
+
+  if (left.kind === "Cdr" && right.kind === "Cdr") {
     alphaEquivalent(ctx, left.target, right.target)
-  } else if (left.kind === "Quote" && right.kind === "Quote") {
+    return
+  }
+
+  if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.literal !== right.literal) {
       throw new ElaborationError(
         `alphaEquivalent expect left literal: ${left.literal} to be equal to right literal: ${right.literal}`,
       )
     }
-  } else if (isClazz(left) && isClazz(right)) {
+
+    return
+  }
+
+  if (isClazz(left) && isClazz(right)) {
     alphaEquivalentClazz(ctx, left, right)
-  } else if (left.kind === "Objekt" && right.kind === "Objekt") {
+    return
+  }
+
+  if (left.kind === "Objekt" && right.kind === "Objekt") {
     alphaEquivalentProperties(ctx, left.properties, right.properties)
-  } else if (left.kind === "Dot" && right.kind === "Dot") {
+    return
+  }
+
+  if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
       throw new ElaborationError(
         `alphaEquivalent expect left name: ${left.name} to be equal to right name: ${right.name}`,
@@ -46,13 +72,14 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     }
 
     alphaEquivalent(ctx, left.target, right.target)
-  } else {
-    throw new ElaborationError(
-      `alphaEquivalent is not implemented for left: ${formatCore(
-        left,
-      )}, and right: ${formatCore(right)}`,
-    )
+    return
   }
+
+  throw new ElaborationError(
+    `alphaEquivalent is not implemented for left: ${formatCore(
+      left,
+    )}, and right: ${formatCore(right)}`,
+  )
 }
 
 function isClazz(core: Core): core is Cores.Clazz {
