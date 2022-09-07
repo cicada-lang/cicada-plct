@@ -6,10 +6,7 @@ type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
 
 /**
 
-   TODO
-
-   Given the `ctx`, we have the opportunity
-   to `readback` the `value` and print it in error report.
+   TODO Given the `ctx`, we have the opportunity to `readback` the `value` and print it in error report.
 
 **/
 

@@ -13,6 +13,5 @@ export class Declare extends Stmt {
     const typeCore = checkType(mod.ctx, this.type)
     const typeValue = evaluate(mod.env, typeCore)
     mod.ctx = CtxCons(this.name, typeValue, mod.ctx)
-    // TODO Should we also extend `mod.env` here?
   }
 }
