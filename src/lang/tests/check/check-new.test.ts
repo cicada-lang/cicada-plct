@@ -109,7 +109,7 @@ class ABC {
   b: String
   c: String
 }
-    
+
 check new ABC {
   a: "a",
   b: "b",
@@ -137,7 +137,7 @@ check new ABC("a", "b", "c"): ABC
 test.todo("check NewNameless -- without args", async () => {
   // Parser doesn't support this yet.
   await runCode(`
- 
+
 class ABC {
   a: String = "a"
   b: String = "b"
@@ -145,7 +145,7 @@ class ABC {
 }
 
 check new ABC(): ABC
-  
+
 `)
 })
 

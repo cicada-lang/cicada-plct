@@ -10,10 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-alphaEquivalentClazz -- handle out of order
-
-- pass conversion-clazz.test.ts again
-
 conversion-fn.test.ts
 conversion-cons.test.ts
 conversion-objekt.test.ts
