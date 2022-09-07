@@ -1,4 +1,3 @@
-import { ElaborationError } from "../errors"
 import * as Exps from "./Exp"
 import { Exp } from "./Exp"
 
@@ -13,8 +12,10 @@ export function unfoldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingAnnotated": {
-      throw new ElaborationError(
-        `unfoldFn is not implemented for exp: ${binding.kind}`,
+      return Exps.AnnotatedFn(
+        binding.name,
+        binding.type,
+        unfoldFn(restBindings, ret),
       )
     }
   }
