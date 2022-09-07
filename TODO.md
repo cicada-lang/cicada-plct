@@ -10,13 +10,11 @@ doAp -- Clazz
 
 ## inclusion
 
-rename conversionType to inclusion
-
-- rename arguments: left, right -> subtype, type
-
 rename conversionClazz to inclusionClazz
 
-- rename arguments: left, right -> subtype, type
+- rename arguments: left, right -> subclazz, clazz
+
+inclusion -- contravariant argType
 
 > follow conversionType
 

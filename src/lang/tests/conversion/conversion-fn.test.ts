@@ -12,13 +12,35 @@ conversion forall (T: Type, x: T) T [
   id,
   (T, x) => x,
   (T, x) => id(T, x),
-  (T: Type, x: T) => x,
-  (T: Type, x: T) => id(T, x),
 ]
 
 conversion forall (A: Type, B: Type) Type [
   (A, B) => A,
   (B, A) => B,
+]
+
+`)
+})
+
+test("conversion AnnotatedFn", async () => {
+  await runCode(`
+
+function id(T: Type, x: T): T {
+  return x
+}
+
+conversion forall (T: Type, x: T) T [
+  id,
+  (T, x) => x,
+  (T, x) => id(T, x),
+  (T: Type, x: T) => x,
+  (T: Type, x: T) => id(T, x),
+]
+
+conversion forall (T: Type, x: T) T [
+  (T: Type, x: T) => x,
+  (T: Type, x: T) => x,
+  (T: Type, x: T) => id(T, x),
 ]
 
 `)

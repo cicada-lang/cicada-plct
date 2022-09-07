@@ -7,7 +7,7 @@ import {
   applyClosure,
   assertClazz,
   conversion,
-  conversionType,
+  inclusion,
   Value,
 } from "../value"
 
@@ -67,13 +67,13 @@ export function conversionClazz(
     }
 
     if (leftProperty.value === undefined && rightProperty.value === undefined) {
-      conversionType(ctx, leftProperty.type, rightProperty.type)
+      inclusion(ctx, leftProperty.type, rightProperty.type)
       const type = leftProperty.type
       ctx = CtxCons(localName, type, ctx)
     }
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      conversionType(ctx, leftProperty.type, rightProperty.type)
+      inclusion(ctx, leftProperty.type, rightProperty.type)
       const type = leftProperty.type
       conversion(ctx, type, leftProperty.value, rightProperty.value)
       const value = leftProperty.value

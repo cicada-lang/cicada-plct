@@ -1,6 +1,7 @@
-import { Ctx } from "../ctx"
+import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { conversion, Value } from "../value"
+import { applyClosure, conversion, conversionClazz, Value } from "../value"
 
 /**
 
@@ -26,19 +27,51 @@ import { conversion, Value } from "../value"
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
-    // TODO handle Pi
-    console.log("[warning] inclusion for Pi is not implemented.")
+    inclusion(ctx, subtype.argType, type.argType)
+    const name = type.retTypeClosure.name
+    const argType = type.argType
+
+    // TODO the following should also pass
+    // const name = subtype.retTypeClosure.name
+    // const argType = subtype.argType
+
+    const freshName = freshenInCtx(ctx, name)
+    const variable = Neutrals.Var(freshName)
+    const typedNeutral = Values.TypedNeutral(argType, variable)
+
+    ctx = CtxCons(freshName, argType, ctx)
+
+    inclusion(
+      ctx,
+      applyClosure(subtype.retTypeClosure, typedNeutral),
+      applyClosure(type.retTypeClosure, typedNeutral),
+    )
+
     return
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
-    // TODO handle Sigma
-    console.log("[warning] inclusion for Sigma is not implemented.")
+    inclusion(ctx, subtype.carType, type.carType)
+    const name = subtype.cdrTypeClosure.name
+    const carType = subtype.carType
+
+    const freshName = freshenInCtx(ctx, name)
+    const variable = Neutrals.Var(freshName)
+    const typedNeutral = Values.TypedNeutral(carType, variable)
+
+    ctx = CtxCons(freshName, carType, ctx)
+
+    inclusion(
+      ctx,
+      applyClosure(subtype.cdrTypeClosure, typedNeutral),
+      applyClosure(type.cdrTypeClosure, typedNeutral),
+    )
+
     return
   }
 
   if (Values.isClazz(subtype) && Values.isClazz(type)) {
-    // TODO handle Clazz
+    conversionClazz(ctx, subtype, type)
     return
   }
 

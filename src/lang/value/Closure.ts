@@ -22,5 +22,6 @@ export function applyClosure(closure: Closure, arg: Value): Value {
 }
 
 export function constClosure(value: Value): Closure {
-  return Closure(EnvCons("ret", value, EnvNull()), "", Cores.Var("ret"))
+  const env = EnvCons("ret", value, EnvNull())
+  return Closure(env, "_", Cores.Var("ret"))
 }
