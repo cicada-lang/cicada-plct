@@ -5,14 +5,24 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   if (left.kind === "Var" && right.kind === "Var") {
     ctx.assertEqualNames(left.name, right.name)
   } else if (left.kind === "Pi" && right.kind === "Pi") {
-    // TODO
+    alphaEquivalent(ctx, left.argType, right.argType)
+    alphaEquivalent(
+      ctx.cons(left.name, right.name),
+      left.retType,
+      right.retType,
+    )
   } else if (left.kind === "Fn" && right.kind === "Fn") {
-    // TODO
+    alphaEquivalent(ctx.cons(left.name, right.name), left.ret, right.ret)
   } else if (left.kind === "Ap" && right.kind === "Ap") {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.arg, right.arg)
   } else if (left.kind === "Sigma" && right.kind === "Sigma") {
-    //
+    alphaEquivalent(ctx, left.carType, right.carType)
+    alphaEquivalent(
+      ctx.cons(left.name, right.name),
+      left.cdrType,
+      right.cdrType,
+    )
   } else if (left.kind === "Car" && right.kind === "Car") {
     alphaEquivalent(ctx, left.target, right.target)
   } else if (left.kind === "Cdr" && right.kind === "Cdr") {
