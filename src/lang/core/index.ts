@@ -1,3 +1,5 @@
+export * from "./AlphaCtx"
+export * from "./alphaEquivalent"
 export * from "./Core"
 export * from "./evaluate"
 export * from "./foldFormatAp"

@@ -10,11 +10,9 @@ doAp -- Clazz
 
 ## conversion
 
-core/alphaEquivalent
+alphaEquivalent
 
 conversion by readback and alphaEquivalent
-
-- for eta rule
 
 conversionByType Pi
 
