@@ -21,7 +21,14 @@ export function applyClosure(closure: Closure, arg: Value): Value {
   return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
 }
 
-export function constClosure(value: Value): Closure {
+/**
+
+   It is important that `constClosure` uses the given name to build `Closure`,
+   because `alphaEquivalent` will compare names.
+
+**/
+
+export function constClosure(name: string, value: Value): Closure {
   const env = EnvCons("ret", value, EnvNull())
-  return Closure(env, "_", Cores.Var("ret"))
+  return Closure(env, name, Cores.Var("ret"))
 }

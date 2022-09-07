@@ -33,11 +33,8 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
        The order of type and subtype is swapped
        in the following recursive call to `inclusion`.
     **/
-    inclusion(ctx, type.argType, subtype.argType)
 
-    // const name = type.retTypeClosure.name
-    // const argType = type.argType
-    // TODO The above passes all tests, the following should also passes.
+    inclusion(ctx, type.argType, subtype.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
 

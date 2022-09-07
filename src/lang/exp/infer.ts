@@ -16,6 +16,7 @@ import {
   applyClosure,
   assertClazzInCtx,
   assertTypeInCtx,
+  constClosure,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
@@ -65,11 +66,11 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const argTypeCore = checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
-      const inferred = infer(ctx, exp.ret)
-      const retClosure = Values.constClosure(inferred.type)
+      const inferredRet = infer(ctx, exp.ret)
+      const retTypeClosure = constClosure(exp.name, inferredRet.type)
       return Inferred(
-        Values.Pi(argTypeValue, retClosure),
-        Cores.Fn(exp.name, inferred.core),
+        Values.Pi(argTypeValue, retTypeClosure),
+        Cores.Fn(exp.name, inferredRet.core),
       )
     }
 

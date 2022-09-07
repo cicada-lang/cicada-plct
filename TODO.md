@@ -10,6 +10,7 @@ doAp -- Clazz
 
 ## inclusion
 
+extract constClosure
 inclusionClazz
 
 inclusion-clazz.test.ts
