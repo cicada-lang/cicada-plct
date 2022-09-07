@@ -10,7 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-conversion-cons.test.ts
 conversion-objekt.test.ts
 
 ## inclusion

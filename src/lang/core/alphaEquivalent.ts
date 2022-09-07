@@ -40,6 +40,12 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
+  if (left.kind === "Cons" && right.kind === "Cons") {
+    alphaEquivalent(ctx, left.car, right.car)
+    alphaEquivalent(ctx, left.cdr, right.cdr)
+    return
+  }
+
   if (left.kind === "Car" && right.kind === "Car") {
     alphaEquivalent(ctx, left.target, right.target)
     return
