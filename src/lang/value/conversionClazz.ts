@@ -1,4 +1,5 @@
 import { Ctx, ctxNames } from "../ctx"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
 /**
@@ -33,7 +34,13 @@ function prepareNameMap(
   const leftNames = Values.clazzPropertyNames(left)
   const rightNames = Values.clazzPropertyNames(right)
 
-  const names = new Set([...ctxNames(ctx), ...leftNames, ...rightNames])
+  const used = new Set([...ctxNames(ctx), ...leftNames, ...rightNames])
+
+  for (const name of [...leftNames, ...rightNames]) {
+    const freshName = freshen(used, name)
+    nameMap.set(name, freshName)
+    used.add(freshName)
+  }
 
   return nameMap
 }

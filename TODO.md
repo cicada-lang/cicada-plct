@@ -10,8 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-prepareNameMap
-
 conversionClazz
 
 - pass conversion-clazz.test.ts
