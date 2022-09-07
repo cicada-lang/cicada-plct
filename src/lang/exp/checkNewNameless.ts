@@ -1,13 +1,14 @@
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
-import { check, Exp } from "../exp"
+import * as Exps from "../exp"
+import { check } from "../exp"
 import * as Values from "../value"
 import { assertClazzInCtx, readback } from "../value"
 
 export function checkNewNameless(
   ctx: Ctx,
-  args: Array<Exp>,
+  args: Array<Exps.Arg>,
   clazz: Values.Clazz,
 ): Record<string, Core> {
   switch (clazz.kind) {
@@ -24,7 +25,7 @@ export function checkNewNameless(
         throw new ElaborationError(`missing property in NewNameless`)
       } else {
         const [arg, ...restArgs] = args
-        const core = check(ctx, arg, clazz.propertyType)
+        const core = check(ctx, arg.exp, clazz.propertyType)
         const value = evaluate(ctxToEnv(ctx), core)
         const rest = Values.applyClosure(clazz.restClosure, value)
         assertClazzInCtx(ctx, rest)

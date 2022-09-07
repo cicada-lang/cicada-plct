@@ -620,10 +620,10 @@ export type NewNameless = {
   family: "Exp"
   kind: "NewNameless"
   name: string
-  args: Array<Exp>
+  args: Array<Arg>
 } & ExpMeta
 
-export function NewNameless(name: string, args: Array<Exp>): NewNameless {
+export function NewNameless(name: string, args: Array<Arg>): NewNameless {
   return {
     family: "Exp",
     kind: "NewNameless",
