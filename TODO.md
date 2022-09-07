@@ -6,8 +6,6 @@ doAp -- Clazz
 
 ## inclusion
 
-inclusionClazz -- all properties in `clazz` must also occurs in `subclazz`
-
 inclusion-clazz.test.ts
 inclusion-pi.test.ts
 inclusion-sigma.test.ts

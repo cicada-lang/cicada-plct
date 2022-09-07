@@ -10,7 +10,8 @@ import { conversion, inclusionClazz, Value } from "../value"
 
    We use the word `inclusion` to name our function
    which implements the subtyping relation.
-   Compare it with the word `conversion`
+
+   Comparing it with the word `conversion`
    for equivalent relation between types.
 
    `inclusion` is like `conversion` but applies only to types,

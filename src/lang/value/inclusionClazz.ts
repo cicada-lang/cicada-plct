@@ -10,6 +10,8 @@ import { assertClazz, conversion, inclusion, Value } from "../value"
 
    # Comparing out of order Clazzes
 
+   All properties in `clazz` must also occurs in `subclazz`.
+
    To compare out of order `Clazz`es,
    all we need is to prepare the `freshNames` first,
    because for example, in the case of `Sigma` in `conversionType`,
@@ -29,12 +31,16 @@ export function inclusionClazz(
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): void {
-  const nameMap = prepareNameMap(ctx, subclazz, clazz)
+  const localNameMap = prepareLocalNameMap(ctx, subclazz, clazz)
 
-  const subclazzPropertyMap = buildPropertyMap(nameMap, subclazz, new Map())
-  const clazzPropertyMap = buildPropertyMap(nameMap, clazz, new Map())
+  const subclazzPropertyMap = buildPropertyMap(
+    localNameMap,
+    subclazz,
+    new Map(),
+  )
+  const clazzPropertyMap = buildPropertyMap(localNameMap, clazz, new Map())
 
-  for (const [name, localName] of nameMap.entries()) {
+  for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
       throw new ElaborationError(
@@ -42,28 +48,19 @@ export function inclusionClazz(
       )
     }
 
-    const clazzProperty = clazzPropertyMap.get(name)
-    if (clazzProperty === undefined) {
-      throw new ElaborationError(
-        `inclusionClazz found missing property on clazz class: ${name}`,
+    const localName = localNameMap.get(name)
+    if (localName === undefined) {
+      throw new Error(
+        "internal error, localName should have all the names from subclazz and clazz",
       )
     }
 
     if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value === undefined
+      clazzProperty.value === undefined &&
+      subclazzProperty.value !== undefined
     ) {
       throw new ElaborationError(
-        `inclusionClazz expect subclazzProperty to have value: ${name}`,
-      )
-    }
-
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      throw new ElaborationError(
-        `inclusionClazz expect clazzProperty to have value: ${name}`,
+        `inclusionClazz expect subclazzProperty to have fulfilled property: ${name}`,
       )
     }
 
@@ -91,9 +88,14 @@ export function inclusionClazz(
 
 type PropertyMap = Map<string, { type: Value; value?: Value }>
 
-// NOTE Side-effect on propertyMap
+/**
+
+   NOTE `buildPropertyMap` will do side-effects on `propertyMap`.
+
+**/
+
 function buildPropertyMap(
-  nameMap: Map<string, string>,
+  localNameMap: Map<string, string>,
   clazz: Values.Clazz,
   propertyMap: PropertyMap,
 ): PropertyMap {
@@ -107,10 +109,10 @@ function buildPropertyMap(
         type: clazz.propertyType,
       })
 
-      const freshName = nameMap.get(clazz.name)
+      const freshName = localNameMap.get(clazz.name)
       if (freshName === undefined) {
         throw new Error(
-          `internal error, expect nameMap to have clazz.name: ${clazz.name}`,
+          `internal error, expect localNameMap to have clazz.name: ${clazz.name}`,
         )
       }
 
@@ -121,7 +123,7 @@ function buildPropertyMap(
 
       assertClazz(rest)
 
-      return buildPropertyMap(nameMap, rest, propertyMap)
+      return buildPropertyMap(localNameMap, rest, propertyMap)
     }
 
     case "ClazzFulfilled": {
@@ -130,17 +132,17 @@ function buildPropertyMap(
         value: clazz.property,
       })
 
-      return buildPropertyMap(nameMap, clazz.rest, propertyMap)
+      return buildPropertyMap(localNameMap, clazz.rest, propertyMap)
     }
   }
 }
 
-function prepareNameMap(
+function prepareLocalNameMap(
   ctx: Ctx,
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): Map<string, string> {
-  const nameMap = new Map()
+  const localNameMap = new Map()
 
   const subclazzNames = Values.clazzPropertyNames(subclazz)
   const clazzNames = Values.clazzPropertyNames(clazz)
@@ -149,9 +151,9 @@ function prepareNameMap(
 
   for (const name of [...subclazzNames, ...clazzNames]) {
     const freshName = freshen(used, name)
-    nameMap.set(name, freshName)
+    localNameMap.set(name, freshName)
     used.add(freshName)
   }
 
-  return nameMap
+  return localNameMap
 }
