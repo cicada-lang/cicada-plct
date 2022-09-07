@@ -56,8 +56,8 @@ export function inclusionClazz(
     }
 
     if (
-      clazzProperty.value === undefined &&
-      subclazzProperty.value !== undefined
+      clazzProperty.value !== undefined &&
+      subclazzProperty.value === undefined
     ) {
       throw new ElaborationError(
         `inclusionClazz expect subclazzProperty to have fulfilled property: ${name}`,

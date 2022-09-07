@@ -6,7 +6,6 @@ doAp -- Clazz
 
 ## inclusion
 
-inclusion-clazz.test.ts
 inclusion-pi.test.ts
 inclusion-sigma.test.ts
 
