@@ -36,6 +36,9 @@ export type Exp =
   | FoldedObjekt
   | New
   | FoldedNew
+  | NewNameless
+  | NewNamelessCons
+  | NewNamelessNull
   | Dot
   | Sequence
   | Let
