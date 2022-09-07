@@ -177,7 +177,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       assertClazzInCtx(ctx, clazz)
-      const propertiesCore = checkNewNameless(ctx, exp.body, clazz)
+      const propertiesCore = checkNewNameless(ctx, exp.args, clazz)
 
       return Inferred(clazz, Cores.Objekt(propertiesCore))
     }

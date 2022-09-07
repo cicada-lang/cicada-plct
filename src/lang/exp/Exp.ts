@@ -620,48 +620,15 @@ export type NewNameless = {
   family: "Exp"
   kind: "NewNameless"
   name: string
-  body: NewNamelessBody
-}
+  args: Array<Exp>
+} & ExpMeta
 
-export function NewNameless(name: string, body: NewNamelessBody): NewNameless {
+export function NewNameless(name: string, args: Array<Exp>): NewNameless {
   return {
     family: "Exp",
     kind: "NewNameless",
     name,
-    body,
-  }
-}
-
-export type NewNamelessBody = NewNamelessCons | NewNamelessNull
-
-export type NewNamelessCons = {
-  family: "Exp"
-  kind: "NewNamelessCons"
-  property: Exp
-  rest: NewNamelessBody
-}
-
-export function NewNamelessCons(
-  property: Exp,
-  rest: NewNamelessBody,
-): NewNamelessCons {
-  return {
-    family: "Exp",
-    kind: "NewNamelessCons",
-    property,
-    rest,
-  }
-}
-
-export type NewNamelessNull = {
-  family: "Exp"
-  kind: "NewNamelessNull"
-}
-
-export function NewNamelessNull(): NewNamelessNull {
-  return {
-    family: "Exp",
-    kind: "NewNamelessNull",
+    args,
   }
 }
 
