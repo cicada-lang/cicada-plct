@@ -26,9 +26,9 @@ Same
 
 # Syntax
 
-## Objekt and New
+## Objekt
 
-syntax -- "property:spread"
+Objekt -- syntax -- "property:spread"
 
 ## FoldedFnWithReturnType
 
