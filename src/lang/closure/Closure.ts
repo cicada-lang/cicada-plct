@@ -1,6 +1,5 @@
-import { Core, evaluate } from "../core"
-import { Env, EnvCons } from "../env"
-import { Value } from "../value"
+import { Core } from "../core"
+import { Env } from "../env"
 
 export type Closure = {
   env: Env
@@ -14,8 +13,4 @@ export function Closure(env: Env, name: string, body: Core): Closure {
     name,
     body,
   }
-}
-
-export function applyClosure(closure: Closure, arg: Value): Value {
-  return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
 }
