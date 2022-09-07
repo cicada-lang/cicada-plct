@@ -69,8 +69,6 @@ syntax -- "property:spread"
 
 ## AnnotatedFn
 
-Exps.AnnotatedFn -- can be inferred
-
 check -- Exps.AnnotatedFn -- checkByInfer
 
 infer -- Exps.AnnotatedFn
