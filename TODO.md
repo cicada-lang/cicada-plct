@@ -6,8 +6,6 @@ doAp -- Clazz
 
 ## inclusion
 
-inclusion-pi.test.ts
-
 allow extra property during check Objekt
 
 - `infer` the properties that are extra, thus not checked.
