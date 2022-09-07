@@ -1,18 +1,12 @@
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { conversionNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, conversionClazz, Value } from "../value"
+import { applyClosure, conversion, conversionClazz, Value } from "../value"
 
 export function conversionType(ctx: Ctx, left: Value, right: Value): void {
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
-    /**
-       The `left.type` and `right.type` are ignored here,
-       maybe we should use them to debug.
-      **/
-
-    conversionNeutral(ctx, left.neutral, right.neutral)
+    conversion(ctx, Values.Type(), left, right)
     return
   }
 

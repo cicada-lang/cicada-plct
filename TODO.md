@@ -10,6 +10,14 @@ doAp -- Clazz
 
 ## inclusion
 
+rename conversionType to inclusion
+
+- rename arguments: left, right -> subtype, type
+
+rename conversionClazz to inclusionClazz
+
+- rename arguments: left, right -> subtype, type
+
 > follow conversionType
 
 inclusion -- Pi
@@ -23,8 +31,6 @@ inclusion -- Sigma
 inclusion -- Clazz
 
 - inclusion-clazz.test.ts
-
-remove conversionType conversionClazz conversionNeutral
 
 # Equivalence
 
