@@ -27,14 +27,19 @@ import { applyClosure, conversion, inclusionClazz, Value } from "../value"
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
-    // NOTE Contravariant in argument position.
-    inclusion(ctx, type.argType, subtype.argType)
-    const name = type.retTypeClosure.name
-    const argType = type.argType
+    /**
+       Contravariant in argument position.
 
-    // TODO the following should also pass
-    // const name = subtype.retTypeClosure.name
-    // const argType = subtype.argType
+       The order of type and subtype is swapped
+       in the following recursive call to `inclusion`.
+    **/
+    inclusion(ctx, type.argType, subtype.argType)
+
+    // const name = type.retTypeClosure.name
+    // const argType = type.argType
+    // TODO The above passes all tests, the following should also passes.
+    const name = subtype.retTypeClosure.name
+    const argType = subtype.argType
 
     const freshName = freshenInCtx(ctx, name)
     const variable = Neutrals.Var(freshName)
