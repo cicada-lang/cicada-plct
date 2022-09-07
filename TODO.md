@@ -7,7 +7,6 @@ doAp -- Clazz
 ## inclusion
 
 inclusion-pi.test.ts
-inclusion-sigma.test.ts
 
 allow extra property during check Objekt
 

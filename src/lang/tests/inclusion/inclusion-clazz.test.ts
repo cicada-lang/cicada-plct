@@ -25,6 +25,29 @@ inclusion [
 `)
 })
 
+test("inclusion Clazz -- ABC", async () => {
+  await runCode(`
+
+class ABC {
+  A: String
+  B: String
+  C: String
+}
+
+class AB {
+  A: String
+  B: String
+}
+
+class A {
+  A: String
+}
+
+inclusion [ ABC, AB, A ]
+
+`)
+})
+
 test("inclusion Clazz -- out of order", async () => {
   await runCode(`
 
