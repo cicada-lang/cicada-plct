@@ -61,6 +61,14 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, Exps.unfoldPi(exp.bindings, exp.retType))
     }
 
+    case "AnnotatedFn": {
+      throw new Error("TODO")
+    }
+
+    case "FoldedFn": {
+      return infer(ctx, Exps.unfoldFn(exp.bindings, exp.ret))
+    }
+
     case "Ap": {
       const inferred = infer(ctx, exp.target)
       assertTypeInCtx(ctx, inferred.type, Values.Pi)

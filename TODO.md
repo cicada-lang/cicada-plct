@@ -69,11 +69,7 @@ syntax -- "property:spread"
 
 ## AnnotatedFn
 
-check -- Exps.AnnotatedFn -- checkByInfer
-
 infer -- Exps.AnnotatedFn
-
-unfoldFn -- return Exps.AnnotatedFn
 
 ## FoldedFnWithReturnType
 

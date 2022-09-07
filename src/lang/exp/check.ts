@@ -1,7 +1,7 @@
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
-import { ElaborationError } from "../errors"
+// import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, checkProperties, Exp } from "../exp"
 import * as Neutrals from "../neutral"
@@ -32,6 +32,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       ctx = CtxCons(exp.name, argType, ctx)
       const retCore = check(ctx, exp.ret, retTypeValue)
       return Cores.Fn(exp.name, retCore)
+    }
+
+    case "AnnotatedFn": {
+      return checkByInfer(ctx, exp, type)
     }
 
     case "FoldedFn": {
@@ -116,10 +120,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    default: {
-      throw new ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`,
-      )
-    }
+    // default: {
+    //   throw new ElaborationError(
+    //     `check is not implemented for exp: ${exp.kind}`,
+    //   )
+    // }
   }
 }
