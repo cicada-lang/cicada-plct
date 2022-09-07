@@ -152,7 +152,12 @@ export type AnnotatedFn = {
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedFn(name: string, argType: Exp, ret: Exp, span?: Span): AnnotatedFn {
+export function AnnotatedFn(
+  name: string,
+  argType: Exp,
+  ret: Exp,
+  span?: Span,
+): AnnotatedFn {
   return {
     family: "Exp",
     kind: "AnnotatedFn",
