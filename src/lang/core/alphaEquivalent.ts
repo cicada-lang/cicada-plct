@@ -3,11 +3,11 @@ import { ElaborationError } from "../errors"
 
 export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   if (left.kind === "Var" && right.kind === "Var") {
-    // TODO
+    ctx.assertEqualNames(left.name, right.name)
   } else if (left.kind === "Pi" && right.kind === "Pi") {
-    //
+    // TODO
   } else if (left.kind === "Fn" && right.kind === "Fn") {
-    //
+    // TODO
   } else if (left.kind === "Ap" && right.kind === "Ap") {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.arg, right.arg)
