@@ -15,35 +15,38 @@ export function checkNewArgs(
   switch (clazz.kind) {
     case "ClazzNull": {
       if (args.length !== 0) {
-        throw new ElaborationError(`too many property in NewNameless`)
-      } else {
-        return {}
+        throw new ElaborationError(
+          `checkNewArgs extra arguments when calling new`,
+        )
       }
+
+      return {}
     }
 
     case "ClazzCons": {
       if (args.length === 0) {
-        throw new ElaborationError(`missing property in NewNameless`)
-      } else {
-        const [arg, ...restArgs] = args
-        const core = check(ctx, arg.exp, clazz.propertyType)
-        const value = evaluate(ctxToEnv(ctx), core)
-        const rest = applyClosure(clazz.restClosure, value)
-        assertClazzInCtx(ctx, rest)
-        ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
-        return {
-          [clazz.name]: core,
-          ...checkNewArgs(ctx, restArgs, rest),
-        }
+        throw new ElaborationError(
+          `checkNewArgs not enough arguments when calling new, require property: ${clazz.name}`,
+        )
+      }
+
+      const [arg, ...restArgs] = args
+      const propertyCore = check(ctx, arg.exp, clazz.propertyType)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const rest = applyClosure(clazz.restClosure, propertyValue)
+      assertClazzInCtx(ctx, rest)
+      ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
+      return {
+        [clazz.name]: propertyCore,
+        ...checkNewArgs(ctx, restArgs, rest),
       }
     }
 
     case "ClazzFulfilled": {
-      const value = clazz.property
-      const core = readback(ctx, clazz.propertyType, value)
+      const propertyCore = readback(ctx, clazz.propertyType, clazz.property)
 
       return {
-        [clazz.name]: core,
+        [clazz.name]: propertyCore,
         ...checkNewArgs(ctx, args, clazz.rest),
       }
     }

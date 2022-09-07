@@ -141,23 +141,18 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "Dot": {
       const inferred = infer(ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
-
       assertClazzInCtx(ctx, inferred.type)
-
       const propertyType = lookupPropertyTypeOrFail(
         inferred.type,
         targetValue,
         exp.name,
       )
-
       const property = lookupPropertyOrFail(
         inferred.type,
         targetValue,
         exp.name,
       )
-
       const propertyCore = readback(ctx, propertyType, property)
-
       return Inferred(propertyType, propertyCore)
     }
 
@@ -173,15 +168,9 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       assertClazzInCtx(ctx, clazz)
-
       const properties = Exps.inferProperties(ctx, exp.properties, clazz)
-
       Exps.disallowExtraProperty(ctx, properties, exp.properties)
-
-      /**
-         TODO The inferred type might be a subtype to the `clazz`.
-       **/
-
+      // TODO The inferred type might be a subtype to the `clazz`.
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
@@ -192,9 +181,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       assertClazzInCtx(ctx, clazz)
-
       const properties = checkNewArgs(ctx, exp.args, clazz)
-
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
