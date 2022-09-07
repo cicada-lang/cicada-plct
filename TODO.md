@@ -67,10 +67,6 @@ Same
 
 syntax -- "property:spread"
 
-## AnnotatedFn
-
-infer -- Exps.AnnotatedFn
-
 ## FoldedFnWithReturnType
 
 FoldedFnWithReturnType

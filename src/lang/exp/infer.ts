@@ -8,6 +8,7 @@ import {
   lookupTypeInCtx,
   lookupValueInCtx,
 } from "../ctx"
+import { EnvCons, EnvNull } from "../env"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
@@ -16,6 +17,7 @@ import {
   applyClosure,
   assertClazzInCtx,
   assertTypeInCtx,
+  Closure,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
@@ -62,7 +64,19 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "AnnotatedFn": {
-      throw new Error("TODO")
+      const argTypeCore = checkType(ctx, exp.argType)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(exp.name, argTypeValue, ctx)
+      const inferred = infer(ctx, exp.ret)
+      const retClosure = Closure(
+        EnvCons("ret", inferred.type, EnvNull()),
+        "_",
+        Cores.Var("ret"),
+      )
+      return Inferred(
+        Values.Pi(argTypeValue, retClosure),
+        Cores.Fn(exp.name, inferred.core),
+      )
     }
 
     case "FoldedFn": {
