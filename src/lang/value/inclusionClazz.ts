@@ -29,40 +29,40 @@ import {
 
 **/
 
-export function conversionClazz(
+export function inclusionClazz(
   ctx: Ctx,
-  left: Values.Clazz,
-  right: Values.Clazz,
+  subclazz: Values.Clazz,
+  clazz: Values.Clazz,
 ): void {
-  const nameMap = prepareNameMap(ctx, left, right)
+  const nameMap = prepareNameMap(ctx, subclazz, clazz)
 
-  const leftPropertyMap = buildPropertyMap(nameMap, left, new Map())
-  const rightPropertyMap = buildPropertyMap(nameMap, right, new Map())
+  const leftPropertyMap = buildPropertyMap(nameMap, subclazz, new Map())
+  const rightPropertyMap = buildPropertyMap(nameMap, clazz, new Map())
 
   for (const [name, localName] of nameMap.entries()) {
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) {
       throw new ElaborationError(
-        `conversionClazz found missing property on left class: ${name}`,
+        `inclusionClazz found missing property on left class: ${name}`,
       )
     }
 
     const rightProperty = rightPropertyMap.get(name)
     if (rightProperty === undefined) {
       throw new ElaborationError(
-        `conversionClazz found missing property on right class: ${name}`,
+        `inclusionClazz found missing property on right class: ${name}`,
       )
     }
 
     if (leftProperty.value !== undefined && rightProperty.value === undefined) {
       throw new ElaborationError(
-        `conversionClazz expect leftProperty to have value: ${name}`,
+        `inclusionClazz expect leftProperty to have value: ${name}`,
       )
     }
 
     if (leftProperty.value === undefined && rightProperty.value !== undefined) {
       throw new ElaborationError(
-        `conversionClazz expect rightProperty to have value: ${name}`,
+        `inclusionClazz expect rightProperty to have value: ${name}`,
       )
     }
 

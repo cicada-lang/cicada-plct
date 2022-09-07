@@ -1,7 +1,7 @@
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, conversion, conversionClazz, Value } from "../value"
+import { applyClosure, conversion, inclusionClazz, Value } from "../value"
 
 /**
 
@@ -71,7 +71,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   }
 
   if (Values.isClazz(subtype) && Values.isClazz(type)) {
-    conversionClazz(ctx, subtype, type)
+    inclusionClazz(ctx, subtype, type)
     return
   }
 
