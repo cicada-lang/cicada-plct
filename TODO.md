@@ -6,11 +6,15 @@ doAp -- Clazz
 
 ## inclusion
 
-inclusionClazz
+inclusionClazz -- all properties in `clazz` must also occurs in `subclazz`
 
 inclusion-clazz.test.ts
 inclusion-pi.test.ts
 inclusion-sigma.test.ts
+
+allow extra property during check Objekt
+
+- `infer` the properties that are extra, thus not checked.
 
 # Equivalence
 

@@ -31,47 +31,59 @@ export function inclusionClazz(
 ): void {
   const nameMap = prepareNameMap(ctx, subclazz, clazz)
 
-  const leftPropertyMap = buildPropertyMap(nameMap, subclazz, new Map())
-  const rightPropertyMap = buildPropertyMap(nameMap, clazz, new Map())
+  const subclazzPropertyMap = buildPropertyMap(nameMap, subclazz, new Map())
+  const clazzPropertyMap = buildPropertyMap(nameMap, clazz, new Map())
 
   for (const [name, localName] of nameMap.entries()) {
-    const leftProperty = leftPropertyMap.get(name)
-    if (leftProperty === undefined) {
+    const subclazzProperty = subclazzPropertyMap.get(name)
+    if (subclazzProperty === undefined) {
       throw new ElaborationError(
-        `inclusionClazz found missing property on left class: ${name}`,
+        `inclusionClazz found missing property on subclazz class: ${name}`,
       )
     }
 
-    const rightProperty = rightPropertyMap.get(name)
-    if (rightProperty === undefined) {
+    const clazzProperty = clazzPropertyMap.get(name)
+    if (clazzProperty === undefined) {
       throw new ElaborationError(
-        `inclusionClazz found missing property on right class: ${name}`,
+        `inclusionClazz found missing property on clazz class: ${name}`,
       )
     }
 
-    if (leftProperty.value !== undefined && rightProperty.value === undefined) {
+    if (
+      subclazzProperty.value !== undefined &&
+      clazzProperty.value === undefined
+    ) {
       throw new ElaborationError(
-        `inclusionClazz expect leftProperty to have value: ${name}`,
+        `inclusionClazz expect subclazzProperty to have value: ${name}`,
       )
     }
 
-    if (leftProperty.value === undefined && rightProperty.value !== undefined) {
+    if (
+      subclazzProperty.value === undefined &&
+      clazzProperty.value !== undefined
+    ) {
       throw new ElaborationError(
-        `inclusionClazz expect rightProperty to have value: ${name}`,
+        `inclusionClazz expect clazzProperty to have value: ${name}`,
       )
     }
 
-    if (leftProperty.value === undefined && rightProperty.value === undefined) {
-      inclusion(ctx, leftProperty.type, rightProperty.type)
-      const type = leftProperty.type
+    if (
+      subclazzProperty.value === undefined &&
+      clazzProperty.value === undefined
+    ) {
+      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
+      const type = subclazzProperty.type
       ctx = CtxCons(localName, type, ctx)
     }
 
-    if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      inclusion(ctx, leftProperty.type, rightProperty.type)
-      const type = leftProperty.type
-      conversion(ctx, type, leftProperty.value, rightProperty.value)
-      const value = leftProperty.value
+    if (
+      subclazzProperty.value !== undefined &&
+      clazzProperty.value !== undefined
+    ) {
+      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
+      const type = subclazzProperty.type
+      conversion(ctx, type, subclazzProperty.value, clazzProperty.value)
+      const value = subclazzProperty.value
       ctx = CtxFulfilled(localName, type, value, ctx)
     }
   }
@@ -125,17 +137,17 @@ function buildPropertyMap(
 
 function prepareNameMap(
   ctx: Ctx,
-  left: Values.Clazz,
-  right: Values.Clazz,
+  subclazz: Values.Clazz,
+  clazz: Values.Clazz,
 ): Map<string, string> {
   const nameMap = new Map()
 
-  const leftNames = Values.clazzPropertyNames(left)
-  const rightNames = Values.clazzPropertyNames(right)
+  const subclazzNames = Values.clazzPropertyNames(subclazz)
+  const clazzNames = Values.clazzPropertyNames(clazz)
 
-  const used = new Set([...ctxNames(ctx), ...leftNames, ...rightNames])
+  const used = new Set([...ctxNames(ctx), ...subclazzNames, ...clazzNames])
 
-  for (const name of [...leftNames, ...rightNames]) {
+  for (const name of [...subclazzNames, ...clazzNames]) {
     const freshName = freshen(used, name)
     nameMap.set(name, freshName)
     used.add(freshName)
