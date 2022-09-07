@@ -1,5 +1,6 @@
+import { AlphaCtx, alphaEquivalent } from "../core"
 import { Ctx } from "../ctx"
-import { conversionByType, conversionByValue, Value } from "../value"
+import { readback, Value } from "../value"
 
 /**
 
@@ -18,10 +19,9 @@ export function conversion(
   left: Value,
   right: Value,
 ): void {
-  const result = conversionByType(ctx, type, left, right)
-  if (result === "ok") {
-    return
-  }
-
-  conversionByValue(ctx, type, left, right)
+  alphaEquivalent(
+    new AlphaCtx(),
+    readback(ctx, type, left),
+    readback(ctx, type, right),
+  )
 }

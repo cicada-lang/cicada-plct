@@ -11,10 +11,24 @@ export class AlphaCtx {
     const leftDepth = this.leftNameMap.get(leftName)
     const rightDepth = this.rightNameMap.get(rightName)
 
-    if (leftDepth === rightDepth) return
+    if (leftDepth === undefined && rightDepth === undefined) {
+      if (leftName === rightName) return
+
+      throw new ElaborationError(
+        `AlphaCtx.assertEqualNames expect the left name: ${leftName} to be equal to the right name: ${rightName}`,
+      )
+    }
+
+    if (leftDepth !== undefined && rightDepth !== undefined) {
+      if (leftDepth === rightDepth) return
+
+      throw new ElaborationError(
+        `AlphaCtx.assertEqualNames expect the left depth: ${leftDepth} (${leftName}) to be equal to the right depth: ${rightDepth} (${rightName})`,
+      )
+    }
 
     throw new ElaborationError(
-      `AlphaCtx.assertEqualNames expect the left depth: ${leftDepth} (${leftName}) to be equal to the right depth: ${rightDepth} (${rightName})`,
+      `AlphaCtx.assertEqualNames expect the left and right to be both bound variables or both free variables, left depth: ${leftDepth} (${leftName}), right depth: ${rightDepth} (${rightName})`,
     )
   }
 

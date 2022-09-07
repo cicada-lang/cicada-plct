@@ -12,21 +12,11 @@ doAp -- Clazz
 
 alphaEquivalentClazz -- handle out of order
 
-conversion by readback and alphaEquivalent
+- pass conversion-clazz.test.ts again
 
-conversionByType Pi
-
-- pass conversion-fn.test.ts
-
-conversionByType Sigma
-
-- pass conversion-cons.test.ts
-
-conversionByType Clazz
-
-- pass conversion-objekt.test.ts
-
-[refactor] conversionClazz
+conversion-fn.test.ts
+conversion-cons.test.ts
+conversion-objekt.test.ts
 
 ## inclusion
 
@@ -44,7 +34,7 @@ inclusion -- Clazz
 
 - inclusion-clazz.test.ts
 
-delete conversionType
+remove conversionType conversionClazz conversionNeutral
 
 # Equivalence
 
