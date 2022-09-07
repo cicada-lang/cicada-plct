@@ -1,5 +1,5 @@
+import { Closure } from "../closure"
 import { Neutral } from "../neutral"
-import { Closure } from "./Closure"
 
 export type Value =
   | TypedNeutral

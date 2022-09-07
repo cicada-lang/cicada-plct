@@ -2,16 +2,12 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 // import { ElaborationError } from "../errors"
+import { applyClosure } from "../closure"
 import * as Exps from "../exp"
 import { checkByInfer, checkProperties, Exp } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  applyClosure,
-  assertClazzInCtx,
-  assertTypeInCtx,
-  Value,
-} from "../value"
+import { assertClazzInCtx, assertTypeInCtx, Value } from "../value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {

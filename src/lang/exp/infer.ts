@@ -1,3 +1,4 @@
+import { applyClosure, constClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import {
@@ -13,10 +14,8 @@ import * as Exps from "../exp"
 import { check, checkClazz, checkType, Exp } from "../exp"
 import * as Values from "../value"
 import {
-  applyClosure,
   assertClazzInCtx,
   assertTypeInCtx,
-  constClosure,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,

@@ -1,9 +1,10 @@
+import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import { check, Exp } from "../exp"
 import * as Values from "../value"
-import { applyClosure, assertClazzInCtx, conversion } from "../value"
+import { assertClazzInCtx, conversion } from "../value"
 
 export function checkProperties(
   ctx: Ctx,

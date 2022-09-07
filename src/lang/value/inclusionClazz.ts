@@ -1,15 +1,10 @@
+import { applyClosure } from "../closure"
 import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import {
-  applyClosure,
-  assertClazz,
-  conversion,
-  inclusion,
-  Value,
-} from "../value"
+import { assertClazz, conversion, inclusion, Value } from "../value"
 
 /**
 

@@ -1,3 +1,4 @@
+import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
@@ -25,7 +26,7 @@ export function inferProperties(
 
       const propertyCore = Exps.check(ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-      const rest = Values.applyClosure(clazz.restClosure, propertyValue)
+      const rest = applyClosure(clazz.restClosure, propertyValue)
 
       assertClazzInCtx(ctx, rest)
 

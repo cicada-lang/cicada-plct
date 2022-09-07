@@ -1,7 +1,8 @@
 import * as Actions from "../actions"
+import { applyClosure } from "../closure"
 import { ElaborationError } from "../errors"
 import * as Values from "../value"
-import { applyClosure, assertClazz, Value } from "../value"
+import { assertClazz, Value } from "../value"
 
 export function lookupProperty(
   clazz: Values.Clazz,

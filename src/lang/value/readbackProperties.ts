@@ -1,4 +1,5 @@
 import * as Actions from "../actions"
+import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import * as Values from "../value"
@@ -16,7 +17,7 @@ export function readbackProperties(
 
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, type.name)
-      const rest = Values.applyClosure(type.restClosure, propertyValue)
+      const rest = applyClosure(type.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
       const propertyCore = readback(ctx, type.propertyType, propertyValue)
       return {

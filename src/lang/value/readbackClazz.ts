@@ -1,13 +1,9 @@
+import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  applyClosure,
-  assertClazzInCtx,
-  readback,
-  readbackType,
-} from "../value"
+import { assertClazzInCtx, readback, readbackType } from "../value"
 
 export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
   switch (clazz.kind) {

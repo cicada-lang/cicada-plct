@@ -1,6 +1,7 @@
+import { applyClosure } from "../closure"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, assertValue, isValue, Value } from "../value"
+import { assertValue, isValue, Value } from "../value"
 import { doCar } from "./doCar"
 
 export function doCdr(target: Value): Value {

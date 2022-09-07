@@ -1,3 +1,4 @@
+import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
@@ -5,7 +6,7 @@ import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { readbackNeutral } from "../neutral"
 import * as Values from "../value"
-import { applyClosure, readback, readbackClazz, Value } from "../value"
+import { readback, readbackClazz, Value } from "../value"
 
 /**
 

@@ -1,7 +1,8 @@
+import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { applyClosure, conversion, inclusionClazz, Value } from "../value"
+import { conversion, inclusionClazz, Value } from "../value"
 
 /**
 

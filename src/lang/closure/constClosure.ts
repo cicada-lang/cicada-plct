@@ -1,6 +1,7 @@
+import { Closure } from "../closure"
 import * as Cores from "../core"
 import { EnvCons, EnvNull } from "../env"
-import { Closure, Value } from "../value"
+import { Value } from "../value"
 
 /**
 

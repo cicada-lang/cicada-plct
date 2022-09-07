@@ -1,3 +1,4 @@
+import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
@@ -27,7 +28,7 @@ export function checkNewNameless(
         const [arg, ...restArgs] = args
         const core = check(ctx, arg.exp, clazz.propertyType)
         const value = evaluate(ctxToEnv(ctx), core)
-        const rest = Values.applyClosure(clazz.restClosure, value)
+        const rest = applyClosure(clazz.restClosure, value)
         assertClazzInCtx(ctx, rest)
         ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
         return {
