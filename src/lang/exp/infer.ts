@@ -11,7 +11,7 @@ import {
 } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { check, checkClazz, checkType, Exp } from "../exp"
+import { check, checkClazz, checkNewArgs, checkType, Exp } from "../exp"
 import * as Values from "../value"
 import {
   assertClazzInCtx,
@@ -21,7 +21,6 @@ import {
   readback,
   Value,
 } from "../value"
-import { checkNewNameless } from "./checkNewNameless"
 
 export type Inferred = {
   type: Value
@@ -193,9 +192,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       assertClazzInCtx(ctx, clazz)
-      const propertiesCore = checkNewNameless(ctx, exp.args, clazz)
 
-      return Inferred(clazz, Cores.Objekt(propertiesCore))
+      const properties = checkNewArgs(ctx, exp.args, clazz)
+
+      return Inferred(clazz, Cores.Objekt(properties))
     }
 
     case "Sequence": {

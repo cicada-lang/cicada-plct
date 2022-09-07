@@ -7,7 +7,7 @@ import { check } from "../exp"
 import * as Values from "../value"
 import { assertClazzInCtx, readback } from "../value"
 
-export function checkNewNameless(
+export function checkNewArgs(
   ctx: Ctx,
   args: Array<Exps.Arg>,
   clazz: Values.Clazz,
@@ -33,7 +33,7 @@ export function checkNewNameless(
         ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
         return {
           [clazz.name]: core,
-          ...checkNewNameless(ctx, restArgs, rest),
+          ...checkNewArgs(ctx, restArgs, rest),
         }
       }
     }
@@ -44,7 +44,7 @@ export function checkNewNameless(
 
       return {
         [clazz.name]: core,
-        ...checkNewNameless(ctx, args, clazz.rest),
+        ...checkNewArgs(ctx, args, clazz.rest),
       }
     }
   }
