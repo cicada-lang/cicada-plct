@@ -623,12 +623,17 @@ export type NewNameless = {
   args: Array<Arg>
 } & ExpMeta
 
-export function NewNameless(name: string, args: Array<Arg>): NewNameless {
+export function NewNameless(
+  name: string,
+  args: Array<Arg>,
+  span?: Span,
+): NewNameless {
   return {
     family: "Exp",
     kind: "NewNameless",
     name,
     args,
+    span,
   }
 }
 
