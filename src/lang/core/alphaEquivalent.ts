@@ -1,3 +1,4 @@
+import * as Cores from "../core"
 import { AlphaCtx, Core, formatCore } from "../core"
 import { ElaborationError } from "../errors"
 
@@ -33,17 +34,18 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
         `alphaEquivalent expect left literal: ${left.literal} to be equal to right literal: ${right.literal}`,
       )
     }
-    // } else if (left.kind === "Clazz" && right.kind === "Clazz") {
-    //   // TODO
+  } else if (isClazz(left) && isClazz(right)) {
+    // TODO
   } else if (left.kind === "Objekt" && right.kind === "Objekt") {
     // TODO
   } else if (left.kind === "Dot" && right.kind === "Dot") {
-    alphaEquivalent(ctx, left.target, right.target)
     if (left.name !== right.name) {
       throw new ElaborationError(
         `alphaEquivalent expect left name: ${left.name} to be equal to right name: ${right.name}`,
       )
     }
+
+    alphaEquivalent(ctx, left.target, right.target)
   } else {
     throw new ElaborationError(
       `alphaEquivalent is not implemented for left: ${formatCore(
@@ -51,4 +53,8 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
       )}, and right: ${formatCore(right)}`,
     )
   }
+}
+
+function isClazz(core: Core): core is Cores.Clazz {
+  return ["ClazzNull", "ClazzCons", "ClazzFulfilled"].includes(core.kind)
 }

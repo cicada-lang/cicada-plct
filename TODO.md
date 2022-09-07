@@ -11,6 +11,7 @@ doAp -- Clazz
 ## conversion
 
 alphaEquivalent -- Objekt
+alphaEquivalent -- alphaEquivalentProperties
 alphaEquivalent -- Clazz
 
 conversion by readback and alphaEquivalent

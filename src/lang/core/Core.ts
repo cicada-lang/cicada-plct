@@ -1,8 +1,8 @@
 export type Core =
   | Var
   | Pi
-  | Ap
   | Fn
+  | Ap
   | Sigma
   | Cons
   | Car
