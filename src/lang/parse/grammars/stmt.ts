@@ -1,6 +1,5 @@
 export const stmt = {
   $grammar: {
-    "stmt:declare": ['"declare"', { name: "identifier" }, '":"', { t: "exp" }],
     "stmt:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
     "stmt:let": ['"let"', { name: "identifier" }, '"="', { exp: "exp" }],
     "stmt:let_the": [

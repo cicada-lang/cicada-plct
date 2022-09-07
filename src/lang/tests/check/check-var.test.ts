@@ -4,7 +4,7 @@ import { expectCodeToFail, runCode } from "../utils"
 test("check Var", async () => {
   await runCode(`
 
-declare t: Type
+let t: Type = Type
 check t: Type
 
 `)

@@ -1,5 +1,3 @@
-remove Stmts.Declared
-
 # Subtyping
 
 ## fulfilling type
