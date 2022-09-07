@@ -35,9 +35,9 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
       )
     }
   } else if (isClazz(left) && isClazz(right)) {
-    // TODO
+    alphaEquivalentClazz(ctx, left, right)
   } else if (left.kind === "Objekt" && right.kind === "Objekt") {
-    // TODO
+    alphaEquivalentProperties(ctx, left.properties, right.properties)
   } else if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
       throw new ElaborationError(
@@ -57,4 +57,20 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
 function isClazz(core: Core): core is Cores.Clazz {
   return ["ClazzNull", "ClazzCons", "ClazzFulfilled"].includes(core.kind)
+}
+
+function alphaEquivalentProperties(
+  ctx: AlphaCtx,
+  left: Record<string, Core>,
+  right: Record<string, Core>,
+): void {
+  // TODO
+}
+
+function alphaEquivalentClazz(
+  ctx: AlphaCtx,
+  left: Cores.Clazz,
+  right: Cores.Clazz,
+): void {
+  // TODO
 }

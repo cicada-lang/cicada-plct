@@ -10,9 +10,8 @@ doAp -- Clazz
 
 ## conversion
 
-alphaEquivalent -- Objekt
-alphaEquivalent -- alphaEquivalentProperties
-alphaEquivalent -- Clazz
+alphaEquivalentProperties
+alphaEquivalentClazz -- handle out of order
 
 conversion by readback and alphaEquivalent
 
