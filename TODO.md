@@ -10,12 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-conversionClazz
-
-- pass conversion-clazz.test.ts
-
-add computation to conversion-clazz.test.ts
-
 conversionByType Pi
 
 - pass conversion-fn.test.ts
@@ -27,6 +21,8 @@ conversionByType Sigma
 conversionByType Clazz
 
 - pass conversion-objekt.test.ts
+
+[refactor] conversionClazz
 
 ## inclusion
 

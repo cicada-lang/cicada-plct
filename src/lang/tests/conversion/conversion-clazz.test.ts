@@ -4,9 +4,14 @@ import { expectCodeToFail, runCode } from "../utils"
 test("conversion Clazz", async () => {
   await runCode(`
 
+function id(T: Type, x: T): T {
+  return x
+}
+
 conversion Type [
   class { A: Type, x: A },
   class { A: Type, x: A },
+  class { A: Type, x: id(Type, A) },
 ]
 
 conversion Type [
@@ -20,20 +25,64 @@ conversion Type [
 test("conversion Clazz -- out of order", async () => {
   await runCode(`
 
+function id(T: Type, x: T): T {
+  return x
+}
+
 conversion Type [
   class { A: Type, B: Type, pair: Pair(A, B) },
   class { B: Type, A: Type, pair: Pair(A, B) },
+  class { B: Type, A: id(Type, Type), pair: Pair(A, B) },
+  class { B: Type, A: id(Type, Type), pair: Pair(id(Type, A), id(Type, B)) },
 ]
 
 `)
 })
 
-test.todo("conversion Clazz -- fail", async () => {
+test("conversion Clazz -- fail -- different property names", async () => {
   await expectCodeToFail(`
 
 conversion Type [
   class { A: Type, x: A },
   class { B: Type, x: B },
+]
+
+`)
+})
+
+test("conversion Clazz -- fail -- different property type", async () => {
+  await expectCodeToFail(`
+
+conversion Type [
+  class { A: Trivial },
+  class { A: String },
+]
+
+`)
+})
+
+test("conversion Clazz -- fail -- different fulfilled property value", async () => {
+  await expectCodeToFail(`
+
+conversion Type [
+  class { A: String = "abc" },
+  class { A: String = "xyz" },
+]
+
+`)
+})
+
+test("conversion Clazz -- fail -- missing fulfilled property value", async () => {
+  await expectCodeToFail(`
+
+conversion Type [
+  class { A: String = "abc" },
+  class { A: String },
+]
+
+conversion Type [
+  class { A: String },
+  class { A: String = "abc" },
 ]
 
 `)
