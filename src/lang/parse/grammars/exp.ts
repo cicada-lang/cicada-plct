@@ -108,5 +108,12 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
+    "operand:new_nameless": [
+      '"new"',
+      { name: "identifier" },
+      '"("',
+      { args: "args" },
+      '")"',
+    ],
   },
 }

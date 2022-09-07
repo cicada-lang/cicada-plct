@@ -21,6 +21,7 @@ import {
   readback,
   Value,
 } from "../value"
+import { checkNewNameless } from "./checkNewNameless"
 
 export type Inferred = {
   type: Value
@@ -167,6 +168,18 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
        **/
 
       return Inferred(clazz, Cores.Objekt(properties))
+    }
+
+    case "NewNameless": {
+      const clazz = lookupValueInCtx(ctx, exp.name)
+      if (clazz === undefined) {
+        throw new ElaborationError(`undefined class: ${exp.name}`)
+      }
+
+      assertClazzInCtx(ctx, clazz)
+      const propertiesCore = checkNewNameless(ctx, exp.args, clazz)
+
+      return Inferred(clazz, Cores.Objekt(propertiesCore))
     }
 
     case "Sequence": {
