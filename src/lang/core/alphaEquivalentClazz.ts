@@ -69,22 +69,22 @@ function reorderTheRightByTheLeft(
     case "ClazzCons": {
       return reorderTheRightByTheLeft(
         left.rest,
-        remove(left.name, right),
-        append(reordered, find(left.name, right)),
+        removeProperty(left.name, right),
+        appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
       )
     }
 
     case "ClazzFulfilled": {
       return reorderTheRightByTheLeft(
         left.rest,
-        remove(left.name, right),
-        append(reordered, find(left.name, right)),
+        removeProperty(left.name, right),
+        appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
       )
     }
   }
 }
 
-function remove(name: string, clazz: Cores.Clazz): Cores.Clazz {
+function removeProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       return clazz
@@ -99,7 +99,7 @@ function remove(name: string, clazz: Cores.Clazz): Cores.Clazz {
         clazz.name,
         clazz.localName,
         clazz.propertyType,
-        remove(name, clazz.rest),
+        removeProperty(name, clazz.rest),
       )
     }
 
@@ -112,13 +112,16 @@ function remove(name: string, clazz: Cores.Clazz): Cores.Clazz {
         clazz.name,
         clazz.propertyType,
         clazz.property,
-        remove(name, clazz.rest),
+        removeProperty(name, clazz.rest),
       )
     }
   }
 }
 
-function find(name: string, clazz: Cores.Clazz): Cores.Clazz {
+function findPropertyAndCreateClazz(
+  name: string,
+  clazz: Cores.Clazz,
+): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new ElaborationError(`expect to find ${name} in clazz`)
@@ -134,7 +137,7 @@ function find(name: string, clazz: Cores.Clazz): Cores.Clazz {
         )
       }
 
-      return find(name, clazz.rest)
+      return findPropertyAndCreateClazz(name, clazz.rest)
     }
 
     case "ClazzFulfilled": {
@@ -147,12 +150,12 @@ function find(name: string, clazz: Cores.Clazz): Cores.Clazz {
         )
       }
 
-      return find(name, clazz.rest)
+      return findPropertyAndCreateClazz(name, clazz.rest)
     }
   }
 }
 
-function append(left: Cores.Clazz, right: Cores.Clazz): Cores.Clazz {
+function appendClazz(left: Cores.Clazz, right: Cores.Clazz): Cores.Clazz {
   switch (left.kind) {
     case "ClazzNull": {
       return right
@@ -163,7 +166,7 @@ function append(left: Cores.Clazz, right: Cores.Clazz): Cores.Clazz {
         left.name,
         left.localName,
         left.propertyType,
-        append(left.rest, right),
+        appendClazz(left.rest, right),
       )
     }
 
@@ -172,7 +175,7 @@ function append(left: Cores.Clazz, right: Cores.Clazz): Cores.Clazz {
         left.name,
         left.propertyType,
         left.property,
-        append(left.rest, right),
+        appendClazz(left.rest, right),
       )
     }
   }
