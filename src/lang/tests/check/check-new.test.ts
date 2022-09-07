@@ -119,3 +119,60 @@ check new ABC {
 
 `)
 })
+
+test("check NewNameless", async () => {
+  await runCode(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+check new ABC("a", "b", "c"): ABC
+
+`)
+})
+
+test.todo("check NewNameless -- without args", async () => {
+  // Parser doesn't support this yet.
+  await runCode(`
+ 
+class ABC {
+  a: String = "a"
+  b: String = "b"
+  c: String = "c"
+}
+
+check new ABC(): ABC
+  
+`)
+})
+
+test("check NewNameless -- missing args", async () => {
+  await expectCodeToFail(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+check new ABC("a", "b"): ABC
+
+`)
+})
+
+test("check NewNameless -- too much args", async () => {
+  await expectCodeToFail(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+check new ABC("a", "b", "c", "d"): ABC
+
+`)
+})
