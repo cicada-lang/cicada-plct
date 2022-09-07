@@ -108,5 +108,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ].map(([name, exp]) => Exps.PropertyPlain(name, exp)),
         span,
       ),
+    "operand:new_nameless": ({ name, args }, { span }) =>
+      Exps.NewNameless(pt.str(name), matchers.args_matcher(args), span),
   })(tree)
 }
