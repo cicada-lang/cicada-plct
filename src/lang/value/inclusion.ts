@@ -27,7 +27,8 @@ import { applyClosure, conversion, inclusionClazz, Value } from "../value"
 
 export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
-    inclusion(ctx, subtype.argType, type.argType)
+    // NOTE Contravariant in argument position.
+    inclusion(ctx, type.argType, subtype.argType)
     const name = type.retTypeClosure.name
     const argType = type.argType
 

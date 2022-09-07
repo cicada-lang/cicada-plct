@@ -10,21 +10,11 @@ doAp -- Clazz
 
 ## inclusion
 
-inclusion -- contravariant argType
+inclusionClazz
 
-> follow conversionType
-
-inclusion -- Pi
-
-- inclusion-pi.test.ts
-
-inclusion -- Sigma
-
-- inclusion-sigma.test.ts
-
-inclusion -- Clazz
-
-- inclusion-clazz.test.ts
+inclusion-clazz.test.ts
+inclusion-pi.test.ts
+inclusion-sigma.test.ts
 
 # Equivalence
 
