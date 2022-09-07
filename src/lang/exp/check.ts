@@ -103,7 +103,8 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return check(ctx, Exps.unfoldNew(exp.name, exp.properties), type)
     }
 
-    case "New": {
+    case "New":
+    case "NewNameless": {
       return checkByInfer(ctx, exp, type)
     }
 
