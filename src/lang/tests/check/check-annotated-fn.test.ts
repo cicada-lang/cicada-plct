@@ -21,8 +21,10 @@ test("check AnnotatedFn -- dependent -- check by infer", async () => {
   await runCode(`
 
 check (T, x) => x: forall (T: Type, x: T) T
+check (T, y) => y: forall (T: Type, x: T) T
 
 check (T: Type, x: T) => x: forall (T: Type, x: T) T
+check (T: Type, y: T) => y: forall (T: Type, x: T) T
 
 `)
 })
