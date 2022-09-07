@@ -11,12 +11,11 @@ import { conversion, Value } from "../value"
    Compare it with the word `conversion`
    for equivalent relation between types.
 
-   `inclusion` is like `conversion`,
-   but also handles subtyping between classes,
+   `inclusion` is like `conversion` but applies only to types,
+   and also handles subtyping between classes,
    -- simple attribute based subtype relation.
 
-   `conversion` might be implemented directly,
-   or implemented by `readback` and `alphaEquivalence`,
+   `conversion` is implemented by `readback` and `alphaEquivalent`,
 
    We will not implement `Union` and `Intersection` types.
 

@@ -10,6 +10,17 @@ doAp -- Clazz
 
 ## conversion
 
+note about readback and eta rule
+
+- `conversion` is implemented by `readback` and `alphaEquivalent`,
+  not implemented directly by recursion over two values.
+
+core/alphaEquivalent
+
+conversion by readback and alphaEquivalent
+
+- for eta rule
+
 conversionByType Pi
 
 - pass conversion-fn.test.ts
