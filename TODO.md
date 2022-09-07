@@ -1,9 +1,5 @@
 # Subtyping
 
-## New
-
-NewNameless
-
 ## fulfilling type
 
 doAp -- Clazz

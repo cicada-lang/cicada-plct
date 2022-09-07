@@ -16,7 +16,7 @@ export function checkNewArgs(
     case "ClazzNull": {
       if (args.length !== 0) {
         throw new ElaborationError(
-          `checkNewArgs extra arguments when calling new`,
+          `checkNewArgs too many arguments when calling new`,
         )
       }
 
