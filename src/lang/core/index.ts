@@ -1,5 +1,7 @@
 export * from "./AlphaCtx"
 export * from "./alphaEquivalent"
+export * from "./alphaEquivalentClazz"
+export * from "./alphaEquivalentProperties"
 export * from "./Core"
 export * from "./evaluate"
 export * from "./foldFormatAp"
