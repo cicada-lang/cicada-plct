@@ -6,7 +6,9 @@ doAp -- Clazz
 
 ## inclusion
 
-Allow extra property during check Objekt
+Allow extra property during check `Objekt` and infer `New`
+
+- write notes about this in the code.
 
 - `infer` the properties that are extra, thus not checked.
 
@@ -19,7 +21,10 @@ When we do a typed binding, we need to be able to refine the declared type.
 
 - `LetThe` -- if we can `infer`, we should use the inferred type instead of the given type.
 
-  - Both `Stmts.LetThe` and Sequence `LetThe`
+- Both `Stmts.LetThe` and Sequence `LetThe`
+
+- [maybe] rename Exp about Sequence
+- [maybe] remove Sequence from Core
 
 # Equivalence
 

@@ -1,6 +1,6 @@
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
-import { ElaborationError } from "../errors"
+import { ElaborationError, InternalError } from "../errors"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -50,8 +50,8 @@ export function inclusionClazz(
 
     const localName = localNameMap.get(name)
     if (localName === undefined) {
-      throw new Error(
-        "internal error, localName should have all the names from subclazz and clazz",
+      throw new InternalError(
+        "inclusionClazz localName should have all the names from subclazz and clazz",
       )
     }
 
@@ -111,8 +111,8 @@ function buildPropertyMap(
 
       const freshName = localNameMap.get(clazz.name)
       if (freshName === undefined) {
-        throw new Error(
-          `internal error, expect localNameMap to have clazz.name: ${clazz.name}`,
+        throw new InternalError(
+          `buildPropertyMap expect localNameMap to have clazz.name: ${clazz.name}`,
         )
       }
 
