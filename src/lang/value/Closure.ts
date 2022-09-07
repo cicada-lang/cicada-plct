@@ -1,7 +1,6 @@
-import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Env, EnvCons, EnvNull } from "../env"
-import { Value } from "./Value"
+import { Env, EnvCons } from "../env"
+import { Value } from "../value"
 
 export type Closure = {
   env: Env
@@ -19,16 +18,4 @@ export function Closure(env: Env, name: string, body: Core): Closure {
 
 export function applyClosure(closure: Closure, arg: Value): Value {
   return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
-}
-
-/**
-
-   It is important that `constClosure` uses the given name to build `Closure`,
-   because `alphaEquivalent` will compare names.
-
-**/
-
-export function constClosure(name: string, value: Value): Closure {
-  const env = EnvCons("ret", value, EnvNull())
-  return Closure(env, name, Cores.Var("ret"))
 }
