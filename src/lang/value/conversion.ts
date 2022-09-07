@@ -5,9 +5,10 @@ import { conversionByType, conversionByValue, Value } from "../value"
 
    # conversion
 
-   The resursion structure of `conversion`
-   closely follows that of `readback`,
-   just two values together.
+   `conversion` is implemented by `readback` and `alphaEquivalent`,
+   not implemented directly by recursion over two values.
+
+   Otherwise eta-rules will be tricky to handle.
 
 **/
 
