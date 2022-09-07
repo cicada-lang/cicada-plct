@@ -61,12 +61,31 @@ function isClazz(core: Core): core is Cores.Clazz {
 
 function alphaEquivalentProperties(
   ctx: AlphaCtx,
-  left: Record<string, Core>,
-  right: Record<string, Core>,
+  leftProperties: Record<string, Core>,
+  rightProperties: Record<string, Core>,
 ): void {
-  // TODO
+  const leftSize = Object.keys(leftProperties).length
+  const rightSize = Object.keys(rightProperties).length
+
+  if (leftSize !== rightSize) {
+    throw new ElaborationError(
+      `alphaEquivalentProperties expect the left size: ${leftSize} to be equal to the right size: ${rightSize}`,
+    )
+  }
+
+  for (const [name, left] of Object.entries(leftProperties)) {
+    const right = rightProperties[name]
+    if (right === undefined) {
+      throw new ElaborationError(
+        `alphaEquivalentProperties missing property: ${name} on the right side`,
+      )
+    }
+
+    alphaEquivalent(ctx, left, right)
+  }
 }
 
+// NOTE Handle out of order properties.
 function alphaEquivalentClazz(
   ctx: AlphaCtx,
   left: Cores.Clazz,

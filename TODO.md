@@ -10,7 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-alphaEquivalentProperties
 alphaEquivalentClazz -- handle out of order
 
 conversion by readback and alphaEquivalent
