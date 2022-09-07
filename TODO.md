@@ -8,10 +8,6 @@ NewNameless
 
 doAp -- Clazz
 
-## conversion
-
-conversion-objekt.test.ts
-
 ## inclusion
 
 > follow conversionType
