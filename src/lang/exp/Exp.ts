@@ -37,8 +37,6 @@ export type Exp =
   | New
   | FoldedNew
   | NewNameless
-  | NewNamelessCons
-  | NewNamelessNull
   | Dot
   | Sequence
   | Let
@@ -622,54 +620,48 @@ export type NewNameless = {
   family: "Exp"
   kind: "NewNameless"
   name: string
-  body: NewNamelessCons | NewNamelessNull
-} & ExpMeta
+  body: NewNamelessBody
+}
 
-export function NewNameless(
-  name: string,
-  body: NewNamelessCons | NewNamelessNull,
-  span?: Span,
-): NewNameless {
+export function NewNameless(name: string, body: NewNamelessBody): NewNameless {
   return {
     family: "Exp",
     kind: "NewNameless",
     name,
     body,
-    span,
   }
 }
+
+export type NewNamelessBody = NewNamelessCons | NewNamelessNull
 
 export type NewNamelessCons = {
   family: "Exp"
   kind: "NewNamelessCons"
   property: Exp
-  rest: NewNameless
-} & ExpMeta
+  rest: NewNamelessBody
+}
 
 export function NewNamelessCons(
   property: Exp,
-  rest: NewNameless,
-  span?: Span,
+  rest: NewNamelessBody,
 ): NewNamelessCons {
   return {
     family: "Exp",
     kind: "NewNamelessCons",
     property,
     rest,
-    span,
   }
 }
 
 export type NewNamelessNull = {
   family: "Exp"
   kind: "NewNamelessNull"
-} & ExpMeta
+}
 
-export function NewNamelessNull(span?: Span): NewNamelessNull {
+export function NewNamelessNull(): NewNamelessNull {
   return {
     family: "Exp",
     kind: "NewNamelessNull",
-    span,
   }
 }
 
