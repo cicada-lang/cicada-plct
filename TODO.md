@@ -10,7 +10,10 @@ doAp -- Clazz
 
 ## conversion
 
-alphaEquivalent
+alphaEquivalent -- Var
+alphaEquivalent -- Pi, Fn, Sigma
+alphaEquivalent -- Objekt
+alphaEquivalent -- Clazz
 
 conversion by readback and alphaEquivalent
 
