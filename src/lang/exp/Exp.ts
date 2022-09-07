@@ -23,6 +23,7 @@ export type Exp =
   | Ap
   | FoldedAp
   | Fn
+  | AnnotatedFn
   | FoldedFn
   | Sigma
   | FoldedSigma
@@ -138,6 +139,25 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
     family: "Exp",
     kind: "Fn",
     name,
+    ret,
+    span,
+  }
+}
+
+export type AnnotatedFn = {
+  family: "Exp"
+  kind: "AnnotatedFn"
+  name: string
+  argType: Exp
+  ret: Exp
+} & ExpMeta
+
+export function AnnotatedFn(name: string, argType: Exp, ret: Exp, span?: Span): AnnotatedFn {
+  return {
+    family: "Exp",
+    kind: "AnnotatedFn",
+    name,
+    argType,
     ret,
     span,
   }

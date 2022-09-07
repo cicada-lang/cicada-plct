@@ -67,15 +67,15 @@ Same
 
 syntax -- "property:spread"
 
-## FnAnnotated
+## AnnotatedFn
 
-Exps.FnAnnotated -- can be inferred
+Exps.AnnotatedFn -- can be inferred
 
-check -- Exps.FnAnnotated -- checkByInfer
+check -- Exps.AnnotatedFn -- checkByInfer
 
-infer -- Exps.FnAnnotated
+infer -- Exps.AnnotatedFn
 
-unfoldFn -- return Exps.FnAnnotated
+unfoldFn -- return Exps.AnnotatedFn
 
 ## FoldedFnWithReturnType
 
