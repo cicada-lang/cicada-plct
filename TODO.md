@@ -10,8 +10,6 @@ doAp -- Clazz
 
 ## conversion
 
-clazzPropertyNames
-
 prepareNameMap
 
 conversionClazz

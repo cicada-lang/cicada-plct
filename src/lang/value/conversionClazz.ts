@@ -1,4 +1,4 @@
-import { Ctx } from "../ctx"
+import { Ctx, ctxNames } from "../ctx"
 import * as Values from "../value"
 
 /**
@@ -29,7 +29,11 @@ function prepareNameMap(
   right: Values.Clazz,
 ): Map<string, string> {
   const nameMap = new Map()
-  //
+
+  const leftNames = Values.clazzPropertyNames(left)
+  const rightNames = Values.clazzPropertyNames(right)
+
+  const names = new Set([...ctxNames(ctx), ...leftNames, ...rightNames])
 
   return nameMap
 }
