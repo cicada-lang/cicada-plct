@@ -28,3 +28,22 @@ check { T: String, x: "x" }: Class(Type)
   
 `)
 })
+
+test.todo("check Clazz -- doAp parameter does not match type", async () => {
+  // This test should be failed
+  await expectCodeToFail(`
+  
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+let BC = ABC(Type)
+
+// compute BC
+// But if you compute BC, it will fail as expected
+// I don't if it's a bug or not
+  
+`)
+})

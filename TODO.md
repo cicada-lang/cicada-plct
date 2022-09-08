@@ -1,9 +1,5 @@
 # Subtyping
 
-## fulfilling type
-
-doAp -- Clazz
-
 ## inclusion
 
 Allow extra property during check `Objekt` and infer `New`
