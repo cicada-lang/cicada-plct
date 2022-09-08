@@ -38,8 +38,6 @@ function applyClazz(clazz: Values.Clazz, arg: Value): Values.Clazz {
     case "ClazzCons": {
       const rest = applyClosure(clazz.restClosure, arg)
       assertClazz(rest)
-
-      // TODO: we should check the type of arg to clazz.propertyType here
       return Values.ClazzFulfilled(clazz.name, clazz.propertyType, arg, rest)
     }
 

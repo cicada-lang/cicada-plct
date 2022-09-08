@@ -5,7 +5,7 @@ import * as Values from "../value"
 import { check } from "./check"
 import { Exp } from "./Exp"
 
-export function checkClazzAp(ctx: Ctx, clazz: Values.Clazz, arg: Exp): Core {
+export function checkClazzArg(ctx: Ctx, clazz: Values.Clazz, arg: Exp): Core {
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new ElaborationError("cannot apply argument to ClazzNull")
@@ -16,7 +16,7 @@ export function checkClazzAp(ctx: Ctx, clazz: Values.Clazz, arg: Exp): Core {
     }
 
     case "ClazzFulfilled": {
-      return checkClazzAp(ctx, clazz.rest, arg)
+      return checkClazzArg(ctx, clazz.rest, arg)
     }
   }
 }

@@ -14,7 +14,7 @@ import * as Exps from "../exp"
 import {
   check,
   checkClazz,
-  checkClazzAp,
+  checkClazzArg,
   checkNewArgs,
   checkType,
   Exp,
@@ -90,7 +90,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       if (Values.isClazz(targetValue)) {
         return Inferred(
           Values.Type(),
-          Cores.Ap(inferred.core, checkClazzAp(ctx, targetValue, exp.arg)),
+          Cores.Ap(inferred.core, checkClazzArg(ctx, targetValue, exp.arg)),
         )
       }
 
