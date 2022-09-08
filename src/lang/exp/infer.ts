@@ -23,7 +23,6 @@ import * as Values from "../value"
 import {
   assertClazzInCtx,
   assertTypeInCtx,
-  assertTypesInCtx,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
@@ -86,31 +85,23 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       const inferred = infer(ctx, exp.target)
-      assertTypesInCtx(ctx, inferred.type, [
-        Values.Pi,
-        Values.Type, // the only type acceptable here is Clazz
-      ])
 
-      switch (inferred.type.kind) {
-        case "Pi": {
-          const pi = inferred.type
-          const argCore = check(ctx, exp.arg, pi.argType)
-          const argValue = evaluate(ctxToEnv(ctx), argCore)
-          return Inferred(
-            applyClosure(pi.retTypeClosure, argValue),
-            Cores.Ap(inferred.core, argCore),
-          )
-        }
-
-        case "Type": {
-          const clazz = evaluate(ctxToEnv(ctx), inferred.core)
-
-          return Inferred(
-            Values.Type(),
-            Cores.Ap(inferred.core, checkClazzAp(ctx, clazz, exp.arg)),
-          )
-        }
+      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+      if (Values.isClazz(targetValue)) {
+        return Inferred(
+          Values.Type(),
+          Cores.Ap(inferred.core, checkClazzAp(ctx, targetValue, exp.arg)),
+        )
       }
+
+      assertTypeInCtx(ctx, inferred.type, Values.Pi)
+      const pi = inferred.type
+      const argCore = check(ctx, exp.arg, pi.argType)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      return Inferred(
+        applyClosure(pi.retTypeClosure, argValue),
+        Cores.Ap(inferred.core, argCore),
+      )
     }
 
     case "FoldedAp": {
@@ -135,7 +126,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "Car": {
       const inferred = infer(ctx, exp.target)
       assertTypeInCtx(ctx, inferred.type, Values.Sigma)
-      return Inferred(inferred.type.carType, Cores.Car(inferred.core))
+      const sigma = inferred.type
+      return Inferred(sigma.carType, Cores.Car(inferred.core))
     }
 
     case "Cdr": {
