@@ -1,5 +1,5 @@
 import { test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("check Clazz is a Type", async () => {
   await runCode(`
@@ -7,5 +7,24 @@ test("check Clazz is a Type", async () => {
 check class { T: Type, x: T }: Type
 check class { a: String, b: String = "b", c: String }: Type
 
+`)
+})
+
+test("check Clazz -- doAp", async () => {
+  await runCode(`
+  
+class Class { T: Type, x: T }
+check Class(String): Type
+check { T: String, x: "x" }: Class(String)
+  
+`)
+})
+
+test("check Clazz -- doAp fail", async () => {
+  await expectCodeToFail(`
+  
+class Class { T: Type, x: T }
+check { T: String, x: "x" }: Class(Type)
+  
 `)
 })
