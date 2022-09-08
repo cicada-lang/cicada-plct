@@ -40,6 +40,10 @@ class ABC {
 }
 
 let BC = ABC(Type)
+
+// compute BC
+// But if you compute BC, it will fail as expected
+// I don't if it's a bug or not
   
 `)
 })
