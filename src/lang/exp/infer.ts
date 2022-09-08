@@ -11,7 +11,14 @@ import {
 } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { check, checkClazz, checkNewArgs, checkType, Exp } from "../exp"
+import {
+  check,
+  checkClazz,
+  checkClazzAp,
+  checkNewArgs,
+  checkType,
+  Exp,
+} from "../exp"
 import * as Values from "../value"
 import {
   assertClazzInCtx,
@@ -96,9 +103,11 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         }
 
         case "Type": {
+          const clazz = evaluate(ctxToEnv(ctx), inferred.core)
+
           return Inferred(
             Values.Type(),
-            Cores.Ap(inferred.core, checkType(ctx, exp.arg)),
+            Cores.Ap(inferred.core, checkClazzAp(ctx, clazz, exp.arg)),
           )
         }
       }
