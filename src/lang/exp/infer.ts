@@ -16,6 +16,7 @@ import * as Values from "../value"
 import {
   assertClazzInCtx,
   assertTypeInCtx,
+  assertTypesInCtx,
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
@@ -78,14 +79,29 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       const inferred = infer(ctx, exp.target)
-      assertTypeInCtx(ctx, inferred.type, Values.Pi)
-      const pi = inferred.type
-      const argCore = check(ctx, exp.arg, pi.argType)
-      const argValue = evaluate(ctxToEnv(ctx), argCore)
-      return Inferred(
-        applyClosure(pi.retTypeClosure, argValue),
-        Cores.Ap(inferred.core, argCore),
-      )
+      assertTypesInCtx(ctx, inferred.type, [
+        Values.Pi,
+        Values.Type, // the only type acceptable here is Clazz
+      ])
+
+      switch (inferred.type.kind) {
+        case "Pi": {
+          const pi = inferred.type
+          const argCore = check(ctx, exp.arg, pi.argType)
+          const argValue = evaluate(ctxToEnv(ctx), argCore)
+          return Inferred(
+            applyClosure(pi.retTypeClosure, argValue),
+            Cores.Ap(inferred.core, argCore),
+          )
+        }
+
+        case "Type": {
+          return Inferred(
+            Values.Type(),
+            Cores.Ap(inferred.core, checkType(ctx, exp.arg)),
+          )
+        }
+      }
     }
 
     case "FoldedAp": {
