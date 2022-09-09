@@ -1,6 +1,6 @@
-import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
-import { AlreadyType, Value } from "../value"
+import { Ctx } from "../../ctx"
+import { ElaborationError } from "../../errors"
+import { AlreadyType, Value } from "../../value"
 
 type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
 

@@ -1,6 +1,6 @@
-import { Ctx } from "../ctx"
-import * as Values from "../value"
-import { assertTypesInCtx, Value } from "../value"
+import { Ctx } from "../../ctx"
+import * as Values from "../../value"
+import { assertTypesInCtx, Value } from "../../value"
 
 export function assertClazzInCtx(
   ctx: Ctx,

@@ -1,5 +1,5 @@
-import { ElaborationError } from "../errors"
-import { Value } from "../value"
+import { ElaborationError } from "../../errors"
+import { Value } from "../../value"
 
 type ValueConstructor = (...args: Array<any>) => Value
 
