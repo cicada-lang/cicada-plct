@@ -2,8 +2,6 @@
 
 ## inclusion
 
-Values.clazzFromTypedValues
-
 Values.appendClazz
 
 Allow extra property during infer `New`
