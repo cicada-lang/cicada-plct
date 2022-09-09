@@ -1,6 +1,20 @@
+# Syntax
+
+## Objekt
+
+Objekt -- syntax -- "property:spread"
+
+## FoldedFnWithReturnType
+
+FoldedFnWithReturnType
+
 # Subtyping
 
 ## inclusion
+
+[maybe] rename Exp about Sequence
+
+[maybe] remove Sequence from Core
 
 When we do a typed binding, we need to be able to refine the declared type.
 
@@ -9,10 +23,6 @@ When we do a typed binding, we need to be able to refine the declared type.
 - `LetThe` -- if we can `infer`, we should use the inferred type instead of the given type.
 
 - Both `Stmts.LetThe` and Sequence `LetThe`
-
-- [maybe] rename Exp about Sequence
-
-- [maybe] remove Sequence from Core
 
 fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
 
@@ -39,16 +49,6 @@ Replace
 Refl
 
 Same
-
-# Syntax
-
-## Objekt
-
-Objekt -- syntax -- "property:spread"
-
-## FoldedFnWithReturnType
-
-FoldedFnWithReturnType
 
 # Inductive datatype
 
