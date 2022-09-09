@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
-import { Solution } from "./Solution"
-import { Value } from "./Value"
+import { Solution } from "../solution"
+import { Value } from "../value"
 
 export function unify(
   solution: Solution,
