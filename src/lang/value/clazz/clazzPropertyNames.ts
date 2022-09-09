@@ -1,7 +1,7 @@
-import { applyClosure } from "../closure"
-import * as Neutrals from "../neutral"
-import * as Values from "../value"
-import { assertClazz } from "../value"
+import { applyClosure } from "../../closure"
+import * as Neutrals from "../../neutral"
+import * as Values from "../../value"
+import { assertClazz } from "../../value"
 
 export function clazzPropertyNames(clazz: Values.Clazz): Array<string> {
   switch (clazz.kind) {

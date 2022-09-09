@@ -2,7 +2,7 @@
 
 ## inclusion
 
-extract `value/clazz/` directory -- for helper functions only
+move `closure/` to `value/closure/`
 
 Values.clazzFromTypedValues
 

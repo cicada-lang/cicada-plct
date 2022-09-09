@@ -1,7 +1,7 @@
-import { applyClosure } from "../closure"
-import { EvaluationError } from "../errors"
-import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { applyClosure } from "../../closure"
+import { EvaluationError } from "../../errors"
+import * as Values from "../../value"
+import { assertClazz, Value } from "../../value"
 
 export function fulfillClazz(clazz: Values.Clazz, arg: Value): Values.Clazz {
   switch (clazz.kind) {
