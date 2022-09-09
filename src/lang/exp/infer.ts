@@ -186,8 +186,17 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
       assertClazzInCtx(ctx, clazz)
       const properties = Exps.inferProperties(ctx, exp.properties, clazz)
+
+      // TODO allow extra properties
       Exps.disallowExtraProperty(ctx, properties, exp.properties)
-      // TODO The inferred type might be a subtype to the `clazz`.
+
+      /**
+         Instead of the given type, we choose the inferred type
+         as the final type in the return value,
+         because the body of the `New` might have extra properties,
+         thus more specific than the given type.
+      **/
+
       return Inferred(clazz, Cores.Objekt(properties))
     }
 

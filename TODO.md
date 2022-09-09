@@ -2,14 +2,9 @@
 
 ## inclusion
 
-Allow extra property during check `Objekt` and infer `New`
+Allow extra property during check `Objekt`
 
-- write notes about this in the code.
-
-- `infer` the properties that are extra, thus not checked.
-
-- We choose the inferred type as the final type, but not the given type,
-  because it is more specific.
+Allow extra property during infer `New`
 
 When we do a typed binding, we need to be able to refine the declared type.
 
@@ -20,7 +15,20 @@ When we do a typed binding, we need to be able to refine the declared type.
 - Both `Stmts.LetThe` and Sequence `LetThe`
 
 - [maybe] rename Exp about Sequence
+
 - [maybe] remove Sequence from Core
+
+# Implicit and Vague
+
+> Equivalence and Datatype depend on these features.
+
+isNeutralVar
+
+- we will use NeutralVar as pattern variable (or say logic variable)
+
+NeutralVar constructor
+
+unify
 
 # Equivalence
 
@@ -45,14 +53,6 @@ Objekt -- syntax -- "property:spread"
 FoldedFnWithReturnType
 
 # Inductive datatype
-
-## implicit Pi and vague Pi
-
-isNeutralVar
-
-- we will use NeutralVar as pattern variable (or say logic variable)
-
-NeutralVar constructor
 
 ## Datatype
 

@@ -85,10 +85,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       const properties = checkProperties(ctx, exp.properties, type)
 
       /**
-         TODO We disallow extra property for now.
-         We might `infer` the properties that are not checked.
-         This require us to handle off-order `Values.Clazz` in `inclusion`.
-       **/
+         Extra properties are not checked,
+         thus we require that they are infer-able.
+      **/
+
+      // TODO allow extra properties
 
       Exps.disallowExtraProperty(ctx, properties, exp.properties)
 
