@@ -2,8 +2,6 @@
 
 ## inclusion
 
-Allow extra property during check `Objekt`
-
 Allow extra property during infer `New`
 
 When we do a typed binding, we need to be able to refine the declared type.
@@ -17,6 +15,8 @@ When we do a typed binding, we need to be able to refine the declared type.
 - [maybe] rename Exp about Sequence
 
 - [maybe] remove Sequence from Core
+
+fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
 
 # Implicit and Vague
 

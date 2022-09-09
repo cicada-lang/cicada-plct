@@ -4,7 +4,7 @@ import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 // import { ElaborationError } from "../errors"
 import { applyClosure } from "../closure"
 import * as Exps from "../exp"
-import { checkByInfer, checkProperties, Exp } from "../exp"
+import { checkByInfer, checkProperties, Exp, infer } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import { assertClazzInCtx, assertTypeInCtx, Value } from "../value"
@@ -89,11 +89,14 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
          thus we require that they are infer-able.
       **/
 
-      // TODO allow extra properties
+      const names = Object.keys(properties)
+      const extraProperties = Object.fromEntries(
+        Object.entries(exp.properties)
+          .filter(([name, exp]) => !names.includes(name))
+          .map(([name, exp]) => [name, infer(ctx, exp).core]),
+      )
 
-      Exps.disallowExtraProperty(ctx, properties, exp.properties)
-
-      return Cores.Objekt(properties)
+      return Cores.Objekt({ ...properties, ...extraProperties })
     }
 
     case "Dot": {

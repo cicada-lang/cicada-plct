@@ -80,9 +80,22 @@ check {
 `)
 })
 
-test("check Objekt -- extra property", async () => {
-  // NOTE Disallowed for now, maybe will allow in the future.
+test("check Objekt -- extra properties", async () => {
+  await runCode(`
 
+check {
+  a: "a",
+  b: "b",
+  c: "c",
+  x: "x",
+  y: "y",
+  z: (T: Type) => "z",
+}: class { a: String, b: String, c: String }
+
+`)
+})
+
+test("check Objekt -- extra properties -- fail -- can not infer", async () => {
   await expectCodeToFail(`
 
 check {
@@ -90,6 +103,8 @@ check {
   b: "b",
   c: "c",
   x: "x",
+  y: "y",
+  z: (T) => "z",
 }: class { a: String, b: String, c: String }
 
 `)
