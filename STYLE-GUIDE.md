@@ -13,11 +13,10 @@ We loosely follows: https://rfc.zeromq.org/spec/42
 We do not force any commit message style,
 just write clear and easy to understand messages.
 
-# About documentation
+# Use of abbreviations
 
-## Use of abbreviations
-
-Do not use to much abbreviations.
+In documentation and everyday discussion,
+do not use too much abbreviations.
 
 If you must, explain them before using.
 
