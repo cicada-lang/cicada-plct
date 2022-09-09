@@ -187,8 +187,25 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       assertClazzInCtx(ctx, clazz)
       const properties = Exps.inferProperties(ctx, exp.properties, clazz)
 
-      // TODO allow extra properties
-      Exps.disallowExtraProperty(ctx, properties, exp.properties)
+      // const names = Object.keys(properties)
+      // const extraInferred = Object.entries(exp.properties)
+      //   .filter(([name, exp]) => !names.includes(name))
+      //   .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
+      // const extraProperties = Object.fromEntries(
+      //   extraInferred.map(([name, inferred]) => [name, inferred.core]),
+      // )
+
+      // const extraTypedValues = Object.fromEntries(
+      //   extraInferred.map(([name, inferred]) => [
+      //     name,
+      //     {
+      //       type: inferred.type,
+      //       value: evaluate(ctxToEnv(ctx), inferred.core),
+      //     },
+      //   ]),
+      // )
+
+      // const extraClazz = Values.clazzFromTypedValues(extraTypedValues)
 
       /**
          Instead of the given type, we choose the inferred type
@@ -196,6 +213,11 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
          because the body of the `New` might have extra properties,
          thus more specific than the given type.
       **/
+
+      // return Inferred(
+      //   Values.appendClazz(clazz, extraClazz),
+      //   Cores.Objekt({ ...properties, ...extraProperties }),
+      // )
 
       return Inferred(clazz, Cores.Objekt(properties))
     }

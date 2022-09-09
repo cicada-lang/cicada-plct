@@ -90,10 +90,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       **/
 
       const names = Object.keys(properties)
+      const extraInferred = Object.entries(exp.properties)
+        .filter(([name, exp]) => !names.includes(name))
+        .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
       const extraProperties = Object.fromEntries(
-        Object.entries(exp.properties)
-          .filter(([name, exp]) => !names.includes(name))
-          .map(([name, exp]) => [name, infer(ctx, exp).core]),
+        extraInferred.map(([name, inferred]) => [name, inferred.core]),
       )
 
       return Cores.Objekt({ ...properties, ...extraProperties })

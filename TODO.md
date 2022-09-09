@@ -2,7 +2,21 @@
 
 ## inclusion
 
+extract new-nameless test
+
+extract `assertions/` directory
+
+extract `predicates/` directory
+
+extract `clazz/` directory -- for helper functions only
+
+Values.clazzFromTypedValues
+
+Values.appendClazz
+
 Allow extra property during infer `New`
+
+test extra property for infer New
 
 When we do a typed binding, we need to be able to refine the declared type.
 

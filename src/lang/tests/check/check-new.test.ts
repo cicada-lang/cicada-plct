@@ -102,7 +102,7 @@ check new ABC {
 })
 
 test("check New -- extra properties", async () => {
-  await expectCodeToFail(`
+  await runCode(`
 
 class ABC {
   a: String
