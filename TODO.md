@@ -2,7 +2,6 @@
 
 ## inclusion
 
-extract `value/predicates/` directory
 extract `value/clazz/` directory -- for helper functions only
 
 Values.clazzFromTypedValues

@@ -1,4 +1,4 @@
-import { Value } from "./Value"
+import { Value } from "../../value"
 
 type ValueConstructor = (...args: Array<any>) => Value
 
