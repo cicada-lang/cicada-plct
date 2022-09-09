@@ -214,12 +214,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
          thus more specific than the given type.
       **/
 
-      // return Inferred(
-      //   Values.appendClazz(clazz, extraClazz),
-      //   Cores.Objekt({ ...properties, ...extraProperties }),
-      // )
-
-      return Inferred(clazz, Cores.Objekt(properties))
+      return Inferred(
+        Values.appendFulfilledClazz(extraClazz, clazz),
+        Cores.Objekt({ ...properties, ...extraProperties }),
+      )
     }
 
     case "NewNameless": {

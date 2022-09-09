@@ -4,6 +4,7 @@
 
 **/
 
+export * from "./appendFulfilledClazz"
 export * from "./clazzFromTypedValues"
 export * from "./clazzPropertyNames"
 export * from "./fulfillClazz"
