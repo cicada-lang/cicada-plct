@@ -2,8 +2,6 @@
 
 ## inclusion
 
-extract new-nameless test
-
 extract `assertions/` directory
 
 extract `predicates/` directory
