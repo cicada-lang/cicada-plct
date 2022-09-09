@@ -2,8 +2,6 @@
 
 ## inclusion
 
-move `closure/` to `value/closure/`
-
 Values.clazzFromTypedValues
 
 Values.appendClazz
