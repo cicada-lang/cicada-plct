@@ -1,7 +1,7 @@
 import { InternalError } from "../../errors"
 import * as Values from "../../value"
 
-export function appendFulfilledClazz(
+export function prependFulfilledClazz(
   left: Values.Clazz,
   right: Values.Clazz,
 ): Values.Clazz {
@@ -11,7 +11,7 @@ export function appendFulfilledClazz(
     }
 
     case "ClazzCons": {
-      throw new InternalError(`appendFulfilledClazz can not append ClazzCons.`)
+      throw new InternalError(`prependFulfilledClazz can not append ClazzCons.`)
     }
 
     case "ClazzFulfilled": {
@@ -19,7 +19,7 @@ export function appendFulfilledClazz(
         left.name,
         left.propertyType,
         left.property,
-        appendFulfilledClazz(left.rest, right),
+        prependFulfilledClazz(left.rest, right),
       )
     }
   }

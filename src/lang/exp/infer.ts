@@ -215,7 +215,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       **/
 
       return Inferred(
-        Values.appendFulfilledClazz(extraClazz, clazz),
+        Values.prependFulfilledClazz(extraClazz, clazz),
         Cores.Objekt({ ...properties, ...extraProperties }),
       )
     }
