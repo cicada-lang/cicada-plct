@@ -40,7 +40,7 @@ npm run test          # Run test
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
 - Remember to add yourself to [AUTHORS](AUTHORS).
 
-To make a contribution, [fork this project](https://github.com/cicada-lang/cicada-next/fork) and open a pull request.
+To make a contribution, [fork this project](https://github.com/cicada-lang/cicada/fork) and open a pull request.
 
 It is assumed that all non draft PRs are ready to be merged.
 
