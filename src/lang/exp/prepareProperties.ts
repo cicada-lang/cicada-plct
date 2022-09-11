@@ -1,7 +1,8 @@
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
+import { Exp, infer } from "../exp"
+import * as Values from "../value"
 
 export function prepareProperties(
   ctx: Ctx,
@@ -19,10 +20,26 @@ export function prepareProperties(
 
         record[property.name] = property.exp
         found.add(property.name)
+        continue
       }
 
       case "PropertySpread": {
-        // TODO
+        /**
+           Type directed spread
+        **/
+        const inferred = infer(ctx, property.exp)
+        Values.assertClazzInCtx(ctx, inferred.type)
+        for (const name of Values.clazzPropertyNames(inferred.type)) {
+          if (found.has(name)) {
+            throw new ElaborationError(
+              `duplicate properties in spread: ${name}`,
+            )
+          }
+
+          record[name] = Exps.Dot(property.exp, name)
+          found.add(name)
+          continue
+        }
       }
     }
   }

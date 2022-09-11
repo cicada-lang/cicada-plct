@@ -2,7 +2,7 @@
 
 ## Objekt
 
-prepareProperties handle type directed spread
+refactor prepareProperties to avoid use `continue`
 
 Objekt -- syntax -- "property:spread"
 
