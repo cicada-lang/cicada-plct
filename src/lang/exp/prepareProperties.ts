@@ -7,25 +7,25 @@ export function prepareProperties(
   ctx: Ctx,
   properties: Array<Exps.Property>,
 ): Record<string, Exp> {
-  assertNoDuplicateProperties(ctx, properties)
+  const found: Set<string> = new Set()
+  const record: Record<string, Exp> = {}
 
-  return Object.fromEntries(
-    properties.map((property) => [property.name, property.exp]),
-  )
-}
+  for (const property of properties) {
+    switch (property.kind) {
+      case "PropertyPlain": {
+        if (found.has(property.name)) {
+          throw new ElaborationError(`duplicate properties: ${property.name}`)
+        }
 
-function assertNoDuplicateProperties(
-  ctx: Ctx,
-  properties: Array<Exps.Property>,
-  found: Array<Exps.Property> = [],
-): void {
-  if (properties.length === 0) return
+        record[property.name] = property.exp
+        found.add(property.name)
+      }
 
-  const [property, ...restProperties] = properties
-
-  if (found.find(({ name }) => name === property.name)) {
-    throw new ElaborationError(`duplicate properties: ${property.name}`)
+      case "PropertySpread": {
+        // TODO
+      }
+    }
   }
 
-  assertNoDuplicateProperties(ctx, restProperties, [...found, property])
+  return record
 }

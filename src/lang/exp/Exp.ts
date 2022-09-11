@@ -583,7 +583,7 @@ export function FoldedObjekt(
   }
 }
 
-export type Property = PropertyPlain // | PropertySpread
+export type Property = PropertyPlain | PropertySpread
 
 export type PropertyPlain = {
   kind: "PropertyPlain"

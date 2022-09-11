@@ -4,8 +4,6 @@
 
 prepareProperties handle type directed spread
 
-PropertySpread as Property
-
 Objekt -- syntax -- "property:spread"
 
 - learned from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
