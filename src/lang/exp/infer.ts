@@ -239,7 +239,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
     }
 
-    case "SequenceLet": {
+    case "SequenceLetThe": {
       const inferred = infer(ctx, exp.exp)
       const value = evaluate(ctxToEnv(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
@@ -250,7 +250,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "LetThe": {
+    case "SequenceLetThe": {
       const typeCore = checkType(ctx, exp.type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
       const core = check(ctx, exp.exp, typeValue)

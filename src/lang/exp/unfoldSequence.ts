@@ -19,7 +19,7 @@ export function unfoldSequence(
     }
 
     case "SequenceBindingLetThe": {
-      return Exps.LetThe(
+      return Exps.SequenceLetThe(
         binding.name,
         binding.type,
         binding.exp,
