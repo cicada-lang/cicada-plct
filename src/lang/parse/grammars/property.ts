@@ -9,5 +9,6 @@ export const property = {
       '")"',
       { sequence: "sequence" },
     ],
+    "property:spread": ['"."', '"."', '"."', { exp: "exp" }],
   },
 }

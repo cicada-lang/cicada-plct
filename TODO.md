@@ -2,10 +2,7 @@
 
 ## Objekt
 
-Objekt -- syntax -- "property:spread"
-
-- learned from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-- see old codebase for some examples.
+parse object-spread.test.ts
 
 ## FoldedFnWithReturnType
 
