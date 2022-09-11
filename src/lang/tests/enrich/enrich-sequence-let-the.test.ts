@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test.todo("enrich SequenceLetThe", async () => {
+test("enrich SequenceLetThe", async () => {
   await runCode(`
 
 class AB {

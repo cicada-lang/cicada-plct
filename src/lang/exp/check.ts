@@ -73,14 +73,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedObjekt": {
-      return check(
-        ctx,
-        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
-        type,
-      )
-    }
-
+    case "FoldedObjekt":
     case "Objekt": {
       const { core } = enrich(ctx, exp, type)
       return core

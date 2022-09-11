@@ -1,13 +1,12 @@
-Summary:
+`Stmts.LetThe` -- call `enrich`
 
-- `Stmts.LetThe` -- try to use `inferred.type` first
-- `Exps.SequenceLetThe` -- try to use `inferred.type` first
+- TODO test
 
-Tests:
+call enrich during `checkProperties`
 
-- check-sequence.test.ts -- "check Sequence -- LetThe and enrich"
-- check-sequence.test.ts -- "check Sequence -- LetThe and enrich -- nested"
-- compute-objekt.test.ts -- "compute Objekt -- extra properties"
+- check-sequence.test.ts -- "check Sequence -- LetThe and enrich -- nested Objekt"
+
+compute-objekt.test.ts -- "compute Objekt -- extra properties"
 
 # Syntax
 

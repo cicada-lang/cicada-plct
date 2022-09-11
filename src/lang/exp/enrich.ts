@@ -5,9 +5,15 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer } from "../exp"
 import * as Values from "../value"
-import { assertClazzInCtx, Value } from "../value"
+import { assertClazzInCtx, inclusion, Value } from "../value"
 
 /**
+
+   # enrich
+
+   Check the `exp` is of given `type`,
+   and return a more specific type
+   which might be a subtype of `type`.
 
    `Enriched` is the same as `Inferred`,
    but we give it a name anyway.
@@ -31,7 +37,29 @@ export function enrich(
   exp: Exp,
   type: Value,
 ): { type: Value; core: Core } {
+  try {
+    const inferred = infer(ctx, exp)
+    inclusion(ctx, inferred.type, type)
+    return inferred
+  } catch (_error) {
+    return checkAndEnrich(ctx, exp, type)
+  }
+}
+
+function checkAndEnrich(
+  ctx: Ctx,
+  exp: Exp,
+  type: Value,
+): { type: Value; core: Core } {
   switch (exp.kind) {
+    case "FoldedObjekt": {
+      return enrich(
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
+        type,
+      )
+    }
+
     case "Objekt": {
       assertClazzInCtx(ctx, type)
 
@@ -69,7 +97,9 @@ export function enrich(
     }
 
     default: {
-      throw new ElaborationError(`enrich is not implemented for: ${exp.kind}`)
+      throw new ElaborationError(
+        `checkAndEnrich is not implemented for: ${exp.kind}`,
+      )
     }
   }
 }
