@@ -33,6 +33,22 @@ check begin {
 `)
 })
 
+test("check Sequence -- multiple lets", async () => {
+  await runCode(`
+
+function id(T: Type, x: T): T {
+  return x
+}
+
+check begin {
+  let x: Trivial = sole
+  let y = id(Trivial, sole)
+  return y
+}: Trivial
+
+`)
+})
+
 test("check Sequence -- Check", async () => {
   await runCode(`
 

@@ -2,8 +2,6 @@
 
 ## inclusion
 
-improve check-sequence.test.ts
-
 rename union of SequenceBinding
 
 rename Sequence to FoldedSequence

@@ -7,19 +7,32 @@ export function unfoldSequence(
 ): Exp {
   if (bindings.length === 0) return ret
 
-  const [entry, ...restEntries] = bindings
+  const [binding, ...restBindings] = bindings
 
-  switch (entry.kind) {
+  switch (binding.kind) {
     case "SequenceLet": {
-      return Exps.Let(entry.name, entry.exp, ret)
+      return Exps.Let(
+        binding.name,
+        binding.exp,
+        unfoldSequence(restBindings, ret),
+      )
     }
 
     case "SequenceLetThe": {
-      return Exps.LetThe(entry.name, entry.type, entry.exp, ret)
+      return Exps.LetThe(
+        binding.name,
+        binding.type,
+        binding.exp,
+        unfoldSequence(restBindings, ret),
+      )
     }
 
     case "SequenceCheck": {
-      return Exps.Check(entry.exp, entry.type, ret)
+      return Exps.Check(
+        binding.exp,
+        binding.type,
+        unfoldSequence(restBindings, ret),
+      )
     }
   }
 }
