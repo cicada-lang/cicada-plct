@@ -5,7 +5,6 @@
 [maybe] rename Exp about Sequence
 
 [maybe] remove Let from Core
-[maybe] remove LetThe from Core
 
 When we do a typed binding, we need to be able to refine the declared type.
 

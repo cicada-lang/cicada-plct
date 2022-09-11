@@ -11,13 +11,6 @@ export function foldFormatSequence(core: Core): {
       return { entries: [entry, ...entries], ret }
     }
 
-    case "LetThe": {
-      const { entries, ret } = foldFormatSequence(core.ret)
-      const type = formatCore(core.type)
-      const entry = `let ${core.name}: ${type} = ${formatCore(core.core)}`
-      return { entries: [entry, ...entries], ret }
-    }
-
     default: {
       return { entries: [], ret: formatCore(core) }
     }

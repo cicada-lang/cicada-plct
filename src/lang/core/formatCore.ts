@@ -62,8 +62,7 @@ export function formatCore(core: Core): string {
       return `${formatCore(core.target)}.${core.name}`
     }
 
-    case "Let":
-    case "LetThe": {
+    case "Let": {
       const { entries, ret } = Cores.foldFormatSequence(core)
       return `begin { ${entries.join("  ")}  return ${ret} }`
     }
