@@ -1,3 +1,32 @@
+[subtyping] Use the inferred type during type binding.
+
+When we do a type binding,
+if we can `infer`,
+we should use the inferred type
+instead of the given type.
+
+This is specially needed for:
+
+```
+let <var>: <fulfilled class> = <object>
+```
+
+Summary:
+
+- Add note about this.
+
+  ```
+  /**
+     If we can `infer`, we should use the inferred type instead of the given type.
+  **/
+  ```
+
+- change `Stmts.LetThe`
+
+- change `Exps.SequenceLetThe`
+
+- fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
+
 # Syntax
 
 ## FoldedFnWithReturnType
