@@ -12,37 +12,36 @@ export function prepareProperties(
   const record: Record<string, Exp> = {}
 
   for (const property of properties) {
-    switch (property.kind) {
-      case "PropertyPlain": {
-        if (found.has(property.name)) {
-          throw new ElaborationError(`duplicate properties: ${property.name}`)
-        }
-
-        record[property.name] = property.exp
-        found.add(property.name)
-        continue
+    for (const [name, exp] of prepareProperty(ctx, property)) {
+      if (found.has(name)) {
+        throw new ElaborationError(`duplicate properties: ${name}`)
       }
 
-      case "PropertySpread": {
-        /**
-           Type directed spread
-        **/
-        const inferred = infer(ctx, property.exp)
-        Values.assertClazzInCtx(ctx, inferred.type)
-        for (const name of Values.clazzPropertyNames(inferred.type)) {
-          if (found.has(name)) {
-            throw new ElaborationError(
-              `duplicate properties in spread: ${name}`,
-            )
-          }
-
-          record[name] = Exps.Dot(property.exp, name)
-          found.add(name)
-          continue
-        }
-      }
+      record[name] = exp
+      found.add(name)
     }
   }
 
   return record
+}
+
+export function prepareProperty(
+  ctx: Ctx,
+  property: Exps.Property,
+): Array<[string, Exp]> {
+  switch (property.kind) {
+    case "PropertyPlain": {
+      return [[property.name, property.exp]]
+    }
+
+    case "PropertySpread": {
+      /**
+         Type directed spread
+      **/
+      const inferred = infer(ctx, property.exp)
+      Values.assertClazzInCtx(ctx, inferred.type)
+      const names = Values.clazzPropertyNames(inferred.type)
+      return names.map((name) => [name, Exps.Dot(property.exp, name)])
+    }
+  }
 }

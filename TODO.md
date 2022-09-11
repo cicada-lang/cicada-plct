@@ -2,8 +2,6 @@
 
 ## Objekt
 
-refactor prepareProperties to avoid use `continue`
-
 Objekt -- syntax -- "property:spread"
 
 - learned from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
