@@ -44,7 +44,7 @@ To make a contribution, fork this project and open a pull request.
 
 It is assumed that all non draft PRs are ready to be merged.
 
-Please use draft PR, if it is not ready to be merged.
+If your PR is not ready to be merged yet, please make it a draft PR:
 
 - [Creating draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests)
 - [Changing a PR to draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request)
