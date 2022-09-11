@@ -235,7 +235,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "Sequence": {
+    case "FoldedSequence": {
       return infer(ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
     }
 

@@ -39,7 +39,7 @@ export type Exp =
   | FoldedNew
   | NewAp
   | Dot
-  | Sequence
+  | FoldedSequence
   | Let
   | LetThe
   | Check
@@ -687,21 +687,21 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
   }
 }
 
-export type Sequence = {
+export type FoldedSequence = {
   family: "Exp"
-  kind: "Sequence"
+  kind: "FoldedSequence"
   bindings: Array<SequenceBinding>
   ret: Exp
 } & ExpMeta
 
-export function Sequence(
+export function FoldedSequence(
   bindings: Array<SequenceBinding>,
   ret: Exp,
   span?: Span,
-): Sequence {
+): FoldedSequence {
   return {
     family: "Exp",
-    kind: "Sequence",
+    kind: "FoldedSequence",
     bindings,
     ret,
     span,

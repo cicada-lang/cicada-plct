@@ -20,7 +20,7 @@ test("parse Let -- function", () => {
         ),
         Exps.FoldedFn(
           [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
-          Exps.Sequence([], Exps.Var("x")),
+          Exps.FoldedSequence([], Exps.Var("x")),
         ),
       ),
     ]),
