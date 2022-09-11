@@ -1,6 +1,6 @@
 import { ElaborationError } from "../errors"
-import * as Exps from "./Exp"
-import { Exp } from "./Exp"
+import * as Exps from "../exp"
+import { Exp } from "../exp"
 
 export function unfoldAp(target: Exp, args: Array<Exps.Arg>): Exp {
   if (args.length === 0) return target

@@ -1,4 +1,4 @@
-import * as Exps from "./Exp"
+import * as Exps from "../exp"
 
 export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
   if (bindings.length === 0) return Exps.ClazzNull()

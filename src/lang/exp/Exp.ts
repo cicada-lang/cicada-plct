@@ -1,4 +1,4 @@
-import { Span } from "./Span"
+import { Span } from "../exp"
 
 type ExpMeta = { span?: Span }
 

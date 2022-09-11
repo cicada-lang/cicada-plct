@@ -1,9 +1,9 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
+import { Exp } from "../exp"
 import * as Values from "../value"
 import { check } from "./check"
-import { Exp } from "./Exp"
 
 export function checkClazzArg(ctx: Ctx, clazz: Values.Clazz, arg: Exp): Core {
   switch (clazz.kind) {

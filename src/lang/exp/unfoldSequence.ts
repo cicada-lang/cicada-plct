@@ -1,5 +1,5 @@
-import * as Exps from "./Exp"
-import { Exp } from "./Exp"
+import * as Exps from "../exp"
+import { Exp } from "../exp"
 
 export function unfoldSequence(
   entries: Array<Exps.SequenceEntry>,

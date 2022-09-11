@@ -2,6 +2,8 @@
 
 ## Objekt
 
+unfoldProperties take ctx and call assertNoDuplicateProperties
+
 unfoldProperties handle type directed spread
 
 PropertySpread as Property

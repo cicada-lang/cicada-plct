@@ -1,5 +1,5 @@
-import * as Exps from "./Exp"
-import { Exp } from "./Exp"
+import * as Exps from "../exp"
+import { Exp } from "../exp"
 
 export function unfoldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
   if (bindings.length === 0) return retType
