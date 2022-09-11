@@ -583,7 +583,7 @@ export function FoldedObjekt(
   }
 }
 
-export type Property = PropertyPlain
+export type Property = PropertyPlain // | PropertySpread
 
 export type PropertyPlain = {
   kind: "PropertyPlain"
@@ -595,6 +595,18 @@ export function PropertyPlain(name: string, exp: Exp): PropertyPlain {
   return {
     kind: "PropertyPlain",
     name,
+    exp,
+  }
+}
+
+export type PropertySpread = {
+  kind: "PropertySpread"
+  exp: Exp
+}
+
+export function PropertySpread(exp: Exp): PropertySpread {
+  return {
+    kind: "PropertySpread",
     exp,
   }
 }
