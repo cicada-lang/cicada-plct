@@ -1,9 +1,5 @@
 # Syntax
 
-## Objekt
-
-check-object-spread.test.ts
-
 ## FoldedFnWithReturnType
 
 FoldedFnWithReturnType
