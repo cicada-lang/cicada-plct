@@ -178,7 +178,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "FoldedNew": {
       return infer(
         ctx,
-        Exps.New(exp.name, Exps.unfoldProperties(ctx, exp.properties)),
+        Exps.New(exp.name, Exps.prepareProperties(ctx, exp.properties)),
       )
     }
 

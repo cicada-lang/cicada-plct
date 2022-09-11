@@ -3,7 +3,7 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function unfoldProperties(
+export function prepareProperties(
   ctx: Ctx,
   properties: Array<Exps.Property>,
 ): Record<string, Exp> {

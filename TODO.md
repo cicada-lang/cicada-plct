@@ -2,10 +2,6 @@
 
 ## Objekt
 
-rename `unfoldProperties` to `prepareProperties`
-
-- because it takes `ctx`, thus different from other `unfold*` functions
-
 move piBindingtoFnBindingFrom to matchers utils
 
 prepareProperties handle type directed spread

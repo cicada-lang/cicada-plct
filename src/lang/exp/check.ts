@@ -77,7 +77,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     case "FoldedObjekt": {
       return check(
         ctx,
-        Exps.Objekt(Exps.unfoldProperties(ctx, exp.properties)),
+        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
         type,
       )
     }
@@ -110,7 +110,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     case "FoldedNew": {
       return check(
         ctx,
-        Exps.New(exp.name, Exps.unfoldProperties(ctx, exp.properties)),
+        Exps.New(exp.name, Exps.prepareProperties(ctx, exp.properties)),
         type,
       )
     }
