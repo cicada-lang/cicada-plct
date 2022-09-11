@@ -39,10 +39,8 @@ export type Exp =
   | FoldedNew
   | NewAp
   | Dot
+  | Sequence
   | FoldedSequence
-  | Let
-  | LetThe
-  | Check
 
 export type Var = {
   family: "Exp"
@@ -687,6 +685,73 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
   }
 }
 
+export type Sequence = Let | LetThe | Check
+
+export type Let = {
+  family: "Exp"
+  kind: "Let"
+  name: string
+  exp: Exp
+  ret: Exp
+} & ExpMeta
+
+export function Let(name: string, exp: Exp, ret: Exp, span?: Span): Let {
+  return {
+    family: "Exp",
+    kind: "Let",
+    name,
+    exp,
+    ret,
+    span,
+  }
+}
+
+export type LetThe = {
+  family: "Exp"
+  kind: "LetThe"
+  name: string
+  type: Exp
+  exp: Exp
+  ret: Exp
+} & ExpMeta
+
+export function LetThe(
+  name: string,
+  type: Exp,
+  exp: Exp,
+  ret: Exp,
+  span?: Span,
+): LetThe {
+  return {
+    family: "Exp",
+    kind: "LetThe",
+    name,
+    type,
+    exp,
+    ret,
+    span,
+  }
+}
+
+export type Check = {
+  family: "Exp"
+  kind: "Check"
+  exp: Exp
+  type: Exp
+  ret: Exp
+} & ExpMeta
+
+export function Check(exp: Exp, type: Exp, ret: Exp, span?: Span): Check {
+  return {
+    family: "Exp",
+    kind: "Check",
+    exp,
+    type,
+    ret,
+    span,
+  }
+}
+
 export type FoldedSequence = {
   family: "Exp"
   kind: "FoldedSequence"
@@ -761,70 +826,5 @@ export function SequenceBindingCheck(
     kind: "SequenceBindingCheck",
     exp,
     type,
-  }
-}
-
-export type Let = {
-  family: "Exp"
-  kind: "Let"
-  name: string
-  exp: Exp
-  ret: Exp
-} & ExpMeta
-
-export function Let(name: string, exp: Exp, ret: Exp, span?: Span): Let {
-  return {
-    family: "Exp",
-    kind: "Let",
-    name,
-    exp,
-    ret,
-    span,
-  }
-}
-
-export type LetThe = {
-  family: "Exp"
-  kind: "LetThe"
-  name: string
-  type: Exp
-  exp: Exp
-  ret: Exp
-} & ExpMeta
-
-export function LetThe(
-  name: string,
-  type: Exp,
-  exp: Exp,
-  ret: Exp,
-  span?: Span,
-): LetThe {
-  return {
-    family: "Exp",
-    kind: "LetThe",
-    name,
-    type,
-    exp,
-    ret,
-    span,
-  }
-}
-
-export type Check = {
-  family: "Exp"
-  kind: "Check"
-  exp: Exp
-  type: Exp
-  ret: Exp
-} & ExpMeta
-
-export function Check(exp: Exp, type: Exp, ret: Exp, span?: Span): Check {
-  return {
-    family: "Exp",
-    kind: "Check",
-    exp,
-    type,
-    ret,
-    span,
   }
 }
