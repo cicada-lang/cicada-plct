@@ -177,7 +177,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "FoldedNew": {
       Exps.assertNoDuplicateProperties(ctx, exp.properties)
-      return infer(ctx, Exps.unfoldNew(exp.name, exp.properties))
+      return infer(
+        ctx,
+        Exps.New(exp.name, Exps.unfoldProperties(exp.properties)),
+      )
     }
 
     case "New": {

@@ -2,7 +2,7 @@
 
 ## Objekt
 
-merge unfoldNew unfoldObjekt into unfoldProperties
+unfoldProperties handle type directed spread
 
 PropertySpread as Property
 
