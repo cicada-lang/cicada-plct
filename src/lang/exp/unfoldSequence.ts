@@ -10,7 +10,7 @@ export function unfoldSequence(
   const [binding, ...restBindings] = bindings
 
   switch (binding.kind) {
-    case "SequenceLet": {
+    case "SequenceBindingLet": {
       return Exps.Let(
         binding.name,
         binding.exp,
@@ -18,7 +18,7 @@ export function unfoldSequence(
       )
     }
 
-    case "SequenceLetThe": {
+    case "SequenceBindingLetThe": {
       return Exps.LetThe(
         binding.name,
         binding.type,
@@ -27,7 +27,7 @@ export function unfoldSequence(
       )
     }
 
-    case "SequenceCheck": {
+    case "SequenceBindingCheck": {
       return Exps.Check(
         binding.exp,
         binding.type,

@@ -708,51 +708,57 @@ export function Sequence(
   }
 }
 
-export type SequenceBinding = SequenceLet | SequenceLetThe | SequenceCheck
+export type SequenceBinding =
+  | SequenceBindingLet
+  | SequenceBindingLetThe
+  | SequenceBindingCheck
 
-export type SequenceLet = {
-  kind: "SequenceLet"
+export type SequenceBindingLet = {
+  kind: "SequenceBindingLet"
   name: string
   exp: Exp
 }
 
-export function SequenceLet(name: string, exp: Exp): SequenceLet {
+export function SequenceBindingLet(name: string, exp: Exp): SequenceBindingLet {
   return {
-    kind: "SequenceLet",
+    kind: "SequenceBindingLet",
     name,
     exp,
   }
 }
 
-export type SequenceLetThe = {
-  kind: "SequenceLetThe"
+export type SequenceBindingLetThe = {
+  kind: "SequenceBindingLetThe"
   name: string
   type: Exp
   exp: Exp
 }
 
-export function SequenceLetThe(
+export function SequenceBindingLetThe(
   name: string,
   type: Exp,
   exp: Exp,
-): SequenceLetThe {
+): SequenceBindingLetThe {
   return {
-    kind: "SequenceLetThe",
+    kind: "SequenceBindingLetThe",
     name,
     type,
     exp,
   }
 }
 
-export type SequenceCheck = {
-  kind: "SequenceCheck"
+export type SequenceBindingCheck = {
+  kind: "SequenceBindingCheck"
   exp: Exp
   type: Exp
 }
 
-export function SequenceCheck(exp: Exp, type: Exp): SequenceCheck {
+export function SequenceBindingCheck(
+  exp: Exp,
+  type: Exp,
+): SequenceBindingCheck {
   return {
-    kind: "SequenceCheck",
+    kind: "SequenceBindingCheck",
     exp,
     type,
   }

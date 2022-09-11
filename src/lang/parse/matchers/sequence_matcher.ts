@@ -16,20 +16,23 @@ export function sequence_matcher(tree: pt.Tree): Exps.Sequence {
 export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
   return pt.matcher<Exps.SequenceBinding>({
     "sequence_entry:let": ({ name, exp }, { span }) =>
-      Exps.SequenceLet(pt.str(name), matchers.exp_matcher(exp)),
+      Exps.SequenceBindingLet(pt.str(name), matchers.exp_matcher(exp)),
     "sequence_entry:let_the": ({ name, t, exp }, { span }) =>
-      Exps.SequenceLetThe(
+      Exps.SequenceBindingLetThe(
         pt.str(name),
         matchers.exp_matcher(t),
         matchers.exp_matcher(exp),
       ),
     "sequence_entry:check": ({ exp, t }, { span }) =>
-      Exps.SequenceCheck(matchers.exp_matcher(exp), matchers.exp_matcher(t)),
+      Exps.SequenceBindingCheck(
+        matchers.exp_matcher(exp),
+        matchers.exp_matcher(t),
+      ),
     "sequence_entry:let_function": (
       { name, bindings, ret_t, sequence },
       { span },
     ) =>
-      Exps.SequenceLetThe(
+      Exps.SequenceBindingLetThe(
         pt.str(name),
         Exps.FoldedPi(
           matchers.pi_bindings_matcher(bindings),

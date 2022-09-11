@@ -22,10 +22,14 @@ begin {
     deleteUndefined(
       Exps.Sequence(
         [
-          Exps.SequenceLetThe("x", Exps.Var("Trivial"), Exps.Var("sole")),
-          Exps.SequenceCheck(Exps.Var("sole"), Exps.Var("Trivial")),
-          Exps.SequenceLet("y", Exps.Var("sole")),
-          Exps.SequenceLet("z", Exps.Var("sole")),
+          Exps.SequenceBindingLetThe(
+            "x",
+            Exps.Var("Trivial"),
+            Exps.Var("sole"),
+          ),
+          Exps.SequenceBindingCheck(Exps.Var("sole"), Exps.Var("Trivial")),
+          Exps.SequenceBindingLet("y", Exps.Var("sole")),
+          Exps.SequenceBindingLet("z", Exps.Var("sole")),
         ],
         Exps.Var("x"),
       ),
@@ -66,7 +70,7 @@ begin {
     deleteUndefined(
       Exps.Sequence(
         [
-          Exps.SequenceLetThe(
+          Exps.SequenceBindingLetThe(
             "id",
             Exps.FoldedPi(
               [

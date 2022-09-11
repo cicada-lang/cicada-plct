@@ -2,8 +2,6 @@
 
 ## inclusion
 
-rename union of SequenceBinding
-
 rename Sequence to FoldedSequence
 
 add Sequence postfix to Let LetThe Check
