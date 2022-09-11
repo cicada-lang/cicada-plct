@@ -47,11 +47,6 @@ to avoid name casting when editing the code.
 
 Use `lisp-case` for directory name.
 
-# About `framework/`
-
-Modules in `framework/` directory are independent helper modules
-that might be extracted to their own packages.
-
 # Hierarchy of resources
 
 Think of the system as a hierarchy of resources:
