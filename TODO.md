@@ -1,9 +1,3 @@
-`Stmts.LetThe` -- call `enrichOrCheck`
-
-- TODO test
-
-compute-objekt.test.ts -- "compute Objekt -- extra properties"
-
 infer Objekt -- if all properties can be inferred
 
 - infer-objekt.test.ts
