@@ -2,7 +2,6 @@
 
 ## inclusion
 
-add `Sequence` postfix to `Let`
 add `Sequence` postfix to `LetThe`
 add `Sequence` postfix to `Check`
 

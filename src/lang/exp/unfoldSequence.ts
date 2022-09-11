@@ -11,7 +11,7 @@ export function unfoldSequence(
 
   switch (binding.kind) {
     case "SequenceBindingLet": {
-      return Exps.Let(
+      return Exps.SequenceLet(
         binding.name,
         binding.exp,
         unfoldSequence(restBindings, ret),

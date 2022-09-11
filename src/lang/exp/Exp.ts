@@ -685,20 +685,25 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
   }
 }
 
-export type Sequence = Let | LetThe | Check
+export type Sequence = SequenceLet | LetThe | Check
 
-export type Let = {
+export type SequenceLet = {
   family: "Exp"
-  kind: "Let"
+  kind: "SequenceLet"
   name: string
   exp: Exp
   ret: Exp
 } & ExpMeta
 
-export function Let(name: string, exp: Exp, ret: Exp, span?: Span): Let {
+export function SequenceLet(
+  name: string,
+  exp: Exp,
+  ret: Exp,
+  span?: Span,
+): SequenceLet {
   return {
     family: "Exp",
-    kind: "Let",
+    kind: "SequenceLet",
     name,
     exp,
     ret,

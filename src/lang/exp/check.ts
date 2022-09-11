@@ -121,7 +121,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FoldedSequence":
-    case "Let":
+    case "SequenceLet":
     case "LetThe":
     case "Check": {
       return checkByInfer(ctx, exp, type)
