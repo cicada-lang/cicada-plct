@@ -1,6 +1,5 @@
 Summary:
 
-- `enrich` -- Objekt
 - `check` -- Objekt -- call `enrich`
 - `enrich` -- New
 - `Stmts.LetThe` -- try to use `inferred.type` first
