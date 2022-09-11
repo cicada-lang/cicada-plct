@@ -2,8 +2,6 @@
 
 ## inclusion
 
-remove foldFormatSequence
-
 [maybe] rename Exp about Sequence
 
 When we do a typed binding, we need to be able to refine the declared type.
