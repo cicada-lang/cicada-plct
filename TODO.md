@@ -2,7 +2,7 @@
 
 ## Objekt
 
-parse object-spread.test.ts
+check-object-spread.test.ts
 
 ## FoldedFnWithReturnType
 
