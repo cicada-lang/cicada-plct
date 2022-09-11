@@ -5,12 +5,6 @@ export function foldFormatSequence(core: Core): {
   ret: string
 } {
   switch (core.kind) {
-    case "Let": {
-      const { entries, ret } = foldFormatSequence(core.ret)
-      const entry = `let ${core.name} = ${formatCore(core.core)}`
-      return { entries: [entry, ...entries], ret }
-    }
-
     default: {
       return { entries: [], ret: formatCore(core) }
     }

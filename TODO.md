@@ -2,9 +2,9 @@
 
 ## inclusion
 
-[maybe] rename Exp about Sequence
+remove foldFormatSequence
 
-[maybe] remove Let from Core
+[maybe] rename Exp about Sequence
 
 When we do a typed binding, we need to be able to refine the declared type.
 

@@ -246,7 +246,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const retInferred = infer(ctx, exp.ret)
       return Inferred(
         retInferred.type,
-        Cores.Let(exp.name, inferred.core, retInferred.core),
+        Cores.Ap(Cores.Fn(exp.name, retInferred.core), inferred.core),
       )
     }
 
@@ -257,7 +257,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const value = evaluate(ctxToEnv(ctx), core)
       ctx = CtxFulfilled(exp.name, typeValue, value, ctx)
       const retInferred = infer(ctx, exp.ret)
-      return Inferred(typeValue, Cores.Let(exp.name, core, retInferred.core))
+      return Inferred(
+        typeValue,
+        Cores.Ap(Cores.Fn(exp.name, retInferred.core), core),
+      )
     }
 
     case "Check": {
