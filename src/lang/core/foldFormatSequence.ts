@@ -18,13 +18,6 @@ export function foldFormatSequence(core: Core): {
       return { entries: [entry, ...entries], ret }
     }
 
-    case "Check": {
-      const { entries, ret } = foldFormatSequence(core.ret)
-      const type = formatCore(core.type)
-      const entry = `check ${type}: ${formatCore(core.core)}`
-      return { entries: [entry, ...entries], ret }
-    }
-
     default: {
       return { entries: [], ret: formatCore(core) }
     }

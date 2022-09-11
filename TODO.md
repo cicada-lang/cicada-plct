@@ -1,16 +1,11 @@
-# Syntax
-
-## FoldedFnWithReturnType
-
-FoldedFnWithReturnType
-
 # Subtyping
 
 ## inclusion
 
 [maybe] rename Exp about Sequence
 
-[maybe] remove Sequence from Core
+[maybe] remove Let from Core
+[maybe] remove LetThe from Core
 
 When we do a typed binding, we need to be able to refine the declared type.
 
@@ -22,11 +17,25 @@ When we do a typed binding, we need to be able to refine the declared type.
 
 fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
 
+# Syntax
+
+## FoldedFnWithReturnType
+
+FoldedFnWithReturnType
+
+function expression can have return type
+
+function stmt can drop return type and let it infer
+
 # Implicit and Vague
 
 > Equivalence and Datatype depend on these features.
 
-isNeutralVar
+[maybe] we should just use `Ctx` as `Solution`
+
+- if we do so, how should we handle `SolutionFailure`?
+
+predicates/isNeutralVar
 
 - we will use NeutralVar as pattern variable (or say logic variable)
 

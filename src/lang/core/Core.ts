@@ -13,7 +13,6 @@ export type Core =
   | Dot
   | Let
   | LetThe
-  | Check
 
 export type Var = {
   family: "Core"
@@ -297,24 +296,6 @@ export function LetThe(
     name,
     type,
     core,
-    ret,
-  }
-}
-
-export type Check = {
-  family: "Core"
-  kind: "Check"
-  core: Core
-  type: Core
-  ret: Core
-}
-
-export function Check(core: Core, type: Core, ret: Core): Check {
-  return {
-    family: "Core",
-    kind: "Check",
-    core,
-    type,
     ret,
   }
 }
