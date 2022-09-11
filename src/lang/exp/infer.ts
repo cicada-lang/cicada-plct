@@ -222,7 +222,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "NewNameless": {
+    case "NewAp": {
       const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
         throw new ElaborationError(`undefined class: ${exp.name}`)

@@ -108,7 +108,7 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:new_nameless": [
+    "operand:new_ap": [
       '"new"',
       { name: "identifier" },
       '"("',

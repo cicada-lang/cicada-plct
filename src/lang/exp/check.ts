@@ -110,7 +110,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "New":
-    case "NewNameless": {
+    case "NewAp": {
       return checkByInfer(ctx, exp, type)
     }
 

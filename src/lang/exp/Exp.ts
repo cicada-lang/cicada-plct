@@ -37,7 +37,7 @@ export type Exp =
   | FoldedObjekt
   | New
   | FoldedNew
-  | NewNameless
+  | NewAp
   | Dot
   | Sequence
   | Let
@@ -641,21 +641,17 @@ export function FoldedNew(
   }
 }
 
-export type NewNameless = {
+export type NewAp = {
   family: "Exp"
-  kind: "NewNameless"
+  kind: "NewAp"
   name: string
   args: Array<Arg>
 } & ExpMeta
 
-export function NewNameless(
-  name: string,
-  args: Array<Arg>,
-  span?: Span,
-): NewNameless {
+export function NewAp(name: string, args: Array<Arg>, span?: Span): NewAp {
   return {
     family: "Exp",
-    kind: "NewNameless",
+    kind: "NewAp",
     name,
     args,
     span,
