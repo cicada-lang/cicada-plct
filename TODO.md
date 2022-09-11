@@ -1,6 +1,5 @@
 Summary:
 
-- `enrich`
 - `enrich` -- Objekt
 - `check` -- Objekt -- call `enrich`
 - `enrich` -- New
