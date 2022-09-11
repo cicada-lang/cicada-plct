@@ -42,11 +42,11 @@ export function enrich(
     inclusion(ctx, inferred.type, type)
     return inferred
   } catch (_error) {
-    return checkAndEnrich(ctx, exp, type)
+    return enrichWithoutInfer(ctx, exp, type)
   }
 }
 
-function checkAndEnrich(
+function enrichWithoutInfer(
   ctx: Ctx,
   exp: Exp,
   type: Value,
@@ -98,7 +98,7 @@ function checkAndEnrich(
 
     default: {
       throw new ElaborationError(
-        `checkAndEnrich is not implemented for: ${exp.kind}`,
+        `enrichWithoutInfer is not implemented for: ${exp.kind}`,
       )
     }
   }

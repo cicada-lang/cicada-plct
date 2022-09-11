@@ -1,4 +1,4 @@
-`Stmts.LetThe` -- call `enrich`
+`Stmts.LetThe` -- call `enrichOrCheck`
 
 - TODO test
 
