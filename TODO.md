@@ -1,7 +1,5 @@
 Summary:
 
-make `tests/enrich` directory
-
 - `enrich`
 - `enrich` -- Objekt
 - `check` -- Objekt -- call `enrich`
