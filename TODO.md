@@ -1,7 +1,5 @@
 Summary:
 
-- `check` -- Objekt -- call `enrich`
-- `enrich` -- New
 - `Stmts.LetThe` -- try to use `inferred.type` first
 - `Exps.SequenceLetThe` -- try to use `inferred.type` first
 
