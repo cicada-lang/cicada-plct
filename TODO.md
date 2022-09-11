@@ -2,8 +2,6 @@
 
 ## Objekt
 
-move piBindingtoFnBindingFrom to matchers utils
-
 prepareProperties handle type directed spread
 
 PropertySpread as Property

@@ -28,7 +28,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         Exps.FoldedFn(
           matchers
             .pi_bindings_matcher(bindings)
-            .map(Exps.piBindingtoFnBindingFrom),
+            .map(matchers.piBindingtoFnBindingFrom),
           matchers.sequence_matcher(sequence),
           span,
         ),
