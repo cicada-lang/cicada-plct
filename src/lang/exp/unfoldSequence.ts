@@ -2,12 +2,12 @@ import * as Exps from "../exp"
 import { Exp } from "../exp"
 
 export function unfoldSequence(
-  entries: Array<Exps.SequenceEntry>,
+  bindings: Array<Exps.SequenceBinding>,
   ret: Exp,
 ): Exp {
-  if (entries.length === 0) return ret
+  if (bindings.length === 0) return ret
 
-  const [entry, ...restEntries] = entries
+  const [entry, ...restEntries] = bindings
 
   switch (entry.kind) {
     case "SequenceLet": {

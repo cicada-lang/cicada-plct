@@ -13,8 +13,8 @@ export function sequence_matcher(tree: pt.Tree): Exps.Sequence {
   })(tree)
 }
 
-export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceEntry {
-  return pt.matcher<Exps.SequenceEntry>({
+export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
+  return pt.matcher<Exps.SequenceBinding>({
     "sequence_entry:let": ({ name, exp }, { span }) =>
       Exps.SequenceLet(pt.str(name), matchers.exp_matcher(exp)),
     "sequence_entry:let_the": ({ name, t, exp }, { span }) =>

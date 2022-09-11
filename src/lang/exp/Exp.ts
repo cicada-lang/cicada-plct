@@ -690,25 +690,25 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
 export type Sequence = {
   family: "Exp"
   kind: "Sequence"
-  entries: Array<SequenceEntry>
+  bindings: Array<SequenceBinding>
   ret: Exp
 } & ExpMeta
 
 export function Sequence(
-  entries: Array<SequenceEntry>,
+  bindings: Array<SequenceBinding>,
   ret: Exp,
   span?: Span,
 ): Sequence {
   return {
     family: "Exp",
     kind: "Sequence",
-    entries,
+    bindings,
     ret,
     span,
   }
 }
 
-export type SequenceEntry = SequenceLet | SequenceLetThe | SequenceCheck
+export type SequenceBinding = SequenceLet | SequenceLetThe | SequenceCheck
 
 export type SequenceLet = {
   kind: "SequenceLet"

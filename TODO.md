@@ -2,7 +2,13 @@
 
 ## inclusion
 
-[maybe] rename Exp about Sequence
+improve check-sequence.test.ts
+
+rename union of SequenceBinding
+
+rename Sequence to FoldedSequence
+
+add Sequence postfix to Let LetThe Check
 
 When we do a typed binding, we need to be able to refine the declared type.
 

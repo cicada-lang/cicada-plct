@@ -236,7 +236,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Sequence": {
-      return infer(ctx, Exps.unfoldSequence(exp.entries, exp.ret))
+      return infer(ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
     }
 
     case "Let": {
