@@ -258,7 +258,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxFulfilled(exp.name, typeValue, value, ctx)
       const retInferred = infer(ctx, exp.ret)
       return Inferred(
-        typeValue,
+        retInferred.type,
         Cores.Ap(Cores.Fn(exp.name, retInferred.core), core),
       )
     }

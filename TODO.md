@@ -1,31 +1,19 @@
-[subtyping] Use the inferred type during type binding.
-
-When we do a type binding,
-if we can `infer`,
-we should use the inferred type
-instead of the given type.
-
-This is specially needed for:
-
-```
-let <var>: <fulfilled class> = <object>
-```
-
 Summary:
 
-- Add note about this.
+make `tests/enrich` directory
 
-  ```
-  /**
-     If we can `infer`, we should use the inferred type instead of the given type.
-  **/
-  ```
+- `enrich`
+- `enrich` -- Objekt
+- `check` -- Objekt -- call `enrich`
+- `enrich` -- New
+- `Stmts.LetThe` -- try to use `inferred.type` first
+- `Exps.SequenceLetThe` -- try to use `inferred.type` first
 
-- change `Stmts.LetThe`
+Tests:
 
-- change `Exps.SequenceLetThe`
-
-- fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
+- check-sequence.test.ts -- "check Sequence -- LetThe and enrich"
+- check-sequence.test.ts -- "check Sequence -- LetThe and enrich -- nested"
+- compute-objekt.test.ts -- "compute Objekt -- extra properties"
 
 # Syntax
 
