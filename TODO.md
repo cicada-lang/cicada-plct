@@ -2,9 +2,13 @@
 
 ## Objekt
 
-unfoldProperties take ctx and call assertNoDuplicateProperties
+rename `unfoldProperties` to `prepareProperties`
 
-unfoldProperties handle type directed spread
+- because it takes `ctx`, thus different from other `unfold*` functions
+
+move piBindingtoFnBindingFrom to matchers utils
+
+prepareProperties handle type directed spread
 
 PropertySpread as Property
 

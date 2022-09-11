@@ -1,4 +1,3 @@
-export * from "./assertNoDuplicateProperties"
 export * from "./check"
 export * from "./checkByInfer"
 export * from "./checkClazz"

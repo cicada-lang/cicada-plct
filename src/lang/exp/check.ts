@@ -75,10 +75,9 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FoldedObjekt": {
-      Exps.assertNoDuplicateProperties(ctx, exp.properties)
       return check(
         ctx,
-        Exps.Objekt(Exps.unfoldProperties(exp.properties)),
+        Exps.Objekt(Exps.unfoldProperties(ctx, exp.properties)),
         type,
       )
     }
@@ -109,10 +108,9 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FoldedNew": {
-      Exps.assertNoDuplicateProperties(ctx, exp.properties)
       return check(
         ctx,
-        Exps.New(exp.name, Exps.unfoldProperties(exp.properties)),
+        Exps.New(exp.name, Exps.unfoldProperties(ctx, exp.properties)),
         type,
       )
     }
