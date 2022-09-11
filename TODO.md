@@ -2,11 +2,11 @@
 
 - TODO test
 
-call enrich during `checkProperties`
-
-- check-sequence.test.ts -- "check Sequence -- LetThe and enrich -- nested Objekt"
-
 compute-objekt.test.ts -- "compute Objekt -- extra properties"
+
+infer Objekt -- if all properties can be inferred
+
+- infer-objekt.test.ts
 
 # Syntax
 
