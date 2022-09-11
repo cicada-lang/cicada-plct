@@ -38,8 +38,16 @@ npm run test          # Run test
 - [TODO.md](TODO.md)
 - [STYLE-GUIDE.md](STYLE-GUIDE.md)
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
-- Remember to run `npm run format` to format the code.
 - Remember to add yourself to [AUTHORS](AUTHORS).
+
+To make a contribution, fork this project and open a pull request.
+
+It is assumed that all non draft PRs are ready to be merged.
+
+Please use draft PR, if it is not ready to be merged.
+
+- [Creating draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests)
+- [Changing a PR to draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request)
 
 ## License
 
