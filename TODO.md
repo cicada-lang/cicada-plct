@@ -1,17 +1,3 @@
-# Subtyping
-
-## inclusion
-
-When we do a typed binding, we need to be able to refine the declared type.
-
-- this is specially needed for `let <var>: <fulfilled class> = <object>`
-
-- `LetThe` -- if we can `infer`, we should use the inferred type instead of the given type.
-
-- Both `Stmts.LetThe` and Sequence `LetThe`
-
-fix compute-objekt.test.ts -- "compute Objekt -- extra properties"
-
 # Syntax
 
 ## FoldedFnWithReturnType
