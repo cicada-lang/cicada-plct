@@ -28,7 +28,7 @@ export function unfoldSequence(
     }
 
     case "SequenceBindingCheck": {
-      return Exps.Check(
+      return Exps.SequenceCheck(
         binding.exp,
         binding.type,
         unfoldSequence(restBindings, ret),

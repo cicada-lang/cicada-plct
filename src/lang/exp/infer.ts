@@ -263,7 +263,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "Check": {
+    case "SequenceCheck": {
       const typeCore = checkType(ctx, exp.type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
       check(ctx, exp.exp, typeValue)

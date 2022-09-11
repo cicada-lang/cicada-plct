@@ -2,8 +2,6 @@
 
 ## inclusion
 
-add `Sequence` postfix to `Check`
-
 When we do a typed binding, we need to be able to refine the declared type.
 
 - this is specially needed for `let <var>: <fulfilled class> = <object>`
