@@ -1,10 +1,4 @@
-# Implicit and Vague
-
-> Equivalence and Datatype depend on these features.
-
-[maybe] we should just use `Ctx` as `Solution`
-
-- if we do so, how should we handle `SolutionFailure`?
+# Unification
 
 predicates/isNeutralVar
 
@@ -13,6 +7,23 @@ predicates/isNeutralVar
 NeutralVar constructor
 
 unify
+
+# Implicit
+
+We should first be clear about the constraints.
+
+Maybe we should have the following constraints:
+
+- `FoldedAp` of expression of `ImplicitPi` type
+  must resolve all of its pattern variables.
+
+  - During `infer` or `check`.
+  - `FoldedAp` can curry, as long as it resolve all pattern variables.
+
+- During `check`, expression of `ImplicitPi` type
+  must resolve all of its pattern variables.
+
+- All pattern variables must occur at the start of the `FoldedPi`.
 
 # Equivalence
 
