@@ -1,3 +1,5 @@
 export * from "./PatternVar"
 export * from "./Solution"
 export * from "./solve"
+export * from "./solveByType"
+export * from "./solveByValue"

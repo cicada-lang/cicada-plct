@@ -1,7 +1,5 @@
 # Solve
 
-extract `solveByType` & `solveByValue` from `solve`
-
 solveType
 
 solveClazz
