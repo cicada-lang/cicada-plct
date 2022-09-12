@@ -1,10 +1,6 @@
 # Unification
 
-predicates/isNeutralVar
-
-- we will use NeutralVar as pattern variable (or say logic variable)
-
-NeutralVar constructor
+PatternVar constructor
 
 unify
 
