@@ -18,9 +18,23 @@ solve (<name>: <type>, ...) {
 
 # Implicit
 
-We should first be clear about the constraints.
+**Problem:**
 
-Maybe we should have the following constraints:
+During `check` of an `Exp` of type `ImplicitPi`,
+use the information from **the given type**
+to solve (typed) pattern variables in the `ImplicitPi`,
+and use the `Solution` to insert `ImplicitAp` to the original `Exp`.
+
+During `infer` of an `Ap` expression,
+if the target of the `Ap` is of `ImplicitAp`,
+we might `infer` **some of its arguments' type**,
+use the information from these `argTypes`
+to solve (typed) pattern variables in the `ImplicitPi`,
+and use the `Solution` to insert `ImplicitAp` to the original `Ap`.
+
+**Constraints:**
+
+We should first be clear about the constraints (maybe the following).
 
 - During `infer`, an application `f(x, y, z)` of an expression `f`
   of `ImplicitPi` type `(implicit A: Type, x: String, y: Pair(A, A), z: String) -> A`,
@@ -32,11 +46,11 @@ Maybe we should have the following constraints:
   - `f(x)` -- not ok
 
 - During `check`, an application `check f(x, y, z): String`
-  can use given return type to 1resolve pattern variables.
+  can use return type to 1resolve pattern variables.
 
 - During `check`, a variable expression `check id: (String) -> String`
   of `ImplicitPi` type `id: (implicit A: Type) -> (A) -> A`
-  must resolve all of its pattern variables using the given return type.
+  must resolve all of its pattern variables using the given type.
 
 - The above constraints require a new constraint:
 
