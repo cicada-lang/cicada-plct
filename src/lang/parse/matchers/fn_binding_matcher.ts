@@ -7,6 +7,8 @@ export function fn_binding_matcher(tree: pt.Tree): Exps.FnBinding {
     "fn_binding:name": ({ name }, { span }) => Exps.FnBindingName(pt.str(name)),
     "fn_binding:annotated": ({ name, t }, { span }) =>
       Exps.FnBindingAnnotated(pt.str(name), matchers.exp_matcher(t)),
+    "fn_binding:implicit": ({ name, t }, { span }) =>
+      Exps.FnBindingImplicit(pt.str(name), matchers.exp_matcher(t)),
   })(tree)
 }
 
