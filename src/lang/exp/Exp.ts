@@ -1,4 +1,5 @@
 import { Span } from "../exp"
+import { Implicit } from "../value"
 
 type ExpMeta = { span?: Span }
 
@@ -21,9 +22,11 @@ export type Exp =
   | Pi
   | FoldedPi
   | Ap
+  | ImplicitAP
   | FoldedAp
   | Fn
   | AnnotatedFn
+  | ImplicitFn
   | FoldedFn
   | Sigma
   | FoldedSigma
@@ -166,6 +169,30 @@ export function AnnotatedFn(
   }
 }
 
+export type ImplicitFn = {
+  family: "Exp"
+  kind: "ImplicitFn"
+  name: string
+  argType: Exp // Maybe we need to implement another ImplicitFn without argType
+  ret: Exp
+} & ExpMeta
+
+export function ImplicitFn(
+  name: string,
+  argType: Exp,
+  ret: Exp,
+  span?: Span,
+): ImplicitFn {
+  return {
+    family: "Exp",
+    kind: "ImplicitFn",
+    name,
+    argType,
+    ret,
+    span,
+  }
+}
+
 export type FoldedFn = {
   family: "Exp"
   kind: "FoldedFn"
@@ -229,6 +256,27 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   return {
     family: "Exp",
     kind: "Ap",
+    target,
+    arg,
+    span,
+  }
+}
+
+export type ImplicitAP = {
+  family: "Exp"
+  kind: "ImplicitAP"
+  target: Exp
+  arg: Implicit
+} & ExpMeta
+
+export function ImplicitAP(
+  target: Exp,
+  arg: Implicit,
+  span?: Span,
+): ImplicitAP {
+  return {
+    family: "Exp",
+    kind: "ImplicitAP",
     target,
     arg,
     span,
