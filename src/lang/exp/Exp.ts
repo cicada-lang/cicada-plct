@@ -214,7 +214,7 @@ export function FoldedFn(
   }
 }
 
-export type FnBinding = FnBindingName | FnBindingAnnotated
+export type FnBinding = FnBindingName | FnBindingAnnotated | FnBindingImplicit
 
 export type FnBindingName = {
   kind: "FnBindingName"
@@ -240,6 +240,20 @@ export function FnBindingAnnotated(
 ): FnBindingAnnotated {
   return {
     kind: "FnBindingAnnotated",
+    name,
+    type,
+  }
+}
+
+export type FnBindingImplicit = {
+  kind: "FnBindingImplicit"
+  name: string
+  type: Exp
+}
+
+export function FnBindingImplicit(name: string, type: Exp): FnBindingImplicit {
+  return {
+    kind: "FnBindingImplicit",
     name,
     type,
   }
