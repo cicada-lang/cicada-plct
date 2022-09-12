@@ -2,6 +2,12 @@ export const fn_binding = {
   $grammar: {
     "fn_binding:name": [{ name: "identifier" }],
     "fn_binding:annotated": [{ name: "identifier" }, '":"', { t: "exp" }],
+    "fn_binding:implicit": [
+      '"implicit"',
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+    ],
   },
 }
 
