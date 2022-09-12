@@ -1,7 +1,5 @@
 # Solve
 
-rename unify to solve
-
 extract `solveByType` & `solveByValue` from `solve`
 
 solveType

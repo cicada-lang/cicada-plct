@@ -1,3 +1,3 @@
 export * from "./PatternVar"
 export * from "./Solution"
-export * from "./unify"
+export * from "./solve"

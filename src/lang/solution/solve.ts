@@ -3,7 +3,7 @@ import { ElaborationError } from "../errors"
 import { Solution } from "../solution"
 import { Value } from "../value"
 
-export function unify(
+export function solve(
   solution: Solution,
   ctx: Ctx,
   type: Value,
@@ -11,6 +11,6 @@ export function unify(
   right: Value,
 ): Solution {
   throw new ElaborationError(
-    `unify is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
+    `solve is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }
