@@ -3,10 +3,10 @@ import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import * as Exps from "../exp"
-import { checkByInfer, checkProperties, Exp, infer } from "../exp"
+import { checkByInfer, enrich, Exp } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { assertClazzInCtx, assertTypeInCtx, Value } from "../value"
+import { assertTypeInCtx, Value } from "../value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -73,33 +73,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedObjekt": {
-      return check(
-        ctx,
-        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
-        type,
-      )
-    }
-
+    case "FoldedObjekt":
     case "Objekt": {
-      assertClazzInCtx(ctx, type)
-
-      const properties = checkProperties(ctx, exp.properties, type)
-
-      /**
-         Extra properties are not checked,
-         thus we require that they are infer-able.
-      **/
-
-      const names = Object.keys(properties)
-      const extraInferred = Object.entries(exp.properties)
-        .filter(([name, exp]) => !names.includes(name))
-        .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
-      const extraProperties = Object.fromEntries(
-        extraInferred.map(([name, inferred]) => [name, inferred.core]),
-      )
-
-      return Cores.Objekt({ ...properties, ...extraProperties })
+      const { core } = enrich(ctx, exp, type)
+      return core
     }
 
     case "Dot": {

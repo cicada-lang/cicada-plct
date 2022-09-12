@@ -1,13 +1,3 @@
-# Syntax
-
-## FoldedFnWithReturnType
-
-FoldedFnWithReturnType
-
-function expression can have return type
-
-function stmt can drop return type and let it infer
-
 # Implicit and Vague
 
 > Equivalence and Datatype depend on these features.

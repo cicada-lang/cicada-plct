@@ -38,8 +38,7 @@ compute abcxyz
 
 `)
 
-  // TODO Should also have the extra properties.
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String, b: String, c: String }"',
+    '"{ x: \\"x\\", y: \\"y\\", z: \\"z\\", a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { x: String = \\"x\\", y: String = \\"y\\", z: String = \\"z\\", a: String, b: String, c: String }"',
   )
 })
