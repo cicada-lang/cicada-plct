@@ -1,12 +1,6 @@
 import { Value } from "../value"
 
-export type Solution = SolutionNull | SolutionCons | SolutionFailure
-
-/**
-
-   TODO Should there be `SolutionFulfilled`, like `CtxFulfilled`?
-
-**/
+export type Solution = SolutionNull | SolutionCons
 
 export type SolutionNull = {
   kind: "SolutionNull"
@@ -35,17 +29,5 @@ export function SolutionCons(
     name,
     value,
     rest,
-  }
-}
-
-export type SolutionFailure = {
-  kind: "SolutionFailure"
-  message: string
-}
-
-export function SolutionFailure(message: string): SolutionFailure {
-  return {
-    kind: "SolutionFailure",
-    message,
   }
 }
