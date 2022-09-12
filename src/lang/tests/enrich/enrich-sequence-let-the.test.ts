@@ -1,6 +1,17 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
+test("enrich SequenceLetThe -- should not break normal let", async () => {
+  await runCode(`
+
+let x = begin {
+  let id: (T: Type, T) -> T = (T, x) => x
+  return id
+}
+
+`)
+})
+
 test("enrich SequenceLetThe", async () => {
   await runCode(`
 

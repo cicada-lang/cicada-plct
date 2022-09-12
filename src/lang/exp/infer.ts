@@ -17,7 +17,7 @@ import {
   checkClazzArg,
   checkNewArgs,
   checkType,
-  enrich,
+  enrichOrCheck,
   Exp,
 } from "../exp"
 import * as Values from "../value"
@@ -254,7 +254,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "SequenceLetThe": {
       const typeCore = checkType(ctx, exp.type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
-      const enriched = enrich(ctx, exp.exp, typeValue)
+      const enriched = enrichOrCheck(ctx, exp.exp, typeValue)
       const value = evaluate(ctxToEnv(ctx), enriched.core)
       ctx = CtxFulfilled(exp.name, enriched.type, value, ctx)
       const retInferred = infer(ctx, exp.ret)
