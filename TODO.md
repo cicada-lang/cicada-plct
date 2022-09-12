@@ -16,23 +16,6 @@ solve (<name>: <type>, ...) {
 }
 ```
 
-```
-solve (A: Type, B: (x: A) -> Type) {
-  equation exists (x: A) B(x) = exists (_: String) String : Type
-}
-
-solve (x: String) {
-  equation B(x) = String : Type
-}
-
-// solution
-
-{
-  A: String,
-  B: (x: String) => String,
-}
-```
-
 # Implicit
 
 We should first be clear about the constraints.
