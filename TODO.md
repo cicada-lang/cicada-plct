@@ -1,7 +1,5 @@
 # Unification
 
-PatternVar constructor
-
 unify
 
 # Implicit

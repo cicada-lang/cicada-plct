@@ -16,6 +16,15 @@ export type PatternVar = {
   neutral: Neutrals.Var
 }
 
+export function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
+  return {
+    family: "Value",
+    kind: "TypedNeutral",
+    type,
+    neutral,
+  }
+}
+
 export function isPatternVar(value: Value): value is PatternVar {
   return value.kind === "TypedNeutral" && value.neutral.kind === "Var"
 }
