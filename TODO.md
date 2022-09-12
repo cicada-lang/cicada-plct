@@ -1,6 +1,39 @@
-# Unification
+# Solve
 
-unify
+rename unify to solve
+
+extract `solveByType` & `solveByValue` from `solve`
+
+solveType
+
+solveClazz
+
+Stmts.Solve -- for testing
+
+```
+solve (<name>: <type>, ...) {
+  equation <lhs> = <rhs> : <type>
+  equation <lhs> = <rhs> : <type>
+  ...
+}
+```
+
+```
+solve (A: Type, B: (x: A) -> Type) {
+  equation exists (x: A) B(x) = exists (_: String) String : Type
+}
+
+solve (x: String) {
+  equation B(x) = String : Type
+}
+
+// solution
+
+{
+  A: String,
+  B: (x: String) => String,
+}
+```
 
 # Implicit
 
