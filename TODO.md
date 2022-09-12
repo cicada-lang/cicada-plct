@@ -1,9 +1,5 @@
 # Solve
 
-solveType
-
-solveClazz
-
 Stmts.Solve -- for testing
 
 ```
@@ -13,6 +9,22 @@ solve (<name>: <type>, ...) {
   ...
 }
 ```
+
+solve-quote.test.ts
+
+solve -- handle `PatternVar`
+
+walk
+
+solveByValue -- typedNeutral
+
+solveByType
+
+solveType
+
+solveClazz
+
+occurCheck
 
 # Implicit
 
