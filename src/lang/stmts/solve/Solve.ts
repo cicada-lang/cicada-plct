@@ -5,6 +5,7 @@ import { Mod } from "../../mod"
 import { formatSolution, Solution, SolutionNull, solve } from "../../solution"
 import { Stmt, StmtOutput } from "../../stmt"
 import { conversionType } from "../../value"
+import { SolveBinding } from "../solve"
 
 export type Equation = EquationTyped | EquationUntyped
 
@@ -35,18 +36,6 @@ export function EquationUntyped(left: Exp, right: Exp): EquationUntyped {
     kind: "EquationUntyped",
     left,
     right,
-  }
-}
-
-export type SolveBinding = {
-  name: string
-  type: Exp
-}
-
-export function SolveBinding(name: string, type: Exp): SolveBinding {
-  return {
-    name,
-    type,
   }
 }
 
