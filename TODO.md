@@ -2,9 +2,11 @@
 
 Stmts.Solve -- Equation can omit `type`
 
-solveType -- Type
-solveType -- String
-solveType -- Trivial
+solveType -- Type & String & Trivial
+
+solve-type.test.ts
+solve-string.test.ts
+solve-trivial.test.ts
 
 solveType -- Pi
 solveType -- Sigma
