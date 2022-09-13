@@ -1,6 +1,8 @@
 # Solve
 
-Stmts.Solve -- `execute`
+Stmts.Solve -- `execute` -- print `Objekt`
+
+[maybe] `solve (...) { ... }` can be used as a expression to return `Objekt`
 
 solve-quote.test.ts
 
