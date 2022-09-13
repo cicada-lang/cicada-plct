@@ -40,6 +40,7 @@ npm run test:watch    # Watch the testing
 - [STYLE-GUIDE.md](STYLE-GUIDE.md)
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
 - Remember to add yourself to [AUTHORS](AUTHORS).
+  - Your line belongs to you, you can write a little introduction to yourself but not too long.
 
 To make a contribution, [fork this project](https://github.com/cicada-lang/cicada/fork) and open a pull request.
 
