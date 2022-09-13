@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { expectCodeToFail, runCode } from "../utils"
+import { runCode } from "../utils"
 
 test("compute Objekt", async () => {
   const output = await runCode(`
@@ -11,7 +11,7 @@ compute abc
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String = \\"a\\", b: String = \\"b\\", c: String = \\"c\\" }"',
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String, b: String, c: String }"',
   )
 })
 
@@ -25,7 +25,7 @@ compute abc
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String = \\"a\\", b: String = \\"b\\", c: String = \\"c\\" }"',
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { a: String, b: String = \\"b\\", c: String }"',
   )
 })
 
@@ -39,7 +39,7 @@ compute abcxyz
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\", x: \\"x\\", y: \\"y\\", z: \\"z\\" }: class { a: String = \\"a\\", b: String = \\"b\\", c: String = \\"c\\", x: String = \\"x\\", y: String = \\"y\\", z: String = \\"z\\" }"',
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\", x: \\"x\\", y: \\"y\\", z: \\"z\\" }: class { a: String, b: String, c: String, x: String, y: String, z: String }"',
   )
 })
 
@@ -51,26 +51,6 @@ compute { a: "c", b: "d" }
   `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"c\\", b: \\"d\\" }: class { a: String = \\"c\\", b: String = \\"d\\" }"',
+    '"{ a: \\"c\\", b: \\"d\\" }: class { a: String, b: String }"',
   )
-})
-
-test("compute Objekt -- reject", async () => {
-  await runCode(`
-
-check { T: String, x: Type }: class { T: Type = String, x: Type = Type }
-
-  `)
-
-  await expectCodeToFail(`
-
-check class { T: Type = String, x: Type = Type }: class { T: Type, x: T }
-
-  `)
-
-  await expectCodeToFail(`
-
-check { T: String, x: Type }: class { T: Type, x: T }
-
-  `)
 })

@@ -168,23 +168,15 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Objekt": {
-      let inferredType: Value = Values.ClazzNull()
-      let propertyCore: Record<string, Core> = {}
-
-      for (let [propertyName, property] of Object.entries(
-        exp.properties,
-      ).reverse()) {
-        const inferredExp = infer(ctx, property)
-        inferredType = Values.ClazzFulfilled(
-          propertyName,
-          inferredExp.type,
-          evaluate(ctxToEnv(ctx), inferredExp.core),
-          inferredType,
-        )
-        propertyCore[propertyName] = inferredExp.core
+      let clazz: Values.Clazz = Values.ClazzNull()
+      let properties: Record<string, Core> = {}
+      for (let [name, property] of Object.entries(exp.properties).reverse()) {
+        const inferred = infer(ctx, property)
+        clazz = Values.ClazzCons(name, inferred.type, constClosure(name, clazz))
+        properties[name] = inferred.core
       }
 
-      return Inferred(inferredType, Cores.Objekt(propertyCore))
+      return Inferred(clazz, Cores.Objekt(properties))
     }
 
     case "FoldedObjekt": {

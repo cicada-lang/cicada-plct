@@ -34,7 +34,9 @@ check {
 }: class { T: Type, x: T }
 
 `)
+})
 
+test("check Objekt -- dependent -- fail", async () => {
   await expectCodeToFail(`
 
 check {
@@ -43,6 +45,17 @@ check {
 }: class { T: Type, x: T }
 
 `)
+})
+
+test("check Objekt -- check against fulfilled clazz", async () => {
+  await runCode(`
+
+check {
+  T: String,
+  x: Type
+}: class { T: Type = String, x: Type = Type }
+
+  `)
 })
 
 test("check Objekt -- prefilled", async () => {
