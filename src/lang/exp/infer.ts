@@ -1,4 +1,4 @@
-import { applyClosure, Closure, constClosure } from "../closure"
+import { applyClosure, constClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import {
@@ -178,10 +178,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         inferredType = Values.ClazzFulfilled(
           propertyName,
           inferredExp.type,
-          applyClosure(
-            Closure(ctxToEnv(ctx), propertyName, inferredExp.core),
-            Values.Trivial(),
-          ),
+          evaluate(ctxToEnv(ctx), inferredExp.core),
           inferredType,
         )
         propertyCore[propertyName] = inferredExp.core

@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("compute Objekt", async () => {
   const output = await runCode(`
@@ -43,14 +43,34 @@ compute abcxyz
   )
 })
 
-test("compute Objekt -- direct style", async () => {
+test("compute Objket -- direct", async () => {
   const output = await runCode(`
 
-compute { a: "a", b: "b" }
+compute { a: "c", b: "d" }
 
   `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\" }: class { a: String = \\"a\\", b: String = \\"b\\" }"',
+    '"{ a: \\"c\\", b: \\"d\\" }: class { a: String = \\"c\\", b: String = \\"d\\" }"',
   )
+})
+
+test("compute Objekt -- reject", async () => {
+  await runCode(`
+
+check { T: String, x: Type }: class { T: Type = String, x: Type = Type }
+
+  `)
+
+  await expectCodeToFail(`
+
+check class { T: Type = String, x: Type = Type }: { T: String, x: Type }
+
+  `)
+
+  await expectCodeToFail(`
+
+check { T: String, x: Type }: class { T: Type, x: T }
+
+  `)
 })
