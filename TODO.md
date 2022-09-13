@@ -1,9 +1,5 @@
 # Solve
 
-walk
-
-[maybe] solve need to return new `ctx`
-
 solveByValue -- typedNeutral
 
 solveByType
@@ -15,3 +11,5 @@ solveClazz
 occurCheck
 
 [maybe] need backtracing
+
+[maybe] solve need to return new `ctx`

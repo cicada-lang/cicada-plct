@@ -30,3 +30,17 @@ solve (a: String, b: String, c: String) {
     '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
   )
 })
+
+test("solve Quote -- walk", async () => {
+  const output = await runCode(`
+
+solve (a: String, b: String, c: String) {
+  equation a = b : String
+  equation b = c : String
+  equation a = "a" : String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ a: b, b: c, c: \\"a\\" }"')
+})
