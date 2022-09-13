@@ -1,6 +1,5 @@
 # Solve
 
-extract stmts/solve/Equation
 extract stmts/solve/solveEquation
 
 solveType -- Type & String & Trivial

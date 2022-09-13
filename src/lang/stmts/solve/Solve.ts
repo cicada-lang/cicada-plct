@@ -1,43 +1,11 @@
 import { evaluate } from "../../core"
 import { Ctx, CtxCons, ctxToEnv } from "../../ctx"
-import { check, checkType, Exp, infer, Span } from "../../exp"
+import { check, checkType, infer, Span } from "../../exp"
 import { Mod } from "../../mod"
 import { formatSolution, Solution, SolutionNull, solve } from "../../solution"
 import { Stmt, StmtOutput } from "../../stmt"
 import { conversionType } from "../../value"
-import { SolveBinding } from "../solve"
-
-export type Equation = EquationTyped | EquationUntyped
-
-export type EquationTyped = {
-  kind: "EquationTyped"
-  left: Exp
-  right: Exp
-  type: Exp
-}
-
-export function EquationTyped(left: Exp, right: Exp, type: Exp): EquationTyped {
-  return {
-    kind: "EquationTyped",
-    left,
-    right,
-    type,
-  }
-}
-
-export type EquationUntyped = {
-  kind: "EquationUntyped"
-  left: Exp
-  right: Exp
-}
-
-export function EquationUntyped(left: Exp, right: Exp): EquationUntyped {
-  return {
-    kind: "EquationUntyped",
-    left,
-    right,
-  }
-}
+import { Equation, SolveBinding } from "../solve"
 
 export class Solve extends Stmt {
   constructor(
