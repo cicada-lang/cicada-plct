@@ -148,7 +148,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const carInferred = infer(ctx, exp.car)
       const cdrInferred = infer(ctx, exp.cdr)
       return Inferred(
-        Values.Sigma(carInferred.type, constClosure("", cdrInferred.type)),
+        Values.Sigma(carInferred.type, constClosure("_", cdrInferred.type)),
         Cores.Cons(carInferred.core, cdrInferred.core),
       )
     }
