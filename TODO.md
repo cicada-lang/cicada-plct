@@ -1,8 +1,23 @@
 # Solve
 
-solveByValue -- typedNeutral
+solveType -- Type
+solveType -- String
+solveType -- Trivial
 
-solveByType
+solveByType -- Trivial
+
+solve-trivial.test.ts
+
+solveType -- Pi
+solveType -- Sigma
+solveType -- Clazz
+
+solveByType -- Pi
+solveByType -- Sigma
+solveByType -- Clazz
+
+solveByValue -- TypedNeutral
+solveType -- TypedNeutral
 
 solveType
 

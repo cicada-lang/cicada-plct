@@ -1,6 +1,5 @@
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
-import { Solution } from "../solution"
+import { Solution, solveType } from "../solution"
 import { Value } from "../value"
 
 export function solveByType(
@@ -10,9 +9,13 @@ export function solveByType(
   left: Value,
   right: Value,
 ): Solution | undefined {
-  return undefined
+  switch (type.kind) {
+    case "Type": {
+      return solveType(solution, ctx, left, right)
+    }
 
-  throw new ElaborationError(
-    `solveByType is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
-  )
+    default: {
+      return undefined
+    }
+  }
 }

@@ -33,6 +33,18 @@ export function readbackByType(
       return readbackType(ctx, value)
     }
 
+    case "Trivial": {
+      /**
+         The η-rule for `Trivial` states that,
+         all of its inhabitants are the same as `sole`.
+         This is implemented by reading all the
+         values of type `Trivial` back to `sole`,
+         even the value is `TypedNeutral`.
+      **/
+
+      return Cores.Var("sole")
+    }
+
     case "Pi": {
       /**
          Everything with a `Pi` type is immediately
@@ -74,18 +86,6 @@ export function readbackByType(
     case "ClazzCons":
     case "ClazzFulfilled": {
       return Cores.Objekt(readbackProperties(ctx, type, value))
-    }
-
-    case "Trivial": {
-      /**
-         The η-rule for `Trivial` states that,
-         all of its inhabitants are the same as `sole`.
-         This is implemented by reading all the
-         values of type `Trivial` back to `sole`,
-         even the value is `TypedNeutral`.
-      **/
-
-      return Cores.Var("sole")
     }
 
     default: {
