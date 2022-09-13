@@ -31,3 +31,28 @@ solve (A: Type, B: Type) {
     ]),
   )
 })
+
+test("parse Solve -- empty bindings", () => {
+  expect(
+    parseStmts(`
+
+solve () {
+  equation A = Trivial : Type
+  equation B = String : Type
+  equation A = B : Type
+}
+
+`),
+  ).toMatchObject(
+    deleteUndefined([
+      new Stmts.Solve(
+        [],
+        [
+          Stmts.Equation(Exps.Var("A"), Exps.Var("Trivial"), Exps.Var("Type")),
+          Stmts.Equation(Exps.Var("B"), Exps.Var("String"), Exps.Var("Type")),
+          Stmts.Equation(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+        ],
+      ),
+    ]),
+  )
+})

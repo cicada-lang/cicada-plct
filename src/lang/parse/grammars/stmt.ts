@@ -54,6 +54,14 @@ export const stmt = {
       { equations: { $ap: ["zero_or_more", "equation"] } },
       '"}"',
     ],
+    "stmt:solve_empty_bindings": [
+      '"solve"',
+      '"("',
+      '")"',
+      '"{"',
+      { equations: { $ap: ["zero_or_more", "equation"] } },
+      '"}"',
+    ],
   },
 }
 

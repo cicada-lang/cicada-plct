@@ -72,6 +72,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           .map(matchers.equation_matcher),
         span,
       ),
+    "stmt:solve_empty_bindings": ({ equations }, { span }) =>
+      new Stmts.Solve(
+        [],
+        pt.matchers
+          .zero_or_more_matcher(equations)
+          .map(matchers.equation_matcher),
+        span,
+      ),
   })(tree)
 }
 

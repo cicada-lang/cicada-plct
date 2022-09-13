@@ -10,6 +10,8 @@ export function solveByType(
   left: Value,
   right: Value,
 ): Solution | undefined {
+  return undefined
+
   throw new ElaborationError(
     `solveByType is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )

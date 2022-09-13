@@ -11,7 +11,7 @@ export function evaluate(env: Env, core: Core): Value {
     case "Var": {
       const value = lookupValueInEnv(env, core.name)
       if (value === undefined) {
-        throw new EvaluationError(`Undefined name: ${name}`)
+        throw new EvaluationError(`Undefined name: ${core.name}`)
       }
 
       return value
