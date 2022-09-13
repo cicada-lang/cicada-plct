@@ -42,3 +42,15 @@ compute abcxyz
     '"{ x: \\"x\\", y: \\"y\\", z: \\"z\\", a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class { x: String = \\"x\\", y: String = \\"y\\", z: String = \\"z\\", a: String, b: String, c: String }"',
   )
 })
+
+test("compute Objekt -- direct style", async () => {
+  const output = await runCode(`
+
+compute { a: "a", b: "b" }
+
+  `)
+
+  expect(output).toMatchInlineSnapshot(
+    `"{ a: "a", b: "b" }: { a: String, b: String }"`,
+  )
+})
