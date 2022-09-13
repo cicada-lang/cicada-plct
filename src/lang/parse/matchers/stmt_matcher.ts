@@ -64,6 +64,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ],
         span,
       ),
+    "stmt:solve": ({ bindings, equations }, { span }) =>
+      new Stmts.Solve(
+        matchers.solve_bindings_matcher(bindings),
+        pt.matchers
+          .zero_or_more_matcher(equations)
+          .map(matchers.equation_matcher),
+        span,
+      ),
   })(tree)
 }
 

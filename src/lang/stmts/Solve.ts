@@ -2,15 +2,20 @@ import { Exp, Span } from "../exp"
 import { Mod } from "../mod"
 import { Stmt } from "../stmt"
 
-type Equation = {
+export type Equation = {
   left: Exp
   right: Exp
   type: Exp
 }
 
+export type SolveBinding = {
+  name: string
+  type: Exp
+}
+
 export class Solve extends Stmt {
   constructor(
-    public vars: Array<[string, Exp]>,
+    public bindings: Array<SolveBinding>,
     public equations: Array<Equation>,
     public span?: Span,
   ) {

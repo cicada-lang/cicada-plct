@@ -1,14 +1,8 @@
 # Solve
 
-Stmts.Solve -- for testing
+Stmts.Solve constructors for Equation and SolveBinding
 
-```
-solve (<name>: <type>, ...) {
-  equation <lhs> = <rhs> : <type>
-  equation <lhs> = <rhs> : <type>
-  ...
-}
-```
+Stmts.Solve -- `execute`
 
 solve-quote.test.ts
 
