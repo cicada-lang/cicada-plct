@@ -13,7 +13,7 @@ solve () {
 `)
 })
 
-test.todo("solve Quote -- bindings", async () => {
+test("solve Quote -- bindings", async () => {
   await runCode(`
 
 solve (a: String, b: String, c: String) {

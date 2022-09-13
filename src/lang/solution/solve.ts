@@ -1,5 +1,11 @@
 import { Ctx } from "../ctx"
-import { Solution, solveByType, solveByValue } from "../solution"
+import {
+  isPatternVar,
+  Solution,
+  SolutionCons,
+  solveByType,
+  solveByValue,
+} from "../solution"
 import { Value } from "../value"
 
 /**
@@ -21,6 +27,22 @@ export function solve(
   left: Value,
   right: Value,
 ): Solution {
+  if (isPatternVar(left) && isPatternVar(right)) {
+    if (left.neutral.name === right.neutral.name) {
+      return solution
+    }
+  }
+
+  if (isPatternVar(left)) {
+    // TODO Need occur check to avoid circular unification.
+    return SolutionCons(left.neutral.name, right, solution)
+  }
+
+  if (isPatternVar(right)) {
+    // TODO Need occur check to avoid circular unification.
+    return SolutionCons(right.neutral.name, left, solution)
+  }
+
   return (
     solveByType(solution, ctx, type, left, right) ||
     solveByValue(solution, ctx, type, left, right)

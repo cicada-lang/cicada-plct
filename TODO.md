@@ -1,7 +1,5 @@
 # Solve
 
-solve -- handle `PatternVar`
-
 use PatternVar constructor in Stmts
 
 solve-quote.test.ts -- bindings
