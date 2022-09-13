@@ -1,12 +1,10 @@
 # Solve
 
+solve-trivial.test.ts
+
 solveType -- Type
 solveType -- String
 solveType -- Trivial
-
-solveByType -- Trivial
-
-solve-trivial.test.ts
 
 solveType -- Pi
 solveType -- Sigma

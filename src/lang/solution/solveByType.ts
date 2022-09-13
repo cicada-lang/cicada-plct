@@ -14,6 +14,10 @@ export function solveByType(
       return solveType(solution, ctx, left, right)
     }
 
+    case "Trivial": {
+      return solution
+    }
+
     default: {
       return undefined
     }
