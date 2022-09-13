@@ -1,8 +1,8 @@
 # Solve
 
-Stmts.Solve -- `execute` -- print `Objekt`
-
 walk
+
+[maybe] solve need to return new `ctx`
 
 solveByValue -- typedNeutral
 

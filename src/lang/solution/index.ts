@@ -1,5 +1,7 @@
 export * from "./createPatternVar"
+export * from "./formatSolution"
 export * from "./isPatternVar"
+export * from "./lookupValueInSolution"
 export * from "./PatternVar"
 export * from "./Solution"
 export * from "./solve"

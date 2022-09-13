@@ -1,10 +1,9 @@
 import { evaluate } from "../core"
-import { CtxCons } from "../ctx"
-import { EnvCons } from "../env"
+import { CtxCons, ctxToEnv } from "../ctx"
 import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import { createPatternVar, Solution, SolutionNull, solve } from "../solution"
-import { Stmt } from "../stmt"
+import { formatSolution, Solution, SolutionNull, solve } from "../solution"
+import { Stmt, StmtOutput } from "../stmt"
 
 export type Equation = {
   left: Exp
@@ -37,14 +36,16 @@ export class Solve extends Stmt {
     super()
   }
 
-  async execute(mod: Mod): Promise<void> {
+  async execute(mod: Mod): Promise<StmtOutput> {
     let ctx = mod.ctx
-    let env = mod.env
+    const names: Array<string> = []
     for (const { name, type } of this.bindings) {
-      const typeValue = evaluate(env, checkType(ctx, type))
+      const typeValue = evaluate(ctxToEnv(ctx), checkType(ctx, type))
       ctx = CtxCons(name, typeValue, ctx)
-      env = EnvCons(name, createPatternVar(typeValue, name), env)
+      names.push(name)
     }
+
+    const env = ctxToEnv(ctx)
 
     let solution: Solution = SolutionNull()
     for (const { left, right, type } of this.equations) {
@@ -54,6 +55,6 @@ export class Solve extends Stmt {
       solution = solve(solution, ctx, typeValue, leftValue, rightValue)
     }
 
-    console.log(solution)
+    return formatSolution(solution, ctx, names)
   }
 }

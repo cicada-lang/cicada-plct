@@ -1,8 +1,8 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
 test("solve Quote -- literal", async () => {
-  await runCode(`
+  const output = await runCode(`
 
 solve () {
   equation "a" = "a" : String
@@ -11,10 +11,12 @@ solve () {
 }
 
 `)
+
+  expect(output).toMatchInlineSnapshot('"{  }"')
 })
 
 test("solve Quote -- bindings", async () => {
-  await runCode(`
+  const output = await runCode(`
 
 solve (a: String, b: String, c: String) {
   equation a = "a" : String
@@ -22,12 +24,9 @@ solve (a: String, b: String, c: String) {
   equation c = "c" : String
 }
 
-// Solution:
-// {
-//   a: "a",
-//   b: "b",
-//   c: "c",
-// }
-
 `)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
+  )
 })
