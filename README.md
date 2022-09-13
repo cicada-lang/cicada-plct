@@ -42,6 +42,7 @@ npm run test:watch    # Watch the testing
   - Your line belongs to you, you can write a little introduction to yourself but not too long.
 
 To make a contribution, [fork this project](https://github.com/cicada-lang/cicada/fork) and open a pull request.
+
 It is assumed that all non draft PRs are ready to be merged.
 If your PR is not ready to be merged yet, please make it a draft PR:
 
