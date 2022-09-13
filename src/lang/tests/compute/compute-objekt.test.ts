@@ -64,7 +64,7 @@ check { T: String, x: Type }: class { T: Type = String, x: Type = Type }
 
   await expectCodeToFail(`
 
-check class { T: Type = String, x: Type = Type }: { T: String, x: Type }
+check class { T: Type = String, x: Type = Type }: class { T: Type, x: T }
 
   `)
 
