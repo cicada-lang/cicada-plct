@@ -43,7 +43,7 @@ compute abcxyz
   )
 })
 
-test("compute Objket -- direct", async () => {
+test.todo("compute Objket -- direct", async () => {
   const output = await runCode(`
 
 compute { a: "c", b: "d" }
@@ -55,7 +55,7 @@ compute { a: "c", b: "d" }
   )
 })
 
-test("compute Objekt -- reject", async () => {
+test.todo("compute Objekt -- reject", async () => {
   await runCode(`
 
 check { T: String, x: Type }: class { T: Type = String, x: Type = Type }

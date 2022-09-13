@@ -34,7 +34,9 @@ check {
 }: class { T: Type, x: T }
 
 `)
+})
 
+test("check Objekt -- dependent -- fail", async () => {
   await expectCodeToFail(`
 
 check {
