@@ -36,7 +36,6 @@ npm run test:watch    # Watch the testing
 
 > Be polite, do not bring negative emotion to others.
 
-- [TODO.md](TODO.md)
 - [STYLE-GUIDE.md](STYLE-GUIDE.md)
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
 - Remember to add yourself to [AUTHORS](AUTHORS).
@@ -45,11 +44,16 @@ npm run test:watch    # Watch the testing
 To make a contribution, [fork this project](https://github.com/cicada-lang/cicada/fork) and open a pull request.
 
 It is assumed that all non draft PRs are ready to be merged.
-
 If your PR is not ready to be merged yet, please make it a draft PR:
 
 - [Creating draft PR](https://github.blog/2019-02-14-introducing-draft-pull-requests)
 - [Changing a PR to draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request)
+
+During the development of your PR,
+you can make use of the [TODO.md](TODO.md) file
+to record ideas temporarily,
+and this file should be clean again
+at the end of your development.
 
 ## License
 
