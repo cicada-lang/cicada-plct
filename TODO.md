@@ -1,7 +1,5 @@
 # Solve
 
-solveEquation -- EquationUntyped
-
 solve tests use EquationUntyped
 
 solveType -- Type & String & Trivial
