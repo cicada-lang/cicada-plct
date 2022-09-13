@@ -19,25 +19,13 @@ solve (A: Type, B: Type) {
     deleteUndefined([
       new Stmts.Solve(
         [
-          { name: "A", type: Exps.Var("Type") },
-          { name: "B", type: Exps.Var("Type") },
+          Stmts.SolveBinding("A", Exps.Var("Type")),
+          Stmts.SolveBinding("B", Exps.Var("Type")),
         ],
         [
-          {
-            left: Exps.Var("A"),
-            right: Exps.Var("Trivial"),
-            type: Exps.Var("Type"),
-          },
-          {
-            left: Exps.Var("B"),
-            right: Exps.Var("String"),
-            type: Exps.Var("Type"),
-          },
-          {
-            left: Exps.Var("A"),
-            right: Exps.Var("B"),
-            type: Exps.Var("Type"),
-          },
+          Stmts.Equation(Exps.Var("A"), Exps.Var("Trivial"), Exps.Var("Type")),
+          Stmts.Equation(Exps.Var("B"), Exps.Var("String"), Exps.Var("Type")),
+          Stmts.Equation(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
         ],
       ),
     ]),

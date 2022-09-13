@@ -1,7 +1,5 @@
 # Solve
 
-Stmts.Solve constructors for Equation and SolveBinding
-
 Stmts.Solve -- `execute`
 
 solve-quote.test.ts

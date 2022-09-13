@@ -8,9 +8,20 @@ export type Equation = {
   type: Exp
 }
 
+export function Equation(left: Exp, right: Exp, type: Exp): Equation {
+  return { left, right, type }
+}
+
 export type SolveBinding = {
   name: string
   type: Exp
+}
+
+export function SolveBinding(name: string, type: Exp): SolveBinding {
+  return {
+    name,
+    type,
+  }
 }
 
 export class Solve extends Stmt {
