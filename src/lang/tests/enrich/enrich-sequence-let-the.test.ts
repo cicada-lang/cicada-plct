@@ -71,11 +71,11 @@ check begin {
     a: "a",
     b: "b",
     c: "c",
-    xyz: the(XY, {
+    xyz: {
       x: "x",
       y: "y",
       z: "z",
-    })
+    }
   }
 
   check abc: ABC
