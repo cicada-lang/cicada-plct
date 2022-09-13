@@ -1,6 +1,6 @@
 # Solve
 
-solve-trivial.test.ts
+Stmts.Solve -- Equation can omit `type`
 
 solveType -- Type
 solveType -- String
