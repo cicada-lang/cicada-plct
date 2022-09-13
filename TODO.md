@@ -1,12 +1,12 @@
 # Solve
 
-use PatternVar constructor in Stmts
+extract createPatternVar
+
+extract isPatternVar
 
 Stmts.Solve -- `execute` -- print `Objekt`
 
 walk
-
-[maybe] `solve (...) { ... }` can be used as a expression to return `Objekt`
 
 solveByValue -- typedNeutral
 
@@ -17,6 +17,10 @@ solveType
 solveClazz
 
 occurCheck
+
+[maybe] `solve (...) { ... }` can be used as a expression to return `Objekt`
+
+[maybe] nested `solve`
 
 # Equivalence
 

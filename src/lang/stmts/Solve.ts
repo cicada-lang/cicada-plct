@@ -3,10 +3,8 @@ import { CtxCons } from "../ctx"
 import { EnvCons } from "../env"
 import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { Solution, SolutionNull, solve } from "../solution"
+import { createPatternVar, Solution, SolutionNull, solve } from "../solution"
 import { Stmt } from "../stmt"
-import * as Values from "../value"
 
 export type Equation = {
   left: Exp
@@ -45,8 +43,7 @@ export class Solve extends Stmt {
     for (const { name, type } of this.bindings) {
       const typeValue = evaluate(env, checkType(ctx, type))
       ctx = CtxCons(name, typeValue, ctx)
-      const variable = Values.TypedNeutral(typeValue, Neutrals.Var(name))
-      env = EnvCons(name, variable, env)
+      env = EnvCons(name, createPatternVar(typeValue, name), env)
     }
 
     let solution: Solution = SolutionNull()
