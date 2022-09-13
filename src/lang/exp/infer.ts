@@ -1,4 +1,4 @@
-import { applyClosure, constClosure } from "../closure"
+import { applyClosure, Closure, constClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import {
@@ -168,18 +168,21 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Objekt": {
-      const propertyNames = Object.keys(exp.properties)
-      // propertyNames.reverse()
-
       let inferredType: Value = Values.ClazzNull()
       let propertyCore: Record<string, Core> = {}
 
-      for (let propertyName in propertyNames) {
-        const inferredExp = infer(ctx, exp.properties[propertyName])
-        inferredType = Values.ClazzCons(
+      for (let [propertyName, property] of Object.entries(
+        exp.properties,
+      ).reverse()) {
+        const inferredExp = infer(ctx, property)
+        inferredType = Values.ClazzFulfilled(
           propertyName,
           inferredExp.type,
-          constClosure("_", inferredType),
+          applyClosure(
+            Closure(ctxToEnv(ctx), propertyName, inferredExp.core),
+            Values.Trivial(),
+          ),
+          inferredType,
         )
         propertyCore[propertyName] = inferredExp.core
       }
