@@ -167,6 +167,33 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, Exps.unfoldClazz(exp.bindings))
     }
 
+    case "Objekt": {
+      let inferredType: Value = Values.ClazzNull()
+      let propertyCore: Record<string, Core> = {}
+
+      for (let [propertyName, property] of Object.entries(
+        exp.properties,
+      ).reverse()) {
+        const inferredExp = infer(ctx, property)
+        inferredType = Values.ClazzFulfilled(
+          propertyName,
+          inferredExp.type,
+          evaluate(ctxToEnv(ctx), inferredExp.core),
+          inferredType,
+        )
+        propertyCore[propertyName] = inferredExp.core
+      }
+
+      return Inferred(inferredType, Cores.Objekt(propertyCore))
+    }
+
+    case "FoldedObjekt": {
+      return infer(
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
+      )
+    }
+
     case "Dot": {
       const inferred = infer(ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
