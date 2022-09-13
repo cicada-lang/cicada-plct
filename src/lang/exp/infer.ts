@@ -144,6 +144,15 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "Cons": {
+      const carInferred = infer(ctx, exp.car)
+      const cdrInferred = infer(ctx, exp.cdr)
+      return Inferred(
+        Values.Sigma(carInferred.type, constClosure("", cdrInferred.type)),
+        Cores.Cons(carInferred.core, cdrInferred.core),
+      )
+    }
+
     case "Quote": {
       return Inferred(Values.String(), Cores.Quote(exp.literal))
     }
