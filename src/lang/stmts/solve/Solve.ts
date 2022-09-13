@@ -1,10 +1,10 @@
-import { evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv } from "../ctx"
-import { check, checkType, Exp, infer, Span } from "../exp"
-import { Mod } from "../mod"
-import { formatSolution, Solution, SolutionNull, solve } from "../solution"
-import { Stmt, StmtOutput } from "../stmt"
-import { conversionType } from "../value"
+import { evaluate } from "../../core"
+import { Ctx, CtxCons, ctxToEnv } from "../../ctx"
+import { check, checkType, Exp, infer, Span } from "../../exp"
+import { Mod } from "../../mod"
+import { formatSolution, Solution, SolutionNull, solve } from "../../solution"
+import { Stmt, StmtOutput } from "../../stmt"
+import { conversionType } from "../../value"
 
 export type Equation = EquationTyped | EquationUntyped
 

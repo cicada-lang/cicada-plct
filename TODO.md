@@ -1,5 +1,9 @@
 # Solve
 
+extract stmts/solve/Equation
+
+extract stmts/solve/SolveBinding
+
 solveType -- Type & String & Trivial
 
 solve-type.test.ts
