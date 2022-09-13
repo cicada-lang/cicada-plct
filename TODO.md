@@ -1,7 +1,5 @@
 # Solve
 
-solve tests use EquationUntyped
-
 solveType -- Type & String & Trivial
 
 solve-type.test.ts

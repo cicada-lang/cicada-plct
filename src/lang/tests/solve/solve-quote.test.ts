@@ -5,9 +5,9 @@ test("solve Quote -- literal", async () => {
   const output = await runCode(`
 
 solve () {
-  equation "a" = "a" : String
-  equation "b" = "b" : String
-  equation "c" = "c" : String
+  equation "a" = "a"
+  equation "b" = "b"
+  equation "c" = "c"
 }
 
 `)
@@ -19,9 +19,9 @@ test("solve Quote -- bindings", async () => {
   const output = await runCode(`
 
 solve (a: String, b: String, c: String) {
-  equation a = "a" : String
-  equation b = "b" : String
-  equation c = "c" : String
+  equation a = "a"
+  equation b = "b"
+  equation c = "c"
 }
 
 `)
@@ -35,9 +35,9 @@ test("solve Quote -- walk", async () => {
   const output = await runCode(`
 
 solve (a: String, b: String, c: String) {
-  equation a = b : String
-  equation b = c : String
-  equation a = "a" : String
+  equation a = b
+  equation b = c
+  equation a = "a"
 }
 
 `)

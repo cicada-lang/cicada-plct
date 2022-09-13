@@ -5,9 +5,9 @@ test("solve Sole", async () => {
   const output = await runCode(`
 
 solve () {
-  equation sole = sole : Trivial
-  equation sole = sole : Trivial
-  equation sole = sole : Trivial
+  equation sole = sole
+  equation sole = sole
+  equation sole = sole
 }
 
 `)
@@ -19,9 +19,9 @@ test("solve Sole", async () => {
   const output = await runCode(`
 
 solve (a: Trivial, b: Trivial, c: Trivial) {
-  equation a = b : Trivial
-  equation b = c : Trivial
-  equation c = sole : Trivial
+  equation a = b
+  equation b = c
+  equation c = sole
 }
 
 `)

@@ -29,7 +29,7 @@ test.todo("solve Sigma", async () => {
   await runCode(`
 
 solve (A: Type, B: (x: A) -> Type) {
-  equation exists (x: A) B(x) = exists (_: String) String : Type
+  equation exists (x: A) B(x) = exists (_: String) String
   solve (x: String) {
     equation B(x) = String : Type
   }
