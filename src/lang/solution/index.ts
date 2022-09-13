@@ -1,3 +1,5 @@
+export * from "./createPatternVar"
+export * from "./isPatternVar"
 export * from "./PatternVar"
 export * from "./Solution"
 export * from "./solve"

@@ -1,9 +1,5 @@
 # Solve
 
-extract createPatternVar
-
-extract isPatternVar
-
 Stmts.Solve -- `execute` -- print `Objekt`
 
 walk
