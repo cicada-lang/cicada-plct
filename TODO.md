@@ -1,6 +1,6 @@
 # Solve
 
-Stmts.Solve -- Equation can omit `type`
+extract solveEquation
 
 solveType -- Type & String & Trivial
 

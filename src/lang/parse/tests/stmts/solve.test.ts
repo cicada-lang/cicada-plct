@@ -23,9 +23,17 @@ solve (A: Type, B: Type) {
           Stmts.SolveBinding("B", Exps.Var("Type")),
         ],
         [
-          Stmts.Equation(Exps.Var("A"), Exps.Var("Trivial"), Exps.Var("Type")),
-          Stmts.Equation(Exps.Var("B"), Exps.Var("String"), Exps.Var("Type")),
-          Stmts.Equation(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+          Stmts.EquationTyped(
+            Exps.Var("A"),
+            Exps.Var("Trivial"),
+            Exps.Var("Type"),
+          ),
+          Stmts.EquationTyped(
+            Exps.Var("B"),
+            Exps.Var("String"),
+            Exps.Var("Type"),
+          ),
+          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
         ],
       ),
     ]),
@@ -48,9 +56,42 @@ solve () {
       new Stmts.Solve(
         [],
         [
-          Stmts.Equation(Exps.Var("A"), Exps.Var("Trivial"), Exps.Var("Type")),
-          Stmts.Equation(Exps.Var("B"), Exps.Var("String"), Exps.Var("Type")),
-          Stmts.Equation(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+          Stmts.EquationTyped(
+            Exps.Var("A"),
+            Exps.Var("Trivial"),
+            Exps.Var("Type"),
+          ),
+          Stmts.EquationTyped(
+            Exps.Var("B"),
+            Exps.Var("String"),
+            Exps.Var("Type"),
+          ),
+          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+        ],
+      ),
+    ]),
+  )
+})
+
+test("parse Solve -- untyped equation", () => {
+  expect(
+    parseStmts(`
+
+solve () {
+  equation A = Trivial
+  equation B = String
+  equation A = B : Type
+}
+
+`),
+  ).toMatchObject(
+    deleteUndefined([
+      new Stmts.Solve(
+        [],
+        [
+          Stmts.EquationUntyped(Exps.Var("A"), Exps.Var("Trivial")),
+          Stmts.EquationUntyped(Exps.Var("B"), Exps.Var("String")),
+          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
         ],
       ),
     ]),
