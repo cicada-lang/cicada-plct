@@ -2,8 +2,6 @@
 
 use PatternVar constructor in Stmts
 
-solve-quote.test.ts -- bindings
-
 Stmts.Solve -- `execute` -- print `Objekt`
 
 walk
