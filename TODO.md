@@ -1,6 +1,8 @@
 # Solve
 
-extract solveEquation
+solveEquation -- EquationUntyped
+
+solve tests use EquationUntyped
 
 solveType -- Type & String & Trivial
 

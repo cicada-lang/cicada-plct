@@ -1,5 +1,5 @@
 import { evaluate } from "../core"
-import { CtxCons, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { check, checkType, Exp, Span } from "../exp"
 import { Mod } from "../mod"
 import { formatSolution, Solution, SolutionNull, solve } from "../solution"
@@ -67,32 +67,36 @@ export class Solve extends Stmt {
       names.push(name)
     }
 
-    const env = ctxToEnv(ctx)
-
     let solution: Solution = SolutionNull()
     for (const equation of this.equations) {
-      switch (equation.kind) {
-        case "EquationTyped": {
-          const typeValue = evaluate(env, checkType(ctx, equation.type))
-          const leftValue = evaluate(env, check(ctx, equation.left, typeValue))
-          const rightValue = evaluate(
-            env,
-            check(ctx, equation.right, typeValue),
-          )
-          solution = solve(solution, ctx, typeValue, leftValue, rightValue)
-          continue
-        }
-
-        case "EquationUntyped": {
-          // const typeValue = evaluate(env, checkType(ctx, type))
-          // const leftValue = evaluate(env, check(ctx, left, typeValue))
-          // const rightValue = evaluate(env, check(ctx, right, typeValue))
-          // solution = solve(solution, ctx, typeValue, leftValue, rightValue)
-          continue
-        }
-      }
+      solution = solveEquation(solution, ctx, equation)
     }
 
     return formatSolution(solution, ctx, names)
+  }
+}
+
+function solveEquation(
+  solution: Solution,
+  ctx: Ctx,
+  equation: Equation,
+): Solution {
+  const env = ctxToEnv(ctx)
+
+  switch (equation.kind) {
+    case "EquationTyped": {
+      const typeValue = evaluate(env, checkType(ctx, equation.type))
+      const leftValue = evaluate(env, check(ctx, equation.left, typeValue))
+      const rightValue = evaluate(env, check(ctx, equation.right, typeValue))
+      return solve(solution, ctx, typeValue, leftValue, rightValue)
+    }
+
+    case "EquationUntyped": {
+      // const typeValue = evaluate(env, checkType(ctx, type))
+      // const leftValue = evaluate(env, check(ctx, left, typeValue))
+      // const rightValue = evaluate(env, check(ctx, right, typeValue))
+      // solution = solve(solution, ctx, typeValue, leftValue, rightValue)
+      return solution
+    }
   }
 }
