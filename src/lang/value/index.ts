@@ -1,6 +1,7 @@
 export * from "./assertions"
 export * from "./clazz"
 export * from "./conversion"
+export * from "./formatTypedValue"
 export * from "./inclusion"
 export * from "./inclusionClazz"
 export * from "./predicates"
