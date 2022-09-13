@@ -1,7 +1,5 @@
 # Solve
 
-extract stmts/solve/solveEquation
-
 solveType -- Type & String & Trivial
 
 solve-type.test.ts

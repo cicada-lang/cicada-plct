@@ -1,11 +1,10 @@
 import { evaluate } from "../../core"
-import { Ctx, CtxCons, ctxToEnv } from "../../ctx"
-import { check, checkType, infer, Span } from "../../exp"
+import { CtxCons, ctxToEnv } from "../../ctx"
+import { checkType, Span } from "../../exp"
 import { Mod } from "../../mod"
-import { formatSolution, Solution, SolutionNull, solve } from "../../solution"
+import { formatSolution, Solution, SolutionNull } from "../../solution"
 import { Stmt, StmtOutput } from "../../stmt"
-import { conversionType } from "../../value"
-import { Equation, SolveBinding } from "../solve"
+import { Equation, SolveBinding, solveEquation } from "../solve"
 
 export class Solve extends Stmt {
   constructor(
@@ -31,33 +30,5 @@ export class Solve extends Stmt {
     }
 
     return formatSolution(solution, ctx, names)
-  }
-}
-
-function solveEquation(
-  solution: Solution,
-  ctx: Ctx,
-  equation: Equation,
-): Solution {
-  const env = ctxToEnv(ctx)
-
-  switch (equation.kind) {
-    case "EquationTyped": {
-      const typeValue = evaluate(env, checkType(ctx, equation.type))
-      const leftValue = evaluate(env, check(ctx, equation.left, typeValue))
-      const rightValue = evaluate(env, check(ctx, equation.right, typeValue))
-      return solve(solution, ctx, typeValue, leftValue, rightValue)
-    }
-
-    case "EquationUntyped": {
-      const leftInferred = infer(ctx, equation.left)
-      const rightInferred = infer(ctx, equation.right)
-      conversionType(ctx, leftInferred.type, rightInferred.type)
-      const typeValue = leftInferred.type
-      const leftValue = evaluate(env, leftInferred.core)
-      const rightValue = evaluate(env, rightInferred.core)
-      solution = solve(solution, ctx, typeValue, leftValue, rightValue)
-      return solution
-    }
   }
 }
