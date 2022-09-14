@@ -1,6 +1,7 @@
 # Solve
 
-solve-cons.test.ts
+solve-cons.test.ts -- cdr
+solve-cons.test.ts -- nested
 
 solveByType -- Clazz
 
