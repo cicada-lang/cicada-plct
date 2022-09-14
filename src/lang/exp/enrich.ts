@@ -32,11 +32,7 @@ export function Enriched(type: Value, core: Core): Enriched {
   }
 }
 
-export function enrich(
-  ctx: Ctx,
-  exp: Exp,
-  type: Value,
-): { type: Value; core: Core } {
+export function enrich(ctx: Ctx, exp: Exp, type: Value): Enriched {
   try {
     const inferred = infer(ctx, exp)
     inclusion(ctx, inferred.type, type)
@@ -46,11 +42,7 @@ export function enrich(
   }
 }
 
-function enrichWithoutInfer(
-  ctx: Ctx,
-  exp: Exp,
-  type: Value,
-): { type: Value; core: Core } {
+function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Enriched {
   switch (exp.kind) {
     case "FoldedObjekt": {
       return enrich(
