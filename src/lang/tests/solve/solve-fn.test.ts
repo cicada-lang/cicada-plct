@@ -12,3 +12,15 @@ solve (x: String) {
 
   expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
 })
+
+test("solve Fn -- alpha equivalence", async () => {
+  const output = await runCode(`
+
+solve () {
+  equation (A: Type, a: A) => a = (B: Type, b: B) => b
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"{  }"')
+})
