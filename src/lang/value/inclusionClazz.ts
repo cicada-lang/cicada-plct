@@ -1,5 +1,5 @@
 import { applyClosure } from "../closure"
-import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
+import { Ctx, ctxNames } from "../ctx"
 import { ElaborationError, InternalError } from "../errors"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
@@ -13,16 +13,14 @@ import { assertClazz, conversion, inclusion, Value } from "../value"
    All properties in `clazz` must also occurs in `subclazz`.
 
    To compare out of order `Clazz`es,
-   all we need is to prepare the `freshNames` first,
+   all we need is to prepare the `freshNames` first (`preparefreshNameMap`),
    because for example, in the case of `Sigma` in `conversionType`,
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
 
-**/
-
-/**
-
-   TODO Functions in this module need refactorings.
+   Then `expelClazz` use the `freshName`
+   to expel all types and values from `Values.Clazz`,
+   it returns a `PropertyMap`, so that the order does not matters anymore.
 
 **/
 
@@ -31,14 +29,10 @@ export function inclusionClazz(
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): void {
-  const localNameMap = prepareLocalNameMap(ctx, subclazz, clazz)
+  const freshNameMap = preparefreshNameMap(ctx, subclazz, clazz)
 
-  const subclazzPropertyMap = buildPropertyMap(
-    localNameMap,
-    subclazz,
-    new Map(),
-  )
-  const clazzPropertyMap = buildPropertyMap(localNameMap, clazz, new Map())
+  const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
+  const clazzPropertyMap = expelClazz(freshNameMap, clazz)
 
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
@@ -48,56 +42,50 @@ export function inclusionClazz(
       )
     }
 
-    const localName = localNameMap.get(name)
-    if (localName === undefined) {
-      throw new InternalError(
-        "inclusionClazz localName should have all the names from subclazz and clazz",
-      )
-    }
-
-    if (
-      clazzProperty.value !== undefined &&
-      subclazzProperty.value === undefined
-    ) {
-      throw new ElaborationError(
-        `inclusionClazz expect subclazzProperty to have fulfilled property: ${name}`,
-      )
-    }
-
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value === undefined
-    ) {
-      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
-      const type = subclazzProperty.type
-      ctx = CtxCons(localName, type, ctx)
-    }
-
-    if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
-      const type = subclazzProperty.type
-      conversion(ctx, type, subclazzProperty.value, clazzProperty.value)
-      const value = subclazzProperty.value
-      ctx = CtxFulfilled(localName, type, value, ctx)
-    }
+    inclusionProperty(ctx, name, subclazzProperty, clazzProperty)
   }
 }
 
-type PropertyMap = Map<string, { type: Value; value?: Value }>
+type Property = { type: Value; value?: Value }
+
+type PropertyMap = Map<string, Property>
+
+function inclusionProperty(
+  ctx: Ctx,
+  name: string,
+  subproperty: Property,
+  property: Property,
+): void {
+  if (subproperty.value === undefined && property.value !== undefined) {
+    throw new ElaborationError(
+      `inclusionProperty expect subproperty to have fulfilled property: ${name}`,
+    )
+  }
+
+  if (subproperty.value !== undefined && property.value === undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+  }
+
+  if (subproperty.value === undefined && property.value === undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+  }
+
+  if (subproperty.value !== undefined && property.value !== undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+    conversion(ctx, property.type, subproperty.value, property.value)
+  }
+}
 
 /**
 
-   NOTE `buildPropertyMap` will do side-effects on `propertyMap`.
+   NOTE `expelClazz` will do side-effects on `propertyMap`.
 
 **/
 
-function buildPropertyMap(
-  localNameMap: Map<string, string>,
+function expelClazz(
+  freshNameMap: Map<string, string>,
   clazz: Values.Clazz,
-  propertyMap: PropertyMap,
+  propertyMap: PropertyMap = new Map(),
 ): PropertyMap {
   switch (clazz.kind) {
     case "ClazzNull": {
@@ -109,21 +97,18 @@ function buildPropertyMap(
         type: clazz.propertyType,
       })
 
-      const freshName = localNameMap.get(clazz.name)
+      const freshName = freshNameMap.get(clazz.name)
       if (freshName === undefined) {
         throw new InternalError(
-          `buildPropertyMap expect localNameMap to have clazz.name: ${clazz.name}`,
+          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
         )
       }
 
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
-
       const rest = applyClosure(clazz.restClosure, typedNeutral)
-
       assertClazz(rest)
-
-      return buildPropertyMap(localNameMap, rest, propertyMap)
+      return expelClazz(freshNameMap, rest, propertyMap)
     }
 
     case "ClazzFulfilled": {
@@ -132,17 +117,17 @@ function buildPropertyMap(
         value: clazz.property,
       })
 
-      return buildPropertyMap(localNameMap, clazz.rest, propertyMap)
+      return expelClazz(freshNameMap, clazz.rest, propertyMap)
     }
   }
 }
 
-function prepareLocalNameMap(
+function preparefreshNameMap(
   ctx: Ctx,
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): Map<string, string> {
-  const localNameMap = new Map()
+  const freshNameMap = new Map()
 
   const subclazzNames = Values.clazzPropertyNames(subclazz)
   const clazzNames = Values.clazzPropertyNames(clazz)
@@ -151,9 +136,9 @@ function prepareLocalNameMap(
 
   for (const name of [...subclazzNames, ...clazzNames]) {
     const freshName = freshen(used, name)
-    localNameMap.set(name, freshName)
+    freshNameMap.set(name, freshName)
     used.add(freshName)
   }
 
-  return localNameMap
+  return freshNameMap
 }

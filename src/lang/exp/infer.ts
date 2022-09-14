@@ -144,6 +144,15 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "Cons": {
+      const carInferred = infer(ctx, exp.car)
+      const cdrInferred = infer(ctx, exp.cdr)
+      return Inferred(
+        Values.Sigma(carInferred.type, constClosure("_", cdrInferred.type)),
+        Cores.Cons(carInferred.core, cdrInferred.core),
+      )
+    }
+
     case "Quote": {
       return Inferred(Values.String(), Cores.Quote(exp.literal))
     }
@@ -156,6 +165,26 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "FoldedClazz": {
       return infer(ctx, Exps.unfoldClazz(exp.bindings))
+    }
+
+    case "Objekt": {
+      let clazz: Values.Clazz = Values.ClazzNull()
+      let properties: Record<string, Core> = {}
+      for (let [name, property] of Object.entries(exp.properties).reverse()) {
+        const inferred = infer(ctx, property)
+        const value = evaluate(ctxToEnv(ctx), inferred.core)
+        clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
+        properties[name] = inferred.core
+      }
+
+      return Inferred(clazz, Cores.Objekt(properties))
+    }
+
+    case "FoldedObjekt": {
+      return infer(
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
+      )
     }
 
     case "Dot": {

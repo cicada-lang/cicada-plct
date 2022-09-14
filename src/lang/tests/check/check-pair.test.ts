@@ -16,3 +16,12 @@ check cons(sole, sole): Pair(Trivial, Trivial)
 
 `)
 })
+
+test("infer Cons to Pair if both car and cdr can be inferred", async () => {
+  await runCode(`
+
+let abc = cons("a", cons("b", "c"))
+check abc: Pair(String, Pair(String, String))
+
+`)
+})

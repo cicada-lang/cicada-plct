@@ -10,5 +10,5 @@ solve (a: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\" }"')
 })

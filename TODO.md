@@ -19,6 +19,4 @@ solve-car.test.ts
 solve-cdr.test.ts
 solve-dot.test.ts
 
-[maybe] need backtracing
-
 [maybe] solve need to return new `ctx`
