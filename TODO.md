@@ -1,7 +1,5 @@
 # Solve
 
-solveType -- Type & String & Trivial
-
 solve-type.test.ts
 solve-string.test.ts
 solve-trivial.test.ts
