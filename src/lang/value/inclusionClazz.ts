@@ -18,8 +18,9 @@ import { assertClazz, conversion, inclusion, Value } from "../value"
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
 
-   Then we use `expelClazz` to expel all types and values from `Values.Clazz`,
-   it returns a `Map`, so that the order does not matters anymore.
+   Then `expelClazz` use the `freshName`
+   to expel all types and values from `Values.Clazz`,
+   it returns a `PropertyMap`, so that the order does not matters anymore.
 
 **/
 
@@ -29,6 +30,7 @@ export function inclusionClazz(
   clazz: Values.Clazz,
 ): void {
   const freshNameMap = preparefreshNameMap(ctx, subclazz, clazz)
+
   const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
   const clazzPropertyMap = expelClazz(freshNameMap, clazz)
 
@@ -40,7 +42,7 @@ export function inclusionClazz(
       )
     }
 
-    inclusionProperty(ctx, subclazzProperty, clazzProperty)
+    inclusionProperty(ctx, name, subclazzProperty, clazzProperty)
   }
 }
 
@@ -48,14 +50,15 @@ type Property = { type: Value; value?: Value }
 
 type PropertyMap = Map<string, Property>
 
-export function inclusionProperty(
+function inclusionProperty(
   ctx: Ctx,
+  name: string,
   subproperty: Property,
   property: Property,
 ): void {
   if (subproperty.value === undefined && property.value !== undefined) {
     throw new ElaborationError(
-      `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
+      `inclusionProperty expect subproperty to have fulfilled property: ${name}`,
     )
   }
 
