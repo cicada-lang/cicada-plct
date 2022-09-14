@@ -8,8 +8,7 @@ export function readbackByValue(ctx: Ctx, type: Value, value: Value): Core {
   switch (value.kind) {
     case "TypedNeutral": {
       /**
-         The `type` and `value.type` are ignored here,
-         maybe we should use them to debug.
+         The `type` in `TypedNeutral` are not used.
       **/
 
       return readbackNeutral(ctx, value.neutral)

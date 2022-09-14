@@ -1,7 +1,5 @@
 # Solve
 
-solveByValue & solveType -- call `solveNeutral` to handle `TypedNeutral`
-
 solveNeutral
 
 solveByType -- Pi

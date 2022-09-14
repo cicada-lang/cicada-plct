@@ -2,7 +2,7 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, solve, solveClazz } from "../solution"
+import { Solution, solve, solveClazz, solveNeutral } from "../solution"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
 
@@ -12,6 +12,14 @@ export function solveType(
   left: Value,
   right: Value,
 ): Solution {
+  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+    /**
+       The `type` in `TypedNeutral` are not used.
+    **/
+
+    return solveNeutral(solution, ctx, left.neutral, right.neutral)
+  }
+
   if (left.kind === "Type" && right.kind === "Type") {
     return solution
   }

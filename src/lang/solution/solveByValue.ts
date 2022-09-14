@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
-import { Solution } from "../solution"
+import { Solution, solveNeutral } from "../solution"
 import { Value } from "../value"
 
 export function solveByValue(
@@ -10,6 +10,14 @@ export function solveByValue(
   left: Value,
   right: Value,
 ): Solution {
+  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+    /**
+       The `type` in `TypedNeutral` are not used.
+    **/
+
+    return solveNeutral(solution, ctx, left.neutral, right.neutral)
+  }
+
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.literal === right.literal) {
       return solution
