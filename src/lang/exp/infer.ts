@@ -171,7 +171,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       /**
          When building the `clazz`,
          We should use `ClazzCons` instead of `ClazzFulfilled`,
-         although the later is more specific.
+         although the latter is more specific.
 
          For example, the following `check` should fail:
 
