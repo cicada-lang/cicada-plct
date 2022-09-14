@@ -1,7 +1,5 @@
 # Solve
 
-solveNeutral
-
 solveByType -- Pi
 solveByType -- Sigma
 solveByType -- Clazz
