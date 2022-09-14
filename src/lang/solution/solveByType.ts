@@ -2,7 +2,7 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import * as Neutrals from "../neutral"
-import { Solution, solve, solveType } from "../solution"
+import { Solution, solve, solveProperties, solveType } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -43,6 +43,12 @@ export function solveByType(
       const rightCdr = Actions.doCdr(right)
       solution = solve(solution, ctx, cdrType, leftCdr, rightCdr)
       return solution
+    }
+
+    case "ClazzNull":
+    case "ClazzCons":
+    case "ClazzFulfilled": {
+      return solveProperties(solution, ctx, type, left, right)
     }
 
     default: {

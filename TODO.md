@@ -1,10 +1,12 @@
 # Solve
 
-solveByType -- Clazz
-
-solve-objekt.test.ts
-
 solveClazz
+
+- solve-clazz.test.ts
+
+solveProperties
+
+- solve-objekt.test.ts
 
 occurCheck
 
