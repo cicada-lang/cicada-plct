@@ -1,7 +1,5 @@
 # Solve
 
-solveByType -- Sigma
-
 solve-cons.test.ts
 
 solveByType -- Clazz

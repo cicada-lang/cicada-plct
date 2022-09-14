@@ -26,11 +26,23 @@ export function solveByType(
       const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const leftRetValue = Actions.doAp(left, typedNeutral)
-      const rightRetValue = Actions.doAp(right, typedNeutral)
-      return solve(solution, ctx, retTypeValue, leftRetValue, rightRetValue)
+      const leftRet = Actions.doAp(left, typedNeutral)
+      const rightRet = Actions.doAp(right, typedNeutral)
+      return solve(solution, ctx, retType, leftRet, rightRet)
+    }
+
+    case "Sigma": {
+      const leftCar = Actions.doCar(left)
+      const rightCar = Actions.doCar(right)
+      solution = solve(solution, ctx, type.carType, leftCar, rightCar)
+      const car = Actions.doCar(left)
+      const cdrType = applyClosure(type.cdrTypeClosure, car)
+      const leftCdr = Actions.doCdr(left)
+      const rightCdr = Actions.doCdr(right)
+      solution = solve(solution, ctx, cdrType, leftCdr, rightCdr)
+      return solution
     }
 
     default: {

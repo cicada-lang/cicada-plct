@@ -49,11 +49,10 @@ export function readbackByType(
       const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const retValue = Actions.doAp(value, typedNeutral)
-      const retCore = readback(ctx, retTypeValue, retValue)
-      return Cores.Fn(freshName, retCore)
+      const ret = Actions.doAp(value, typedNeutral)
+      return Cores.Fn(freshName, readback(ctx, retType, ret))
     }
 
     case "Sigma": {
@@ -64,13 +63,13 @@ export function readbackByType(
          will be `readback` with a `cons` at the top.
       **/
 
-      const carValue = Actions.doCar(value)
-      const cdrValue = Actions.doCdr(value)
-      const cdrType = applyClosure(type.cdrTypeClosure, carValue)
+      const car = Actions.doCar(value)
+      const cdr = Actions.doCdr(value)
+      const cdrType = applyClosure(type.cdrTypeClosure, car)
 
       return Cores.Cons(
-        readback(ctx, type.carType, carValue),
-        readback(ctx, cdrType, cdrValue),
+        readback(ctx, type.carType, car),
+        readback(ctx, cdrType, cdr),
       )
     }
 
