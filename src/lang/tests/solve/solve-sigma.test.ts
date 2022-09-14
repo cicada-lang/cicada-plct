@@ -18,6 +18,7 @@ test("solve Sigma -- nested", async () => {
 
 solve (A: Type, B: Type) {
   equation Pair(A, Pair(String, B)) = Pair(String, Pair(String, String))
+  equation Pair(A, Pair(String, String)) = Pair(String, Pair(String, B))
 }
 
 `)
@@ -30,6 +31,7 @@ test("solve Sigma -- occur twice", async () => {
 
 solve (A: Type, B: Type) {
   equation Pair(A, Pair(B, B)) = Pair(String, Pair(String, String))
+  equation Pair(A, Pair(B, String)) = Pair(String, Pair(String, B))
 }
 
 `)

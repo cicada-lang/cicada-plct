@@ -18,6 +18,7 @@ test("solve Pi -- nested", async () => {
 
 solve (A: Type, B: Type) {
   equation (A, String) -> B = (String, String) -> String
+  equation (A, String) -> String = (String, String) -> B
 }
 
 `)
@@ -30,6 +31,7 @@ test("solve Pi -- occur twice", async () => {
 
 solve (A: Type, B: Type) {
   equation (A, B) -> B = (String, String) -> String
+  equation (A, B) -> String = (String, String) -> B
 }
 
 `)

@@ -1,7 +1,7 @@
 import { formatCore } from "../core"
 import { Ctx, lookupTypeInCtx } from "../ctx"
 import { lookupValueInSolution, Solution } from "../solution"
-import { readback } from "../value"
+import { readback, readbackType } from "../value"
 
 export function formatSolution(
   solution: Solution,
@@ -17,12 +17,12 @@ export function formatSolution(
 
     const value = lookupValueInSolution(solution, name)
     if (value === undefined) {
-      throw new Error(`formatSolution find value of name: ${name}`)
+      const typeCore = readbackType(ctx, type)
+      properties.push(`${name}: TODO(${formatCore(typeCore)})`)
+    } else {
+      const core = readback(ctx, type, value)
+      properties.push(`${name}: ${formatCore(core)}`)
     }
-
-    const core = readback(ctx, type, value)
-
-    properties.push(`${name}: ${formatCore(core)}`)
   }
 
   return `{ ${properties.join(", ")} }`
