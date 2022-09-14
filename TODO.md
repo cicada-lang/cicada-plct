@@ -1,8 +1,9 @@
 # Solve
 
-solveType -- Pi
-solveType -- Sigma
 solveType -- Clazz
+
+solve-pi.test.ts
+solve-sigma.test.ts
 
 solveByType -- Pi
 solveByType -- Sigma
