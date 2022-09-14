@@ -1,7 +1,5 @@
 # Solve
 
-solve-fn.test.ts
-
 solveByType -- Sigma
 
 solve-cons.test.ts
