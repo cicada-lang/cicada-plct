@@ -1,9 +1,5 @@
 # Solve
 
-solve-type.test.ts
-solve-string.test.ts
-solve-trivial.test.ts
-
 solveType -- Pi
 solveType -- Sigma
 solveType -- Clazz
