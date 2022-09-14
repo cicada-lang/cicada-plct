@@ -72,7 +72,7 @@ function inclusionProperty(
 
   if (subproperty.value !== undefined && property.value !== undefined) {
     inclusion(ctx, subproperty.type, property.type)
-    conversion(ctx, subproperty.type, subproperty.value, property.value)
+    conversion(ctx, property.type, subproperty.value, property.value)
   }
 }
 
