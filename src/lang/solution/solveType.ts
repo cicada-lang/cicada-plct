@@ -2,9 +2,9 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, solve } from "../solution"
+import { Solution, solve, solveClazz } from "../solution"
 import * as Values from "../value"
-import { Value } from "../value"
+import { isClazz, Value } from "../value"
 
 export function solveType(
   solution: Solution,
@@ -66,6 +66,10 @@ export function solveType(
     )
 
     return solution
+  }
+
+  if (isClazz(left) && isClazz(right)) {
+    return solveClazz(solution, ctx, left, right)
   }
 
   throw new ElaborationError(

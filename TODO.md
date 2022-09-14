@@ -3,13 +3,9 @@
 solveByValue -- TypedNeutral
 solveType -- TypedNeutral
 
-solveType -- Clazz
-
 solveByType -- Pi
 solveByType -- Sigma
 solveByType -- Clazz
-
-solveType
 
 solveClazz
 
