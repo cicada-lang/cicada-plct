@@ -1,8 +1,14 @@
 # Solve
 
-solveByType -- Pi
+solve-fn.test.ts
+
 solveByType -- Sigma
+
+solve-cons.test.ts
+
 solveByType -- Clazz
+
+solve-objekt.test.ts
 
 solveClazz
 

@@ -5,13 +5,7 @@ import { Core } from "../core"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  isValue,
-  readback,
-  readbackProperties,
-  readbackType,
-  Value,
-} from "../value"
+import { readback, readbackProperties, readbackType, Value } from "../value"
 
 /**
 
@@ -52,14 +46,12 @@ export function readbackByType(
          This implements the eta-rule for `Fn`.
       **/
 
-      const freshName = isValue(value, Values.Fn)
-        ? freshenInCtx(ctx, value.retClosure.name)
-        : freshenInCtx(ctx, type.retTypeClosure.name)
+      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
+      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const retValue = Actions.doAp(value, typedNeutral)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
       const retCore = readback(ctx, retTypeValue, retValue)
       return Cores.Fn(freshName, retCore)
     }
