@@ -168,6 +168,26 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Objekt": {
+      /**
+         When building the `clazz`,
+         We should use `ClazzCons` instead of `ClazzFulfilled`,
+         although the later is more specific.
+
+         For example, the following `check` should fail:
+
+         check { T: String, x: Type }: class { T: Type, x: T }
+
+         but if we `infer` { T: String, x: Type } to be:
+
+         class { T: Type = String, x: Type = Type }
+
+         it will be a subtype of:
+
+         class { T: Type, x: T }
+
+         We must always be able to `checkByInfer` (`infer` + `inclusion`),
+         thus we should not use `ClazzFulfilled`.
+      **/
       let clazz: Values.Clazz = Values.ClazzNull()
       let properties: Record<string, Core> = {}
       for (let [name, property] of Object.entries(exp.properties).reverse()) {
