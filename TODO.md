@@ -1,7 +1,8 @@
 # Solve
 
-solveByValue -- TypedNeutral
-solveType -- TypedNeutral
+solveByValue & solveType -- call `solveNeutral` to handle `TypedNeutral`
+
+solveNeutral
 
 solveByType -- Pi
 solveByType -- Sigma
