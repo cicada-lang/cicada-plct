@@ -65,6 +65,15 @@ export function inclusionClazz(
     }
 
     if (
+      clazzProperty.value === undefined &&
+      subclazzProperty.value !== undefined
+    ) {
+      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
+      const type = subclazzProperty.type
+      ctx = CtxCons(localName, type, ctx)
+    }
+
+    if (
       subclazzProperty.value === undefined &&
       clazzProperty.value === undefined
     ) {

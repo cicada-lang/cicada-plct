@@ -48,6 +48,17 @@ inclusion [ ABC, AB, A ]
 `)
 })
 
+test("inclusion Clazz -- fulfilled v.s. dependent", async () => {
+  await expectCodeToFail(`
+
+inclusion [
+  class { T: Type = String, x: Type = Type },
+  class { T: Type, x: T },
+]
+
+`)
+})
+
 test("inclusion Clazz -- out of order", async () => {
   await runCode(`
 
