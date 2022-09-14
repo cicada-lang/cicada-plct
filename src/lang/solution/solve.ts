@@ -19,6 +19,10 @@ import { Value } from "../value"
    The recursion structure of `solve` closely follows `readback`,
    but dealing with two values in each step.
 
+   Note that, we should always
+   recursive call to `solve` (not `solveType`),
+   because `solve` handles `walk` and `PatternVar`.
+
 **/
 
 export function solve(

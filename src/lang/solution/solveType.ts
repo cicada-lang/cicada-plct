@@ -6,13 +6,6 @@ import { Solution, solve } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
-/**
-
-   We should recursive call to `solve`
-   which handles `walk` and `PatternVar`.
-
-**/
-
 export function solveType(
   solution: Solution,
   ctx: Ctx,
