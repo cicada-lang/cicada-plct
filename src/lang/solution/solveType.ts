@@ -2,9 +2,16 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution } from "../solution"
+import { Solution, solve } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
+
+/**
+
+   We should recursive call to `solve`
+   which handles `walk` and `PatternVar`.
+
+**/
 
 export function solveType(
   solution: Solution,
@@ -25,7 +32,7 @@ export function solveType(
   }
 
   if (left.kind === "Pi" && right.kind === "Pi") {
-    solution = solveType(solution, ctx, left.argType, right.argType)
+    solution = solve(solution, ctx, Values.Type(), left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
 
@@ -35,9 +42,10 @@ export function solveType(
 
     ctx = CtxCons(freshName, argType, ctx)
 
-    solution = solveType(
+    solution = solve(
       solution,
       ctx,
+      Values.Type(),
       applyClosure(right.retTypeClosure, typedNeutral),
       applyClosure(left.retTypeClosure, typedNeutral),
     )
@@ -46,7 +54,7 @@ export function solveType(
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    solution = solveType(solution, ctx, left.carType, right.carType)
+    solution = solve(solution, ctx, Values.Type(), left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
@@ -56,9 +64,10 @@ export function solveType(
 
     ctx = CtxCons(freshName, carType, ctx)
 
-    solution = solveType(
+    solution = solve(
       solution,
       ctx,
+      Values.Type(),
       applyClosure(right.cdrTypeClosure, typedNeutral),
       applyClosure(left.cdrTypeClosure, typedNeutral),
     )

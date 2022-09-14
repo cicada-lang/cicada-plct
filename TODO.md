@@ -1,16 +1,16 @@
 # Solve
 
+solveByValue -- TypedNeutral
+solveType -- TypedNeutral
+
 solveType -- Clazz
 
-solve-pi.test.ts
-solve-sigma.test.ts
+solve-pi.test.ts -- generate const function
+solve-sigma.test.ts -- generate const function
 
 solveByType -- Pi
 solveByType -- Sigma
 solveByType -- Clazz
-
-solveByValue -- TypedNeutral
-solveType -- TypedNeutral
 
 solveType
 
