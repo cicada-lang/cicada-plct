@@ -1,5 +1,3 @@
-# Solve
-
 solveClazz
 
 - solve-clazz.test.ts
@@ -7,7 +5,3 @@ solveClazz
 solveProperties
 
 - solve-objekt.test.ts
-
-solve-ap.test.ts -- generate const function
-
-occurCheck

@@ -38,3 +38,15 @@ solve (A: Type, B: Type) {
 
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
+
+test.todo("solve Sigma -- generate const function", async () => {
+  const output = await runCode(`
+
+solve (A: Type, B: (x: A) -> Type) {
+  equation exists (x: A) B(x) = exists (_: String) String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot()
+})
