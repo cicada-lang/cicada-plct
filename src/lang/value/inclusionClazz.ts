@@ -13,10 +13,13 @@ import { assertClazz, conversion, inclusion, Value } from "../value"
    All properties in `clazz` must also occurs in `subclazz`.
 
    To compare out of order `Clazz`es,
-   all we need is to prepare the `freshNames` first,
+   all we need is to prepare the `freshNames` first (`preparefreshNameMap`),
    because for example, in the case of `Sigma` in `conversionType`,
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
+
+   Then we use `expelClazz` to expel all types and values from `Values.Clazz`,
+   it returns a `Map`, so that the order does not matters anymore.
 
 **/
 
@@ -26,9 +29,8 @@ export function inclusionClazz(
   clazz: Values.Clazz,
 ): void {
   const freshNameMap = preparefreshNameMap(ctx, subclazz, clazz)
-
-  const subclazzPropertyMap = buildPropertyMap(freshNameMap, subclazz)
-  const clazzPropertyMap = buildPropertyMap(freshNameMap, clazz)
+  const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
+  const clazzPropertyMap = expelClazz(freshNameMap, clazz)
 
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
@@ -38,56 +40,46 @@ export function inclusionClazz(
       )
     }
 
-    const freshName = freshNameMap.get(name)
-    if (freshName === undefined) {
-      throw new InternalError(
-        "inclusionClazz freshName should have all the names from subclazz and clazz",
-      )
-    }
-
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      throw new ElaborationError(
-        `inclusionClazz expect subclazzProperty to have fulfilled property: ${name}`,
-      )
-    }
-
-    if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value === undefined
-    ) {
-      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
-    }
-
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value === undefined
-    ) {
-      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
-    }
-
-    if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      inclusion(ctx, subclazzProperty.type, clazzProperty.type)
-      const type = subclazzProperty.type
-      conversion(ctx, type, subclazzProperty.value, clazzProperty.value)
-    }
+    inclusionProperty(ctx, subclazzProperty, clazzProperty)
   }
 }
 
-type PropertyMap = Map<string, { type: Value; value?: Value }>
+type Property = { type: Value; value?: Value }
+
+type PropertyMap = Map<string, Property>
+
+export function inclusionProperty(
+  ctx: Ctx,
+  subproperty: Property,
+  property: Property,
+): void {
+  if (subproperty.value === undefined && property.value !== undefined) {
+    throw new ElaborationError(
+      `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
+    )
+  }
+
+  if (subproperty.value !== undefined && property.value === undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+  }
+
+  if (subproperty.value === undefined && property.value === undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+  }
+
+  if (subproperty.value !== undefined && property.value !== undefined) {
+    inclusion(ctx, subproperty.type, property.type)
+    conversion(ctx, subproperty.type, subproperty.value, property.value)
+  }
+}
 
 /**
 
-   NOTE `buildPropertyMap` will do side-effects on `propertyMap`.
+   NOTE `expelClazz` will do side-effects on `propertyMap`.
 
 **/
 
-function buildPropertyMap(
+function expelClazz(
   freshNameMap: Map<string, string>,
   clazz: Values.Clazz,
   propertyMap: PropertyMap = new Map(),
@@ -105,7 +97,7 @@ function buildPropertyMap(
       const freshName = freshNameMap.get(clazz.name)
       if (freshName === undefined) {
         throw new InternalError(
-          `buildPropertyMap expect freshNameMap to have clazz.name: ${clazz.name}`,
+          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
         )
       }
 
@@ -113,7 +105,7 @@ function buildPropertyMap(
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
       const rest = applyClosure(clazz.restClosure, typedNeutral)
       assertClazz(rest)
-      return buildPropertyMap(freshNameMap, rest, propertyMap)
+      return expelClazz(freshNameMap, rest, propertyMap)
     }
 
     case "ClazzFulfilled": {
@@ -122,7 +114,7 @@ function buildPropertyMap(
         value: clazz.property,
       })
 
-      return buildPropertyMap(freshNameMap, clazz.rest, propertyMap)
+      return expelClazz(freshNameMap, clazz.rest, propertyMap)
     }
   }
 }
