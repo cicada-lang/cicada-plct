@@ -2,7 +2,7 @@ import { Ctx, ctxNames } from "../ctx"
 import { ElaborationError } from "../errors"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { conversion, expelClazz, inclusion, Value } from "../value"
+import { conversion, expelClazz, inclusion } from "../value"
 
 /**
 
@@ -46,32 +46,27 @@ export function inclusionClazz(
       )
     }
 
-    inclusionProperty(ctx, name, subclazzProperty, clazzProperty)
-  }
-}
+    if (
+      subclazzProperty.value === undefined &&
+      clazzProperty.value !== undefined
+    ) {
+      throw new ElaborationError(
+        `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
+      )
+    }
 
-function inclusionProperty(
-  ctx: Ctx,
-  name: string,
-  subproperty: { type: Value; value?: Value },
-  property: { type: Value; value?: Value },
-): void {
-  if (subproperty.value === undefined && property.value !== undefined) {
-    throw new ElaborationError(
-      `inclusionProperty expect subproperty to have fulfilled property: ${name}`,
-    )
-  }
+    inclusion(ctx, subclazzProperty.type, clazzProperty.type)
 
-  if (subproperty.value !== undefined && property.value === undefined) {
-    inclusion(ctx, subproperty.type, property.type)
-  }
-
-  if (subproperty.value === undefined && property.value === undefined) {
-    inclusion(ctx, subproperty.type, property.type)
-  }
-
-  if (subproperty.value !== undefined && property.value !== undefined) {
-    inclusion(ctx, subproperty.type, property.type)
-    conversion(ctx, property.type, subproperty.value, property.value)
+    if (
+      subclazzProperty.value !== undefined &&
+      clazzProperty.value !== undefined
+    ) {
+      conversion(
+        ctx,
+        clazzProperty.type,
+        subclazzProperty.value,
+        clazzProperty.value,
+      )
+    }
   }
 }
