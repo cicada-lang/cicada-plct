@@ -84,6 +84,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return infer(ctx, Exps.unfoldFn(exp.bindings, exp.ret))
     }
 
+    case "FoldedFnWithRetType": {
+      return infer(
+        ctx,
+        Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),
+      )
+    }
+
     case "Ap": {
       const inferred = infer(ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
