@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Objekt", async () => {
   const output = await runCode(`
@@ -37,4 +37,19 @@ solve (a: String, b: String) {
 `)
 
   expect(output).toMatchInlineSnapshot('"{ a: b, b: \\"c\\" }"')
+})
+
+test("solve Objekt -- extra common properties", async () => {
+  await expectCodeToFail(`
+
+class AB {
+  a: String
+  b: String
+}
+
+solve (a: String, b: String, c: String) {
+  equation { a, b, c } = { a: b, b: "c", c: "c" } : AB
+}
+
+`)
 })
