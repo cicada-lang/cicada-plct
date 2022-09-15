@@ -7,32 +7,31 @@ import { assertClazzInCtx, readback, Value } from "../value"
 
 export function readbackProperties(
   ctx: Ctx,
-  type: Values.Clazz,
+  clazz: Values.Clazz,
   value: Value,
 ): Record<string, Cores.Core> {
-  switch (type.kind) {
+  switch (clazz.kind) {
     case "ClazzNull": {
       return {}
     }
 
     case "ClazzCons": {
-      const propertyValue = Actions.doDot(value, type.name)
-      const rest = applyClosure(type.restClosure, propertyValue)
+      const propertyValue = Actions.doDot(value, clazz.name)
+      const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
-      const propertyCore = readback(ctx, type.propertyType, propertyValue)
+      const propertyCore = readback(ctx, clazz.propertyType, propertyValue)
       return {
-        [type.name]: propertyCore,
+        [clazz.name]: propertyCore,
         ...readbackProperties(ctx, rest, value),
       }
     }
 
     case "ClazzFulfilled": {
-      const propertyValue = Actions.doDot(value, type.name)
-      const rest = type.rest
-      const propertyCore = readback(ctx, type.propertyType, propertyValue)
+      const propertyValue = Actions.doDot(value, clazz.name)
+      const propertyCore = readback(ctx, clazz.propertyType, propertyValue)
       return {
-        [type.name]: propertyCore,
-        ...readbackProperties(ctx, rest, value),
+        [clazz.name]: propertyCore,
+        ...readbackProperties(ctx, clazz.rest, value),
       }
     }
   }
