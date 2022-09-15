@@ -1,6 +1,5 @@
 # Module System
 
-deleteFirstFromCtx
 mod.delete
 
 Stmt.undo -- Let, LetThe, Clazz
