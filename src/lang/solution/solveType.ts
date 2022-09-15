@@ -1,6 +1,6 @@
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, freshenInCtx } from "../ctx"
-import { ElaborationError } from "../errors"
+import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { Solution, solve, solveClazz, solveNeutral } from "../solution"
 import * as Values from "../value"
@@ -80,7 +80,7 @@ export function solveType(
     return solveClazz(solution, ctx, left, right)
   }
 
-  throw new ElaborationError(
+  throw new EquationError(
     `solveType is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

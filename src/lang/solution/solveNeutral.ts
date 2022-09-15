@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import { EquationError } from "../errors"
 import { Neutral } from "../neutral"
 import { Solution, solveTypedValue } from "../solution"
 
@@ -11,7 +11,7 @@ export function solveNeutral(
 ): Solution {
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
-      throw new ElaborationError(
+      throw new EquationError(
         `solveNeutral expect left name: ${left.name}, to be equal to right name: ${right.name}`,
       )
     }
@@ -37,7 +37,7 @@ export function solveNeutral(
 
   if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
-      throw new ElaborationError(
+      throw new EquationError(
         `solveNeutral expect left property name: ${left.name}, to be equal to right property name: ${right.name}`,
       )
     }
@@ -46,7 +46,7 @@ export function solveNeutral(
     return solution
   }
 
-  throw new ElaborationError(
+  throw new EquationError(
     `solveNeutral is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

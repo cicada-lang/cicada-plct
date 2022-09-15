@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import { EquationError } from "../errors"
 import { Solution, solveNeutral } from "../solution"
 import { Value } from "../value"
 
@@ -23,12 +23,12 @@ export function solveByValue(
       return solution
     }
 
-    throw new ElaborationError(
+    throw new EquationError(
       `solveByValue expect left.literal: ${left.literal} to be the same as right.literal: ${right.literal}`,
     )
   }
 
-  throw new ElaborationError(
+  throw new EquationError(
     `solveByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }
