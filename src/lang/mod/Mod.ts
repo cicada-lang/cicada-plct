@@ -1,5 +1,5 @@
-import { Ctx, CtxFulfilled, CtxNull } from "../ctx"
-import { Env, EnvCons, EnvNull } from "../env"
+import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
+import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
 import { globals } from "./globals"
@@ -29,5 +29,10 @@ export class Mod {
   define(name: string, type: Value, value: Value): void {
     this.ctx = CtxFulfilled(name, type, value, this.ctx)
     this.env = EnvCons(name, value, this.env)
+  }
+
+  delete(name: string): void {
+    this.ctx = deleteFirstFromCtx(this.ctx, name)
+    this.env = deleteFirstFromEnv(this.env, name)
   }
 }
