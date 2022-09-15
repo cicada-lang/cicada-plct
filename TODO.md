@@ -1,9 +1,9 @@
 # Module System
 
+deleteFirstFromCtx
 mod.delete
 
-- deleteNameFromEnv
-- deleteNameFromCtx
+Stmt.undo -- Let, LetThe, Clazz
 
 Stmts.Import
 
