@@ -1,5 +1,3 @@
-solveProperties
-
-- solve-objekt.test.ts
-
 assertNoExtraCommonProperties
+
+- solve-objekt.test.ts -- extra common properties
