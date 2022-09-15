@@ -1,4 +1,4 @@
-import { rightPad } from "../../../../utils/right-pad"
+import { rightPad } from "../../../../utils/rightPad"
 import { Command } from "../command"
 import { ReadlineRepl } from "../readline-repl"
 

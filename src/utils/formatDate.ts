@@ -1,4 +1,4 @@
-import { leftPad } from "./left-pad"
+import { leftPad } from "./leftPad"
 
 export function formatDate(t: Date | number): string {
   if (typeof t === "number") t = new Date(t)

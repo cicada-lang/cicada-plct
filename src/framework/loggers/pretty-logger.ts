@@ -1,5 +1,5 @@
 import { colors } from "../../utils/colors"
-import { formatTime } from "../../utils/format-date"
+import { formatTime } from "../../utils/formatDate"
 import { indent } from "../../utils/indent"
 import { Logger, LogOptions } from "../logger"
 
