@@ -1,0 +1,6 @@
+let x = begin {
+  let y = sole
+  return y
+}
+
+compute x

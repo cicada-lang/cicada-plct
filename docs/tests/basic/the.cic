@@ -1,0 +1,9 @@
+compute the(Type, String)
+
+compute begin {
+  let the: String = "redefine the in local scope"
+  return the
+}
+
+let the: String = "redefine the at top-level"
+compute the

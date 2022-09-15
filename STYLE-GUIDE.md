@@ -22,6 +22,11 @@ do not use too much abbreviations.
 
 If you must, explain them before using.
 
+# About `framework/`
+
+Modules in `framework/` directory are independent helper modules
+that might be extracted to their own packages.
+
 # Open v.s. closed types
 
 Beware of open v.s. closed types,
