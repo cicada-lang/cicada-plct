@@ -13,4 +13,8 @@ export class Let extends Stmt {
     const value = evaluate(mod.env, inferred.core)
     mod.define(this.name, inferred.type, value)
   }
+
+  undo(mod: Mod): void {
+    mod.delete(this.name)
+  }
 }

@@ -20,4 +20,8 @@ export class LetThe extends Stmt {
     const value = evaluate(mod.env, enriched.core)
     mod.define(this.name, enriched.type, value)
   }
+
+  undo(mod: Mod): void {
+    mod.delete(this.name)
+  }
 }
