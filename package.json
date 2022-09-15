@@ -17,9 +17,11 @@
     "format": "npx prettier src --write"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.20"
+    "@cicada-lang/partech": "^0.1.20",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.185",
     "@types/node": "^18.7.16",
     "@vitest/coverage-c8": "^0.23.2",
     "@vitest/coverage-istanbul": "^0.23.2",
