@@ -1,10 +1,8 @@
-import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
-import { ElaborationError, InternalError } from "../errors"
-import * as Neutrals from "../neutral"
+import { ElaborationError } from "../errors"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazz, conversion, inclusion, Value } from "../value"
+import { conversion, expelClazz, inclusion, Value } from "../value"
 
 /**
 
@@ -52,15 +50,11 @@ export function inclusionClazz(
   }
 }
 
-type Property = { type: Value; value?: Value }
-
-type PropertyMap = Map<string, Property>
-
 function inclusionProperty(
   ctx: Ctx,
   name: string,
-  subproperty: Property,
-  property: Property,
+  subproperty: { type: Value; value?: Value },
+  property: { type: Value; value?: Value },
 ): void {
   if (subproperty.value === undefined && property.value !== undefined) {
     throw new ElaborationError(
@@ -79,45 +73,5 @@ function inclusionProperty(
   if (subproperty.value !== undefined && property.value !== undefined) {
     inclusion(ctx, subproperty.type, property.type)
     conversion(ctx, property.type, subproperty.value, property.value)
-  }
-}
-
-export function expelClazz(
-  freshNameMap: Map<string, string>,
-  clazz: Values.Clazz,
-  propertyMap: PropertyMap = new Map(),
-): PropertyMap {
-  switch (clazz.kind) {
-    case "ClazzNull": {
-      return propertyMap
-    }
-
-    case "ClazzCons": {
-      propertyMap.set(clazz.name, {
-        type: clazz.propertyType,
-      })
-
-      const freshName = freshNameMap.get(clazz.name)
-      if (freshName === undefined) {
-        throw new InternalError(
-          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
-        )
-      }
-
-      const variable = Neutrals.Var(freshName)
-      const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
-      const rest = applyClosure(clazz.restClosure, typedNeutral)
-      assertClazz(rest)
-      return expelClazz(freshNameMap, rest, propertyMap)
-    }
-
-    case "ClazzFulfilled": {
-      propertyMap.set(clazz.name, {
-        type: clazz.propertyType,
-        value: clazz.property,
-      })
-
-      return expelClazz(freshNameMap, clazz.rest, propertyMap)
-    }
   }
 }

@@ -6,6 +6,7 @@
 
 export * from "./clazzFromTypedValues"
 export * from "./clazzPropertyNames"
+export * from "./expelClazz"
 export * from "./fulfillClazz"
 export * from "./lookupProperty"
 export * from "./lookupPropertyType"
