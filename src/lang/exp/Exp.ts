@@ -219,22 +219,22 @@ export type FoldedFnWithRetType = {
   family: "Exp"
   kind: "FoldedFnWithRetType"
   bindings: Array<FnBinding>
-  ret: Exp
   retType: Exp
+  ret: Exp
 } & ExpMeta
 
 export function FoldedFnWithRetType(
   bindings: Array<FnBinding>,
-  ret: Exp,
   retType: Exp,
+  ret: Exp,
   span?: Span,
 ): FoldedFnWithRetType {
   return {
     family: "Exp",
     kind: "FoldedFnWithRetType",
     bindings,
-    ret,
     retType,
+    ret,
     span,
   }
 }
