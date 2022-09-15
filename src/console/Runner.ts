@@ -1,12 +1,13 @@
-// import { ModLoader } from "../lang/mod"
+import fs from "fs"
+import { Loader } from "../loader"
 
 export class Runner {
-  // loader = new ModLoader()
+  loader = new Loader()
 
   constructor() {
-    // this.loader.fetcher.register("file", (url) =>
-    //   fs.promises.readFile(url.pathname, "utf8"),
-    // )
+    this.loader.fetcher.register("file", (url) =>
+      fs.promises.readFile(url.pathname, "utf8"),
+    )
   }
 
   async run(
@@ -14,16 +15,12 @@ export class Runner {
     opts?: { silent?: boolean },
   ): Promise<{ error?: unknown }> {
     try {
-      // const mod = await this.loader.loadAndExecute(url)
-
-      // const output = mod.blocks.outputs
-      //   .filter((output) => output !== undefined)
-      //   .map((output) => (output as StmtOutput).formatForConsole())
-      //   .join("\n")
-
-      // if (output && !opts?.silent) {
-      //   console.log(output)
-      // }
+      const mod = await this.loader.loadAndRun(url)
+      const outputs = Array.from(mod.outputs.values())
+      const output = outputs.join("\n")
+      if (output && !opts?.silent) {
+        console.log(output)
+      }
 
       return { error: undefined }
     } catch (error) {
