@@ -1,6 +1,7 @@
-import { Ctx, CtxNull } from "../ctx"
-import { Env, EnvNull } from "../env"
+import { Ctx, CtxFulfilled, CtxNull } from "../ctx"
+import { Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
+import { Value } from "../value"
 import { globals } from "./globals"
 
 export interface ModOptions {
@@ -23,5 +24,10 @@ export class Mod {
         this.outputs.set(index, output)
       }
     }
+  }
+
+  define(name: string, type: Value, value: Value): void {
+    this.ctx = CtxFulfilled(name, type, value, this.ctx)
+    this.env = EnvCons(name, value, this.env)
   }
 }

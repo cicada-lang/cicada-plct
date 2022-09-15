@@ -1,6 +1,4 @@
 import { evaluate } from "../core"
-import { CtxFulfilled } from "../ctx"
-import { EnvCons } from "../env"
 import * as Exps from "../exp"
 import { infer, Span } from "../exp"
 import { Mod } from "../mod"
@@ -18,7 +16,6 @@ export class Clazz extends Stmt {
   async execute(mod: Mod): Promise<void> {
     const inferred = infer(mod.ctx, this.clazz)
     const value = evaluate(mod.env, inferred.core)
-    mod.ctx = CtxFulfilled(this.name, inferred.type, value, mod.ctx)
-    mod.env = EnvCons(this.name, value, mod.env)
+    mod.define(this.name, inferred.type, value)
   }
 }

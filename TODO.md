@@ -1,6 +1,14 @@
 # Module System
 
-- Stmts.Import
-- Stmt.undo
-- Loader -- inject itself to Mod
-- Mod has url
+mod.delete
+
+- deleteNameFromEnv
+- deleteNameFromCtx
+
+Stmt.undo
+
+Stmts.Import
+
+Loader -- inject itself to Mod
+
+Mod has url
