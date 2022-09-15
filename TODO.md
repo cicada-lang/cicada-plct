@@ -1,12 +1,14 @@
 # migrate cli from cicada-solo
 
-setup bin
-migrate framework/
+quit using "@xieyuheng/test-case" -- use vitest instead
+
+utils tests using vitest
+
 note about framework/
-migrate utils/
 setup config/
 setup app/
 setup console/
+setup bin/
 
 Loader -- inject to `Mod`
 
