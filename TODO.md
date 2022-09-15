@@ -3,7 +3,9 @@
 RunCommand
 CheckCommand
 ReplCommand
-DefaultCommand
+
+DefaultCommand -- `run`
+DefaultCommand -- `repl`
 
 Loader -- inject to `Mod`
 
