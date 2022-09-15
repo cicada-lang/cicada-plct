@@ -2,7 +2,7 @@ import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import { ElaborationError, InternalError } from "../errors"
 import * as Neutrals from "../neutral"
-import { freshen } from "../utils/freshen"
+import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazz, conversion, inclusion, Value } from "../value"
 
@@ -13,7 +13,7 @@ import { assertClazz, conversion, inclusion, Value } from "../value"
    All properties in `clazz` must also occurs in `subclazz`.
 
    To compare out of order `Clazz`es,
-   all we need is to prepare the `freshNames` first (`preparefreshNameMap`),
+   all we need is to prepare the `freshNames` first,
    because for example, in the case of `Sigma` in `conversionType`,
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
@@ -29,7 +29,13 @@ export function inclusionClazz(
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): void {
-  const freshNameMap = preparefreshNameMap(ctx, subclazz, clazz)
+  const freshNameMap = freshenNames(
+    new Set([...ctxNames(ctx)]),
+    new Set([
+      ...Values.clazzPropertyNames(subclazz),
+      ...Values.clazzPropertyNames(clazz),
+    ]),
+  )
 
   const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
   const clazzPropertyMap = expelClazz(freshNameMap, clazz)
@@ -76,13 +82,7 @@ function inclusionProperty(
   }
 }
 
-/**
-
-   NOTE `expelClazz` will do side-effects on `propertyMap`.
-
-**/
-
-function expelClazz(
+export function expelClazz(
   freshNameMap: Map<string, string>,
   clazz: Values.Clazz,
   propertyMap: PropertyMap = new Map(),
@@ -120,25 +120,4 @@ function expelClazz(
       return expelClazz(freshNameMap, clazz.rest, propertyMap)
     }
   }
-}
-
-function preparefreshNameMap(
-  ctx: Ctx,
-  subclazz: Values.Clazz,
-  clazz: Values.Clazz,
-): Map<string, string> {
-  const freshNameMap = new Map()
-
-  const subclazzNames = Values.clazzPropertyNames(subclazz)
-  const clazzNames = Values.clazzPropertyNames(clazz)
-
-  const used = new Set([...ctxNames(ctx), ...subclazzNames, ...clazzNames])
-
-  for (const name of [...subclazzNames, ...clazzNames]) {
-    const freshName = freshen(used, name)
-    freshNameMap.set(name, freshName)
-    used.add(freshName)
-  }
-
-  return freshNameMap
 }
