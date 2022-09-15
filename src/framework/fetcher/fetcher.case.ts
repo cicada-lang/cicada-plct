@@ -1,28 +1,28 @@
-import { TestCase } from "@xieyuheng/test-case"
+import { expect, test } from "vitest"
 import { Fetcher } from "../fetcher"
 
-export default class extends TestCase {
-  async "A fetcher can handle http and https by default."() {
-    const fetcher = new Fetcher()
-    await fetcher.fetch(new URL("http://example.com"))
-    await fetcher.fetch(new URL("https://example.com"))
-  }
+test("A fetcher can handle http and https by default.", async () => {
+  const fetcher = new Fetcher()
 
-  async "A fetcher can not handler other protocols by default."() {
-    const fetcher = new Fetcher()
+  await fetcher.fetch(new URL("http://example.com"))
+  await fetcher.fetch(new URL("https://example.com"))
+})
 
-    this.assertErrorAsync(async () => {
-      await fetcher.fetch(new URL("file-store:example-file.txt"))
-    })
-  }
+test("A fetcher can not handler other protocols by default.", async () => {
+  const fetcher = new Fetcher()
 
-  async "We can extend a fetcher by registering new handler to protocol."() {
-    const fetcher = new Fetcher()
-    fetcher.register("echo", (url) => {
-      return url.href
-    })
+  await expect(
+    fetcher.fetch(new URL("file-store:example-file.txt")),
+  ).rejects.toThrow()
+})
 
-    const href = await fetcher.fetch(new URL("echo:abc"))
-    this.assertEquals(href, "echo:abc")
-  }
-}
+test("We can extend a fetcher by registering new handler to protocol.", async () => {
+  const fetcher = new Fetcher()
+
+  fetcher.register("echo", (url) => {
+    return url.href
+  })
+
+  const href = await fetcher.fetch(new URL("echo:abc"))
+  expect(href).toEqual("echo:abc")
+})

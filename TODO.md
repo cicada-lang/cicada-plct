@@ -1,7 +1,5 @@
 # migrate cli from cicada-solo
 
-quit using "@xieyuheng/test-case" -- use vitest instead
-
 note about framework/
 setup config/
 setup app/
