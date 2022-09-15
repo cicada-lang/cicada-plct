@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.185",
-    "@types/node": "^18.7.16",
+    "@types/node": "^18.7.18",
     "@vitest/coverage-c8": "^0.23.2",
     "@vitest/coverage-istanbul": "^0.23.2",
     "@vitest/ui": "^0.23.2",
