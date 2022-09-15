@@ -26,15 +26,17 @@ export class DefaultCommand extends Command<Args, Opts> {
       return
     }
 
-    // const file = argv["file"]
+    const file = argv["file"]
 
-    // if (file === undefined) {
-    //   const dir = process.cwd()
-    //   const command = new Commands.ReplCommand()
-    //   await command.execute({ dir })
-    // } else {
-    //   const command = new Commands.RunCommand()
-    //   await command.execute({ file })
-    // }
+    if (file === undefined) {
+      const command = new Commands.CommonHelpCommand()
+      await command.execute({}, runner)
+      // const dir = process.cwd()
+      // const command = new Commands.ReplCommand()
+      // await command.execute({ dir })
+    } else {
+      const command = new Commands.RunCommand()
+      await command.execute({ file })
+    }
   }
 }

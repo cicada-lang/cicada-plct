@@ -1,13 +1,16 @@
 # migrate cli from cicada-solo
 
-RunCommand
-CheckCommand
+Loader -- inject to `Mod`
+
+Runner.loader
+
+Stmt.undo
+
 ReplCommand
 
-DefaultCommand -- `run`
-DefaultCommand -- `repl`
+Stmt.Import -- import from URL
 
-Loader -- inject to `Mod`
+DefaultCommand -- `repl`
 
 fix `utils/` files naming
 
