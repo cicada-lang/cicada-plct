@@ -2,8 +2,6 @@
 
 quit using "@xieyuheng/test-case" -- use vitest instead
 
-utils tests using vitest
-
 note about framework/
 setup config/
 setup app/
