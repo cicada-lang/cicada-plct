@@ -1,3 +1,4 @@
+import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
 import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
@@ -5,6 +6,7 @@ import { Value } from "../value"
 import { globals } from "./globals"
 
 export interface ModOptions {
+  loader: Loader
   stmts: Array<Stmt>
 }
 
