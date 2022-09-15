@@ -8,6 +8,7 @@ import { globals } from "./globals"
 export interface ModOptions {
   loader: Loader
   stmts: Array<Stmt>
+  url: URL
 }
 
 export class Mod {
@@ -16,6 +17,10 @@ export class Mod {
   outputs: Map<number, StmtOutput> = new Map()
 
   constructor(public options: ModOptions) {}
+
+  resolve(href: string): URL {
+    return new URL(href, this.options.url)
+  }
 
   async run(): Promise<void> {
     await globals.mount(this)

@@ -1,5 +1,4 @@
 # Module System
 
 Stmts.Import
-
-Mod has url
+Stmts.Import -- syntax

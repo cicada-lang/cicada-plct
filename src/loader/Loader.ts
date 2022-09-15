@@ -12,7 +12,7 @@ export class Loader {
 
     const code = await this.fetcher.fetch(url)
     const stmts = parseStmts(code)
-    const mod = new Mod({ loader: this, stmts })
+    const mod = new Mod({ loader: this, url, stmts })
 
     this.cache.set(url.href, mod)
     return mod
