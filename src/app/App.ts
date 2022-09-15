@@ -1,6 +1,6 @@
 import * as Loggers from "../framework/loggers"
-import { Config } from "./config"
-import { HomeFileStore } from "./home"
+import { Config } from "./Config"
+import { HomeFileStore } from "./HomeFileStore"
 
 export class App {
   config = new Config()
