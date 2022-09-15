@@ -1,9 +1,13 @@
 # migrate cli from cicada-solo
 
-setup app/
+app/home
+app.logger
+
 setup console/
 setup bin/
 
 Loader -- inject to `Mod`
+
+fix `utils/` files naming
 
 quit using axios -- use `fetch` instead
