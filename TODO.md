@@ -1,7 +1,6 @@
 # migrate cli from cicada-solo
 
 app/home
-app.logger
 
 setup console/
 setup bin/
