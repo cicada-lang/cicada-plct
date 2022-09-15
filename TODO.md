@@ -1,7 +1,5 @@
 # migrate cli from cicada-solo
 
-setup bin/
-
 RunCommand
 CheckCommand
 ReplCommand
