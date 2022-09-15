@@ -1,7 +1,11 @@
 # migrate cli from cicada-solo
 
-setup console/
 setup bin/
+
+RunCommand
+CheckCommand
+ReplCommand
+DefaultCommand
 
 Loader -- inject to `Mod`
 
