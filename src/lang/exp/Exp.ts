@@ -22,7 +22,7 @@ export type Exp =
   | Pi
   | FoldedPi
   | Ap
-  | ImplicitAP
+  | ImplicitAp
   | FoldedAp
   | Fn
   | AnnotatedFn
@@ -276,21 +276,21 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   }
 }
 
-export type ImplicitAP = {
+export type ImplicitAp = {
   family: "Exp"
-  kind: "ImplicitAP"
+  kind: "ImplicitAp"
   target: Exp
   arg: Implicit
 } & ExpMeta
 
-export function ImplicitAP(
+export function ImplicitAp(
   target: Exp,
   arg: Implicit,
   span?: Span,
-): ImplicitAP {
+): ImplicitAp {
   return {
     family: "Exp",
-    kind: "ImplicitAP",
+    kind: "ImplicitAp",
     target,
     arg,
     span,
