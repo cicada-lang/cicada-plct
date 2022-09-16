@@ -28,6 +28,7 @@ export type Exp =
   | AnnotatedFn
   | ImplicitFn
   | FoldedFn
+  | FoldedFnWithRetType
   | Sigma
   | FoldedSigma
   | Cons
@@ -209,6 +210,30 @@ export function FoldedFn(
     family: "Exp",
     kind: "FoldedFn",
     bindings,
+    ret,
+    span,
+  }
+}
+
+export type FoldedFnWithRetType = {
+  family: "Exp"
+  kind: "FoldedFnWithRetType"
+  bindings: Array<FnBinding>
+  retType: Exp
+  ret: Exp
+} & ExpMeta
+
+export function FoldedFnWithRetType(
+  bindings: Array<FnBinding>,
+  retType: Exp,
+  ret: Exp,
+  span?: Span,
+): FoldedFnWithRetType {
+  return {
+    family: "Exp",
+    kind: "FoldedFnWithRetType",
+    bindings,
+    retType,
     ret,
     span,
   }
