@@ -61,7 +61,7 @@ test("compute Fn -- evaluation blocked by variable -- FoldedAp", async () => {
 let apply2: (T: Type, x: T, y: T, f: (T, T) -> T) -> T =
   (T, x, y, f) => f(x, y)
 
-compute apply2 
+compute apply2
 compute apply2(Type)
 compute apply2(Type, Type)
 compute apply2(Type, Type, Type)
@@ -75,5 +75,21 @@ compute apply2(Type, Type, Type, (x, y) => x)
     (y, f) => f(Type, y): (y: Type, f: (_: Type, _1: Type) -> Type) -> Type
     (f) => f(Type, Type): (f: (_: Type, _1: Type) -> Type) -> Type
     Type: Type"
+  `)
+})
+
+test("compute Fn -- stmts", async () => {
+  const output = await runCode(`
+
+function id(T: Type, x: T) { 
+  return x 
+}
+
+compute id
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "(T, x) => x: (T: Type, x: T) -> T"
   `)
 })

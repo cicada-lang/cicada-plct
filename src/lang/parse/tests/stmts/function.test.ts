@@ -5,21 +5,35 @@ import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Let -- function", () => {
+  expect(parseStmts("function id(T: Type, x: T) { return x }")).toMatchObject(
+    deleteUndefined([
+      new Stmts.Let(
+        "id",
+        Exps.FoldedFn(
+          [
+            Exps.FnBindingAnnotated("T", Exps.Var("Type")),
+            Exps.FnBindingAnnotated("x", Exps.Var("T")),
+          ],
+          Exps.FoldedSequence([], Exps.Var("x")),
+        ),
+      ),
+    ]),
+  )
+})
+
+test("parse Let -- functionWithRetType", () => {
   expect(
     parseStmts("function id(T: Type, x: T): T { return x }"),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.LetThe(
+      new Stmts.Let(
         "id",
-        Exps.FoldedPi(
+        Exps.FoldedFnWithRetType(
           [
-            Exps.PiBindingNamed("T", Exps.Var("Type")),
-            Exps.PiBindingNamed("x", Exps.Var("T")),
+            Exps.FnBindingAnnotated("T", Exps.Var("Type")),
+            Exps.FnBindingAnnotated("x", Exps.Var("T")),
           ],
           Exps.Var("T"),
-        ),
-        Exps.FoldedFn(
-          [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
           Exps.FoldedSequence([], Exps.Var("x")),
         ),
       ),

@@ -70,6 +70,16 @@ export function operand_matcher(tree: pt.Tree): Exp {
         exp_matcher(ret),
         span,
       ),
+    "operand:fn_function_with_ret_type": (
+      { bindings, ret_type, ret },
+      { span },
+    ) =>
+      Exps.FoldedFnWithRetType(
+        matchers.fn_bindings_matcher(bindings),
+        exp_matcher(ret_type),
+        exp_matcher(ret),
+        span,
+      ),
     "operand:sigma_exists": ({ bindings, cdr_t }, { span }) =>
       Exps.FoldedSigma(
         matchers.sigma_bindings_matcher(bindings),

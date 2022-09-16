@@ -1,6 +1,4 @@
 import { evaluate } from "../core"
-import { CtxFulfilled } from "../ctx"
-import { EnvCons } from "../env"
 import { checkType, enrichOrCheck, Exp, Span } from "../exp"
 import { Mod } from "../mod"
 import { Stmt } from "../stmt"
@@ -20,7 +18,10 @@ export class LetThe extends Stmt {
     const typeValue = evaluate(mod.env, typeCore)
     const enriched = enrichOrCheck(mod.ctx, this.exp, typeValue)
     const value = evaluate(mod.env, enriched.core)
-    mod.ctx = CtxFulfilled(this.name, enriched.type, value, mod.ctx)
-    mod.env = EnvCons(this.name, value, mod.env)
+    mod.define(this.name, enriched.type, value)
+  }
+
+  undo(mod: Mod): void {
+    mod.delete(this.name)
   }
 }

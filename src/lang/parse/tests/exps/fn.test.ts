@@ -81,3 +81,15 @@ test("parse Fn -- implicit", () => {
     ),
   )
 })
+
+test("parse Fn -- with return type", () => {
+  expect(parseExp("function (x: String): String x")).toMatchObject(
+    deleteUndefined(
+      Exps.FoldedFnWithRetType(
+        [Exps.FnBindingAnnotated("x", Exps.Var("String"))],
+        Exps.Var("String"),
+        Exps.Var("x"),
+      ),
+    ),
+  )
+})

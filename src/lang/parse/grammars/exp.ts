@@ -70,6 +70,15 @@ export const operand = {
       '")"',
       { ret: "exp" },
     ],
+    "operand:fn_function_with_ret_type": [
+      '"function"',
+      '"("',
+      { bindings: "fn_bindings" },
+      '")"',
+      '":"',
+      { ret_type: "exp" },
+      { ret: "exp" },
+    ],
     "operand:sigma_exists": [
       '"exists"',
       '"("',
