@@ -1,8 +1,8 @@
 import fs from "fs"
-import { Loader } from "../loader"
+import { ScriptLoader } from "../loaders/ScriptLoader"
 
 export class Runner {
-  loader = new Loader()
+  loader = new ScriptLoader()
 
   constructor() {
     this.loader.fetcher.register("file", (url) =>

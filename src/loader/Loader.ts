@@ -17,10 +17,4 @@ export class Loader {
     this.cache.set(url.href, mod)
     return mod
   }
-
-  async loadAndRun(url: URL): Promise<Mod> {
-    const mod = await this.load(url)
-    await mod.run()
-    return mod
-  }
 }
