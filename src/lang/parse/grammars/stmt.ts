@@ -18,7 +18,7 @@ export const stmt = {
       '")"',
       { sequence: "sequence" },
     ],
-    "stmt:let_functionWithRetType": [
+    "stmt:let_function_with_ret_type": [
       '"function"',
       { name: "identifier" },
       '"("',

@@ -25,7 +25,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           matchers.sequence_matcher(sequence),
         ),
       ),
-    "stmt:let_functionWithRetType": (
+    "stmt:let_function_with_ret_type": (
       { name, bindings, ret_t, sequence },
       { span },
     ) =>
