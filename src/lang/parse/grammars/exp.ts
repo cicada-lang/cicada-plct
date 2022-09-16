@@ -24,10 +24,23 @@ export const operator = {
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [{ target: "operator" }, '"."', { name: "name" }],
+    "operator:dot_field_quote": [
+      { target: "operator" },
+      '"["',
+      { literal: { $pattern: ["string"] } },
+      '"]"',
+    ],
     "operator:dot_method": [
       { target: "operator" },
       '"."',
       { name: "name" },
+      { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
+    ],
+    "operator:dot_method_quote": [
+      { target: "operator" },
+      '"["',
+      { literal: { $pattern: ["string"] } },
+      '"]"',
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
     "operator:sequence_begin": ['"begin"', { sequence: "sequence" }],
