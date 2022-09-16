@@ -12,15 +12,10 @@ export class Loader {
 
     const code = await this.fetcher.fetch(url)
     const stmts = parseStmts(code)
-    const mod = new Mod({ loader: this, url, stmts })
+    const mod = new Mod({ loader: this, url })
+    await mod.executeStmts(stmts)
 
     this.cache.set(url.href, mod)
-    return mod
-  }
-
-  async loadAndRun(url: URL): Promise<Mod> {
-    const mod = await this.load(url)
-    await mod.run()
     return mod
   }
 }

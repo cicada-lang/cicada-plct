@@ -21,7 +21,7 @@ export class Import extends Stmt {
       throw new ElaborationError(`I can not circular import: ${this.path}`)
     }
 
-    const importedMod = await mod.options.loader.loadAndRun(url)
+    const importedMod = await mod.options.loader.load(url)
     for (const binding of this.bindings) {
       const type = lookupTypeInCtx(importedMod.ctx, binding.name)
       const value = lookupValueInEnv(importedMod.env, binding.name)
