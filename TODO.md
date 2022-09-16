@@ -1,4 +1,3 @@
-isIdentifier.test.ts
 fix clazz formatter
 
 update syntax for clazz
