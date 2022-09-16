@@ -1,4 +1,9 @@
 # REPL
 
-loaders/ScriptLoader
+runner and test use ScriptLoader
+
 loaders/ReplLoader
+
+Mod.init
+
+Mod.run -- take `stmts`
