@@ -77,3 +77,19 @@ compute apply2(Type, Type, Type, (x, y) => x)
     Type: Type"
   `)
 })
+
+test("compute Fn -- stmts", async () => {
+  const output = await runCode(`
+
+function id(T: Type, x: T) { 
+  return x 
+}
+
+compute id
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "(T, x) => x: (T: Type, x: T) -> T"
+  `)
+})

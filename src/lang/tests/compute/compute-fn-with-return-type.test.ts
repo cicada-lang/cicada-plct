@@ -23,3 +23,19 @@ let id = function (x: String): Type x
 
   `)
 })
+
+test("compute Fn return type -- stmts", async () => {
+  const output = await runCode(`
+
+function id(T: Type, x: T): T { 
+  return x 
+}
+
+compute id
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "(T, x) => x: (T: Type, x: T) -> T"
+  `)
+})
