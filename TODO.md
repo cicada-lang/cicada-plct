@@ -1,4 +1,7 @@
 # Module System
 
-Stmts.Import
+Stmts.ImportBinding
+
+Stmts.Import.execute
+
 Stmts.Import -- syntax
