@@ -69,7 +69,7 @@ function reorderTheRightByTheLeft(
     case "ClazzCons": {
       return reorderTheRightByTheLeft(
         left.rest,
-        removeProperty(left.name, right),
+        deleteProperty(left.name, right),
         appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
       )
     }
@@ -77,14 +77,14 @@ function reorderTheRightByTheLeft(
     case "ClazzFulfilled": {
       return reorderTheRightByTheLeft(
         left.rest,
-        removeProperty(left.name, right),
+        deleteProperty(left.name, right),
         appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
       )
     }
   }
 }
 
-function removeProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
+function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       return clazz
@@ -99,7 +99,7 @@ function removeProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
         clazz.name,
         clazz.localName,
         clazz.propertyType,
-        removeProperty(name, clazz.rest),
+        deleteProperty(name, clazz.rest),
       )
     }
 
@@ -112,7 +112,7 @@ function removeProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
         clazz.name,
         clazz.propertyType,
         clazz.property,
-        removeProperty(name, clazz.rest),
+        deleteProperty(name, clazz.rest),
       )
     }
   }
