@@ -1,0 +1,6 @@
+import { a } from "./a.cic"
+
+let b = "b"
+
+compute a
+compute b

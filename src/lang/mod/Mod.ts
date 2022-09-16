@@ -1,6 +1,7 @@
-import { Ctx, CtxNull } from "../ctx"
-import { Env, EnvNull } from "../env"
+import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
+import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
+import { Value } from "../value"
 import { globals } from "./globals"
 
 export class Mod {
@@ -12,6 +13,7 @@ export class Mod {
 
   async initialize(): Promise<void> {
     if (this.initialized) return
+
     await globals.mount(this)
   }
 
@@ -28,5 +30,15 @@ export class Mod {
     }
 
     return outputs
+  }
+
+  define(name: string, type: Value, value: Value): void {
+    this.ctx = CtxFulfilled(name, type, value, this.ctx)
+    this.env = EnvCons(name, value, this.env)
+  }
+
+  delete(name: string): void {
+    this.ctx = deleteFirstFromCtx(this.ctx, name)
+    this.env = deleteFirstFromEnv(this.env, name)
   }
 }

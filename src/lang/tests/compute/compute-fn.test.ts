@@ -61,7 +61,7 @@ test("compute Fn -- evaluation blocked by variable -- FoldedAp", async () => {
 let apply2: (T: Type, x: T, y: T, f: (T, T) -> T) -> T =
   (T, x, y, f) => f(x, y)
 
-compute apply2 
+compute apply2
 compute apply2(Type)
 compute apply2(Type, Type)
 compute apply2(Type, Type, Type)
