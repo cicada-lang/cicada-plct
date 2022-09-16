@@ -8,8 +8,8 @@ import { defineBinding, ImportBinding, undoBinding } from "../import"
 
 export class Import extends Stmt {
   constructor(
-    public path: string,
     public bindings: Array<ImportBinding>,
+    public path: string,
     public span?: Span,
   ) {
     super()

@@ -1,3 +1,3 @@
 # Module System
 
-Stmts.Import -- syntax
+docs/tests/module/

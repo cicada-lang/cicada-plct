@@ -62,6 +62,14 @@ export const stmt = {
       { equations: { $ap: ["zero_or_more", "equation"] } },
       '"}"',
     ],
+    "stmt:import": [
+      '"import"',
+      '"{"',
+      { bindings: { $ap: ["zero_or_more", "import_binding"] } },
+      '"}"',
+      '"from"',
+      { path: { $pattern: ["string"] } },
+    ],
   },
 }
 
