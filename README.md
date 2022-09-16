@@ -54,8 +54,7 @@ To make a contribution,
 [fork this project](https://github.com/cicada-lang/cicada/fork)
 and create a pull request.
 
-- [STYLE-GUIDE.md](STYLE-GUIDE.md)
-- [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
+Please read the [STYLE-GUIDE.md](STYLE-GUIDE.md) before you change the code.
 
 Remember to add yourself to [AUTHORS](AUTHORS).
 Your line belongs to you, you can write a little
@@ -73,4 +72,4 @@ and this file should be clean again at the end of your development.
 
 ## License
 
-- [GPLv3](LICENSE)
+[GPLv3](LICENSE)
