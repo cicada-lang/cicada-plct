@@ -12,15 +12,10 @@ export const sequence = {
 
 export const sequence_entry = {
   $grammar: {
-    "sequence_entry:let": [
-      '"let"',
-      { name: "identifier" },
-      '"="',
-      { exp: "exp" },
-    ],
+    "sequence_entry:let": ['"let"', { name: "name" }, '"="', { exp: "exp" }],
     "sequence_entry:let_the": [
       '"let"',
-      { name: "identifier" },
+      { name: "name" },
       '":"',
       { t: "exp" },
       '"="',
@@ -29,7 +24,7 @@ export const sequence_entry = {
     "sequence_entry:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
     "sequence_entry:let_function": [
       '"function"',
-      { name: "identifier" },
+      { name: "name" },
       '"("',
       { bindings: "pi_bindings" },
       '")"',

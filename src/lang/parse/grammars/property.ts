@@ -1,9 +1,9 @@
 export const property = {
   $grammar: {
-    "property:field_shorthand": [{ name: "identifier" }],
-    "property:field": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "property:field_shorthand": [{ name: "name" }],
+    "property:field": [{ name: "name" }, '":"', { exp: "exp" }],
     "property:method": [
-      { name: "identifier" },
+      { name: "name" },
       '"("',
       { bindings: "fn_bindings" },
       '")"',

@@ -1,10 +1,10 @@
 export const stmt = {
   $grammar: {
     "stmt:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
-    "stmt:let": ['"let"', { name: "identifier" }, '"="', { exp: "exp" }],
+    "stmt:let": ['"let"', { name: "name" }, '"="', { exp: "exp" }],
     "stmt:let_the": [
       '"let"',
-      { name: "identifier" },
+      { name: "name" },
       '":"',
       { t: "exp" },
       '"="',
@@ -12,7 +12,7 @@ export const stmt = {
     ],
     "stmt:let_function": [
       '"function"',
-      { name: "identifier" },
+      { name: "name" },
       '"("',
       { bindings: "fn_bindings" },
       '")"',
@@ -20,7 +20,7 @@ export const stmt = {
     ],
     "stmt:let_function_with_ret_type": [
       '"function"',
-      { name: "identifier" },
+      { name: "name" },
       '"("',
       { bindings: "fn_bindings" },
       '")"',
@@ -31,7 +31,7 @@ export const stmt = {
     "stmt:compute": ['"compute"', { exp: "exp" }],
     "stmt:clazz": [
       '"class"',
-      { name: "identifier" },
+      { name: "name" },
       '"{"',
       { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',

@@ -1,6 +1,6 @@
 export const solve_binding = {
   $grammar: {
-    "solve_binding:named": [{ name: "identifier" }, '":"', { type: "exp" }],
+    "solve_binding:named": [{ name: "name" }, '":"', { type: "exp" }],
   },
 }
 

@@ -1,7 +1,7 @@
 export const sigma_binding = {
   $grammar: {
     "sigma_binding:nameless": [{ exp: "exp" }],
-    "sigma_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "sigma_binding:named": [{ name: "name" }, '":"', { exp: "exp" }],
   },
 }
 

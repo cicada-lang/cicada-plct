@@ -1,4 +1,4 @@
-extract grammar for `key`
+extract grammar and matcher for `key`
 
 update syntax for Objekt
 
