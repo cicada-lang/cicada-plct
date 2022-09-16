@@ -1,6 +1,5 @@
-extract grammar and matcher for `key`
-
-update syntax for Objekt
+update syntax for objekt
+update syntax for clazz
 
 parse test
 
