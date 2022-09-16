@@ -1,4 +1,4 @@
-import { applyClosure, Closure, constClosure } from "../closure"
+import { applyClosure, Closure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import {
@@ -149,8 +149,10 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     case "Cons": {
       const carInferred = infer(ctx, exp.car)
       const cdrInferred = infer(ctx, exp.cdr)
+      const cdrTypeCore = readbackType(ctx, cdrInferred.type)
+      const cdrTypeClosure = Closure(ctxToEnv(ctx), "_", cdrTypeCore)
       return Inferred(
-        Values.Sigma(carInferred.type, constClosure("_", cdrInferred.type)),
+        Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),
       )
     }
