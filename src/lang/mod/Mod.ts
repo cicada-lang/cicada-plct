@@ -11,11 +11,17 @@ export class Mod {
   ctx: Ctx = CtxNull()
   env: Env = EnvNull()
   outputs: Map<number, StmtOutput> = new Map()
+  initialized = false
 
   constructor(public options: ModOptions) {}
 
-  async run(): Promise<void> {
+  async initialize(): Promise<void> {
+    if (this.initialized) return
     await globals.mount(this)
+  }
+
+  async run(): Promise<void> {
+    await this.initialize()
 
     for (const [index, stmt] of this.options.stmts.entries()) {
       const output = await stmt.execute(this)
