@@ -1,8 +1,8 @@
 import fs from "fs"
-import { ScriptLoader } from "../loaders/ScriptLoader"
+import { Loader } from "../loader"
 
 export class Runner {
-  loader = new ScriptLoader()
+  loader = new Loader()
 
   constructor() {
     this.loader.fetcher.register("file", (url) =>
@@ -15,7 +15,7 @@ export class Runner {
     opts?: { silent?: boolean },
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.loader.loadAndRun(url)
+      const mod = await this.loader.load(url)
       const outputs = Array.from(mod.outputs.values())
       const output = outputs.join("\n")
       if (output && !opts?.silent) {

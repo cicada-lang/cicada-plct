@@ -4,8 +4,8 @@ import { parseStmts } from "../parse"
 
 export async function runCode(code: string): Promise<string> {
   const stmts = parseStmts(code)
-  const mod = new Mod({ stmts })
-  await mod.run()
+  const mod = new Mod()
+  await mod.executeStmts(stmts)
 
   const outputs = Array.from(mod.outputs.values())
   return outputs.join("\n")

@@ -21,11 +21,8 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   async handle(event: ReplEvent): Promise<boolean> {
-    const { text } = event
-    return await this.execute(text)
-  }
+    let { text } = event
 
-  private async execute(text: string): Promise<boolean> {
     text = text.trim()
     const url = new URL("repl:")
     const mod = await this.loader.load(url)
