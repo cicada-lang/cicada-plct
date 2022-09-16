@@ -80,6 +80,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           .map(matchers.equation_matcher),
         span,
       ),
+    "stmt:import": ({ bindings, path }, { span }) =>
+      new Stmts.Import(
+        pt.matchers
+          .zero_or_more_matcher(bindings)
+          .map(matchers.import_binding_matcher),
+        pt.trim_boundary(pt.str(path), 1),
+        span,
+      ),
   })(tree)
 }
 

@@ -1,10 +1,14 @@
-import { Ctx, CtxNull } from "../ctx"
-import { Env, EnvNull } from "../env"
+import { Loader } from "../../loader"
+import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
+import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
+import { Value } from "../value"
 import { globals } from "./globals"
 
 export interface ModOptions {
+  loader: Loader
   stmts: Array<Stmt>
+  url: URL
 }
 
 export class Mod {
@@ -13,6 +17,10 @@ export class Mod {
   outputs: Map<number, StmtOutput> = new Map()
 
   constructor(public options: ModOptions) {}
+
+  resolve(href: string): URL {
+    return new URL(href, this.options.url)
+  }
 
   async run(): Promise<void> {
     await globals.mount(this)
@@ -23,5 +31,15 @@ export class Mod {
         this.outputs.set(index, output)
       }
     }
+  }
+
+  define(name: string, type: Value, value: Value): void {
+    this.ctx = CtxFulfilled(name, type, value, this.ctx)
+    this.env = EnvCons(name, value, this.env)
+  }
+
+  delete(name: string): void {
+    this.ctx = deleteFirstFromCtx(this.ctx, name)
+    this.env = deleteFirstFromEnv(this.env, name)
   }
 }
