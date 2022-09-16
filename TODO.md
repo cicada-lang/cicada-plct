@@ -1,7 +1,7 @@
-update syntax for clazz
-parse clazz.test.ts
-compute-clazz.test.ts
+compute-clazz-json.test.ts
 
 update syntax for dot
-parse dot.test.ts
-compute-dot.test.ts
+
+- parse dot-json.test.ts
+
+compute-dot-json.test.ts
