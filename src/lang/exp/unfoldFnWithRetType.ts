@@ -1,18 +1,19 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-/*
- * This code assumes that there's `the(expr, Type)` in the global context.
- * */
-
 export function unfoldFnWithRetType(
   bindings: Array<Exps.FnBinding>,
   retType: Exp,
   ret: Exp,
 ): Exp {
   // We implement the restriction of returnType by adding a `the` around returnExpr
-  if (bindings.length === 0)
-    return Exps.Ap(Exps.Ap(Exps.Var("the"), retType), ret)
+  if (bindings.length === 0) {
+    let the: Exp = Exps.Fn(
+      "retType",
+      Exps.AnnotatedFn("ret", Exps.Var("retType"), Exps.Var("ret")),
+    )
+    return Exps.Ap(Exps.Ap(the, retType), ret)
+  }
 
   const [binding, ...restBindings] = bindings
 
