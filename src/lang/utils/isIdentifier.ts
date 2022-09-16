@@ -1,5 +1,6 @@
 const identifierRegExp = new RegExp(
-  "^\\s*([-_\\p{Letter}][-_\\p{Letter}0-9]*)\\s*",
+  "^([-_\\p{Letter}][-_\\p{Letter}0-9]*)$",
+  "u",
 )
 
 export function isIdentifier(text: string): boolean {

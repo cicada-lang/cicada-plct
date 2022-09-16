@@ -1,5 +1,6 @@
 import * as Cores from "../core"
 import { Core } from "../core"
+import { isIdentifier } from "../utils/isIdentifier"
 
 export function formatCore(core: Core): string {
   switch (core.kind) {
@@ -52,7 +53,10 @@ export function formatCore(core: Core): string {
 
     case "Objekt": {
       const properties = Object.entries(core.properties).map(
-        ([name, property]) => `${name}: ${formatCore(property)}`,
+        ([name, property]) =>
+          isIdentifier(name)
+            ? `${name}: ${formatCore(property)}`
+            : `"${name}": ${formatCore(property)}`,
       )
 
       return `{ ${properties.join(", ")} }`
