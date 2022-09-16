@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("compute Fn with return type", async () => {
   const output = await runCode(`
@@ -13,5 +13,13 @@ compute id(Type)
   expect(output).toMatchInlineSnapshot(`
     "(T, x) => x: (T: Type, x: T) -> T
     (x) => x: (x: Type) -> Type"
+  `)
+})
+
+test("compute Fn with return type -- conflict", async () => {
+  const output = await expectCodeToFail(`
+
+let id = function (x: String): Type x
+
   `)
 })
