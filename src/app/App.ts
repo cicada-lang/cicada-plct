@@ -1,9 +1,12 @@
 import * as Loggers from "../framework/loggers"
-import { Config } from "./Config"
-import { HomeFileStore } from "./HomeFileStore"
+import { AppConfig } from "./AppConfig"
+import { AppHome } from "./AppHome"
+import { AppReplEventHandler } from "./AppReplEventHandler"
 
 export class App {
-  config = new Config()
   logger = new Loggers.PrettyLogger()
-  home = new HomeFileStore()
+
+  config = new AppConfig()
+  home = new AppHome()
+  replEventHandler = new AppReplEventHandler()
 }
