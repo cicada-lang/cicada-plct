@@ -1,8 +1,14 @@
+import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
 import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
 import { globals } from "./globals"
+
+export interface ModOptions {
+  loader: Loader
+  url: URL
+}
 
 export class Mod {
   ctx: Ctx = CtxNull()
@@ -10,6 +16,12 @@ export class Mod {
   outputs: Map<number, StmtOutput> = new Map()
   stmts: Array<Stmt> = []
   initialized = false
+
+  constructor(public options: ModOptions) {}
+
+  resolve(href: string): URL {
+    return new URL(href, this.options.url)
+  }
 
   async initialize(): Promise<void> {
     if (this.initialized) return
