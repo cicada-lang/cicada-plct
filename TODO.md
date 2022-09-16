@@ -1,3 +1,3 @@
 # REPL
 
-AppReplEventHandler.handle
+DefaultCommand -- use repl

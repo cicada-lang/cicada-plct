@@ -1,6 +1,7 @@
 import fs from "fs"
 import { ReplEvent, ReplEventHandler } from "../framework/repl"
 import { LangError } from "../lang/errors"
+import { parseStmts } from "../lang/parse"
 import { Loader } from "../loader"
 import { colors } from "../utils/colors"
 
@@ -24,11 +25,16 @@ export class AppReplEventHandler extends ReplEventHandler {
     let { text } = event
 
     text = text.trim()
+
     const url = new URL("repl:")
     const mod = await this.loader.load(url)
 
     try {
-      console.log(colors.blue(text))
+      const stmts = parseStmts(text)
+      const outputs = await mod.executeStmts(stmts)
+      for (const output of outputs) {
+        console.log(colors.blue(output))
+      }
       return true
     } catch (error) {
       if (!(error instanceof LangError)) throw error
