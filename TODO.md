@@ -1,4 +1,5 @@
-compute-objekt.test.ts
+fix objekt formatter
+fix clazz formatter
 
 update syntax for clazz
 parse clazz.test.ts
