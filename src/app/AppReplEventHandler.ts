@@ -12,7 +12,9 @@ export class AppReplEventHandler extends ReplEventHandler {
     this.loader.fetcher.register("file", (url) =>
       fs.promises.readFile(url.pathname, "utf8"),
     )
-    this.loader.fetcher.register("repl", (url) => "")
+    this.loader.fetcher.register("repl", (url) =>
+      url.pathname ? fs.promises.readFile("./" + url.pathname, "utf8") : "",
+    )
   }
 
   greeting(): void {
@@ -25,7 +27,7 @@ export class AppReplEventHandler extends ReplEventHandler {
 
     text = text.trim()
 
-    const url = new URL("repl:")
+    const url = new URL("repl://")
     const mod = await this.loader.load(url)
 
     try {
