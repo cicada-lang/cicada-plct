@@ -1,13 +1,12 @@
 import { Span } from "../../exp"
 import { Mod } from "../../mod"
 import { Stmt } from "../../stmt"
-
-export type ImportEntry = { name: string; alias?: string }
+import { ImportBinding, undoBinding } from "../import"
 
 export class Import extends Stmt {
   constructor(
     public path: string,
-    public entries: Array<ImportEntry>,
+    public bindings: Array<ImportBinding>,
     public span?: Span,
   ) {
     super()
@@ -18,8 +17,8 @@ export class Import extends Stmt {
   }
 
   undo(mod: Mod): void {
-    for (const { name, alias } of this.entries) {
-      mod.delete(alias || name)
+    for (const binding of this.bindings) {
+      undoBinding(mod, binding)
     }
   }
 }
