@@ -1,6 +1,9 @@
-update syntax for objekt
+compute-objekt.test.ts
+
 update syntax for clazz
+parse clazz.test.ts
+compute-clazz.test.ts
 
-parse test
-
-compute test
+update syntax for dot
+parse dot.test.ts
+compute-dot.test.ts
