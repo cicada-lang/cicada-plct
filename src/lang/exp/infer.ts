@@ -230,38 +230,21 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       assertClazzInCtx(ctx, clazz)
+
       const properties = Exps.inferProperties(ctx, exp.properties, clazz)
-
       const names = Object.keys(properties)
-      const extraInferred = Object.entries(exp.properties)
-        .filter(([name, exp]) => !names.includes(name))
-        .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
-      const extraProperties = Object.fromEntries(
-        extraInferred.map(([name, inferred]) => [name, inferred.core]),
-      )
 
-      const extraTypedValues = Object.fromEntries(
-        extraInferred.map(([name, inferred]) => [
-          name,
-          {
-            type: inferred.type,
-            value: evaluate(ctxToEnv(ctx), inferred.core),
-          },
-        ]),
-      )
-
-      const extraClazz = Values.clazzFromTypedValues(extraTypedValues)
+      const extra = Exps.inferExtraProperties(ctx, exp.properties, names)
 
       /**
-         Instead of the given type, we choose the inferred type
-         as the final type in the return value,
+         We add the inferred `extra.clazz` to the return value,
          because the body of the `New` might have extra properties,
          thus more specific than the given type.
       **/
 
       return Inferred(
-        Values.prependFulfilledClazz(extraClazz, clazz),
-        Cores.Objekt({ ...properties, ...extraProperties }),
+        Values.prependFulfilledClazz(extra.clazz, clazz),
+        Cores.Objekt({ ...properties, ...extra.properties }),
       )
     }
 
