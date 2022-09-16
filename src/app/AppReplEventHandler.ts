@@ -1,6 +1,5 @@
 import fs from "fs"
 import { ReplEvent, ReplEventHandler } from "../framework/repl"
-import { LangError } from "../lang/errors"
 import { parseStmts } from "../lang/parse"
 import { Loader } from "../loader"
 import { colors } from "../utils/colors"
@@ -37,7 +36,7 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      if (!(error instanceof LangError)) throw error
+      if (!(error instanceof Error)) throw error
       console.error(error.message)
       return false
     }
