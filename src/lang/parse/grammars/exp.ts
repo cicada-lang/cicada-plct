@@ -68,7 +68,7 @@ export const operand = {
       '"("',
       { bindings: "fn_bindings" },
       '")"',
-      { ret: "exp" },
+      { sequence: "sequence" },
     ],
     "operand:fn_function_with_ret_type": [
       '"function"',
@@ -77,7 +77,7 @@ export const operand = {
       '")"',
       '":"',
       { ret_type: "exp" },
-      { ret: "exp" },
+      { sequence: "sequence" },
     ],
     "operand:sigma_exists": [
       '"exists"',

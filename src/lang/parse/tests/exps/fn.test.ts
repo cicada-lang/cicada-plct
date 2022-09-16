@@ -8,8 +8,13 @@ test("parse Fn", () => {
     deleteUndefined(Exps.FoldedFn([Exps.FnBindingName("x")], Exps.Var("x"))),
   )
 
-  expect(parseExp("function (x) x")).toMatchObject(
-    deleteUndefined(Exps.FoldedFn([Exps.FnBindingName("x")], Exps.Var("x"))),
+  expect(parseExp("function (x) { return x }")).toMatchObject(
+    deleteUndefined(
+      Exps.FoldedFn(
+        [Exps.FnBindingName("x")],
+        Exps.FoldedSequence([], Exps.Var("x")),
+      ),
+    ),
   )
 })
 
@@ -23,11 +28,11 @@ test("parse Fn -- multiple bindings", () => {
     ),
   )
 
-  expect(parseExp("function (x, y) x")).toMatchObject(
+  expect(parseExp("function (x, y) { return x }")).toMatchObject(
     deleteUndefined(
       Exps.FoldedFn(
         [Exps.FnBindingName("x"), Exps.FnBindingName("y")],
-        Exps.Var("x"),
+        Exps.FoldedSequence([], Exps.Var("x")),
       ),
     ),
   )
@@ -69,26 +74,28 @@ test("parse Fn -- implicit", () => {
     ),
   )
 
-  expect(parseExp("function (implicit T: Type, y: T) T")).toMatchObject(
+  expect(
+    parseExp("function (implicit T: Type, y: T) { return T }"),
+  ).toMatchObject(
     deleteUndefined(
       Exps.FoldedFn(
         [
           Exps.FnBindingImplicit("T", Exps.Var("Type")),
           Exps.FnBindingAnnotated("y", Exps.Var("T")),
         ],
-        Exps.Var("T"),
+        Exps.FoldedSequence([], Exps.Var("T")),
       ),
     ),
   )
 })
 
 test("parse Fn -- with return type", () => {
-  expect(parseExp("function (x: String): String x")).toMatchObject(
+  expect(parseExp("function (x: String): String { return x }")).toMatchObject(
     deleteUndefined(
       Exps.FoldedFnWithRetType(
         [Exps.FnBindingAnnotated("x", Exps.Var("String"))],
         Exps.Var("String"),
-        Exps.Var("x"),
+        Exps.FoldedSequence([], Exps.Var("x")),
       ),
     ),
   )
