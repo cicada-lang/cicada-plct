@@ -29,7 +29,8 @@ npm run test:watch    # Watch the testing
 
 GitHub:
 
-- Main repo: [github.com/cicada-lang](https://github.com/cicada-lang)
+- Organization: [github.com/cicada-lang](https://github.com/cicada-lang)
+- Main repo: [github.com/cicada-lang/cicada](https://github.com/cicada-lang/cicada)
 
 Telegram:
 
