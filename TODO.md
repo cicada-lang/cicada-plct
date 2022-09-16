@@ -1,5 +1,3 @@
-fix clazz formatter
-
 update syntax for clazz
 parse clazz.test.ts
 compute-clazz.test.ts
