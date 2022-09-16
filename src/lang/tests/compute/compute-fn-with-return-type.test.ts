@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test.todo("compute Fn with return type", async () => {
+test("compute Fn with return type", async () => {
   const output = await runCode(`
 
 let id = function (T: Type, x: T): T x
