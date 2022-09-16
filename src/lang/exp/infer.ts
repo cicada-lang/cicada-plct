@@ -1,4 +1,4 @@
-import { applyClosure, constClosure } from "../closure"
+import { applyClosure, Closure, constClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import {
@@ -27,6 +27,7 @@ import {
   lookupPropertyOrFail,
   lookupPropertyTypeOrFail,
   readback,
+  readbackType,
   Value,
 } from "../value"
 
@@ -73,7 +74,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const inferredRet = infer(ctx, exp.ret)
-      const retTypeClosure = constClosure(exp.name, inferredRet.type)
+      const retTypeCore = readbackType(ctx, inferredRet.type)
+      const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
         Cores.Fn(exp.name, inferredRet.core),
