@@ -1,9 +1,9 @@
 import * as Cores from "../core"
-import { Core, evaluate } from "../core"
+import { evaluate } from "../core"
 import { Ctx, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { checkProperties, Exp, infer } from "../exp"
+import { checkProperties, Exp, infer, Inferred } from "../exp"
 import * as Values from "../value"
 import { assertClazzInCtx, inclusion, Value } from "../value"
 
@@ -15,24 +15,9 @@ import { assertClazzInCtx, inclusion, Value } from "../value"
    and return a more specific type
    which might be a subtype of `type`.
 
-   `Enriched` is the same as `Inferred`,
-   but we give it a name anyway.
-
 **/
 
-export type Enriched = {
-  type: Value
-  core: Core
-}
-
-export function Enriched(type: Value, core: Core): Enriched {
-  return {
-    type,
-    core,
-  }
-}
-
-export function enrich(ctx: Ctx, exp: Exp, type: Value): Enriched {
+export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
     const inferred = infer(ctx, exp)
     inclusion(ctx, inferred.type, type)
@@ -42,7 +27,7 @@ export function enrich(ctx: Ctx, exp: Exp, type: Value): Enriched {
   }
 }
 
-function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Enriched {
+function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
   switch (exp.kind) {
     case "FoldedObjekt": {
       return enrich(
@@ -82,7 +67,7 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Enriched {
 
       const extraClazz = Values.clazzFromTypedValues(extraTypedValues)
 
-      return Enriched(
+      return Inferred(
         Values.prependFulfilledClazz(extraClazz, type),
         Cores.Objekt({ ...properties, ...extraProperties }),
       )
