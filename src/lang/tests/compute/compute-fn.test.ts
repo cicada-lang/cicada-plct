@@ -78,7 +78,7 @@ compute apply2(Type, Type, Type, (x, y) => x)
   `)
 })
 
-test.todo("compute Fn -- issue 65", async () => {
+test("compute Fn -- issue 65", async () => {
   const output = await runCode(`
 
 let id = (T: Type, x: T) => x
