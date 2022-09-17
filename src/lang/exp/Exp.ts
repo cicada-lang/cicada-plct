@@ -1,5 +1,4 @@
 import { Span } from "../exp"
-import { Implicit } from "../value"
 
 type ExpMeta = { span?: Span }
 
@@ -335,14 +334,10 @@ export type ImplicitAp = {
   family: "Exp"
   kind: "ImplicitAp"
   target: Exp
-  arg: Implicit
+  arg: Exp
 } & ExpMeta
 
-export function ImplicitAp(
-  target: Exp,
-  arg: Implicit,
-  span?: Span,
-): ImplicitAp {
+export function ImplicitAp(target: Exp, arg: Exp, span?: Span): ImplicitAp {
   return {
     family: "Exp",
     kind: "ImplicitAp",
