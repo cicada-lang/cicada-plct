@@ -369,7 +369,7 @@ export function FoldedAp(target: Exp, args: Array<Arg>, span?: Span): FoldedAp {
   }
 }
 
-export type Arg = ArgPlain | ArgImplicit | ArgVague
+export type Arg = ArgPlain | ArgImplicit
 
 export type ArgPlain = {
   kind: "ArgPlain"
@@ -391,18 +391,6 @@ export type ArgImplicit = {
 export function ArgImplicit(exp: Exp): ArgImplicit {
   return {
     kind: "ArgImplicit",
-    exp,
-  }
-}
-
-export type ArgVague = {
-  kind: "ArgVague"
-  exp: Exp
-}
-
-export function ArgVague(exp: Exp): ArgVague {
-  return {
-    kind: "ArgVague",
     exp,
   }
 }

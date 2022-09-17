@@ -17,11 +17,5 @@ export function unfoldAp(target: Exp, args: Array<Exps.Arg>): Exp {
         `unfoldAp is not implemented for exp: ${arg.kind}`,
       )
     }
-
-    case "ArgVague": {
-      throw new ElaborationError(
-        `unfoldAp is not implemented for exp: ${arg.kind}`,
-      )
-    }
   }
 }
