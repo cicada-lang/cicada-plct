@@ -1,7 +1,5 @@
 # implicit
 
-syntax for Exps.ImplicitPi
-
 check-implicit-pi.test.ts
 compute-implicit-pi.test.ts
 
