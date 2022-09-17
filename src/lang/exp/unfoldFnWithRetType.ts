@@ -34,7 +34,6 @@ export function unfoldFnWithRetType(
     case "FnBindingImplicit": {
       return Exps.ImplicitFn(
         binding.name,
-        binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),
       )
     }

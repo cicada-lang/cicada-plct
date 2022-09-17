@@ -174,21 +174,14 @@ export type ImplicitFn = {
   family: "Exp"
   kind: "ImplicitFn"
   name: string
-  argType: Exp // Maybe we need to implement another ImplicitFn without argType
   ret: Exp
 } & ExpMeta
 
-export function ImplicitFn(
-  name: string,
-  argType: Exp,
-  ret: Exp,
-  span?: Span,
-): ImplicitFn {
+export function ImplicitFn(name: string, ret: Exp, span?: Span): ImplicitFn {
   return {
     family: "Exp",
     kind: "ImplicitFn",
     name,
-    argType,
     ret,
     span,
   }
@@ -273,14 +266,12 @@ export function FnBindingAnnotated(
 export type FnBindingImplicit = {
   kind: "FnBindingImplicit"
   name: string
-  type: Exp
 }
 
-export function FnBindingImplicit(name: string, type: Exp): FnBindingImplicit {
+export function FnBindingImplicit(name: string): FnBindingImplicit {
   return {
     kind: "FnBindingImplicit",
     name,
-    type,
   }
 }
 

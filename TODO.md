@@ -1,10 +1,12 @@
 # implicit
 
-ImplicitPi
+fix comment style in unfoldFnWithRetType
 
-ImplicitFn
+Exps.ImplicitPi
 
-ImplicitAp
+Exps.ImplicitFn
+
+Exps.ImplicitAp
 
 insertImplicitAp
 
