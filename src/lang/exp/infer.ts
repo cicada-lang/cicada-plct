@@ -101,13 +101,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
       }
 
-      /**
-         `ImplicitAp` insertion.
-      **/
-      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-        // TODO
-      }
-
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
       const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
@@ -118,9 +111,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ImplicitAp": {
-      /**
-         TODO Also do `ImplicitAp` insertion during `infer` of `ImplicitAp`.
-       **/
       const inferred = infer(ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
       const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
@@ -132,6 +122,19 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "FoldedAp": {
+      /**
+         `ImplicitAp` insertion.
+      **/
+      const inferred = infer(ctx, exp.target)
+      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+        return Exps.insertImplicitAp(
+          ctx,
+          inferred.core,
+          inferred.type,
+          exp.args,
+        )
+      }
+
       return infer(ctx, Exps.unfoldAp(exp.target, exp.args))
     }
 
