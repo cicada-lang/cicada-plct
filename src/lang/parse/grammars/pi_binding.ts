@@ -1,7 +1,7 @@
 export const pi_binding = {
   $grammar: {
     "pi_binding:nameless": [{ exp: "exp" }],
-    "pi_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "pi_binding:named": [{ name: "name" }, '":"', { exp: "exp" }],
   },
 }
 

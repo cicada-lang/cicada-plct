@@ -27,6 +27,12 @@ export function operator_matcher(tree: pt.Tree): Exp {
       Exps.Cdr(exp_matcher(target), span),
     "operator:dot_field": ({ target, name }, { span }) =>
       Exps.Dot(operator_matcher(target), pt.str(name), span),
+    "operator:dot_field_quote": ({ target, literal }, { span }) =>
+      Exps.Dot(
+        operator_matcher(target),
+        pt.trim_boundary(pt.str(literal), 1),
+        span,
+      ),
     "operator:dot_method": ({ target, name, args_group }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args_group)
@@ -37,6 +43,18 @@ export function operator_matcher(tree: pt.Tree): Exp {
             operator_matcher(target),
             pt.str(name),
             pt.span_closure([target.span, name.span]),
+          ),
+        ),
+    "operator:dot_method_quote": ({ target, literal, args_group }, { span }) =>
+      pt.matchers
+        .one_or_more_matcher(args_group)
+        .map((args) => matchers.args_matcher(args))
+        .reduce(
+          (result: Exp, args) => Exps.FoldedAp(result, args, span),
+          Exps.Dot(
+            operator_matcher(target),
+            pt.trim_boundary(pt.str(literal), 1),
+            pt.span_closure([target.span, literal.span]),
           ),
         ),
     "operator:sequence_begin": ({ sequence }, { span }) =>

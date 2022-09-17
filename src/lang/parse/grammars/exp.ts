@@ -16,22 +16,31 @@ export const exp = {
 
 export const operator = {
   $grammar: {
-    "operator:var": [{ name: "identifier" }],
+    "operator:var": [{ name: "name" }],
     "operator:ap": [
       { target: "operator" },
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "operator:dot_field": [
+    "operator:dot_field": [{ target: "operator" }, '"."', { name: "name" }],
+    "operator:dot_field_quote": [
       { target: "operator" },
-      '"."',
-      { name: "identifier" },
+      '"["',
+      { literal: { $pattern: ["string"] } },
+      '"]"',
     ],
     "operator:dot_method": [
       { target: "operator" },
       '"."',
-      { name: "identifier" },
+      { name: "name" },
+      { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
+    ],
+    "operator:dot_method_quote": [
+      { target: "operator" },
+      '"["',
+      { literal: { $pattern: ["string"] } },
+      '"]"',
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
     "operator:sequence_begin": ['"begin"', { sequence: "sequence" }],
@@ -110,7 +119,7 @@ export const operand = {
     ],
     "operand:new": [
       '"new"',
-      { name: "identifier" },
+      { name: "name" },
       '"{"',
       { properties: { $ap: ["zero_or_more", "property", '","'] } },
       { last_property: "property" },
@@ -119,7 +128,7 @@ export const operand = {
     ],
     "operand:new_ap": [
       '"new"',
-      { name: "identifier" },
+      { name: "name" },
       '"("',
       { args: "args" },
       '")"',

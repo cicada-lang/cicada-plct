@@ -1,13 +1,13 @@
 export const clazz_binding = {
   $grammar: {
     "clazz_binding:field_abstract": [
-      { name: "identifier" },
+      { key: "key" },
       '":"',
       { t: "exp" },
       { $ap: ["optional", '","'] },
     ],
     "clazz_binding:field_fulfilled": [
-      { name: "identifier" },
+      { key: "key" },
       '":"',
       { t: "exp" },
       '"="',
@@ -15,7 +15,7 @@ export const clazz_binding = {
       { $ap: ["optional", '","'] },
     ],
     "clazz_binding:method_abstract": [
-      { name: "identifier" },
+      { key: "key" },
       '"("',
       { bindings: "pi_bindings" },
       '")"',
@@ -24,7 +24,7 @@ export const clazz_binding = {
       { $ap: ["optional", '","'] },
     ],
     "clazz_binding:method_fulfilled": [
-      { name: "identifier" },
+      { key: "key" },
       '"("',
       { bindings: "pi_bindings" },
       '")"',

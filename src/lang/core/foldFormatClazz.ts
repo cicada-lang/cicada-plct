@@ -1,5 +1,6 @@
 import * as Cores from "../core"
 import { formatCore } from "../core"
+import { isIdentifier } from "../utils/isIdentifier"
 
 export function foldFormatClazz(clazz: Cores.Clazz): {
   bindings: Array<string>
@@ -11,7 +12,9 @@ export function foldFormatClazz(clazz: Cores.Clazz): {
 
     case "ClazzCons": {
       const propertyType = formatCore(clazz.propertyType)
-      const binding = `${clazz.name}: ${propertyType}`
+      const binding = isIdentifier(clazz.name)
+        ? `${clazz.name}: ${propertyType}`
+        : `"${clazz.name}": ${propertyType}`
       const { bindings } = foldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }
@@ -19,7 +22,9 @@ export function foldFormatClazz(clazz: Cores.Clazz): {
     case "ClazzFulfilled": {
       const propertyType = formatCore(clazz.propertyType)
       const property = formatCore(clazz.property)
-      const binding = `${clazz.name}: ${propertyType} = ${property}`
+      const binding = isIdentifier(clazz.name)
+        ? `${clazz.name}: ${propertyType} = ${property}`
+        : `"${clazz.name}": ${propertyType} = ${property}`
       const { bindings } = foldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }

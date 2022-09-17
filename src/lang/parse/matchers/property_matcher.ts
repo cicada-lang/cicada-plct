@@ -4,13 +4,16 @@ import * as matchers from "../matchers"
 
 export function property_matcher(tree: pt.Tree): Exps.Property {
   return pt.matcher<Exps.Property>({
-    "property:field_shorthand": ({ name }) =>
-      Exps.PropertyPlain(pt.str(name), Exps.Var(pt.str(name))),
-    "property:field": ({ name, exp }) =>
-      Exps.PropertyPlain(pt.str(name), matchers.exp_matcher(exp)),
-    "property:method": ({ name, bindings, sequence }) =>
+    "property:field_shorthand": ({ key }) =>
       Exps.PropertyPlain(
-        pt.str(name),
+        matchers.key_matcher(key),
+        Exps.Var(matchers.key_matcher(key)),
+      ),
+    "property:field": ({ key, exp }) =>
+      Exps.PropertyPlain(matchers.key_matcher(key), matchers.exp_matcher(exp)),
+    "property:method": ({ key, bindings, sequence }) =>
+      Exps.PropertyPlain(
+        matchers.key_matcher(key),
         Exps.FoldedFn(
           matchers.fn_bindings_matcher(bindings),
           matchers.sequence_matcher(sequence),
