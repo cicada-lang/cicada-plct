@@ -1,7 +1,5 @@
 # parallel to Pi
 
-formatCore ImplicitFn
-
 parse implicit-fn.test.ts
 
 check-implicit-fn.test.ts
