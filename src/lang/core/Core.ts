@@ -1,6 +1,7 @@
 export type Core =
   | Var
   | Pi
+  | ImplicitPi
   | Fn
   | Ap
   | Sigma
@@ -38,6 +39,28 @@ export function Pi(name: string, argType: Core, retType: Core): Pi {
   return {
     family: "Core",
     kind: "Pi",
+    name,
+    argType,
+    retType,
+  }
+}
+
+export type ImplicitPi = {
+  family: "Core"
+  kind: "ImplicitPi"
+  name: string
+  argType: Core
+  retType: Core
+}
+
+export function ImplicitPi(
+  name: string,
+  argType: Core,
+  retType: Core,
+): ImplicitPi {
+  return {
+    family: "Core",
+    kind: "ImplicitPi",
     name,
     argType,
     retType,

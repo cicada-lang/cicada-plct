@@ -92,10 +92,10 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
-    // default: {
-    //   throw new EvaluationError(
-    //     `evaluate is not implemented for core: ${core.kind}`,
-    //   )
-    // }
+    default: {
+      throw new EvaluationError(
+        `evaluate is not implemented for core: ${core.kind}`,
+      )
+    }
   }
 }

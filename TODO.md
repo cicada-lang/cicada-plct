@@ -1,6 +1,12 @@
 # implicit
 
-Cores.ImplicitPi & Values.ImplicitPi
+Values.ImplicitPi
+
+formatCore ImplicitPi
+checkType ImplicitPi
+evaluate ImplicitPi
+
+unfoldPi handles Exps.ImplicitPi
 
 Exps.ImplicitFn
 

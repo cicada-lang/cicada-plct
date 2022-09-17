@@ -1,5 +1,6 @@
 import * as Cores from "../core"
 import { Core } from "../core"
+import { EvaluationError } from "../errors"
 import { isIdentifier } from "../utils/isIdentifier"
 
 export function formatCore(core: Core): string {
@@ -66,10 +67,10 @@ export function formatCore(core: Core): string {
       return `${formatCore(core.target)}.${core.name}`
     }
 
-    // default: {
-    //   throw new EvaluationError(
-    //     `formatCore is not implemented for ${core.kind}`,
-    //   )
-    // }
+    default: {
+      throw new EvaluationError(
+        `formatCore is not implemented for ${core.kind}`,
+      )
+    }
   }
 }
