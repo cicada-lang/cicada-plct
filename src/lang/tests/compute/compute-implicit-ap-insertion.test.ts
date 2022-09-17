@@ -12,7 +12,10 @@ compute id("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(`
+    "sole: Trivial
+    \\"abc\\": String"
+  `)
 })
 
 test("compute ImplicitAp -- insertion -- infer", async () => {
@@ -25,5 +28,8 @@ compute infer("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(`
+    "Trivial: Type
+    String: Type"
+  `)
 })

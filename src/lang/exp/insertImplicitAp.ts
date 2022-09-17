@@ -22,14 +22,16 @@ export function insertImplicitAp(
   type: Value,
   target: Core,
   args: Array<Exps.Arg>,
+  passedArgs: Array<Core> = [],
 ): Inferred {
   const [arg, ...restArgs] = args
 
   if (arg?.kind !== "ArgPlain") {
-    // TODO deepWalk
+    // TODO `deepWalk`
     type = walk(solution, type)
     let inferred = Inferred(type, target)
     inferred = insertByPatternVars(patternVars, solution, ctx, inferred)
+    inferred = insertpassedArgs(inferred, passedArgs)
     inferred = collectInferredByArgs(ctx, inferred, args)
     return inferred
   }
@@ -51,28 +53,39 @@ export function insertImplicitAp(
     )
     const argCore = argInferred.core
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    const retType = applyClosure(type.retTypeClosure, argValue)
     return insertImplicitAp(
       patternVars,
       solution,
       ctx,
-      retType,
+      applyClosure(type.retTypeClosure, argValue),
       target,
       restArgs,
+      [...passedArgs, argCore],
     )
   } else {
     const argCore = check(ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    const retType = applyClosure(type.retTypeClosure, argValue)
     return insertImplicitAp(
       patternVars,
       solution,
       ctx,
-      retType,
+      applyClosure(type.retTypeClosure, argValue),
       target,
       restArgs,
+      [...passedArgs, argCore],
     )
   }
+}
+
+function insertpassedArgs(
+  inferred: Inferred,
+  passedArgs: Array<Core>,
+): Inferred {
+  for (const argCore of passedArgs) {
+    inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
+  }
+
+  return inferred
 }
 
 function insertByPatternVars(
