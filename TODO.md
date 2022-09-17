@@ -1,6 +1,6 @@
 # insertImplicitFn
 
-check Fn -- if given is ImplicitPi, we should insertImplicitFn
+check Fn -- if given type is ImplicitPi, we should insertImplicitFn
 
 # insertImplicitAp
 
