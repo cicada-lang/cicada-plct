@@ -101,6 +101,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
       }
 
+      /**
+         `ImplicitAp` insertion.
+      **/
+      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+        // TODO
+      }
+
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
       const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)

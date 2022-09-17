@@ -1,9 +1,18 @@
 # insertImplicitAp
 
+collectPatternVars -- name need to be fresh
+
+fix fresh name in `solve` -- must also be fresh in `solution`
+
 infer Ap -- insertImplicitAp
 
-[maybe] checkByInfer -- when inferred type is ImplicitPi, handle specially
+insertImplicitAp
 
-[maybe] deepWalk
+- note is it ok to use `readback` in current `ctx`?
 
-checkByInfer
+  - inferred `argType` are inferred in current `ctx`,
+    but Values are not evaluated in current `ctx`.
+
+deepWalk -- apply to the collected `patternVars`
+
+[maybe] checkByInfer -- when inferred type is ImplicitPi, handle it specially
