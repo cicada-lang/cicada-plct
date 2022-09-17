@@ -89,14 +89,35 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
+      {
+        const folded = Exps.foldAp(exp)
+        const inferred = infer(ctx, folded.target)
+        /**
+           `ImplicitAp` insertion.
+        **/
+        if (
+          Values.isValue(inferred.type, Values.ImplicitPi) &&
+          folded.args[0]?.kind !== "ArgImplicit"
+        ) {
+          return Exps.insertImplicitAp(
+            ctx,
+            inferred.core,
+            inferred.type,
+            folded.args,
+          )
+        }
+      }
+
       const inferred = infer(ctx, exp.target)
 
       {
         /**
            Try to use `targetValue` first, then use `inferred.type`.
         **/
-
         const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+        /**
+           Fulfilling type.
+        **/
         if (Values.isClazz(targetValue)) {
           const argCore = Exps.checkClazzArg(ctx, targetValue, exp.arg)
           return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
@@ -124,19 +145,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "FoldedAp": {
-      /**
-         `ImplicitAp` insertion.
-      **/
-      const inferred = infer(ctx, exp.target)
-      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-        return Exps.insertImplicitAp(
-          ctx,
-          inferred.core,
-          inferred.type,
-          exp.args,
-        )
-      }
-
       return infer(ctx, Exps.unfoldAp(exp.target, exp.args))
     }
 

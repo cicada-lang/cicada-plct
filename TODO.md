@@ -1,7 +1,5 @@
 # insertImplicitAp
 
-insertImplicitAp -- after `foldAp` during infer `Ap`
-
 insertImplicitAp
 
 deepWalk -- apply to the collected `patternVars`
