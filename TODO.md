@@ -1,8 +1,5 @@
 # parallel to Pi
 
-fix doAp for ImplicitAp
-Neutrals.ImplicitAp
-
 compute-implicit-ap.test.ts -- "compute ImplicitAp"
 
 # insertImplicitFn

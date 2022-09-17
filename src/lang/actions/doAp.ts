@@ -1,4 +1,5 @@
 import { applyClosure } from "../closure"
+import { EvaluationError } from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
@@ -17,10 +18,22 @@ export function doAp(target: Value, arg: Value): Value {
   }
 
   Values.assertValue(target, Values.TypedNeutral)
-  Values.assertValue(target.type, Values.Pi)
 
-  return Values.TypedNeutral(
-    applyClosure(target.type.retTypeClosure, arg),
-    Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg)),
+  if (Values.isValue(target.type, Values.Pi)) {
+    return Values.TypedNeutral(
+      applyClosure(target.type.retTypeClosure, arg),
+      Neutrals.Ap(target.neutral, TypedValue(target.type.argType, arg)),
+    )
+  }
+
+  if (Values.isValue(target.type, Values.ImplicitPi)) {
+    return Values.TypedNeutral(
+      applyClosure(target.type.retTypeClosure, arg),
+      Neutrals.ImplicitAp(target.neutral, TypedValue(target.type.argType, arg)),
+    )
+  }
+
+  throw new EvaluationError(
+    `doAp expect target.type to be Pi or ImplicitAp, instead of: ${target.type.kind}`,
   )
 }
