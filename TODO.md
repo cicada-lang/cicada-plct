@@ -2,9 +2,11 @@
 
 insertImplicitAp
 
+insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
+
 deepWalk -- apply to the collected `patternVars`
 
-insertImplicitAp -- refactor recursion structure
+[refactor] insertImplicitAp -- improve recursion structure
 
 [maybe] fix recursion structure of `solveType` and `solve`
 
