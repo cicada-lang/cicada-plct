@@ -39,7 +39,8 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.ImplicitFn(Closure(env, core.name, core.ret))
     }
 
-    case "Ap": {
+    case "Ap":
+    case "ImplicitAp": {
       return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 
