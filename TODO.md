@@ -1,6 +1,5 @@
 # implicit
 
-checkType ImplicitPi
 evaluate ImplicitPi
 
 unfoldPi handles Exps.ImplicitPi

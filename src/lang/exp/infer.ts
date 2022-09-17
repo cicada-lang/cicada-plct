@@ -49,6 +49,17 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "ImplicitPi": {
+      const argTypeCore = Exps.checkType(ctx, exp.argType)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(exp.name, argTypeValue, ctx)
+      const retTypeCore = Exps.checkType(ctx, exp.retType)
+      return Inferred(
+        Values.Type(),
+        Cores.ImplicitPi(exp.name, argTypeCore, retTypeCore),
+      )
+    }
+
     case "FoldedPi": {
       return infer(ctx, Exps.unfoldPi(exp.bindings, exp.retType))
     }
