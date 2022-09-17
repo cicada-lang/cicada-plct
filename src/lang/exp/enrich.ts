@@ -2,9 +2,9 @@ import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { checkProperties, Exp, infer, Inferred } from "../exp"
+import { Exp, Inferred } from "../exp"
 import * as Values from "../value"
-import { assertClazzInCtx, inclusion, Value } from "../value"
+import { Value } from "../value"
 
 /**
 
@@ -17,12 +17,12 @@ import { assertClazzInCtx, inclusion, Value } from "../value"
 **/
 
 export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
-  try {
-    const inferred = infer(ctx, exp)
-    inclusion(ctx, inferred.type, type)
-    return inferred
-  } catch (_error) {
+  const inferred = Exps.inferOrUndefined(ctx, exp)
+  if (inferred === undefined) {
     return enrichWithoutInfer(ctx, exp, type)
+  } else {
+    Values.inclusion(ctx, inferred.type, type)
+    return inferred
   }
 }
 
@@ -37,9 +37,9 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
     }
 
     case "Objekt": {
-      assertClazzInCtx(ctx, type)
+      Values.assertClazzInCtx(ctx, type)
 
-      const properties = checkProperties(ctx, exp.properties, type)
+      const properties = Exps.checkProperties(ctx, exp.properties, type)
       const names = Object.keys(properties)
 
       /**

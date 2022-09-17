@@ -95,16 +95,21 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         /**
            `ImplicitAp` insertion.
         **/
-        if (
-          Values.isValue(inferred.type, Values.ImplicitPi) &&
-          folded.args[0]?.kind !== "ArgImplicit"
-        ) {
-          return Exps.insertImplicitAp(
-            ctx,
-            inferred.core,
-            inferred.type,
-            folded.args,
-          )
+        if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+          const arg = folded.args[0]
+          switch (arg.kind) {
+            case "ArgPlain": {
+              const collected = Exps.collectPatternVars(ctx, inferred.type)
+              return Exps.insertImplicitAp(
+                collected.patternVars,
+                collected.ctx,
+                inferred.core,
+                collected.type,
+                arg.exp,
+                folded.args,
+              )
+            }
+          }
         }
       }
 
