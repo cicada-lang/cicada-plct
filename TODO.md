@@ -1,5 +1,3 @@
-parse implicit-ap.test.ts
-
 # insertImplicitFn
 
 check Fn -- if given is ImplicitPi, we should insertImplicitFn
