@@ -64,20 +64,20 @@ export function operand_matcher(tree: pt.Tree): Exp {
         exp_matcher(ret),
         span,
       ),
-    "operand:fn_function": ({ bindings, ret }, { span }) =>
+    "operand:fn_function": ({ bindings, sequence }, { span }) =>
       Exps.FoldedFn(
         matchers.fn_bindings_matcher(bindings),
-        exp_matcher(ret),
+        matchers.sequence_matcher(sequence),
         span,
       ),
     "operand:fn_function_with_ret_type": (
-      { bindings, ret_type, ret },
+      { bindings, ret_type, sequence },
       { span },
     ) =>
       Exps.FoldedFnWithRetType(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret_type),
-        exp_matcher(ret),
+        matchers.sequence_matcher(sequence),
         span,
       ),
     "operand:sigma_exists": ({ bindings, cdr_t }, { span }) =>
