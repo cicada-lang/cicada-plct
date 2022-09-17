@@ -1,4 +1,3 @@
-import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
@@ -13,9 +12,7 @@ export function unfoldAp(target: Exp, args: Array<Exps.Arg>): Exp {
     }
 
     case "ArgImplicit": {
-      throw new ElaborationError(
-        `unfoldAp is not implemented for exp: ${arg.kind}`,
-      )
+      return unfoldAp(Exps.ImplicitAp(target, arg.exp), restArgs)
     }
   }
 }

@@ -1,10 +1,9 @@
 # parallel to Pi
 
-unfoldAp -- ImplicitAp
 Cores.ImplicitAp
 Neutrals.ImplicitAp
 
-compute-implicit-fn.test.ts -- "compute ImplicitFn -- ImplicitAp"
+compute-implicit-ap.test.ts -- "compute ImplicitAp"
 
 # insertImplicitFn
 
