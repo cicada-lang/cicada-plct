@@ -111,6 +111,9 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ImplicitAp": {
+      /**
+         TODO Also do `ImplicitAp` insertion during `infer` of `ImplicitAp`.
+       **/
       const inferred = infer(ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
       const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
