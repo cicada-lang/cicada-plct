@@ -1,7 +1,5 @@
 # insertImplicitAp
 
-collectPatternVars -- name need to be fresh
-
 fix fresh name in `solve` -- must also be fresh in `solution`
 
 infer Ap -- insertImplicitAp
