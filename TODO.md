@@ -1,5 +1,3 @@
-extract insertImplicitFn
-
 # insertImplicitAp
 
 infer Ap -- insertImplicitAp
