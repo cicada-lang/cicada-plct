@@ -102,12 +102,22 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       }
 
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
-      const pi = inferred.type
-      const argCore = Exps.check(ctx, exp.arg, pi.argType)
+      const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
-        applyClosure(pi.retTypeClosure, argValue),
+        applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.Ap(inferred.core, argCore),
+      )
+    }
+
+    case "ImplicitAp": {
+      const inferred = infer(ctx, exp.target)
+      Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
+      const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      return Inferred(
+        applyClosure(inferred.type.retTypeClosure, argValue),
+        Cores.ImplicitAp(inferred.core, argCore),
       )
     }
 

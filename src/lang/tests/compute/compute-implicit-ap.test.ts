@@ -9,5 +9,5 @@ compute infer(implicit Trivial, sole)
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"Trivial: Type"')
 })
