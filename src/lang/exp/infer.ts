@@ -90,15 +90,17 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       const inferred = infer(ctx, exp.target)
-      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
 
-      /**
-         Try to use `targetValue` first, then use `inferred.type`.
-       **/
+      {
+        /**
+           Try to use `targetValue` first, then use `inferred.type`.
+        **/
 
-      if (Values.isClazz(targetValue)) {
-        const argCore = Exps.checkClazzArg(ctx, targetValue, exp.arg)
-        return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
+        const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+        if (Values.isClazz(targetValue)) {
+          const argCore = Exps.checkClazzArg(ctx, targetValue, exp.arg)
+          return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
+        }
       }
 
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
