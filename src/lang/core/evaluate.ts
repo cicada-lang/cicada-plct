@@ -24,6 +24,13 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
+    case "ImplicitPi": {
+      return Values.ImplicitPi(
+        evaluate(env, core.argType),
+        Closure(env, core.name, core.retType),
+      )
+    }
+
     case "Fn": {
       return Values.Fn(Closure(env, core.name, core.ret))
     }
@@ -92,10 +99,10 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
-    default: {
-      throw new EvaluationError(
-        `evaluate is not implemented for core: ${core.kind}`,
-      )
-    }
+    // default: {
+    //   throw new EvaluationError(
+    //     `evaluate is not implemented for core: ${core.kind}`,
+    //   )
+    // }
   }
 }

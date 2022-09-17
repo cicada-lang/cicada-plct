@@ -1,7 +1,5 @@
 # implicit
 
-evaluate ImplicitPi
-
 unfoldPi handles Exps.ImplicitPi
 
 syntax for Exps.ImplicitPi
