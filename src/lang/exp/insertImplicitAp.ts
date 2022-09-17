@@ -26,6 +26,7 @@ export function insertImplicitAp(
   const [arg, ...restArgs] = args
 
   if (arg?.kind !== "ArgPlain") {
+    // TODO deepWalk
     type = walk(solution, type)
     let inferred = Inferred(type, target)
     inferred = insertByPatternVars(patternVars, solution, ctx, inferred)
