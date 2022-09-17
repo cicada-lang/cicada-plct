@@ -1,7 +1,3 @@
-# parallel to Pi
-
-compute-implicit-ap.test.ts -- "compute ImplicitAp"
-
 # insertImplicitFn
 
 check Fn -- if given is ImplicitPi, we should insertImplicitFn

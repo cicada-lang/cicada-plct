@@ -1,6 +1,7 @@
 export const arg = {
   $grammar: {
     "arg:plain": [{ arg: "exp" }],
+    "arg:implicit": ['"implicit"', { arg: "exp" }],
   },
 }
 
