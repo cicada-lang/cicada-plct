@@ -1,9 +1,8 @@
 import * as Cores from "../core"
-import { Core, evaluate } from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { checkProperties, Exp, infer } from "../exp"
+import { checkProperties, Exp, infer, Inferred } from "../exp"
 import * as Values from "../value"
 import { assertClazzInCtx, inclusion, Value } from "../value"
 
@@ -15,24 +14,9 @@ import { assertClazzInCtx, inclusion, Value } from "../value"
    and return a more specific type
    which might be a subtype of `type`.
 
-   `Enriched` is the same as `Inferred`,
-   but we give it a name anyway.
-
 **/
 
-export type Enriched = {
-  type: Value
-  core: Core
-}
-
-export function Enriched(type: Value, core: Core): Enriched {
-  return {
-    type,
-    core,
-  }
-}
-
-export function enrich(ctx: Ctx, exp: Exp, type: Value): Enriched {
+export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
     const inferred = infer(ctx, exp)
     inclusion(ctx, inferred.type, type)
@@ -42,7 +26,7 @@ export function enrich(ctx: Ctx, exp: Exp, type: Value): Enriched {
   }
 }
 
-function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Enriched {
+function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
   switch (exp.kind) {
     case "FoldedObjekt": {
       return enrich(
@@ -56,35 +40,18 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Enriched {
       assertClazzInCtx(ctx, type)
 
       const properties = checkProperties(ctx, exp.properties, type)
+      const names = Object.keys(properties)
 
       /**
          Extra properties are not checked,
          thus we require that they are infer-able.
       **/
 
-      const names = Object.keys(properties)
-      const extraInferred = Object.entries(exp.properties)
-        .filter(([name, exp]) => !names.includes(name))
-        .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
-      const extraProperties = Object.fromEntries(
-        extraInferred.map(([name, inferred]) => [name, inferred.core]),
-      )
+      const extra = Exps.inferExtraProperties(ctx, exp.properties, names)
 
-      const extraTypedValues = Object.fromEntries(
-        extraInferred.map(([name, inferred]) => [
-          name,
-          {
-            type: inferred.type,
-            value: evaluate(ctxToEnv(ctx), inferred.core),
-          },
-        ]),
-      )
-
-      const extraClazz = Values.clazzFromTypedValues(extraTypedValues)
-
-      return Enriched(
-        Values.prependFulfilledClazz(extraClazz, type),
-        Cores.Objekt({ ...properties, ...extraProperties }),
+      return Inferred(
+        Values.prependFulfilledClazz(extra.clazz, type),
+        Cores.Objekt({ ...properties, ...extra.properties }),
       )
     }
 
