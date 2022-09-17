@@ -38,7 +38,8 @@ export function solveType(
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const freshName = freshen(new Set(ctxNames(ctx)), name)
+    const usedNames = new Set(ctxNames(ctx))
+    const freshName = freshen(usedNames, name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
 

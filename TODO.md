@@ -1,5 +1,7 @@
 # insertImplicitAp
 
+freshen can also take array
+
 fix fresh name in `solve` -- must also be fresh in `solution`
 
 infer Ap -- insertImplicitAp
