@@ -68,12 +68,12 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const argTypeCore = Exps.checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
-      const inferredRet = infer(ctx, exp.ret)
-      const retTypeCore = readbackType(ctx, inferredRet.type)
+      const retInferred = infer(ctx, exp.ret)
+      const retTypeCore = readbackType(ctx, retInferred.type)
       const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
-        Cores.Fn(exp.name, inferredRet.core),
+        Cores.Fn(exp.name, retInferred.core),
       )
     }
 

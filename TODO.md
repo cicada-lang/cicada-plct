@@ -1,7 +1,5 @@
 # insertImplicitAp
 
-insertImplicitAp -- take `argExp`
-
 insertImplicitAp
 
 deepWalk -- apply to the collected `patternVars`

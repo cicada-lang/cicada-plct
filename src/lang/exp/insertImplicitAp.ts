@@ -1,7 +1,7 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
-import { Exp, infer, Inferred } from "../exp"
+import { Exp, Inferred } from "../exp"
 import { PatternVar } from "../solution"
 import { Value } from "../value"
 
@@ -13,7 +13,10 @@ export function insertImplicitAp(
   argExp: Exp,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const inferredArg = infer(ctx, argExp)
-
-  throw new Error("TODO")
+  const argInferred = Exps.inferOrUndefined(ctx, argExp)
+  if (argInferred === undefined) {
+    throw new Error("TODO")
+  } else {
+    throw new Error("TODO")
+  }
 }
