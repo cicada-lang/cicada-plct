@@ -12,6 +12,7 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { SolutionNull } from "../solution"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
 
@@ -95,21 +96,19 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
         /**
            `ImplicitAp` insertion.
         **/
-        if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-          const arg = folded.args[0]
-          switch (arg.kind) {
-            case "ArgPlain": {
-              const collected = Exps.collectPatternVars(ctx, inferred.type)
-              return Exps.insertImplicitAp(
-                collected.patternVars,
-                collected.ctx,
-                inferred.core,
-                collected.type,
-                arg.exp,
-                folded.args,
-              )
-            }
-          }
+        if (
+          Values.isValue(inferred.type, Values.ImplicitPi) &&
+          folded.args[0]?.kind === "ArgPlain"
+        ) {
+          const collected = Exps.collectPatternVars(ctx, inferred.type)
+          return Exps.insertImplicitAp(
+            collected.patternVars,
+            SolutionNull(),
+            collected.ctx,
+            inferred.core,
+            collected.type,
+            folded.args,
+          )
         }
       }
 
