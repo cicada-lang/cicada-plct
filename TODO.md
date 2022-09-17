@@ -1,8 +1,8 @@
 # parallel to Pi
 
-compute-implicit-fn.test.ts
-
 Exps.ImplicitAp
+
+compute-implicit-fn.test.ts -- "compute ImplicitFn -- ImplicitAp"
 
 # insertImplicitFn
 

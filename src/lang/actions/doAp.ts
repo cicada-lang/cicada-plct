@@ -1,26 +1,23 @@
 import { applyClosure } from "../closure"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  assertValue,
-  fulfillClazz,
-  isClazz,
-  isValue,
-  TypedValue,
-  Value,
-} from "../value"
+import { TypedValue, Value } from "../value"
 
 export function doAp(target: Value, arg: Value): Value {
-  if (isValue(target, Values.Fn)) {
+  if (Values.isValue(target, Values.Fn)) {
     return applyClosure(target.retClosure, arg)
   }
 
-  if (isClazz(target)) {
-    return fulfillClazz(target, arg)
+  if (Values.isValue(target, Values.ImplicitFn)) {
+    return applyClosure(target.retClosure, arg)
   }
 
-  assertValue(target, Values.TypedNeutral)
-  assertValue(target.type, Values.Pi)
+  if (Values.isClazz(target)) {
+    return Values.fulfillClazz(target, arg)
+  }
+
+  Values.assertValue(target, Values.TypedNeutral)
+  Values.assertValue(target.type, Values.Pi)
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),
