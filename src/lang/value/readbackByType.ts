@@ -2,8 +2,9 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
-import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackProperties, readbackType, Value } from "../value"
 
@@ -46,7 +47,8 @@ export function readbackByType(
          This implements the eta-rule for `Fn`.
       **/
 
-      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const name = type.retTypeClosure.name
+      const freshName = freshen(new Set(ctxNames(ctx)), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
@@ -56,7 +58,8 @@ export function readbackByType(
     }
 
     case "ImplicitPi": {
-      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const name = type.retTypeClosure.name
+      const freshName = freshen(new Set(ctxNames(ctx)), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)

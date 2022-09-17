@@ -1,8 +1,9 @@
 import { applyClosure } from "../closure"
-import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
 import { Solution, solve, solveClazz, solveNeutral } from "../solution"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
 
@@ -37,7 +38,7 @@ export function solveType(
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const freshName = freshenInCtx(ctx, name)
+    const freshName = freshen(new Set(ctxNames(ctx)), name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
 
@@ -59,7 +60,7 @@ export function solveType(
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
-    const freshName = freshenInCtx(ctx, name)
+    const freshName = freshen(new Set(ctxNames(ctx)), name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(carType, variable)
 

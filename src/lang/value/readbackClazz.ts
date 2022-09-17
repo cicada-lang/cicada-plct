@@ -1,7 +1,8 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
-import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazzInCtx, readback, readbackType } from "../value"
 
@@ -12,7 +13,7 @@ export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
     }
 
     case "ClazzCons": {
-      const freshName = freshenInCtx(ctx, clazz.name)
+      const freshName = freshen(new Set(ctxNames(ctx)), clazz.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
       const restValue = applyClosure(clazz.restClosure, typedNeutral)
