@@ -1,6 +1,5 @@
 # parallel to Pi
 
-parse annotated-fn.test.ts
 parse fn-with-return-type.test.ts
 
 check-implicit-fn.test.ts

@@ -38,32 +38,6 @@ test("parse Fn -- multiple bindings", () => {
   )
 })
 
-test("parse Fn -- annotated", () => {
-  expect(parseExp("(x: Type, y: Type) => x")).toMatchObject(
-    deleteUndefined(
-      Exps.FoldedFn(
-        [
-          Exps.FnBindingAnnotated("x", Exps.Var("Type")),
-          Exps.FnBindingAnnotated("y", Exps.Var("Type")),
-        ],
-        Exps.Var("x"),
-      ),
-    ),
-  )
-
-  expect(parseExp("(x: Type, y) => x")).toMatchObject(
-    deleteUndefined(
-      Exps.FoldedFn(
-        [
-          Exps.FnBindingAnnotated("x", Exps.Var("Type")),
-          Exps.FnBindingName("y"),
-        ],
-        Exps.Var("x"),
-      ),
-    ),
-  )
-})
-
 test("parse Fn -- with return type", () => {
   expect(parseExp("function (x: String): String { return x }")).toMatchObject(
     deleteUndefined(
