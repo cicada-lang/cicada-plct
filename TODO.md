@@ -1,6 +1,5 @@
 # parallel to Pi
 
-Cores.ImplicitFn
 Values.ImplicitFn
 
 formatCore ImplicitFn

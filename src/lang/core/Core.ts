@@ -3,6 +3,7 @@ export type Core =
   | Pi
   | ImplicitPi
   | Fn
+  | ImplicitFn
   | Ap
   | Sigma
   | Cons
@@ -78,6 +79,22 @@ export function Fn(name: string, ret: Core): Fn {
   return {
     family: "Core",
     kind: "Fn",
+    name,
+    ret,
+  }
+}
+
+export type ImplicitFn = {
+  family: "Core"
+  kind: "ImplicitFn"
+  name: string
+  ret: Core
+}
+
+export function ImplicitFn(name: string, ret: Core): ImplicitFn {
+  return {
+    family: "Core",
+    kind: "ImplicitFn",
     name,
     ret,
   }
