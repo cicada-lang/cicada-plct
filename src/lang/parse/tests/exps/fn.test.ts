@@ -64,26 +64,6 @@ test("parse Fn -- annotated", () => {
   )
 })
 
-test("parse Fn -- implicit", () => {
-  expect(parseExp("(implicit x) => x")).toMatchObject(
-    deleteUndefined(
-      Exps.FoldedFn([Exps.FnBindingImplicit("x")], Exps.Var("x")),
-    ),
-  )
-
-  expect(parseExp("function (implicit T, y: T) { return T }")).toMatchObject(
-    deleteUndefined(
-      Exps.FoldedFn(
-        [
-          Exps.FnBindingImplicit("T"),
-          Exps.FnBindingAnnotated("y", Exps.Var("T")),
-        ],
-        Exps.FoldedSequence([], Exps.Var("T")),
-      ),
-    ),
-  )
-})
-
 test("parse Fn -- with return type", () => {
   expect(parseExp("function (x: String): String { return x }")).toMatchObject(
     deleteUndefined(
