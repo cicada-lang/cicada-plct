@@ -4,16 +4,19 @@ import * as Stmts from "../../../stmts"
 import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
-test("parse Let -- function", () => {
-  expect(parseStmts("function id(T: Type, x: T) { return x }")).toMatchObject(
+test("parse Let -- function with return type", () => {
+  expect(
+    parseStmts("function id(T: Type, x: T): T { return x }"),
+  ).toMatchObject(
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FoldedFn(
+        Exps.FoldedFnWithRetType(
           [
             Exps.FnBindingAnnotated("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),
           ],
+          Exps.Var("T"),
           Exps.FoldedSequence([], Exps.Var("x")),
         ),
       ),
