@@ -1,7 +1,5 @@
 # implicit
 
-Values.ImplicitPi
-
 formatCore ImplicitPi
 checkType ImplicitPi
 evaluate ImplicitPi
