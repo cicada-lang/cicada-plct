@@ -20,7 +20,8 @@ export function formatCore(core: Core): string {
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
-    case "Ap": {
+    case "Ap":
+    case "ImplicitAp": {
       const { target, args } = Cores.foldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }

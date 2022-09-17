@@ -1,6 +1,5 @@
 # parallel to Pi
 
-formatCore ImplicitAp
 fix doAp for ImplicitAp
 Neutrals.ImplicitAp
 
