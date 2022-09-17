@@ -55,6 +55,16 @@ export function readbackByType(
       return Cores.Fn(freshName, readback(ctx, retType, ret))
     }
 
+    case "ImplicitPi": {
+      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const variable = Neutrals.Var(freshName)
+      const typedNeutral = Values.TypedNeutral(type.argType, variable)
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      ctx = CtxCons(freshName, type.argType, ctx)
+      const ret = Actions.doAp(value, typedNeutral)
+      return Cores.ImplicitFn(freshName, readback(ctx, retType, ret))
+    }
+
     case "Sigma": {
       /**
          `Sigma`s are also η-expanded.
