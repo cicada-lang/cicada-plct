@@ -7,6 +7,7 @@ export type Value =
   | Pi
   | ImplicitPi
   | Fn
+  | ImplicitFn
   | Sigma
   | Cons
   | String
@@ -92,6 +93,20 @@ export function Fn(retClosure: Closure): Fn {
   return {
     family: "Value",
     kind: "Fn",
+    retClosure,
+  }
+}
+
+export type ImplicitFn = {
+  family: "Value"
+  kind: "ImplicitFn"
+  retClosure: Closure
+}
+
+export function ImplicitFn(retClosure: Closure): ImplicitFn {
+  return {
+    family: "Value",
+    kind: "ImplicitFn",
     retClosure,
   }
 }
