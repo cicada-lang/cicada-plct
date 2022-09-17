@@ -4,7 +4,13 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, solve, solveProperties, solveType } from "../solution"
+import {
+  Solution,
+  solutionNames,
+  solve,
+  solveProperties,
+  solveType,
+} from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isValue, Value } from "../value"
@@ -27,7 +33,8 @@ export function solveByType(
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const freshName = freshen(ctxNames(ctx), name)
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+      const freshName = freshen(usedNames, name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
