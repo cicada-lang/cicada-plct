@@ -1,6 +1,8 @@
 # parallel to Pi
 
-Cores.ImplicitAp
+evaluate ImplicitAp
+formatCore ImplicitAp
+fix doAp for ImplicitAp
 Neutrals.ImplicitAp
 
 compute-implicit-ap.test.ts -- "compute ImplicitAp"
