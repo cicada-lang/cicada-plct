@@ -1,13 +1,13 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv, freshenInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, enrich, Exp } from "../exp"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { assertTypeInCtx, Value } from "../value"
+import { Value } from "../value"
 
 export function check(ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -21,12 +21,25 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
-      assertTypeInCtx(ctx, type, Values.Pi)
-      const { argType, retTypeClosure } = type
-      const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
-      const retTypeValue = applyClosure(retTypeClosure, argValue)
-      ctx = CtxCons(exp.name, argType, ctx)
-      const retCore = check(ctx, exp.ret, retTypeValue)
+      /**
+         `ImplicitFn` insertion.
+       **/
+      if (Values.isValue(type, Values.ImplicitPi)) {
+        const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+        const variable = Neutrals.Var(freshName)
+        const arg = Values.TypedNeutral(type.argType, variable)
+        const retType = applyClosure(type.retTypeClosure, arg)
+        /**
+           TODO Scope BUG, the `freshName` might occurs in `exp`.
+         **/
+        return Cores.ImplicitFn(freshName, check(ctx, exp, retType))
+      }
+
+      Values.assertTypeInCtx(ctx, type, Values.Pi)
+      const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
+      const retType = applyClosure(type.retTypeClosure, arg)
+      ctx = CtxCons(exp.name, type.argType, ctx)
+      const retCore = check(ctx, exp.ret, retType)
       return Cores.Fn(exp.name, retCore)
     }
 
@@ -37,12 +50,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
          the number of implicits in `ImplicitFn`.
       **/
 
-      assertTypeInCtx(ctx, type, Values.ImplicitPi)
-      const { argType, retTypeClosure } = type
-      const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
-      const retTypeValue = applyClosure(retTypeClosure, argValue)
-      ctx = CtxCons(exp.name, argType, ctx)
-      const retCore = check(ctx, exp.ret, retTypeValue)
+      Values.assertTypeInCtx(ctx, type, Values.ImplicitPi)
+      const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
+      const retType = applyClosure(type.retTypeClosure, arg)
+      ctx = CtxCons(exp.name, type.argType, ctx)
+      const retCore = check(ctx, exp.ret, retType)
       return Cores.ImplicitFn(exp.name, retCore)
     }
 
@@ -73,7 +85,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Cons": {
-      assertTypeInCtx(ctx, type, Values.Sigma)
+      Values.assertTypeInCtx(ctx, type, Values.Sigma)
       const { carType, cdrTypeClosure } = type
       const carCore = check(ctx, exp.car, carType)
       const carValue = evaluate(ctxToEnv(ctx), carCore)
