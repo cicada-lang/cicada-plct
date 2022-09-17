@@ -2,12 +2,16 @@
 
 stmt function handle implicit fn
 
+- pass function-with-implicit.test.ts
+
 check-implicit-ap-insertion.test.ts -- use `function` stmt
 compute-implicit-ap-insertion.test.ts -- use `function` stmt
 
-insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
+implicit-ap-insertion -- test deepWalk
 
-deepWalk -- apply to the collected `patternVars`
+deepWalk -- note about target of deepWalk
+
+insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
 
 [refactor] insertImplicitAp -- improve recursion structure
 
@@ -16,4 +20,5 @@ deepWalk -- apply to the collected `patternVars`
 - Should be able to call `solveType` as API
 
 [maybe] insertImplicitFn -- after `foldFn`
+
 [maybe] checkByInfer -- when inferred type is ImplicitPi, handle it specially
