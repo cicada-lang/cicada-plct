@@ -1,12 +1,13 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, Inferred } from "../exp"
-import { PatternVar, Solution, solve } from "../solution"
+import { lookupValueInSolution, PatternVar, Solution, solve } from "../solution"
 import * as Values from "../value"
-import { Value } from "../value"
+import { readback, Value } from "../value"
 
 export function insertImplicitAp(
   patternVars: Array<PatternVar>,
@@ -33,13 +34,9 @@ export function insertImplicitAp(
   Values.assertTypeInCtx(ctx, type, Values.Pi)
 
   if (argInferred !== undefined) {
-    solution = solve(
-      solution,
-      ctx,
-      Values.Type(),
-      argInferred.type,
-      type.argType,
-    )
+    const left = argInferred.type
+    const right = type.argType
+    solution = solve(solution, ctx, Values.Type(), left, right)
   }
 
   const argCore = check(ctx, arg.exp, type.argType)
@@ -67,7 +64,23 @@ function insertByPatternVar(
   ctx: Ctx,
   inferred: Inferred,
 ): Inferred {
-  throw new Error("TODO")
+  const argValue = lookupValueInSolution(solution, patternVar.neutral.name)
+  if (argValue === undefined) {
+    throw new ElaborationError(
+      `Unsolved patternVar: ${patternVar.neutral.name}`,
+    )
+  }
+
+  const argType = lookupTypeInCtx(ctx, patternVar.neutral.name)
+  if (argType === undefined) {
+    throw new ElaborationError(
+      `Undefined arg type name: ${patternVar.neutral.name}`,
+    )
+  }
+
+  const argCore = readback(ctx, argType, argValue)
+
+  return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
 }
 
 function collectInferredByArgs(

@@ -1,8 +1,6 @@
 # insertImplicitAp
 
-extrat insertByPatternVar
-
-insertImplicitAp
+check-implicit-ap-insertion.test.ts
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
 
