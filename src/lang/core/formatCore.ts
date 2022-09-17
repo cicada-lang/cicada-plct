@@ -8,17 +8,20 @@ export function formatCore(core: Core): string {
       return core.name
     }
 
-    case "Pi": {
+    case "Pi":
+    case "ImplicitPi": {
       const { bindings, retType } = Cores.foldFormatPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }
 
-    case "Fn": {
+    case "Fn":
+    case "ImplicitFn": {
       const { bindings, ret } = Cores.foldFormatFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
-    case "Ap": {
+    case "Ap":
+    case "ImplicitAp": {
       const { target, args } = Cores.foldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }

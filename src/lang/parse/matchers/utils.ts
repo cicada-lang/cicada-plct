@@ -11,5 +11,9 @@ export function piBindingtoFnBindingFrom(
     case "PiBindingNamed": {
       return Exps.FnBindingName(binding.name)
     }
+
+    case "PiBindingImplicit": {
+      return Exps.FnBindingImplicit(binding.name)
+    }
   }
 }

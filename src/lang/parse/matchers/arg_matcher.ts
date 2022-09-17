@@ -5,6 +5,7 @@ import * as matchers from "../matchers"
 export function arg_matcher(tree: pt.Tree): Exps.Arg {
   return pt.matcher<Exps.Arg>({
     "arg:plain": ({ arg }) => Exps.ArgPlain(matchers.exp_matcher(arg)),
+    "arg:implicit": ({ arg }) => Exps.ArgImplicit(matchers.exp_matcher(arg)),
   })(tree)
 }
 

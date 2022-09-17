@@ -5,7 +5,9 @@ export type Value =
   | TypedNeutral
   | Type
   | Pi
+  | ImplicitPi
   | Fn
+  | ImplicitFn
   | Sigma
   | Cons
   | String
@@ -16,7 +18,14 @@ export type Value =
   | Objekt
   | Implicit
 
-export type AlreadyType = Type | Pi | Sigma | String | Trivial | Clazz
+export type AlreadyType =
+  | Type
+  | Pi
+  | ImplicitPi
+  | Sigma
+  | String
+  | Trivial
+  | Clazz
 
 export type TypedNeutral = {
   family: "Value"
@@ -62,6 +71,25 @@ export function Pi(argType: Value, retTypeClosure: Closure): Pi {
   }
 }
 
+export type ImplicitPi = {
+  family: "Value"
+  kind: "ImplicitPi"
+  argType: Value
+  retTypeClosure: Closure
+}
+
+export function ImplicitPi(
+  argType: Value,
+  retTypeClosure: Closure,
+): ImplicitPi {
+  return {
+    family: "Value",
+    kind: "ImplicitPi",
+    argType,
+    retTypeClosure,
+  }
+}
+
 export type Fn = {
   family: "Value"
   kind: "Fn"
@@ -72,6 +100,20 @@ export function Fn(retClosure: Closure): Fn {
   return {
     family: "Value",
     kind: "Fn",
+    retClosure,
+  }
+}
+
+export type ImplicitFn = {
+  family: "Value"
+  kind: "ImplicitFn"
+  retClosure: Closure
+}
+
+export function ImplicitFn(retClosure: Closure): ImplicitFn {
+  return {
+    family: "Value",
+    kind: "ImplicitFn",
     retClosure,
   }
 }

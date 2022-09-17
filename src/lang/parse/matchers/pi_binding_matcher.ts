@@ -8,6 +8,8 @@ export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
       Exps.PiBindingNameless(matchers.exp_matcher(exp)),
     "pi_binding:named": ({ name, exp }) =>
       Exps.PiBindingNamed(pt.str(name), matchers.exp_matcher(exp)),
+    "pi_binding:implicit": ({ name, exp }) =>
+      Exps.PiBindingImplicit(pt.str(name), matchers.exp_matcher(exp)),
   })(tree)
 }
 

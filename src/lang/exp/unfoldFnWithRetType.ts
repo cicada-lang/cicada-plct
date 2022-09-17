@@ -6,7 +6,10 @@ export function unfoldFnWithRetType(
   retType: Exp,
   ret: Exp,
 ): Exp {
-  // We implement the restriction of returnType by adding a `the` around returnExpr
+  /**
+     We implement the restriction of returnType by adding a `the` around the `ret`.
+  **/
+
   if (bindings.length === 0) {
     let typedRet = Exps.SequenceLetThe("ret", retType, ret, Exps.Var("ret"))
 
@@ -34,7 +37,6 @@ export function unfoldFnWithRetType(
     case "FnBindingImplicit": {
       return Exps.ImplicitFn(
         binding.name,
-        binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),
       )
     }

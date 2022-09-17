@@ -1,5 +1,4 @@
 import { Span } from "../exp"
-import { Implicit } from "../value"
 
 type ExpMeta = { span?: Span }
 
@@ -20,6 +19,7 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | Pi
+  | ImplicitPi
   | FoldedPi
   | Ap
   | ImplicitAp
@@ -80,6 +80,30 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   }
 }
 
+export type ImplicitPi = {
+  family: "Exp"
+  kind: "ImplicitPi"
+  name: string
+  argType: Exp
+  retType: Exp
+} & ExpMeta
+
+export function ImplicitPi(
+  name: string,
+  argType: Exp,
+  retType: Exp,
+  span?: Span,
+): ImplicitPi {
+  return {
+    family: "Exp",
+    kind: "ImplicitPi",
+    name,
+    argType,
+    retType,
+    span,
+  }
+}
+
 export type FoldedPi = {
   family: "Exp"
   kind: "FoldedPi"
@@ -101,7 +125,7 @@ export function FoldedPi(
   }
 }
 
-export type PiBinding = PiBindingNameless | PiBindingNamed
+export type PiBinding = PiBindingNameless | PiBindingNamed | PiBindingImplicit
 
 export type PiBindingNameless = {
   kind: "PiBindingNameless"
@@ -124,6 +148,20 @@ export type PiBindingNamed = {
 export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
   return {
     kind: "PiBindingNamed",
+    name,
+    type,
+  }
+}
+
+export type PiBindingImplicit = {
+  kind: "PiBindingImplicit"
+  name: string
+  type: Exp
+}
+
+export function PiBindingImplicit(name: string, type: Exp): PiBindingImplicit {
+  return {
+    kind: "PiBindingImplicit",
     name,
     type,
   }
@@ -174,21 +212,14 @@ export type ImplicitFn = {
   family: "Exp"
   kind: "ImplicitFn"
   name: string
-  argType: Exp // Maybe we need to implement another ImplicitFn without argType
   ret: Exp
 } & ExpMeta
 
-export function ImplicitFn(
-  name: string,
-  argType: Exp,
-  ret: Exp,
-  span?: Span,
-): ImplicitFn {
+export function ImplicitFn(name: string, ret: Exp, span?: Span): ImplicitFn {
   return {
     family: "Exp",
     kind: "ImplicitFn",
     name,
-    argType,
     ret,
     span,
   }
@@ -273,14 +304,12 @@ export function FnBindingAnnotated(
 export type FnBindingImplicit = {
   kind: "FnBindingImplicit"
   name: string
-  type: Exp
 }
 
-export function FnBindingImplicit(name: string, type: Exp): FnBindingImplicit {
+export function FnBindingImplicit(name: string): FnBindingImplicit {
   return {
     kind: "FnBindingImplicit",
     name,
-    type,
   }
 }
 
@@ -305,14 +334,10 @@ export type ImplicitAp = {
   family: "Exp"
   kind: "ImplicitAp"
   target: Exp
-  arg: Implicit
+  arg: Exp
 } & ExpMeta
 
-export function ImplicitAp(
-  target: Exp,
-  arg: Implicit,
-  span?: Span,
-): ImplicitAp {
+export function ImplicitAp(target: Exp, arg: Exp, span?: Span): ImplicitAp {
   return {
     family: "Exp",
     kind: "ImplicitAp",
@@ -339,7 +364,7 @@ export function FoldedAp(target: Exp, args: Array<Arg>, span?: Span): FoldedAp {
   }
 }
 
-export type Arg = ArgPlain | ArgImplicit | ArgVague
+export type Arg = ArgPlain | ArgImplicit
 
 export type ArgPlain = {
   kind: "ArgPlain"
@@ -361,18 +386,6 @@ export type ArgImplicit = {
 export function ArgImplicit(exp: Exp): ArgImplicit {
   return {
     kind: "ArgImplicit",
-    exp,
-  }
-}
-
-export type ArgVague = {
-  kind: "ArgVague"
-  exp: Exp
-}
-
-export function ArgVague(exp: Exp): ArgVague {
-  return {
-    kind: "ArgVague",
     exp,
   }
 }

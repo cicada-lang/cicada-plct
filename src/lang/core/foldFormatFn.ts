@@ -11,6 +11,12 @@ export function foldFormatFn(core: Core): {
       return { bindings: [binding, ...bindings], ret }
     }
 
+    case "ImplicitFn": {
+      const binding = `implicit ${core.name}`
+      const { bindings, ret } = foldFormatFn(core.ret)
+      return { bindings: [binding, ...bindings], ret }
+    }
+
     default: {
       return { bindings: [], ret: formatCore(core) }
     }
