@@ -1,7 +1,5 @@
 # implicit
 
-fix comment style in unfoldFnWithRetType
-
 Exps.ImplicitPi
 
 Exps.ImplicitFn
