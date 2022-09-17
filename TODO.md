@@ -1,4 +1,4 @@
-# implicit
+# parallel to Pi
 
 Cores.ImplicitFn
 Values.ImplicitFn
@@ -15,6 +15,12 @@ readbackByType -- ImplicitPi
 compute-implicit-fn.test.ts
 
 Exps.ImplicitAp
+
+# insertImplicitFn
+
+check Fn -- if given is ImplicitPi, we should insertImplicitFn
+
+# insertImplicitAp
 
 infer Ap -- insertImplicitAp
 
