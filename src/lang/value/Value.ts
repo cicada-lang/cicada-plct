@@ -18,7 +18,14 @@ export type Value =
   | Objekt
   | Implicit
 
-export type AlreadyType = Type | Pi | Sigma | String | Trivial | Clazz
+export type AlreadyType =
+  | Type
+  | Pi
+  | ImplicitPi
+  | Sigma
+  | String
+  | Trivial
+  | Clazz
 
 export type TypedNeutral = {
   family: "Value"

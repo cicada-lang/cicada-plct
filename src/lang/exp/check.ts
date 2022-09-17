@@ -30,6 +30,22 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Fn(exp.name, retCore)
     }
 
+    case "ImplicitFn": {
+      /**
+         TODO We can also insert `ImplicitFn` when
+         the number of implicits in `ImplicitPi` is greater than
+         the number of implicits in `ImplicitFn`.
+      **/
+
+      assertTypeInCtx(ctx, type, Values.ImplicitPi)
+      const { argType, retTypeClosure } = type
+      const argValue = Values.TypedNeutral(argType, Neutrals.Var(exp.name))
+      const retTypeValue = applyClosure(retTypeClosure, argValue)
+      ctx = CtxCons(exp.name, argType, ctx)
+      const retCore = check(ctx, exp.ret, retTypeValue)
+      return Cores.ImplicitFn(exp.name, retCore)
+    }
+
     case "AnnotatedFn": {
       return checkByInfer(ctx, exp, type)
     }

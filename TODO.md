@@ -1,7 +1,5 @@
 # parallel to Pi
 
-check-implicit-fn.test.ts
-
 readbackByType -- ImplicitPi
 
 compute-implicit-fn.test.ts
