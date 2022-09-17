@@ -21,6 +21,9 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
+      /**
+         `ImplicitFn` insertion.
+       **/
       if (Values.isValue(type, Values.ImplicitPi)) {
         const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
         const variable = Neutrals.Var(freshName)
@@ -29,7 +32,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
         /**
            TODO Scope BUG, the `freshName` might occurs in `exp`.
          **/
-        return Cores.Fn(freshName, check(ctx, exp, retType))
+        return Cores.ImplicitFn(freshName, check(ctx, exp, retType))
       }
 
       Values.assertTypeInCtx(ctx, type, Values.Pi)
