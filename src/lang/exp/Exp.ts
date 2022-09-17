@@ -126,7 +126,7 @@ export function FoldedPi(
   }
 }
 
-export type PiBinding = PiBindingNameless | PiBindingNamed
+export type PiBinding = PiBindingNameless | PiBindingNamed | PiBindingImplicit
 
 export type PiBindingNameless = {
   kind: "PiBindingNameless"
@@ -149,6 +149,20 @@ export type PiBindingNamed = {
 export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
   return {
     kind: "PiBindingNamed",
+    name,
+    type,
+  }
+}
+
+export type PiBindingImplicit = {
+  kind: "PiBindingImplicit"
+  name: string
+  type: Exp
+}
+
+export function PiBindingImplicit(name: string, type: Exp): PiBindingImplicit {
+  return {
+    kind: "PiBindingImplicit",
     name,
     type,
   }

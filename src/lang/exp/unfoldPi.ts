@@ -18,5 +18,13 @@ export function unfoldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
         unfoldPi(restBindings, retType),
       )
     }
+
+    case "PiBindingImplicit": {
+      return Exps.ImplicitPi(
+        binding.name,
+        binding.type,
+        unfoldPi(restBindings, retType),
+      )
+    }
   }
 }
