@@ -20,6 +20,7 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | Pi
+  | ImplicitPi
   | FoldedPi
   | Ap
   | ImplicitAp
@@ -73,6 +74,30 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   return {
     family: "Exp",
     kind: "Pi",
+    name,
+    argType,
+    retType,
+    span,
+  }
+}
+
+export type ImplicitPi = {
+  family: "Exp"
+  kind: "ImplicitPi"
+  name: string
+  argType: Exp
+  retType: Exp
+} & ExpMeta
+
+export function ImplicitPi(
+  name: string,
+  argType: Exp,
+  retType: Exp,
+  span?: Span,
+): ImplicitPi {
+  return {
+    family: "Exp",
+    kind: "ImplicitPi",
     name,
     argType,
     retType,
