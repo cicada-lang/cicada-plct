@@ -1,9 +1,11 @@
 # insertImplicitAp
 
+compute-implicit-ap-insertion.test.ts
+
 stmt function handle implicit fn
 
-check-implicit-ap-insertion.test.ts
-compute-implicit-ap-insertion.test.ts
+check-implicit-ap-insertion.test.ts -- use `function` stmt
+compute-implicit-ap-insertion.test.ts -- use `function` stmt
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
 

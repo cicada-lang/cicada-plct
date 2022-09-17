@@ -1,11 +1,11 @@
 import { Ctx } from "../ctx"
 import {
   isPatternVar,
-  lookupValueInSolution,
   Solution,
   SolutionCons,
   solveByType,
   solveByValue,
+  walk,
 } from "../solution"
 import { Value } from "../value"
 
@@ -55,14 +55,4 @@ export function solve(
     solveByType(solution, ctx, type, left, right) ||
     solveByValue(solution, ctx, type, left, right)
   )
-}
-
-function walk(solution: Solution, value: Value): Value {
-  while (isPatternVar(value)) {
-    const found = lookupValueInSolution(solution, value.neutral.name)
-    if (found === undefined) return value
-    value = found
-  }
-
-  return value
 }

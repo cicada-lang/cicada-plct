@@ -5,7 +5,13 @@ import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, Inferred } from "../exp"
-import { lookupValueInSolution, PatternVar, Solution, solve } from "../solution"
+import {
+  lookupValueInSolution,
+  PatternVar,
+  Solution,
+  solve,
+  walk,
+} from "../solution"
 import * as Values from "../value"
 import { readback, Value } from "../value"
 
@@ -20,6 +26,7 @@ export function insertImplicitAp(
   const [arg, ...restArgs] = args
 
   if (arg?.kind !== "ArgPlain") {
+    type = walk(solution, type)
     let inferred = Inferred(type, target)
     inferred = insertByPatternVars(patternVars, solution, ctx, inferred)
     inferred = collectInferredByArgs(ctx, inferred, args)
@@ -34,15 +41,37 @@ export function insertImplicitAp(
   Values.assertTypeInCtx(ctx, type, Values.Pi)
 
   if (argInferred !== undefined) {
-    const left = argInferred.type
-    const right = type.argType
-    solution = solve(solution, ctx, Values.Type(), left, right)
+    solution = solve(
+      solution,
+      ctx,
+      Values.Type(),
+      argInferred.type,
+      type.argType,
+    )
+    const argCore = argInferred.core
+    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    const retType = applyClosure(type.retTypeClosure, argValue)
+    return insertImplicitAp(
+      patternVars,
+      solution,
+      ctx,
+      retType,
+      target,
+      restArgs,
+    )
+  } else {
+    const argCore = check(ctx, arg.exp, type.argType)
+    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    const retType = applyClosure(type.retTypeClosure, argValue)
+    return insertImplicitAp(
+      patternVars,
+      solution,
+      ctx,
+      retType,
+      target,
+      restArgs,
+    )
   }
-
-  const argCore = check(ctx, arg.exp, type.argType)
-  const argValue = evaluate(ctxToEnv(ctx), argCore)
-  const retType = applyClosure(type.retTypeClosure, argValue)
-  return insertImplicitAp(patternVars, solution, ctx, retType, target, restArgs)
 }
 
 function insertByPatternVars(
@@ -64,19 +93,25 @@ function insertByPatternVar(
   ctx: Ctx,
   inferred: Inferred,
 ): Inferred {
-  const argValue = lookupValueInSolution(solution, patternVar.neutral.name)
+  let argValue = lookupValueInSolution(solution, patternVar.neutral.name)
   if (argValue === undefined) {
     throw new ElaborationError(
       `Unsolved patternVar: ${patternVar.neutral.name}`,
     )
   }
 
-  const argType = lookupTypeInCtx(ctx, patternVar.neutral.name)
+  // TODO where to call `walk` or `deepWalk`?
+  // argValue = walk(solution, argValue)
+
+  let argType = lookupTypeInCtx(ctx, patternVar.neutral.name)
   if (argType === undefined) {
     throw new ElaborationError(
       `Undefined arg type name: ${patternVar.neutral.name}`,
     )
   }
+
+  // TODO where to call `walk` or `deepWalk`?
+  // argType = walk(solution, argType)
 
   const argCore = readback(ctx, argType, argValue)
 
