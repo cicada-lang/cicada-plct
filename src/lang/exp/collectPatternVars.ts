@@ -16,7 +16,7 @@ export function collectPatternVars(
 } {
   if (Values.isValue(type, Values.ImplicitPi)) {
     const name = type.retTypeClosure.name
-    const freshName = freshen(new Set(ctxNames(ctx)), name)
+    const freshName = freshen(ctxNames(ctx), name)
     const patternVar = createPatternVar(type.argType, freshName)
     return collectPatternVars(
       CtxCons(freshName, type.argType, ctx),

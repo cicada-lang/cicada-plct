@@ -27,7 +27,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
        **/
       if (Values.isValue(type, Values.ImplicitPi)) {
         const name = type.retTypeClosure.name
-        const freshName = freshen(new Set(ctxNames(ctx)), name)
+        const freshName = freshen(ctxNames(ctx), name)
         const variable = Neutrals.Var(freshName)
         const arg = Values.TypedNeutral(type.argType, variable)
         const retType = applyClosure(type.retTypeClosure, arg)

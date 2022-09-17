@@ -13,7 +13,7 @@ export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
     }
 
     case "ClazzCons": {
-      const freshName = freshen(new Set(ctxNames(ctx)), clazz.name)
+      const freshName = freshen(ctxNames(ctx), clazz.name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
       const restValue = applyClosure(clazz.restClosure, typedNeutral)

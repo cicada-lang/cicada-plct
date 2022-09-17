@@ -27,7 +27,7 @@ export function solveByType(
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const freshName = freshen(new Set(ctxNames(ctx)), name)
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)

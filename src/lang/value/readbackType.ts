@@ -50,7 +50,7 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const freshName = freshen(new Set(ctxNames(ctx)), name)
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const argTypeCore = readback(ctx, Values.Type(), type.argType)
@@ -62,7 +62,7 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     case "ImplicitPi": {
       const name = type.retTypeClosure.name
-      const freshName = freshen(new Set(ctxNames(ctx)), name)
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const argTypeCore = readback(ctx, Values.Type(), type.argType)
@@ -74,7 +74,7 @@ export function readbackType(ctx: Ctx, type: Value): Core {
 
     case "Sigma": {
       const name = type.cdrTypeClosure.name
-      const freshName = freshen(new Set(ctxNames(ctx)), name)
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.carType, variable)
       const carTypeCore = readback(ctx, Values.Type(), type.carType)

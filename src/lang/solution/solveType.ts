@@ -38,7 +38,7 @@ export function solveType(
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const usedNames = new Set(ctxNames(ctx))
+    const usedNames = ctxNames(ctx)
     const freshName = freshen(usedNames, name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
@@ -61,7 +61,7 @@ export function solveType(
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
-    const freshName = freshen(new Set(ctxNames(ctx)), name)
+    const freshName = freshen(ctxNames(ctx), name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(carType, variable)
 

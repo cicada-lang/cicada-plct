@@ -1,4 +1,8 @@
-export function freshen(usedNames: Set<string>, name: string): string {
+export function freshen(
+  usedNames: Array<string> | Set<string>,
+  name: string,
+): string {
+  usedNames = new Set(usedNames)
   let counter = 1
   let freshName = name
   while (true) {
@@ -12,8 +16,8 @@ export function freshen(usedNames: Set<string>, name: string): string {
 }
 
 export function freshenNames(
-  usedNames: Set<string>,
-  names: Set<string>,
+  usedNames: Array<string> | Set<string>,
+  names: Array<string> | Set<string>,
 ): Map<string, string> {
   usedNames = new Set([...usedNames, ...names])
   const freshNameMap = new Map()

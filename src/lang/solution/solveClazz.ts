@@ -18,11 +18,8 @@ export function solveClazz(
   right: Values.Clazz,
 ): Solution {
   const freshNameMap = freshenNames(
-    new Set([...ctxNames(ctx)]),
-    new Set([
-      ...Values.clazzPropertyNames(left),
-      ...Values.clazzPropertyNames(right),
-    ]),
+    [...ctxNames(ctx)],
+    [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
   )
 
   const leftPropertyMap = expelClazz(freshNameMap, left)
