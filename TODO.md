@@ -1,5 +1,7 @@
 # insertImplicitAp
 
+extrat insertByPatternVar
+
 insertImplicitAp
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`

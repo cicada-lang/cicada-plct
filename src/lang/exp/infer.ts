@@ -105,8 +105,8 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
             collected.patternVars,
             SolutionNull(),
             collected.ctx,
-            inferred.core,
             collected.type,
+            inferred.core,
             folded.args,
           )
         }

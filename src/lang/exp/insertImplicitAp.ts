@@ -12,14 +12,17 @@ export function insertImplicitAp(
   patternVars: Array<PatternVar>,
   solution: Solution,
   ctx: Ctx,
-  target: Core,
   type: Value,
+  target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
   const [arg, ...restArgs] = args
 
   if (arg?.kind !== "ArgPlain") {
-    return collectInferredByArgs(ctx, Inferred(type, target), args)
+    let inferred = Inferred(type, target)
+    inferred = insertByPatternVars(patternVars, solution, ctx, inferred)
+    inferred = collectInferredByArgs(ctx, inferred, args)
+    return inferred
   }
 
   const argInferred = Exps.inferOrUndefined(ctx, arg.exp)
@@ -42,7 +45,29 @@ export function insertImplicitAp(
   const argCore = check(ctx, arg.exp, type.argType)
   const argValue = evaluate(ctxToEnv(ctx), argCore)
   const retType = applyClosure(type.retTypeClosure, argValue)
-  return insertImplicitAp(patternVars, solution, ctx, target, retType, restArgs)
+  return insertImplicitAp(patternVars, solution, ctx, retType, target, restArgs)
+}
+
+function insertByPatternVars(
+  patternVars: Array<PatternVar>,
+  solution: Solution,
+  ctx: Ctx,
+  inferred: Inferred,
+): Inferred {
+  for (const patternVar of patternVars) {
+    inferred = insertByPatternVar(patternVar, solution, ctx, inferred)
+  }
+
+  return inferred
+}
+
+function insertByPatternVar(
+  patternVar: PatternVar,
+  solution: Solution,
+  ctx: Ctx,
+  inferred: Inferred,
+): Inferred {
+  throw new Error("TODO")
 }
 
 function collectInferredByArgs(
