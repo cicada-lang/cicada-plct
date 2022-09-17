@@ -37,15 +37,3 @@ test("parse Fn -- multiple bindings", () => {
     ),
   )
 })
-
-test("parse Fn -- with return type", () => {
-  expect(parseExp("function (x: String): String { return x }")).toMatchObject(
-    deleteUndefined(
-      Exps.FoldedFnWithRetType(
-        [Exps.FnBindingAnnotated("x", Exps.Var("String"))],
-        Exps.Var("String"),
-        Exps.FoldedSequence([], Exps.Var("x")),
-      ),
-    ),
-  )
-})
