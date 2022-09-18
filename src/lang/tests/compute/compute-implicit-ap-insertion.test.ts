@@ -37,6 +37,29 @@ compute infer("abc")
   `)
 })
 
+test("compute ImplicitAp -- insertion -- infer2", async () => {
+  const output = await runCode(`
+
+function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
+  return Pair(A, B)
+}
+
+compute infer2(sole, "abc")
+compute infer2(sole, sole)
+compute infer2("abc", sole)
+compute infer2("abc", "abc")
+
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "exists (Trivial) String: Type
+    exists (Trivial) Trivial: Type
+    exists (String) Trivial: Type
+    exists (String) String: Type"
+  `)
+})
+
 test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
   const output = await runCode(`
 
