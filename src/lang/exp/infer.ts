@@ -78,6 +78,19 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    case "AnnotatedImplicitFn": {
+      const argTypeCore = Exps.checkType(ctx, exp.argType)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(exp.name, argTypeValue, ctx)
+      const retInferred = infer(ctx, exp.ret)
+      const retTypeCore = readbackType(ctx, retInferred.type)
+      const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
+      return Inferred(
+        Values.ImplicitPi(argTypeValue, retTypeClosure),
+        Cores.ImplicitFn(exp.name, retInferred.core),
+      )
+    }
+
     case "FoldedFn": {
       return infer(ctx, Exps.unfoldFn(exp.bindings, exp.ret))
     }

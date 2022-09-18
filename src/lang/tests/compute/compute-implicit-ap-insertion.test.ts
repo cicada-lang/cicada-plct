@@ -4,11 +4,12 @@ import { runCode } from "../utils"
 test("compute ImplicitAp -- insertion -- id", async () => {
   const output = await runCode(`
 
-let id: (implicit T: Type, x: T) -> T = (x) => x
+function id(implicit T: Type, x: T): T {
+  return x
+}
 
 compute id(sole)
 compute id("abc")
-
 
 `)
 
@@ -21,7 +22,9 @@ compute id("abc")
 test("compute ImplicitAp -- insertion -- infer", async () => {
   const output = await runCode(`
 
-let infer: (implicit T: Type, x: T) -> Type = (implicit T, x) => T
+function infer(implicit T: Type, x: T): Type {
+  return T
+}
 
 compute infer(sole)
 compute infer("abc")

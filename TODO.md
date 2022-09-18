@@ -1,10 +1,5 @@
 # insertImplicitAp
 
-infer AnnotatedImplicitFn
-
-check-implicit-ap-insertion.test.ts -- use `function` stmt
-compute-implicit-ap-insertion.test.ts -- use `function` stmt
-
 implicit-ap-insertion -- test deepWalk
 
 deepWalk -- note about target of deepWalk
