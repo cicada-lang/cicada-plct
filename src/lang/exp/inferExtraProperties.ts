@@ -26,7 +26,7 @@ export function inferExtraProperties(
       name,
       {
         type: inferred.type,
-        value: evaluate(solution, ctxToEnv(ctx), inferred.core),
+        value: evaluate(ctxToEnv(ctx), inferred.core),
       },
     ]),
   )

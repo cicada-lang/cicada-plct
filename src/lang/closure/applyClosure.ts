@@ -4,9 +4,5 @@ import { EnvCons } from "../env"
 import { Value } from "../value"
 
 export function applyClosure(closure: Closure, arg: Value): Value {
-  return evaluate(
-    closure.solution,
-    EnvCons(closure.name, arg, closure.env),
-    closure.body,
-  )
+  return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
 }

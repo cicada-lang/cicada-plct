@@ -17,11 +17,7 @@ export function checkClazz(
 
     case "ClazzCons": {
       const propertyTypeCore = checkType(solution, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(
-        solution,
-        ctxToEnv(ctx),
-        propertyTypeCore,
-      )
+      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
       ctx = CtxCons(exp.name, propertyTypeValue, ctx)
       const restCore = checkClazz(solution, ctx, exp.rest)
       return Cores.ClazzCons(exp.name, exp.name, propertyTypeCore, restCore)
@@ -29,13 +25,9 @@ export function checkClazz(
 
     case "ClazzFulfilled": {
       const propertyTypeCore = checkType(solution, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(
-        solution,
-        ctxToEnv(ctx),
-        propertyTypeCore,
-      )
+      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
       const propertyCore = check(solution, ctx, exp.property, propertyTypeValue)
-      const propertyValue = evaluate(solution, ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
       const restCore = checkClazz(solution, ctx, exp.rest)
       return Cores.ClazzFulfilled(

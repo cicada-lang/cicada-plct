@@ -34,7 +34,7 @@ export function checkNewArgs(
 
       const [arg, ...restArgs] = args
       const propertyCore = check(solution, ctx, arg.exp, clazz.propertyType)
-      const propertyValue = evaluate(solution, ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)

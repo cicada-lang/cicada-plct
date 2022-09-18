@@ -10,7 +10,7 @@ export class Let extends Stmt {
 
   async execute(mod: Mod): Promise<void> {
     const inferred = infer(mod.solution, mod.ctx, this.exp)
-    const value = evaluate(mod.solution, mod.env, inferred.core)
+    const value = evaluate(mod.env, inferred.core)
     mod.define(this.name, inferred.type, value)
   }
 

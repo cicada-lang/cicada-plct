@@ -42,7 +42,7 @@ export class Solution {
         const typeCore = readbackType(ctx, type)
         properties.push(`${name}: TODO(${formatCore(typeCore)})`)
       } else {
-        value = deepWalk(this, value)
+        value = deepWalk(this, ctx, value)
         const core = readback(ctx, type, value)
         properties.push(`${name}: ${formatCore(core)}`)
       }
