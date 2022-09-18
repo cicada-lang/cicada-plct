@@ -1,6 +1,5 @@
 # having solution all the time
 
-Solution.names
 Solution.lookupValue
 Solution.format
 Solution.walk
