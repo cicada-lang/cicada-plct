@@ -152,6 +152,9 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       }
 
       {
+        /**
+           `ImplicitAp` insertion.
+        **/
         if (Values.isValue(inferred.type, Values.ImplicitPi)) {
           const name = inferred.type.retTypeClosure.name
           // TODO Scope BUG, `freshName` might occurs in `args`.
@@ -161,7 +164,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
           ctx = CtxCons(freshName, inferred.type.argType, ctx)
           return Inferred(
             applyClosure(inferred.type.retTypeClosure, patternVar),
-            Cores.ImplicitAp(inferred.core, Cores.Var("name")),
+            Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
           )
         }
       }
