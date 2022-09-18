@@ -5,6 +5,7 @@ import {
   Ctx,
   CtxCons,
   CtxFulfilled,
+  ctxNames,
   ctxToEnv,
   lookupTypeInCtx,
   lookupValueInCtx,
@@ -12,7 +13,8 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { Solution } from "../solution"
+import { createPatternVar, Solution, solveType } from "../solution"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
 
@@ -114,19 +116,19 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
-      {
-        const { target, args } = Exps.foldAp(exp)
-        const inferred = infer(solution, ctx, target)
-        /**
-           `ImplicitAp` insertion.
-        **/
-        if (
-          Values.isValue(inferred.type, Values.ImplicitPi) &&
-          args[0]?.kind === "ArgPlain"
-        ) {
-          return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
-        }
-      }
+      // {
+      //   const { target, args } = Exps.foldAp(exp)
+      //   const inferred = infer(solution, ctx, target)
+      //   /**
+      //      `ImplicitAp` insertion.
+      //   **/
+      //   if (
+      //     Values.isValue(inferred.type, Values.ImplicitPi) &&
+      //     args[0]?.kind === "ArgPlain"
+      //   ) {
+      //     return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
+      //   }
+      // }
 
       const inferred = infer(solution, ctx, exp.target)
 
@@ -149,7 +151,35 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
         }
       }
 
+      {
+        if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+          const name = inferred.type.retTypeClosure.name
+          // TODO Scope BUG, `freshName` might occurs in `args`.
+          const usedNames = [...ctxNames(ctx), ...solution.names]
+          const freshName = freshen(usedNames, name)
+          const patternVar = createPatternVar(inferred.type.argType, freshName)
+          ctx = CtxCons(freshName, inferred.type.argType, ctx)
+          return Inferred(
+            applyClosure(inferred.type.retTypeClosure, patternVar),
+            Cores.ImplicitAp(inferred.core, Cores.Var("name")),
+          )
+        }
+      }
+
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
+
+      {
+        const argInferred = Exps.inferOrUndefined(solution, ctx, exp.arg)
+        if (argInferred !== undefined) {
+          solution = solveType(
+            solution,
+            ctx,
+            argInferred.type,
+            inferred.type.argType,
+          )
+        }
+      }
+
       const argCore = Exps.check(solution, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
       return Inferred(
