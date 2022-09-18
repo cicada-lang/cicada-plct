@@ -13,7 +13,7 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, Exp } from "../exp"
-import { createPatternVar, Solution, solveType } from "../solution"
+import { createPatternVar, deepWalk, Solution, solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -162,9 +162,12 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
           const freshName = freshen(usedNames, name)
           const patternVar = createPatternVar(inferred.type.argType, freshName)
           ctx = CtxCons(freshName, inferred.type.argType, ctx)
-          const argCore = check(solution, ctx, exp.arg, inferred.type.argType)
+          let retType = applyClosure(inferred.type.retTypeClosure, patternVar)
+          Values.assertValue(retType, Values.Pi)
+          const argType = deepWalk(solution, retType.argType)
+          const argCore = check(solution, ctx, exp.arg, argType)
           return Inferred(
-            applyClosure(inferred.type.retTypeClosure, patternVar),
+            retType,
             Cores.Ap(
               Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
               argCore,
