@@ -46,18 +46,16 @@ class ImplicitApInserter {
   }
 
   insert(): Inferred {
-    this.solveArgs()
+    this.solvePatternVars()
     this.type = deepWalk(this.solution, this.type)
     let inferred = Inferred(this.type, this.target)
-    for (const patternVar of this.patternVars)
-      inferred = this.insertPatternVar(patternVar, inferred)
-    for (const argCore of this.passedArgs)
-      inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
-    for (const arg of this.args) inferred = this.insertArg(inferred, arg)
+    inferred = this.insertPatternVars(inferred)
+    inferred = this.insertPassedArgs(inferred)
+    inferred = this.insertArgs(inferred)
     return inferred
   }
 
-  private solveArgs(): void {
+  private solvePatternVars(): void {
     while (this.args[0]?.kind === "ArgPlain") {
       const arg = this.args[0]
       const argInferred = Exps.inferOrUndefined(this.ctx, arg.exp)
@@ -92,31 +90,17 @@ class ImplicitApInserter {
     }
   }
 
-  private insertArg(inferred: Inferred, arg: Exps.Arg): Inferred {
-    Values.assertTypeInCtx(this.ctx, inferred.type, Values.Pi)
-    const argCore = Exps.check(this.ctx, arg.exp, inferred.type.argType)
-    const argValue = evaluate(ctxToEnv(this.ctx), argCore)
-
-    switch (arg.kind) {
-      case "ArgPlain": {
-        return Inferred(
-          applyClosure(inferred.type.retTypeClosure, argValue),
-          Cores.Ap(inferred.core, argCore),
-        )
-      }
-
-      case "ArgImplicit": {
-        return Inferred(
-          applyClosure(inferred.type.retTypeClosure, argValue),
-          Cores.ImplicitAp(inferred.core, argCore),
-        )
-      }
+  private insertPatternVars(inferred: Inferred): Inferred {
+    for (const patternVar of this.patternVars) {
+      inferred = this.insertPatternVar(inferred, patternVar)
     }
+
+    return inferred
   }
 
   private insertPatternVar(
-    patternVar: PatternVar,
     inferred: Inferred,
+    patternVar: PatternVar,
   ): Inferred {
     let argValue = lookupValueInSolution(this.solution, patternVar.neutral.name)
     if (argValue === undefined) {
@@ -138,5 +122,44 @@ class ImplicitApInserter {
 
     const argCore = readback(this.ctx, argType, argValue)
     return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
+  }
+
+  private insertPassedArgs(inferred: Inferred): Inferred {
+    for (const argCore of this.passedArgs) {
+      inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
+    }
+
+    return inferred
+  }
+
+  private insertArgs(inferred: Inferred): Inferred {
+    for (const arg of this.args) {
+      inferred = this.insertArg(inferred, arg)
+    }
+
+    return inferred
+  }
+
+  private insertArg(inferred: Inferred, arg: Exps.Arg): Inferred {
+    Values.assertTypeInCtx(this.ctx, inferred.type, Values.Pi)
+
+    const argCore = Exps.check(this.ctx, arg.exp, inferred.type.argType)
+    const argValue = evaluate(ctxToEnv(this.ctx), argCore)
+
+    switch (arg.kind) {
+      case "ArgPlain": {
+        return Inferred(
+          applyClosure(inferred.type.retTypeClosure, argValue),
+          Cores.Ap(inferred.core, argCore),
+        )
+      }
+
+      case "ArgImplicit": {
+        return Inferred(
+          applyClosure(inferred.type.retTypeClosure, argValue),
+          Cores.ImplicitAp(inferred.core, argCore),
+        )
+      }
+    }
   }
 }

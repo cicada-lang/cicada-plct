@@ -1,15 +1,9 @@
 deepWalk
 
-Stmts.Solve -- use `deepWalk`
+Stmts.Solve -- use `deepWalk` -- for testing
 
 # insertImplicitAp
 
-insertImplicitAp -- note using `deepWalk` during `solveArgs`
+insertImplicitAp -- note using `deepWalk` during `solvePatternVars`
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
-
-[maybe] checkByInfer -- when inferred type is ImplicitPi, handle it specially
-
-# insertImplicitFn
-
-[maybe] insertImplicitFn -- after `foldFn`
