@@ -1,6 +1,8 @@
 # insertImplicitAp
 
-check-implicit-ap-insertion -- test deepWalk
+deepWalk
+
+add deepWalk to `Stmts.Solve`
 
 deepWalk -- note about target of deepWalk
 

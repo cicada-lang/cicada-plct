@@ -20,7 +20,7 @@ export function readbackByValue(ctx: Ctx, type: Value, value: Value): Core {
 
     default: {
       throw new ElaborationError(
-        `readback is not implemented for type: ${type.kind}, and value: ${value.kind}`,
+        `readbackByValue is not implemented for type: ${type.kind}, and value: ${value.kind}`,
       )
     }
   }

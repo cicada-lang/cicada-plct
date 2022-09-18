@@ -63,3 +63,29 @@ compute inferReturnType(id(implicit String))
     String: Type"
   `)
 })
+
+test("compute ImplicitAp -- insertion -- deepWalk required", async () => {
+  const output = await runCode(`
+
+function Box(T: Type): Type {
+  return Pair(T, Trivial)
+}
+
+function box(implicit T: Type, x: T): Box(T) {
+  return cons(x, sole)
+}
+
+compute box("abc")
+compute cons("abc", sole)
+
+`)
+
+  // TODO Need to do `deepWalk` on return type.
+
+  expect(output).toMatchInlineSnapshot(
+    `
+    "cons(\\"abc\\", sole): exists (T) Trivial
+    cons(\\"abc\\", sole): exists (String) Trivial"
+  `,
+  )
+})
