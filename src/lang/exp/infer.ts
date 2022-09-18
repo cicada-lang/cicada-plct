@@ -12,7 +12,7 @@ import {
 } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
+import { check, Exp } from "../exp"
 import { createPatternVar, Solution, solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -162,9 +162,13 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
           const freshName = freshen(usedNames, name)
           const patternVar = createPatternVar(inferred.type.argType, freshName)
           ctx = CtxCons(freshName, inferred.type.argType, ctx)
+          const argCore = check(solution, ctx, exp.arg, inferred.type.argType)
           return Inferred(
             applyClosure(inferred.type.retTypeClosure, patternVar),
-            Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
+            Cores.Ap(
+              Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
+              argCore,
+            ),
           )
         }
       }
