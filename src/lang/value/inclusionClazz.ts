@@ -28,11 +28,11 @@ export function inclusionClazz(
   clazz: Values.Clazz,
 ): void {
   const freshNameMap = freshenNames(
-    new Set([...ctxNames(ctx)]),
-    new Set([
+    [...ctxNames(ctx)],
+    [
       ...Values.clazzPropertyNames(subclazz),
       ...Values.clazzPropertyNames(clazz),
-    ]),
+    ],
   )
 
   const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)

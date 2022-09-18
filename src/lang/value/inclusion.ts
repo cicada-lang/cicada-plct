@@ -1,6 +1,7 @@
 import { applyClosure } from "../closure"
-import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { conversion, inclusionClazz, Value } from "../value"
 
@@ -40,7 +41,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
 
-    const freshName = freshenInCtx(ctx, name)
+    const freshName = freshen(ctxNames(ctx), name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
 
@@ -60,7 +61,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
 
-    const freshName = freshenInCtx(ctx, name)
+    const freshName = freshen(ctxNames(ctx), name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(carType, variable)
 

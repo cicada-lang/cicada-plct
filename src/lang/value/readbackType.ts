@@ -1,9 +1,10 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
-import { Ctx, CtxCons, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackClazz, readbackNeutral, Value } from "../value"
 
@@ -48,7 +49,8 @@ export function readbackType(ctx: Ctx, type: Value): Core {
     }
 
     case "Pi": {
-      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const name = type.retTypeClosure.name
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const argTypeCore = readback(ctx, Values.Type(), type.argType)
@@ -59,7 +61,8 @@ export function readbackType(ctx: Ctx, type: Value): Core {
     }
 
     case "ImplicitPi": {
-      const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
+      const name = type.retTypeClosure.name
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const argTypeCore = readback(ctx, Values.Type(), type.argType)
@@ -70,7 +73,8 @@ export function readbackType(ctx: Ctx, type: Value): Core {
     }
 
     case "Sigma": {
-      const freshName = freshenInCtx(ctx, type.cdrTypeClosure.name)
+      const name = type.cdrTypeClosure.name
+      const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.carType, variable)
       const carTypeCore = readback(ctx, Values.Type(), type.carType)

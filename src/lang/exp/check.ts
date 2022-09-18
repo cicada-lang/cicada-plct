@@ -1,7 +1,7 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv, freshenInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, enrich, Exp } from "../exp"
@@ -25,14 +25,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
          `ImplicitFn` insertion.
        **/
       if (Values.isValue(type, Values.ImplicitPi)) {
-        const freshName = freshenInCtx(ctx, type.retTypeClosure.name)
-        const variable = Neutrals.Var(freshName)
-        const arg = Values.TypedNeutral(type.argType, variable)
-        const retType = applyClosure(type.retTypeClosure, arg)
-        /**
-           TODO Scope BUG, the `freshName` might occurs in `exp`.
-         **/
-        return Cores.ImplicitFn(freshName, check(ctx, exp, retType))
+        return Exps.insertImplicitFn(ctx, exp, type)
       }
 
       Values.assertTypeInCtx(ctx, type, Values.Pi)

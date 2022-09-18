@@ -4,7 +4,7 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer, Inferred } from "../exp"
 import * as Values from "../value"
-import { assertClazzInCtx, inclusion, Value } from "../value"
+import { Value } from "../value"
 
 /**
 
@@ -19,7 +19,7 @@ import { assertClazzInCtx, inclusion, Value } from "../value"
 export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
     const inferred = infer(ctx, exp)
-    inclusion(ctx, inferred.type, type)
+    Values.inclusion(ctx, inferred.type, type)
     return inferred
   } catch (_error) {
     return enrichWithoutInfer(ctx, exp, type)
@@ -37,7 +37,7 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
     }
 
     case "Objekt": {
-      assertClazzInCtx(ctx, type)
+      Values.assertClazzInCtx(ctx, type)
 
       const properties = checkProperties(ctx, exp.properties, type)
       const names = Object.keys(properties)

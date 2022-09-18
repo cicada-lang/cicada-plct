@@ -68,12 +68,25 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const argTypeCore = Exps.checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
-      const inferredRet = infer(ctx, exp.ret)
-      const retTypeCore = readbackType(ctx, inferredRet.type)
+      const retInferred = infer(ctx, exp.ret)
+      const retTypeCore = readbackType(ctx, retInferred.type)
       const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
-        Cores.Fn(exp.name, inferredRet.core),
+        Cores.Fn(exp.name, retInferred.core),
+      )
+    }
+
+    case "AnnotatedImplicitFn": {
+      const argTypeCore = Exps.checkType(ctx, exp.argType)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      ctx = CtxCons(exp.name, argTypeValue, ctx)
+      const retInferred = infer(ctx, exp.ret)
+      const retTypeCore = readbackType(ctx, retInferred.type)
+      const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
+      return Inferred(
+        Values.ImplicitPi(argTypeValue, retTypeClosure),
+        Cores.ImplicitFn(exp.name, retInferred.core),
       )
     }
 
@@ -89,16 +102,34 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
+      {
+        const { target, args } = Exps.foldAp(exp)
+        const inferred = infer(ctx, target)
+        /**
+           `ImplicitAp` insertion.
+        **/
+        if (
+          Values.isValue(inferred.type, Values.ImplicitPi) &&
+          args[0]?.kind === "ArgPlain"
+        ) {
+          return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
+        }
+      }
+
       const inferred = infer(ctx, exp.target)
-      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
 
-      /**
-         Try to use `targetValue` first, then use `inferred.type`.
-       **/
-
-      if (Values.isClazz(targetValue)) {
-        const argCore = Exps.checkClazzArg(ctx, targetValue, exp.arg)
-        return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
+      {
+        /**
+           Try to use `targetValue` first, then use `inferred.type`.
+        **/
+        const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+        /**
+           Fulfilling type.
+        **/
+        if (Values.isClazz(targetValue)) {
+          const argCore = Exps.checkClazzArg(ctx, targetValue, exp.arg)
+          return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
+        }
       }
 
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)

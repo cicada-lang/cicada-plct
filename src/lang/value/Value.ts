@@ -16,7 +16,6 @@ export type Value =
   | Sole
   | Clazz
   | Objekt
-  | Implicit
 
 export type AlreadyType =
   | Type
@@ -272,19 +271,5 @@ export function Objekt(properties: Record<string, Value>): Objekt {
     family: "Value",
     kind: "Objekt",
     properties,
-  }
-}
-
-export type Implicit = {
-  family: "Value"
-  kind: "Implicit"
-  name: string
-}
-
-export function Implicit(name: string): Implicit {
-  return {
-    family: "Value",
-    kind: "Implicit",
-    name,
   }
 }
