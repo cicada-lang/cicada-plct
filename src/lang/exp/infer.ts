@@ -12,7 +12,6 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { SolutionNull } from "../solution"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
 
@@ -104,24 +103,16 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       {
-        const folded = Exps.foldAp(exp)
-        const inferred = infer(ctx, folded.target)
+        const { target, args } = Exps.foldAp(exp)
+        const inferred = infer(ctx, target)
         /**
            `ImplicitAp` insertion.
         **/
         if (
           Values.isValue(inferred.type, Values.ImplicitPi) &&
-          folded.args[0]?.kind === "ArgPlain"
+          args[0]?.kind === "ArgPlain"
         ) {
-          const collected = Exps.collectPatternVars(ctx, inferred.type)
-          return Exps.insertImplicitAp(
-            collected.patternVars,
-            SolutionNull(),
-            collected.ctx,
-            collected.type,
-            inferred.core,
-            folded.args,
-          )
+          return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
         }
       }
 

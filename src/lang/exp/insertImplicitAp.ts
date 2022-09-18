@@ -9,6 +9,7 @@ import {
   lookupValueInSolution,
   PatternVar,
   Solution,
+  SolutionNull,
   solve,
   walk,
 } from "../solution"
@@ -16,6 +17,23 @@ import * as Values from "../value"
 import { readback, Value } from "../value"
 
 export function insertImplicitAp(
+  ctx: Ctx,
+  type: Value,
+  target: Core,
+  args: Array<Exps.Arg>,
+): Inferred {
+  const collected = Exps.collectPatternVars(ctx, type)
+  return insertImplicitApRecur(
+    collected.patternVars,
+    SolutionNull(),
+    collected.ctx,
+    collected.type,
+    target,
+    args,
+  )
+}
+
+function insertImplicitApRecur(
   patternVars: Array<PatternVar>,
   solution: Solution,
   ctx: Ctx,
@@ -53,7 +71,7 @@ export function insertImplicitAp(
     )
     const argCore = argInferred.core
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return insertImplicitAp(
+    return insertImplicitApRecur(
       patternVars,
       solution,
       ctx,
@@ -65,7 +83,7 @@ export function insertImplicitAp(
   } else {
     const argCore = check(ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return insertImplicitAp(
+    return insertImplicitApRecur(
       patternVars,
       solution,
       ctx,
