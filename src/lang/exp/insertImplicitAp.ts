@@ -29,7 +29,7 @@ export function insertImplicitAp(
 class ImplicitApInserter {
   patternVars: Array<PatternVar>
   solution: Solution = SolutionNull()
-  passedArgs: Array<Core> = []
+  usedArgs: Array<Core> = []
   type: Value
   ctx: Ctx
 
@@ -50,7 +50,7 @@ class ImplicitApInserter {
     this.type = deepWalk(this.solution, this.type)
     let inferred = Inferred(this.type, this.target)
     inferred = this.insertPatternVars(inferred)
-    inferred = this.insertPassedArgs(inferred)
+    inferred = this.insertUsedArgs(inferred)
     inferred = this.insertArgs(inferred)
     return inferred
   }
@@ -85,7 +85,7 @@ class ImplicitApInserter {
 
       const argValue = evaluate(ctxToEnv(this.ctx), argCore)
       this.type = applyClosure(this.type.retTypeClosure, argValue)
-      this.passedArgs.push(argCore)
+      this.usedArgs.push(argCore)
       this.args.shift()
     }
   }
@@ -124,8 +124,8 @@ class ImplicitApInserter {
     return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
   }
 
-  private insertPassedArgs(inferred: Inferred): Inferred {
-    for (const argCore of this.passedArgs) {
+  private insertUsedArgs(inferred: Inferred): Inferred {
+    for (const argCore of this.usedArgs) {
       inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
     }
 
