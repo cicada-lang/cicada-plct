@@ -130,7 +130,7 @@ compute cons("abc", sole)
 
   expect(output).toMatchInlineSnapshot(
     `
-    "cons(\\"abc\\", sole): exists (T) Trivial
+    "cons(\\"abc\\", sole): exists (String) Trivial
     cons(\\"abc\\", sole): exists (String) Trivial"
   `,
   )

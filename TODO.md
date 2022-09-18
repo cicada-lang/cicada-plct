@@ -1,9 +1,4 @@
-# insertImplicitAp
-
 deepWalk
-
-- pass test "compute ImplicitAp -- insertion -- deepWalk required"
-  in compute-implicit-ap-insertion.test.ts
 
 Stmts.Solve -- use `deepWalk` -- for testing
 
