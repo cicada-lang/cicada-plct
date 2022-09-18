@@ -1,10 +1,10 @@
-[refactor] fix recursion structure of `solveType` and `solve`
-
-- Should be able to call `solveType` as API
-
 [refactor] insertImplicitAp -- improve recursion structure
 
 - [maybe] define a `Inserting` class
+
+[refactor] fix recursion structure of `solveType` and `solve`
+
+- Should be able to call `solveType` as API
 
 deepWalk
 

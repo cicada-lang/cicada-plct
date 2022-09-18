@@ -48,9 +48,17 @@ function insertImplicitApRecur(
     // TODO `deepWalk`
     type = walk(solution, type)
     let inferred = Inferred(type, target)
-    inferred = insertByPatternVars(patternVars, solution, ctx, inferred)
+
+    for (const patternVar of patternVars) {
+      inferred = insertByPatternVar(patternVar, solution, ctx, inferred)
+    }
+
     inferred = insertpassedArgs(inferred, passedArgs)
-    inferred = collectInferredByArgs(ctx, inferred, args)
+
+    for (const arg of args) {
+      inferred = collectInferredByArg(ctx, inferred, arg)
+    }
+
     return inferred
   }
 
@@ -106,19 +114,6 @@ function insertpassedArgs(
   return inferred
 }
 
-function insertByPatternVars(
-  patternVars: Array<PatternVar>,
-  solution: Solution,
-  ctx: Ctx,
-  inferred: Inferred,
-): Inferred {
-  for (const patternVar of patternVars) {
-    inferred = insertByPatternVar(patternVar, solution, ctx, inferred)
-  }
-
-  return inferred
-}
-
 function insertByPatternVar(
   patternVar: PatternVar,
   solution: Solution,
@@ -148,18 +143,6 @@ function insertByPatternVar(
   const argCore = readback(ctx, argType, argValue)
 
   return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
-}
-
-function collectInferredByArgs(
-  ctx: Ctx,
-  inferred: Inferred,
-  args: Array<Exps.Arg>,
-): Inferred {
-  for (const arg of args) {
-    inferred = collectInferredByArg(ctx, inferred, arg)
-  }
-
-  return inferred
 }
 
 function collectInferredByArg(
