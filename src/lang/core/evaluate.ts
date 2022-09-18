@@ -21,23 +21,23 @@ export function evaluate(solution: Solution, env: Env, core: Core): Value {
     case "Pi": {
       return Values.Pi(
         evaluate(solution, env, core.argType),
-        Closure(env, core.name, core.retType),
+        Closure(solution, env, core.name, core.retType),
       )
     }
 
     case "ImplicitPi": {
       return Values.ImplicitPi(
         evaluate(solution, env, core.argType),
-        Closure(env, core.name, core.retType),
+        Closure(solution, env, core.name, core.retType),
       )
     }
 
     case "Fn": {
-      return Values.Fn(Closure(env, core.name, core.ret))
+      return Values.Fn(Closure(solution, env, core.name, core.ret))
     }
 
     case "ImplicitFn": {
-      return Values.ImplicitFn(Closure(env, core.name, core.ret))
+      return Values.ImplicitFn(Closure(solution, env, core.name, core.ret))
     }
 
     case "Ap":
@@ -51,7 +51,7 @@ export function evaluate(solution: Solution, env: Env, core: Core): Value {
     case "Sigma": {
       return Values.Sigma(
         evaluate(solution, env, core.carType),
-        Closure(env, core.name, core.cdrType),
+        Closure(solution, env, core.name, core.cdrType),
       )
     }
 
@@ -82,7 +82,7 @@ export function evaluate(solution: Solution, env: Env, core: Core): Value {
       return Values.ClazzCons(
         core.name,
         evaluate(solution, env, core.propertyType),
-        Closure(env, core.localName, core.rest),
+        Closure(solution, env, core.localName, core.rest),
       )
     }
 

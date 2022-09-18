@@ -71,7 +71,12 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
-      const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = Closure(
+        solution,
+        ctxToEnv(ctx),
+        exp.name,
+        retTypeCore,
+      )
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
         Cores.Fn(exp.name, retInferred.core),
@@ -84,7 +89,12 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
-      const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = Closure(
+        solution,
+        ctxToEnv(ctx),
+        exp.name,
+        retTypeCore,
+      )
       return Inferred(
         Values.ImplicitPi(argTypeValue, retTypeClosure),
         Cores.ImplicitFn(exp.name, retInferred.core),
@@ -204,7 +214,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       const carInferred = infer(solution, ctx, exp.car)
       const cdrInferred = infer(solution, ctx, exp.cdr)
       const cdrTypeCore = readbackType(ctx, cdrInferred.type)
-      const cdrTypeClosure = Closure(ctxToEnv(ctx), "_", cdrTypeCore)
+      const cdrTypeClosure = Closure(solution, ctxToEnv(ctx), "_", cdrTypeCore)
       return Inferred(
         Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),

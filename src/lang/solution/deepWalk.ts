@@ -52,7 +52,7 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
       const cdrTypeCore = readbackType(ctx, cdrType)
       return Values.Sigma(
         carType,
-        Closure(ctxToEnv(ctx), freshName, cdrTypeCore),
+        Closure(solution, ctxToEnv(ctx), freshName, cdrTypeCore),
       )
     }
 
