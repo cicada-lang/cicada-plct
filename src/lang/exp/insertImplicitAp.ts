@@ -46,6 +46,29 @@ class ImplicitApInserter {
   }
 
   insert(): Inferred {
+    this.solveArgs()
+
+    // TODO `deepWalk`
+    this.type = walk(this.solution, this.type)
+
+    let inferred = Inferred(this.type, this.target)
+
+    for (const patternVar of this.patternVars) {
+      inferred = this.insertPatternVar(patternVar, inferred)
+    }
+
+    for (const argCore of this.passedArgs) {
+      inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
+    }
+
+    for (const arg of this.args) {
+      inferred = this.insertArg(inferred, arg)
+    }
+
+    return inferred
+  }
+
+  private solveArgs(): void {
     while (this.args[0]?.kind === "ArgPlain") {
       const arg = this.args[0]
       const argInferred = Exps.inferOrUndefined(this.ctx, arg.exp)
@@ -73,25 +96,6 @@ class ImplicitApInserter {
       this.passedArgs.push(argCore)
       this.args.shift()
     }
-
-    // TODO `deepWalk`
-    this.type = walk(this.solution, this.type)
-
-    let inferred = Inferred(this.type, this.target)
-
-    for (const patternVar of this.patternVars) {
-      inferred = this.insertPatternVar(patternVar, inferred)
-    }
-
-    for (const argCore of this.passedArgs) {
-      inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
-    }
-
-    for (const arg of this.args) {
-      inferred = this.insertArg(inferred, arg)
-    }
-
-    return inferred
   }
 
   private insertArg(inferred: Inferred, arg: Exps.Arg): Inferred {
