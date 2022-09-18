@@ -13,7 +13,7 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { createPatternVar, deepWalk, Solution, solveType } from "../solution"
+import { createPatternVar, Solution, solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -151,51 +151,11 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
         }
       }
 
-      {
-        /**
-           `ImplicitAp` insertion.
-        **/
-        if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-          const name = inferred.type.retTypeClosure.name
-          // TODO Scope BUG, `freshName` might occurs in `args`.
-          const usedNames = [...ctxNames(ctx), ...solution.names]
-          const freshName = freshen(usedNames, name)
-          const patternVar = createPatternVar(inferred.type.argType, freshName)
-          ctx = CtxCons(freshName, inferred.type.argType, ctx)
-          let retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-          retType = deepWalk(solution, retType)
-          return inferForApArg(
-            solution,
-            ctx,
-            Inferred(
-              retType,
-              Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
-            ),
-            exp.arg,
-          )
-        }
+      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+        return inferApImplicitPi(solution, ctx, inferred, exp.arg)
+      } else {
+        return inferApPi(solution, ctx, inferred, exp.arg)
       }
-
-      Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
-
-      {
-        const argInferred = Exps.inferOrUndefined(solution, ctx, exp.arg)
-        if (argInferred !== undefined) {
-          solution = solveType(
-            solution,
-            ctx,
-            argInferred.type,
-            inferred.type.argType,
-          )
-        }
-      }
-
-      const argCore = Exps.check(solution, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
-      return Inferred(
-        applyClosure(inferred.type.retTypeClosure, argValue),
-        Cores.Ap(inferred.core, argCore),
-      )
     }
 
     case "ImplicitAp": {
@@ -412,38 +372,58 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
   }
 }
 
-export function inferForApArg(
+export function inferApImplicitPi(
   solution: Solution,
   ctx: Ctx,
   inferred: Inferred,
   argExp: Exp,
 ): Inferred {
-  Values.assertTypesInCtx(ctx, inferred.type, [Values.Pi, Values.ImplicitPi])
+  Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
 
-  {
-    const argInferred = Exps.inferOrUndefined(solution, ctx, argExp)
-    if (argInferred !== undefined) {
-      solution = solveType(
-        solution,
-        ctx,
-        argInferred.type,
-        inferred.type.argType,
-      )
-    }
+  const name = inferred.type.retTypeClosure.name
+  // TODO Scope BUG, `freshName` might occurs in `args`.
+  const usedNames = [...ctxNames(ctx), ...solution.names]
+  const freshName = freshen(usedNames, name)
+  const patternVar = createPatternVar(inferred.type.argType, freshName)
+  ctx = CtxCons(freshName, inferred.type.argType, ctx)
+  const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
+
+  /**
+     `ImplicitAp` insertion.
+  **/
+  inferred = Inferred(
+    retType,
+    Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
+  )
+
+  if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+    return inferApImplicitPi(solution, ctx, inferred, argExp)
+  } else {
+    return inferApPi(solution, ctx, inferred, argExp)
+  }
+}
+
+export function inferApPi(
+  solution: Solution,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
+  Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
+
+  const argInferred = Exps.inferOrUndefined(solution, ctx, argExp)
+  if (argInferred !== undefined) {
+    solution = solveType(solution, ctx, argInferred.type, inferred.type.argType)
   }
 
-  const argCore = Exps.check(solution, ctx, argExp, inferred.type.argType)
+  const argCore = argInferred
+    ? argInferred.core
+    : Exps.check(solution, ctx, argExp, inferred.type.argType)
+
   const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
 
-  if (Values.isValue(inferred.type, Values.Pi)) {
-    return Inferred(
-      applyClosure(inferred.type.retTypeClosure, argValue),
-      Cores.Ap(inferred.core, argCore),
-    )
-  } else {
-    return Inferred(
-      applyClosure(inferred.type.retTypeClosure, argValue),
-      Cores.ImplicitAp(inferred.core, argCore),
-    )
-  }
+  return Inferred(
+    applyClosure(inferred.type.retTypeClosure, argValue),
+    Cores.Ap(inferred.core, argCore),
+  )
 }
