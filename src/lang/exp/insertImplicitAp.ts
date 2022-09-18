@@ -53,7 +53,9 @@ function insertImplicitApRecur(
       inferred = insertByPatternVar(patternVar, solution, ctx, inferred)
     }
 
-    inferred = insertpassedArgs(inferred, passedArgs)
+    for (const argCore of passedArgs) {
+      inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
+    }
 
     for (const arg of args) {
       inferred = collectInferredByArg(ctx, inferred, arg)
@@ -101,17 +103,6 @@ function insertImplicitApRecur(
       [...passedArgs, argCore],
     )
   }
-}
-
-function insertpassedArgs(
-  inferred: Inferred,
-  passedArgs: Array<Core>,
-): Inferred {
-  for (const argCore of passedArgs) {
-    inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
-  }
-
-  return inferred
 }
 
 function insertByPatternVar(
