@@ -1,4 +1,5 @@
 export * from "./createPatternVar"
+export * from "./deepWalk"
 export * from "./formatSolution"
 export * from "./isPatternVar"
 export * from "./lookupValueInSolution"

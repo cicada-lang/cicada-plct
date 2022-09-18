@@ -4,9 +4,7 @@ Stmts.Solve -- use `deepWalk`
 
 # insertImplicitAp
 
-insertImplicitAp -- use `deepWalk`
-
-- note about target of deepWalk
+insertImplicitAp -- note using `deepWalk` during `solveArgs`
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
 

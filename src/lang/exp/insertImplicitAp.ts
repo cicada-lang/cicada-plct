@@ -6,12 +6,12 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, Inferred } from "../exp"
 import {
+  deepWalk,
   lookupValueInSolution,
   PatternVar,
   Solution,
   SolutionNull,
   solveType,
-  walk,
 } from "../solution"
 import * as Values from "../value"
 import { readback, Value } from "../value"
@@ -47,24 +47,13 @@ class ImplicitApInserter {
 
   insert(): Inferred {
     this.solveArgs()
-
-    // TODO `deepWalk`
-    this.type = walk(this.solution, this.type)
-
+    this.type = deepWalk(this.solution, this.type)
     let inferred = Inferred(this.type, this.target)
-
-    for (const patternVar of this.patternVars) {
+    for (const patternVar of this.patternVars)
       inferred = this.insertPatternVar(patternVar, inferred)
-    }
-
-    for (const argCore of this.passedArgs) {
+    for (const argCore of this.passedArgs)
       inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
-    }
-
-    for (const arg of this.args) {
-      inferred = this.insertArg(inferred, arg)
-    }
-
+    for (const arg of this.args) inferred = this.insertArg(inferred, arg)
     return inferred
   }
 
@@ -88,8 +77,14 @@ class ImplicitApInserter {
         )
       }
 
-      const argCore =
-        argInferred?.core || check(this.ctx, arg.exp, this.type.argType)
+      /**
+         TODO Do we need to call `deepWalk` here?
+      **/
+
+      const argCore = argInferred
+        ? argInferred.core
+        : check(this.ctx, arg.exp, this.type.argType)
+
       const argValue = evaluate(ctxToEnv(this.ctx), argCore)
       this.type = applyClosure(this.type.retTypeClosure, argValue)
       this.passedArgs.push(argCore)
@@ -130,8 +125,7 @@ class ImplicitApInserter {
       )
     }
 
-    // TODO where to call `walk` or `deepWalk`?
-    // argValue = walk(solution, argValue)
+    argValue = deepWalk(this.solution, argValue)
 
     let argType = lookupTypeInCtx(this.ctx, patternVar.neutral.name)
     if (argType === undefined) {
@@ -140,11 +134,9 @@ class ImplicitApInserter {
       )
     }
 
-    // TODO where to call `walk` or `deepWalk`?
-    // argType = walk(solution, argType)
+    argType = deepWalk(this.solution, argType)
 
     const argCore = readback(this.ctx, argType, argValue)
-
     return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
   }
 }
