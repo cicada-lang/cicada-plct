@@ -1,8 +1,7 @@
 # having solution all the time
 
-Solution.format
-Solution.walk
 Solution.deepWalk
+Solution.format
 
 Solution class replace Solution type
 
