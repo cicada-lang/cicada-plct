@@ -1,4 +1,4 @@
-[refactor] `ImplicitApInserter` extract method
+[refactor] extract method `insertByPatternVar`
 
 [refactor] fix recursion structure of `solveType` and `solve`
 

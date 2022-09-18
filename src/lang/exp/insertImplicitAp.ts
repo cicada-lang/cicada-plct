@@ -93,10 +93,32 @@ class ImplicitApInserter {
     }
 
     for (const arg of this.args) {
-      inferred = collectInferredByArg(this.ctx, inferred, arg)
+      inferred = this.collectArg(inferred, arg)
     }
 
     return inferred
+  }
+
+  private collectArg(inferred: Inferred, arg: Exps.Arg): Inferred {
+    Values.assertTypeInCtx(this.ctx, inferred.type, Values.Pi)
+    const argCore = Exps.check(this.ctx, arg.exp, inferred.type.argType)
+    const argValue = evaluate(ctxToEnv(this.ctx), argCore)
+
+    switch (arg.kind) {
+      case "ArgPlain": {
+        return Inferred(
+          applyClosure(inferred.type.retTypeClosure, argValue),
+          Cores.Ap(inferred.core, argCore),
+        )
+      }
+
+      case "ArgImplicit": {
+        return Inferred(
+          applyClosure(inferred.type.retTypeClosure, argValue),
+          Cores.ImplicitAp(inferred.core, argCore),
+        )
+      }
+    }
   }
 }
 
@@ -129,30 +151,4 @@ function insertByPatternVar(
   const argCore = readback(ctx, argType, argValue)
 
   return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
-}
-
-function collectInferredByArg(
-  ctx: Ctx,
-  inferred: Inferred,
-  arg: Exps.Arg,
-): Inferred {
-  Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
-  const argCore = Exps.check(ctx, arg.exp, inferred.type.argType)
-  const argValue = evaluate(ctxToEnv(ctx), argCore)
-
-  switch (arg.kind) {
-    case "ArgPlain": {
-      return Inferred(
-        applyClosure(inferred.type.retTypeClosure, argValue),
-        Cores.Ap(inferred.core, argCore),
-      )
-    }
-
-    case "ArgImplicit": {
-      return Inferred(
-        applyClosure(inferred.type.retTypeClosure, argValue),
-        Cores.ImplicitAp(inferred.core, argCore),
-      )
-    }
-  }
 }
