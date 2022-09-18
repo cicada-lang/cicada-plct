@@ -49,7 +49,6 @@ compute infer2(sole, sole)
 compute infer2("abc")(sole)
 compute infer2("abc")("abc")
 
-
 `)
 
   expect(output).toMatchInlineSnapshot(`
@@ -71,7 +70,6 @@ compute infer2(sole, "abc")
 compute infer2(sole, sole)
 compute infer2("abc")(sole)
 compute infer2("abc")("abc")
-
 
 `)
 
