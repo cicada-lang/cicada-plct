@@ -75,7 +75,7 @@ function solveArgs(
     const argCore = argInferred
       ? argInferred.core
       : check(solution, ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
     return solveArgs(
       ctx,
       applyClosure(type.retTypeClosure, argValue),
@@ -87,7 +87,7 @@ function solveArgs(
 
   if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
     const argCore = Exps.check(solution, ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
     return solveArgs(
       ctx,
       applyClosure(type.retTypeClosure, argValue),

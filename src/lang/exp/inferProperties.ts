@@ -32,7 +32,7 @@ export function inferProperties(
         property,
         clazz.propertyType,
       )
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(solution, ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
 
       assertClazzInCtx(ctx, rest)
@@ -54,7 +54,7 @@ export function inferProperties(
           property,
           clazz.propertyType,
         )
-        const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+        const propertyValue = evaluate(solution, ctxToEnv(ctx), propertyCore)
 
         conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
       }

@@ -3,10 +3,11 @@ import { Closure } from "../closure"
 import { Core } from "../core"
 import { Env, EnvCons, lookupValueInEnv } from "../env"
 import { EvaluationError } from "../errors"
+import { Solution } from "../solution"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
 
-export function evaluate(env: Env, core: Core): Value {
+export function evaluate(solution: Solution, env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
       const value = lookupValueInEnv(env, core.name)
@@ -19,14 +20,14 @@ export function evaluate(env: Env, core: Core): Value {
 
     case "Pi": {
       return Values.Pi(
-        evaluate(env, core.argType),
+        evaluate(solution, env, core.argType),
         Closure(env, core.name, core.retType),
       )
     }
 
     case "ImplicitPi": {
       return Values.ImplicitPi(
-        evaluate(env, core.argType),
+        evaluate(solution, env, core.argType),
         Closure(env, core.name, core.retType),
       )
     }
@@ -41,26 +42,32 @@ export function evaluate(env: Env, core: Core): Value {
 
     case "Ap":
     case "ImplicitAp": {
-      return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
+      return Actions.doAp(
+        evaluate(solution, env, core.target),
+        evaluate(solution, env, core.arg),
+      )
     }
 
     case "Sigma": {
       return Values.Sigma(
-        evaluate(env, core.carType),
+        evaluate(solution, env, core.carType),
         Closure(env, core.name, core.cdrType),
       )
     }
 
     case "Cons": {
-      return Values.Cons(evaluate(env, core.car), evaluate(env, core.cdr))
+      return Values.Cons(
+        evaluate(solution, env, core.car),
+        evaluate(solution, env, core.cdr),
+      )
     }
 
     case "Car": {
-      return Actions.doCar(evaluate(env, core.target))
+      return Actions.doCar(evaluate(solution, env, core.target))
     }
 
     case "Cdr": {
-      return Actions.doCdr(evaluate(env, core.target))
+      return Actions.doCdr(evaluate(solution, env, core.target))
     }
 
     case "Quote": {
@@ -74,15 +81,19 @@ export function evaluate(env: Env, core: Core): Value {
     case "ClazzCons": {
       return Values.ClazzCons(
         core.name,
-        evaluate(env, core.propertyType),
+        evaluate(solution, env, core.propertyType),
         Closure(env, core.localName, core.rest),
       )
     }
 
     case "ClazzFulfilled": {
-      const propertyType = evaluate(env, core.propertyType)
-      const property = evaluate(env, core.property)
-      const rest = evaluate(EnvCons(core.name, property, env), core.rest)
+      const propertyType = evaluate(solution, env, core.propertyType)
+      const property = evaluate(solution, env, core.property)
+      const rest = evaluate(
+        solution,
+        EnvCons(core.name, property, env),
+        core.rest,
+      )
 
       assertClazz(rest)
 
@@ -93,7 +104,7 @@ export function evaluate(env: Env, core: Core): Value {
       const properties = Object.fromEntries(
         Object.entries(core.properties).map(([name, core]) => [
           name,
-          evaluate(env, core),
+          evaluate(solution, env, core),
         ]),
       )
 
@@ -101,7 +112,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Dot": {
-      return Actions.doDot(evaluate(env, core.target), core.name)
+      return Actions.doDot(evaluate(solution, env, core.target), core.name)
     }
 
     // default: {

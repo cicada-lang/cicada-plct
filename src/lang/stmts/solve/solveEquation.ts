@@ -14,12 +14,18 @@ export function solveEquation(
 
   switch (equation.kind) {
     case "EquationTyped": {
-      const typeValue = evaluate(env, checkType(solution, ctx, equation.type))
+      const typeValue = evaluate(
+        solution,
+        env,
+        checkType(solution, ctx, equation.type),
+      )
       const leftValue = evaluate(
+        solution,
         env,
         check(solution, ctx, equation.left, typeValue),
       )
       const rightValue = evaluate(
+        solution,
         env,
         check(solution, ctx, equation.right, typeValue),
       )
@@ -31,8 +37,8 @@ export function solveEquation(
       const rightInferred = infer(solution, ctx, equation.right)
       conversionType(ctx, leftInferred.type, rightInferred.type)
       const typeValue = leftInferred.type
-      const leftValue = evaluate(env, leftInferred.core)
-      const rightValue = evaluate(env, rightInferred.core)
+      const leftValue = evaluate(solution, env, leftInferred.core)
+      const rightValue = evaluate(solution, env, rightInferred.core)
       solution = solve(solution, ctx, typeValue, leftValue, rightValue)
       return solution
     }

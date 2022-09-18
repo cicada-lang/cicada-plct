@@ -12,7 +12,7 @@ export class Compute extends Stmt {
 
   async execute(mod: Mod): Promise<StmtOutput> {
     const inferred = infer(mod.solution, mod.ctx, this.exp)
-    const value = evaluate(ctxToEnv(mod.ctx), inferred.core)
+    const value = evaluate(mod.solution, ctxToEnv(mod.ctx), inferred.core)
     return formatTypedValue(mod.ctx, TypedValue(inferred.type, value))
   }
 }

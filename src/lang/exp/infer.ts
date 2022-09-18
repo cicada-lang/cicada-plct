@@ -41,7 +41,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Pi": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(solution, ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(solution, ctx, exp.retType)
       return Inferred(
@@ -52,7 +52,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "ImplicitPi": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(solution, ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(solution, ctx, exp.retType)
       return Inferred(
@@ -67,7 +67,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedFn": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(solution, ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
@@ -80,7 +80,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedImplicitFn": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(solution, ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
@@ -124,7 +124,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
         /**
            Try to use `targetValue` first, then use `inferred.type`.
         **/
-        const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+        const targetValue = evaluate(solution, ctxToEnv(ctx), inferred.core)
         /**
            Fulfilling type.
         **/
@@ -141,7 +141,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
       Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
       const argCore = Exps.check(solution, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.Ap(inferred.core, argCore),
@@ -152,7 +152,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(solution, ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
       const argCore = Exps.check(solution, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.ImplicitAp(inferred.core, argCore),
@@ -165,7 +165,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Sigma": {
       const carTypeCore = Exps.checkType(solution, ctx, exp.carType)
-      const carTypeValue = evaluate(ctxToEnv(ctx), carTypeCore)
+      const carTypeValue = evaluate(solution, ctxToEnv(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = Exps.checkType(solution, ctx, exp.cdrType)
       return Inferred(
@@ -189,7 +189,11 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(solution, ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
       const sigma = inferred.type
-      const carValue = evaluate(ctxToEnv(ctx), Cores.Car(inferred.core))
+      const carValue = evaluate(
+        solution,
+        ctxToEnv(ctx),
+        Cores.Car(inferred.core),
+      )
       return Inferred(
         applyClosure(sigma.cdrTypeClosure, carValue),
         Cores.Cdr(inferred.core),
@@ -226,7 +230,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       let properties: Record<string, Core> = {}
       for (let [name, property] of Object.entries(exp.properties).reverse()) {
         const inferred = infer(solution, ctx, property)
-        const value = evaluate(ctxToEnv(ctx), inferred.core)
+        const value = evaluate(solution, ctxToEnv(ctx), inferred.core)
         clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
         properties[name] = inferred.core
       }
@@ -244,7 +248,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Dot": {
       const inferred = infer(solution, ctx, exp.target)
-      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
+      const targetValue = evaluate(solution, ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(ctx, inferred.type)
       const propertyType = Values.lookupPropertyTypeOrFail(
         inferred.type,
@@ -323,7 +327,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLet": {
       const inferred = infer(solution, ctx, exp.exp)
-      const value = evaluate(ctxToEnv(ctx), inferred.core)
+      const value = evaluate(solution, ctxToEnv(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       return Inferred(
@@ -334,9 +338,9 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLetThe": {
       const typeCore = Exps.checkType(solution, ctx, exp.type)
-      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
+      const typeValue = evaluate(solution, ctxToEnv(ctx), typeCore)
       const enriched = Exps.enrichOrCheck(solution, ctx, exp.exp, typeValue)
-      const value = evaluate(ctxToEnv(ctx), enriched.core)
+      const value = evaluate(solution, ctxToEnv(ctx), enriched.core)
       ctx = CtxFulfilled(exp.name, enriched.type, value, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       return Inferred(
@@ -347,7 +351,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceCheck": {
       const typeCore = Exps.checkType(solution, ctx, exp.type)
-      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
+      const typeValue = evaluate(solution, ctxToEnv(ctx), typeCore)
       Exps.check(solution, ctx, exp.exp, typeValue)
       return infer(solution, ctx, exp.ret)
     }
