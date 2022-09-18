@@ -10,7 +10,7 @@ export class Inclusion extends Stmt {
   }
 
   async execute(mod: Mod): Promise<void> {
-    const cores = this.exps.map((exp) => checkType(mod.ctx, exp))
+    const cores = this.exps.map((exp) => checkType(mod.solution, mod.ctx, exp))
     const types = cores.map((core) => evaluate(mod.env, core))
 
     if (types.length === 0) return

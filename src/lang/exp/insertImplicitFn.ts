@@ -4,10 +4,12 @@ import { Core } from "../core"
 import { Ctx, ctxNames } from "../ctx"
 import { check, Exp } from "../exp"
 import * as Neutrals from "../neutral"
+import { Solution } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
 export function insertImplicitFn(
+  solution: Solution,
   ctx: Ctx,
   exp: Exp,
   type: Values.ImplicitPi,
@@ -20,5 +22,5 @@ export function insertImplicitFn(
   /**
      TODO Scope BUG, the `freshName` might occurs in `exp`.
   **/
-  return Cores.ImplicitFn(freshName, check(ctx, exp, retType))
+  return Cores.ImplicitFn(freshName, check(solution, ctx, exp, retType))
 }

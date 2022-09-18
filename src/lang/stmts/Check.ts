@@ -9,8 +9,8 @@ export class Check extends Stmt {
   }
 
   async execute(mod: Mod): Promise<void> {
-    const typeCore = checkType(mod.ctx, this.type)
+    const typeCore = checkType(mod.solution, mod.ctx, this.type)
     const typeValue = evaluate(mod.env, typeCore)
-    check(mod.ctx, this.exp, typeValue)
+    check(mod.solution, mod.ctx, this.exp, typeValue)
   }
 }

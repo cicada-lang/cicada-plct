@@ -19,7 +19,10 @@ export class Solve extends Stmt {
     let ctx = mod.ctx
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
-      const typeValue = evaluate(ctxToEnv(ctx), checkType(ctx, type))
+      const typeValue = evaluate(
+        ctxToEnv(ctx),
+        checkType(mod.solution, ctx, type),
+      )
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
     }

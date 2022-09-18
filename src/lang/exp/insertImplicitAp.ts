@@ -66,7 +66,7 @@ function solveArgs(
   }
 
   if (type.kind === "Pi" && arg.kind === "ArgPlain") {
-    const argInferred = Exps.inferOrUndefined(ctx, arg.exp)
+    const argInferred = Exps.inferOrUndefined(solution, ctx, arg.exp)
     if (argInferred !== undefined) {
       solution = solveType(solution, ctx, argInferred.type, type.argType)
     }
@@ -74,7 +74,7 @@ function solveArgs(
     // TODO Do we need to call `deepWalk` here?
     const argCore = argInferred
       ? argInferred.core
-      : check(ctx, arg.exp, type.argType)
+      : check(solution, ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
     return solveArgs(
       ctx,
@@ -86,7 +86,7 @@ function solveArgs(
   }
 
   if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
-    const argCore = Exps.check(ctx, arg.exp, type.argType)
+    const argCore = Exps.check(solution, ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
     return solveArgs(
       ctx,

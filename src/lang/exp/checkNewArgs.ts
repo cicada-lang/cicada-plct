@@ -4,10 +4,12 @@ import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check } from "../exp"
+import { Solution } from "../solution"
 import * as Values from "../value"
 import { assertClazzInCtx, readback } from "../value"
 
 export function checkNewArgs(
+  solution: Solution,
   ctx: Ctx,
   args: Array<Exps.Arg>,
   clazz: Values.Clazz,
@@ -31,14 +33,14 @@ export function checkNewArgs(
       }
 
       const [arg, ...restArgs] = args
-      const propertyCore = check(ctx, arg.exp, clazz.propertyType)
+      const propertyCore = check(solution, ctx, arg.exp, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
       return {
         [clazz.name]: propertyCore,
-        ...checkNewArgs(ctx, restArgs, rest),
+        ...checkNewArgs(solution, ctx, restArgs, rest),
       }
     }
 
@@ -47,7 +49,7 @@ export function checkNewArgs(
 
       return {
         [clazz.name]: propertyCore,
-        ...checkNewArgs(ctx, args, clazz.rest),
+        ...checkNewArgs(solution, ctx, args, clazz.rest),
       }
     }
   }

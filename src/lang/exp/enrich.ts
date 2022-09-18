@@ -3,6 +3,7 @@ import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer, Inferred } from "../exp"
+import { Solution } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -16,22 +17,33 @@ import { Value } from "../value"
 
 **/
 
-export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
+export function enrich(
+  solution: Solution,
+  ctx: Ctx,
+  exp: Exp,
+  type: Value,
+): Inferred {
   try {
-    const inferred = infer(ctx, exp)
+    const inferred = infer(solution, ctx, exp)
     Values.inclusion(ctx, inferred.type, type)
     return inferred
   } catch (_error) {
-    return enrichWithoutInfer(ctx, exp, type)
+    return enrichWithoutInfer(solution, ctx, exp, type)
   }
 }
 
-function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
+function enrichWithoutInfer(
+  solution: Solution,
+  ctx: Ctx,
+  exp: Exp,
+  type: Value,
+): Inferred {
   switch (exp.kind) {
     case "FoldedObjekt": {
       return enrich(
+        solution,
         ctx,
-        Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
+        Exps.Objekt(Exps.prepareProperties(solution, ctx, exp.properties)),
         type,
       )
     }
@@ -39,7 +51,7 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
     case "Objekt": {
       Values.assertClazzInCtx(ctx, type)
 
-      const properties = checkProperties(ctx, exp.properties, type)
+      const properties = checkProperties(solution, ctx, exp.properties, type)
       const names = Object.keys(properties)
 
       /**
@@ -47,7 +59,12 @@ function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
          thus we require that they are infer-able.
       **/
 
-      const extra = Exps.inferExtraProperties(ctx, exp.properties, names)
+      const extra = Exps.inferExtraProperties(
+        solution,
+        ctx,
+        exp.properties,
+        names,
+      )
 
       return Inferred(
         Values.prependFulfilledClazz(extra.clazz, type),
