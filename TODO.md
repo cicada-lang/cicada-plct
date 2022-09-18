@@ -1,8 +1,5 @@
 # having solution all the time
 
-Solution.deepWalk
-Solution.format
-
 Solution class replace Solution type
 
 simple `ImplicitAp` insertion on `ImplicitPi` v.s. `Ap`
