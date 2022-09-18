@@ -3,14 +3,22 @@ import { Closure } from "../closure"
 import { Core } from "../core"
 import { Env, EnvCons, lookupValueInEnv } from "../env"
 import { EvaluationError } from "../errors"
-import { Solution } from "../solution"
+import { deepWalk, Solution } from "../solution"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
 
 export function evaluate(solution: Solution, env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
-      const value = lookupValueInEnv(env, core.name)
+      let value = lookupValueInEnv(env, core.name)
+
+      if (value === undefined) {
+        value = solution.lookupValue(core.name)
+        if (value !== undefined) {
+          value = deepWalk(solution, value)
+        }
+      }
+
       if (value === undefined) {
         throw new EvaluationError(`Undefined name: ${core.name}`)
       }

@@ -26,7 +26,7 @@ export function insertImplicitAp(
     target = applyInsertion(solved.solution, ctx, insertion, target)
   }
 
-  return Inferred(deepWalk(solved.solution, ctx, solved.type), target)
+  return Inferred(deepWalk(solved.solution, solved.type), target)
 }
 
 function solveArgs(
@@ -158,8 +158,8 @@ function applyInsertion(
 
       const argCore = readback(
         ctx,
-        deepWalk(solution, ctx, insertion.patternVar.type),
-        deepWalk(solution, ctx, argValue),
+        deepWalk(solution, insertion.patternVar.type),
+        deepWalk(solution, argValue),
       )
 
       return Cores.ImplicitAp(core, argCore)
