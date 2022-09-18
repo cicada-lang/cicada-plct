@@ -60,7 +60,7 @@ compute infer2("abc")("abc")
   `)
 })
 
-test.todo("compute ImplicitAp -- insertion -- infer2 -- over", async () => {
+test("compute ImplicitAp -- insertion -- infer2 -- over", async () => {
   const output = await runCode(`
 
 function infer2(implicit A: Type, x: A, implicit B: Type, y: B): Type {
