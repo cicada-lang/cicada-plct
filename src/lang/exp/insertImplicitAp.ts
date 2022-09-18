@@ -23,12 +23,85 @@ export function insertImplicitAp(
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const solved = solveArgs(SolutionNull(), ctx, type, args)
+  const solved = solveArgs(ctx, type, args)
   for (const insertion of solved.insertions) {
     target = applyInsertion(solved.solution, ctx, insertion, target)
   }
 
   return Inferred(deepWalk(solved.solution, solved.type), target)
+}
+
+function solveArgs(
+  ctx: Ctx,
+  type: Value,
+  args: Array<Exps.Arg>,
+  solution: Solution = SolutionNull(),
+  insertions: Array<Insertion> = [],
+): {
+  type: Value
+  solution: Solution
+  insertions: Array<Insertion>
+} {
+  const [arg, ...restArgs] = args
+
+  if (arg === undefined) {
+    return { solution, type, insertions }
+  }
+
+  if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
+    const name = type.retTypeClosure.name
+    // TODO Scope BUG, `freshName` might occurs in `args`.
+    const freshName = freshen(ctxNames(ctx), name)
+    const patternVar = createPatternVar(type.argType, freshName)
+    return solveArgs(
+      // TODO Why we need to extend `ctx` here?
+      CtxCons(freshName, type.argType, ctx),
+      applyClosure(type.retTypeClosure, patternVar),
+      args, // NOTE Do not consume arg here.
+      solution,
+      [...insertions, InsertionPatternVar(patternVar)],
+    )
+  }
+
+  if (type.kind === "Pi" && arg.kind === "ArgPlain") {
+    const argInferred = Exps.inferOrUndefined(ctx, arg.exp)
+    if (argInferred !== undefined) {
+      solution = solveType(solution, ctx, argInferred.type, type.argType)
+    }
+
+    // TODO Do we need to call `deepWalk` here?
+    const argCore = argInferred
+      ? argInferred.core
+      : check(ctx, arg.exp, type.argType)
+    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    return solveArgs(
+      ctx,
+      applyClosure(type.retTypeClosure, argValue),
+      restArgs,
+      solution,
+      [...insertions, InsertionUsedArg(argCore)],
+    )
+  }
+
+  if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
+    const argCore = Exps.check(ctx, arg.exp, type.argType)
+    const argValue = evaluate(ctxToEnv(ctx), argCore)
+    return solveArgs(
+      ctx,
+      applyClosure(type.retTypeClosure, argValue),
+      restArgs,
+      solution,
+      [...insertions, InsertionImplicitArg(argCore)],
+    )
+  }
+
+  if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
+    throw new ElaborationError(`extra Implicit argument`)
+  }
+
+  throw new ElaborationError(
+    `expect type to be Pi or ImplicitPi instead of: ${type.kind}`,
+  )
 }
 
 type Insertion = InsertionPatternVar | InsertionUsedArg | InsertionImplicitArg
@@ -104,78 +177,4 @@ function applyInsertion(
       return Cores.ImplicitAp(core, insertion.argCore)
     }
   }
-}
-
-function solveArgs(
-  solution: Solution,
-  ctx: Ctx,
-  type: Value,
-  args: Array<Exps.Arg>,
-  insertions: Array<Insertion> = [],
-): {
-  solution: Solution
-  type: Value
-  args: Array<Exps.Arg>
-  insertions: Array<Insertion>
-} {
-  const [arg, ...restArgs] = args
-
-  if (arg === undefined) {
-    return { solution, type, args, insertions }
-  }
-
-  if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
-    const name = type.retTypeClosure.name
-    // TODO Scope BUG, `freshName` might occurs in `args`.
-    const freshName = freshen(ctxNames(ctx), name)
-    const patternVar = createPatternVar(type.argType, freshName)
-    return solveArgs(
-      solution,
-      // TODO Why we need to extend `ctx` here?
-      CtxCons(freshName, type.argType, ctx),
-      applyClosure(type.retTypeClosure, patternVar),
-      args,
-      [...insertions, InsertionPatternVar(patternVar)],
-    )
-  }
-
-  if (type.kind === "Pi" && arg.kind === "ArgPlain") {
-    const argInferred = Exps.inferOrUndefined(ctx, arg.exp)
-    if (argInferred !== undefined) {
-      solution = solveType(solution, ctx, argInferred.type, type.argType)
-    }
-
-    // TODO Do we need to call `deepWalk` here?
-    const argCore = argInferred
-      ? argInferred.core
-      : check(ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
-      solution,
-      ctx,
-      applyClosure(type.retTypeClosure, argValue),
-      restArgs,
-      [...insertions, InsertionUsedArg(argCore)],
-    )
-  }
-
-  if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
-    const argCore = Exps.check(ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
-      solution,
-      ctx,
-      applyClosure(type.retTypeClosure, argValue),
-      restArgs,
-      [...insertions, InsertionImplicitArg(argCore)],
-    )
-  }
-
-  if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
-    throw new ElaborationError(`extra Implicit argument`)
-  }
-
-  throw new ElaborationError(
-    `expect type to be Pi or ImplicitPi instead of: ${type.kind}`,
-  )
 }
