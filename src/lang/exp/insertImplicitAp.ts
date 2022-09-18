@@ -11,6 +11,7 @@ import {
   lookupValueInSolution,
   PatternVar,
   Solution,
+  solutionNames,
   SolutionNull,
   solveType,
 } from "../solution"
@@ -51,7 +52,8 @@ function solveArgs(
   if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
     const name = type.retTypeClosure.name
     // TODO Scope BUG, `freshName` might occurs in `args`.
-    const freshName = freshen(ctxNames(ctx), name)
+    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+    const freshName = freshen(usedNames, name)
     const patternVar = createPatternVar(type.argType, freshName)
     return solveArgs(
       // TODO Why we need to extend `ctx` here?
