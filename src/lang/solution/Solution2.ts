@@ -6,4 +6,8 @@ export class Solution {
   get names(): Array<string> {
     return Array.from(this.bindings.keys())
   }
+
+  lookupValue(name: string): Value | undefined {
+    return this.bindings.get(name)
+  }
 }

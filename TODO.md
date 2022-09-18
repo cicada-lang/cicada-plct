@@ -1,6 +1,5 @@
 # having solution all the time
 
-Solution.lookupValue
 Solution.format
 Solution.walk
 Solution.deepWalk
