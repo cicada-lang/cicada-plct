@@ -36,3 +36,30 @@ compute infer("abc")
     String: Type"
   `)
 })
+
+test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
+  const output = await runCode(`
+
+function inferReturnType(implicit A: Type, implicit B: Type, x: (A) -> B): Type {
+  return B
+}
+
+function stringToTrivial(_: String): Trivial {
+  return sole
+}
+
+compute inferReturnType(stringToTrivial)
+
+function id(implicit T: Type, x: T): T {
+  return x
+}
+
+compute inferReturnType(id(implicit String))
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "Trivial: Type
+    String: Type"
+  `)
+})

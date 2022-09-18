@@ -1,12 +1,14 @@
 # insertImplicitAp
 
-implicit-ap-insertion -- test deepWalk
+check-implicit-ap-insertion -- test deepWalk
 
 deepWalk -- note about target of deepWalk
 
 insertImplicitAp -- `collectPatternVars` again on `Values.ImplicitPi`
 
 [refactor] insertImplicitAp -- improve recursion structure
+
+- [maybe] define a `Inserting` class
 
 [maybe] fix recursion structure of `solveType` and `solve`
 
