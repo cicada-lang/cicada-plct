@@ -12,7 +12,7 @@ import {
 } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
-import { check, Exp } from "../exp"
+import { Exp } from "../exp"
 import { createPatternVar, deepWalk, Solution, solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -163,15 +163,15 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
           const patternVar = createPatternVar(inferred.type.argType, freshName)
           ctx = CtxCons(freshName, inferred.type.argType, ctx)
           let retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-          Values.assertValue(retType, Values.Pi)
-          const argType = deepWalk(solution, retType.argType)
-          const argCore = check(solution, ctx, exp.arg, argType)
-          return Inferred(
-            retType,
-            Cores.Ap(
+          retType = deepWalk(solution, retType)
+          return inferForApArg(
+            solution,
+            ctx,
+            Inferred(
+              retType,
               Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
-              argCore,
             ),
+            exp.arg,
           )
         }
       }
@@ -409,5 +409,41 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
     default: {
       throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
+  }
+}
+
+export function inferForApArg(
+  solution: Solution,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
+  Values.assertTypesInCtx(ctx, inferred.type, [Values.Pi, Values.ImplicitPi])
+
+  {
+    const argInferred = Exps.inferOrUndefined(solution, ctx, argExp)
+    if (argInferred !== undefined) {
+      solution = solveType(
+        solution,
+        ctx,
+        argInferred.type,
+        inferred.type.argType,
+      )
+    }
+  }
+
+  const argCore = Exps.check(solution, ctx, argExp, inferred.type.argType)
+  const argValue = evaluate(solution, ctxToEnv(ctx), argCore)
+
+  if (Values.isValue(inferred.type, Values.Pi)) {
+    return Inferred(
+      applyClosure(inferred.type.retTypeClosure, argValue),
+      Cores.Ap(inferred.core, argCore),
+    )
+  } else {
+    return Inferred(
+      applyClosure(inferred.type.retTypeClosure, argValue),
+      Cores.ImplicitAp(inferred.core, argCore),
+    )
   }
 }
