@@ -80,12 +80,7 @@ class ImplicitApInserter {
     let inferred = Inferred(this.type, this.target)
 
     for (const patternVar of this.patternVars) {
-      inferred = insertByPatternVar(
-        patternVar,
-        this.solution,
-        this.ctx,
-        inferred,
-      )
+      inferred = this.insertPatternVar(patternVar, inferred)
     }
 
     for (const argCore of this.passedArgs) {
@@ -93,13 +88,13 @@ class ImplicitApInserter {
     }
 
     for (const arg of this.args) {
-      inferred = this.collectArg(inferred, arg)
+      inferred = this.insertArg(inferred, arg)
     }
 
     return inferred
   }
 
-  private collectArg(inferred: Inferred, arg: Exps.Arg): Inferred {
+  private insertArg(inferred: Inferred, arg: Exps.Arg): Inferred {
     Values.assertTypeInCtx(this.ctx, inferred.type, Values.Pi)
     const argCore = Exps.check(this.ctx, arg.exp, inferred.type.argType)
     const argValue = evaluate(ctxToEnv(this.ctx), argCore)
@@ -120,35 +115,33 @@ class ImplicitApInserter {
       }
     }
   }
-}
 
-function insertByPatternVar(
-  patternVar: PatternVar,
-  solution: Solution,
-  ctx: Ctx,
-  inferred: Inferred,
-): Inferred {
-  let argValue = lookupValueInSolution(solution, patternVar.neutral.name)
-  if (argValue === undefined) {
-    throw new ElaborationError(
-      `Unsolved patternVar: ${patternVar.neutral.name}`,
-    )
+  private insertPatternVar(
+    patternVar: PatternVar,
+    inferred: Inferred,
+  ): Inferred {
+    let argValue = lookupValueInSolution(this.solution, patternVar.neutral.name)
+    if (argValue === undefined) {
+      throw new ElaborationError(
+        `Unsolved patternVar: ${patternVar.neutral.name}`,
+      )
+    }
+
+    // TODO where to call `walk` or `deepWalk`?
+    // argValue = walk(solution, argValue)
+
+    let argType = lookupTypeInCtx(this.ctx, patternVar.neutral.name)
+    if (argType === undefined) {
+      throw new ElaborationError(
+        `Undefined arg type name: ${patternVar.neutral.name}`,
+      )
+    }
+
+    // TODO where to call `walk` or `deepWalk`?
+    // argType = walk(solution, argType)
+
+    const argCore = readback(this.ctx, argType, argValue)
+
+    return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
   }
-
-  // TODO where to call `walk` or `deepWalk`?
-  // argValue = walk(solution, argValue)
-
-  let argType = lookupTypeInCtx(ctx, patternVar.neutral.name)
-  if (argType === undefined) {
-    throw new ElaborationError(
-      `Undefined arg type name: ${patternVar.neutral.name}`,
-    )
-  }
-
-  // TODO where to call `walk` or `deepWalk`?
-  // argType = walk(solution, argType)
-
-  const argCore = readback(ctx, argType, argValue)
-
-  return Inferred(inferred.type, Cores.ImplicitAp(inferred.core, argCore))
 }
