@@ -1,8 +1,6 @@
 # insertImplicitAp
 
-stmt function handle implicit fn
-
-- pass function-with-implicit.test.ts
+infer AnnotatedImplicitFn
 
 check-implicit-ap-insertion.test.ts -- use `function` stmt
 compute-implicit-ap-insertion.test.ts -- use `function` stmt

@@ -11,9 +11,7 @@ export function unfoldFnWithRetType(
   **/
 
   if (bindings.length === 0) {
-    let typedRet = Exps.SequenceLetThe("ret", retType, ret, Exps.Var("ret"))
-
-    return typedRet
+    return Exps.SequenceLetThe("_", retType, ret, Exps.Var("_"))
   }
 
   const [binding, ...restBindings] = bindings
@@ -37,6 +35,14 @@ export function unfoldFnWithRetType(
     case "FnBindingImplicit": {
       return Exps.ImplicitFn(
         binding.name,
+        unfoldFnWithRetType(restBindings, retType, ret),
+      )
+    }
+
+    case "FnBindingAnnotatedImplicit": {
+      return Exps.AnnotatedImplicitFn(
+        binding.name,
+        binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),
       )
     }

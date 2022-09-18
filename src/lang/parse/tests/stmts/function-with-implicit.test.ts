@@ -4,7 +4,7 @@ import * as Stmts from "../../../stmts"
 import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
-test.todo("parse Let -- function with implicit", () => {
+test("parse Let -- function with implicit", () => {
   expect(
     parseStmts("function id(implicit T: Type, x: T): T { return x }"),
   ).toMatchObject(
@@ -13,7 +13,7 @@ test.todo("parse Let -- function with implicit", () => {
         "id",
         Exps.FoldedFnWithRetType(
           [
-            Exps.FnBindingAnnotated("T", Exps.Var("Type")),
+            Exps.FnBindingAnnotatedImplicit("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),
           ],
           Exps.Var("T"),

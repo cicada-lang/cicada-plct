@@ -27,6 +27,7 @@ export type Exp =
   | Fn
   | AnnotatedFn
   | ImplicitFn
+  | AnnotatedImplicitFn
   | FoldedFn
   | FoldedFnWithRetType
   | Sigma
@@ -225,6 +226,30 @@ export function ImplicitFn(name: string, ret: Exp, span?: Span): ImplicitFn {
   }
 }
 
+export type AnnotatedImplicitFn = {
+  family: "Exp"
+  kind: "AnnotatedImplicitFn"
+  name: string
+  argType: Exp
+  ret: Exp
+} & ExpMeta
+
+export function AnnotatedImplicitFn(
+  name: string,
+  argType: Exp,
+  ret: Exp,
+  span?: Span,
+): AnnotatedImplicitFn {
+  return {
+    family: "Exp",
+    kind: "AnnotatedImplicitFn",
+    name,
+    argType,
+    ret,
+    span,
+  }
+}
+
 export type FoldedFn = {
   family: "Exp"
   kind: "FoldedFn"
@@ -270,7 +295,11 @@ export function FoldedFnWithRetType(
   }
 }
 
-export type FnBinding = FnBindingName | FnBindingAnnotated | FnBindingImplicit
+export type FnBinding =
+  | FnBindingName
+  | FnBindingAnnotated
+  | FnBindingImplicit
+  | FnBindingAnnotatedImplicit
 
 export type FnBindingName = {
   kind: "FnBindingName"
@@ -310,6 +339,23 @@ export function FnBindingImplicit(name: string): FnBindingImplicit {
   return {
     kind: "FnBindingImplicit",
     name,
+  }
+}
+
+export type FnBindingAnnotatedImplicit = {
+  kind: "FnBindingAnnotatedImplicit"
+  name: string
+  type: Exp
+}
+
+export function FnBindingAnnotatedImplicit(
+  name: string,
+  type: Exp,
+): FnBindingAnnotatedImplicit {
+  return {
+    kind: "FnBindingAnnotatedImplicit",
+    name,
+    type,
   }
 }
 
