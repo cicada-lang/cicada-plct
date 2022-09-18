@@ -1,11 +1,12 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import { Ctx, CtxCons, ctxNames, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check, Inferred } from "../exp"
 import {
+  createPatternVar,
   deepWalk,
   lookupValueInSolution,
   PatternVar,
@@ -13,6 +14,7 @@ import {
   SolutionNull,
   solveType,
 } from "../solution"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, Value } from "../value"
 
@@ -39,7 +41,7 @@ class ImplicitApInserter {
     public target: Core,
     public args: Array<Exps.Arg>,
   ) {
-    const collected = Exps.collectPatternVars(ctx, type)
+    const collected = collectPatternVars(ctx, type)
     this.patternVars = collected.patternVars
     this.type = collected.type
     this.ctx = collected.ctx
@@ -162,4 +164,27 @@ class ImplicitApInserter {
       }
     }
   }
+}
+
+function collectPatternVars(
+  ctx: Ctx,
+  type: Value,
+  patternVars: Array<PatternVar> = [],
+): {
+  ctx: Ctx
+  type: Value
+  patternVars: Array<PatternVar>
+} {
+  if (Values.isValue(type, Values.ImplicitPi)) {
+    const name = type.retTypeClosure.name
+    const freshName = freshen(ctxNames(ctx), name)
+    const patternVar = createPatternVar(type.argType, freshName)
+    return collectPatternVars(
+      CtxCons(freshName, type.argType, ctx),
+      applyClosure(type.retTypeClosure, patternVar),
+      [...patternVars, patternVar],
+    )
+  }
+
+  return { patternVars, type, ctx }
 }
