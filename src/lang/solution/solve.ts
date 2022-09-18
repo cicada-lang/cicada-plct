@@ -1,11 +1,5 @@
 import { Ctx } from "../ctx"
-import {
-  Solution,
-  solveByType,
-  solveByValue,
-  solveVar,
-  walk,
-} from "../solution"
+import { Solution, solveByType, solveByValue, solveVar } from "../solution"
 import { Value } from "../value"
 
 /**
@@ -27,8 +21,8 @@ export function solve(
   left: Value,
   right: Value,
 ): Solution {
-  left = walk(solution, left)
-  right = walk(solution, right)
+  left = solution.walk(left)
+  right = solution.walk(right)
 
   return (
     solveVar(solution, left, right) ||

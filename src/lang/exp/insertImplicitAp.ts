@@ -8,11 +8,8 @@ import { check, Inferred } from "../exp"
 import {
   createPatternVar,
   deepWalk,
-  lookupValueInSolution,
   PatternVar,
   Solution,
-  solutionNames,
-  SolutionNull,
   solveType,
 } from "../solution"
 import { freshen } from "../utils/freshen"
@@ -36,7 +33,7 @@ function solveArgs(
   ctx: Ctx,
   type: Value,
   args: Array<Exps.Arg>,
-  solution: Solution = SolutionNull(),
+  solution = new Solution(),
   insertions: Array<Insertion> = [],
 ): {
   type: Value
@@ -52,7 +49,7 @@ function solveArgs(
   if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
     const name = type.retTypeClosure.name
     // TODO Scope BUG, `freshName` might occurs in `args`.
-    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+    const usedNames = [...ctxNames(ctx), ...solution.names]
     const freshName = freshen(usedNames, name)
     const patternVar = createPatternVar(type.argType, freshName)
     return solveArgs(
@@ -152,10 +149,7 @@ function applyInsertion(
 ): Core {
   switch (insertion.kind) {
     case "InsertionPatternVar": {
-      let argValue = lookupValueInSolution(
-        solution,
-        insertion.patternVar.neutral.name,
-      )
+      let argValue = solution.lookupValue(insertion.patternVar.neutral.name)
       if (argValue === undefined) {
         throw new ElaborationError(
           `Unsolved patternVar: ${insertion.patternVar.neutral.name}`,

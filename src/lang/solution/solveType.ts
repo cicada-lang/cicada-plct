@@ -4,12 +4,10 @@ import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
 import {
   Solution,
-  solutionNames,
   solve,
   solveClazz,
   solveNeutral,
   solveVar,
-  walk,
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -21,8 +19,8 @@ export function solveType(
   left: Value,
   right: Value,
 ): Solution {
-  left = walk(solution, left)
-  right = walk(solution, right)
+  left = solution.walk(left)
+  right = solution.walk(right)
 
   const success = solveVar(solution, left, right)
   if (success !== undefined) {
@@ -54,7 +52,7 @@ export function solveType(
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+    const usedNames = [...ctxNames(ctx), ...solution.names]
     const freshName = freshen(usedNames, name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(argType, variable)
@@ -77,7 +75,7 @@ export function solveType(
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
-    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+    const usedNames = [...ctxNames(ctx), ...solution.names]
     const freshName = freshen(usedNames, name)
     const variable = Neutrals.Var(freshName)
     const typedNeutral = Values.TypedNeutral(carType, variable)

@@ -1,33 +1,53 @@
-import { Value } from "../value"
+import { formatCore } from "../core"
+import { Ctx, lookupTypeInCtx } from "../ctx"
+import { deepWalk, isPatternVar } from "../solution"
+import { readback, readbackType, Value } from "../value"
 
-export type Solution = SolutionNull | SolutionCons
+export class Solution {
+  bindings: Map<string, Value> = new Map()
 
-export type SolutionNull = {
-  kind: "SolutionNull"
-}
-
-export function SolutionNull(): SolutionNull {
-  return {
-    kind: "SolutionNull",
+  get names(): Array<string> {
+    return Array.from(this.bindings.keys())
   }
-}
 
-export type SolutionCons = {
-  kind: "SolutionCons"
-  name: string
-  value: Value
-  rest: Solution
-}
+  bind(name: string, value: Value): this {
+    this.bindings.set(name, value)
+    return this
+  }
 
-export function SolutionCons(
-  name: string,
-  value: Value,
-  rest: Solution,
-): SolutionCons {
-  return {
-    kind: "SolutionCons",
-    name,
-    value,
-    rest,
+  lookupValue(name: string): Value | undefined {
+    return this.bindings.get(name)
+  }
+
+  walk(value: Value): Value {
+    while (isPatternVar(value)) {
+      const found = this.lookupValue(value.neutral.name)
+      if (found === undefined) return value
+      value = found
+    }
+
+    return value
+  }
+
+  formatSolution(ctx: Ctx, names: Array<string>): string {
+    const properties: Array<string> = []
+    for (const name of names) {
+      const type = lookupTypeInCtx(ctx, name)
+      if (type === undefined) {
+        throw new Error(`formatSolution find type of name: ${name}`)
+      }
+
+      let value = this.lookupValue(name)
+      if (value === undefined) {
+        const typeCore = readbackType(ctx, type)
+        properties.push(`${name}: TODO(${formatCore(typeCore)})`)
+      } else {
+        value = deepWalk(this, ctx, value)
+        const core = readback(ctx, type, value)
+        properties.push(`${name}: ${formatCore(core)}`)
+      }
+    }
+
+    return `{ ${properties.join(", ")} }`
   }
 }

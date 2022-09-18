@@ -1,13 +1,13 @@
 import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import * as Neutrals from "../neutral"
-import { Solution, walk } from "../solution"
+import { Solution } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readbackType, Value } from "../value"
 
 export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
-  value = walk(solution, value)
+  value = solution.walk(value)
 
   switch (value.kind) {
     case "TypedNeutral": {

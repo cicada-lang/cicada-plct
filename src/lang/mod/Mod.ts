@@ -1,7 +1,7 @@
 import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
 import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
-import { Solution, SolutionNull } from "../solution"
+import { Solution } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
 import { globals } from "./globals"
@@ -12,7 +12,7 @@ export interface ModOptions {
 }
 
 export class Mod {
-  solution: Solution = SolutionNull()
+  solution = new Solution()
   ctx: Ctx = CtxNull()
   env: Env = EnvNull()
   outputs: Map<number, StmtOutput> = new Map()
