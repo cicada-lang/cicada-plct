@@ -22,86 +22,81 @@ export function insertImplicitAp(
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const collected = Exps.collectPatternVars(ctx, type)
-  return insertImplicitApRecur(
-    collected.patternVars,
-    SolutionNull(),
-    collected.ctx,
-    collected.type,
-    target,
-    args,
-  )
+  const inserter = new ImplicitApInserter(ctx, type, target, args)
+  return inserter.insert()
 }
 
-function insertImplicitApRecur(
-  patternVars: Array<PatternVar>,
-  solution: Solution,
-  ctx: Ctx,
-  type: Value,
-  target: Core,
-  args: Array<Exps.Arg>,
-  passedArgs: Array<Core> = [],
-): Inferred {
-  const [arg, ...restArgs] = args
+class ImplicitApInserter {
+  patternVars: Array<PatternVar>
+  solution: Solution = SolutionNull()
+  passedArgs: Array<Core> = []
+  type: Value
+  ctx: Ctx
 
-  if (arg?.kind !== "ArgPlain") {
-    // TODO `deepWalk`
-    type = walk(solution, type)
-    let inferred = Inferred(type, target)
+  constructor(
+    ctx: Ctx,
+    type: Value,
+    public target: Core,
+    public args: Array<Exps.Arg>,
+  ) {
+    const collected = Exps.collectPatternVars(ctx, type)
+    this.patternVars = collected.patternVars
+    this.type = collected.type
+    this.ctx = collected.ctx
+  }
 
-    for (const patternVar of patternVars) {
-      inferred = insertByPatternVar(patternVar, solution, ctx, inferred)
+  insert(): Inferred {
+    while (this.args[0]?.kind === "ArgPlain") {
+      const arg = this.args[0]
+      const argInferred = Exps.inferOrUndefined(this.ctx, arg.exp)
+
+      /**
+         TODO We also need to handle `Values.ImplicitPi`.
+      **/
+
+      Values.assertTypeInCtx(this.ctx, this.type, Values.Pi)
+
+      if (argInferred !== undefined) {
+        this.solution = solve(
+          this.solution,
+          this.ctx,
+          Values.Type(),
+          argInferred.type,
+          this.type.argType,
+        )
+      }
+
+      const argCore =
+        argInferred?.core || check(this.ctx, arg.exp, this.type.argType)
+      const argValue = evaluate(ctxToEnv(this.ctx), argCore)
+      this.type = applyClosure(this.type.retTypeClosure, argValue)
+      this.passedArgs.push(argCore)
+      this.args.shift()
     }
 
-    for (const argCore of passedArgs) {
+    // TODO `deepWalk`
+    this.type = walk(this.solution, this.type)
+
+    let inferred = Inferred(this.type, this.target)
+
+    for (const patternVar of this.patternVars) {
+      inferred = insertByPatternVar(
+        patternVar,
+        this.solution,
+        this.ctx,
+        inferred,
+      )
+    }
+
+    for (const argCore of this.passedArgs) {
       inferred = Inferred(inferred.type, Cores.Ap(inferred.core, argCore))
     }
 
-    for (const arg of args) {
-      inferred = collectInferredByArg(ctx, inferred, arg)
+    for (const arg of this.args) {
+      inferred = collectInferredByArg(this.ctx, inferred, arg)
     }
 
     return inferred
-  }
-
-  const argInferred = Exps.inferOrUndefined(ctx, arg.exp)
-
-  /**
-       TODO We also need to handle `Values.ImplicitPi`.
-    **/
-  Values.assertTypeInCtx(ctx, type, Values.Pi)
-
-  if (argInferred !== undefined) {
-    solution = solve(
-      solution,
-      ctx,
-      Values.Type(),
-      argInferred.type,
-      type.argType,
-    )
-    const argCore = argInferred.core
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return insertImplicitApRecur(
-      patternVars,
-      solution,
-      ctx,
-      applyClosure(type.retTypeClosure, argValue),
-      target,
-      restArgs,
-      [...passedArgs, argCore],
-    )
-  } else {
-    const argCore = check(ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return insertImplicitApRecur(
-      patternVars,
-      solution,
-      ctx,
-      applyClosure(type.retTypeClosure, argValue),
-      target,
-      restArgs,
-      [...passedArgs, argCore],
-    )
   }
 }
 

@@ -1,6 +1,4 @@
-[refactor] insertImplicitAp -- improve recursion structure
-
-- [maybe] define a `Inserting` class
+[refactor] `ImplicitApInserter` extract method
 
 [refactor] fix recursion structure of `solveType` and `solve`
 
