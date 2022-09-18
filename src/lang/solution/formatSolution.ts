@@ -1,6 +1,6 @@
 import { formatCore } from "../core"
 import { Ctx, lookupTypeInCtx } from "../ctx"
-import { lookupValueInSolution, Solution } from "../solution"
+import { deepWalk, lookupValueInSolution, Solution } from "../solution"
 import { readback, readbackType } from "../value"
 
 export function formatSolution(
@@ -15,11 +15,12 @@ export function formatSolution(
       throw new Error(`formatSolution find type of name: ${name}`)
     }
 
-    const value = lookupValueInSolution(solution, name)
+    let value = lookupValueInSolution(solution, name)
     if (value === undefined) {
       const typeCore = readbackType(ctx, type)
       properties.push(`${name}: TODO(${formatCore(typeCore)})`)
     } else {
+      value = deepWalk(solution, ctx, value)
       const core = readback(ctx, type, value)
       properties.push(`${name}: ${formatCore(core)}`)
     }

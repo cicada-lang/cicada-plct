@@ -36,7 +36,7 @@ solve (a: String, b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: b, b: \\"c\\" }"')
+  expect(output).toMatchInlineSnapshot('"{ a: \\"c\\", b: \\"c\\" }"')
 })
 
 test("solve Objekt -- extra common properties", async () => {

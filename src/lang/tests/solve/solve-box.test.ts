@@ -12,12 +12,9 @@ function box(implicit T: Type, x: T): Box(T) {
   return cons(x, sole)
 }
 
-// TODO Be able to call box directly.
-
 solve (x: String, y: Box(String), z: Box(Box(String))) {
-  // equation y = box(x)
-  equation y = cons(x, sole)
-  equation z = cons(y, sole)
+  equation y = box(x)
+  equation z = box(y)
   equation x = "abc"
 }
 

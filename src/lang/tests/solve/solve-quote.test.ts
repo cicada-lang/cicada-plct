@@ -42,5 +42,7 @@ solve (a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: b, b: c, c: \\"a\\" }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"a\\", c: \\"a\\" }"',
+  )
 })
