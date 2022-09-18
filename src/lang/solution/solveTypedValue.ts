@@ -1,6 +1,5 @@
 import { Ctx } from "../ctx"
-import { Solution, solve } from "../solution"
-import * as Values from "../value"
+import { Solution, solve, solveType } from "../solution"
 import { TypedValue } from "../value"
 
 export function solveTypedValue(
@@ -9,7 +8,7 @@ export function solveTypedValue(
   left: TypedValue,
   right: TypedValue,
 ): Solution {
-  solution = solve(solution, ctx, Values.Type(), left.type, right.type)
+  solution = solveType(solution, ctx, left.type, right.type)
   solution = solve(solution, ctx, left.type, left.value, right.value)
   return solution
 }

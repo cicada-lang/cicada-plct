@@ -8,6 +8,8 @@ import {
   solve,
   solveClazz,
   solveNeutral,
+  solveVar,
+  walk,
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -19,6 +21,14 @@ export function solveType(
   left: Value,
   right: Value,
 ): Solution {
+  left = walk(solution, left)
+  right = walk(solution, right)
+
+  const success = solveVar(solution, left, right)
+  if (success !== undefined) {
+    return success
+  }
+
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
@@ -40,7 +50,7 @@ export function solveType(
   }
 
   if (left.kind === "Pi" && right.kind === "Pi") {
-    solution = solve(solution, ctx, Values.Type(), left.argType, right.argType)
+    solution = solveType(solution, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
 
@@ -63,7 +73,7 @@ export function solveType(
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    solution = solve(solution, ctx, Values.Type(), left.carType, right.carType)
+    solution = solveType(solution, ctx, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 

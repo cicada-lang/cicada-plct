@@ -1,10 +1,9 @@
 import { Ctx } from "../ctx"
 import {
-  isPatternVar,
   Solution,
-  SolutionCons,
   solveByType,
   solveByValue,
+  solveVar,
   walk,
 } from "../solution"
 import { Value } from "../value"
@@ -19,10 +18,6 @@ import { Value } from "../value"
    The recursion structure of `solve` closely follows `readback`,
    but dealing with two values in each step.
 
-   Note that, we should always
-   recursive call to `solve` (not `solveType`),
-   because `solve` handles `walk` and `PatternVar`.
-
 **/
 
 export function solve(
@@ -35,23 +30,8 @@ export function solve(
   left = walk(solution, left)
   right = walk(solution, right)
 
-  if (isPatternVar(left) && isPatternVar(right)) {
-    if (left.neutral.name === right.neutral.name) {
-      return solution
-    }
-  }
-
-  if (isPatternVar(left)) {
-    // TODO Need occur check to avoid circular unification.
-    return SolutionCons(left.neutral.name, right, solution)
-  }
-
-  if (isPatternVar(right)) {
-    // TODO Need occur check to avoid circular unification.
-    return SolutionCons(right.neutral.name, left, solution)
-  }
-
   return (
+    solveVar(solution, left, right) ||
     solveByType(solution, ctx, type, left, right) ||
     solveByValue(solution, ctx, type, left, right)
   )

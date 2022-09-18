@@ -1,7 +1,3 @@
-[refactor] fix recursion structure of `solveType` and `solve`
-
-- Should be able to call `solveType` as API
-
 deepWalk
 
 Stmts.Solve -- use `deepWalk`

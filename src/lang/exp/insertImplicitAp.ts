@@ -10,7 +10,7 @@ import {
   PatternVar,
   Solution,
   SolutionNull,
-  solve,
+  solveType,
   walk,
 } from "../solution"
 import * as Values from "../value"
@@ -80,10 +80,9 @@ class ImplicitApInserter {
       Values.assertTypeInCtx(this.ctx, this.type, Values.Pi)
 
       if (argInferred !== undefined) {
-        this.solution = solve(
+        this.solution = solveType(
           this.solution,
           this.ctx,
-          Values.Type(),
           argInferred.type,
           this.type.argType,
         )
