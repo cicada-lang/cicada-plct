@@ -24,7 +24,7 @@ export function insertImplicitAp(
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const solved = solveArgs(ctx, type, args, solution)
+  const solved = solveArgTypes(solution, ctx, type, args)
   for (const insertion of solved.insertions) {
     target = applyInsertion(solved.solution, ctx, insertion, target)
   }
@@ -33,15 +33,15 @@ export function insertImplicitAp(
   return Inferred(solvedType, target)
 }
 
-function solveArgs(
+function solveArgTypes(
+  solution: Solution,
   ctx: Ctx,
   type: Value,
   args: Array<Exps.Arg>,
-  solution: Solution,
   insertions: Array<Insertion> = [],
 ): {
-  type: Value
   solution: Solution
+  type: Value
   insertions: Array<Insertion>
 } {
   const [arg, ...restArgs] = args
@@ -56,12 +56,12 @@ function solveArgs(
     const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
     const freshName = freshen(usedNames, name)
     const patternVar = createPatternVar(type.argType, freshName)
-    return solveArgs(
+    return solveArgTypes(
+      solution,
       // TODO Why we need to extend `ctx` here?
       CtxCons(freshName, type.argType, ctx),
       applyClosure(type.retTypeClosure, patternVar),
       args, // NOTE Do not consume arg here.
-      solution,
       [...insertions, InsertionPatternVar(patternVar)],
     )
   }
@@ -77,11 +77,11 @@ function solveArgs(
       ? argInferred.core
       : check(ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
+    return solveArgTypes(
+      solution,
       ctx,
       applyClosure(type.retTypeClosure, argValue),
       restArgs,
-      solution,
       [...insertions, InsertionUsedArg(argCore)],
     )
   }
@@ -89,11 +89,11 @@ function solveArgs(
   if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
     const argCore = Exps.check(ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
+    return solveArgTypes(
+      solution,
       ctx,
       applyClosure(type.retTypeClosure, argValue),
       restArgs,
-      solution,
       [...insertions, InsertionImplicitArg(argCore)],
     )
   }
