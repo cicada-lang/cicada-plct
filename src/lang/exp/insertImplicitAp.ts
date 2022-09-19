@@ -25,12 +25,11 @@ export function insertImplicitAp(
   args: Array<Exps.Arg>,
 ): Inferred {
   const solved = solveArgs(ctx, type, args, solution)
-  solution = solved.solution
   for (const insertion of solved.insertions) {
-    target = applyInsertion(solution, ctx, insertion, target)
+    target = applyInsertion(solved.solution, ctx, insertion, target)
   }
 
-  return Inferred(deepWalk(solution, ctx, solved.type), target)
+  return Inferred(deepWalk(solved.solution, ctx, solved.type), target)
 }
 
 function solveArgs(

@@ -29,6 +29,23 @@ export function Inferred(type: Value, core: Core): Inferred {
 }
 
 export function infer(ctx: Ctx, exp: Exp): Inferred {
+  /**
+     `ImplicitAp` insertion.
+  **/
+  if (exp.kind === "Ap") {
+    const { target, args } = Exps.foldAp(exp)
+    const inferred = infer(ctx, target)
+    if (inferred.type.kind === "ImplicitPi" && args[0]?.kind === "ArgPlain") {
+      return Exps.insertImplicitAp(
+        SolutionNull(),
+        ctx,
+        inferred.type,
+        inferred.core,
+        args,
+      )
+    }
+  }
+
   switch (exp.kind) {
     case "Var": {
       const type = lookupTypeInCtx(ctx, exp.name)
@@ -103,26 +120,6 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
-      {
-        const { target, args } = Exps.foldAp(exp)
-        const inferred = infer(ctx, target)
-        /**
-           `ImplicitAp` insertion.
-        **/
-        if (
-          Values.isValue(inferred.type, Values.ImplicitPi) &&
-          args[0]?.kind === "ArgPlain"
-        ) {
-          return Exps.insertImplicitAp(
-            SolutionNull(),
-            ctx,
-            inferred.type,
-            inferred.core,
-            args,
-          )
-        }
-      }
-
       const inferred = infer(ctx, exp.target)
 
       {
