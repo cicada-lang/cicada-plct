@@ -1,6 +1,5 @@
 # implicit-ap-insertion-during-check
 
-extract insertion/solveArgTypes
 extract insertion/applyInsertions
 extract insertion/solveRetType
 
