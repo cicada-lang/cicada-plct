@@ -12,31 +12,32 @@ import {
   PatternVar,
   Solution,
   solutionNames,
-  SolutionNull,
   solveType,
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import { readback, Value } from "../value"
 
 export function insertImplicitAp(
+  solution: Solution,
   ctx: Ctx,
   type: Value,
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const solved = solveArgs(ctx, type, args)
+  const solved = solveArgs(ctx, type, args, solution)
+  solution = solved.solution
   for (const insertion of solved.insertions) {
-    target = applyInsertion(solved.solution, ctx, insertion, target)
+    target = applyInsertion(solution, ctx, insertion, target)
   }
 
-  return Inferred(deepWalk(solved.solution, ctx, solved.type), target)
+  return Inferred(deepWalk(solution, ctx, solved.type), target)
 }
 
 function solveArgs(
   ctx: Ctx,
   type: Value,
   args: Array<Exps.Arg>,
-  solution: Solution = SolutionNull(),
+  solution: Solution,
   insertions: Array<Insertion> = [],
 ): {
   type: Value

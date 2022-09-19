@@ -12,6 +12,7 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { SolutionNull } from "../solution"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
 
@@ -112,7 +113,13 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
           Values.isValue(inferred.type, Values.ImplicitPi) &&
           args[0]?.kind === "ArgPlain"
         ) {
-          return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
+          return Exps.insertImplicitAp(
+            SolutionNull(),
+            ctx,
+            inferred.type,
+            inferred.core,
+            args,
+          )
         }
       }
 
