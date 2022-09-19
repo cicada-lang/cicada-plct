@@ -10,10 +10,16 @@ export function inferImplicitApInsertion(
   switch (exp.kind) {
     case "Ap": {
       const { target, args } = Exps.foldAp(exp)
-      const { type, core } = infer(ctx, target)
-      if (type.kind === "ImplicitPi") {
+      const inferred = infer(ctx, target)
+      if (inferred.type.kind === "ImplicitPi") {
         const solution = SolutionNull()
-        return Exps.insertImplicitAp(solution, ctx, type, core, args)
+        return Exps.insertImplicitAp(
+          solution,
+          ctx,
+          inferred.type,
+          inferred.core,
+          args,
+        )
       }
     }
   }

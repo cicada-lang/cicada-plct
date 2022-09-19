@@ -29,7 +29,8 @@ export function insertImplicitAp(
     target = applyInsertion(solved.solution, ctx, insertion, target)
   }
 
-  return Inferred(deepWalk(solved.solution, ctx, solved.type), target)
+  const solvedType = deepWalk(solved.solution, ctx, solved.type)
+  return Inferred(solvedType, target)
 }
 
 function solveArgs(
