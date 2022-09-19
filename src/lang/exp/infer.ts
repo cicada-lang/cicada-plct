@@ -12,7 +12,6 @@ import {
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { SolutionNull } from "../solution"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
 
@@ -29,22 +28,8 @@ export function Inferred(type: Value, core: Core): Inferred {
 }
 
 export function infer(ctx: Ctx, exp: Exp): Inferred {
-  /**
-     `ImplicitAp` insertion.
-  **/
-  if (exp.kind === "Ap") {
-    const { target, args } = Exps.foldAp(exp)
-    const inferred = infer(ctx, target)
-    if (inferred.type.kind === "ImplicitPi" && args[0]?.kind === "ArgPlain") {
-      return Exps.insertImplicitAp(
-        SolutionNull(),
-        ctx,
-        inferred.type,
-        inferred.core,
-        args,
-      )
-    }
-  }
+  const inferred = Exps.inferImplicitApInsertion(ctx, exp)
+  if (inferred !== undefined) return inferred
 
   switch (exp.kind) {
     case "Var": {
