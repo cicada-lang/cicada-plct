@@ -228,13 +228,13 @@ export function ImplicitFn(name: string, ret: Exp, span?: Span): FnImplicit {
 
 export type FnAnnotatedImplicit = {
   family: "Exp"
-  kind: "AnnotatedImplicitFn"
+  kind: "FnAnnotatedImplicit"
   name: string
   argType: Exp
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedImplicitFn(
+export function FnAnnotatedImplicit(
   name: string,
   argType: Exp,
   ret: Exp,
@@ -242,7 +242,7 @@ export function AnnotatedImplicitFn(
 ): FnAnnotatedImplicit {
   return {
     family: "Exp",
-    kind: "AnnotatedImplicitFn",
+    kind: "FnAnnotatedImplicit",
     name,
     argType,
     ret,

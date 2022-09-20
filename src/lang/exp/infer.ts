@@ -77,7 +77,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "AnnotatedImplicitFn": {
+    case "FnAnnotatedImplicit": {
       const argTypeCore = Exps.checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
