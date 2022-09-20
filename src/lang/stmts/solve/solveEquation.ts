@@ -1,7 +1,7 @@
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer } from "../../exp"
-import { Solution, solve } from "../../solution"
+import { deepWalk, Solution, solve } from "../../solution"
 import { conversionType } from "../../value"
 import { Equation } from "../solve"
 
@@ -29,8 +29,10 @@ export function solveEquation(
     case "EquationUntyped": {
       const leftInferred = infer(solution, ctx, equation.left)
       const rightInferred = infer(solution, ctx, equation.right)
-      conversionType(ctx, leftInferred.type, rightInferred.type)
-      const typeValue = leftInferred.type
+      const leftType = deepWalk(solution, ctx, leftInferred.type)
+      const rightType = deepWalk(solution, ctx, rightInferred.type)
+      conversionType(ctx, leftType, rightType)
+      const typeValue = leftType
       const leftValue = evaluate(env, leftInferred.core)
       const rightValue = evaluate(env, rightInferred.core)
       solution = solve(solution, ctx, typeValue, leftValue, rightValue)
