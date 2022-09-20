@@ -25,6 +25,12 @@ export function solveArgTypes(
   type: Value
   insertions: Array<Insertions.Insertion>
 } {
+  /**
+     We should not `for (const arg of args) { ... }`
+     because in the case of `ImplicitPi` v.s. `ArgPlain`,
+     the `arg` is not consumed.
+   **/
+
   const [arg, ...restArgs] = args
 
   if (arg === undefined) {
