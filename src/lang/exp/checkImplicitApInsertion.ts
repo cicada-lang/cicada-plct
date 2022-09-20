@@ -17,12 +17,18 @@ export function checkImplicitApInsertion(
       const inferred = infer(ctx, target)
       if (inferred.type.kind === "ImplicitPi") {
         let solved = solveArgTypes(SolutionNull(), ctx, inferred.type, args)
+        let insertions = solved.insertions
         solved = solveRetType(solved.solution, solved.ctx, solved.type, type)
-        inclusion(ctx, deepWalk(solved.solution, solved.ctx, solved.type), type)
+        insertions = [...insertions, ...solved.insertions]
+        inclusion(
+          solved.ctx,
+          deepWalk(solved.solution, solved.ctx, solved.type),
+          type,
+        )
         return applyInsertions(
           solved.solution,
           solved.ctx,
-          solved.insertions,
+          insertions,
           inferred.core,
         )
       }

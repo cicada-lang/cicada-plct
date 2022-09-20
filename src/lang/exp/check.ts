@@ -54,9 +54,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       )
     }
 
-    case "Ap":
-    case "FoldedAp": {
+    case "Ap": {
       return checkByInfer(ctx, exp, type)
+    }
+
+    case "FoldedAp": {
+      return check(ctx, Exps.unfoldAp(exp.target, exp.args), type)
     }
 
     case "Sigma":

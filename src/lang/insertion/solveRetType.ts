@@ -1,7 +1,13 @@
-import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import { applyClosure } from "../closure"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Insertions from "../insertion"
-import { Solution } from "../solution"
+import {
+  createPatternVar,
+  Solution,
+  solutionNames,
+  solveType,
+} from "../solution"
+import { freshen } from "../utils/freshen"
 import { Value } from "../value"
 
 export function solveRetType(
@@ -16,9 +22,23 @@ export function solveRetType(
   type: Value
   insertions: Array<Insertions.Insertion>
 } {
-  return { solution, ctx, type, insertions }
+  if (type.kind === "ImplicitPi") {
+    const name = type.retTypeClosure.name
+    // TODO Scope BUG, `freshName` might occurs in `args`.
+    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+    const freshName = freshen(usedNames, name)
+    const patternVar = createPatternVar(type.argType, freshName)
+    return solveRetType(
+      solution,
+      // TODO Why we need to extend `ctx` here?
+      CtxCons(freshName, type.argType, ctx),
+      applyClosure(type.retTypeClosure, patternVar),
+      retType,
+      [...insertions, Insertions.InsertionPatternVar(patternVar)],
+    )
+  }
 
-  throw new ElaborationError(
-    `solveRetType expect type to ImplicitPi instead of: ${type.kind}`,
-  )
+  solution = solveType(solution, ctx, type, retType)
+
+  return { solution, ctx, type, insertions }
 }
