@@ -1,10 +1,19 @@
 import { formatCore } from "../core"
 import { Ctx, lookupTypeInCtx } from "../ctx"
+import { Env, EnvCons } from "../env"
 import { deepWalk, isPatternVar } from "../solution"
 import { readback, readbackType, Value } from "../value"
 
 export class Solution {
   bindings: Map<string, Value> = new Map()
+
+  enrichEnv(env: Env): Env {
+    for (const [name, value] of this.bindings.entries()) {
+      env = EnvCons(name, value, env)
+    }
+
+    return env
+  }
 
   get names(): Array<string> {
     return Array.from(this.bindings.keys())

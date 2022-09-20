@@ -10,7 +10,7 @@ export function solveEquation(
   ctx: Ctx,
   equation: Equation,
 ): Solution {
-  const env = ctxToEnv(ctx)
+  const env = solution.enrichEnv(ctxToEnv(ctx))
 
   switch (equation.kind) {
     case "EquationTyped": {

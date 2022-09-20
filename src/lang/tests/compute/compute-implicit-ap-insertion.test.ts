@@ -15,7 +15,7 @@ compute id("abc")
 
   // TODO fix for sole
 
-  expect(output).toMatchInlineSnapshot('"\\"abc\\": T"')
+  expect(output).toMatchInlineSnapshot('"\\"abc\\": String"')
 })
 
 test("compute ImplicitAp -- insertion -- infer", async () => {
