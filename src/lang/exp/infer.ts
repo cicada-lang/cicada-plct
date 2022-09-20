@@ -6,7 +6,6 @@ import {
   CtxCons,
   CtxFulfilled,
   ctxNames,
-  ctxToEnv,
   lookupTypeInCtx,
   lookupValueInCtx,
 } from "../ctx"
@@ -43,10 +42,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Pi": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        argTypeCore,
-      )
+      const argTypeValue = evaluate(solution.enrichCtx(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(solution, ctx, exp.retType)
       return Inferred(
@@ -57,10 +53,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "ImplicitPi": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        argTypeCore,
-      )
+      const argTypeValue = evaluate(solution.enrichCtx(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(solution, ctx, exp.retType)
       return Inferred(
@@ -75,15 +68,12 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedFn": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        argTypeCore,
-      )
+      const argTypeValue = evaluate(solution.enrichCtx(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
       const retTypeClosure = Closure(
-        solution.enrichEnv(ctxToEnv(ctx)),
+        solution.enrichCtx(ctx),
         exp.name,
         retTypeCore,
       )
@@ -95,15 +85,12 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedImplicitFn": {
       const argTypeCore = Exps.checkType(solution, ctx, exp.argType)
-      const argTypeValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        argTypeCore,
-      )
+      const argTypeValue = evaluate(solution.enrichCtx(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       const retTypeCore = readbackType(ctx, retInferred.type)
       const retTypeClosure = Closure(
-        solution.enrichEnv(ctxToEnv(ctx)),
+        solution.enrichCtx(ctx),
         exp.name,
         retTypeCore,
       )
@@ -132,10 +119,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
         /**
            Try to use `targetValue` first, then use `inferred.type`.
         **/
-        const targetValue = evaluate(
-          solution.enrichEnv(ctxToEnv(ctx)),
-          inferred.core,
-        )
+        const targetValue = evaluate(solution.enrichCtx(ctx), inferred.core)
         /**
            Fulfilling type.
         **/
@@ -161,7 +145,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(solution, ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
       const argCore = Exps.check(solution, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(solution.enrichEnv(ctxToEnv(ctx)), argCore)
+      const argValue = evaluate(solution.enrichCtx(ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.ImplicitAp(inferred.core, argCore),
@@ -174,10 +158,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Sigma": {
       const carTypeCore = Exps.checkType(solution, ctx, exp.carType)
-      const carTypeValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        carTypeCore,
-      )
+      const carTypeValue = evaluate(solution.enrichCtx(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = Exps.checkType(solution, ctx, exp.cdrType)
       return Inferred(
@@ -202,7 +183,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
       const sigma = inferred.type
       const carValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
+        solution.enrichCtx(ctx),
         Cores.Car(inferred.core),
       )
       return Inferred(
@@ -215,11 +196,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       const carInferred = infer(solution, ctx, exp.car)
       const cdrInferred = infer(solution, ctx, exp.cdr)
       const cdrTypeCore = readbackType(ctx, cdrInferred.type)
-      const cdrTypeClosure = Closure(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        "_",
-        cdrTypeCore,
-      )
+      const cdrTypeClosure = Closure(solution.enrichCtx(ctx), "_", cdrTypeCore)
       return Inferred(
         Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),
@@ -245,7 +222,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
       let properties: Record<string, Core> = {}
       for (let [name, property] of Object.entries(exp.properties).reverse()) {
         const inferred = infer(solution, ctx, property)
-        const value = evaluate(solution.enrichEnv(ctxToEnv(ctx)), inferred.core)
+        const value = evaluate(solution.enrichCtx(ctx), inferred.core)
         clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
         properties[name] = inferred.core
       }
@@ -263,10 +240,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "Dot": {
       const inferred = infer(solution, ctx, exp.target)
-      const targetValue = evaluate(
-        solution.enrichEnv(ctxToEnv(ctx)),
-        inferred.core,
-      )
+      const targetValue = evaluate(solution.enrichCtx(ctx), inferred.core)
       Values.assertClazzInCtx(ctx, inferred.type)
       const propertyType = Values.lookupPropertyTypeOrFail(
         inferred.type,
@@ -345,7 +319,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLet": {
       const inferred = infer(solution, ctx, exp.exp)
-      const value = evaluate(solution.enrichEnv(ctxToEnv(ctx)), inferred.core)
+      const value = evaluate(solution.enrichCtx(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       return Inferred(
@@ -356,9 +330,9 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLetThe": {
       const typeCore = Exps.checkType(solution, ctx, exp.type)
-      const typeValue = evaluate(solution.enrichEnv(ctxToEnv(ctx)), typeCore)
+      const typeValue = evaluate(solution.enrichCtx(ctx), typeCore)
       const enriched = Exps.enrichOrCheck(solution, ctx, exp.exp, typeValue)
-      const value = evaluate(solution.enrichEnv(ctxToEnv(ctx)), enriched.core)
+      const value = evaluate(solution.enrichCtx(ctx), enriched.core)
       ctx = CtxFulfilled(exp.name, enriched.type, value, ctx)
       const retInferred = infer(solution, ctx, exp.ret)
       return Inferred(
@@ -369,7 +343,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceCheck": {
       const typeCore = Exps.checkType(solution, ctx, exp.type)
-      const typeValue = evaluate(solution.enrichEnv(ctxToEnv(ctx)), typeCore)
+      const typeValue = evaluate(solution.enrichCtx(ctx), typeCore)
       Exps.check(solution, ctx, exp.exp, typeValue)
       return infer(solution, ctx, exp.ret)
     }
@@ -428,7 +402,7 @@ export function inferApPi(
     ? argInferred.core
     : Exps.check(solution, ctx, argExp, inferred.type.argType)
 
-  const argValue = evaluate(solution.enrichEnv(ctxToEnv(ctx)), argCore)
+  const argValue = evaluate(solution.enrichCtx(ctx), argCore)
 
   return Inferred(
     applyClosure(inferred.type.retTypeClosure, argValue),

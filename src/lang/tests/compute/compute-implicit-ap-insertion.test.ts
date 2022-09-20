@@ -45,8 +45,7 @@ function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
 // compute infer2(sole, "abc")
 // compute infer2(sole, sole)
 // compute infer2("abc")(sole)
-check infer2("abc")("abc"): Type
-// compute infer2("abc")("abc")
+compute infer2("abc")("abc")
 
 `)
 

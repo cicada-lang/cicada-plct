@@ -1,7 +1,7 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, enrich, Exp } from "../exp"
@@ -88,7 +88,7 @@ export function check(
       Values.assertTypeInCtx(ctx, type, Values.Sigma)
       const { carType, cdrTypeClosure } = type
       const carCore = check(solution, ctx, exp.car, carType)
-      const carValue = evaluate(solution.enrichEnv(ctxToEnv(ctx)), carCore)
+      const carValue = evaluate(solution.enrichCtx(ctx), carCore)
       const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
       const cdrCore = check(solution, ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)

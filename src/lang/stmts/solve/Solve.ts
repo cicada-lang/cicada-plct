@@ -1,5 +1,5 @@
 import { evaluate } from "../../core"
-import { CtxCons, ctxToEnv } from "../../ctx"
+import { CtxCons } from "../../ctx"
 import { checkType, Span } from "../../exp"
 import { Mod } from "../../mod"
 import { formatSolution, Solution } from "../../solution"
@@ -20,7 +20,7 @@ export class Solve extends Stmt {
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
       const typeValue = evaluate(
-        mod.solution.enrichEnv(ctxToEnv(ctx)),
+        mod.solution.enrichCtx(ctx),
         checkType(mod.solution, ctx, type),
       )
       ctx = CtxCons(name, typeValue, ctx)

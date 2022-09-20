@@ -1,5 +1,5 @@
 import { evaluate } from "../../core"
-import { Ctx, ctxToEnv } from "../../ctx"
+import { Ctx } from "../../ctx"
 import { check, checkType, infer } from "../../exp"
 import { Solution, solve } from "../../solution"
 import { conversionType } from "../../value"
@@ -10,7 +10,7 @@ export function solveEquation(
   ctx: Ctx,
   equation: Equation,
 ): Solution {
-  const env = solution.enrichEnv(ctxToEnv(ctx))
+  const env = solution.enrichCtx(ctx)
 
   switch (equation.kind) {
     case "EquationTyped": {
