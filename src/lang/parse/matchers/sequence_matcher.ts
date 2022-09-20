@@ -34,7 +34,7 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
     ) =>
       Exps.SequenceBindingLetThe(
         pt.str(name),
-        Exps.FoldedPi(
+        Exps.PiFolded(
           matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
         ),

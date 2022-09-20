@@ -60,7 +60,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FoldedPi": {
+    case "PiFolded": {
       return infer(ctx, Exps.unfoldPi(exp.bindings, exp.retType))
     }
 

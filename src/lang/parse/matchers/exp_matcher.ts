@@ -65,13 +65,13 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": ({ bindings, ret_t }, { span }) =>
-      Exps.FoldedPi(
+      Exps.PiFolded(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span,
       ),
     "operand:pi_forall": ({ bindings, ret_t }, { span }) =>
-      Exps.FoldedPi(
+      Exps.PiFolded(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span,

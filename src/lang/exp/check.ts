@@ -16,7 +16,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
-    case "FoldedPi": {
+    case "PiFolded": {
       return checkByInfer(ctx, exp, type)
     }
 

@@ -107,19 +107,19 @@ export function PiImplicit(
 
 export type PiFolded = {
   family: "Exp"
-  kind: "FoldedPi"
+  kind: "PiFolded"
   bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
 
-export function FoldedPi(
+export function PiFolded(
   bindings: Array<PiBinding>,
   retType: Exp,
   span?: Span,
 ): PiFolded {
   return {
     family: "Exp",
-    kind: "FoldedPi",
+    kind: "PiFolded",
     bindings,
     retType,
     span,

@@ -77,7 +77,7 @@ class {
       Exps.FoldedClazz([
         Exps.ClazzBindingFulfilled(
           "id",
-          Exps.FoldedPi(
+          Exps.PiFolded(
             [
               Exps.PiBindingNamed("T", Exps.Var("Type")),
               Exps.PiBindingNamed("x", Exps.Var("T")),
