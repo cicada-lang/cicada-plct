@@ -51,7 +51,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.ImplicitFn(exp.name, retCore)
     }
 
-    case "AnnotatedFn": {
+    case "FnAnnotated": {
       return checkByInfer(ctx, exp, type)
     }
 

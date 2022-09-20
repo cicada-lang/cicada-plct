@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test("check AnnotatedFn", async () => {
+test("check FnAnnotated", async () => {
   await runCode(`
 
 check (T: Type) => T: (Type) -> Type
@@ -9,7 +9,7 @@ check (T: Type) => T: (Type) -> Type
 `)
 })
 
-test("check AnnotatedFn -- dependent", async () => {
+test("check FnAnnotated -- dependent", async () => {
   await runCode(`
 
 let id = (T: Type, x: T) => x
@@ -17,7 +17,7 @@ let id = (T: Type, x: T) => x
 `)
 })
 
-test("check AnnotatedFn -- dependent -- check by infer", async () => {
+test("check FnAnnotated -- dependent -- check by infer", async () => {
   await runCode(`
 
 check (T, x) => x: forall (T: Type, x: T) T

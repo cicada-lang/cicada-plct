@@ -12,7 +12,7 @@ export function unfoldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingAnnotated": {
-      return Exps.AnnotatedFn(
+      return Exps.FnAnnotated(
         binding.name,
         binding.type,
         unfoldFn(restBindings, ret),

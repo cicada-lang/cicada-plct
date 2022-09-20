@@ -187,13 +187,13 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
 
 export type FnAnnotated = {
   family: "Exp"
-  kind: "AnnotatedFn"
+  kind: "FnAnnotated"
   name: string
   argType: Exp
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedFn(
+export function FnAnnotated(
   name: string,
   argType: Exp,
   ret: Exp,
@@ -201,7 +201,7 @@ export function AnnotatedFn(
 ): FnAnnotated {
   return {
     family: "Exp",
-    kind: "AnnotatedFn",
+    kind: "FnAnnotated",
     name,
     argType,
     ret,

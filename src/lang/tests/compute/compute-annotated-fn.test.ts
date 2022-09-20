@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("compute AnnotatedFn", async () => {
+test("compute FnAnnotated", async () => {
   const output = await runCode(`
 
 let id = (T: Type, x: T) => x
