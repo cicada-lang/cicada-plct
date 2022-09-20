@@ -5,7 +5,7 @@ export type Core =
   | Fn
   | ImplicitFn
   | Ap
-  | ImplicitAp
+  | ApImplicit
   | Sigma
   | Cons
   | Car
@@ -116,17 +116,17 @@ export function Ap(target: Core, arg: Core): Ap {
     arg,
   }
 }
-export type ImplicitAp = {
+export type ApImplicit = {
   family: "Core"
-  kind: "ImplicitAp"
+  kind: "ApImplicit"
   target: Core
   arg: Core
 }
 
-export function ImplicitAp(target: Core, arg: Core): ImplicitAp {
+export function ApImplicit(target: Core, arg: Core): ApImplicit {
   return {
     family: "Core",
-    kind: "ImplicitAp",
+    kind: "ApImplicit",
     target,
     arg,
   }

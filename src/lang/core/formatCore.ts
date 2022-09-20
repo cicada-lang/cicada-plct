@@ -21,7 +21,7 @@ export function formatCore(core: Core): string {
     }
 
     case "Ap":
-    case "ImplicitAp": {
+    case "ApImplicit": {
       const { target, args } = Cores.foldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }

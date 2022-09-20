@@ -17,8 +17,8 @@ export function readbackNeutral(ctx: Ctx, neutral: Neutral): Core {
       )
     }
 
-    case "ImplicitAp": {
-      return Cores.ImplicitAp(
+    case "ApImplicit": {
+      return Cores.ApImplicit(
         readbackNeutral(ctx, neutral.target),
         readback(ctx, neutral.arg.type, neutral.arg.value),
       )

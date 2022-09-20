@@ -1,10 +1,10 @@
+import * as Exps from "."
+import { check, Inferred } from "."
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
-import * as Exps from "../exp"
-import { check, Inferred } from "../exp"
 import {
   createPatternVar,
   deepWalk,
@@ -18,7 +18,7 @@ import {
 import { freshen } from "../utils/freshen"
 import { readback, Value } from "../value"
 
-export function insertImplicitAp(
+export function insertApImplicit(
   ctx: Ctx,
   type: Value,
   target: Core,
@@ -168,7 +168,7 @@ function applyInsertion(
         deepWalk(solution, ctx, argValue),
       )
 
-      return Cores.ImplicitAp(core, argCore)
+      return Cores.ApImplicit(core, argCore)
     }
 
     case "InsertionUsedArg": {
@@ -176,7 +176,7 @@ function applyInsertion(
     }
 
     case "InsertionImplicitArg": {
-      return Cores.ImplicitAp(core, insertion.argCore)
+      return Cores.ApImplicit(core, insertion.argCore)
     }
   }
 }

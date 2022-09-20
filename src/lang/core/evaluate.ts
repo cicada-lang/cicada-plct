@@ -40,7 +40,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Ap":
-    case "ImplicitAp": {
+    case "ApImplicit": {
       return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 

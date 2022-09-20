@@ -378,15 +378,15 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
 
 export type ApImplicit = {
   family: "Exp"
-  kind: "ImplicitAp"
+  kind: "ApImplicit"
   target: Exp
   arg: Exp
 } & ExpMeta
 
-export function ImplicitAp(target: Exp, arg: Exp, span?: Span): ApImplicit {
+export function ApImplicit(target: Exp, arg: Exp, span?: Span): ApImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitAp",
+    kind: "ApImplicit",
     target,
     arg,
     span,
