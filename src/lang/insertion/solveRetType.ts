@@ -12,9 +12,12 @@ export function solveRetType(
   insertions: Array<Insertions.Insertion> = [],
 ): {
   solution: Solution
+  ctx: Ctx
   type: Value
   insertions: Array<Insertions.Insertion>
 } {
+  return { solution, ctx, type, insertions }
+
   throw new ElaborationError(
     `solveRetType expect type to ImplicitPi instead of: ${type.kind}`,
   )
