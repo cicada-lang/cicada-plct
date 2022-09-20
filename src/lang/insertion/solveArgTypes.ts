@@ -22,6 +22,7 @@ export function solveArgTypes(
   insertions: Array<Insertions.Insertion> = [],
 ): {
   solution: Solution
+  ctx: Ctx
   type: Value
   insertions: Array<Insertions.Insertion>
 } {
@@ -34,7 +35,7 @@ export function solveArgTypes(
   const [arg, ...restArgs] = args
 
   if (arg === undefined) {
-    return { solution, type, insertions }
+    return { solution, ctx, type, insertions }
   }
 
   if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
