@@ -1,5 +1,5 @@
 import { applyClosure, Closure } from "../closure"
-import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Neutrals from "../neutral"
 import { Solution } from "../solution"
 import { freshen } from "../utils/freshen"
@@ -31,7 +31,8 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
       retType = deepWalk(solution, ctx, retType)
       ctx = CtxCons(freshName, argType, ctx)
       const retTypeCore = readbackType(ctx, retType)
-      return Values.Pi(argType, Closure(ctxToEnv(ctx), freshName, retTypeCore))
+      const env = solution.enrichCtx(ctx)
+      return Values.Pi(argType, Closure(env, freshName, retTypeCore))
     }
 
     case "ImplicitPi": {
@@ -60,10 +61,8 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
       cdrType = deepWalk(solution, ctx, cdrType)
       ctx = CtxCons(freshName, carType, ctx)
       const cdrTypeCore = readbackType(ctx, cdrType)
-      return Values.Sigma(
-        carType,
-        Closure(ctxToEnv(ctx), freshName, cdrTypeCore),
-      )
+      const env = solution.enrichCtx(ctx)
+      return Values.Sigma(carType, Closure(env, freshName, cdrTypeCore))
     }
 
     case "Cons": {

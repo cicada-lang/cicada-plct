@@ -1,5 +1,7 @@
 # having solution all the time
 
+add `solution` to `readback`
+
 insert `ImplicitAp` during check
 
 - add test "compute ImplicitAp -- insertion -- during check"
