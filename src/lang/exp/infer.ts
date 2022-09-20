@@ -49,14 +49,14 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const argTypeCore = Exps.checkType(ctx, exp.argType)
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(ctx, exp.retType)
       return Inferred(
         Values.Type(),
-        Cores.ImplicitPi(exp.name, argTypeCore, retTypeCore),
+        Cores.PiImplicit(exp.name, argTypeCore, retTypeCore),
       )
     }
 
@@ -85,7 +85,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const retTypeCore = readbackType(ctx, retInferred.type)
       const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
-        Values.ImplicitPi(argTypeValue, retTypeClosure),
+        Values.PiImplicit(argTypeValue, retTypeClosure),
         Cores.ImplicitFn(exp.name, retInferred.core),
       )
     }
@@ -109,7 +109,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
            `ImplicitAp` insertion.
         **/
         if (
-          Values.isValue(inferred.type, Values.ImplicitPi) &&
+          Values.isValue(inferred.type, Values.PiImplicit) &&
           args[0]?.kind === "ArgPlain"
         ) {
           return Exps.insertImplicitAp(ctx, inferred.type, inferred.core, args)
@@ -143,7 +143,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
 
     case "ImplicitAp": {
       const inferred = infer(ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
+      Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
       const argCore = Exps.check(ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(

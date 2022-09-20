@@ -49,7 +49,7 @@ function solveArgs(
     return { solution, type, insertions }
   }
 
-  if (type.kind === "ImplicitPi" && arg.kind === "ArgPlain") {
+  if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
     const name = type.retTypeClosure.name
     // TODO Scope BUG, `freshName` might occurs in `args`.
     const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
@@ -85,7 +85,7 @@ function solveArgs(
     )
   }
 
-  if (type.kind === "ImplicitPi" && arg.kind === "ArgImplicit") {
+  if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
     const argCore = Exps.check(ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
     return solveArgs(
@@ -102,7 +102,7 @@ function solveArgs(
   }
 
   throw new ElaborationError(
-    `expect type to be Pi or ImplicitPi instead of: ${type.kind}`,
+    `expect type to be Pi or PiImplicit instead of: ${type.kind}`,
   )
 }
 

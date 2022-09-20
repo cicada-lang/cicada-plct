@@ -57,7 +57,7 @@ export function readbackByType(
       return Cores.Fn(freshName, readback(ctx, retType, ret))
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const name = type.retTypeClosure.name
       const freshName = freshen(ctxNames(ctx), name)
       const variable = Neutrals.Var(freshName)

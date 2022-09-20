@@ -83,13 +83,13 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
 
 export type PiImplicit = {
   family: "Exp"
-  kind: "ImplicitPi"
+  kind: "PiImplicit"
   name: string
   argType: Exp
   retType: Exp
 } & ExpMeta
 
-export function ImplicitPi(
+export function PiImplicit(
   name: string,
   argType: Exp,
   retType: Exp,
@@ -97,7 +97,7 @@ export function ImplicitPi(
 ): PiImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitPi",
+    kind: "PiImplicit",
     name,
     argType,
     retType,

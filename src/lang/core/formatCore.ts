@@ -9,7 +9,7 @@ export function formatCore(core: Core): string {
     }
 
     case "Pi":
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const { bindings, retType } = Cores.foldFormatPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }

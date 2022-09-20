@@ -24,8 +24,8 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
-    case "ImplicitPi": {
-      return Values.ImplicitPi(
+    case "PiImplicit": {
+      return Values.PiImplicit(
         evaluate(env, core.argType),
         Closure(env, core.name, core.retType),
       )

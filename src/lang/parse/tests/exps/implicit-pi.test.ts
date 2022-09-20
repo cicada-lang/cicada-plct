@@ -3,7 +3,7 @@ import * as Exps from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"
 
-test("parse ImplicitPi", () => {
+test("parse PiImplicit", () => {
   expect(parseExp("(implicit T: Type, x: T) -> Type")).toMatchObject(
     deleteUndefined(
       Exps.FoldedPi(

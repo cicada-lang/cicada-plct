@@ -10,7 +10,7 @@ import * as Values from "../value"
 export function insertImplicitFn(
   ctx: Ctx,
   exp: Exp,
-  type: Values.ImplicitPi,
+  type: Values.PiImplicit,
 ): Core {
   const name = type.retTypeClosure.name
   const freshName = freshen(ctxNames(ctx), name)

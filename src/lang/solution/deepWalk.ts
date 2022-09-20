@@ -24,7 +24,7 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
       return value
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       // TODO
       return value
     }

@@ -26,7 +26,7 @@ export function doAp(target: Value, arg: Value): Value {
     )
   }
 
-  if (Values.isValue(target.type, Values.ImplicitPi)) {
+  if (Values.isValue(target.type, Values.PiImplicit)) {
     return Values.TypedNeutral(
       applyClosure(target.type.retTypeClosure, arg),
       Neutrals.ImplicitAp(target.neutral, TypedValue(target.type.argType, arg)),

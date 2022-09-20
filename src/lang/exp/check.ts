@@ -24,7 +24,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       /**
          `ImplicitFn` insertion.
        **/
-      if (Values.isValue(type, Values.ImplicitPi)) {
+      if (Values.isValue(type, Values.PiImplicit)) {
         return Exps.insertImplicitFn(ctx, exp, type)
       }
 
@@ -39,11 +39,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     case "ImplicitFn": {
       /**
          TODO We can also insert `ImplicitFn` when
-         the number of implicits in `ImplicitPi` is greater than
+         the number of implicits in `PiImplicit` is greater than
          the number of implicits in `ImplicitFn`.
       **/
 
-      Values.assertTypeInCtx(ctx, type, Values.ImplicitPi)
+      Values.assertTypeInCtx(ctx, type, Values.PiImplicit)
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
