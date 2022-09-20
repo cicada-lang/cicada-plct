@@ -10,10 +10,9 @@ export function solveEquation(
   ctx: Ctx,
   equation: Equation,
 ): Solution {
-  const env = solution.enrichCtx(ctx)
-
   switch (equation.kind) {
     case "EquationTyped": {
+      const env = solution.enrichCtx(ctx)
       const typeValue = evaluate(env, checkType(solution, ctx, equation.type))
       const leftValue = evaluate(
         env,
@@ -33,6 +32,7 @@ export function solveEquation(
       const rightType = deepWalk(solution, ctx, rightInferred.type)
       conversionType(ctx, leftType, rightType)
       const typeValue = leftType
+      const env = solution.enrichCtx(ctx)
       const leftValue = evaluate(env, leftInferred.core)
       const rightValue = evaluate(env, rightInferred.core)
       solution = solve(solution, ctx, typeValue, leftValue, rightValue)

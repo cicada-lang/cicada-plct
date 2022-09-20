@@ -1,5 +1,7 @@
 # having solution all the time
 
+insert `ImplicitAp` during check
+
 infer and check take `mod` instead of `solution`
 
 every call to `evaluate` should use `solution` enriched `env`

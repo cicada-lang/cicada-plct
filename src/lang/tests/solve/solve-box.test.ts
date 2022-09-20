@@ -27,5 +27,7 @@ solve (x: String, y: Box(String), z: Box(Box(String))) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(
+    '"{ x: \\"abc\\", y: cons(x, sole), z: cons(cons(x, sole), sole) }"',
+  )
 })
