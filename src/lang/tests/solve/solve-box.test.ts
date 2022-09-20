@@ -13,14 +13,19 @@ function box(implicit T: Type, x: T): Box(T) {
 }
 
 solve (x: String, y: Box(String), z: Box(Box(String))) {
+  // equation y = cons(x, sole)
+  // equation z = cons(y, sole)
+
+  // equation y = box(implicit String, x)
+  // equation z = box(implicit Box(String), y)
+
   equation y = box(x)
   equation z = box(y)
+
   equation x = "abc"
 }
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ x: \\"abc\\", y: cons(x, sole), z: cons(cons(car(y), sole), sole) }"',
-  )
+  expect(output).toMatchInlineSnapshot()
 })
