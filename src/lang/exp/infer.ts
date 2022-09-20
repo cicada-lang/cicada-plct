@@ -152,7 +152,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FoldedAp": {
+    case "ApFolded": {
       return infer(ctx, Exps.unfoldAp(exp.target, exp.args))
     }
 
@@ -167,7 +167,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FoldedSigma": {
+    case "SigmaFolded": {
       return infer(ctx, Exps.unfoldSigma(exp.bindings, exp.cdrType))
     }
 
@@ -210,7 +210,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(Values.Type(), Exps.checkClazz(ctx, exp))
     }
 
-    case "FoldedClazz": {
+    case "ClazzFolded": {
       return infer(ctx, Exps.unfoldClazz(exp.bindings))
     }
 
@@ -227,7 +227,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "FoldedObjekt": {
+    case "ObjektFolded": {
       return infer(
         ctx,
         Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),
@@ -252,7 +252,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
-    case "FoldedNew": {
+    case "NewFolded": {
       return infer(
         ctx,
         Exps.New(exp.name, Exps.prepareProperties(ctx, exp.properties)),
@@ -284,7 +284,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "NewAp": {
+    case "ApNew": {
       const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
         throw new ElaborationError(`undefined class: ${exp.name}`)
@@ -295,7 +295,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "FoldedSequence": {
+    case "SequenceFolded": {
       return infer(ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
     }
 

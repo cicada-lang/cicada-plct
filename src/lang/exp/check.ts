@@ -68,12 +68,12 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Ap":
-    case "FoldedAp": {
+    case "ApFolded": {
       return checkByInfer(ctx, exp, type)
     }
 
     case "Sigma":
-    case "FoldedSigma": {
+    case "SigmaFolded": {
       return checkByInfer(ctx, exp, type)
     }
 
@@ -99,11 +99,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled":
-    case "FoldedClazz": {
+    case "ClazzFolded": {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedObjekt":
+    case "ObjektFolded":
     case "Objekt": {
       const { core } = enrich(ctx, exp, type)
       return core
@@ -113,7 +113,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedNew": {
+    case "NewFolded": {
       return check(
         ctx,
         Exps.New(exp.name, Exps.prepareProperties(ctx, exp.properties)),
@@ -122,11 +122,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "New":
-    case "NewAp": {
+    case "ApNew": {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedSequence":
+    case "SequenceFolded":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {

@@ -42,7 +42,7 @@ export type Exp =
   | ObjektFolded
   | New
   | NewFolded
-  | NewAp
+  | ApNew
   | Dot
   | Sequence
   | SequenceFolded
@@ -395,7 +395,7 @@ export function ApImplicit(target: Exp, arg: Exp, span?: Span): ApImplicit {
 
 export type ApFolded = {
   family: "Exp"
-  kind: "FoldedAp"
+  kind: "ApFolded"
   target: Exp
   args: Array<Arg>
 } & ExpMeta
@@ -403,7 +403,7 @@ export type ApFolded = {
 export function FoldedAp(target: Exp, args: Array<Arg>, span?: Span): ApFolded {
   return {
     family: "Exp",
-    kind: "FoldedAp",
+    kind: "ApFolded",
     target,
     args,
     span,
@@ -462,7 +462,7 @@ export function Sigma(
 
 export type SigmaFolded = {
   family: "Exp"
-  kind: "FoldedSigma"
+  kind: "SigmaFolded"
   bindings: Array<SigmaBinding>
   cdrType: Exp
 } & ExpMeta
@@ -474,7 +474,7 @@ export function FoldedSigma(
 ): SigmaFolded {
   return {
     family: "Exp",
-    kind: "FoldedSigma",
+    kind: "SigmaFolded",
     bindings,
     cdrType,
     span,
@@ -639,7 +639,7 @@ export function ClazzFulfilled(
 
 export type ClazzFolded = {
   family: "Exp"
-  kind: "FoldedClazz"
+  kind: "ClazzFolded"
   bindings: Array<ClazzBinding>
 } & ExpMeta
 
@@ -649,7 +649,7 @@ export function FoldedClazz(
 ): ClazzFolded {
   return {
     family: "Exp",
-    kind: "FoldedClazz",
+    kind: "ClazzFolded",
     bindings,
     span,
   }
@@ -711,7 +711,7 @@ export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
 
 export type ObjektFolded = {
   family: "Exp"
-  kind: "FoldedObjekt"
+  kind: "ObjektFolded"
   properties: Array<Property>
 } & ExpMeta
 
@@ -721,7 +721,7 @@ export function FoldedObjekt(
 ): ObjektFolded {
   return {
     family: "Exp",
-    kind: "FoldedObjekt",
+    kind: "ObjektFolded",
     properties,
     span,
   }
@@ -778,36 +778,36 @@ export function New(
 
 export type NewFolded = {
   family: "Exp"
-  kind: "FoldedNew"
+  kind: "NewFolded"
   name: string
   properties: Array<Property>
 } & ExpMeta
 
-export function FoldedNew(
+export function NewFolded(
   name: string,
   properties: Array<Property>,
   span?: Span,
 ): NewFolded {
   return {
     family: "Exp",
-    kind: "FoldedNew",
+    kind: "NewFolded",
     name,
     properties,
     span,
   }
 }
 
-export type NewAp = {
+export type ApNew = {
   family: "Exp"
-  kind: "NewAp"
+  kind: "ApNew"
   name: string
   args: Array<Arg>
 } & ExpMeta
 
-export function NewAp(name: string, args: Array<Arg>, span?: Span): NewAp {
+export function ApNew(name: string, args: Array<Arg>, span?: Span): ApNew {
   return {
     family: "Exp",
-    kind: "NewAp",
+    kind: "ApNew",
     name,
     args,
     span,
@@ -910,7 +910,7 @@ export function SequenceCheck(
 
 export type SequenceFolded = {
   family: "Exp"
-  kind: "FoldedSequence"
+  kind: "SequenceFolded"
   bindings: Array<SequenceBinding>
   ret: Exp
 } & ExpMeta
@@ -922,7 +922,7 @@ export function FoldedSequence(
 ): SequenceFolded {
   return {
     family: "Exp",
-    kind: "FoldedSequence",
+    kind: "SequenceFolded",
     bindings,
     ret,
     span,

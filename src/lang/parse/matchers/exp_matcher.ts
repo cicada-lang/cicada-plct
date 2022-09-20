@@ -126,7 +126,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         span,
       ),
     "operand:new": ({ name, properties, last_property }, { span }) =>
-      Exps.FoldedNew(
+      Exps.NewFolded(
         pt.str(name),
         [
           ...pt.matchers
@@ -137,6 +137,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         span,
       ),
     "operand:new_ap": ({ name, args }, { span }) =>
-      Exps.NewAp(pt.str(name), matchers.args_matcher(args), span),
+      Exps.ApNew(pt.str(name), matchers.args_matcher(args), span),
   })(tree)
 }

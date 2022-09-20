@@ -28,7 +28,7 @@ export function enrich(ctx: Ctx, exp: Exp, type: Value): Inferred {
 
 function enrichWithoutInfer(ctx: Ctx, exp: Exp, type: Value): Inferred {
   switch (exp.kind) {
-    case "FoldedObjekt": {
+    case "ObjektFolded": {
       return enrich(
         ctx,
         Exps.Objekt(Exps.prepareProperties(ctx, exp.properties)),

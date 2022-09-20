@@ -20,7 +20,7 @@ export function foldAp(
       return foldAp(exp.target, [Exps.ArgImplicit(exp.arg), ...args])
     }
 
-    case "FoldedAp": {
+    case "ApFolded": {
       return foldAp(exp.target, [...exp.args, ...args])
     }
 

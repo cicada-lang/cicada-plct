@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("check NewAp", async () => {
+test("check ApNew", async () => {
   await runCode(`
 
 class ABC {
@@ -15,7 +15,7 @@ check new ABC("a", "b", "c"): ABC
 `)
 })
 
-test("check NewAp -- prefilled", async () => {
+test("check ApNew -- prefilled", async () => {
   await runCode(`
 
 class ABC {
@@ -29,7 +29,7 @@ check new ABC("a", "c"): ABC
 `)
 })
 
-test("check NewAp -- not enough args", async () => {
+test("check ApNew -- not enough args", async () => {
   await expectCodeToFail(`
 
 class ABC {
@@ -43,7 +43,7 @@ check new ABC("a", "b"): ABC
 `)
 })
 
-test("check NewAp -- not enough args -- prefilled", async () => {
+test("check ApNew -- not enough args -- prefilled", async () => {
   await expectCodeToFail(`
 
 class ABC {
@@ -57,7 +57,7 @@ check new ABC("a"): ABC
 `)
 })
 
-test("check NewAp -- too many args", async () => {
+test("check ApNew -- too many args", async () => {
   await expectCodeToFail(`
 
 class ABC {
@@ -71,7 +71,7 @@ check new ABC("a", "b", "c", "d"): ABC
 `)
 })
 
-test("check NewAp -- too many args -- prefilled", async () => {
+test("check ApNew -- too many args -- prefilled", async () => {
   await expectCodeToFail(`
 
 class ABC {
