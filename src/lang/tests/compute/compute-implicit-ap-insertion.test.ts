@@ -42,9 +42,9 @@ function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
   return Pair(A, B)
 }
 
-compute infer2(sole, "abc")
-compute infer2(sole, sole)
-compute infer2("abc")(sole)
+// compute infer2(sole, "abc")
+// compute infer2(sole, sole)
+// compute infer2("abc")(sole)
 compute infer2("abc")("abc")
 
 `)
@@ -59,19 +59,14 @@ function infer2(implicit A: Type, x: A, implicit B: Type, y: B): Type {
   return Pair(A, B)
 }
 
-compute infer2(sole, "abc")
-compute infer2(sole, sole)
-compute infer2("abc")(sole)
+// compute infer2(sole, "abc")
+// compute infer2(sole, sole)
+// compute infer2("abc")(sole)
 compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "exists (Trivial) String: Type
-    exists (Trivial) Trivial: Type
-    exists (String) Trivial: Type
-    exists (String) String: Type"
-  `)
+  expect(output).toMatchInlineSnapshot()
 })
 
 test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
