@@ -211,15 +211,15 @@ export function FnAnnotated(
 
 export type FnImplicit = {
   family: "Exp"
-  kind: "ImplicitFn"
+  kind: "FnImplicit"
   name: string
   ret: Exp
 } & ExpMeta
 
-export function ImplicitFn(name: string, ret: Exp, span?: Span): FnImplicit {
+export function FnImplicit(name: string, ret: Exp, span?: Span): FnImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitFn",
+    kind: "FnImplicit",
     name,
     ret,
     span,

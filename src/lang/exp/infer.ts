@@ -86,7 +86,7 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       const retTypeClosure = Closure(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
-        Cores.ImplicitFn(exp.name, retInferred.core),
+        Cores.FnImplicit(exp.name, retInferred.core),
       )
     }
 

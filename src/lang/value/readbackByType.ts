@@ -65,7 +65,7 @@ export function readbackByType(
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
-      return Cores.ImplicitFn(freshName, readback(ctx, retType, ret))
+      return Cores.FnImplicit(freshName, readback(ctx, retType, ret))
     }
 
     case "Sigma": {

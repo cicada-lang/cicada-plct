@@ -9,7 +9,7 @@ export function doAp(target: Value, arg: Value): Value {
     return applyClosure(target.retClosure, arg)
   }
 
-  if (Values.isValue(target, Values.ImplicitFn)) {
+  if (Values.isValue(target, Values.FnImplicit)) {
     return applyClosure(target.retClosure, arg)
   }
 

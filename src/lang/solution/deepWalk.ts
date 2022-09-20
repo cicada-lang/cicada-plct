@@ -33,7 +33,7 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
       return value
     }
 
-    case "ImplicitFn": {
+    case "FnImplicit": {
       // TODO
       return value
     }

@@ -22,10 +22,10 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Fn": {
       /**
-         `ImplicitFn` insertion.
+         `FnImplicit` insertion.
        **/
       if (Values.isValue(type, Values.PiImplicit)) {
-        return Exps.insertImplicitFn(ctx, exp, type)
+        return Exps.insertFnImplicit(ctx, exp, type)
       }
 
       Values.assertTypeInCtx(ctx, type, Values.Pi)
@@ -36,11 +36,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Fn(exp.name, retCore)
     }
 
-    case "ImplicitFn": {
+    case "FnImplicit": {
       /**
-         TODO We can also insert `ImplicitFn` when
+         TODO We can also insert `FnImplicit` when
          the number of implicits in `PiImplicit` is greater than
-         the number of implicits in `ImplicitFn`.
+         the number of implicits in `FnImplicit`.
       **/
 
       Values.assertTypeInCtx(ctx, type, Values.PiImplicit)
@@ -48,7 +48,7 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(ctx, exp.ret, retType)
-      return Cores.ImplicitFn(exp.name, retCore)
+      return Cores.FnImplicit(exp.name, retCore)
     }
 
     case "FnAnnotated": {

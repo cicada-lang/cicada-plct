@@ -15,7 +15,7 @@ export function formatCore(core: Core): string {
     }
 
     case "Fn":
-    case "ImplicitFn": {
+    case "FnImplicit": {
       const { bindings, ret } = Cores.foldFormatFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
