@@ -11,6 +11,7 @@ export function checkByInfer(
   type: Value,
 ): Core {
   const inferred = infer(solution, ctx, exp)
+  // solution = solveType(solution, ctx, inferred.type, type)
   inclusion(
     ctx,
     deepWalk(solution, ctx, inferred.type),

@@ -20,8 +20,18 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
     }
 
     case "Pi": {
-      // TODO
-      return value
+      const type = value
+      const name = type.retTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, name)
+      const variable = Neutrals.Var(freshName)
+      const argType = deepWalk(solution, ctx, type.argType)
+      const typedNeutral = Values.TypedNeutral(argType, variable)
+      let retType = applyClosure(type.retTypeClosure, typedNeutral)
+      retType = deepWalk(solution, ctx, retType)
+      ctx = CtxCons(freshName, argType, ctx)
+      const retTypeCore = readbackType(ctx, retType)
+      return Values.Pi(argType, Closure(ctxToEnv(ctx), freshName, retTypeCore))
     }
 
     case "ImplicitPi": {
@@ -41,7 +51,8 @@ export function deepWalk(solution: Solution, ctx: Ctx, value: Value): Value {
     case "Sigma": {
       const type = value
       const name = type.cdrTypeClosure.name
-      const freshName = freshen(ctxNames(ctx), name)
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, name)
       const variable = Neutrals.Var(freshName)
       const carType = deepWalk(solution, ctx, type.carType)
       const typedNeutral = Values.TypedNeutral(carType, variable)

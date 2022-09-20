@@ -2,6 +2,8 @@
 
 insert `ImplicitAp` during check
 
+- add test "compute ImplicitAp -- insertion -- during check"
+
 infer and check take `mod` instead of `solution`
 
 every call to `evaluate` should use `solution` enriched `env`
