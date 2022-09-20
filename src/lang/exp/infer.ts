@@ -134,11 +134,7 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
         }
       }
 
-      if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-        return inferApImplicitPi(solution, ctx, inferred, exp.arg)
-      } else {
-        return inferApPi(solution, ctx, inferred, exp.arg)
-      }
+      return inferAp(solution, ctx, inferred, exp.arg)
     }
 
     case "ImplicitAp": {
@@ -354,7 +350,20 @@ export function infer(solution: Solution, ctx: Ctx, exp: Exp): Inferred {
   }
 }
 
-export function inferApImplicitPi(
+export function inferAp(
+  solution: Solution,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
+  if (Values.isValue(inferred.type, Values.ImplicitPi)) {
+    return inferApImplicitPi(solution, ctx, inferred, argExp)
+  } else {
+    return inferApPi(solution, ctx, inferred, argExp)
+  }
+}
+
+function inferApImplicitPi(
   solution: Solution,
   ctx: Ctx,
   inferred: Inferred,
@@ -370,7 +379,7 @@ export function inferApImplicitPi(
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 
-  solution = solution.bind(freshName, patternVar)
+  // solution = solution.bind(freshName, patternVar)
 
   /**
      `ImplicitAp` insertion.
@@ -380,14 +389,10 @@ export function inferApImplicitPi(
     Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
   )
 
-  if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-    return inferApImplicitPi(solution, ctx, inferred, argExp)
-  } else {
-    return inferApPi(solution, ctx, inferred, argExp)
-  }
+  return inferAp(solution, ctx, inferred, argExp)
 }
 
-export function inferApPi(
+function inferApPi(
   solution: Solution,
   ctx: Ctx,
   inferred: Inferred,
