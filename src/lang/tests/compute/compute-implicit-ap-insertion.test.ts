@@ -45,7 +45,8 @@ function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
 // compute infer2(sole, "abc")
 // compute infer2(sole, sole)
 // compute infer2("abc")(sole)
-compute infer2("abc")("abc")
+check infer2("abc")("abc"): Type
+// compute infer2("abc")("abc")
 
 `)
 
@@ -66,7 +67,7 @@ compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"exists (String) String: Type"')
 })
 
 test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
