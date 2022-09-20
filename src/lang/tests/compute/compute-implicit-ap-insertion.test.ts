@@ -8,14 +8,15 @@ function id(implicit T: Type, x: T): T {
   return x
 }
 
-// compute id(sole)
+compute id(sole)
 compute id("abc")
 
 `)
 
-  // TODO fix for sole
-
-  expect(output).toMatchInlineSnapshot('"\\"abc\\": String"')
+  expect(output).toMatchInlineSnapshot(`
+    "sole: Trivial
+    \\"abc\\": String"
+  `)
 })
 
 test("compute ImplicitAp -- insertion -- infer", async () => {
@@ -25,14 +26,15 @@ function infer(implicit T: Type, x: T): Type {
   return T
 }
 
-// compute infer(sole)
+compute infer(sole)
 compute infer("abc")
 
 `)
 
-  // TODO fix for sole
-
-  expect(output).toMatchInlineSnapshot('"String: Type"')
+  expect(output).toMatchInlineSnapshot(`
+    "Trivial: Type
+    String: Type"
+  `)
 })
 
 test("compute ImplicitAp -- insertion -- infer2", async () => {
@@ -42,14 +44,19 @@ function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
   return Pair(A, B)
 }
 
-// compute infer2(sole, "abc")
-// compute infer2(sole, sole)
-// compute infer2("abc")(sole)
+compute infer2(sole, "abc")
+compute infer2(sole, sole)
+compute infer2("abc")(sole)
 compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"exists (String) String: Type"')
+  expect(output).toMatchInlineSnapshot(`
+    "exists (Trivial) String: Type
+    exists (Trivial) Trivial: Type
+    exists (String) Trivial: Type
+    exists (String) String: Type"
+  `)
 })
 
 test("compute ImplicitAp -- insertion -- infer2 -- over", async () => {
@@ -59,14 +66,19 @@ function infer2(implicit A: Type, x: A, implicit B: Type, y: B): Type {
   return Pair(A, B)
 }
 
-// compute infer2(sole, "abc")
-// compute infer2(sole, sole)
-// compute infer2("abc")(sole)
+compute infer2(sole, "abc")
+compute infer2(sole, sole)
+compute infer2("abc")(sole)
 compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"exists (String) String: Type"')
+  expect(output).toMatchInlineSnapshot(`
+    "exists (Trivial) String: Type
+    exists (Trivial) Trivial: Type
+    exists (String) Trivial: Type
+    exists (String) String: Type"
+  `)
 })
 
 test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
