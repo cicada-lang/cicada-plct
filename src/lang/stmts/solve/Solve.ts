@@ -2,7 +2,7 @@ import { evaluate } from "../../core"
 import { CtxCons } from "../../ctx"
 import { checkType, Span } from "../../exp"
 import { Mod } from "../../mod"
-import { formatSolution, Solution } from "../../solution"
+import { formatSolution } from "../../solution"
 import { Stmt, StmtOutput } from "../../stmt"
 import { Equation, SolveBinding, solveEquation } from "../solve"
 
@@ -26,11 +26,10 @@ export class Solve extends Stmt {
       names.push(name)
     }
 
-    let solution: Solution = new Solution()
     for (const equation of this.equations) {
-      solution = solveEquation(solution, ctx, equation)
+      mod.solution = solveEquation(mod.solution, ctx, equation)
     }
 
-    return formatSolution(solution, ctx, names)
+    return formatSolution(mod.solution, ctx, names)
   }
 }
