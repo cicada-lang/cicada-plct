@@ -16,6 +16,6 @@ export function solveRetType(
   insertions: Array<Insertions.Insertion>
 } {
   throw new ElaborationError(
-    `expect type to ImplicitPi instead of: ${type.kind}`,
+    `solveRetType expect type to ImplicitPi instead of: ${type.kind}`,
   )
 }

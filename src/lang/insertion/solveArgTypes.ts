@@ -86,10 +86,10 @@ export function solveArgTypes(
   }
 
   if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
-    throw new ElaborationError(`extra Implicit argument`)
+    throw new ElaborationError(`solveArgTypes found extra Implicit argument`)
   }
 
   throw new ElaborationError(
-    `expect type to be Pi or ImplicitPi instead of: ${type.kind}`,
+    `solveArgTypes expect type to be Pi or ImplicitPi instead of: ${type.kind}`,
   )
 }
