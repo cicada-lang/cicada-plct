@@ -2,7 +2,7 @@ import pt from "@cicada-lang/partech"
 import * as Exps from "../../exp"
 import * as matchers from "../matchers"
 
-export function sequence_matcher(tree: pt.Tree): Exps.FoldedSequence {
+export function sequence_matcher(tree: pt.Tree): Exps.SequenceFolded {
   return pt.matcher({
     "sequence:sequence": ({ entries, ret }, { span }) =>
       Exps.FoldedSequence(

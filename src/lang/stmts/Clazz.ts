@@ -7,7 +7,7 @@ import { Stmt } from "../stmt"
 export class Clazz extends Stmt {
   constructor(
     public name: string,
-    public clazz: Exps.FoldedClazz,
+    public clazz: Exps.ClazzFolded,
     public span?: Span,
   ) {
     super()
