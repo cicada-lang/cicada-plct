@@ -34,7 +34,14 @@ export class Solution {
   }
 
   lookupValue(name: string): Value | undefined {
-    return this.bindings.get(name)
+    const value = this.bindings.get(name)
+    if (value === undefined) return undefined
+
+    if (isPatternVar(value) && value.neutral.name === name) {
+      return undefined
+    }
+
+    return value
   }
 
   walk(value: Value): Value {

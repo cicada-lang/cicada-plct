@@ -370,6 +370,8 @@ export function inferApImplicitPi(
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 
+  solution = solution.bind(freshName, patternVar)
+
   /**
      `ImplicitAp` insertion.
   **/

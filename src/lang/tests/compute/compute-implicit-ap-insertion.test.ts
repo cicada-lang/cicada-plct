@@ -49,7 +49,7 @@ compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"exists (String) String: Type"')
 })
 
 test("compute ImplicitAp -- insertion -- infer2 -- over", async () => {
