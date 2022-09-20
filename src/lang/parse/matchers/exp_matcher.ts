@@ -77,13 +77,13 @@ export function operand_matcher(tree: pt.Tree): Exp {
         span,
       ),
     "operand:fn": ({ bindings, ret }, { span }) =>
-      Exps.FoldedFn(
+      Exps.FnFolded(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
         span,
       ),
     "operand:fn_function": ({ bindings, sequence }, { span }) =>
-      Exps.FoldedFn(
+      Exps.FnFolded(
         matchers.fn_bindings_matcher(bindings),
         matchers.sequence_matcher(sequence),
         span,
@@ -92,7 +92,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
       { bindings, ret_type, sequence },
       { span },
     ) =>
-      Exps.FoldedFnWithRetType(
+      Exps.FnFoldedWithRetType(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret_type),
         matchers.sequence_matcher(sequence),

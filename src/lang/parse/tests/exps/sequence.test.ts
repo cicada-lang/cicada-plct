@@ -79,7 +79,7 @@ begin {
               ],
               Exps.Var("T"),
             ),
-            Exps.FoldedFn(
+            Exps.FnFolded(
               [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
               Exps.FoldedSequence([], Exps.Var("x")),
             ),

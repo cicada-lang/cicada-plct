@@ -35,7 +35,7 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
           matchers.exp_matcher(ret_t),
           span,
         ),
-        Exps.FoldedFn(
+        Exps.FnFolded(
           matchers
             .pi_bindings_matcher(bindings)
             .map(matchers.piBindingtoFnBindingFrom),

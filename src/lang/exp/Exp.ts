@@ -252,19 +252,19 @@ export function FnAnnotatedImplicit(
 
 export type FnFolded = {
   family: "Exp"
-  kind: "FoldedFn"
+  kind: "FnFolded"
   bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
 
-export function FoldedFn(
+export function FnFolded(
   bindings: Array<FnBinding>,
   ret: Exp,
   span?: Span,
 ): FnFolded {
   return {
     family: "Exp",
-    kind: "FoldedFn",
+    kind: "FnFolded",
     bindings,
     ret,
     span,
@@ -273,13 +273,13 @@ export function FoldedFn(
 
 export type FnFoldedWithRetType = {
   family: "Exp"
-  kind: "FoldedFnWithRetType"
+  kind: "FnFoldedWithRetType"
   bindings: Array<FnBinding>
   retType: Exp
   ret: Exp
 } & ExpMeta
 
-export function FoldedFnWithRetType(
+export function FnFoldedWithRetType(
   bindings: Array<FnBinding>,
   retType: Exp,
   ret: Exp,
@@ -287,7 +287,7 @@ export function FoldedFnWithRetType(
 ): FnFoldedWithRetType {
   return {
     family: "Exp",
-    kind: "FoldedFnWithRetType",
+    kind: "FnFoldedWithRetType",
     bindings,
     retType,
     ret,

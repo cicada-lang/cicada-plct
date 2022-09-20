@@ -20,7 +20,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:let_function": ({ name, bindings, sequence }, { span }) =>
       new Stmts.Let(
         pt.str(name),
-        Exps.FoldedFn(
+        Exps.FnFolded(
           matchers.fn_bindings_matcher(bindings),
           matchers.sequence_matcher(sequence),
         ),
@@ -31,7 +31,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     ) =>
       new Stmts.Let(
         pt.str(name),
-        Exps.FoldedFnWithRetType(
+        Exps.FnFoldedWithRetType(
           matchers.fn_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
           matchers.sequence_matcher(sequence),

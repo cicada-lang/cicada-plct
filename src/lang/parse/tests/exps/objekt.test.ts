@@ -63,7 +63,7 @@ test("parse Objekt -- method", () => {
       Exps.FoldedObjekt([
         Exps.PropertyPlain(
           "f",
-          Exps.FoldedFn([Exps.FnBindingName("x")], Exps.Var("x")),
+          Exps.FnFolded([Exps.FnBindingName("x")], Exps.Var("x")),
         ),
       ]),
     ),
@@ -74,7 +74,7 @@ test("parse Objekt -- method", () => {
       Exps.FoldedObjekt([
         Exps.PropertyPlain(
           "f",
-          Exps.FoldedFn(
+          Exps.FnFolded(
             [
               Exps.FnBindingName("x"),
               Exps.FnBindingName("y"),

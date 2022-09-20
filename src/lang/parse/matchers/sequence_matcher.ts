@@ -38,7 +38,7 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
           matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
         ),
-        Exps.FoldedFn(
+        Exps.FnFolded(
           matchers
             .pi_bindings_matcher(bindings)
             .map(matchers.piBindingtoFnBindingFrom),

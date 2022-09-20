@@ -90,11 +90,11 @@ export function infer(ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FoldedFn": {
+    case "FnFolded": {
       return infer(ctx, Exps.unfoldFn(exp.bindings, exp.ret))
     }
 
-    case "FoldedFnWithRetType": {
+    case "FnFoldedWithRetType": {
       return infer(
         ctx,
         Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),

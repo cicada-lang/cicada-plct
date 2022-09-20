@@ -11,7 +11,7 @@ test("parse Let -- function with implicit", () => {
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FoldedFnWithRetType(
+        Exps.FnFoldedWithRetType(
           [
             Exps.FnBindingAnnotatedImplicit("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),

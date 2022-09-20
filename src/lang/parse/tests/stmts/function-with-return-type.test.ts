@@ -11,7 +11,7 @@ test("parse Let -- function with return type", () => {
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FoldedFnWithRetType(
+        Exps.FnFoldedWithRetType(
           [
             Exps.FnBindingAnnotated("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),

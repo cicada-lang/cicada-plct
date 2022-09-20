@@ -9,7 +9,7 @@ test("parse Let -- function", () => {
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FoldedFn(
+        Exps.FnFolded(
           [
             Exps.FnBindingAnnotated("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),

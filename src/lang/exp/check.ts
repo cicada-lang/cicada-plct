@@ -55,11 +55,11 @@ export function check(ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(ctx, exp, type)
     }
 
-    case "FoldedFn": {
+    case "FnFolded": {
       return check(ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
     }
 
-    case "FoldedFnWithRetType": {
+    case "FnFoldedWithRetType": {
       return check(
         ctx,
         Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),
