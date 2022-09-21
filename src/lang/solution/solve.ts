@@ -24,7 +24,8 @@ export function solve(
   left = solution.walk(left)
   right = solution.walk(right)
 
-  solveVar(solution, left, right) ||
-    solveByType(solution, ctx, type, left, right) ||
-    solveByValue(solution, ctx, type, left, right)
+  if (solveVar(solution, left, right)) return
+  if (solveByType(solution, ctx, type, left, right)) return
+
+  solveByValue(solution, ctx, type, left, right)
 }
