@@ -9,18 +9,18 @@ export function solveByValue(
   type: Value,
   left: Value,
   right: Value,
-): Solution {
+): void {
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
-
-    return solveNeutral(solution, ctx, left.neutral, right.neutral)
+    solveNeutral(solution, ctx, left.neutral, right.neutral)
+    return
   }
 
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.literal === right.literal) {
-      return solution
+      return
     }
 
     throw new EquationError(

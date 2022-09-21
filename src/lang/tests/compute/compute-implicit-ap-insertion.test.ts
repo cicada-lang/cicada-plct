@@ -124,12 +124,50 @@ compute cons("abc", sole)
 
 `)
 
-  // TODO Need to do `deepWalk` on return type.
-
   expect(output).toMatchInlineSnapshot(
     `
     "cons(\\"abc\\", sole): exists (String) Trivial
     cons(\\"abc\\", sole): exists (String) Trivial"
   `,
   )
+})
+
+test("compute ImplicitAp -- insertion -- nested", async () => {
+  const output = await runCode(`
+
+function Box(T: Type): Type {
+  return Pair(T, Trivial)
+}
+
+function box(implicit T: Type, x: T): Box(T) {
+  return cons(x, sole)
+}
+
+compute box(box("abc"))
+compute box(box(box("abc")))
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "cons(cons(\\"abc\\", sole), sole): exists (exists (String) Trivial) Trivial
+    cons(cons(cons(\\"abc\\", sole), sole), sole): exists (exists (exists (String) Trivial) Trivial) Trivial"
+  `)
+})
+
+test("compute ImplicitAp -- insertion -- during check", async () => {
+  const output = await runCode(`
+
+function idWithTrivial(implicit T: Type, solo: Trivial, x: T): T {
+  return x
+}
+
+
+check idWithTrivial(sole): (String) -> String
+
+let idString: (String) -> String = idWithTrivial(sole)
+compute idString
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"(_1) => _1: (_1: String) -> String"')
 })

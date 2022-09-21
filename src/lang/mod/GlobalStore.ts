@@ -1,5 +1,4 @@
 import { CtxFulfilled } from "../ctx"
-import { EnvCons } from "../env"
 import { Mod } from "../mod"
 import { parseStmts } from "../parse"
 import { Stmt } from "../stmt"
@@ -45,7 +44,6 @@ export class GlobalStore {
   async mountTypedValues(mod: Mod): Promise<void> {
     for (const [name, { type, value }] of this.typedValues.entries()) {
       mod.ctx = CtxFulfilled(name, type, value, mod.ctx)
-      mod.env = EnvCons(name, value, mod.env)
     }
   }
 }

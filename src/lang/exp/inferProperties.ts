@@ -1,13 +1,15 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
+import { Ctx, CtxFulfilled } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertClazzInCtx, conversion } from "../value"
 
 export function inferProperties(
+  mod: Mod,
   ctx: Ctx,
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
@@ -24,8 +26,8 @@ export function inferProperties(
         throw new ElaborationError(`missing property: ${clazz.name}`)
       }
 
-      const propertyCore = Exps.check(ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
 
       assertClazzInCtx(ctx, rest)
@@ -34,20 +36,24 @@ export function inferProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferProperties(ctx, properties, rest),
+        ...inferProperties(mod, ctx, properties, rest),
       }
     }
 
     case "ClazzFulfilled": {
       const property = properties[clazz.name]
       if (property !== undefined) {
-        const propertyCore = Exps.check(ctx, property, clazz.propertyType)
-        const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+        const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
+        const propertyValue = evaluate(
+          mod.enrichedEnvFromCtx(ctx),
+          propertyCore,
+        )
 
-        conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
+        conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
       const propertyCore = Values.readback(
+        mod,
         ctx,
         clazz.propertyType,
         clazz.property,
@@ -57,7 +63,7 @@ export function inferProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferProperties(ctx, properties, clazz.rest),
+        ...inferProperties(mod, ctx, properties, clazz.rest),
       }
     }
   }

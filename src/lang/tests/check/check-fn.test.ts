@@ -28,7 +28,7 @@ check (A, a) => a: (A: Type, A) -> A
 test("check Fn -- dependent error", async () => {
   await expectCodeToFail(`
 
-check (A, B) => A: (A: Type, A) -> A
+check (A) => A: (A: Type) -> A
 
 `)
 })

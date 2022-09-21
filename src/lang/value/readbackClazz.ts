@@ -1,29 +1,37 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazzInCtx, readback, readbackType } from "../value"
 
-export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
+export function readbackClazz(
+  mod: Mod,
+  ctx: Ctx,
+  clazz: Values.Clazz,
+): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       return Cores.ClazzNull()
     }
 
     case "ClazzCons": {
-      const freshName = freshen(ctxNames(ctx), clazz.name)
+      const name = clazz.name
+      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const freshName = freshen(usedNames, name)
+
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
       const restValue = applyClosure(clazz.restClosure, typedNeutral)
       assertClazzInCtx(ctx, restValue)
       ctx = CtxCons(freshName, clazz.propertyType, ctx)
-      const restCore = readbackClazz(ctx, restValue)
+      const restCore = readbackClazz(mod, ctx, restValue)
       return Cores.ClazzCons(
         clazz.name,
         freshName,
-        readbackType(ctx, clazz.propertyType),
+        readbackType(mod, ctx, clazz.propertyType),
         restCore,
       )
     }
@@ -31,9 +39,9 @@ export function readbackClazz(ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
     case "ClazzFulfilled": {
       return Cores.ClazzFulfilled(
         clazz.name,
-        readbackType(ctx, clazz.propertyType),
-        readback(ctx, clazz.propertyType, clazz.property),
-        readbackClazz(ctx, clazz.rest),
+        readbackType(mod, ctx, clazz.propertyType),
+        readback(mod, ctx, clazz.propertyType, clazz.property),
+        readbackClazz(mod, ctx, clazz.rest),
       )
     }
   }

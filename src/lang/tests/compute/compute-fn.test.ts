@@ -11,8 +11,8 @@ compute id(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, x: T) -> T
-    (x) => x: (x: Type) -> Type"
+    "(T1, x1) => x1: (T1: Type, x1: T1) -> T1
+    (x1) => x1: (x1: Type) -> Type"
   `)
 })
 
@@ -29,8 +29,8 @@ compute id2(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, x: T) -> T
-    (x) => x: (x: Type) -> Type"
+    "(T1, x1) => x1: (T1: Type, x1: T1) -> T1
+    (x1) => x1: (x1: Type) -> Type"
   `)
 })
 
@@ -48,9 +48,9 @@ compute apply(Type, Type, (x) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T, x, f) => f(x): (T: Type, x: T, f: (_: T) -> T) -> T
-    (x, f) => f(x): (x: Type, f: (_: Type) -> Type) -> Type
-    (f) => f(Type): (f: (_: Type) -> Type) -> Type
+    "(T1, x1, f1) => f1(x1): (T1: Type, x1: T1, f1: (_1: T1) -> T1) -> T1
+    (x1, f1) => f1(x1): (x1: Type, f1: (_1: Type) -> Type) -> Type
+    (f1) => f1(Type): (f1: (_1: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -70,10 +70,10 @@ compute apply2(Type, Type, Type, (x, y) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T, x, y, f) => f(x, y): (T: Type, x: T, y: T, f: (_: T, _1: T) -> T) -> T
-    (x, y, f) => f(x, y): (x: Type, y: Type, f: (_: Type, _1: Type) -> Type) -> Type
-    (y, f) => f(Type, y): (y: Type, f: (_: Type, _1: Type) -> Type) -> Type
-    (f) => f(Type, Type): (f: (_: Type, _1: Type) -> Type) -> Type
+    "(T1, x1, y1, f1) => f1(x1, y1): (T1: Type, x1: T1, y1: T1, f1: (_2: T1, _11: T1) -> T1) -> T1
+    (x1, y1, f1) => f1(x1, y1): (x1: Type, y1: Type, f1: (_2: Type, _11: Type) -> Type) -> Type
+    (y1, f1) => f1(Type, y1): (y1: Type, f1: (_2: Type, _11: Type) -> Type) -> Type
+    (f1) => f1(Type, Type): (f1: (_2: Type, _11: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -89,7 +89,7 @@ compute id
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, x: T) -> T"
-  `)
+  expect(output).toMatchInlineSnapshot(
+    '"(T1, x1) => x1: (T1: Type, x1: T1) -> T1"',
+  )
 })

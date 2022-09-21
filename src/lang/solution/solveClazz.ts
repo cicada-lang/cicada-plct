@@ -1,5 +1,5 @@
 import { Ctx, ctxNames } from "../ctx"
-import { Solution, solutionNames, solve, solveType } from "../solution"
+import { Solution, solve, solveType } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
 import { expelClazz } from "../value"
@@ -18,7 +18,7 @@ export function solveClazz(
   right: Values.Clazz,
 ): Solution {
   const freshNameMap = freshenNames(
-    [...ctxNames(ctx), ...solutionNames(solution)],
+    [...ctxNames(ctx), ...solution.names],
     [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
   )
 
@@ -29,10 +29,10 @@ export function solveClazz(
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
 
-    solution = solveType(solution, ctx, leftProperty.type, rightProperty.type)
+    solveType(solution, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      solution = solve(
+      solve(
         solution,
         ctx,
         leftProperty.type,

@@ -1,13 +1,15 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { check } from "../exp"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertClazzInCtx, readback } from "../value"
 
 export function checkNewArgs(
+  mod: Mod,
   ctx: Ctx,
   args: Array<Exps.Arg>,
   clazz: Values.Clazz,
@@ -31,23 +33,28 @@ export function checkNewArgs(
       }
 
       const [arg, ...restArgs] = args
-      const propertyCore = check(ctx, arg.exp, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyCore = check(mod, ctx, arg.exp, clazz.propertyType)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
       return {
         [clazz.name]: propertyCore,
-        ...checkNewArgs(ctx, restArgs, rest),
+        ...checkNewArgs(mod, ctx, restArgs, rest),
       }
     }
 
     case "ClazzFulfilled": {
-      const propertyCore = readback(ctx, clazz.propertyType, clazz.property)
+      const propertyCore = readback(
+        mod,
+        ctx,
+        clazz.propertyType,
+        clazz.property,
+      )
 
       return {
         [clazz.name]: propertyCore,
-        ...checkNewArgs(ctx, args, clazz.rest),
+        ...checkNewArgs(mod, ctx, args, clazz.rest),
       }
     }
   }

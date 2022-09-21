@@ -1,6 +1,7 @@
 import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
-import { deleteFirstFromEnv, Env, EnvCons, EnvNull } from "../env"
+import { Env } from "../env"
+import { Solution } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
 import { globals } from "./globals"
@@ -11,13 +12,21 @@ export interface ModOptions {
 }
 
 export class Mod {
+  solution = new Solution()
   ctx: Ctx = CtxNull()
-  env: Env = EnvNull()
   outputs: Map<number, StmtOutput> = new Map()
   stmts: Array<Stmt> = []
   initialized = false
 
   constructor(public options: ModOptions) {}
+
+  enrichedEnvFromCtx(ctx: Ctx): Env {
+    return this.solution.enrichCtx(this, ctx)
+  }
+
+  get env(): Env {
+    return this.enrichedEnvFromCtx(this.ctx)
+  }
 
   resolve(href: string): URL {
     return new URL(href, this.options.url)
@@ -39,6 +48,7 @@ export class Mod {
         outputs.push(output)
         this.outputs.set(index, output)
       }
+      this.solution.cleanup()
     }
 
     return outputs
@@ -46,11 +56,9 @@ export class Mod {
 
   define(name: string, type: Value, value: Value): void {
     this.ctx = CtxFulfilled(name, type, value, this.ctx)
-    this.env = EnvCons(name, value, this.env)
   }
 
   delete(name: string): void {
     this.ctx = deleteFirstFromCtx(this.ctx, name)
-    this.env = deleteFirstFromEnv(this.env, name)
   }
 }

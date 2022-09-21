@@ -4,13 +4,7 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
-import {
-  Solution,
-  solutionNames,
-  solve,
-  solveProperties,
-  solveType,
-} from "../solution"
+import { Solution, solve, solveProperties, solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isValue, Value } from "../value"
@@ -21,19 +15,20 @@ export function solveByType(
   type: Value,
   left: Value,
   right: Value,
-): Solution | undefined {
+): "ok" | undefined {
   switch (type.kind) {
     case "Type": {
-      return solveType(solution, ctx, left, right)
+      solveType(solution, ctx, left, right)
+      return "ok"
     }
 
     case "Trivial": {
-      return solution
+      return "ok"
     }
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+      const usedNames = [...ctxNames(ctx), ...solution.names]
       const freshName = freshen(usedNames, name)
       const variable = Neutrals.Var(freshName)
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
@@ -41,30 +36,28 @@ export function solveByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
-      return solve(solution, ctx, retType, leftRet, rightRet)
+      solve(solution, ctx, retType, leftRet, rightRet)
+      return "ok"
     }
 
     case "Sigma": {
       const leftCar = Actions.doCar(left)
       const rightCar = Actions.doCar(right)
-      solution = solve(solution, ctx, type.carType, leftCar, rightCar)
+      solve(solution, ctx, type.carType, leftCar, rightCar)
       const car = Actions.doCar(left)
       const cdrType = applyClosure(type.cdrTypeClosure, car)
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
-      solution = solve(solution, ctx, cdrType, leftCdr, rightCdr)
-      return solution
+      solve(solution, ctx, cdrType, leftCdr, rightCdr)
+      return "ok"
     }
 
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
       assertNoExtraCommonProperties(type, left, right)
-      return solveProperties(solution, ctx, type, left, right)
-    }
-
-    default: {
-      return undefined
+      solveProperties(solution, ctx, type, left, right)
+      return "ok"
     }
   }
 }

@@ -20,7 +20,7 @@ export function solveProperties(
     case "ClazzCons": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      solution = solve(
+      solve(
         solution,
         ctx,
         clazz.propertyType,
@@ -35,7 +35,7 @@ export function solveProperties(
     case "ClazzFulfilled": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      solution = solve(
+      solve(
         solution,
         ctx,
         clazz.propertyType,

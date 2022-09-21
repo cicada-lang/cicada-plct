@@ -1,5 +1,6 @@
 import { Ctx, ctxNames } from "../ctx"
 import { ElaborationError } from "../errors"
+import { Mod } from "../mod"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
 import { conversion, expelClazz, inclusion } from "../value"
@@ -23,6 +24,7 @@ import { conversion, expelClazz, inclusion } from "../value"
 **/
 
 export function inclusionClazz(
+  mod: Mod,
   ctx: Ctx,
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
@@ -55,13 +57,14 @@ export function inclusionClazz(
       )
     }
 
-    inclusion(ctx, subclazzProperty.type, clazzProperty.type)
+    inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
 
     if (
       subclazzProperty.value !== undefined &&
       clazzProperty.value !== undefined
     ) {
       conversion(
+        mod,
         ctx,
         clazzProperty.type,
         subclazzProperty.value,

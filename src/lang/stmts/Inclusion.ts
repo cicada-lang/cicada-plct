@@ -10,14 +10,14 @@ export class Inclusion extends Stmt {
   }
 
   async execute(mod: Mod): Promise<void> {
-    const cores = this.exps.map((exp) => checkType(mod.ctx, exp))
+    const cores = this.exps.map((exp) => checkType(mod, mod.ctx, exp))
     const types = cores.map((core) => evaluate(mod.env, core))
 
     if (types.length === 0) return
 
     let left = types[0]
     for (const right of types.slice(1)) {
-      inclusion(mod.ctx, left, right)
+      inclusion(mod, mod.ctx, left, right)
       left = right
     }
   }

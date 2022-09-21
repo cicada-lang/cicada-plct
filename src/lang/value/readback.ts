@@ -1,5 +1,6 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { Mod } from "../mod"
 import { readbackByType, readbackByValue, Value } from "../value"
 
 /**
@@ -16,6 +17,9 @@ import { readbackByType, readbackByValue, Value } from "../value"
 
 **/
 
-export function readback(ctx: Ctx, type: Value, value: Value): Core {
-  return readbackByType(ctx, type, value) || readbackByValue(ctx, type, value)
+export function readback(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
+  return (
+    readbackByType(mod, ctx, type, value) ||
+    readbackByValue(mod, ctx, type, value)
+  )
 }

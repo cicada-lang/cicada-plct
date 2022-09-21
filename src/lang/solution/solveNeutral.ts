@@ -8,7 +8,7 @@ export function solveNeutral(
   ctx: Ctx,
   left: Neutral,
   right: Neutral,
-): Solution {
+): void {
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new EquationError(
@@ -16,23 +16,23 @@ export function solveNeutral(
       )
     }
 
-    return solution
+    return
   }
 
   if (left.kind === "Ap" && right.kind === "Ap") {
-    solution = solveNeutral(solution, ctx, left.target, right.target)
-    solution = solveTypedValue(solution, ctx, left.arg, right.arg)
-    return solution
+    solveNeutral(solution, ctx, left.target, right.target)
+    solveTypedValue(solution, ctx, left.arg, right.arg)
+    return
   }
 
   if (left.kind === "Car" && right.kind === "Car") {
-    solution = solveNeutral(solution, ctx, left.target, right.target)
-    return solution
+    solveNeutral(solution, ctx, left.target, right.target)
+    return
   }
 
   if (left.kind === "Cdr" && right.kind === "Cdr") {
-    solution = solveNeutral(solution, ctx, left.target, right.target)
-    return solution
+    solveNeutral(solution, ctx, left.target, right.target)
+    return
   }
 
   if (left.kind === "Dot" && right.kind === "Dot") {
@@ -42,8 +42,8 @@ export function solveNeutral(
       )
     }
 
-    solution = solveNeutral(solution, ctx, left.target, right.target)
-    return solution
+    solveNeutral(solution, ctx, left.target, right.target)
+    return
   }
 
   throw new EquationError(

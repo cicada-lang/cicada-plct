@@ -1,26 +1,26 @@
-import { isPatternVar, Solution, SolutionCons } from "../solution"
+import { Solution } from "../solution"
 import { Value } from "../value"
 
 export function solveVar(
   solution: Solution,
   left: Value,
   right: Value,
-): Solution | undefined {
-  if (isPatternVar(left) && isPatternVar(right)) {
+): "ok" | undefined {
+  if (solution.isPatternVar(left) && solution.isPatternVar(right)) {
     if (left.neutral.name === right.neutral.name) {
-      return solution
+      return "ok"
     }
   }
 
-  if (isPatternVar(left)) {
+  if (solution.isPatternVar(left)) {
     // TODO Need occur check to avoid circular unification.
-    return SolutionCons(left.neutral.name, right, solution)
+    solution.bind(left.neutral.name, right)
+    return "ok"
   }
 
-  if (isPatternVar(right)) {
+  if (solution.isPatternVar(right)) {
     // TODO Need occur check to avoid circular unification.
-    return SolutionCons(right.neutral.name, left, solution)
+    solution.bind(right.neutral.name, left)
+    return "ok"
   }
-
-  return undefined
 }

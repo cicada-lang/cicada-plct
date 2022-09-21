@@ -1,5 +1,4 @@
 import { evaluate } from "../core"
-import { ctxToEnv } from "../ctx"
 import { Exp, infer, Span } from "../exp"
 import { Mod } from "../mod"
 import { Stmt, StmtOutput } from "../stmt"
@@ -11,8 +10,15 @@ export class Compute extends Stmt {
   }
 
   async execute(mod: Mod): Promise<StmtOutput> {
-    const inferred = infer(mod.ctx, this.exp)
-    const value = evaluate(ctxToEnv(mod.ctx), inferred.core)
-    return formatTypedValue(mod.ctx, TypedValue(inferred.type, value))
+    const inferred = infer(mod, mod.ctx, this.exp)
+    const value = evaluate(mod.env, inferred.core)
+    return formatTypedValue(
+      mod,
+      mod.ctx,
+      TypedValue(
+        mod.solution.deepWalk(mod, mod.ctx, inferred.type),
+        mod.solution.deepWalk(mod, mod.ctx, value),
+      ),
+    )
   }
 }

@@ -7,8 +7,7 @@ export function solveTypedValue(
   ctx: Ctx,
   left: TypedValue,
   right: TypedValue,
-): Solution {
-  solution = solveType(solution, ctx, left.type, right.type)
-  solution = solve(solution, ctx, left.type, left.value, right.value)
-  return solution
+): void {
+  solveType(solution, ctx, left.type, right.type)
+  solve(solution, ctx, left.type, left.value, right.value)
 }

@@ -1,5 +1,6 @@
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -28,7 +29,12 @@ import { conversion, inclusionClazz, Value } from "../value"
 
 **/
 
-export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
+export function inclusion(
+  mod: Mod,
+  ctx: Ctx,
+  subtype: Value,
+  type: Value,
+): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**
        Contravariant in argument position.
@@ -37,7 +43,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
        in the following recursive call to `inclusion`.
     **/
 
-    inclusion(ctx, type.argType, subtype.argType)
+    inclusion(mod, ctx, type.argType, subtype.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
 
@@ -48,6 +54,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     ctx = CtxCons(freshName, argType, ctx)
 
     inclusion(
+      mod,
       ctx,
       applyClosure(subtype.retTypeClosure, typedNeutral),
       applyClosure(type.retTypeClosure, typedNeutral),
@@ -57,7 +64,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
-    inclusion(ctx, subtype.carType, type.carType)
+    inclusion(mod, ctx, subtype.carType, type.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
 
@@ -68,6 +75,7 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
     ctx = CtxCons(freshName, carType, ctx)
 
     inclusion(
+      mod,
       ctx,
       applyClosure(subtype.cdrTypeClosure, typedNeutral),
       applyClosure(type.cdrTypeClosure, typedNeutral),
@@ -77,9 +85,9 @@ export function inclusion(ctx: Ctx, subtype: Value, type: Value): void {
   }
 
   if (Values.isClazz(subtype) && Values.isClazz(type)) {
-    inclusionClazz(ctx, subtype, type)
+    inclusionClazz(mod, ctx, subtype, type)
     return
   }
 
-  conversion(ctx, Values.Type(), subtype, type)
+  conversion(mod, ctx, Values.Type(), subtype, type)
 }

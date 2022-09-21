@@ -1,12 +1,14 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
+import { Ctx, CtxFulfilled } from "../ctx"
 import { ElaborationError } from "../errors"
 import { check, Exp } from "../exp"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertClazzInCtx, conversion } from "../value"
 
 export function checkProperties(
+  mod: Mod,
   ctx: Ctx,
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
@@ -23,14 +25,14 @@ export function checkProperties(
         throw new ElaborationError(`missing property: ${clazz.name}`)
       }
 
-      const propertyCore = check(ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyCore = check(mod, ctx, property, clazz.propertyType)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
       return {
         [clazz.name]: propertyCore,
-        ...checkProperties(ctx, properties, rest),
+        ...checkProperties(mod, ctx, properties, rest),
       }
     }
 
@@ -41,13 +43,13 @@ export function checkProperties(
         throw new ElaborationError(`missing property: ${clazz.name}`)
       }
 
-      const propertyCore = check(ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-      conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
+      const propertyCore = check(mod, ctx, property, clazz.propertyType)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
+      conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {
         [clazz.name]: propertyCore,
-        ...checkProperties(ctx, properties, clazz.rest),
+        ...checkProperties(mod, ctx, properties, clazz.rest),
       }
     }
   }

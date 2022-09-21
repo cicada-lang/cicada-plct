@@ -1,5 +1,6 @@
 import { AlphaCtx, alphaEquivalent } from "../core"
 import { Ctx } from "../ctx"
+import { Mod } from "../mod"
 import { readback, Value } from "../value"
 
 /**
@@ -14,6 +15,7 @@ import { readback, Value } from "../value"
 **/
 
 export function conversion(
+  mod: Mod,
   ctx: Ctx,
   type: Value,
   left: Value,
@@ -21,7 +23,7 @@ export function conversion(
 ): void {
   alphaEquivalent(
     new AlphaCtx(),
-    readback(ctx, type, left),
-    readback(ctx, type, right),
+    readback(mod, ctx, type, left),
+    readback(mod, ctx, type, right),
   )
 }

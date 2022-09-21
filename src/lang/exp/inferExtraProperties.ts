@@ -1,17 +1,19 @@
 import { Core, evaluate } from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import { Ctx } from "../ctx"
 import * as Exps from "../exp"
 import { Exp, infer } from "../exp"
+import { Mod } from "../mod"
 import * as Values from "../value"
 
 export function inferExtraProperties(
+  mod: Mod,
   ctx: Ctx,
   properties: Record<string, Exp>,
   names: Array<string>,
 ): { clazz: Values.Clazz; properties: Record<string, Core> } {
   const extraInferred = Object.entries(properties)
     .filter(([name, exp]) => !names.includes(name))
-    .map(([name, exp]): [string, Exps.Inferred] => [name, infer(ctx, exp)])
+    .map(([name, exp]): [string, Exps.Inferred] => [name, infer(mod, ctx, exp)])
   const extraProperties = Object.fromEntries(
     extraInferred.map(([name, inferred]) => [name, inferred.core]),
   )
@@ -21,7 +23,7 @@ export function inferExtraProperties(
       name,
       {
         type: inferred.type,
-        value: evaluate(ctxToEnv(ctx), inferred.core),
+        value: evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core),
       },
     ]),
   )
