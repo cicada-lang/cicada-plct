@@ -16,16 +16,17 @@ export class Solution {
 
   enrichCtx(ctx: Ctx): Env {
     let env = ctxToEnv(ctx)
-    for (const [name, value] of this.bindings.entries()) {
-      env = EnvCons(name, this.deepWalk(ctx, value), env)
+
+    for (const patternVar of this.patternVars) {
+      env = EnvCons(
+        patternVar.neutral.name,
+        this.deepWalk(ctx, patternVar),
+        env,
+      )
     }
 
-    return env
-  }
-
-  enrichEnv(env: Env): Env {
     for (const [name, value] of this.bindings.entries()) {
-      env = EnvCons(name, value, env)
+      env = EnvCons(name, this.deepWalk(ctx, value), env)
     }
 
     return env
@@ -38,16 +39,13 @@ export class Solution {
   createPatternVar(name: string, type: Value): PatternVar {
     const patternVar = PatternVar(type, Neutrals.Var(name))
     this.patternVars.push(patternVar)
-    this.bind(name, patternVar)
     return patternVar
   }
 
   isPatternVar(value: Value): value is PatternVar {
     if (value.kind !== "TypedNeutral") return false
     if (value.neutral.kind !== "Var") return false
-
     const name = value.neutral.name
-
     return Boolean(
       this.patternVars.find((patternVar) => patternVar.neutral.name === name),
     )
@@ -57,13 +55,17 @@ export class Solution {
     this.bindings.set(name, value)
   }
 
-  lookupValue(name: string): Value | undefined {
+  private lookupValue(name: string): Value | undefined {
     const value = this.bindings.get(name)
     if (value === undefined) return undefined
     if (this.isPatternVar(value) && value.neutral.name === name)
       return undefined
     return value
   }
+
+  // lookupValue(name: string): Value | undefined {
+  //   return this.bindings.get(name)
+  // }
 
   walk(value: Value): Value {
     while (this.isPatternVar(value)) {

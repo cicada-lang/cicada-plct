@@ -2,7 +2,6 @@ import { evaluate } from "../../core"
 import { CtxCons } from "../../ctx"
 import { checkType, Span } from "../../exp"
 import { Mod } from "../../mod"
-import { formatSolution } from "../../solution"
 import { Stmt, StmtOutput } from "../../stmt"
 import { Equation, SolveBinding, solveEquation } from "../solve"
 
@@ -30,6 +29,6 @@ export class Solve extends Stmt {
       solveEquation(mod, ctx, equation)
     }
 
-    return formatSolution(mod.solution, ctx, names)
+    return mod.solution.formatSolution(ctx, names)
   }
 }
