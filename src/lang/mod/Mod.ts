@@ -45,6 +45,7 @@ export class Mod {
         outputs.push(output)
         this.outputs.set(index, output)
       }
+      this.solution = new Solution()
     }
 
     return outputs

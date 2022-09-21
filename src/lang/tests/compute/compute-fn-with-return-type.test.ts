@@ -12,7 +12,7 @@ compute id(Type)
 
   expect(output).toMatchInlineSnapshot(`
     "(T, x) => x: (T: Type, x: T) -> T
-    (x1) => x1: (x1: Type) -> Type"
+    (x) => x: (x: Type) -> Type"
   `)
 })
 

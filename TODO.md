@@ -14,5 +14,3 @@ fix tests/solve/solve-box.test.ts
 - infinite loop
 
 eager `deepWalk` -- like the elab paper
-
-mod cleanup solution after each stmt
