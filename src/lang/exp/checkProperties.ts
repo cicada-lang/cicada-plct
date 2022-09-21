@@ -1,6 +1,6 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
+import { Ctx, CtxFulfilled } from "../ctx"
 import { ElaborationError } from "../errors"
 import { check, Exp } from "../exp"
 import { Mod } from "../mod"
@@ -26,7 +26,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
@@ -44,7 +44,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {

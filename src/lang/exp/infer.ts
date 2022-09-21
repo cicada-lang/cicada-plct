@@ -150,7 +150,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Sigma": {
       const carTypeCore = Exps.checkType(mod, ctx, exp.carType)
-      const carTypeValue = evaluate(mod.enrichCtx(ctx), carTypeCore)
+      const carTypeValue = evaluate(mod.enrichedEnvFromCtx(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = Exps.checkType(mod, ctx, exp.cdrType)
       return Inferred(
@@ -174,7 +174,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
       const sigma = inferred.type
-      const carValue = evaluate(mod.enrichCtx(ctx), Cores.Car(inferred.core))
+      const carValue = evaluate(
+        mod.enrichedEnvFromCtx(ctx),
+        Cores.Car(inferred.core),
+      )
       return Inferred(
         applyClosure(sigma.cdrTypeClosure, carValue),
         Cores.Cdr(inferred.core),
@@ -185,7 +188,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const carInferred = infer(mod, ctx, exp.car)
       const cdrInferred = infer(mod, ctx, exp.cdr)
       const cdrTypeCore = readbackType(ctx, cdrInferred.type)
-      const cdrTypeClosure = Closure(mod.enrichCtx(ctx), "_", cdrTypeCore)
+      const cdrTypeClosure = Closure(
+        mod.enrichedEnvFromCtx(ctx),
+        "_",
+        cdrTypeCore,
+      )
       return Inferred(
         Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),
@@ -211,7 +218,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       let properties: Record<string, Core> = {}
       for (let [name, property] of Object.entries(exp.properties).reverse()) {
         const inferred = infer(mod, ctx, property)
-        const value = evaluate(mod.enrichCtx(ctx), inferred.core)
+        const value = evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core)
         clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
         properties[name] = inferred.core
       }
@@ -229,7 +236,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Dot": {
       const inferred = infer(mod, ctx, exp.target)
-      const targetValue = evaluate(mod.enrichCtx(ctx), inferred.core)
+      const targetValue = evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core)
       Values.assertClazzInCtx(ctx, inferred.type)
       const propertyType = Values.lookupPropertyTypeOrFail(
         inferred.type,
@@ -295,7 +302,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLet": {
       const inferred = infer(mod, ctx, exp.exp)
-      const value = evaluate(mod.enrichCtx(ctx), inferred.core)
+      const value = evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
@@ -306,9 +313,9 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLetThe": {
       const typeCore = Exps.checkType(mod, ctx, exp.type)
-      const typeValue = evaluate(mod.enrichCtx(ctx), typeCore)
+      const typeValue = evaluate(mod.enrichedEnvFromCtx(ctx), typeCore)
       const enriched = Exps.enrichOrCheck(mod, ctx, exp.exp, typeValue)
-      const value = evaluate(mod.enrichCtx(ctx), enriched.core)
+      const value = evaluate(mod.enrichedEnvFromCtx(ctx), enriched.core)
       ctx = CtxFulfilled(exp.name, enriched.type, value, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
@@ -319,7 +326,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceCheck": {
       const typeCore = Exps.checkType(mod, ctx, exp.type)
-      const typeValue = evaluate(mod.enrichCtx(ctx), typeCore)
+      const typeValue = evaluate(mod.enrichedEnvFromCtx(ctx), typeCore)
       Exps.check(mod, ctx, exp.exp, typeValue)
       return infer(mod, ctx, exp.ret)
     }
@@ -389,7 +396,7 @@ function inferApPi(
     ? argInferred.core
     : Exps.check(mod, ctx, argExp, inferred.type.argType)
 
-  const argValue = evaluate(mod.enrichCtx(ctx), argCore)
+  const argValue = evaluate(mod.enrichedEnvFromCtx(ctx), argCore)
 
   return Inferred(
     applyClosure(inferred.type.retTypeClosure, argValue),

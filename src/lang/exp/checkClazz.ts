@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { evaluate } from "../core"
-import { Ctx, CtxCons, CtxFulfilled, ctxToEnv } from "../ctx"
+import { Ctx, CtxCons, CtxFulfilled } from "../ctx"
 import * as Exps from "../exp"
 import { check, checkType } from "../exp"
 import { Mod } from "../mod"
@@ -13,7 +13,10 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
 
     case "ClazzCons": {
       const propertyTypeCore = checkType(mod, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
+      const propertyTypeValue = evaluate(
+        mod.enrichedEnvFromCtx(ctx),
+        propertyTypeCore,
+      )
       ctx = CtxCons(exp.name, propertyTypeValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzCons(exp.name, exp.name, propertyTypeCore, restCore)
@@ -21,9 +24,12 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
 
     case "ClazzFulfilled": {
       const propertyTypeCore = checkType(mod, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(ctxToEnv(ctx), propertyTypeCore)
+      const propertyTypeValue = evaluate(
+        mod.enrichedEnvFromCtx(ctx),
+        propertyTypeCore,
+      )
       const propertyCore = check(mod, ctx, exp.property, propertyTypeValue)
-      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
       ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzFulfilled(

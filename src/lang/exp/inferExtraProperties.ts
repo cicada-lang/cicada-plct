@@ -1,5 +1,5 @@
 import { Core, evaluate } from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import { Ctx } from "../ctx"
 import * as Exps from "../exp"
 import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
@@ -23,7 +23,7 @@ export function inferExtraProperties(
       name,
       {
         type: inferred.type,
-        value: evaluate(ctxToEnv(ctx), inferred.core),
+        value: evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core),
       },
     ]),
   )
