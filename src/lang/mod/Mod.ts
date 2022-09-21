@@ -42,16 +42,21 @@ export class Mod {
     await this.initialize()
     const outputs = []
     for (const [index, stmt] of stmts.entries()) {
-      const output = await stmt.execute(this)
-      this.stmts.push(stmt)
+      const output = await this.executeStmt(stmt)
       if (output) {
-        outputs.push(output)
         this.outputs.set(index, output)
+        outputs.push(output)
       }
-      this.solution.cleanup()
     }
 
     return outputs
+  }
+
+  private async executeStmt(stmt: Stmt): Promise<StmtOutput | undefined> {
+    const output = await stmt.execute(this)
+    this.stmts.push(stmt)
+    this.solution.cleanup()
+    return output || undefined
   }
 
   define(name: string, type: Value, value: Value): void {
