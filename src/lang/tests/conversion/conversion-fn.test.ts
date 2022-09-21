@@ -22,7 +22,7 @@ conversion forall (A: Type, B: Type) Type [
 `)
 })
 
-test("conversion AnnotatedFn", async () => {
+test("conversion FnAnnotated", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {

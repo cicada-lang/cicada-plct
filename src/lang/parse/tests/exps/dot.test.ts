@@ -10,7 +10,7 @@ test("parse Dot", () => {
 
   expect(parseExp("object.f(x, y)")).toMatchObject(
     deleteUndefined(
-      Exps.FoldedAp(Exps.Dot(Exps.Var("object"), "f"), [
+      Exps.ApFolded(Exps.Dot(Exps.Var("object"), "f"), [
         Exps.ArgPlain(Exps.Var("x")),
         Exps.ArgPlain(Exps.Var("y")),
       ]),
@@ -19,8 +19,8 @@ test("parse Dot", () => {
 
   expect(parseExp("object.f(x)(y)")).toMatchObject(
     deleteUndefined(
-      Exps.FoldedAp(
-        Exps.FoldedAp(Exps.Dot(Exps.Var("object"), "f"), [
+      Exps.ApFolded(
+        Exps.ApFolded(Exps.Dot(Exps.Var("object"), "f"), [
           Exps.ArgPlain(Exps.Var("x")),
         ]),
         [Exps.ArgPlain(Exps.Var("y"))],

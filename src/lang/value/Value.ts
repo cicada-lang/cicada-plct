@@ -5,9 +5,9 @@ export type Value =
   | TypedNeutral
   | Type
   | Pi
-  | ImplicitPi
+  | PiImplicit
   | Fn
-  | ImplicitFn
+  | FnImplicit
   | Sigma
   | Cons
   | String
@@ -20,7 +20,7 @@ export type Value =
 export type AlreadyType =
   | Type
   | Pi
-  | ImplicitPi
+  | PiImplicit
   | Sigma
   | String
   | Trivial
@@ -70,20 +70,20 @@ export function Pi(argType: Value, retTypeClosure: Closure): Pi {
   }
 }
 
-export type ImplicitPi = {
+export type PiImplicit = {
   family: "Value"
-  kind: "ImplicitPi"
+  kind: "PiImplicit"
   argType: Value
   retTypeClosure: Closure
 }
 
-export function ImplicitPi(
+export function PiImplicit(
   argType: Value,
   retTypeClosure: Closure,
-): ImplicitPi {
+): PiImplicit {
   return {
     family: "Value",
-    kind: "ImplicitPi",
+    kind: "PiImplicit",
     argType,
     retTypeClosure,
   }
@@ -103,16 +103,16 @@ export function Fn(retClosure: Closure): Fn {
   }
 }
 
-export type ImplicitFn = {
+export type FnImplicit = {
   family: "Value"
-  kind: "ImplicitFn"
+  kind: "FnImplicit"
   retClosure: Closure
 }
 
-export function ImplicitFn(retClosure: Closure): ImplicitFn {
+export function FnImplicit(retClosure: Closure): FnImplicit {
   return {
     family: "Value",
-    kind: "ImplicitFn",
+    kind: "FnImplicit",
     retClosure,
   }
 }

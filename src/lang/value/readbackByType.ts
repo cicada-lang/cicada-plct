@@ -60,7 +60,7 @@ export function readbackByType(
       return Cores.Fn(freshName, readback(mod, ctx, retType, ret))
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
@@ -69,7 +69,7 @@ export function readbackByType(
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
-      return Cores.ImplicitFn(freshName, readback(mod, ctx, retType, ret))
+      return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
     }
 
     case "Sigma": {

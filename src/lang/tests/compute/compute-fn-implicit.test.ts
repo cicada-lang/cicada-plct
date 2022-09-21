@@ -1,13 +1,15 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("compute ImplicitAp", async () => {
+test("compute FnImplicit", async () => {
   const output = await runCode(`
 
 let infer: (implicit T: Type, x: T) -> Type = (implicit T, x) => T
-compute infer(implicit Trivial, sole)
+compute infer
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"Trivial: Type"')
+  expect(output).toMatchInlineSnapshot(
+    '"(implicit T, x) => T: (implicit T: Type, x: T) -> Type"',
+  )
 })

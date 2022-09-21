@@ -17,7 +17,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
-    case "FoldedPi": {
+    case "PiFolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
@@ -30,24 +30,24 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Fn(exp.name, retCore)
     }
 
-    case "ImplicitFn": {
-      Values.assertTypeInCtx(ctx, type, Values.ImplicitPi)
+    case "FnImplicit": {
+      Values.assertTypeInCtx(ctx, type, Values.PiImplicit)
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(mod, ctx, exp.ret, retType)
-      return Cores.ImplicitFn(exp.name, retCore)
+      return Cores.FnImplicit(exp.name, retCore)
     }
 
-    case "AnnotatedFn": {
+    case "FnAnnotated": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "FoldedFn": {
+    case "FnFolded": {
       return check(mod, ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
     }
 
-    case "FoldedFnWithRetType": {
+    case "FnFoldedWithRetType": {
       return check(
         mod,
         ctx,
@@ -57,12 +57,12 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Ap":
-    case "FoldedAp": {
+    case "ApFolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Sigma":
-    case "FoldedSigma": {
+    case "SigmaFolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
@@ -88,11 +88,11 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled":
-    case "FoldedClazz": {
+    case "ClazzFolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "FoldedObjekt":
+    case "ObjektFolded":
     case "Objekt": {
       const { core } = enrich(mod, ctx, exp, type)
       return core
@@ -102,7 +102,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "FoldedNew": {
+    case "NewFolded": {
       return check(
         mod,
         ctx,
@@ -116,7 +116,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "FoldedSequence":
+    case "SequenceFolded":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {

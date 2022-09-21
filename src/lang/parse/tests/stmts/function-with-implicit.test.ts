@@ -11,13 +11,13 @@ test("parse Let -- function with implicit", () => {
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FoldedFnWithRetType(
+        Exps.FnFoldedWithRetType(
           [
             Exps.FnBindingAnnotatedImplicit("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),
           ],
           Exps.Var("T"),
-          Exps.FoldedSequence([], Exps.Var("x")),
+          Exps.SequenceFolded([], Exps.Var("x")),
         ),
       ),
     ]),

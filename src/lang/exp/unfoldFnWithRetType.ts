@@ -25,7 +25,7 @@ export function unfoldFnWithRetType(
     }
 
     case "FnBindingAnnotated": {
-      return Exps.AnnotatedFn(
+      return Exps.FnAnnotated(
         binding.name,
         binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),
@@ -33,14 +33,14 @@ export function unfoldFnWithRetType(
     }
 
     case "FnBindingImplicit": {
-      return Exps.ImplicitFn(
+      return Exps.FnImplicit(
         binding.name,
         unfoldFnWithRetType(restBindings, retType, ret),
       )
     }
 
     case "FnBindingAnnotatedImplicit": {
-      return Exps.AnnotatedImplicitFn(
+      return Exps.FnImplicitAnnotated(
         binding.name,
         binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),

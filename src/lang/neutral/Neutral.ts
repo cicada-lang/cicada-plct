@@ -1,6 +1,6 @@
 import { TypedValue } from "../value"
 
-export type Neutral = Var | Ap | ImplicitAp | Car | Cdr | Dot
+export type Neutral = Var | Ap | ApImplicit | Car | Cdr | Dot
 
 export type Var = {
   family: "Neutral"
@@ -32,17 +32,17 @@ export function Ap(target: Neutral, arg: TypedValue): Ap {
   }
 }
 
-export type ImplicitAp = {
+export type ApImplicit = {
   family: "Neutral"
-  kind: "ImplicitAp"
+  kind: "ApImplicit"
   target: Neutral
   arg: TypedValue
 }
 
-export function ImplicitAp(target: Neutral, arg: TypedValue): ImplicitAp {
+export function ApImplicit(target: Neutral, arg: TypedValue): ApImplicit {
   return {
     family: "Neutral",
-    kind: "ImplicitAp",
+    kind: "ApImplicit",
     target,
     arg,
   }

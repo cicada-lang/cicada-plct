@@ -12,7 +12,7 @@ export function unfoldAp(target: Exp, args: Array<Exps.Arg>): Exp {
     }
 
     case "ArgImplicit": {
-      return unfoldAp(Exps.ImplicitAp(target, arg.exp), restArgs)
+      return unfoldAp(Exps.ApImplicit(target, arg.exp), restArgs)
     }
   }
 }

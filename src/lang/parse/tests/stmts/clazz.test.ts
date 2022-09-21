@@ -11,7 +11,7 @@ test("parse Clazz", () => {
     deleteUndefined([
       new Stmts.Clazz(
         "ABC",
-        Exps.FoldedClazz([
+        Exps.ClazzFolded([
           Exps.ClazzBindingAbstract("a", Exps.Var("String")),
           Exps.ClazzBindingAbstract("b", Exps.Var("String")),
           Exps.ClazzBindingAbstract("c", Exps.Var("String")),

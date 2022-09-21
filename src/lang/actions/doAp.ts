@@ -9,7 +9,7 @@ export function doAp(target: Value, arg: Value): Value {
     return applyClosure(target.retClosure, arg)
   }
 
-  if (Values.isValue(target, Values.ImplicitFn)) {
+  if (Values.isValue(target, Values.FnImplicit)) {
     return applyClosure(target.retClosure, arg)
   }
 
@@ -26,14 +26,14 @@ export function doAp(target: Value, arg: Value): Value {
     )
   }
 
-  if (Values.isValue(target.type, Values.ImplicitPi)) {
+  if (Values.isValue(target.type, Values.PiImplicit)) {
     return Values.TypedNeutral(
       applyClosure(target.type.retTypeClosure, arg),
-      Neutrals.ImplicitAp(target.neutral, TypedValue(target.type.argType, arg)),
+      Neutrals.ApImplicit(target.neutral, TypedValue(target.type.argType, arg)),
     )
   }
 
   throw new EvaluationError(
-    `doAp expect target.type to be Pi or ImplicitAp, instead of: ${target.type.kind}`,
+    `doAp expect target.type to be Pi or ApImplicit, instead of: ${target.type.kind}`,
   )
 }

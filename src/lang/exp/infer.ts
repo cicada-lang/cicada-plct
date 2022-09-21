@@ -55,7 +55,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
       const argTypeValue = evaluate(
         mod.solution.enrichCtx(mod, ctx),
@@ -65,15 +65,15 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
       return Inferred(
         Values.Type(),
-        Cores.ImplicitPi(exp.name, argTypeCore, retTypeCore),
+        Cores.PiImplicit(exp.name, argTypeCore, retTypeCore),
       )
     }
 
-    case "FoldedPi": {
+    case "PiFolded": {
       return infer(mod, ctx, Exps.unfoldPi(exp.bindings, exp.retType))
     }
 
-    case "AnnotatedFn": {
+    case "FnAnnotated": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
       const argTypeValue = evaluate(
         mod.solution.enrichCtx(mod, ctx),
@@ -93,7 +93,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "AnnotatedImplicitFn": {
+    case "FnImplicitAnnotated": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
       const argTypeValue = evaluate(
         mod.solution.enrichCtx(mod, ctx),
@@ -108,16 +108,16 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         retTypeCore,
       )
       return Inferred(
-        Values.ImplicitPi(argTypeValue, retTypeClosure),
-        Cores.ImplicitFn(exp.name, retInferred.core),
+        Values.PiImplicit(argTypeValue, retTypeClosure),
+        Cores.FnImplicit(exp.name, retInferred.core),
       )
     }
 
-    case "FoldedFn": {
+    case "FnFolded": {
       return infer(mod, ctx, Exps.unfoldFn(exp.bindings, exp.ret))
     }
 
-    case "FoldedFnWithRetType": {
+    case "FnFoldedWithRetType": {
       return infer(
         mod,
         ctx,
@@ -148,18 +148,18 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return inferAp(mod, ctx, inferred, exp.arg)
     }
 
-    case "ImplicitAp": {
+    case "ApImplicit": {
       const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
+      Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
       const argCore = Exps.check(mod, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(mod.solution.enrichCtx(mod, ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
-        Cores.ImplicitAp(inferred.core, argCore),
+        Cores.ApImplicit(inferred.core, argCore),
       )
     }
 
-    case "FoldedAp": {
+    case "ApFolded": {
       return infer(mod, ctx, Exps.unfoldAp(exp.target, exp.args))
     }
 
@@ -174,7 +174,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FoldedSigma": {
+    case "SigmaFolded": {
       return infer(mod, ctx, Exps.unfoldSigma(exp.bindings, exp.cdrType))
     }
 
@@ -224,7 +224,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(Values.Type(), Exps.checkClazz(mod, ctx, exp))
     }
 
-    case "FoldedClazz": {
+    case "ClazzFolded": {
       return infer(mod, ctx, Exps.unfoldClazz(exp.bindings))
     }
 
@@ -241,7 +241,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "FoldedObjekt": {
+    case "ObjektFolded": {
       return infer(
         mod,
         ctx,
@@ -267,7 +267,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
-    case "FoldedNew": {
+    case "NewFolded": {
       return infer(
         mod,
         ctx,
@@ -311,7 +311,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "FoldedSequence": {
+    case "SequenceFolded": {
       return infer(mod, ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
     }
 
@@ -358,20 +358,20 @@ export function inferAp(
   inferred: Inferred,
   argExp: Exp,
 ): Inferred {
-  if (Values.isValue(inferred.type, Values.ImplicitPi)) {
-    return inferApImplicitPi(mod, ctx, inferred, argExp)
+  if (Values.isValue(inferred.type, Values.PiImplicit)) {
+    return inferApPiImplicit(mod, ctx, inferred, argExp)
   } else {
     return inferApPi(mod, ctx, inferred, argExp)
   }
 }
 
-function inferApImplicitPi(
+function inferApPiImplicit(
   mod: Mod,
   ctx: Ctx,
   inferred: Inferred,
   argExp: Exp,
 ): Inferred {
-  Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
+  Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
 
   const name = inferred.type.retTypeClosure.name
   // TODO Scope BUG, `freshName` might occurs in `args`.
@@ -385,11 +385,11 @@ function inferApImplicitPi(
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 
   /**
-     `ImplicitAp` insertion.
+     `ApImplicit` insertion.
   **/
   inferred = Inferred(
     retType,
-    Cores.ImplicitAp(inferred.core, Cores.Var(freshName)),
+    Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
   )
 
   return inferAp(mod, ctx, inferred, argExp)

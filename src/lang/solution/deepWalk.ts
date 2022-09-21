@@ -34,7 +34,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
       return Values.Pi(argType, Closure(env, freshName, retTypeCore))
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       // TODO
       return value
     }
@@ -43,7 +43,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
       return value
     }
 
-    case "ImplicitFn": {
+    case "FnImplicit": {
       // TODO
       return value
     }

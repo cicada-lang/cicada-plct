@@ -9,19 +9,19 @@ export function formatCore(core: Core): string {
     }
 
     case "Pi":
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const { bindings, retType } = Cores.foldFormatPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }
 
     case "Fn":
-    case "ImplicitFn": {
+    case "FnImplicit": {
       const { bindings, ret } = Cores.foldFormatFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
     case "Ap":
-    case "ImplicitAp": {
+    case "ApImplicit": {
       const { target, args } = Cores.foldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }

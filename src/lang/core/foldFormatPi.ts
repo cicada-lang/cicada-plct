@@ -12,7 +12,7 @@ export function foldFormatPi(core: Core): {
       return { bindings: [binding, ...bindings], retType }
     }
 
-    case "ImplicitPi": {
+    case "PiImplicit": {
       const argType = formatCore(core.argType)
       const binding = `implicit ${core.name}: ${argType}`
       const { bindings, retType } = foldFormatPi(core.retType)

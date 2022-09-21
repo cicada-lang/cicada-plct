@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("compute ImplicitAp -- insertion -- id", async () => {
+test("compute ApImplicit -- insertion -- id", async () => {
   const output = await runCode(`
 
 function id(implicit T: Type, x: T): T {
@@ -19,7 +19,7 @@ compute id("abc")
   `)
 })
 
-test("compute ImplicitAp -- insertion -- infer", async () => {
+test("compute ApImplicit -- insertion -- infer", async () => {
   const output = await runCode(`
 
 function infer(implicit T: Type, x: T): Type {
@@ -37,7 +37,7 @@ compute infer("abc")
   `)
 })
 
-test("compute ImplicitAp -- insertion -- infer2", async () => {
+test("compute ApImplicit -- insertion -- infer2", async () => {
   const output = await runCode(`
 
 function infer2(implicit A: Type, implicit B: Type, x: A, y: B): Type {
@@ -59,7 +59,7 @@ compute infer2("abc")("abc")
   `)
 })
 
-test("compute ImplicitAp -- insertion -- infer2 -- over", async () => {
+test("compute ApImplicit -- insertion -- infer2 -- over", async () => {
   const output = await runCode(`
 
 function infer2(implicit A: Type, x: A, implicit B: Type, y: B): Type {
@@ -81,7 +81,7 @@ compute infer2("abc")("abc")
   `)
 })
 
-test("compute ImplicitAp -- insertion -- inferReturnType", async () => {
+test("compute ApImplicit -- insertion -- inferReturnType", async () => {
   const output = await runCode(`
 
 function inferReturnType(implicit A: Type, implicit B: Type, x: (A) -> B): Type {
@@ -108,7 +108,7 @@ compute inferReturnType(id(implicit String))
   `)
 })
 
-test("compute ImplicitAp -- insertion -- deepWalk required", async () => {
+test("compute ApImplicit -- insertion -- deepWalk required", async () => {
   const output = await runCode(`
 
 function Box(T: Type): Type {
@@ -132,7 +132,7 @@ compute cons("abc", sole)
   )
 })
 
-test("compute ImplicitAp -- insertion -- nested", async () => {
+test("compute ApImplicit -- insertion -- nested", async () => {
   const output = await runCode(`
 
 function Box(T: Type): Type {
@@ -154,7 +154,7 @@ compute box(box(box("abc")))
   `)
 })
 
-test("compute ImplicitAp -- insertion -- during check", async () => {
+test("compute ApImplicit -- insertion -- during check", async () => {
   const output = await runCode(`
 
 function idWithTrivial(implicit T: Type, solo: Trivial, x: T): T {

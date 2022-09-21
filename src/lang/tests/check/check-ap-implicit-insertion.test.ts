@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test("check ImplicitAp -- insertion -- id", async () => {
+test("check ApImplicit -- insertion -- id", async () => {
   await runCode(`
 
 function id(implicit T: Type, x: T): T {
@@ -14,7 +14,7 @@ check id("abc"): String
 `)
 })
 
-test("check ImplicitAp -- insertion -- infer", async () => {
+test("check ApImplicit -- insertion -- infer", async () => {
   await runCode(`
 
 function infer(implicit T: Type, x: T): Type {

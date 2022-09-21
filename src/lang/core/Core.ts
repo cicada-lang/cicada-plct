@@ -1,11 +1,11 @@
 export type Core =
   | Var
   | Pi
-  | ImplicitPi
+  | PiImplicit
   | Fn
-  | ImplicitFn
+  | FnImplicit
   | Ap
-  | ImplicitAp
+  | ApImplicit
   | Sigma
   | Cons
   | Car
@@ -47,22 +47,22 @@ export function Pi(name: string, argType: Core, retType: Core): Pi {
   }
 }
 
-export type ImplicitPi = {
+export type PiImplicit = {
   family: "Core"
-  kind: "ImplicitPi"
+  kind: "PiImplicit"
   name: string
   argType: Core
   retType: Core
 }
 
-export function ImplicitPi(
+export function PiImplicit(
   name: string,
   argType: Core,
   retType: Core,
-): ImplicitPi {
+): PiImplicit {
   return {
     family: "Core",
-    kind: "ImplicitPi",
+    kind: "PiImplicit",
     name,
     argType,
     retType,
@@ -85,17 +85,17 @@ export function Fn(name: string, ret: Core): Fn {
   }
 }
 
-export type ImplicitFn = {
+export type FnImplicit = {
   family: "Core"
-  kind: "ImplicitFn"
+  kind: "FnImplicit"
   name: string
   ret: Core
 }
 
-export function ImplicitFn(name: string, ret: Core): ImplicitFn {
+export function FnImplicit(name: string, ret: Core): FnImplicit {
   return {
     family: "Core",
-    kind: "ImplicitFn",
+    kind: "FnImplicit",
     name,
     ret,
   }
@@ -116,17 +116,17 @@ export function Ap(target: Core, arg: Core): Ap {
     arg,
   }
 }
-export type ImplicitAp = {
+export type ApImplicit = {
   family: "Core"
-  kind: "ImplicitAp"
+  kind: "ApImplicit"
   target: Core
   arg: Core
 }
 
-export function ImplicitAp(target: Core, arg: Core): ImplicitAp {
+export function ApImplicit(target: Core, arg: Core): ApImplicit {
   return {
     family: "Core",
-    kind: "ImplicitAp",
+    kind: "ApImplicit",
     target,
     arg,
   }
