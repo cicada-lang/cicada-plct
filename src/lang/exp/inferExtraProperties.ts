@@ -23,7 +23,7 @@ export function inferExtraProperties(
       name,
       {
         type: inferred.type,
-        value: evaluate(mod.enrichedEnvFromCtx(ctx), inferred.core),
+        value: evaluate(mod.ctxToEnv(ctx), inferred.core),
       },
     ]),
   )

@@ -26,7 +26,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
+      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
@@ -44,7 +44,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
+      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {

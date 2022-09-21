@@ -30,7 +30,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
       retType = deepWalk(mod, ctx, retType)
       ctx = CtxCons(freshName, argType, ctx)
       const retTypeCore = readbackType(mod, ctx, retType)
-      const env = mod.solution.enrichCtx(mod, ctx)
+      const env = mod.ctxToEnv(ctx)
       return Values.Pi(argType, Closure(env, freshName, retTypeCore))
     }
 
@@ -60,7 +60,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
       cdrType = deepWalk(mod, ctx, cdrType)
       ctx = CtxCons(freshName, carType, ctx)
       const cdrTypeCore = readbackType(mod, ctx, cdrType)
-      const env = mod.solution.enrichCtx(mod, ctx)
+      const env = mod.ctxToEnv(ctx)
       return Values.Sigma(carType, Closure(env, freshName, cdrTypeCore))
     }
 

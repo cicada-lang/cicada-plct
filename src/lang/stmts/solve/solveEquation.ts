@@ -9,7 +9,7 @@ import { Equation } from "../solve"
 export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
     case "EquationTyped": {
-      const env = mod.solution.enrichCtx(mod, ctx)
+      const env = mod.ctxToEnv(ctx)
       const typeValue = evaluate(env, checkType(mod, ctx, equation.type))
       const leftValue = evaluate(env, check(mod, ctx, equation.left, typeValue))
       const rightValue = evaluate(
@@ -27,7 +27,7 @@ export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       const rightType = mod.solution.deepWalk(mod, ctx, rightInferred.type)
       conversionType(mod, ctx, leftType, rightType)
       const typeValue = leftType
-      const env = mod.solution.enrichCtx(mod, ctx)
+      const env = mod.ctxToEnv(ctx)
       const leftValue = evaluate(env, leftInferred.core)
       const rightValue = evaluate(env, rightInferred.core)
       solve(mod.solution, ctx, typeValue, leftValue, rightValue)

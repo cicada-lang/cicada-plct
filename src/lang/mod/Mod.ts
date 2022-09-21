@@ -20,12 +20,12 @@ export class Mod {
 
   constructor(public options: ModOptions) {}
 
-  enrichedEnvFromCtx(ctx: Ctx): Env {
+  ctxToEnv(ctx: Ctx): Env {
     return this.solution.enrichCtx(this, ctx)
   }
 
   get env(): Env {
-    return this.enrichedEnvFromCtx(this.ctx)
+    return this.ctxToEnv(this.ctx)
   }
 
   resolve(href: string): URL {

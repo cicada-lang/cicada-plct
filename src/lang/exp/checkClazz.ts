@@ -13,10 +13,7 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
 
     case "ClazzCons": {
       const propertyTypeCore = checkType(mod, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(
-        mod.enrichedEnvFromCtx(ctx),
-        propertyTypeCore,
-      )
+      const propertyTypeValue = evaluate(mod.ctxToEnv(ctx), propertyTypeCore)
       ctx = CtxCons(exp.name, propertyTypeValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzCons(exp.name, exp.name, propertyTypeCore, restCore)
@@ -24,12 +21,9 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
 
     case "ClazzFulfilled": {
       const propertyTypeCore = checkType(mod, ctx, exp.propertyType)
-      const propertyTypeValue = evaluate(
-        mod.enrichedEnvFromCtx(ctx),
-        propertyTypeCore,
-      )
+      const propertyTypeValue = evaluate(mod.ctxToEnv(ctx), propertyTypeCore)
       const propertyCore = check(mod, ctx, exp.property, propertyTypeValue)
-      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
+      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzFulfilled(

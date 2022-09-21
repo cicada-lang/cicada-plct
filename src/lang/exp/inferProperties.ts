@@ -27,7 +27,7 @@ export function inferProperties(
       }
 
       const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
+      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
 
       assertClazzInCtx(ctx, rest)
@@ -44,10 +44,7 @@ export function inferProperties(
       const property = properties[clazz.name]
       if (property !== undefined) {
         const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
-        const propertyValue = evaluate(
-          mod.enrichedEnvFromCtx(ctx),
-          propertyCore,
-        )
+        const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
 
         conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
