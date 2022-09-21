@@ -1,6 +1,6 @@
 # having solution all the time
 
-infer and check take `mod` instead of `solution`
+fix solve return types
 
 every call to `evaluate` should use `solution` enriched `env`
 

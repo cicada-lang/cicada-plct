@@ -20,14 +20,14 @@ export class Solve extends Stmt {
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
       const env = mod.solution.enrichCtx(ctx)
-      const typeCore = checkType(mod.solution, ctx, type)
+      const typeCore = checkType(mod, ctx, type)
       const typeValue = evaluate(env, typeCore)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
     }
 
     for (const equation of this.equations) {
-      mod.solution = solveEquation(mod.solution, ctx, equation)
+      mod.solution = solveEquation(mod, ctx, equation)
     }
 
     return formatSolution(mod.solution, ctx, names)

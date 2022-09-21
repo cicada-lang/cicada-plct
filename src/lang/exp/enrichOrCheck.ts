@@ -1,19 +1,19 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { check, enrich, Exp } from "../exp"
-import { Solution } from "../solution"
+import { Mod } from "../mod"
 import { Value } from "../value"
 
 export function enrichOrCheck(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   exp: Exp,
   type: Value,
 ): { type: Value; core: Core } {
   try {
-    return enrich(solution, ctx, exp, type)
+    return enrich(mod, ctx, exp, type)
   } catch (_error) {
-    const core = check(solution, ctx, exp, type)
+    const core = check(mod, ctx, exp, type)
     return { core, type }
   }
 }

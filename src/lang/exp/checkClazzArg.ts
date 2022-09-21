@@ -2,12 +2,12 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import { Exp } from "../exp"
-import { Solution } from "../solution"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { check } from "./check"
 
 export function checkClazzArg(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   clazz: Values.Clazz,
   arg: Exp,
@@ -18,11 +18,11 @@ export function checkClazzArg(
     }
 
     case "ClazzCons": {
-      return check(solution, ctx, arg, clazz.propertyType)
+      return check(mod, ctx, arg, clazz.propertyType)
     }
 
     case "ClazzFulfilled": {
-      return checkClazzArg(solution, ctx, clazz.rest, arg)
+      return checkClazzArg(mod, ctx, clazz.rest, arg)
     }
   }
 }

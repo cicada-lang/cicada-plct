@@ -1,14 +1,14 @@
 import { Ctx } from "../ctx"
 import { Exp, infer, Inferred } from "../exp"
-import { Solution } from "../solution"
+import { Mod } from "../mod"
 
 export function inferOrUndefined(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   exp: Exp,
 ): Inferred | undefined {
   try {
-    return infer(solution, ctx, exp)
+    return infer(mod, ctx, exp)
   } catch (_error) {
     return undefined
   }

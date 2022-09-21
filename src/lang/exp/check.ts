@@ -5,25 +5,20 @@ import { Ctx, CtxCons } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, enrich, Exp } from "../exp"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { Solution } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function check(
-  solution: Solution,
-  ctx: Ctx,
-  exp: Exp,
-  type: Value,
-): Core {
+export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Pi":
     case "FoldedPi": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Fn": {
@@ -31,7 +26,7 @@ export function check(
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
-      const retCore = check(solution, ctx, exp.ret, retType)
+      const retCore = check(mod, ctx, exp.ret, retType)
       return Cores.Fn(exp.name, retCore)
     }
 
@@ -40,21 +35,21 @@ export function check(
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
-      const retCore = check(solution, ctx, exp.ret, retType)
+      const retCore = check(mod, ctx, exp.ret, retType)
       return Cores.ImplicitFn(exp.name, retCore)
     }
 
     case "AnnotatedFn": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "FoldedFn": {
-      return check(solution, ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
+      return check(mod, ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
     }
 
     case "FoldedFnWithRetType": {
       return check(
-        solution,
+        mod,
         ctx,
         Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),
         type,
@@ -63,72 +58,69 @@ export function check(
 
     case "Ap":
     case "FoldedAp": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Sigma":
     case "FoldedSigma": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Cons": {
       Values.assertTypeInCtx(ctx, type, Values.Sigma)
       const { carType, cdrTypeClosure } = type
-      const carCore = check(solution, ctx, exp.car, carType)
-      const carValue = evaluate(solution.enrichCtx(ctx), carCore)
+      const carCore = check(mod, ctx, exp.car, carType)
+      const carValue = evaluate(mod.solution.enrichCtx(ctx), carCore)
       const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
-      const cdrCore = check(solution, ctx, exp.cdr, cdrTypeValue)
+      const cdrCore = check(mod, ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)
     }
 
     case "Car":
     case "Cdr": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Quote": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled":
     case "FoldedClazz": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "FoldedObjekt":
     case "Objekt": {
-      const { core } = enrich(solution, ctx, exp, type)
+      const { core } = enrich(mod, ctx, exp, type)
       return core
     }
 
     case "Dot": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "FoldedNew": {
       return check(
-        solution,
+        mod,
         ctx,
-        Exps.New(
-          exp.name,
-          Exps.prepareProperties(solution, ctx, exp.properties),
-        ),
+        Exps.New(exp.name, Exps.prepareProperties(mod, ctx, exp.properties)),
         type,
       )
     }
 
     case "New":
     case "NewAp": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "FoldedSequence":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {
-      return checkByInfer(solution, ctx, exp, type)
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     default: {

@@ -4,12 +4,12 @@ import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { Solution } from "../solution"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertClazzInCtx, conversion } from "../value"
 
 export function inferProperties(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
@@ -26,12 +26,7 @@ export function inferProperties(
         throw new ElaborationError(`missing property: ${clazz.name}`)
       }
 
-      const propertyCore = Exps.check(
-        solution,
-        ctx,
-        property,
-        clazz.propertyType,
-      )
+      const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
 
@@ -41,19 +36,14 @@ export function inferProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferProperties(solution, ctx, properties, rest),
+        ...inferProperties(mod, ctx, properties, rest),
       }
     }
 
     case "ClazzFulfilled": {
       const property = properties[clazz.name]
       if (property !== undefined) {
-        const propertyCore = Exps.check(
-          solution,
-          ctx,
-          property,
-          clazz.propertyType,
-        )
+        const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
         const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
 
         conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
@@ -69,7 +59,7 @@ export function inferProperties(
 
       return {
         [clazz.name]: propertyCore,
-        ...inferProperties(solution, ctx, properties, clazz.rest),
+        ...inferProperties(mod, ctx, properties, clazz.rest),
       }
     }
   }

@@ -14,9 +14,9 @@ export class LetThe extends Stmt {
   }
 
   async execute(mod: Mod): Promise<void> {
-    const typeCore = checkType(mod.solution, mod.ctx, this.type)
+    const typeCore = checkType(mod, mod.ctx, this.type)
     const typeValue = evaluate(mod.solution.enrichEnv(mod.env), typeCore)
-    const enriched = enrichOrCheck(mod.solution, mod.ctx, this.exp, typeValue)
+    const enriched = enrichOrCheck(mod, mod.ctx, this.exp, typeValue)
     const value = evaluate(mod.solution.enrichEnv(mod.env), enriched.core)
     mod.define(this.name, enriched.type, value)
   }

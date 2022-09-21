@@ -21,6 +21,10 @@ export class Mod {
 
   constructor(public options: ModOptions) {}
 
+  enrichCtx(ctx: Ctx): Env {
+    return this.solution.enrichCtx(ctx)
+  }
+
   resolve(href: string): URL {
     return new URL(href, this.options.url)
   }

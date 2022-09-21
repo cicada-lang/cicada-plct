@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer, Inferred } from "../exp"
-import { Solution } from "../solution"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -17,23 +17,18 @@ import { Value } from "../value"
 
 **/
 
-export function enrich(
-  solution: Solution,
-  ctx: Ctx,
-  exp: Exp,
-  type: Value,
-): Inferred {
+export function enrich(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
-    const inferred = infer(solution, ctx, exp)
+    const inferred = infer(mod, ctx, exp)
     Values.inclusion(ctx, inferred.type, type)
     return inferred
   } catch (_error) {
-    return enrichWithoutInfer(solution, ctx, exp, type)
+    return enrichWithoutInfer(mod, ctx, exp, type)
   }
 }
 
 function enrichWithoutInfer(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   exp: Exp,
   type: Value,
@@ -41,9 +36,9 @@ function enrichWithoutInfer(
   switch (exp.kind) {
     case "FoldedObjekt": {
       return enrich(
-        solution,
+        mod,
         ctx,
-        Exps.Objekt(Exps.prepareProperties(solution, ctx, exp.properties)),
+        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
         type,
       )
     }
@@ -51,7 +46,7 @@ function enrichWithoutInfer(
     case "Objekt": {
       Values.assertClazzInCtx(ctx, type)
 
-      const properties = checkProperties(solution, ctx, exp.properties, type)
+      const properties = checkProperties(mod, ctx, exp.properties, type)
       const names = Object.keys(properties)
 
       /**
@@ -59,12 +54,7 @@ function enrichWithoutInfer(
          thus we require that they are infer-able.
       **/
 
-      const extra = Exps.inferExtraProperties(
-        solution,
-        ctx,
-        exp.properties,
-        names,
-      )
+      const extra = Exps.inferExtraProperties(mod, ctx, exp.properties, names)
 
       return Inferred(
         Values.prependFulfilledClazz(extra.clazz, type),
