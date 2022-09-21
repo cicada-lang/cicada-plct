@@ -1,6 +1,6 @@
 import { formatCore } from "../core"
 import { Ctx, lookupTypeInCtx } from "../ctx"
-import { deepWalk, Solution } from "../solution"
+import { Solution } from "../solution"
 import { readback, readbackType } from "../value"
 
 export function formatSolution(
@@ -20,7 +20,7 @@ export function formatSolution(
       const typeCore = readbackType(ctx, type)
       properties.push(`${name}: TODO(${formatCore(typeCore)})`)
     } else {
-      value = deepWalk(solution, ctx, value)
+      value = solution.deepWalk(ctx, value)
       const core = readback(ctx, type, value)
       properties.push(`${name}: ${formatCore(core)}`)
     }

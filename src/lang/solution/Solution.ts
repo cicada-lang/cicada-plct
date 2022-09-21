@@ -10,7 +10,7 @@ export class Solution {
   enrichCtx(ctx: Ctx): Env {
     let env = ctxToEnv(ctx)
     for (const [name, value] of this.bindings.entries()) {
-      env = EnvCons(name, deepWalk(this, ctx, value), env)
+      env = EnvCons(name, this.deepWalk(ctx, value), env)
     }
 
     return env
@@ -50,6 +50,10 @@ export class Solution {
     return value
   }
 
+  deepWalk(ctx: Ctx, value: Value): Value {
+    return deepWalk(this, ctx, value)
+  }
+
   formatSolution(ctx: Ctx, names: Array<string>): string {
     const properties: Array<string> = []
     for (const name of names) {
@@ -63,7 +67,7 @@ export class Solution {
         const typeCore = readbackType(ctx, type)
         properties.push(`${name}: TODO(${formatCore(typeCore)})`)
       } else {
-        value = deepWalk(this, ctx, value)
+        value = this.deepWalk(ctx, value)
         const core = readback(ctx, type, value)
         properties.push(`${name}: ${formatCore(core)}`)
       }

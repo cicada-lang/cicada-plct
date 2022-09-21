@@ -2,7 +2,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
-import { deepWalk, solveType } from "../solution"
+import { solveType } from "../solution"
 import { inclusion, Value } from "../value"
 
 export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
@@ -10,8 +10,8 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   solveType(mod.solution, ctx, inferred.type, type)
   inclusion(
     ctx,
-    deepWalk(mod.solution, ctx, inferred.type),
-    deepWalk(mod.solution, ctx, type),
+    mod.solution.deepWalk(ctx, inferred.type),
+    mod.solution.deepWalk(ctx, type),
   )
   return inferred.core
 }
