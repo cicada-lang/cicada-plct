@@ -16,11 +16,11 @@ solve (x: String, y: Box(String), z: Box(Box(String))) {
   // equation y = cons(x, sole)
   // equation z = cons(y, sole)
 
-  // equation y = box(implicit String, x)
-  // equation z = box(implicit Box(String), y)
+  equation y = box(implicit String, x)
+  equation z = box(implicit Box(String), y)
 
-  equation y = box(x)
-  equation z = box(y)
+  // equation y = box(x)
+  // equation z = box(y)
 
   equation x = "abc"
 }

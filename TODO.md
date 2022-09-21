@@ -1,10 +1,12 @@
 # having solution all the time
 
-add `solution` to `readback`
+fix deepWalk on Pi and Sigma
 
 insert `ImplicitAp` during check
 
-- add test "compute ImplicitAp -- insertion -- during check"
+- pass test "compute ImplicitAp -- insertion -- during check"
+
+fix tests/solve/solve-box.test.ts
 
 infer and check take `mod` instead of `solution`
 
