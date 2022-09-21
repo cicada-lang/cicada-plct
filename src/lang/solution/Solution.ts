@@ -9,6 +9,11 @@ export class Solution {
   patternVars: Array<PatternVar> = []
   bindings: Map<string, Value> = new Map()
 
+  cleanup(): void {
+    this.patternVars = []
+    this.bindings = new Map()
+  }
+
   enrichCtx(ctx: Ctx): Env {
     let env = ctxToEnv(ctx)
     for (const [name, value] of this.bindings.entries()) {
