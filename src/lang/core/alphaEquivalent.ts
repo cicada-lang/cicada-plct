@@ -14,20 +14,29 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  if (left.kind === "Pi" && right.kind === "Pi") {
+  if (
+    (left.kind === "Pi" && right.kind === "Pi") ||
+    (left.kind === "PiImplicit" && right.kind === "PiImplicit")
+  ) {
     alphaEquivalent(ctx, left.argType, right.argType)
     ctx = ctx.cons(left.name, right.name)
     alphaEquivalent(ctx, left.retType, right.retType)
     return
   }
 
-  if (left.kind === "Fn" && right.kind === "Fn") {
+  if (
+    (left.kind === "Fn" && right.kind === "Fn") ||
+    (left.kind === "FnImplicit" && right.kind === "FnImplicit")
+  ) {
     ctx = ctx.cons(left.name, right.name)
     alphaEquivalent(ctx, left.ret, right.ret)
     return
   }
 
-  if (left.kind === "Ap" && right.kind === "Ap") {
+  if (
+    (left.kind === "Ap" && right.kind === "Ap") ||
+    (left.kind === "ApImplicit" && right.kind === "ApImplicit")
+  ) {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.arg, right.arg)
     return

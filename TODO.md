@@ -1,1 +1,0 @@
-solveByType for ImplicitPi

@@ -26,7 +26,8 @@ export function solveByType(
       return "ok"
     }
 
-    case "Pi": {
+    case "Pi":
+    case "PiImplicit": {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...solution.names]
       const freshName = freshen(usedNames, name)
