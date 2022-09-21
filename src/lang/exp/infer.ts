@@ -104,22 +104,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Ap": {
       const inferred = infer(mod, ctx, exp.target)
-
-      {
-        /**
-           Try to use `targetValue` first, then use `inferred.type`.
-        **/
-        const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
-        /**
-           Fulfilling type.
-        **/
-        if (Values.isClazz(targetValue)) {
-          const argCore = Exps.checkClazzArg(mod, ctx, targetValue, exp.arg)
-          return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
-        }
-      }
-
-      return Exps.inferAp(mod, ctx, inferred, exp.arg)
+      return (
+        Exps.inferFulfillingType(mod, ctx, inferred, exp.arg) ||
+        Exps.inferAp(mod, ctx, inferred, exp.arg)
+      )
     }
 
     case "ApImplicit": {
