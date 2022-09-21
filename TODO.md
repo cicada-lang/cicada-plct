@@ -1,1 +1,1 @@
-[maybe] extract mod.freshenNameInCtx
+extract inferFulfillingType
