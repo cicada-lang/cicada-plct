@@ -15,9 +15,6 @@ export function inferFulfillingType(
   const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
   if (!Values.isClazz(targetValue)) return undefined
 
-  /**
-     Fulfilling type.
-  **/
   const argCore = Exps.checkClazzArg(mod, ctx, targetValue, argExp)
   return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
 }
