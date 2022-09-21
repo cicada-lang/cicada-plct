@@ -15,15 +15,15 @@ export function solveByType(
   type: Value,
   left: Value,
   right: Value,
-): Solution | undefined {
+): "ok" | undefined {
   switch (type.kind) {
     case "Type": {
       solveType(solution, ctx, left, right)
-      return solution
+      return "ok"
     }
 
     case "Trivial": {
-      return solution
+      return "ok"
     }
 
     case "Pi": {
@@ -37,7 +37,7 @@ export function solveByType(
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
       solve(solution, ctx, retType, leftRet, rightRet)
-      return solution
+      return "ok"
     }
 
     case "Sigma": {
@@ -49,7 +49,7 @@ export function solveByType(
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
       solve(solution, ctx, cdrType, leftCdr, rightCdr)
-      return solution
+      return "ok"
     }
 
     case "ClazzNull":
@@ -57,11 +57,7 @@ export function solveByType(
     case "ClazzFulfilled": {
       assertNoExtraCommonProperties(type, left, right)
       solveProperties(solution, ctx, type, left, right)
-      return solution
-    }
-
-    default: {
-      return undefined
+      return "ok"
     }
   }
 }

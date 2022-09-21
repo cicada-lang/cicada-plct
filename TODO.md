@@ -1,6 +1,6 @@
 # having solution all the time
 
-fix tests/solve/solve-box.test.ts
+fix solve-box-implicit.test
 
 - infinite loop
 
