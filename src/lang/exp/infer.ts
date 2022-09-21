@@ -344,7 +344,7 @@ function inferApPiImplicit(
   Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
 
   const name = inferred.type.retTypeClosure.name
-  // TODO Scope BUG, `freshName` might occurs in `args`.
+  // TODO Scope BUG, `freshName` might occurs in `argExp`.
   const usedNames = [...ctxNames(ctx), ...mod.solution.names]
   const freshName = freshen(usedNames, name)
   const patternVar = mod.solution.createPatternVar(
