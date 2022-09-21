@@ -27,7 +27,7 @@ export class Solve extends Stmt {
     }
 
     for (const equation of this.equations) {
-      mod.solution = solveEquation(mod, ctx, equation)
+      solveEquation(mod, ctx, equation)
     }
 
     return formatSolution(mod.solution, ctx, names)

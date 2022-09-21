@@ -1,7 +1,5 @@
 # having solution all the time
 
-fix solve return types
-
 every call to `evaluate` should use `solution` enriched `env`
 
 - `Mod` should provide API for this

@@ -18,7 +18,8 @@ export function solveByType(
 ): Solution | undefined {
   switch (type.kind) {
     case "Type": {
-      return solveType(solution, ctx, left, right)
+      solveType(solution, ctx, left, right)
+      return solution
     }
 
     case "Trivial": {
@@ -35,18 +36,19 @@ export function solveByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
-      return solve(solution, ctx, retType, leftRet, rightRet)
+      solve(solution, ctx, retType, leftRet, rightRet)
+      return solution
     }
 
     case "Sigma": {
       const leftCar = Actions.doCar(left)
       const rightCar = Actions.doCar(right)
-      solution = solve(solution, ctx, type.carType, leftCar, rightCar)
+      solve(solution, ctx, type.carType, leftCar, rightCar)
       const car = Actions.doCar(left)
       const cdrType = applyClosure(type.cdrTypeClosure, car)
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
-      solution = solve(solution, ctx, cdrType, leftCdr, rightCdr)
+      solve(solution, ctx, cdrType, leftCdr, rightCdr)
       return solution
     }
 
@@ -54,7 +56,8 @@ export function solveByType(
     case "ClazzCons":
     case "ClazzFulfilled": {
       assertNoExtraCommonProperties(type, left, right)
-      return solveProperties(solution, ctx, type, left, right)
+      solveProperties(solution, ctx, type, left, right)
+      return solution
     }
 
     default: {

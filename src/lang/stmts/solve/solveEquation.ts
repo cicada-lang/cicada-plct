@@ -2,15 +2,11 @@ import { Mod } from "src/lang/mod"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer } from "../../exp"
-import { deepWalk, Solution, solve } from "../../solution"
+import { deepWalk, solve } from "../../solution"
 import { conversionType } from "../../value"
 import { Equation } from "../solve"
 
-export function solveEquation(
-  mod: Mod,
-  ctx: Ctx,
-  equation: Equation,
-): Solution {
+export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
     case "EquationTyped": {
       const env = mod.solution.enrichCtx(ctx)
@@ -20,7 +16,8 @@ export function solveEquation(
         env,
         check(mod, ctx, equation.right, typeValue),
       )
-      return solve(mod.solution, ctx, typeValue, leftValue, rightValue)
+      solve(mod.solution, ctx, typeValue, leftValue, rightValue)
+      return
     }
 
     case "EquationUntyped": {
@@ -33,8 +30,8 @@ export function solveEquation(
       const env = mod.solution.enrichCtx(ctx)
       const leftValue = evaluate(env, leftInferred.core)
       const rightValue = evaluate(env, rightInferred.core)
-      mod.solution = solve(mod.solution, ctx, typeValue, leftValue, rightValue)
-      return mod.solution
+      solve(mod.solution, ctx, typeValue, leftValue, rightValue)
+      return
     }
   }
 }

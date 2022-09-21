@@ -382,12 +382,7 @@ function inferApPi(
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    mod.solution = solveType(
-      mod.solution,
-      ctx,
-      argInferred.type,
-      inferred.type.argType,
-    )
+    solveType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
   const argCore = argInferred

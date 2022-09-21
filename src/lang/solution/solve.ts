@@ -20,13 +20,11 @@ export function solve(
   type: Value,
   left: Value,
   right: Value,
-): Solution {
+): void {
   left = solution.walk(left)
   right = solution.walk(right)
 
-  return (
-    solveVar(solution, left, right) ||
+  solveVar(solution, left, right) ||
     solveByType(solution, ctx, type, left, right) ||
     solveByValue(solution, ctx, type, left, right)
-  )
 }

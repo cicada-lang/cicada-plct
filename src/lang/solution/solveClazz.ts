@@ -29,10 +29,10 @@ export function solveClazz(
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
 
-    solution = solveType(solution, ctx, leftProperty.type, rightProperty.type)
+    solveType(solution, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      solution = solve(
+      solve(
         solution,
         ctx,
         leftProperty.type,

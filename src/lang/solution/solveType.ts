@@ -18,37 +18,36 @@ export function solveType(
   ctx: Ctx,
   left: Value,
   right: Value,
-): Solution {
+): void {
   left = solution.walk(left)
   right = solution.walk(right)
 
   const success = solveVar(solution, left, right)
-  if (success !== undefined) {
-    return success
-  }
+  if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
 
-    return solveNeutral(solution, ctx, left.neutral, right.neutral)
+    solveNeutral(solution, ctx, left.neutral, right.neutral)
+    return
   }
 
   if (left.kind === "Type" && right.kind === "Type") {
-    return solution
+    return
   }
 
   if (left.kind === "String" && right.kind === "String") {
-    return solution
+    return
   }
 
   if (left.kind === "Trivial" && right.kind === "Trivial") {
-    return solution
+    return
   }
 
   if (left.kind === "Pi" && right.kind === "Pi") {
-    solution = solveType(solution, ctx, left.argType, right.argType)
+    solveType(solution, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
 
@@ -59,7 +58,7 @@ export function solveType(
 
     ctx = CtxCons(freshName, argType, ctx)
 
-    solution = solve(
+    solve(
       solution,
       ctx,
       Values.Type(),
@@ -67,11 +66,11 @@ export function solveType(
       applyClosure(left.retTypeClosure, typedNeutral),
     )
 
-    return solution
+    return
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    solution = solveType(solution, ctx, left.carType, right.carType)
+    solveType(solution, ctx, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
@@ -82,7 +81,7 @@ export function solveType(
 
     ctx = CtxCons(freshName, carType, ctx)
 
-    solution = solve(
+    solve(
       solution,
       ctx,
       Values.Type(),
@@ -90,11 +89,12 @@ export function solveType(
       applyClosure(left.cdrTypeClosure, typedNeutral),
     )
 
-    return solution
+    return
   }
 
   if (isClazz(left) && isClazz(right)) {
-    return solveClazz(solution, ctx, left, right)
+    solveClazz(solution, ctx, left, right)
+    return
   }
 
   throw new EquationError(
