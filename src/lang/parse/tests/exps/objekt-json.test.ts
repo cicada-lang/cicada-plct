@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Objekt -- JSON", () => {
   expect(parseExp('{ "Hello, World!": "Hi!" }')).toMatchObject(
     deleteUndefined(
-      Exps.FoldedObjekt([
+      Exps.ObjektFolded([
         Exps.PropertyPlain("Hello, World!", Exps.Quote("Hi!")),
       ]),
     ),

@@ -20,7 +20,7 @@ begin {
     ),
   ).toMatchObject(
     deleteUndefined(
-      Exps.FoldedSequence(
+      Exps.SequenceFolded(
         [
           Exps.SequenceBindingLetThe(
             "x",
@@ -48,7 +48,7 @@ begin {
 
 `,
     ),
-  ).toMatchObject(deleteUndefined(Exps.FoldedSequence([], Exps.Var("x"))))
+  ).toMatchObject(deleteUndefined(Exps.SequenceFolded([], Exps.Var("x"))))
 })
 
 test("parse Sequence -- let function", () => {
@@ -68,20 +68,20 @@ begin {
     ),
   ).toMatchObject(
     deleteUndefined(
-      Exps.FoldedSequence(
+      Exps.SequenceFolded(
         [
           Exps.SequenceBindingLetThe(
             "id",
-            Exps.FoldedPi(
+            Exps.PiFolded(
               [
                 Exps.PiBindingNamed("T", Exps.Var("Type")),
                 Exps.PiBindingNamed("x", Exps.Var("T")),
               ],
               Exps.Var("T"),
             ),
-            Exps.FoldedFn(
+            Exps.FnFolded(
               [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
-              Exps.FoldedSequence([], Exps.Var("x")),
+              Exps.SequenceFolded([], Exps.Var("x")),
             ),
           ),
         ],

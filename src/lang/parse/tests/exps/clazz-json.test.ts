@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Clazz -- JSON", () => {
   expect(parseExp('class { "Hello, World!": String }')).toMatchObject(
     deleteUndefined(
-      Exps.FoldedClazz([
+      Exps.ClazzFolded([
         Exps.ClazzBindingAbstract("Hello, World!", Exps.Var("String")),
       ]),
     ),

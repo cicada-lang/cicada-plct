@@ -7,7 +7,7 @@ import { Value } from "../value"
    # solve
 
    `solve` will be used during elaboration (`check` and `infer`),
-   to support features like `ImplicitPi`.
+   to support features like `PiImplicit`.
 
    The recursion structure of `solve` closely follows `readback`,
    but dealing with two values in each step.

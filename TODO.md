@@ -1,3 +1,3 @@
 # postfix-always-naming-convention
 
-Exp, Core, Value, Neutral
+swap unfold and fold

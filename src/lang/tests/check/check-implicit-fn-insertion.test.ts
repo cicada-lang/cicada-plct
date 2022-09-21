@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("check ImplicitFn -- no ImplicitFn insertion", async () => {
+test("check FnImplicit -- no FnImplicit insertion", async () => {
   await expectCodeToFail(`
 
 let id: (implicit T: Type, x: T) -> T = (x) => x
@@ -9,7 +9,7 @@ let id: (implicit T: Type, x: T) -> T = (x) => x
 `)
 })
 
-test("check ImplicitFn", async () => {
+test("check FnImplicit", async () => {
   await runCode(`
 
 let id: (implicit T: Type, x: T) -> T = (implicit T, x) => x

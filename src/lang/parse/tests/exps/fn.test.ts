@@ -5,14 +5,14 @@ import { deleteUndefined } from "../utils"
 
 test("parse Fn", () => {
   expect(parseExp("(x) => x")).toMatchObject(
-    deleteUndefined(Exps.FoldedFn([Exps.FnBindingName("x")], Exps.Var("x"))),
+    deleteUndefined(Exps.FnFolded([Exps.FnBindingName("x")], Exps.Var("x"))),
   )
 
   expect(parseExp("function (x) { return x }")).toMatchObject(
     deleteUndefined(
-      Exps.FoldedFn(
+      Exps.FnFolded(
         [Exps.FnBindingName("x")],
-        Exps.FoldedSequence([], Exps.Var("x")),
+        Exps.SequenceFolded([], Exps.Var("x")),
       ),
     ),
   )
@@ -21,7 +21,7 @@ test("parse Fn", () => {
 test("parse Fn -- multiple bindings", () => {
   expect(parseExp("(x, y) => x")).toMatchObject(
     deleteUndefined(
-      Exps.FoldedFn(
+      Exps.FnFolded(
         [Exps.FnBindingName("x"), Exps.FnBindingName("y")],
         Exps.Var("x"),
       ),
@@ -30,9 +30,9 @@ test("parse Fn -- multiple bindings", () => {
 
   expect(parseExp("function (x, y) { return x }")).toMatchObject(
     deleteUndefined(
-      Exps.FoldedFn(
+      Exps.FnFolded(
         [Exps.FnBindingName("x"), Exps.FnBindingName("y")],
-        Exps.FoldedSequence([], Exps.Var("x")),
+        Exps.SequenceFolded([], Exps.Var("x")),
       ),
     ),
   )

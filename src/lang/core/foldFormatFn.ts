@@ -11,7 +11,7 @@ export function foldFormatFn(core: Core): {
       return { bindings: [binding, ...bindings], ret }
     }
 
-    case "ImplicitFn": {
+    case "FnImplicit": {
       const binding = `implicit ${core.name}`
       const { bindings, ret } = foldFormatFn(core.ret)
       return { bindings: [binding, ...bindings], ret }

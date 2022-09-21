@@ -19,33 +19,33 @@ type ExpMeta = { span?: Span }
 export type Exp =
   | Var
   | Pi
-  | ImplicitPi
-  | FoldedPi
+  | PiImplicit
+  | PiFolded
   | Ap
-  | ImplicitAp
-  | FoldedAp
+  | ApImplicit
+  | ApFolded
   | Fn
-  | AnnotatedFn
-  | ImplicitFn
-  | AnnotatedImplicitFn
-  | FoldedFn
-  | FoldedFnWithRetType
+  | FnAnnotated
+  | FnImplicit
+  | AnnotatedFnImplicit
+  | FnFolded
+  | FnFoldedWithRetType
   | Sigma
-  | FoldedSigma
+  | SigmaFolded
   | Cons
   | Car
   | Cdr
   | Quote
   | Clazz
-  | FoldedClazz
+  | ClazzFolded
   | Objekt
-  | FoldedObjekt
+  | ObjektFolded
   | New
-  | FoldedNew
+  | NewFolded
   | NewAp
   | Dot
   | Sequence
-  | FoldedSequence
+  | SequenceFolded
 
 export type Var = {
   family: "Exp"
@@ -81,23 +81,23 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   }
 }
 
-export type ImplicitPi = {
+export type PiImplicit = {
   family: "Exp"
-  kind: "ImplicitPi"
+  kind: "PiImplicit"
   name: string
   argType: Exp
   retType: Exp
 } & ExpMeta
 
-export function ImplicitPi(
+export function PiImplicit(
   name: string,
   argType: Exp,
   retType: Exp,
   span?: Span,
-): ImplicitPi {
+): PiImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitPi",
+    kind: "PiImplicit",
     name,
     argType,
     retType,
@@ -105,21 +105,21 @@ export function ImplicitPi(
   }
 }
 
-export type FoldedPi = {
+export type PiFolded = {
   family: "Exp"
-  kind: "FoldedPi"
+  kind: "PiFolded"
   bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
 
-export function FoldedPi(
+export function PiFolded(
   bindings: Array<PiBinding>,
   retType: Exp,
   span?: Span,
-): FoldedPi {
+): PiFolded {
   return {
     family: "Exp",
-    kind: "FoldedPi",
+    kind: "PiFolded",
     bindings,
     retType,
     span,
@@ -185,23 +185,23 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
   }
 }
 
-export type AnnotatedFn = {
+export type FnAnnotated = {
   family: "Exp"
-  kind: "AnnotatedFn"
+  kind: "FnAnnotated"
   name: string
   argType: Exp
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedFn(
+export function FnAnnotated(
   name: string,
   argType: Exp,
   ret: Exp,
   span?: Span,
-): AnnotatedFn {
+): FnAnnotated {
   return {
     family: "Exp",
-    kind: "AnnotatedFn",
+    kind: "FnAnnotated",
     name,
     argType,
     ret,
@@ -209,40 +209,40 @@ export function AnnotatedFn(
   }
 }
 
-export type ImplicitFn = {
+export type FnImplicit = {
   family: "Exp"
-  kind: "ImplicitFn"
+  kind: "FnImplicit"
   name: string
   ret: Exp
 } & ExpMeta
 
-export function ImplicitFn(name: string, ret: Exp, span?: Span): ImplicitFn {
+export function FnImplicit(name: string, ret: Exp, span?: Span): FnImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitFn",
+    kind: "FnImplicit",
     name,
     ret,
     span,
   }
 }
 
-export type AnnotatedImplicitFn = {
+export type AnnotatedFnImplicit = {
   family: "Exp"
-  kind: "AnnotatedImplicitFn"
+  kind: "AnnotatedFnImplicit"
   name: string
   argType: Exp
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedImplicitFn(
+export function AnnotatedFnImplicit(
   name: string,
   argType: Exp,
   ret: Exp,
   span?: Span,
-): AnnotatedImplicitFn {
+): AnnotatedFnImplicit {
   return {
     family: "Exp",
-    kind: "AnnotatedImplicitFn",
+    kind: "AnnotatedFnImplicit",
     name,
     argType,
     ret,
@@ -250,44 +250,44 @@ export function AnnotatedImplicitFn(
   }
 }
 
-export type FoldedFn = {
+export type FnFolded = {
   family: "Exp"
-  kind: "FoldedFn"
+  kind: "FnFolded"
   bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
 
-export function FoldedFn(
+export function FnFolded(
   bindings: Array<FnBinding>,
   ret: Exp,
   span?: Span,
-): FoldedFn {
+): FnFolded {
   return {
     family: "Exp",
-    kind: "FoldedFn",
+    kind: "FnFolded",
     bindings,
     ret,
     span,
   }
 }
 
-export type FoldedFnWithRetType = {
+export type FnFoldedWithRetType = {
   family: "Exp"
-  kind: "FoldedFnWithRetType"
+  kind: "FnFoldedWithRetType"
   bindings: Array<FnBinding>
   retType: Exp
   ret: Exp
 } & ExpMeta
 
-export function FoldedFnWithRetType(
+export function FnFoldedWithRetType(
   bindings: Array<FnBinding>,
   retType: Exp,
   ret: Exp,
   span?: Span,
-): FoldedFnWithRetType {
+): FnFoldedWithRetType {
   return {
     family: "Exp",
-    kind: "FoldedFnWithRetType",
+    kind: "FnFoldedWithRetType",
     bindings,
     retType,
     ret,
@@ -376,34 +376,34 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   }
 }
 
-export type ImplicitAp = {
+export type ApImplicit = {
   family: "Exp"
-  kind: "ImplicitAp"
+  kind: "ApImplicit"
   target: Exp
   arg: Exp
 } & ExpMeta
 
-export function ImplicitAp(target: Exp, arg: Exp, span?: Span): ImplicitAp {
+export function ApImplicit(target: Exp, arg: Exp, span?: Span): ApImplicit {
   return {
     family: "Exp",
-    kind: "ImplicitAp",
+    kind: "ApImplicit",
     target,
     arg,
     span,
   }
 }
 
-export type FoldedAp = {
+export type ApFolded = {
   family: "Exp"
-  kind: "FoldedAp"
+  kind: "ApFolded"
   target: Exp
   args: Array<Arg>
 } & ExpMeta
 
-export function FoldedAp(target: Exp, args: Array<Arg>, span?: Span): FoldedAp {
+export function ApFolded(target: Exp, args: Array<Arg>, span?: Span): ApFolded {
   return {
     family: "Exp",
-    kind: "FoldedAp",
+    kind: "ApFolded",
     target,
     args,
     span,
@@ -460,21 +460,21 @@ export function Sigma(
   }
 }
 
-export type FoldedSigma = {
+export type SigmaFolded = {
   family: "Exp"
-  kind: "FoldedSigma"
+  kind: "SigmaFolded"
   bindings: Array<SigmaBinding>
   cdrType: Exp
 } & ExpMeta
 
-export function FoldedSigma(
+export function SigmaFolded(
   bindings: Array<SigmaBinding>,
   cdrType: Exp,
   span?: Span,
-): FoldedSigma {
+): SigmaFolded {
   return {
     family: "Exp",
-    kind: "FoldedSigma",
+    kind: "SigmaFolded",
     bindings,
     cdrType,
     span,
@@ -637,19 +637,19 @@ export function ClazzFulfilled(
   }
 }
 
-export type FoldedClazz = {
+export type ClazzFolded = {
   family: "Exp"
-  kind: "FoldedClazz"
+  kind: "ClazzFolded"
   bindings: Array<ClazzBinding>
 } & ExpMeta
 
-export function FoldedClazz(
+export function ClazzFolded(
   bindings: Array<ClazzBinding>,
   span?: Span,
-): FoldedClazz {
+): ClazzFolded {
   return {
     family: "Exp",
-    kind: "FoldedClazz",
+    kind: "ClazzFolded",
     bindings,
     span,
   }
@@ -709,19 +709,19 @@ export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
   }
 }
 
-export type FoldedObjekt = {
+export type ObjektFolded = {
   family: "Exp"
-  kind: "FoldedObjekt"
+  kind: "ObjektFolded"
   properties: Array<Property>
 } & ExpMeta
 
-export function FoldedObjekt(
+export function ObjektFolded(
   properties: Array<Property>,
   span?: Span,
-): FoldedObjekt {
+): ObjektFolded {
   return {
     family: "Exp",
-    kind: "FoldedObjekt",
+    kind: "ObjektFolded",
     properties,
     span,
   }
@@ -776,21 +776,21 @@ export function New(
   }
 }
 
-export type FoldedNew = {
+export type NewFolded = {
   family: "Exp"
-  kind: "FoldedNew"
+  kind: "NewFolded"
   name: string
   properties: Array<Property>
 } & ExpMeta
 
-export function FoldedNew(
+export function NewFolded(
   name: string,
   properties: Array<Property>,
   span?: Span,
-): FoldedNew {
+): NewFolded {
   return {
     family: "Exp",
-    kind: "FoldedNew",
+    kind: "NewFolded",
     name,
     properties,
     span,
@@ -908,21 +908,21 @@ export function SequenceCheck(
   }
 }
 
-export type FoldedSequence = {
+export type SequenceFolded = {
   family: "Exp"
-  kind: "FoldedSequence"
+  kind: "SequenceFolded"
   bindings: Array<SequenceBinding>
   ret: Exp
 } & ExpMeta
 
-export function FoldedSequence(
+export function SequenceFolded(
   bindings: Array<SequenceBinding>,
   ret: Exp,
   span?: Span,
-): FoldedSequence {
+): SequenceFolded {
   return {
     family: "Exp",
-    kind: "FoldedSequence",
+    kind: "SequenceFolded",
     bindings,
     ret,
     span,

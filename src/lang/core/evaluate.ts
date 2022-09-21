@@ -25,8 +25,8 @@ export function evaluate(env: Env, core: Core): Value {
       )
     }
 
-    case "ImplicitPi": {
-      return Values.ImplicitPi(
+    case "PiImplicit": {
+      return Values.PiImplicit(
         evaluate(env, core.argType),
         Closure(env, core.name, core.retType),
       )
@@ -36,12 +36,12 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.Fn(Closure(env, core.name, core.ret))
     }
 
-    case "ImplicitFn": {
-      return Values.ImplicitFn(Closure(env, core.name, core.ret))
+    case "FnImplicit": {
+      return Values.FnImplicit(Closure(env, core.name, core.ret))
     }
 
     case "Ap":
-    case "ImplicitAp": {
+    case "ApImplicit": {
       return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
     }
 

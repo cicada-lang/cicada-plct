@@ -12,7 +12,7 @@ export function unfoldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingAnnotated": {
-      return Exps.AnnotatedFn(
+      return Exps.FnAnnotated(
         binding.name,
         binding.type,
         unfoldFn(restBindings, ret),
@@ -20,11 +20,11 @@ export function unfoldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingImplicit": {
-      return Exps.ImplicitFn(binding.name, unfoldFn(restBindings, ret))
+      return Exps.FnImplicit(binding.name, unfoldFn(restBindings, ret))
     }
 
     case "FnBindingAnnotatedImplicit": {
-      return Exps.AnnotatedImplicitFn(
+      return Exps.AnnotatedFnImplicit(
         binding.name,
         binding.type,
         unfoldFn(restBindings, ret),
