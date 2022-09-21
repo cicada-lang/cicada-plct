@@ -20,7 +20,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:let_function": ({ name, bindings, sequence }, { span }) =>
       new Stmts.Let(
         pt.str(name),
-        Exps.FnFolded(
+        Exps.FnUnfolded(
           matchers.fn_bindings_matcher(bindings),
           matchers.sequence_matcher(sequence),
         ),
@@ -31,7 +31,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     ) =>
       new Stmts.Let(
         pt.str(name),
-        Exps.FnFoldedWithRetType(
+        Exps.FnUnfoldedWithRetType(
           matchers.fn_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
           matchers.sequence_matcher(sequence),
@@ -42,7 +42,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:clazz": ({ name, bindings }, { span }) =>
       new Stmts.Clazz(
         pt.str(name),
-        Exps.ClazzFolded(
+        Exps.ClazzUnfolded(
           pt.matchers
             .zero_or_more_matcher(bindings)
             .map(matchers.clazz_binding_matcher),

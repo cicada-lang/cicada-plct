@@ -1,7 +1,7 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function unfoldSigma(
+export function foldSigma(
   bindings: Array<Exps.SigmaBinding>,
   cdrType: Exp,
 ): Exp {
@@ -11,14 +11,14 @@ export function unfoldSigma(
 
   switch (binding.kind) {
     case "SigmaBindingNameless": {
-      return Exps.Sigma("_", binding.type, unfoldSigma(restBindings, cdrType))
+      return Exps.Sigma("_", binding.type, foldSigma(restBindings, cdrType))
     }
 
     case "SigmaBindingNamed": {
       return Exps.Sigma(
         binding.name,
         binding.type,
-        unfoldSigma(restBindings, cdrType),
+        foldSigma(restBindings, cdrType),
       )
     }
   }

@@ -34,7 +34,7 @@ function enrichWithoutInfer(
   type: Value,
 ): Inferred {
   switch (exp.kind) {
-    case "ObjektFolded": {
+    case "ObjektUnfolded": {
       return enrich(
         mod,
         ctx,

@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse PiImplicit", () => {
   expect(parseExp("(implicit T: Type, x: T) -> Type")).toMatchObject(
     deleteUndefined(
-      Exps.PiFolded(
+      Exps.PiUnfolded(
         [
           Exps.PiBindingImplicit("T", Exps.Var("Type")),
           Exps.PiBindingNamed("x", Exps.Var("T")),
@@ -18,7 +18,7 @@ test("parse PiImplicit", () => {
 
   expect(parseExp("forall (implicit T: Type, x: T) Type")).toMatchObject(
     deleteUndefined(
-      Exps.PiFolded(
+      Exps.PiUnfolded(
         [
           Exps.PiBindingImplicit("T", Exps.Var("Type")),
           Exps.PiBindingNamed("x", Exps.Var("T")),

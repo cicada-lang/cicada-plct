@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Fn -- annotated", () => {
   expect(parseExp("(x: Type, y: Type) => x")).toMatchObject(
     deleteUndefined(
-      Exps.FnFolded(
+      Exps.FnUnfolded(
         [
           Exps.FnBindingAnnotated("x", Exps.Var("Type")),
           Exps.FnBindingAnnotated("y", Exps.Var("Type")),
@@ -18,7 +18,7 @@ test("parse Fn -- annotated", () => {
 
   expect(parseExp("(x: Type, y) => x")).toMatchObject(
     deleteUndefined(
-      Exps.FnFolded(
+      Exps.FnUnfolded(
         [
           Exps.FnBindingAnnotated("x", Exps.Var("Type")),
           Exps.FnBindingName("y"),

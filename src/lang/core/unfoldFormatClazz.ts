@@ -2,7 +2,7 @@ import * as Cores from "../core"
 import { formatCore } from "../core"
 import { isIdentifier } from "../utils/isIdentifier"
 
-export function foldFormatClazz(clazz: Cores.Clazz): {
+export function unfoldFormatClazz(clazz: Cores.Clazz): {
   bindings: Array<string>
 } {
   switch (clazz.kind) {
@@ -15,7 +15,7 @@ export function foldFormatClazz(clazz: Cores.Clazz): {
       const binding = isIdentifier(clazz.name)
         ? `${clazz.name}: ${propertyType}`
         : `"${clazz.name}": ${propertyType}`
-      const { bindings } = foldFormatClazz(clazz.rest)
+      const { bindings } = unfoldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }
 
@@ -25,7 +25,7 @@ export function foldFormatClazz(clazz: Cores.Clazz): {
       const binding = isIdentifier(clazz.name)
         ? `${clazz.name}: ${propertyType} = ${property}`
         : `"${clazz.name}": ${propertyType} = ${property}`
-      const { bindings } = foldFormatClazz(clazz.rest)
+      const { bindings } = unfoldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }
   }

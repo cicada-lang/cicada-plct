@@ -17,7 +17,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
-    case "PiFolded": {
+    case "PiUnfolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
@@ -43,26 +43,26 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "FnFolded": {
-      return check(mod, ctx, Exps.unfoldFn(exp.bindings, exp.ret), type)
+    case "FnUnfolded": {
+      return check(mod, ctx, Exps.foldFn(exp.bindings, exp.ret), type)
     }
 
-    case "FnFoldedWithRetType": {
+    case "FnUnfoldedWithRetType": {
       return check(
         mod,
         ctx,
-        Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),
+        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
         type,
       )
     }
 
     case "Ap":
-    case "ApFolded": {
+    case "ApUnfolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Sigma":
-    case "SigmaFolded": {
+    case "SigmaUnfolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
@@ -88,11 +88,11 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled":
-    case "ClazzFolded": {
+    case "ClazzUnfolded": {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "ObjektFolded":
+    case "ObjektUnfolded":
     case "Objekt": {
       const { core } = enrich(mod, ctx, exp, type)
       return core
@@ -102,7 +102,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "NewFolded": {
+    case "NewUnfolded": {
       return check(
         mod,
         ctx,
@@ -116,7 +116,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return checkByInfer(mod, ctx, exp, type)
     }
 
-    case "SequenceFolded":
+    case "SequenceUnfolded":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {

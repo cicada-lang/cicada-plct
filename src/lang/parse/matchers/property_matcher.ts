@@ -14,7 +14,7 @@ export function property_matcher(tree: pt.Tree): Exps.Property {
     "property:method": ({ key, bindings, sequence }) =>
       Exps.PropertyPlain(
         matchers.key_matcher(key),
-        Exps.FnFolded(
+        Exps.FnUnfolded(
           matchers.fn_bindings_matcher(bindings),
           matchers.sequence_matcher(sequence),
         ),

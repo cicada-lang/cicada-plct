@@ -11,13 +11,13 @@ test("parse Let -- function with return type", () => {
     deleteUndefined([
       new Stmts.Let(
         "id",
-        Exps.FnFoldedWithRetType(
+        Exps.FnUnfoldedWithRetType(
           [
             Exps.FnBindingAnnotated("T", Exps.Var("Type")),
             Exps.FnBindingAnnotated("x", Exps.Var("T")),
           ],
           Exps.Var("T"),
-          Exps.SequenceFolded([], Exps.Var("x")),
+          Exps.SequenceUnfolded([], Exps.Var("x")),
         ),
       ),
     ]),

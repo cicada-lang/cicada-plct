@@ -10,24 +10,24 @@ export function formatCore(core: Core): string {
 
     case "Pi":
     case "PiImplicit": {
-      const { bindings, retType } = Cores.foldFormatPi(core)
+      const { bindings, retType } = Cores.unfoldFormatPi(core)
       return `(${bindings.join(", ")}) -> ${retType}`
     }
 
     case "Fn":
     case "FnImplicit": {
-      const { bindings, ret } = Cores.foldFormatFn(core)
+      const { bindings, ret } = Cores.unfoldFormatFn(core)
       return `(${bindings.join(", ")}) => ${ret}`
     }
 
     case "Ap":
     case "ApImplicit": {
-      const { target, args } = Cores.foldFormatAp(core)
+      const { target, args } = Cores.unfoldFormatAp(core)
       return `${target}(${args.join(", ")})`
     }
 
     case "Sigma": {
-      const { bindings, cdrType } = Cores.foldFormatSigma(core)
+      const { bindings, cdrType } = Cores.unfoldFormatSigma(core)
       return `exists (${bindings.join(", ")}) ${cdrType}`
     }
 
@@ -50,7 +50,7 @@ export function formatCore(core: Core): string {
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
-      const { bindings } = Cores.foldFormatClazz(core)
+      const { bindings } = Cores.unfoldFormatClazz(core)
       return `class { ${bindings.join(", ")} }`
     }
 

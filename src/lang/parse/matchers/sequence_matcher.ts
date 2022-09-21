@@ -2,10 +2,10 @@ import pt from "@cicada-lang/partech"
 import * as Exps from "../../exp"
 import * as matchers from "../matchers"
 
-export function sequence_matcher(tree: pt.Tree): Exps.SequenceFolded {
+export function sequence_matcher(tree: pt.Tree): Exps.SequenceUnfolded {
   return pt.matcher({
     "sequence:sequence": ({ entries, ret }, { span }) =>
-      Exps.SequenceFolded(
+      Exps.SequenceUnfolded(
         pt.matchers.zero_or_more_matcher(entries).map(sequence_entry_matcher),
         matchers.exp_matcher(ret),
         span,
@@ -34,11 +34,11 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
     ) =>
       Exps.SequenceBindingLetThe(
         pt.str(name),
-        Exps.PiFolded(
+        Exps.PiUnfolded(
           matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
         ),
-        Exps.FnFolded(
+        Exps.FnUnfolded(
           matchers
             .pi_bindings_matcher(bindings)
             .map(matchers.piBindingtoFnBindingFrom),

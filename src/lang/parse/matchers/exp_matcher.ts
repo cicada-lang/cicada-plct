@@ -18,7 +18,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .one_or_more_matcher(args_group)
         .map((args) => matchers.args_matcher(args))
         .reduce(
-          (result, args) => Exps.ApFolded(result, args, span),
+          (result, args) => Exps.ApUnfolded(result, args, span),
           operator_matcher(target),
         ),
     "operator:car": ({ target }, { span }) =>
@@ -38,7 +38,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .one_or_more_matcher(args_group)
         .map((args) => matchers.args_matcher(args))
         .reduce(
-          (result: Exp, args) => Exps.ApFolded(result, args, span),
+          (result: Exp, args) => Exps.ApUnfolded(result, args, span),
           Exps.Dot(
             operator_matcher(target),
             pt.str(name),
@@ -50,7 +50,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .one_or_more_matcher(args_group)
         .map((args) => matchers.args_matcher(args))
         .reduce(
-          (result: Exp, args) => Exps.ApFolded(result, args, span),
+          (result: Exp, args) => Exps.ApUnfolded(result, args, span),
           Exps.Dot(
             operator_matcher(target),
             pt.trim_boundary(pt.str(literal), 1),
@@ -65,25 +65,25 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": ({ bindings, ret_t }, { span }) =>
-      Exps.PiFolded(
+      Exps.PiUnfolded(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span,
       ),
     "operand:pi_forall": ({ bindings, ret_t }, { span }) =>
-      Exps.PiFolded(
+      Exps.PiUnfolded(
         matchers.pi_bindings_matcher(bindings),
         exp_matcher(ret_t),
         span,
       ),
     "operand:fn": ({ bindings, ret }, { span }) =>
-      Exps.FnFolded(
+      Exps.FnUnfolded(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret),
         span,
       ),
     "operand:fn_function": ({ bindings, sequence }, { span }) =>
-      Exps.FnFolded(
+      Exps.FnUnfolded(
         matchers.fn_bindings_matcher(bindings),
         matchers.sequence_matcher(sequence),
         span,
@@ -92,14 +92,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
       { bindings, ret_type, sequence },
       { span },
     ) =>
-      Exps.FnFoldedWithRetType(
+      Exps.FnUnfoldedWithRetType(
         matchers.fn_bindings_matcher(bindings),
         exp_matcher(ret_type),
         matchers.sequence_matcher(sequence),
         span,
       ),
     "operand:sigma_exists": ({ bindings, cdr_t }, { span }) =>
-      Exps.SigmaFolded(
+      Exps.SigmaUnfolded(
         matchers.sigma_bindings_matcher(bindings),
         matchers.exp_matcher(cdr_t),
         span,
@@ -109,14 +109,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:quote": ({ literal }, { span }) =>
       Exps.Quote(pt.trim_boundary(pt.str(literal), 1), span),
     "operand:clazz": ({ bindings }, { span }) =>
-      Exps.ClazzFolded(
+      Exps.ClazzUnfolded(
         pt.matchers
           .zero_or_more_matcher(bindings)
           .map(matchers.clazz_binding_matcher),
         span,
       ),
     "operand:objekt": ({ properties, last_property }, { span }) =>
-      Exps.ObjektFolded(
+      Exps.ObjektUnfolded(
         [
           ...pt.matchers
             .zero_or_more_matcher(properties)
@@ -126,7 +126,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         span,
       ),
     "operand:new": ({ name, properties, last_property }, { span }) =>
-      Exps.NewFolded(
+      Exps.NewUnfolded(
         pt.str(name),
         [
           ...pt.matchers

@@ -6,10 +6,10 @@ import { deleteUndefined } from "../utils"
 test("parse Fn -- with return type", () => {
   expect(parseExp("function (x: String): String { return x }")).toMatchObject(
     deleteUndefined(
-      Exps.FnFoldedWithRetType(
+      Exps.FnUnfoldedWithRetType(
         [Exps.FnBindingAnnotated("x", Exps.Var("String"))],
         Exps.Var("String"),
-        Exps.SequenceFolded([], Exps.Var("x")),
+        Exps.SequenceUnfolded([], Exps.Var("x")),
       ),
     ),
   )

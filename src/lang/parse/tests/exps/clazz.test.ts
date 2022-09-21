@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Clazz", () => {
   expect(parseExp("class { T: Type, x: T }")).toMatchObject(
     deleteUndefined(
-      Exps.ClazzFolded([
+      Exps.ClazzUnfolded([
         Exps.ClazzBindingAbstract("T", Exps.Var("Type")),
         Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
@@ -15,7 +15,7 @@ test("parse Clazz", () => {
 
   expect(parseExp("class { T: Type = String, x: T }")).toMatchObject(
     deleteUndefined(
-      Exps.ClazzFolded([
+      Exps.ClazzUnfolded([
         Exps.ClazzBindingFulfilled("T", Exps.Var("Type"), Exps.Var("String")),
         Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
@@ -35,7 +35,7 @@ class {
 `),
   ).toMatchObject(
     deleteUndefined(
-      Exps.ClazzFolded([
+      Exps.ClazzUnfolded([
         Exps.ClazzBindingAbstract("T", Exps.Var("Type")),
         Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
@@ -53,7 +53,7 @@ class {
 `),
   ).toMatchObject(
     deleteUndefined(
-      Exps.ClazzFolded([
+      Exps.ClazzUnfolded([
         Exps.ClazzBindingFulfilled("T", Exps.Var("Type"), Exps.Var("String")),
         Exps.ClazzBindingAbstract("x", Exps.Var("T")),
       ]),
@@ -74,19 +74,19 @@ class {
 `),
   ).toMatchObject(
     deleteUndefined(
-      Exps.ClazzFolded([
+      Exps.ClazzUnfolded([
         Exps.ClazzBindingFulfilled(
           "id",
-          Exps.PiFolded(
+          Exps.PiUnfolded(
             [
               Exps.PiBindingNamed("T", Exps.Var("Type")),
               Exps.PiBindingNamed("x", Exps.Var("T")),
             ],
             Exps.Var("T"),
           ),
-          Exps.FnFolded(
+          Exps.FnUnfolded(
             [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
-            Exps.SequenceFolded([], Exps.Var("x")),
+            Exps.SequenceUnfolded([], Exps.Var("x")),
           ),
         ),
       ]),
