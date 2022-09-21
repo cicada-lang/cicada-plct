@@ -93,7 +93,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "AnnotatedFnImplicit": {
+    case "FnImplicitAnnotated": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
       const argTypeValue = evaluate(
         mod.solution.enrichCtx(mod, ctx),

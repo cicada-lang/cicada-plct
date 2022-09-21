@@ -27,7 +27,7 @@ export type Exp =
   | Fn
   | FnAnnotated
   | FnImplicit
-  | AnnotatedFnImplicit
+  | FnImplicitAnnotated
   | FnFolded
   | FnFoldedWithRetType
   | Sigma
@@ -226,23 +226,23 @@ export function FnImplicit(name: string, ret: Exp, span?: Span): FnImplicit {
   }
 }
 
-export type AnnotatedFnImplicit = {
+export type FnImplicitAnnotated = {
   family: "Exp"
-  kind: "AnnotatedFnImplicit"
+  kind: "FnImplicitAnnotated"
   name: string
   argType: Exp
   ret: Exp
 } & ExpMeta
 
-export function AnnotatedFnImplicit(
+export function FnImplicitAnnotated(
   name: string,
   argType: Exp,
   ret: Exp,
   span?: Span,
-): AnnotatedFnImplicit {
+): FnImplicitAnnotated {
   return {
     family: "Exp",
-    kind: "AnnotatedFnImplicit",
+    kind: "FnImplicitAnnotated",
     name,
     argType,
     ret,

@@ -40,7 +40,7 @@ export function unfoldFnWithRetType(
     }
 
     case "FnBindingAnnotatedImplicit": {
-      return Exps.AnnotatedFnImplicit(
+      return Exps.FnImplicitAnnotated(
         binding.name,
         binding.type,
         unfoldFnWithRetType(restBindings, retType, ret),
