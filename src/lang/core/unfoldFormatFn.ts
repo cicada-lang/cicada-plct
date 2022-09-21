@@ -1,19 +1,19 @@
 import { Core, formatCore } from "../core"
 
-export function foldFormatFn(core: Core): {
+export function unfoldFormatFn(core: Core): {
   bindings: Array<string>
   ret: string
 } {
   switch (core.kind) {
     case "Fn": {
       const binding = `${core.name}`
-      const { bindings, ret } = foldFormatFn(core.ret)
+      const { bindings, ret } = unfoldFormatFn(core.ret)
       return { bindings: [binding, ...bindings], ret }
     }
 
     case "FnImplicit": {
       const binding = `implicit ${core.name}`
-      const { bindings, ret } = foldFormatFn(core.ret)
+      const { bindings, ret } = unfoldFormatFn(core.ret)
       return { bindings: [binding, ...bindings], ret }
     }
 

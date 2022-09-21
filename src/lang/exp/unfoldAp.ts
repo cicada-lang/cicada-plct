@@ -1,18 +1,31 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function unfoldAp(target: Exp, args: Array<Exps.Arg>): Exp {
-  if (args.length === 0) return target
+/**
 
-  const [arg, ...restArgs] = args
+   `unfoldAp` can normalize `f(x)(y)` to `f(x, y)`.
 
-  switch (arg.kind) {
-    case "ArgPlain": {
-      return unfoldAp(Exps.Ap(target, arg.exp), restArgs)
+**/
+
+export function unfoldAp(
+  exp: Exp,
+  args: Array<Exps.Arg> = [],
+): { target: Exp; args: Array<Exps.Arg> } {
+  switch (exp.kind) {
+    case "Ap": {
+      return unfoldAp(exp.target, [Exps.ArgPlain(exp.arg), ...args])
     }
 
-    case "ArgImplicit": {
-      return unfoldAp(Exps.ApImplicit(target, arg.exp), restArgs)
+    case "ApImplicit": {
+      return unfoldAp(exp.target, [Exps.ArgImplicit(exp.arg), ...args])
+    }
+
+    case "ApUnfolded": {
+      return unfoldAp(exp.target, [...exp.args, ...args])
+    }
+
+    default: {
+      return { target: exp, args }
     }
   }
 }

@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Objekt -- spread", () => {
   expect(parseExp("{ a, ...b }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("a", Exps.Var("a")),
         Exps.PropertySpread(Exps.Var("b")),
       ]),
@@ -15,10 +15,10 @@ test("parse Objekt -- spread", () => {
 
   expect(parseExp("{ a, ...f(b) }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("a", Exps.Var("a")),
         Exps.PropertySpread(
-          Exps.ApFolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("b"))]),
+          Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("b"))]),
         ),
       ]),
     ),

@@ -6,7 +6,7 @@ import { deleteUndefined } from "../utils"
 test("parse Objekt", () => {
   expect(parseExp("{ T: Type, x: T }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("T", Exps.Var("Type")),
         Exps.PropertyPlain("x", Exps.Var("T")),
       ]),
@@ -17,7 +17,7 @@ test("parse Objekt", () => {
 test("parse Objekt -- optional ending comma", () => {
   expect(parseExp("{ T: Type, x: T, }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("T", Exps.Var("Type")),
         Exps.PropertyPlain("x", Exps.Var("T")),
       ]),
@@ -28,7 +28,7 @@ test("parse Objekt -- optional ending comma", () => {
 test("parse Objekt -- shorthand", () => {
   expect(parseExp("{ x, y, z }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("x", Exps.Var("x")),
         Exps.PropertyPlain("y", Exps.Var("y")),
         Exps.PropertyPlain("z", Exps.Var("z")),
@@ -40,7 +40,7 @@ test("parse Objekt -- shorthand", () => {
 test("parse Objekt -- shorthand -- single one", () => {
   expect(parseExp("{ x }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([Exps.PropertyPlain("x", Exps.Var("x"))]),
+      Exps.ObjektUnfolded([Exps.PropertyPlain("x", Exps.Var("x"))]),
     ),
   )
 })
@@ -48,7 +48,7 @@ test("parse Objekt -- shorthand -- single one", () => {
 test("parse Objekt -- duplicate", () => {
   expect(parseExp("{ x, x, x }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain("x", Exps.Var("x")),
         Exps.PropertyPlain("x", Exps.Var("x")),
         Exps.PropertyPlain("x", Exps.Var("x")),
@@ -60,10 +60,10 @@ test("parse Objekt -- duplicate", () => {
 test("parse Objekt -- method", () => {
   expect(parseExp("{ f: (x) => x }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain(
           "f",
-          Exps.FnFolded([Exps.FnBindingName("x")], Exps.Var("x")),
+          Exps.FnUnfolded([Exps.FnBindingName("x")], Exps.Var("x")),
         ),
       ]),
     ),
@@ -71,10 +71,10 @@ test("parse Objekt -- method", () => {
 
   expect(parseExp("{ f: (x, y, z) => x }")).toMatchObject(
     deleteUndefined(
-      Exps.ObjektFolded([
+      Exps.ObjektUnfolded([
         Exps.PropertyPlain(
           "f",
-          Exps.FnFolded(
+          Exps.FnUnfolded(
             [
               Exps.FnBindingName("x"),
               Exps.FnBindingName("y"),

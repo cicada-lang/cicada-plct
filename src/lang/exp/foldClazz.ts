@@ -1,6 +1,6 @@
 import * as Exps from "../exp"
 
-export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
+export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
   if (bindings.length === 0) return Exps.ClazzNull()
 
   const [binding, ...restBindings] = bindings
@@ -10,7 +10,7 @@ export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
       return Exps.ClazzCons(
         binding.name,
         binding.propertyType,
-        unfoldClazz(restBindings),
+        foldClazz(restBindings),
       )
     }
 
@@ -19,7 +19,7 @@ export function unfoldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.name,
         binding.propertyType,
         binding.property,
-        unfoldClazz(restBindings),
+        foldClazz(restBindings),
       )
     }
   }

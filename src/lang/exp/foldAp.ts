@@ -1,31 +1,18 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-/**
+export function foldAp(target: Exp, args: Array<Exps.Arg>): Exp {
+  if (args.length === 0) return target
 
-   `foldAp` can normalize `f(x)(y)` to `f(x, y)`.
+  const [arg, ...restArgs] = args
 
-**/
-
-export function foldAp(
-  exp: Exp,
-  args: Array<Exps.Arg> = [],
-): { target: Exp; args: Array<Exps.Arg> } {
-  switch (exp.kind) {
-    case "Ap": {
-      return foldAp(exp.target, [Exps.ArgPlain(exp.arg), ...args])
+  switch (arg.kind) {
+    case "ArgPlain": {
+      return foldAp(Exps.Ap(target, arg.exp), restArgs)
     }
 
-    case "ApImplicit": {
-      return foldAp(exp.target, [Exps.ArgImplicit(exp.arg), ...args])
-    }
-
-    case "ApFolded": {
-      return foldAp(exp.target, [...exp.args, ...args])
-    }
-
-    default: {
-      return { target: exp, args }
+    case "ArgImplicit": {
+      return foldAp(Exps.ApImplicit(target, arg.exp), restArgs)
     }
   }
 }

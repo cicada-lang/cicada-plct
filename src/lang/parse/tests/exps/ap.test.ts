@@ -6,13 +6,13 @@ import { deleteUndefined } from "../utils"
 test("parse Ap", () => {
   expect(parseExp("f(x)")).toMatchObject(
     deleteUndefined(
-      Exps.ApFolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("x"))]),
+      Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("x"))]),
     ),
   )
 
   expect(parseExp("f(x, y)")).toMatchObject(
     deleteUndefined(
-      Exps.ApFolded(Exps.Var("f"), [
+      Exps.ApUnfolded(Exps.Var("f"), [
         Exps.ArgPlain(Exps.Var("x")),
         Exps.ArgPlain(Exps.Var("y")),
       ]),
@@ -21,8 +21,8 @@ test("parse Ap", () => {
 
   expect(parseExp("f(x)(y)")).toMatchObject(
     deleteUndefined(
-      Exps.ApFolded(
-        Exps.ApFolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("x"))]),
+      Exps.ApUnfolded(
+        Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("x"))]),
         [Exps.ArgPlain(Exps.Var("y"))],
       ),
     ),

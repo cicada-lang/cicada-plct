@@ -10,7 +10,7 @@ test("parse Dot", () => {
 
   expect(parseExp('object["Hello, World!"](x, y)')).toMatchObject(
     deleteUndefined(
-      Exps.ApFolded(Exps.Dot(Exps.Var("object"), "Hello, World!"), [
+      Exps.ApUnfolded(Exps.Dot(Exps.Var("object"), "Hello, World!"), [
         Exps.ArgPlain(Exps.Var("x")),
         Exps.ArgPlain(Exps.Var("y")),
       ]),
@@ -19,8 +19,8 @@ test("parse Dot", () => {
 
   expect(parseExp('object["Hello, World!"](x)(y)')).toMatchObject(
     deleteUndefined(
-      Exps.ApFolded(
-        Exps.ApFolded(Exps.Dot(Exps.Var("object"), "Hello, World!"), [
+      Exps.ApUnfolded(
+        Exps.ApUnfolded(Exps.Dot(Exps.Var("object"), "Hello, World!"), [
           Exps.ArgPlain(Exps.Var("x")),
         ]),
         [Exps.ArgPlain(Exps.Var("y"))],

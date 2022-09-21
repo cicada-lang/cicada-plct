@@ -1,7 +1,7 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function unfoldSequence(
+export function foldSequence(
   bindings: Array<Exps.SequenceBinding>,
   ret: Exp,
 ): Exp {
@@ -14,7 +14,7 @@ export function unfoldSequence(
       return Exps.SequenceLet(
         binding.name,
         binding.exp,
-        unfoldSequence(restBindings, ret),
+        foldSequence(restBindings, ret),
       )
     }
 
@@ -23,7 +23,7 @@ export function unfoldSequence(
         binding.name,
         binding.type,
         binding.exp,
-        unfoldSequence(restBindings, ret),
+        foldSequence(restBindings, ret),
       )
     }
 
@@ -31,7 +31,7 @@ export function unfoldSequence(
       return Exps.SequenceCheck(
         binding.exp,
         binding.type,
-        unfoldSequence(restBindings, ret),
+        foldSequence(restBindings, ret),
       )
     }
   }

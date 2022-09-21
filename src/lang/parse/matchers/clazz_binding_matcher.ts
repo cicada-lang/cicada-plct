@@ -18,7 +18,7 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
     "clazz_binding:method_abstract": ({ key, bindings, ret_t }, { span }) =>
       Exps.ClazzBindingAbstract(
         matchers.key_matcher(key),
-        Exps.PiFolded(
+        Exps.PiUnfolded(
           matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
           span,
@@ -30,12 +30,12 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
     ) =>
       Exps.ClazzBindingFulfilled(
         matchers.key_matcher(key),
-        Exps.PiFolded(
+        Exps.PiUnfolded(
           matchers.pi_bindings_matcher(bindings),
           matchers.exp_matcher(ret_t),
           span,
         ),
-        Exps.FnFolded(
+        Exps.FnUnfolded(
           matchers
             .pi_bindings_matcher(bindings)
             .map(matchers.piBindingtoFnBindingFrom),

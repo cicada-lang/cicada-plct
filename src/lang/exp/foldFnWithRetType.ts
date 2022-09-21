@@ -1,7 +1,7 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function unfoldFnWithRetType(
+export function foldFnWithRetType(
   bindings: Array<Exps.FnBinding>,
   retType: Exp,
   ret: Exp,
@@ -20,7 +20,7 @@ export function unfoldFnWithRetType(
     case "FnBindingName": {
       return Exps.Fn(
         binding.name,
-        unfoldFnWithRetType(restBindings, retType, ret),
+        foldFnWithRetType(restBindings, retType, ret),
       )
     }
 
@@ -28,14 +28,14 @@ export function unfoldFnWithRetType(
       return Exps.FnAnnotated(
         binding.name,
         binding.type,
-        unfoldFnWithRetType(restBindings, retType, ret),
+        foldFnWithRetType(restBindings, retType, ret),
       )
     }
 
     case "FnBindingImplicit": {
       return Exps.FnImplicit(
         binding.name,
-        unfoldFnWithRetType(restBindings, retType, ret),
+        foldFnWithRetType(restBindings, retType, ret),
       )
     }
 
@@ -43,7 +43,7 @@ export function unfoldFnWithRetType(
       return Exps.FnImplicitAnnotated(
         binding.name,
         binding.type,
-        unfoldFnWithRetType(restBindings, retType, ret),
+        foldFnWithRetType(restBindings, retType, ret),
       )
     }
   }

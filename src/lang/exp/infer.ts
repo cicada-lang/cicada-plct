@@ -69,8 +69,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "PiFolded": {
-      return infer(mod, ctx, Exps.unfoldPi(exp.bindings, exp.retType))
+    case "PiUnfolded": {
+      return infer(mod, ctx, Exps.foldPi(exp.bindings, exp.retType))
     }
 
     case "FnAnnotated": {
@@ -113,15 +113,15 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "FnFolded": {
-      return infer(mod, ctx, Exps.unfoldFn(exp.bindings, exp.ret))
+    case "FnUnfolded": {
+      return infer(mod, ctx, Exps.foldFn(exp.bindings, exp.ret))
     }
 
-    case "FnFoldedWithRetType": {
+    case "FnUnfoldedWithRetType": {
       return infer(
         mod,
         ctx,
-        Exps.unfoldFnWithRetType(exp.bindings, exp.retType, exp.ret),
+        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
       )
     }
 
@@ -159,8 +159,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "ApFolded": {
-      return infer(mod, ctx, Exps.unfoldAp(exp.target, exp.args))
+    case "ApUnfolded": {
+      return infer(mod, ctx, Exps.foldAp(exp.target, exp.args))
     }
 
     case "Sigma": {
@@ -174,8 +174,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
-    case "SigmaFolded": {
-      return infer(mod, ctx, Exps.unfoldSigma(exp.bindings, exp.cdrType))
+    case "SigmaUnfolded": {
+      return infer(mod, ctx, Exps.foldSigma(exp.bindings, exp.cdrType))
     }
 
     case "Car": {
@@ -224,8 +224,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(Values.Type(), Exps.checkClazz(mod, ctx, exp))
     }
 
-    case "ClazzFolded": {
-      return infer(mod, ctx, Exps.unfoldClazz(exp.bindings))
+    case "ClazzUnfolded": {
+      return infer(mod, ctx, Exps.foldClazz(exp.bindings))
     }
 
     case "Objekt": {
@@ -241,7 +241,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "ObjektFolded": {
+    case "ObjektUnfolded": {
       return infer(
         mod,
         ctx,
@@ -267,7 +267,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(propertyType, propertyCore)
     }
 
-    case "NewFolded": {
+    case "NewUnfolded": {
       return infer(
         mod,
         ctx,
@@ -311,8 +311,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return Inferred(clazz, Cores.Objekt(properties))
     }
 
-    case "SequenceFolded": {
-      return infer(mod, ctx, Exps.unfoldSequence(exp.bindings, exp.ret))
+    case "SequenceUnfolded": {
+      return infer(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret))
     }
 
     case "SequenceLet": {
