@@ -1,1 +1,1 @@
-solveType and solveByType for ImplicitPi
+solveByType for ImplicitPi

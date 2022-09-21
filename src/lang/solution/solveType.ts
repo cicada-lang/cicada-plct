@@ -46,7 +46,10 @@ export function solveType(
     return
   }
 
-  if (left.kind === "Pi" && right.kind === "Pi") {
+  if (
+    (left.kind === "Pi" && right.kind === "Pi") ||
+    (left.kind === "PiImplicit" && right.kind === "PiImplicit")
+  ) {
     solveType(solution, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
