@@ -1,6 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
+/**
+   TODO We need to design a failing test, before we try to fix `inferApPiImplicit`.
+**/
+
 test("compute ApImplicit -- Scope", async () => {
   const output = await runCode(`
 
