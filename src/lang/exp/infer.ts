@@ -13,7 +13,7 @@ import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
-import { createPatternVar, solveType } from "../solution"
+import { solveType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -362,11 +362,12 @@ function inferApImplicitPi(
   // TODO Scope BUG, `freshName` might occurs in `args`.
   const usedNames = [...ctxNames(ctx), ...mod.solution.names]
   const freshName = freshen(usedNames, name)
-  const patternVar = createPatternVar(inferred.type.argType, freshName)
+  const patternVar = mod.solution.createPatternVar(
+    freshName,
+    inferred.type.argType,
+  )
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-
-  mod.solution = mod.solution.bind(freshName, patternVar)
 
   /**
      `ImplicitAp` insertion.

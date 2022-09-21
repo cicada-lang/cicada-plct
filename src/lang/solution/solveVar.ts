@@ -1,4 +1,4 @@
-import { isPatternVar, Solution } from "../solution"
+import { Solution } from "../solution"
 import { Value } from "../value"
 
 export function solveVar(
@@ -6,20 +6,22 @@ export function solveVar(
   left: Value,
   right: Value,
 ): Solution | undefined {
-  if (isPatternVar(left) && isPatternVar(right)) {
+  if (solution.isPatternVar(left) && solution.isPatternVar(right)) {
     if (left.neutral.name === right.neutral.name) {
       return solution
     }
   }
 
-  if (isPatternVar(left)) {
+  if (solution.isPatternVar(left)) {
     // TODO Need occur check to avoid circular unification.
-    return solution.bind(left.neutral.name, right)
+    solution.bind(left.neutral.name, right)
+    return solution
   }
 
-  if (isPatternVar(right)) {
+  if (solution.isPatternVar(right)) {
     // TODO Need occur check to avoid circular unification.
-    return solution.bind(right.neutral.name, left)
+    solution.bind(right.neutral.name, left)
+    return solution
   }
 
   return undefined

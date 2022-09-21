@@ -19,9 +19,9 @@ export class Solve extends Stmt {
     let ctx = mod.ctx
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
-      const env = mod.solution.enrichCtx(ctx)
       const typeCore = checkType(mod, ctx, type)
-      const typeValue = evaluate(env, typeCore)
+      const typeValue = evaluate(mod.solution.enrichCtx(ctx), typeCore)
+      mod.solution.createPatternVar(name, typeValue)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
     }
