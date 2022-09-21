@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Ap", async () => {
+test("solve Ap -- same PatternVar", async () => {
   const output = await runCode(`
 
 solve (f: (String) -> String, x: String) {
@@ -12,5 +12,19 @@ solve (f: (String) -> String, x: String) {
 
   expect(output).toMatchInlineSnapshot(
     '"{ f: TODO((_: String) -> String), x: TODO(String) }"',
+  )
+})
+
+test("solve Ap -- PatternVar v.s. String", async () => {
+  const output = await runCode(`
+
+solve (f: (String) -> String, x: String) {
+  equation f(x) = f("abc")
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ f: TODO((_: String) -> String), x: \\"abc\\" }"',
   )
 })

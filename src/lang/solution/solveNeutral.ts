@@ -25,6 +25,12 @@ export function solveNeutral(
     return
   }
 
+  if (left.kind === "ApImplicit" && right.kind === "ApImplicit") {
+    solveNeutral(solution, ctx, left.target, right.target)
+    solveTypedValue(solution, ctx, left.arg, right.arg)
+    return
+  }
+
   if (left.kind === "Car" && right.kind === "Car") {
     solveNeutral(solution, ctx, left.target, right.target)
     return
