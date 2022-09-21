@@ -1,8 +1,8 @@
 # having solution all the time
 
-should not use `TypedNeutral` as `PatternVar`
+solution has a record of `patternVars`
 
-- `PatternVar` must be its own value
+- only unify `solution.isPatternVar`
 - fix "check Fn -- dependent error"
 
 fix tests/solve/solve-box.test.ts
