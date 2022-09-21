@@ -2,10 +2,12 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
+import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertClazzInCtx, readback, Value } from "../value"
 
 export function readbackProperties(
+  mod: Mod,
   ctx: Ctx,
   clazz: Values.Clazz,
   value: Value,
@@ -19,19 +21,19 @@ export function readbackProperties(
       const propertyValue = Actions.doDot(value, clazz.name)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
-      const propertyCore = readback(ctx, clazz.propertyType, propertyValue)
+      const propertyCore = readback(mod, ctx, clazz.propertyType, propertyValue)
       return {
         [clazz.name]: propertyCore,
-        ...readbackProperties(ctx, rest, value),
+        ...readbackProperties(mod, ctx, rest, value),
       }
     }
 
     case "ClazzFulfilled": {
       const propertyValue = Actions.doDot(value, clazz.name)
-      const propertyCore = readback(ctx, clazz.propertyType, propertyValue)
+      const propertyCore = readback(mod, ctx, clazz.propertyType, propertyValue)
       return {
         [clazz.name]: propertyCore,
-        ...readbackProperties(ctx, clazz.rest, value),
+        ...readbackProperties(mod, ctx, clazz.rest, value),
       }
     }
   }

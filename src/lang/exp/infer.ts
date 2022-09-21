@@ -43,7 +43,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Pi": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.solution.enrichCtx(ctx), argTypeCore)
+      const argTypeValue = evaluate(
+        mod.solution.enrichCtx(mod, ctx),
+        argTypeCore,
+      )
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
       return Inferred(
@@ -54,7 +57,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "ImplicitPi": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.solution.enrichCtx(ctx), argTypeCore)
+      const argTypeValue = evaluate(
+        mod.solution.enrichCtx(mod, ctx),
+        argTypeCore,
+      )
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
       return Inferred(
@@ -69,12 +75,15 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedFn": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.solution.enrichCtx(ctx), argTypeCore)
+      const argTypeValue = evaluate(
+        mod.solution.enrichCtx(mod, ctx),
+        argTypeCore,
+      )
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
-      const retTypeCore = readbackType(ctx, retInferred.type)
+      const retTypeCore = readbackType(mod, ctx, retInferred.type)
       const retTypeClosure = Closure(
-        mod.solution.enrichCtx(ctx),
+        mod.solution.enrichCtx(mod, ctx),
         exp.name,
         retTypeCore,
       )
@@ -86,12 +95,15 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "AnnotatedImplicitFn": {
       const argTypeCore = Exps.checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.solution.enrichCtx(ctx), argTypeCore)
+      const argTypeValue = evaluate(
+        mod.solution.enrichCtx(mod, ctx),
+        argTypeCore,
+      )
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
-      const retTypeCore = readbackType(ctx, retInferred.type)
+      const retTypeCore = readbackType(mod, ctx, retInferred.type)
       const retTypeClosure = Closure(
-        mod.solution.enrichCtx(ctx),
+        mod.solution.enrichCtx(mod, ctx),
         exp.name,
         retTypeCore,
       )
@@ -120,7 +132,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         /**
            Try to use `targetValue` first, then use `inferred.type`.
         **/
-        const targetValue = evaluate(mod.solution.enrichCtx(ctx), inferred.core)
+        const targetValue = evaluate(
+          mod.solution.enrichCtx(mod, ctx),
+          inferred.core,
+        )
         /**
            Fulfilling type.
         **/
@@ -137,7 +152,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       Values.assertTypeInCtx(ctx, inferred.type, Values.ImplicitPi)
       const argCore = Exps.check(mod, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(mod.solution.enrichCtx(ctx), argCore)
+      const argValue = evaluate(mod.solution.enrichCtx(mod, ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.ImplicitAp(inferred.core, argCore),
@@ -187,7 +202,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "Cons": {
       const carInferred = infer(mod, ctx, exp.car)
       const cdrInferred = infer(mod, ctx, exp.cdr)
-      const cdrTypeCore = readbackType(ctx, cdrInferred.type)
+      const cdrTypeCore = readbackType(mod, ctx, cdrInferred.type)
       const cdrTypeClosure = Closure(
         mod.enrichedEnvFromCtx(ctx),
         "_",
@@ -248,7 +263,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         targetValue,
         exp.name,
       )
-      const propertyCore = readback(ctx, propertyType, property)
+      const propertyCore = readback(mod, ctx, propertyType, property)
       return Inferred(propertyType, propertyCore)
     }
 

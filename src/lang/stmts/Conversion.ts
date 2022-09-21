@@ -20,7 +20,7 @@ export class Conversion extends Stmt {
 
     let left = values[0]
     for (const right of values.slice(1)) {
-      conversion(mod.ctx, typeValue, left, right)
+      conversion(mod, mod.ctx, typeValue, left, right)
       left = right
     }
   }

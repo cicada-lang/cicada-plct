@@ -19,7 +19,7 @@ export class Solve extends Stmt {
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
       const typeCore = checkType(mod, ctx, type)
-      const typeValue = evaluate(mod.solution.enrichCtx(ctx), typeCore)
+      const typeValue = evaluate(mod.solution.enrichCtx(mod, ctx), typeCore)
       mod.solution.createPatternVar(name, typeValue)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
@@ -29,6 +29,6 @@ export class Solve extends Stmt {
       solveEquation(mod, ctx, equation)
     }
 
-    return mod.solution.formatSolution(ctx, names)
+    return mod.solution.formatSolution(mod, ctx, names)
   }
 }

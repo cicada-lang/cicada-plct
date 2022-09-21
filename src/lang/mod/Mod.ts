@@ -21,7 +21,7 @@ export class Mod {
   constructor(public options: ModOptions) {}
 
   enrichedEnvFromCtx(ctx: Ctx): Env {
-    return this.solution.enrichCtx(ctx)
+    return this.solution.enrichCtx(this, ctx)
   }
 
   get env(): Env {

@@ -45,7 +45,12 @@ export function checkNewArgs(
     }
 
     case "ClazzFulfilled": {
-      const propertyCore = readback(ctx, clazz.propertyType, clazz.property)
+      const propertyCore = readback(
+        mod,
+        ctx,
+        clazz.propertyType,
+        clazz.property,
+      )
 
       return {
         [clazz.name]: propertyCore,

@@ -45,7 +45,7 @@ export function checkProperties(
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
       const propertyValue = evaluate(mod.enrichedEnvFromCtx(ctx), propertyCore)
-      conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
+      conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {
         [clazz.name]: propertyCore,

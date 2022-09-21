@@ -17,7 +17,7 @@ export class Inclusion extends Stmt {
 
     let left = types[0]
     for (const right of types.slice(1)) {
-      inclusion(mod.ctx, left, right)
+      inclusion(mod, mod.ctx, left, right)
       left = right
     }
   }

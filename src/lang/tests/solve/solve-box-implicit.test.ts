@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test.todo("solve Box -- implicit", async () => {
+test("solve Box -- implicit", async () => {
   const output = await runCode(`
 
 function Box(T: Type): Type {
@@ -20,5 +20,7 @@ solve (x: String, y: Box(String), z: Box(Box(String))) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot(
+    '"{ x: \\"abc\\", y: cons(x, sole), z: cons(cons(x, sole), sole) }"',
+  )
 })

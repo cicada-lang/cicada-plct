@@ -132,6 +132,28 @@ compute cons("abc", sole)
   )
 })
 
+test("compute ImplicitAp -- insertion -- nested", async () => {
+  const output = await runCode(`
+
+function Box(T: Type): Type {
+  return Pair(T, Trivial)
+}
+
+function box(implicit T: Type, x: T): Box(T) {
+  return cons(x, sole)
+}
+
+compute box(box("abc"))
+compute box(box(box("abc")))
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "cons(cons(\\"abc\\", sole), sole): exists (exists (String) Trivial) Trivial
+    cons(cons(cons(\\"abc\\", sole), sole), sole): exists (exists (exists (String) Trivial) Trivial) Trivial"
+  `)
+})
+
 test("compute ImplicitAp -- insertion -- during check", async () => {
   const output = await runCode(`
 
@@ -147,5 +169,5 @@ compute idString
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(_) => _: (_: String) -> String"')
+  expect(output).toMatchInlineSnapshot('"(_1) => _1: (_1: String) -> String"')
 })

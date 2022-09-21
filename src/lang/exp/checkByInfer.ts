@@ -9,9 +9,10 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   const inferred = infer(mod, ctx, exp)
   solveType(mod.solution, ctx, inferred.type, type)
   inclusion(
+    mod,
     ctx,
-    mod.solution.deepWalk(ctx, inferred.type),
-    mod.solution.deepWalk(ctx, type),
+    mod.solution.deepWalk(mod, ctx, inferred.type),
+    mod.solution.deepWalk(mod, ctx, type),
   )
   return inferred.core
 }

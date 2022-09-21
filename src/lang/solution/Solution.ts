@@ -1,6 +1,7 @@
 import { formatCore } from "../core"
 import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { Env, EnvCons } from "../env"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { deepWalk, PatternVar } from "../solution"
 import { readback, readbackType, Value } from "../value"
@@ -14,19 +15,20 @@ export class Solution {
     this.bindings = new Map()
   }
 
-  enrichCtx(ctx: Ctx): Env {
+  enrichCtx(mod: Mod, ctx: Ctx): Env {
+    /**
+       `enrichCtx` should not call `deepWalk`,
+       will lead to infinite loop.
+    **/
+
     let env = ctxToEnv(ctx)
 
     for (const patternVar of this.patternVars) {
-      env = EnvCons(
-        patternVar.neutral.name,
-        this.deepWalk(ctx, patternVar),
-        env,
-      )
+      env = EnvCons(patternVar.neutral.name, patternVar, env)
     }
 
     for (const [name, value] of this.bindings.entries()) {
-      env = EnvCons(name, this.deepWalk(ctx, value), env)
+      env = EnvCons(name, value, env)
     }
 
     return env
@@ -63,10 +65,6 @@ export class Solution {
     return value
   }
 
-  // lookupValue(name: string): Value | undefined {
-  //   return this.bindings.get(name)
-  // }
-
   walk(value: Value): Value {
     while (this.isPatternVar(value)) {
       const found = this.lookupValue(value.neutral.name)
@@ -77,11 +75,11 @@ export class Solution {
     return value
   }
 
-  deepWalk(ctx: Ctx, value: Value): Value {
-    return deepWalk(this, ctx, value)
+  deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
+    return deepWalk(mod, ctx, value)
   }
 
-  formatSolution(ctx: Ctx, names: Array<string>): string {
+  formatSolution(mod: Mod, ctx: Ctx, names: Array<string>): string {
     const properties: Array<string> = []
     for (const name of names) {
       const type = lookupTypeInCtx(ctx, name)
@@ -91,11 +89,11 @@ export class Solution {
 
       let value = this.lookupValue(name)
       if (value === undefined) {
-        const typeCore = readbackType(ctx, type)
+        const typeCore = readbackType(mod, ctx, type)
         properties.push(`${name}: TODO(${formatCore(typeCore)})`)
       } else {
-        value = this.deepWalk(ctx, value)
-        const core = readback(ctx, type, value)
+        value = this.deepWalk(mod, ctx, value)
+        const core = readback(mod, ctx, type, value)
         properties.push(`${name}: ${formatCore(core)}`)
       }
     }

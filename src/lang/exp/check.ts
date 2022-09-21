@@ -70,7 +70,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       Values.assertTypeInCtx(ctx, type, Values.Sigma)
       const { carType, cdrTypeClosure } = type
       const carCore = check(mod, ctx, exp.car, carType)
-      const carValue = evaluate(mod.solution.enrichCtx(ctx), carCore)
+      const carValue = evaluate(mod.solution.enrichCtx(mod, ctx), carCore)
       const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
       const cdrCore = check(mod, ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)

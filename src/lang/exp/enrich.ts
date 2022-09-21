@@ -20,7 +20,7 @@ import { Value } from "../value"
 export function enrich(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
     const inferred = infer(mod, ctx, exp)
-    Values.inclusion(ctx, inferred.type, type)
+    Values.inclusion(mod, ctx, inferred.type, type)
     return inferred
   } catch (_error) {
     return enrichWithoutInfer(mod, ctx, exp, type)

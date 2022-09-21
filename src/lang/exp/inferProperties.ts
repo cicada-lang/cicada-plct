@@ -49,10 +49,11 @@ export function inferProperties(
           propertyCore,
         )
 
-        conversion(ctx, clazz.propertyType, propertyValue, clazz.property)
+        conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
       const propertyCore = Values.readback(
+        mod,
         ctx,
         clazz.propertyType,
         clazz.property,

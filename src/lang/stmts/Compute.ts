@@ -13,10 +13,11 @@ export class Compute extends Stmt {
     const inferred = infer(mod, mod.ctx, this.exp)
     const value = evaluate(mod.env, inferred.core)
     return formatTypedValue(
+      mod,
       mod.ctx,
       TypedValue(
-        mod.solution.deepWalk(mod.ctx, inferred.type),
-        mod.solution.deepWalk(mod.ctx, value),
+        mod.solution.deepWalk(mod, mod.ctx, inferred.type),
+        mod.solution.deepWalk(mod, mod.ctx, value),
       ),
     )
   }
