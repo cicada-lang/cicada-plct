@@ -66,17 +66,3 @@ to avoid name casting when editing the code.
 ## About directory name
 
 Use `lisp-case` for directory name.
-
-# Hierarchy of resources
-
-Think of the system as a hierarchy of resources:
-
-```
-Project -> Mod -> Stmt -> Exp
-```
-
-Top-level syntax of module is statement oriented -- `Stmt`.
-
-# Semantics architecture
-
-Use first-order syntax to implement `Exp`.
