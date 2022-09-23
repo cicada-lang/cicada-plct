@@ -1,6 +1,7 @@
 import { evaluate } from "../core"
-import { check, checkType, Exp, Span } from "../exp"
+import { check, checkType, Exp } from "../exp"
 import { Mod } from "../mod"
+import { Span } from "../span"
 import { Stmt } from "../stmt"
 
 export class Check extends Stmt {

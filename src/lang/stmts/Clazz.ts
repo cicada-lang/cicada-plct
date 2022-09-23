@@ -1,7 +1,8 @@
 import { evaluate } from "../core"
 import * as Exps from "../exp"
-import { infer, Span } from "../exp"
+import { infer } from "../exp"
 import { Mod } from "../mod"
+import { Span } from "../span"
 import { Stmt } from "../stmt"
 
 export class Clazz extends Stmt {

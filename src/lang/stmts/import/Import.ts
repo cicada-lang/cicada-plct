@@ -1,8 +1,8 @@
 import { lookupTypeInCtx } from "../../ctx"
 import { lookupValueInEnv } from "../../env"
 import { ElaborationError } from "../../errors"
-import { Span } from "../../exp"
 import { Mod } from "../../mod"
+import { Span } from "../../span"
 import { Stmt } from "../../stmt"
 import { defineBinding, ImportBinding, undoBinding } from "../import"
 

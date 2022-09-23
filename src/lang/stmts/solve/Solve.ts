@@ -1,7 +1,8 @@
 import { evaluate } from "../../core"
 import { CtxCons } from "../../ctx"
-import { checkType, Span } from "../../exp"
+import { checkType } from "../../exp"
 import { Mod } from "../../mod"
+import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
 import { Equation, SolveBinding, solveEquation } from "../solve"
 

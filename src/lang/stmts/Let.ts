@@ -1,6 +1,7 @@
 import { evaluate } from "../core"
-import { Exp, infer, Span } from "../exp"
+import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
+import { Span } from "../span"
 import { Stmt } from "../stmt"
 
 export class Let extends Stmt {
