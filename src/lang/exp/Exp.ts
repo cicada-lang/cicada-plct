@@ -563,14 +563,14 @@ export function Cdr(target: Exp, span?: Span): Cdr {
 export type Quote = {
   family: "Exp"
   kind: "Quote"
-  literal: string
+  data: string
 } & ExpMeta
 
-export function Quote(literal: string, span?: Span): Quote {
+export function Quote(data: string, span?: Span): Quote {
   return {
     family: "Exp",
     kind: "Quote",
-    literal,
+    data,
     span,
   }
 }

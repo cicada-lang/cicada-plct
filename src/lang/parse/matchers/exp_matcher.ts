@@ -27,10 +27,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
       Exps.Cdr(exp_matcher(target), span),
     "operator:dot_field": ({ target, name }, { span }) =>
       Exps.Dot(operator_matcher(target), pt.str(name), span),
-    "operator:dot_field_quote": ({ target, literal }, { span }) =>
+    "operator:dot_field_quote": ({ target, data }, { span }) =>
       Exps.Dot(
         operator_matcher(target),
-        pt.trim_boundary(pt.str(literal), 1),
+        pt.trim_boundary(pt.str(data), 1),
         span,
       ),
     "operator:dot_method": ({ target, name, args_group }, { span }) =>
@@ -45,7 +45,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
             pt.span_closure([target.span, name.span]),
           ),
         ),
-    "operator:dot_method_quote": ({ target, literal, args_group }, { span }) =>
+    "operator:dot_method_quote": ({ target, data, args_group }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args_group)
         .map((args) => matchers.args_matcher(args))
@@ -53,8 +53,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
           (result: Exp, args) => Exps.ApUnfolded(result, args, span),
           Exps.Dot(
             operator_matcher(target),
-            pt.trim_boundary(pt.str(literal), 1),
-            pt.span_closure([target.span, literal.span]),
+            pt.trim_boundary(pt.str(data), 1),
+            pt.span_closure([target.span, data.span]),
           ),
         ),
     "operator:sequence_begin": ({ sequence }, { span }) =>
@@ -106,8 +106,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
       ),
     "operand:cons": ({ car, cdr }, { span }) =>
       Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
-    "operand:quote": ({ literal }, { span }) =>
-      Exps.Quote(pt.trim_boundary(pt.str(literal), 1), span),
+    "operand:quote": ({ data }, { span }) =>
+      Exps.Quote(pt.trim_boundary(pt.str(data), 1), span),
     "operand:clazz": ({ bindings }, { span }) =>
       Exps.ClazzUnfolded(
         pt.matchers

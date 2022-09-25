@@ -19,12 +19,12 @@ export function solveByValue(
   }
 
   if (left.kind === "Quote" && right.kind === "Quote") {
-    if (left.literal === right.literal) {
+    if (left.data === right.data) {
       return
     }
 
     throw new EquationError(
-      `solveByValue expect left.literal: ${left.literal} to be the same as right.literal: ${right.literal}`,
+      `solveByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
     )
   }
 

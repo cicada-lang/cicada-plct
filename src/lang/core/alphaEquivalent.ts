@@ -66,9 +66,9 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   }
 
   if (left.kind === "Quote" && right.kind === "Quote") {
-    if (left.literal !== right.literal) {
+    if (left.data !== right.data) {
       throw new ElaborationError(
-        `alphaEquivalent expect left literal: ${left.literal} to be equal to right literal: ${right.literal}`,
+        `alphaEquivalent expect left data: ${left.data} to be equal to right data: ${right.data}`,
       )
     }
 

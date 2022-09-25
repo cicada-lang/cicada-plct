@@ -164,14 +164,14 @@ export function String(): String {
 export type Quote = {
   family: "Value"
   kind: "Quote"
-  literal: string
+  data: string
 }
 
-export function Quote(literal: string): Quote {
+export function Quote(data: string): Quote {
   return {
     family: "Value",
     kind: "Quote",
-    literal,
+    data,
   }
 }
 

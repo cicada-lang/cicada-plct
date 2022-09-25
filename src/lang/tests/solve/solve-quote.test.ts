@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Quote -- literal", async () => {
+test("solve Quote -- data", async () => {
   const output = await runCode(`
 
 solve () {

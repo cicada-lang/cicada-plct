@@ -27,7 +27,7 @@ export const operator = {
     "operator:dot_field_quote": [
       { target: "operator" },
       '"["',
-      { literal: { $pattern: ["string"] } },
+      { data: { $pattern: ["string"] } },
       '"]"',
     ],
     "operator:dot_method": [
@@ -39,7 +39,7 @@ export const operator = {
     "operator:dot_method_quote": [
       { target: "operator" },
       '"["',
-      { literal: { $pattern: ["string"] } },
+      { data: { $pattern: ["string"] } },
       '"]"',
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
@@ -103,7 +103,7 @@ export const operand = {
       { cdr: "exp" },
       '")"',
     ],
-    "operand:quote": [{ literal: { $pattern: ["string"] } }],
+    "operand:quote": [{ data: { $pattern: ["string"] } }],
     "operand:clazz": [
       '"class"',
       '"{"',

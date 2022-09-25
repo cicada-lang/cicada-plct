@@ -170,7 +170,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Quote": {
-      return Inferred(Values.String(), Cores.Quote(exp.literal))
+      return Inferred(Values.String(), Cores.Quote(exp.data))
     }
 
     case "ClazzNull":

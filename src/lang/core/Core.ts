@@ -197,14 +197,14 @@ export function Cdr(target: Core): Cdr {
 export type Quote = {
   family: "Core"
   kind: "Quote"
-  literal: string
+  data: string
 }
 
-export function Quote(literal: string): Quote {
+export function Quote(data: string): Quote {
   return {
     family: "Core",
     kind: "Quote",
-    literal,
+    data,
   }
 }
 

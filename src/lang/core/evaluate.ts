@@ -65,7 +65,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Quote": {
-      return Values.Quote(core.literal)
+      return Values.Quote(core.data)
     }
 
     case "ClazzNull": {

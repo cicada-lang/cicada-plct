@@ -21,7 +21,7 @@ export function readbackByValue(
     }
 
     case "Quote": {
-      return Cores.Quote(value.literal)
+      return Cores.Quote(value.data)
     }
 
     default: {

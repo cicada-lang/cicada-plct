@@ -44,7 +44,7 @@ export function formatCore(core: Core): string {
     }
 
     case "Quote": {
-      return `"${core.literal}"`
+      return `"${core.data}"`
     }
 
     case "ClazzNull":
