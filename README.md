@@ -48,8 +48,6 @@ Thanks [David Christiansen](https://davidchristiansen.dk), for coauthoring ["The
 
 ## Contributions
 
-> **Be polite. Do NOT bring negative emotion to others.**
-
 To make a contribution,
 [fork this project](https://github.com/cicada-lang/cicada/fork)
 and create a pull request.
