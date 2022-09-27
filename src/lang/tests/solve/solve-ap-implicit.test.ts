@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("unify ApImplicit -- same PatternVar", async () => {
+test("solve ApImplicit -- same PatternVar", async () => {
   const output = await runCode(`
 
-unify (id: (implicit T: Type, x: T) -> T, x: String) {
+solve (id: (implicit T: Type, x: T) -> T, x: String) {
   equation id(x) = id(x)
 }
 
@@ -15,10 +15,10 @@ unify (id: (implicit T: Type, x: T) -> T, x: String) {
   )
 })
 
-test("unify ApImplicit -- PatternVar v.s. String", async () => {
+test("solve ApImplicit -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
-unify (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
+solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
   equation id(implicit String, x) = id(implicit A, "abc")
 }
 
@@ -29,10 +29,10 @@ unify (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
   )
 })
 
-test("unify ApImplicit -- insertion", async () => {
+test("solve ApImplicit -- insertion", async () => {
   const output = await runCode(`
 
-unify (id: (implicit T: Type, x: T) -> T, x: String) {
+solve (id: (implicit T: Type, x: T) -> T, x: String) {
   equation id(x) = id("abc")
 }
 

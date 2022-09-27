@@ -8,7 +8,7 @@ test("parse Solve", () => {
   expect(
     parseStmts(`
 
-unify (A: Type, B: Type) {
+solve (A: Type, B: Type) {
   equation A = Trivial : Type
   equation B = String : Type
   equation A = B : Type
@@ -44,7 +44,7 @@ test("parse Solve -- empty bindings", () => {
   expect(
     parseStmts(`
 
-unify () {
+solve () {
   equation A = Trivial : Type
   equation B = String : Type
   equation A = B : Type
@@ -77,7 +77,7 @@ test("parse Solve -- untyped equation", () => {
   expect(
     parseStmts(`
 
-unify () {
+solve () {
   equation A = Trivial
   equation B = String
   equation A = B : Type

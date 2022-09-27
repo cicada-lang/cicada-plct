@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("unify Quote -- data", async () => {
+test("solve Quote -- data", async () => {
   const output = await runCode(`
 
-unify () {
+solve () {
   equation "a" = "a"
   equation "b" = "b"
   equation "c" = "c"
@@ -15,10 +15,10 @@ unify () {
   expect(output).toMatchInlineSnapshot('"{  }"')
 })
 
-test("unify Quote -- bindings", async () => {
+test("solve Quote -- bindings", async () => {
   const output = await runCode(`
 
-unify (a: String, b: String, c: String) {
+solve (a: String, b: String, c: String) {
   equation a = "a"
   equation b = "b"
   equation c = "c"
@@ -31,10 +31,10 @@ unify (a: String, b: String, c: String) {
   )
 })
 
-test("unify Quote -- walk", async () => {
+test("solve Quote -- walk", async () => {
   const output = await runCode(`
 
-unify (a: String, b: String, c: String) {
+solve (a: String, b: String, c: String) {
   equation a = b
   equation b = c
   equation a = "a"

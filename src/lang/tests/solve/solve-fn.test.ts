@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("unify Fn", async () => {
+test("solve Fn", async () => {
   const output = await runCode(`
 
-unify (x: String) {
+solve (x: String) {
   equation (_: Trivial) => x = (_: Trivial) => "abc"
 }
 
@@ -13,10 +13,10 @@ unify (x: String) {
   expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
 })
 
-test("unify Fn -- alpha equivalence", async () => {
+test("solve Fn -- alpha equivalence", async () => {
   const output = await runCode(`
 
-unify () {
+solve () {
   equation (A: Type, a: A) => a = (B: Type, b: B) => b
 }
 

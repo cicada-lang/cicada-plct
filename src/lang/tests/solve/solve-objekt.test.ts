@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("unify Objekt", async () => {
+test("solve Objekt", async () => {
   const output = await runCode(`
 
 class ABC {
@@ -10,7 +10,7 @@ class ABC {
   c: String
 }
 
-unify (a: String, b: String, c: String) {
+solve (a: String, b: String, c: String) {
   equation { a, b, c } = { a: "a", b: "b", c: "c" } : ABC
 }
 
@@ -21,7 +21,7 @@ unify (a: String, b: String, c: String) {
   )
 })
 
-test("unify Objekt -- occur twice", async () => {
+test("solve Objekt -- occur twice", async () => {
   const output = await runCode(`
 
 class ABC {
@@ -30,7 +30,7 @@ class ABC {
   c: String
 }
 
-unify (a: String, b: String) {
+solve (a: String, b: String) {
   equation { a, b, c: b } = { a: b, b: "c", c: "c" } : ABC
 }
 
@@ -39,7 +39,7 @@ unify (a: String, b: String) {
   expect(output).toMatchInlineSnapshot('"{ a: \\"c\\", b: \\"c\\" }"')
 })
 
-test("unify Objekt -- extra common properties", async () => {
+test("solve Objekt -- extra common properties", async () => {
   await expectCodeToFail(`
 
 class AB {
@@ -47,7 +47,7 @@ class AB {
   b: String
 }
 
-unify (a: String, b: String, c: String) {
+solve (a: String, b: String, c: String) {
   equation { a, b, c } = { a: b, b: "c", c: "c" } : AB
 }
 

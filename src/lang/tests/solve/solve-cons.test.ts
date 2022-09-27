@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("unify Cons -- car", async () => {
+test("solve Cons -- car", async () => {
   const output = await runCode(`
 
-unify (a: String) {
+solve (a: String) {
   equation cons(a, "b") = cons("a", "b")
 }
 
@@ -13,10 +13,10 @@ unify (a: String) {
   expect(output).toMatchInlineSnapshot('"{ a: \\"a\\" }"')
 })
 
-test("unify Cons -- cdr", async () => {
+test("solve Cons -- cdr", async () => {
   const output = await runCode(`
 
-unify (b: String) {
+solve (b: String) {
   equation cons("a", "b") = cons("a", b)
 }
 
@@ -25,10 +25,10 @@ unify (b: String) {
   expect(output).toMatchInlineSnapshot('"{ b: \\"b\\" }"')
 })
 
-test("unify Cons -- car and cdr", async () => {
+test("solve Cons -- car and cdr", async () => {
   const output = await runCode(`
 
-unify (a: String, b: String) {
+solve (a: String, b: String) {
   equation cons(a, "b") = cons("a", b)
 }
 
@@ -37,10 +37,10 @@ unify (a: String, b: String) {
   expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\" }"')
 })
 
-test("unify Cons -- nested", async () => {
+test("solve Cons -- nested", async () => {
   const output = await runCode(`
 
-unify (a: String, b: String) {
+solve (a: String, b: String) {
   equation cons(a, cons("b", "c")) = cons("a", cons(b, "c"))
 }
 

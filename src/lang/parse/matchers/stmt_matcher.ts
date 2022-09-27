@@ -67,7 +67,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ],
         span,
       ),
-    "stmt:unify": ({ bindings, equations }, { span }) =>
+    "stmt:solve": ({ bindings, equations }, { span }) =>
       new Stmts.Solve(
         matchers.solve_bindings_matcher(bindings),
         pt.matchers
@@ -75,7 +75,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           .map(matchers.equation_matcher),
         span,
       ),
-    "stmt:unify_empty_bindings": ({ equations }, { span }) =>
+    "stmt:solve_empty_bindings": ({ equations }, { span }) =>
       new Stmts.Solve(
         [],
         pt.matchers

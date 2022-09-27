@@ -53,8 +53,8 @@ export const stmt = {
       { $ap: ["optional", '","'] },
       '"]"',
     ],
-    "stmt:unify": [
-      '"unify"',
+    "stmt:solve": [
+      '"solve"',
       '"("',
       { bindings: "solve_bindings" },
       '")"',
@@ -62,8 +62,8 @@ export const stmt = {
       { equations: { $ap: ["zero_or_more", "equation"] } },
       '"}"',
     ],
-    "stmt:unify_empty_bindings": [
-      '"unify"',
+    "stmt:solve_empty_bindings": [
+      '"solve"',
       '"("',
       '")"',
       '"{"',
