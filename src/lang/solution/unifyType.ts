@@ -7,7 +7,7 @@ import {
   unify,
   unifyClazz,
   unifyNeutral,
-  unifyVar,
+  unifyPatternVar,
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -22,7 +22,7 @@ export function unifyType(
   left = solution.walk(left)
   right = solution.walk(right)
 
-  const success = unifyVar(solution, left, right)
+  const success = unifyPatternVar(solution, left, right)
   if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {

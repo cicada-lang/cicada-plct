@@ -1,5 +1,10 @@
 import { Ctx } from "../ctx"
-import { Solution, unifyByType, unifyByValue, unifyVar } from "../solution"
+import {
+  Solution,
+  unifyByType,
+  unifyByValue,
+  unifyPatternVar,
+} from "../solution"
 import { Value } from "../value"
 
 /**
@@ -24,7 +29,7 @@ export function unify(
   left = solution.walk(left)
   right = solution.walk(right)
 
-  if (unifyVar(solution, left, right)) return
+  if (unifyPatternVar(solution, left, right)) return
   if (unifyByType(solution, ctx, type, left, right)) return
 
   unifyByValue(solution, ctx, type, left, right)
