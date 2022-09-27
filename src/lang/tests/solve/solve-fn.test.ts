@@ -5,7 +5,7 @@ test("solve Fn", async () => {
   const output = await runCode(`
 
 solve (x: String) {
-  equation (_: Trivial) => x = (_: Trivial) => "abc"
+  unify (_: Trivial) => x = (_: Trivial) => "abc"
 }
 
 `)
@@ -17,7 +17,7 @@ test("solve Fn -- alpha equivalence", async () => {
   const output = await runCode(`
 
 solve () {
-  equation (A: Type, a: A) => a = (B: Type, b: B) => b
+  unify (A: Type, a: A) => a = (B: Type, b: B) => b
 }
 
 `)

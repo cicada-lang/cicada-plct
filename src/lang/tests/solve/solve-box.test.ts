@@ -9,9 +9,9 @@ function Box(T: Type): Type {
 }
 
 solve (x: String, y: Box(String), z: Box(Box(String))) {
-  equation y = cons(x, sole)
-  equation z = cons(y, sole)
-  equation x = "abc"
+  unify y = cons(x, sole)
+  unify z = cons(y, sole)
+  unify x = "abc"
 }
 
 `)

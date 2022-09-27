@@ -5,7 +5,7 @@ test("solve FnImplicit", async () => {
   const output = await runCode(`
 
 solve (x: String) {
-  equation
+  unify
     (implicit A: Type, implicit B: Type, a: A, b: B) => x =
     (implicit A: Type, implicit B: Type, a: A, b: B) => "abc"
 }
@@ -19,7 +19,7 @@ test("solve FnImplicit -- alpha equivalence", async () => {
   const output = await runCode(`
 
 solve () {
-  equation (implicit A: Type, a: A) => a = (implicit B: Type, b: B) => b
+  unify (implicit A: Type, a: A) => a = (implicit B: Type, b: B) => b
 }
 
 `)

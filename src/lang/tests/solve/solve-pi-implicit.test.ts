@@ -5,8 +5,8 @@ test("solve PiImplicit -- occur twice", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  equation (implicit _: A, B) -> B = (implicit _: String, String) -> String
-  equation (implicit _: A, B) -> String = (implicit _: String, String) -> B
+  unify (implicit _: A, B) -> B = (implicit _: String, String) -> String
+  unify (implicit _: A, B) -> String = (implicit _: String, String) -> B
 }
 
 `)

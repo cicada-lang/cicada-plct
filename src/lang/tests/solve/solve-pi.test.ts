@@ -5,7 +5,7 @@ test("solve Pi", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  equation (A) -> B = (String) -> String
+  unify (A) -> B = (String) -> String
 }
 
 `)
@@ -17,8 +17,8 @@ test("solve Pi -- nested", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  equation (A, String) -> B = (String, String) -> String
-  equation (A, String) -> String = (String, String) -> B
+  unify (A, String) -> B = (String, String) -> String
+  unify (A, String) -> String = (String, String) -> B
 }
 
 `)
@@ -30,8 +30,8 @@ test("solve Pi -- occur twice", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  equation (A, B) -> B = (String, String) -> String
-  equation (A, B) -> String = (String, String) -> B
+  unify (A, B) -> B = (String, String) -> String
+  unify (A, B) -> String = (String, String) -> B
 }
 
 `)

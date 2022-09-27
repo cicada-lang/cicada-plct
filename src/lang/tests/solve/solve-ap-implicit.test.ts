@@ -5,7 +5,7 @@ test("solve ApImplicit -- same PatternVar", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String) {
-  equation id(x) = id(x)
+  unify id(x) = id(x)
 }
 
 `)
@@ -19,7 +19,7 @@ test("solve ApImplicit -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
-  equation id(implicit String, x) = id(implicit A, "abc")
+  unify id(implicit String, x) = id(implicit A, "abc")
 }
 
 `)
@@ -33,7 +33,7 @@ test("solve ApImplicit -- insertion", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String) {
-  equation id(x) = id("abc")
+  unify id(x) = id("abc")
 }
 
 `)

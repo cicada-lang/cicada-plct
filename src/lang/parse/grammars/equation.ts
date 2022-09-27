@@ -1,18 +1,13 @@
 export const equation = {
   $grammar: {
-    "equation:typed": [
-      '"equation"',
+    "equation:unify_typed": [
+      '"unify"',
       { left: "exp" },
       '"="',
       { right: "exp" },
       '":"',
       { type: "exp" },
     ],
-    "equation:untyped": [
-      '"equation"',
-      { left: "exp" },
-      '"="',
-      { right: "exp" },
-    ],
+    "equation:unify": ['"unify"', { left: "exp" }, '"="', { right: "exp" }],
   },
 }

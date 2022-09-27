@@ -5,7 +5,7 @@ test("solve Ap -- same PatternVar", async () => {
   const output = await runCode(`
 
 solve (f: (String) -> String, x: String) {
-  equation f(x) = f(x)
+  unify f(x) = f(x)
 }
 
 `)
@@ -19,7 +19,7 @@ test("solve Ap -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
 solve (f: (String) -> String, x: String) {
-  equation f(x) = f("abc")
+  unify f(x) = f("abc")
 }
 
 `)
