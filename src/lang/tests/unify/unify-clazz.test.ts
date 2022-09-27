@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Clazz", async () => {
+test("unify Clazz", async () => {
   const output = await runCode(`
 
-solve (A: Type, B: Type) {
+unify (A: Type, B: Type) {
   equation class { a: A, b: B } = class { a: String, b: String }
 }
 
@@ -13,10 +13,10 @@ solve (A: Type, B: Type) {
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
 
-test("solve Clazz -- subclazz", async () => {
+test("unify Clazz -- subclazz", async () => {
   const output = await runCode(`
 
-solve (A: Type) {
+unify (A: Type) {
   equation class { a: A } = class { a: String, b: String }
 }
 
@@ -25,10 +25,10 @@ solve (A: Type) {
   expect(output).toMatchInlineSnapshot('"{ A: String }"')
 })
 
-test("solve Clazz -- nested", async () => {
+test("unify Clazz -- nested", async () => {
   const output = await runCode(`
 
-solve (A: Type, B: Type) {
+unify (A: Type, B: Type) {
   equation class { c: class { a: A, b: B } } = class { c: class { a: String, b: String } }
 }
 
@@ -37,10 +37,10 @@ solve (A: Type, B: Type) {
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
 
-test("solve Clazz -- occur twice", async () => {
+test("unify Clazz -- occur twice", async () => {
   const output = await runCode(`
 
-solve (A: Type, B: Type) {
+unify (A: Type, B: Type) {
   equation
     class { c: class { a: A, b: B }, b: String } =
     class { c: class { a: String, b: String }, b: B }

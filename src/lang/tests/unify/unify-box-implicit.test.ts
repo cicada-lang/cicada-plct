@@ -1,16 +1,20 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Box", async () => {
+test("unify Box -- implicit", async () => {
   const output = await runCode(`
 
 function Box(T: Type): Type {
   return Pair(T, Trivial)
 }
 
-solve (x: String, y: Box(String), z: Box(Box(String))) {
-  equation y = cons(x, sole)
-  equation z = cons(y, sole)
+function box(implicit T: Type, x: T): Box(T) {
+  return cons(x, sole)
+}
+
+unify (x: String, y: Box(String), z: Box(Box(String))) {
+  equation y = box(x)
+  equation z = box(y)
   equation x = "abc"
 }
 

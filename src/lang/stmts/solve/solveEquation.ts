@@ -2,11 +2,11 @@ import { Mod } from "src/lang/mod"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer } from "../../exp"
-import { solve } from "../../solution"
+import { unify } from "../../solution"
 import { conversionType } from "../../value"
 import { Equation } from "../solve"
 
-export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
+export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
     case "EquationTyped": {
       const env = mod.ctxToEnv(ctx)
@@ -16,7 +16,7 @@ export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         env,
         check(mod, ctx, equation.right, typeValue),
       )
-      solve(mod.solution, ctx, typeValue, leftValue, rightValue)
+      unify(mod.solution, ctx, typeValue, leftValue, rightValue)
       return
     }
 
@@ -30,7 +30,7 @@ export function solveEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       const env = mod.ctxToEnv(ctx)
       const leftValue = evaluate(env, leftInferred.core)
       const rightValue = evaluate(env, rightInferred.core)
-      solve(mod.solution, ctx, typeValue, leftValue, rightValue)
+      unify(mod.solution, ctx, typeValue, leftValue, rightValue)
       return
     }
   }

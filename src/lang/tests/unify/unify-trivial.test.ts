@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Trivial", async () => {
+test("unify Trivial", async () => {
   const output = await runCode(`
 
-solve () {
+unify () {
   equation Trivial = Trivial
 }
 

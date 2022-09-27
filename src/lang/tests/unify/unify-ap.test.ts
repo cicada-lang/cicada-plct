@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Ap -- same PatternVar", async () => {
+test("unify Ap -- same PatternVar", async () => {
   const output = await runCode(`
 
-solve (f: (String) -> String, x: String) {
+unify (f: (String) -> String, x: String) {
   equation f(x) = f(x)
 }
 
@@ -15,10 +15,10 @@ solve (f: (String) -> String, x: String) {
   )
 })
 
-test("solve Ap -- PatternVar v.s. String", async () => {
+test("unify Ap -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
-solve (f: (String) -> String, x: String) {
+unify (f: (String) -> String, x: String) {
   equation f(x) = f("abc")
 }
 

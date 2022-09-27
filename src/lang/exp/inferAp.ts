@@ -5,7 +5,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { Exp, Inferred } from "../exp"
 import { Mod } from "../mod"
-import { solveType } from "../solution"
+import { unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
@@ -62,7 +62,7 @@ function inferApPi(
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    solveType(mod.solution, ctx, argInferred.type, inferred.type.argType)
+    unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
   const argCore = argInferred

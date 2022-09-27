@@ -4,16 +4,16 @@ import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
 import {
   Solution,
-  solve,
-  solveClazz,
-  solveNeutral,
-  solveVar,
+  unify,
+  unifyClazz,
+  unifyNeutral,
+  unifyVar,
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
 
-export function solveType(
+export function unifyType(
   solution: Solution,
   ctx: Ctx,
   left: Value,
@@ -22,7 +22,7 @@ export function solveType(
   left = solution.walk(left)
   right = solution.walk(right)
 
-  const success = solveVar(solution, left, right)
+  const success = unifyVar(solution, left, right)
   if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
@@ -30,7 +30,7 @@ export function solveType(
        The `type` in `TypedNeutral` are not used.
     **/
 
-    solveNeutral(solution, ctx, left.neutral, right.neutral)
+    unifyNeutral(solution, ctx, left.neutral, right.neutral)
     return
   }
 
@@ -50,7 +50,7 @@ export function solveType(
     (left.kind === "Pi" && right.kind === "Pi") ||
     (left.kind === "PiImplicit" && right.kind === "PiImplicit")
   ) {
-    solveType(solution, ctx, left.argType, right.argType)
+    unifyType(solution, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
 
@@ -61,7 +61,7 @@ export function solveType(
 
     ctx = CtxCons(freshName, argType, ctx)
 
-    solve(
+    unify(
       solution,
       ctx,
       Values.Type(),
@@ -73,7 +73,7 @@ export function solveType(
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    solveType(solution, ctx, left.carType, right.carType)
+    unifyType(solution, ctx, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
@@ -84,7 +84,7 @@ export function solveType(
 
     ctx = CtxCons(freshName, carType, ctx)
 
-    solve(
+    unify(
       solution,
       ctx,
       Values.Type(),
@@ -96,11 +96,11 @@ export function solveType(
   }
 
   if (isClazz(left) && isClazz(right)) {
-    solveClazz(solution, ctx, left, right)
+    unifyClazz(solution, ctx, left, right)
     return
   }
 
   throw new EquationError(
-    `solveType is not implemented for left: ${left.kind}, right: ${right.kind}`,
+    `unifyType is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

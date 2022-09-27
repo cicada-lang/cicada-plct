@@ -1,9 +1,9 @@
 import { Ctx } from "../ctx"
 import { EquationError } from "../errors"
-import { Solution, solveNeutral } from "../solution"
+import { Solution, unifyNeutral } from "../solution"
 import { Value } from "../value"
 
-export function solveByValue(
+export function unifyByValue(
   solution: Solution,
   ctx: Ctx,
   type: Value,
@@ -14,7 +14,7 @@ export function solveByValue(
     /**
        The `type` in `TypedNeutral` are not used.
     **/
-    solveNeutral(solution, ctx, left.neutral, right.neutral)
+    unifyNeutral(solution, ctx, left.neutral, right.neutral)
     return
   }
 
@@ -24,11 +24,11 @@ export function solveByValue(
     }
 
     throw new EquationError(
-      `solveByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
+      `unifyByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
     )
   }
 
   throw new EquationError(
-    `solveByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
+    `unifyByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }

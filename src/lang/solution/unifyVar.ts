@@ -1,7 +1,7 @@
 import { Solution } from "../solution"
 import { Value } from "../value"
 
-export function solveVar(
+export function unifyVar(
   solution: Solution,
   left: Value,
   right: Value,

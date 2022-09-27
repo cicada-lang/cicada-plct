@@ -1,5 +1,5 @@
 import { Ctx, ctxNames } from "../ctx"
-import { Solution, solve, solveType } from "../solution"
+import { Solution, unify, unifyType } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
 import { expelClazz } from "../value"
@@ -11,7 +11,7 @@ import { expelClazz } from "../value"
 
 **/
 
-export function solveClazz(
+export function unifyClazz(
   solution: Solution,
   ctx: Ctx,
   left: Values.Clazz,
@@ -29,10 +29,10 @@ export function solveClazz(
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
 
-    solveType(solution, ctx, leftProperty.type, rightProperty.type)
+    unifyType(solution, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      solve(
+      unify(
         solution,
         ctx,
         leftProperty.type,

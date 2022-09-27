@@ -1,11 +1,11 @@
 import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx } from "../ctx"
-import { Solution, solve } from "../solution"
+import { Solution, unify } from "../solution"
 import * as Values from "../value"
 import { assertClazzInCtx, Value } from "../value"
 
-export function solveProperties(
+export function unifyProperties(
   solution: Solution,
   ctx: Ctx,
   clazz: Values.Clazz,
@@ -20,7 +20,7 @@ export function solveProperties(
     case "ClazzCons": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      solve(
+      unify(
         solution,
         ctx,
         clazz.propertyType,
@@ -29,20 +29,20 @@ export function solveProperties(
       )
       const rest = applyClosure(clazz.restClosure, leftPropertyValue)
       assertClazzInCtx(ctx, rest)
-      return solveProperties(solution, ctx, rest, left, right)
+      return unifyProperties(solution, ctx, rest, left, right)
     }
 
     case "ClazzFulfilled": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      solve(
+      unify(
         solution,
         ctx,
         clazz.propertyType,
         leftPropertyValue,
         rightPropertyValue,
       )
-      return solveProperties(solution, ctx, clazz.rest, left, right)
+      return unifyProperties(solution, ctx, clazz.rest, left, right)
     }
   }
 }

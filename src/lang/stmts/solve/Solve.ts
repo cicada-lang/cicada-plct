@@ -4,7 +4,7 @@ import { checkType } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
-import { Equation, SolveBinding, solveEquation } from "../solve"
+import { Equation, SolveBinding, unifyEquation } from "../solve"
 
 export class Solve extends Stmt {
   constructor(
@@ -27,7 +27,7 @@ export class Solve extends Stmt {
     }
 
     for (const equation of this.equations) {
-      solveEquation(mod, ctx, equation)
+      unifyEquation(mod, ctx, equation)
     }
 
     return mod.solution.formatSolution(mod, ctx, names)

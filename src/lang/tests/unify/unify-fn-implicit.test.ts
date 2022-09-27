@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve FnImplicit", async () => {
+test("unify FnImplicit", async () => {
   const output = await runCode(`
 
-solve (x: String) {
+unify (x: String) {
   equation
     (implicit A: Type, implicit B: Type, a: A, b: B) => x =
     (implicit A: Type, implicit B: Type, a: A, b: B) => "abc"
@@ -15,10 +15,10 @@ solve (x: String) {
   expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
 })
 
-test("solve FnImplicit -- alpha equivalence", async () => {
+test("unify FnImplicit -- alpha equivalence", async () => {
   const output = await runCode(`
 
-solve () {
+unify () {
   equation (implicit A: Type, a: A) => a = (implicit B: Type, b: B) => b
 }
 
