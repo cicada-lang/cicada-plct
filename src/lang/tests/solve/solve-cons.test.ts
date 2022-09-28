@@ -48,3 +48,20 @@ solve (a: String, b: String) {
 
   expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\" }"')
 })
+
+test("solve Cons -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (a: String, b: String, c: Pair(String, String)) {
+
+  unify cons(a, b) = c
+  unify a = "a"
+  unify b = "b"
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: cons(a, b) }"',
+  )
+})

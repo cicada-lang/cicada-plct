@@ -2,9 +2,11 @@
 
 - https://github.com/cicada-lang/cicada/issues/78
 
+deepWalk -- Cons
+
 deepWalk -- Fn
 deepWalk -- FnImplicit
-deepWalk -- Cons
+
 deepWalk -- Objekt
 
 deepWalk -- ClazzNull ClazzCons ClazzFulfilled
