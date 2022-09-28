@@ -33,7 +33,6 @@ function inferApPiImplicit(
   const name = inferred.type.retTypeClosure.name
   /**
      NOTE `freshName` might occur in `argExp`.
-     TODO [question] is `mod.solution.names` part of `boundNames`?
    **/
   const boundNames = new Set(ctxNames(ctx))
   const usedNames = [

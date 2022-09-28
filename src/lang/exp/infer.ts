@@ -218,8 +218,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         targetValue,
         exp.name,
       )
-      const propertyCore = readback(mod, ctx, propertyType, property)
-      return Inferred(propertyType, propertyCore)
+      return Inferred(propertyType, readback(mod, ctx, propertyType, property))
     }
 
     case "NewUnfolded": {

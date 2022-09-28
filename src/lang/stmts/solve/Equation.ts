@@ -1,32 +1,36 @@
 import { Exp } from "../../exp"
 
-export type Equation = EquationTyped | EquationUntyped
+export type Equation = EquationUnifyTyped | EquationUnify
 
-export type EquationTyped = {
-  kind: "EquationTyped"
+export type EquationUnifyTyped = {
+  kind: "EquationUnifyTyped"
   left: Exp
   right: Exp
   type: Exp
 }
 
-export function EquationTyped(left: Exp, right: Exp, type: Exp): EquationTyped {
+export function EquationUnifyTyped(
+  left: Exp,
+  right: Exp,
+  type: Exp,
+): EquationUnifyTyped {
   return {
-    kind: "EquationTyped",
+    kind: "EquationUnifyTyped",
     left,
     right,
     type,
   }
 }
 
-export type EquationUntyped = {
-  kind: "EquationUntyped"
+export type EquationUnify = {
+  kind: "EquationUnify"
   left: Exp
   right: Exp
 }
 
-export function EquationUntyped(left: Exp, right: Exp): EquationUntyped {
+export function EquationUnify(left: Exp, right: Exp): EquationUnify {
   return {
-    kind: "EquationUntyped",
+    kind: "EquationUnify",
     left,
     right,
   }

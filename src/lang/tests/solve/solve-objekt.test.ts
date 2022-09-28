@@ -11,7 +11,7 @@ class ABC {
 }
 
 solve (a: String, b: String, c: String) {
-  unify { a, b, c } = { a: "a", b: "b", c: "c" } : ABC
+  unify { a, b, c } = { a: "a", b: "b", c: "c" }
 }
 
 `)
@@ -31,7 +31,7 @@ class ABC {
 }
 
 solve (a: String, b: String) {
-  unify { a, b, c: b } = { a: b, b: "c", c: "c" } : ABC
+  unify { a, b, c: b } = { a: b, b: "c", c: "c" }
 }
 
 `)
@@ -52,4 +52,25 @@ solve (a: String, b: String, c: String) {
 }
 
 `)
+})
+
+test("solve Objekt -- deepWalk", async () => {
+  const output = await runCode(`
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+solve (a: String, b: String, c: String, abc: ABC) {
+  unify abc = { a, b, c }
+  unify { a, b, c } = { a: "a", b: "b", c: "c" }
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\", abc: { a: \\"a\\", b: \\"b\\", c: \\"c\\" } }"',
+  )
 })

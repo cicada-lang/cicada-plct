@@ -13,3 +13,21 @@ solve (A: Type, B: Type) {
 
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
+
+test("solve PiImplicit -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (A: Type, B: Type, C: Type) {
+  // NOTE To test deepWalk, the order matters here.
+  unify C = (implicit _: A) -> B
+  unify A = String
+  unify B = String
+
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ A: String, B: String, C: (implicit _1: String) -> String }"',
+  )
+})

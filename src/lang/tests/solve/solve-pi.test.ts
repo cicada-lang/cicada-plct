@@ -38,3 +38,20 @@ solve (A: Type, B: Type) {
 
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
+
+test("solve Pi -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (A: Type, B: Type, C: Type) {
+  // NOTE To test deepWalk, the order matters here.
+  unify C = (A) -> B
+  unify A = String
+  unify B = String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ A: String, B: String, C: (_1: String) -> String }"',
+  )
+})
