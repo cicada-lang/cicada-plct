@@ -1,5 +1,3 @@
-test "compute ApImplicit -- scope" -- should `LangError` -- not just `expectCodeToFail`
-
 [feature] deepWalk
 
 - https://github.com/cicada-lang/cicada/issues/78
