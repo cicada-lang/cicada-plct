@@ -172,23 +172,30 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "SequenceLet": {
-      // TODO
-      return new Set()
+      return new Set([
+        ...freeNames(boundNames, exp.exp),
+        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
+      ])
     }
 
     case "SequenceLetThe": {
-      // TODO
-      return new Set()
+      return new Set([
+        ...freeNames(boundNames, exp.exp),
+        ...freeNames(boundNames, exp.type),
+        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
+      ])
     }
 
     case "SequenceCheck": {
-      // TODO
-      return new Set()
+      return new Set([
+        ...freeNames(boundNames, exp.exp),
+        ...freeNames(boundNames, exp.type),
+        ...freeNames(boundNames, exp.ret),
+      ])
     }
 
     case "SequenceUnfolded": {
-      // TODO
-      return new Set()
+      return freeNames(boundNames, Exps.foldSequence(exp.bindings, exp.ret))
     }
   }
 }

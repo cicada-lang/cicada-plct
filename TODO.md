@@ -5,7 +5,6 @@
 - https://github.com/cicada-lang/cicada/issues/72
 
 `exp/freeNames` -- Clazz
-`exp/freeNames` -- Sequence
 
 [feature] deepWalk
 
