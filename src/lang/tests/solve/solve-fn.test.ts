@@ -24,3 +24,16 @@ solve () {
 
   expect(output).toMatchInlineSnapshot('"{  }"')
 })
+
+test("solve Fn -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (T: Type, f: (Trivial) -> Type) {
+  unify f = (_) => T : (Trivial) -> Type
+  unify T = String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ T: String, f: (_2) => T }"')
+})
