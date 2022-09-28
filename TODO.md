@@ -2,16 +2,18 @@
 
 - https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk -- PiImplicit
-
 deepWalk -- Fn
 deepWalk -- FnImplicit
 deepWalk -- Cons
 deepWalk -- Objekt
+
 deepWalk -- ClazzNull ClazzCons ClazzFulfilled
+
 deepWalk -- TypedNeutral
 
 [feature] unification between two Sigmas #53
+
+extract deepWalkNeutral
 
 - https://github.com/cicada-lang/cicada/issues/53
 

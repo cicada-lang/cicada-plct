@@ -35,8 +35,19 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
     }
 
     case "PiImplicit": {
-      // TODO
-      return value
+      const type = value
+      const name = type.retTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const freshName = freshen(usedNames, name)
+      const argType = deepWalk(mod, ctx, type.argType)
+      const patternVar = mod.solution.createPatternVar(freshName, argType)
+      let retType = applyClosure(type.retTypeClosure, patternVar)
+      mod.solution.bind(freshName, patternVar)
+      retType = deepWalk(mod, ctx, retType)
+      ctx = CtxCons(freshName, argType, ctx)
+      const retTypeCore = readbackType(mod, ctx, retType)
+      const env = mod.ctxToEnv(ctx)
+      return Values.PiImplicit(argType, Closure(env, freshName, retTypeCore))
     }
 
     case "Fn": {
