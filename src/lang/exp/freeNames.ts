@@ -130,13 +130,19 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Objekt": {
-      // TODO
-      return new Set()
+      return new Set(
+        Object.values(exp.properties).flatMap((property) =>
+          Array.from(freeNames(boundNames, property)),
+        ),
+      )
     }
 
     case "ObjektUnfolded": {
-      // TODO
-      return new Set()
+      return new Set(
+        exp.properties.flatMap((property) =>
+          Array.from(freeNames(boundNames, property.exp)),
+        ),
+      )
     }
 
     case "New": {
@@ -155,8 +161,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Dot": {
-      // TODO
-      return new Set()
+      return new Set([...freeNames(boundNames, exp.target)])
     }
 
     case "SequenceLet": {
