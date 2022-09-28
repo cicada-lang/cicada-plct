@@ -115,18 +115,22 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "ClazzCons": {
-      // TODO
-      return new Set()
+      return new Set([
+        ...freeNames(boundNames, exp.propertyType),
+        ...freeNames(new Set([...boundNames, exp.name]), exp.rest),
+      ])
     }
 
     case "ClazzFulfilled": {
-      // TODO
-      return new Set()
+      return new Set([
+        ...freeNames(boundNames, exp.propertyType),
+        ...freeNames(boundNames, exp.property),
+        ...freeNames(new Set([...boundNames, exp.name]), exp.rest),
+      ])
     }
 
     case "ClazzUnfolded": {
-      // TODO
-      return new Set()
+      return freeNames(boundNames, Exps.foldClazz(exp.bindings))
     }
 
     case "Objekt": {
