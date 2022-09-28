@@ -8,7 +8,7 @@ import { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
-    case "EquationTyped": {
+    case "EquationUnifyTyped": {
       const env = mod.ctxToEnv(ctx)
       const typeValue = evaluate(env, checkType(mod, ctx, equation.type))
       const leftValue = evaluate(env, check(mod, ctx, equation.left, typeValue))
@@ -20,7 +20,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       return
     }
 
-    case "EquationUntyped": {
+    case "EquationUnify": {
       const leftInferred = infer(mod, ctx, equation.left)
       const rightInferred = infer(mod, ctx, equation.right)
       const leftType = mod.solution.deepWalk(mod, ctx, leftInferred.type)

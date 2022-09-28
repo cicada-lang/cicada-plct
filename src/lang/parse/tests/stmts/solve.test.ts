@@ -23,17 +23,21 @@ solve (A: Type, B: Type) {
           Stmts.SolveBinding("B", Exps.Var("Type")),
         ],
         [
-          Stmts.EquationTyped(
+          Stmts.EquationUnifyTyped(
             Exps.Var("A"),
             Exps.Var("Trivial"),
             Exps.Var("Type"),
           ),
-          Stmts.EquationTyped(
+          Stmts.EquationUnifyTyped(
             Exps.Var("B"),
             Exps.Var("String"),
             Exps.Var("Type"),
           ),
-          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+          Stmts.EquationUnifyTyped(
+            Exps.Var("A"),
+            Exps.Var("B"),
+            Exps.Var("Type"),
+          ),
         ],
       ),
     ]),
@@ -56,17 +60,21 @@ solve () {
       new Stmts.Solve(
         [],
         [
-          Stmts.EquationTyped(
+          Stmts.EquationUnifyTyped(
             Exps.Var("A"),
             Exps.Var("Trivial"),
             Exps.Var("Type"),
           ),
-          Stmts.EquationTyped(
+          Stmts.EquationUnifyTyped(
             Exps.Var("B"),
             Exps.Var("String"),
             Exps.Var("Type"),
           ),
-          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+          Stmts.EquationUnifyTyped(
+            Exps.Var("A"),
+            Exps.Var("B"),
+            Exps.Var("Type"),
+          ),
         ],
       ),
     ]),
@@ -89,9 +97,13 @@ solve () {
       new Stmts.Solve(
         [],
         [
-          Stmts.EquationUntyped(Exps.Var("A"), Exps.Var("Trivial")),
-          Stmts.EquationUntyped(Exps.Var("B"), Exps.Var("String")),
-          Stmts.EquationTyped(Exps.Var("A"), Exps.Var("B"), Exps.Var("Type")),
+          Stmts.EquationUnify(Exps.Var("A"), Exps.Var("Trivial")),
+          Stmts.EquationUnify(Exps.Var("B"), Exps.Var("String")),
+          Stmts.EquationUnifyTyped(
+            Exps.Var("A"),
+            Exps.Var("B"),
+            Exps.Var("Type"),
+          ),
         ],
       ),
     ]),
