@@ -77,8 +77,10 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
     }
 
     case "Cons": {
-      // TODO
-      return value
+      return Values.Cons(
+        deepWalk(mod, ctx, value.car),
+        deepWalk(mod, ctx, value.car),
+      )
     }
 
     case "String": {
