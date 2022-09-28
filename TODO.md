@@ -7,13 +7,22 @@ Stmts.Solve -- support infer if left or right can be inferred
 
 https://github.com/cicada-lang/cicada/issues/78
 
-[maybe] deepWalk should take `type` for partial evaluation of `Fn`
+**Problem:** `deepWalk` need to do partial evaluation on `Fn`
+
+- **Solution 1:** `deepWalk` takes `type` as argument,
+  NOT because of it is doing eta-expansion,
+  but because of it need to do partial evaluation of `Fn`,
+  thus need `argType` to construct a `TypedNeutral`.
+
+- **Solution 2:** `Values.Fn` and `Cores.Fn` always have `argType`
 
 deepWalk -- Fn
 
 - "solve Fn -- deepWalk"
 
 deepWalk -- FnImplicit
+
+- "solve FnImplicit -- deepWalk"
 
 deepWalk -- ClazzNull ClazzCons ClazzFulfilled
 
