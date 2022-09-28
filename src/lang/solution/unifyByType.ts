@@ -4,12 +4,12 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { EquationError } from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, solve, solveProperties, solveType } from "../solution"
+import { Solution, unify, unifyProperties, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isValue, Value } from "../value"
 
-export function solveByType(
+export function unifyByType(
   solution: Solution,
   ctx: Ctx,
   type: Value,
@@ -18,7 +18,7 @@ export function solveByType(
 ): "ok" | undefined {
   switch (type.kind) {
     case "Type": {
-      solveType(solution, ctx, left, right)
+      unifyType(solution, ctx, left, right)
       return "ok"
     }
 
@@ -37,19 +37,19 @@ export function solveByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
-      solve(solution, ctx, retType, leftRet, rightRet)
+      unify(solution, ctx, retType, leftRet, rightRet)
       return "ok"
     }
 
     case "Sigma": {
       const leftCar = Actions.doCar(left)
       const rightCar = Actions.doCar(right)
-      solve(solution, ctx, type.carType, leftCar, rightCar)
+      unify(solution, ctx, type.carType, leftCar, rightCar)
       const car = Actions.doCar(left)
       const cdrType = applyClosure(type.cdrTypeClosure, car)
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
-      solve(solution, ctx, cdrType, leftCdr, rightCdr)
+      unify(solution, ctx, cdrType, leftCdr, rightCdr)
       return "ok"
     }
 
@@ -57,7 +57,7 @@ export function solveByType(
     case "ClazzCons":
     case "ClazzFulfilled": {
       assertNoExtraCommonProperties(type, left, right)
-      solveProperties(solution, ctx, type, left, right)
+      unifyProperties(solution, ctx, type, left, right)
       return "ok"
     }
   }

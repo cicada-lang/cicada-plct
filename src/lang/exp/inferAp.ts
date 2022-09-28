@@ -5,7 +5,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { Exp, Inferred } from "../exp"
 import { Mod } from "../mod"
-import { solveType } from "../solution"
+import { unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
@@ -31,8 +31,16 @@ function inferApPiImplicit(
   Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
 
   const name = inferred.type.retTypeClosure.name
-  // TODO Scope BUG, `freshName` might occur in `argExp`.
-  const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+  /**
+     NOTE `freshName` might occur in `argExp`.
+     TODO [question] is `mod.solution.names` part of `boundNames`?
+   **/
+  const boundNames = new Set(ctxNames(ctx))
+  const usedNames = [
+    ...boundNames,
+    ...mod.solution.names,
+    ...Exps.freeNames(boundNames, argExp),
+  ]
   const freshName = freshen(usedNames, name)
   const patternVar = mod.solution.createPatternVar(
     freshName,
@@ -62,7 +70,7 @@ function inferApPi(
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    solveType(mod.solution, ctx, argInferred.type, inferred.type.argType)
+    unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
   const argCore = argInferred

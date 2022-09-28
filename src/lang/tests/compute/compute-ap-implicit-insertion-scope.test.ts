@@ -1,5 +1,5 @@
-import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { test } from "vitest"
+import { expectCodeToFail } from "../utils"
 
 /**
 
@@ -15,8 +15,8 @@ import { runCode } from "../utils"
 
 **/
 
-test.todo("compute ApImplicit -- scope", async () => {
-  const output = await runCode(`
+test("compute ApImplicit -- scope", async () => {
+  await expectCodeToFail(`
 
 function id(implicit A: Type, x: A): A {
   return x
@@ -28,6 +28,4 @@ compute id((x: A) => x)
 // compute id(id(id((x: A1) => x)))
 
 `)
-
-  expect(output).toMatchInlineSnapshot()
 })
