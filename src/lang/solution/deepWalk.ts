@@ -40,6 +40,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
     }
 
     case "Fn": {
+      // TODO
       return value
     }
 
