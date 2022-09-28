@@ -1,5 +1,3 @@
-drop some type in solve-objekt.test.ts
-
 # [feature] deepWalk
 
 https://github.com/cicada-lang/cicada/issues/78
@@ -21,7 +19,9 @@ deepWalk -- FnImplicit
 
 - "solve FnImplicit -- deepWalk"
 
-deepWalk -- ClazzNull ClazzCons ClazzFulfilled
+deepWalk -- ClazzCons & ClazzFulfilled
+
+- "solve Clazz -- deepWalk"
 
 deepWalk -- TypedNeutral
 
