@@ -1,8 +1,10 @@
 [bug] implement freeNames to fix the scope BUG of ImplicitAp insertion
 
-- https://github.com/cicada-lang/cicada/issues/72
+- finish `exp/freeNames`
 
-- `exp/freeNames`
+- test "compute ApImplicit -- scope" -- should `LangError` -- not just `expectCodeToFail`
+
+- https://github.com/cicada-lang/cicada/issues/72
 
 [feature] deepWalk
 
