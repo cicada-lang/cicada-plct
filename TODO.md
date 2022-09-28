@@ -1,7 +1,4 @@
-Stmts.Solve -- support infer if left or right can be inferred
-
-- drop type in "solve Fn -- deepWalk"
-- drop type in solve-objekt.test.ts
+drop some type in solve-objekt.test.ts
 
 # [feature] deepWalk
 
