@@ -2,8 +2,7 @@ import { Mod } from "src/lang/mod"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer, inferOrUndefined } from "../../exp"
-import { unify } from "../../solution"
-import { conversionType } from "../../value"
+import { unify, unifyType } from "../../solution"
 import { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
@@ -27,7 +26,8 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       if (leftInferred !== undefined && rightInferred !== undefined) {
         const leftType = mod.solution.deepWalk(mod, ctx, leftInferred.type)
         const rightType = mod.solution.deepWalk(mod, ctx, rightInferred.type)
-        conversionType(mod, ctx, leftType, rightType)
+        // conversionType(mod, ctx, leftType, rightType)
+        unifyType(mod.solution, ctx, leftType, rightType)
         const typeValue = leftType
         const env = mod.ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)

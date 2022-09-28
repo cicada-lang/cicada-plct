@@ -11,7 +11,7 @@ class ABC {
 }
 
 solve (a: String, b: String, c: String) {
-  unify { a, b, c } = { a: "a", b: "b", c: "c" } : ABC
+  unify { a, b, c } = { a: "a", b: "b", c: "c" }
 }
 
 `)
@@ -31,7 +31,7 @@ class ABC {
 }
 
 solve (a: String, b: String) {
-  unify { a, b, c: b } = { a: b, b: "c", c: "c" } : ABC
+  unify { a, b, c: b } = { a: b, b: "c", c: "c" }
 }
 
 `)
@@ -64,8 +64,8 @@ class ABC {
 }
 
 solve (a: String, b: String, c: String, abc: ABC) {
-  unify abc = { a, b, c }: ABC
-  unify { a, b, c } = { a: "a", b: "b", c: "c" } : ABC
+  unify abc = { a, b, c }
+  unify { a, b, c } = { a: "a", b: "b", c: "c" }
 }
 
 `)
