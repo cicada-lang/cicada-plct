@@ -2,9 +2,8 @@
 
 - https://github.com/cicada-lang/cicada/issues/78
 
-- TDD -- try to write failing test that can be fixed by using deepWalk here
-
 deepWalk -- PiImplicit
+
 deepWalk -- Fn
 deepWalk -- FnImplicit
 deepWalk -- Cons

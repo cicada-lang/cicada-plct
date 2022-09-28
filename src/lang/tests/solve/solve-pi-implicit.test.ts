@@ -18,14 +18,16 @@ test("solve PiImplicit -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type, C: Type) {
-  unify (implicit _: A, B) -> B = (implicit _: String, String) -> String
-  unify (implicit _: A, B) -> String = (implicit _: String, String) -> B
+  // NOTE To test deepWalk, the order matters here.
   unify C = (implicit _: A) -> B
+  unify A = String
+  unify B = String
+
 }
 
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ A: String, B: String, C: (implicit _: String) -> String }"',
+    '"{ A: String, B: String, C: (implicit _: A) -> B }"',
   )
 })
