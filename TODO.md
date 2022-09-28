@@ -2,8 +2,6 @@
 
 - https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk -- Objekt
-
 deepWalk -- Fn
 deepWalk -- FnImplicit
 

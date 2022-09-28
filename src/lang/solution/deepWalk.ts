@@ -107,8 +107,14 @@ export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
     }
 
     case "Objekt": {
-      // TODO
-      return value
+      return Values.Objekt(
+        Object.fromEntries(
+          Object.entries(value.properties).map(([name, property]) => [
+            name,
+            deepWalk(mod, ctx, property),
+          ]),
+        ),
+      )
     }
   }
 }
