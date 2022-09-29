@@ -1,12 +1,8 @@
-# format
-
-`formatCore` -- `Sigma` -- print `Pair` if not occured
-
-formatExp -- for error report
-
 # [DX] error report #40
 
 https://github.com/cicada-lang/cicada/issues/40
+
+`formatExp` -- for error report
 
 # [feature] support running markdown file directly #61
 

@@ -27,8 +27,12 @@ export function formatCore(core: Core): string {
     }
 
     case "Sigma": {
-      const { bindings, cdrType } = Cores.unfoldFormatSigma(core)
-      return `exists (${bindings.join(", ")}) ${cdrType}`
+      if (Cores.freeOccurred(core.name, core.cdrType)) {
+        const { bindings, cdrType } = Cores.unfoldFormatSigma(core)
+        return `exists (${bindings.join(", ")}) ${cdrType}`
+      } else {
+        return `Pair(${formatCore(core.carType)}, ${formatCore(core.cdrType)})`
+      }
     }
 
     case "Cons": {

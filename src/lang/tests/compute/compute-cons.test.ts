@@ -9,7 +9,7 @@ compute pair
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"cons(Type, Type): exists (Type) Type"')
+  expect(output).toMatchInlineSnapshot('"cons(Type, Type): Pair(Type, Type)"')
 })
 
 test("compute Cons -- inferred", async () => {
@@ -20,5 +20,5 @@ compute pair
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"cons(Type, Type): exists (Type) Type"')
+  expect(output).toMatchInlineSnapshot('"cons(Type, Type): Pair(Type, Type)"')
 })

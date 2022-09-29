@@ -52,10 +52,10 @@ compute infer2("abc")("abc")
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "exists (Trivial) String: Type
-    exists (Trivial) Trivial: Type
-    exists (String) Trivial: Type
-    exists (String) String: Type"
+    "Pair(Trivial, String): Type
+    Pair(Trivial, Trivial): Type
+    Pair(String, Trivial): Type
+    Pair(String, String): Type"
   `)
 })
 
@@ -74,10 +74,10 @@ compute infer2("abc")("abc")
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "exists (Trivial) String: Type
-    exists (Trivial) Trivial: Type
-    exists (String) Trivial: Type
-    exists (String) String: Type"
+    "Pair(Trivial, String): Type
+    Pair(Trivial, Trivial): Type
+    Pair(String, Trivial): Type
+    Pair(String, String): Type"
   `)
 })
 
@@ -126,8 +126,8 @@ compute cons("abc", sole)
 
   expect(output).toMatchInlineSnapshot(
     `
-    "cons(\\"abc\\", sole): exists (String) Trivial
-    cons(\\"abc\\", sole): exists (String) Trivial"
+    "cons(\\"abc\\", sole): Pair(String, Trivial)
+    cons(\\"abc\\", sole): Pair(String, Trivial)"
   `,
   )
 })
@@ -149,8 +149,8 @@ compute box(box(box("abc")))
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "cons(cons(\\"abc\\", sole), sole): exists (exists (String) Trivial) Trivial
-    cons(cons(cons(\\"abc\\", sole), sole), sole): exists (exists (exists (String) Trivial) Trivial) Trivial"
+    "cons(cons(\\"abc\\", sole), sole): Pair(Pair(String, Trivial), Trivial)
+    cons(cons(cons(\\"abc\\", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
   `)
 })
 
