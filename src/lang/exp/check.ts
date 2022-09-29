@@ -8,7 +8,7 @@ import { checkByInfer, enrich, Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { Value } from "../value"
+import { readbackType, Value } from "../value"
 
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -27,7 +27,8 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(mod, ctx, exp.ret, retType)
-      return Cores.Fn(exp.name, retCore)
+      const argTypeCore = readbackType(mod, ctx, type.argType)
+      return Cores.Fn(exp.name, argTypeCore, retCore)
     }
 
     case "FnImplicit": {
@@ -36,7 +37,8 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(mod, ctx, exp.ret, retType)
-      return Cores.FnImplicit(exp.name, retCore)
+      const argTypeCore = readbackType(mod, ctx, type.argType)
+      return Cores.FnImplicit(exp.name, argTypeCore, retCore)
     }
 
     case "FnAnnotated": {
