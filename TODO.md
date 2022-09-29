@@ -1,7 +1,3 @@
-# [DX] error report #40
-
-https://github.com/cicada-lang/cicada/issues/40
-
 # [feature] unification need to implement occur check #52
 
 https://github.com/cicada-lang/cicada/issues/52

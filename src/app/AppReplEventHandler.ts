@@ -1,5 +1,7 @@
+import pt from "@cicada-lang/partech"
 import fs from "fs"
 import { ReplEvent, ReplEventHandler } from "../framework/repl"
+import * as Errors from "../lang/errors"
 import { parseStmts } from "../lang/parse"
 import { Loader } from "../loader"
 import { colors } from "../utils/colors"
@@ -36,6 +38,12 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
+      if (error instanceof Errors.ElaborationError) {
+        if (error.options?.span) {
+          console.log(pt.report(error.options.span, text))
+        }
+      }
+
       if (!(error instanceof Error)) throw error
       console.error(error.message)
       return false
