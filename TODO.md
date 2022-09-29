@@ -2,8 +2,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk take type -- like readback
-
 deepWalk -- Fn
 
 - "solve Fn -- deepWalk"

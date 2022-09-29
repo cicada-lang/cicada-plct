@@ -11,8 +11,8 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   inclusion(
     mod,
     ctx,
-    mod.solution.deepWalk(mod, ctx, inferred.type),
-    mod.solution.deepWalk(mod, ctx, type),
+    mod.solution.deepWalkType(mod, ctx, inferred.type),
+    mod.solution.deepWalkType(mod, ctx, type),
   )
   return inferred.core
 }
