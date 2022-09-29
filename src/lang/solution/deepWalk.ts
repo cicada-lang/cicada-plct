@@ -89,7 +89,8 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       mod.solution.bind(freshName, typedNeutral)
       let ret = applyClosure(value.retClosure, typedNeutral)
-      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      let retType = applyClosure(type.retTypeClosure, typedNeutral)
+      retType = deepWalkType(mod, ctx, retType)
       ret = deepWalk(mod, ctx, retType, ret)
       ctx = CtxCons(freshName, argType, ctx)
       const retCore = readback(mod, ctx, retType, ret)
@@ -113,9 +114,17 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     }
 
     case "Cons": {
+      type = deepWalkType(mod, ctx, type)
+      Values.assertValue(type, Values.Sigma)
+
       return Values.Cons(
-        deepWalk(mod, ctx, type, value.car),
-        deepWalk(mod, ctx, type, value.car),
+        deepWalk(mod, ctx, type.carType, value.car),
+        deepWalk(
+          mod,
+          ctx,
+          applyClosure(type.cdrTypeClosure, value.car),
+          value.cdr,
+        ),
       )
     }
 
