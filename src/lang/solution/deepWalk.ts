@@ -1,10 +1,8 @@
-import _ from "lodash"
 import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import { EquationError } from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { deepWalkNeutral, deepWalkProperties, deepWalkType } from "../solution"
+import { deepWalkNeutral, deepWalkType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -22,7 +20,7 @@ import { readback, readbackType, Value } from "../value"
 
 **/
 
-export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
+export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
   value = mod.solution.walk(value)
 
   switch (value.kind) {
@@ -53,7 +51,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     case "PiImplicit": {
       const name = value.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = name // freshen(usedNames, name)
+      const freshName = freshen(usedNames, name)
       const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
@@ -67,12 +65,10 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const name = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      Values.assertTypeInCtx(ctx, type, Values.Pi)
-      const argType = deepWalkType(mod, ctx, type.argType)
+      const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(mod, ctx, applyClosure(type.retTypeClosure, typedNeutral))
-      const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
+      const ret = deepWalk(mod, ctx, applyClosure(value.retClosure, typedNeutral))
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
       return Values.Fn(argType, Closure(env, freshName, retCore))
@@ -82,13 +78,11 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const name = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      Values.assertTypeInCtx(ctx, type, Values.PiImplicit)
-      const argType = deepWalkType(mod, ctx, type.argType)
+      const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(mod, ctx, applyClosure(type.retTypeClosure, typedNeutral))
-      const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
-      const retCore = readback(mod, ctx, retType, ret)
+      const ret = deepWalk(mod, ctx, applyClosure(value.retClosure, typedNeutral))
+      const retCore = readback(mod, ctx, ret)
       const env = mod.ctxToEnv(ctx)
       return Values.FnImplicit(argType, Closure(env, freshName, retCore))
     }
@@ -107,13 +101,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     }
 
     case "Cons": {
-      type = deepWalkType(mod, ctx, type)
-      Values.assertTypeInCtx(ctx, type, Values.Sigma)
-      const cdrType = applyClosure(type.cdrTypeClosure, value.car)
-      return Values.Cons(
-        deepWalk(mod, ctx, type.carType, value.car),
-        deepWalk(mod, ctx, cdrType, value.cdr),
-      )
+      return Values.Cons(deepWalk(mod, ctx, value.car), deepWalk(mod, ctx, value.cdr))
     }
 
     case "String": {
@@ -150,30 +138,21 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     }
 
     case "ClazzFulfilled": {
-      const propertyType = deepWalkType(mod, ctx, value.propertyType)
-      const property = deepWalk(mod, ctx, propertyType, value.property)
+      const property = deepWalk(mod, ctx, value.property)
       const rest = deepWalkType(mod, ctx, value.rest)
       Values.assertClazzInCtx(ctx, rest)
       return Values.ClazzFulfilled(value.name, propertyType, property, rest)
     }
 
     case "Objekt": {
-      type = deepWalkType(mod, ctx, type)
-      Values.assertClazzInCtx(ctx, type)
-      const result = Values.Objekt(deepWalkProperties(mod, ctx, type, value))
-      assertNoExtraProperties(type, result)
-      return result
-    }
-  }
-}
-
-function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
-  if (Values.isValue(value, Values.Objekt)) {
-    const clazzNames = Values.clazzPropertyNames(clazz)
-    const valueNames = Object.keys(value.properties)
-    const extraNames = _.difference(valueNames, clazzNames)
-    if (extraNames.length > 0) {
-      throw new EquationError(`expect no extra common names: ${extraNames}`)
+      return Values.Objekt(
+        Object.fromEntries(
+          Object.entries(value.properties).map(([name, property]) => [
+            name,
+            deepWalk(mod, ctx, property),
+          ]),
+        ),
+      )
     }
   }
 }

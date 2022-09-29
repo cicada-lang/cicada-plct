@@ -1,6 +1,5 @@
 export * from "./deepWalk"
 export * from "./deepWalkNeutral"
-export * from "./deepWalkProperties"
 export * from "./deepWalkType"
 export * from "./deepWalkTypedValue"
 export * from "./PatternVar"

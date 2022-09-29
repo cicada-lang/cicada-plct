@@ -4,8 +4,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-[maybe] deepWalk -- should not take `type` -- for reduce `TypedValue` further
-
 deepWalk -- try to reduce `TypedValue` further
 
 pass test "solve Car -- deepWalk"

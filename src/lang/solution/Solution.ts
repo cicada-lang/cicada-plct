@@ -73,7 +73,7 @@ export class Solution {
   }
 
   deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
-    return deepWalk(mod, ctx, type, value)
+    return deepWalk(mod, ctx, value)
   }
 
   deepWalkType(mod: Mod, ctx: Ctx, type: Value): Value {
