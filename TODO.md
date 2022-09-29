@@ -5,13 +5,12 @@
 https://github.com/cicada-lang/cicada/issues/78
 
 extract deepWalkNeutral
-add "solve Ap -- deepWalk"
-
-- pass "solve Ap -- deepWalk"
 
 deepWalk -- fix TypedNeutral -- call deepWalkNeutral
 
 deepWalkNeutral
+
+- fix test "solve Ap -- deepWalk"
 
 # [feature] unification between two Sigmas #53
 
