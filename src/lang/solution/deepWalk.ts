@@ -6,6 +6,19 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readbackType, Value } from "../value"
 
+/**
+
+   # `deepWalk` need to do partial evaluation on `Fn`
+
+   `deepWalk` takes `type` as argument,
+   NOT because of it is doing eta-expansion,
+   but because of it need to do partial evaluation of `Fn`,
+   thus need `argType` to construct a `TypedNeutral`.
+
+   another solution is to let `Values.Fn` and `Cores.Fn` always have `argType`.
+
+**/
+
 export function deepWalk(mod: Mod, ctx: Ctx, value: Value): Value {
   value = mod.solution.walk(value)
 
