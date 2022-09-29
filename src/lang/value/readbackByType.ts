@@ -48,10 +48,12 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
       const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const argTypeCore = readbackType(mod, ctx, type.argType)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
-      return Cores.Fn(freshName, readback(mod, ctx, retType, ret))
+      const retCore = readback(mod, ctx, retType, ret)
+      return Cores.Fn(freshName, argTypeCore, retCore)
     }
 
     case "PiImplicit": {
@@ -59,10 +61,12 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
       const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const argTypeCore = readbackType(mod, ctx, type.argType)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doApImplicit(value, typedNeutral)
-      return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
+      const retCore = readback(mod, ctx, retType, ret)
+      return Cores.FnImplicit(freshName, argTypeCore, retCore)
     }
 
     case "Sigma": {

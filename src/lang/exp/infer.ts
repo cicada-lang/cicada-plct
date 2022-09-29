@@ -59,7 +59,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
       const retTypeClosure = Closure(mod.ctxToEnv(ctx), exp.name, retTypeCore)
-      return Inferred(Values.Pi(argTypeValue, retTypeClosure), Cores.Fn(exp.name, retInferred.core))
+      return Inferred(
+        Values.Pi(argTypeValue, retTypeClosure),
+        Cores.Fn(exp.name, argTypeCore, retInferred.core),
+      )
     }
 
     case "FnImplicitAnnotated": {
@@ -71,7 +74,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retTypeClosure = Closure(mod.ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
-        Cores.FnImplicit(exp.name, retInferred.core),
+        Cores.FnImplicit(exp.name, argTypeCore, retInferred.core),
       )
     }
 
@@ -230,12 +233,13 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLet": {
       const inferred = infer(mod, ctx, exp.exp)
+      const inferredTypeCore = readbackType(mod, ctx, inferred.type)
       const value = evaluate(mod.ctxToEnv(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
         retInferred.type,
-        Cores.Ap(Cores.Fn(exp.name, retInferred.core), inferred.core),
+        Cores.Ap(Cores.Fn(exp.name, inferredTypeCore, retInferred.core), inferred.core),
       )
     }
 
@@ -248,7 +252,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
         retInferred.type,
-        Cores.Ap(Cores.Fn(exp.name, retInferred.core), enriched.core),
+        Cores.Ap(Cores.Fn(exp.name, typeCore, retInferred.core), enriched.core),
       )
     }
 

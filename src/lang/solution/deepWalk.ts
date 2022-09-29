@@ -75,7 +75,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
-      return Values.Fn(Closure(env, freshName, retCore))
+      return Values.Fn(argType, Closure(env, freshName, retCore))
     }
 
     case "FnImplicit": {
@@ -90,7 +90,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
-      return Values.FnImplicit(Closure(env, freshName, retCore))
+      return Values.FnImplicit(argType, Closure(env, freshName, retCore))
     }
 
     case "Sigma": {

@@ -27,11 +27,11 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Fn": {
-      return Values.Fn(Closure(env, core.name, core.ret))
+      return Values.Fn(evaluate(env, core.argType), Closure(env, core.name, core.ret))
     }
 
     case "FnImplicit": {
-      return Values.FnImplicit(Closure(env, core.name, core.ret))
+      return Values.FnImplicit(evaluate(env, core.argType), Closure(env, core.name, core.ret))
     }
 
     case "Ap": {

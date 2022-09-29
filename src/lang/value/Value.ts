@@ -82,13 +82,15 @@ export function PiImplicit(argType: Value, retTypeClosure: Closure): PiImplicit 
 export type Fn = {
   family: "Value"
   kind: "Fn"
+  argType: Value
   retClosure: Closure
 }
 
-export function Fn(retClosure: Closure): Fn {
+export function Fn(argType: Value, retClosure: Closure): Fn {
   return {
     family: "Value",
     kind: "Fn",
+    argType,
     retClosure,
   }
 }
@@ -96,13 +98,15 @@ export function Fn(retClosure: Closure): Fn {
 export type FnImplicit = {
   family: "Value"
   kind: "FnImplicit"
+  argType: Value
   retClosure: Closure
 }
 
-export function FnImplicit(retClosure: Closure): FnImplicit {
+export function FnImplicit(argType: Value, retClosure: Closure): FnImplicit {
   return {
     family: "Value",
     kind: "FnImplicit",
+    argType,
     retClosure,
   }
 }

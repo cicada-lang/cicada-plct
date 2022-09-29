@@ -28,6 +28,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     (left.kind === "Fn" && right.kind === "Fn") ||
     (left.kind === "FnImplicit" && right.kind === "FnImplicit")
   ) {
+    alphaEquivalent(ctx, left.argType, right.argType)
     ctx = ctx.cons(left.name, right.name)
     alphaEquivalent(ctx, left.ret, right.ret)
     return

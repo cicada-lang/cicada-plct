@@ -69,14 +69,16 @@ export type Fn = {
   family: "Core"
   kind: "Fn"
   name: string
+  argType: Core
   ret: Core
 }
 
-export function Fn(name: string, ret: Core): Fn {
+export function Fn(name: string, argType: Core, ret: Core): Fn {
   return {
     family: "Core",
     kind: "Fn",
     name,
+    argType,
     ret,
   }
 }
@@ -85,14 +87,16 @@ export type FnImplicit = {
   family: "Core"
   kind: "FnImplicit"
   name: string
+  argType: Core
   ret: Core
 }
 
-export function FnImplicit(name: string, ret: Core): FnImplicit {
+export function FnImplicit(name: string, argType: Core, ret: Core): FnImplicit {
   return {
     family: "Core",
     kind: "FnImplicit",
     name,
+    argType,
     ret,
   }
 }
