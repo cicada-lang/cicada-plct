@@ -51,6 +51,22 @@ solve (A: Type, B: Type) {
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
 
+test("solve ClazzCons -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (A: Type, B: Type, C: Type) {
+  unify C = class { a: A, b: B }
+  unify A = String
+  unify B = String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ A: String, B: String, C: class { a: A, b: B } }"',
+  )
+})
+
 test("solve ClazzFulfilled -- deepWalk", async () => {
   const output = await runCode(`
 

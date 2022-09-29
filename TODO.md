@@ -4,7 +4,7 @@ https://github.com/cicada-lang/cicada/issues/78
 
 deepWalk -- ClazzCons
 
-- "solve ClazzCons -- deepWalk"
+- fix "solve ClazzCons -- deepWalk"
 
 extract deepWalkNeutral
 
