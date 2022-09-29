@@ -2,12 +2,8 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-fix type of deepWalk "Cons"
-fix type of deepWalk "Objekt"
-
-deepWalk -- FnImplicit
-
-- "solve FnImplicit -- deepWalk"
+fix type of recursive call deepWalk in "Cons"
+fix type of recursive call deepWalk in "Objekt"
 
 deepWalk -- ClazzCons & ClazzFulfilled
 

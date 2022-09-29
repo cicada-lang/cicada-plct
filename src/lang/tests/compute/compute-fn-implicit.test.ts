@@ -10,6 +10,6 @@ compute infer
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"(implicit T1, x1) => T1: (implicit T1: Type, x1: T1) -> Type"',
+    '"(implicit T2, x11) => T2: (implicit T2: Type, x11: T2) -> Type"',
   )
 })
