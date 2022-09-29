@@ -6,10 +6,6 @@ https://github.com/cicada-lang/cicada/issues/52
 
 https://github.com/cicada-lang/cicada/issues/61
 
-# [feature] playground website #63
-
-https://github.com/cicada-lang/cicada/issues/63
-
 # [feature] equivalence #43
 
 https://github.com/cicada-lang/cicada/issues/43
