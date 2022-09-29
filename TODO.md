@@ -4,13 +4,15 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-extract deepWalkNeutral
+[maybe] `Values.Fn` and `Cores.Fn` both have `argType` -- so that `deepWalk` can avoid taking `type`
 
-deepWalk -- fix TypedNeutral -- call deepWalkNeutral
+[maybe] deepWalk -- should not take `type` -- for reduce `TypedValue` further
 
-deepWalkNeutral
+deepWalk -- try to reduce `TypedValue` further
 
-- fix test "solve Ap -- deepWalk"
+pass test "solve Car -- deepWalk"
+pass test "solve Cdr -- deepWalk"
+pass test "solve Dot -- deepWalk"
 
 # [feature] unification between two Sigmas #53
 

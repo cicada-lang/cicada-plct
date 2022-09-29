@@ -47,8 +47,7 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const variable = Neutrals.Var(freshName)
-      const typedNeutral = Values.TypedNeutral(type.argType, variable)
+      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
@@ -59,11 +58,10 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const variable = Neutrals.Var(freshName)
-      const typedNeutral = Values.TypedNeutral(type.argType, variable)
+      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const ret = Actions.doAp(value, typedNeutral)
+      const ret = Actions.doApImplicit(value, typedNeutral)
       return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
     }
 

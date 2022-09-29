@@ -43,8 +43,7 @@ export function inclusion(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void
     const argType = subtype.argType
 
     const freshName = freshen(ctxNames(ctx), name)
-    const variable = Neutrals.Var(freshName)
-    const typedNeutral = Values.TypedNeutral(argType, variable)
+    const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, argType, ctx)
 
@@ -64,8 +63,7 @@ export function inclusion(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void
     const carType = subtype.carType
 
     const freshName = freshen(ctxNames(ctx), name)
-    const variable = Neutrals.Var(freshName)
-    const typedNeutral = Values.TypedNeutral(carType, variable)
+    const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, carType, ctx)
 

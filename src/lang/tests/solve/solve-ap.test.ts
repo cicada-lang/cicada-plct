@@ -36,6 +36,6 @@ solve (f: (String) -> String, x: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((_: String) -> String), x: \\"abc\\", c: f(x) }"',
+    '"{ f: TODO((_: String) -> String), x: \\"abc\\", c: f(\\"abc\\") }"',
   )
 })

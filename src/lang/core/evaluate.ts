@@ -34,9 +34,12 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.FnImplicit(Closure(env, core.name, core.ret))
     }
 
-    case "Ap":
-    case "ApImplicit": {
+    case "Ap": {
       return Actions.doAp(evaluate(env, core.target), evaluate(env, core.arg))
+    }
+
+    case "ApImplicit": {
+      return Actions.doApImplicit(evaluate(env, core.target), evaluate(env, core.arg))
     }
 
     case "Sigma": {

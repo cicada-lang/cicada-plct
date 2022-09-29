@@ -11,6 +11,12 @@ export function unfoldFormatAp(core: Core): {
       return { target, args: [...args, arg] }
     }
 
+    case "ApImplicit": {
+      const arg = `implicit ${formatCore(core.arg)}`
+      const { target, args } = unfoldFormatAp(core.target)
+      return { target, args: [...args, arg] }
+    }
+
     default: {
       return { target: formatCore(core), args: [] }
     }
