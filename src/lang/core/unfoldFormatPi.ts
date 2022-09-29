@@ -7,9 +7,10 @@ export function unfoldFormatPi(core: Core): {
 } {
   switch (core.kind) {
     case "Pi": {
-      const retTypefreeNames = Cores.freeNames(new Set(), core.retType)
       const argType = formatCore(core.argType)
-      const binding = retTypefreeNames.has(core.name) ? `${core.name}: ${argType}` : `${argType}`
+      const binding = Cores.freeOccurred(core.name, core.retType)
+        ? `${core.name}: ${argType}`
+        : `${argType}`
       const { bindings, retType } = unfoldFormatPi(core.retType)
       return { bindings: [binding, ...bindings], retType }
     }
