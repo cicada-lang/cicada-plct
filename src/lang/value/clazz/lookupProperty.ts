@@ -1,6 +1,6 @@
 import * as Actions from "../../actions"
 import { applyClosure } from "../../closure"
-import { ElaborationError } from "../../errors"
+import * as Errors from "../../errors"
 import * as Values from "../../value"
 import { assertClazz, Value } from "../../value"
 
@@ -35,7 +35,7 @@ export function lookupProperty(
 export function lookupPropertyOrFail(clazz: Values.Clazz, target: Value, name: string): Value {
   const property = lookupProperty(clazz, target, name)
   if (property === undefined) {
-    throw new ElaborationError(`Undefined property name: ${name}`)
+    throw new Errors.ElaborationError(`Undefined property name: ${name}`)
   }
 
   return property

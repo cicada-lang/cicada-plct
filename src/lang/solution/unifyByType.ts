@@ -2,7 +2,7 @@ import _ from "lodash"
 import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import { EquationError } from "../errors"
+import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import { Solution, unify, unifyProperties, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
@@ -85,7 +85,7 @@ function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: 
     )
 
     if (extraCommonNames.length > 0) {
-      throw new EquationError(`expect no extra common names: ${extraCommonNames}`)
+      throw new Errors.EquationError(`expect no extra common names: ${extraCommonNames}`)
     }
   }
 }

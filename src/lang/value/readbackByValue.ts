@@ -1,7 +1,7 @@
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { readbackNeutral, Value } from "../value"
 
@@ -20,7 +20,7 @@ export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): 
     }
 
     default: {
-      throw new ElaborationError(
+      throw new Errors.ElaborationError(
         `readbackByValue is not implemented for type: ${type.kind}, and value: ${value.kind}`,
       )
     }

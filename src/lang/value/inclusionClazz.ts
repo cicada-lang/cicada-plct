@@ -1,5 +1,5 @@
 import { Ctx, ctxNames } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
@@ -40,11 +40,13 @@ export function inclusionClazz(
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
-      throw new ElaborationError(`inclusionClazz found missing property on subclazz class: ${name}`)
+      throw new Errors.ElaborationError(
+        `inclusionClazz found missing property on subclazz class: ${name}`,
+      )
     }
 
     if (subclazzProperty.value === undefined && clazzProperty.value !== undefined) {
-      throw new ElaborationError(
+      throw new Errors.ElaborationError(
         `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
       )
     }

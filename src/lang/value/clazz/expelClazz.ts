@@ -1,5 +1,5 @@
 import { applyClosure } from "../../closure"
-import { InternalError } from "../../errors"
+import * as Errors from "../../errors"
 import * as Neutrals from "../../neutral"
 import * as Values from "../../value"
 import { assertClazz, Value } from "../../value"
@@ -25,7 +25,9 @@ export function expelClazz(
 
       const freshName = freshNameMap.get(clazz.name)
       if (freshName === undefined) {
-        throw new InternalError(`expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`)
+        throw new Errors.InternalError(
+          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
+        )
       }
 
       const typedNeutral = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))

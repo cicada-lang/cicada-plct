@@ -1,7 +1,7 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
@@ -23,7 +23,7 @@ export function inferProperties(
       const property = properties[clazz.name]
       if (property === undefined) {
         // TODO improve error report
-        throw new ElaborationError(`missing property: ${clazz.name}`)
+        throw new Errors.ElaborationError(`missing property: ${clazz.name}`)
       }
 
       const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)

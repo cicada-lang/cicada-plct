@@ -6,7 +6,7 @@ import {
   Core,
   formatCore,
 } from "../core"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 
 export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   if (left.kind === "Var" && right.kind === "Var") {
@@ -67,7 +67,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.data !== right.data) {
-      throw new ElaborationError(
+      throw new Errors.ElaborationError(
         `alphaEquivalent expect left data: ${left.data} to be equal to right data: ${right.data}`,
       )
     }
@@ -91,7 +91,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
-      throw new ElaborationError(
+      throw new Errors.ElaborationError(
         `alphaEquivalent expect left name: ${left.name} to be equal to right name: ${right.name}`,
       )
     }
@@ -100,7 +100,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  throw new ElaborationError(
+  throw new Errors.ElaborationError(
     `alphaEquivalent is not implemented for left: ${formatCore(left)}, and right: ${formatCore(
       right,
     )}`,

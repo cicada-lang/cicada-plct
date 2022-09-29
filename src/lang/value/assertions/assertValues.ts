@@ -1,4 +1,4 @@
-import { ElaborationError } from "../../errors"
+import * as Errors from "../../errors"
 import { Value } from "../../value"
 
 type ValueConstructor = (...args: Array<any>) => Value
@@ -13,6 +13,8 @@ export function assertValues<T extends Array<ValueConstructor>>(
   const kinds = valueConstructors.map((x) => x.name)
 
   if (!kinds.includes(value.kind)) {
-    throw new ElaborationError(`expect value to have kind: ${kinds}, instead of: ${value.kind}`)
+    throw new Errors.ElaborationError(
+      `expect value to have kind: ${kinds}, instead of: ${value.kind}`,
+    )
   }
 }

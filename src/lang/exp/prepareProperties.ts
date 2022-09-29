@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
@@ -16,7 +16,7 @@ export function prepareProperties(
   for (const property of properties) {
     for (const [name, exp] of prepareProperty(mod, ctx, property)) {
       if (found.has(name)) {
-        throw new ElaborationError(`duplicate properties: ${name}`)
+        throw new Errors.ElaborationError(`duplicate properties: ${name}`)
       }
 
       record[name] = exp

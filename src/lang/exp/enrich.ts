@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer, Inferred } from "../exp"
 import { Mod } from "../mod"
@@ -53,7 +53,7 @@ function enrichWithoutInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred
     }
 
     default: {
-      throw new ElaborationError(`enrichWithoutInfer is not implemented for: ${exp.kind}`)
+      throw new Errors.ElaborationError(`enrichWithoutInfer is not implemented for: ${exp.kind}`)
     }
   }
 }

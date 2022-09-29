@@ -1,7 +1,7 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { check } from "../exp"
 import { Mod } from "../mod"
@@ -17,7 +17,7 @@ export function checkNewArgs(
   switch (clazz.kind) {
     case "ClazzNull": {
       if (args.length !== 0) {
-        throw new ElaborationError(`checkNewArgs too many arguments when calling new`)
+        throw new Errors.ElaborationError(`checkNewArgs too many arguments when calling new`)
       }
 
       return {}
@@ -25,7 +25,7 @@ export function checkNewArgs(
 
     case "ClazzCons": {
       if (args.length === 0) {
-        throw new ElaborationError(
+        throw new Errors.ElaborationError(
           `checkNewArgs not enough arguments when calling new, require property: ${clazz.name}`,
         )
       }

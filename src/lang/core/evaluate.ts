@@ -2,7 +2,7 @@ import * as Actions from "../actions"
 import { Closure } from "../closure"
 import { Core } from "../core"
 import { Env, EnvCons, lookupValueInEnv } from "../env"
-import { EvaluationError } from "../errors"
+import * as Errors from "../errors"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
 
@@ -12,7 +12,7 @@ export function evaluate(env: Env, core: Core): Value {
       const value = lookupValueInEnv(env, core.name)
 
       if (value === undefined) {
-        throw new EvaluationError(`Undefined name: ${core.name}`)
+        throw new Errors.EvaluationError(`Undefined name: ${core.name}`)
       }
 
       return value
@@ -97,7 +97,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     // default: {
-    //   throw new EvaluationError(
+    //   throw new Errors.EvaluationError(
     //     `evaluate is not implemented for core: ${core.kind}`,
     //   )
     // }

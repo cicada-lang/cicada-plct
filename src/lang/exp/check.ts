@@ -2,7 +2,7 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { checkByInfer, enrich, Exp } from "../exp"
 import { Mod } from "../mod"
@@ -119,7 +119,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     default: {
-      throw new ElaborationError(`check is not implemented for exp: ${exp.kind}`)
+      throw new Errors.ElaborationError(`check is not implemented for exp: ${exp.kind}`)
     }
   }
 }

@@ -1,12 +1,12 @@
 import { applyClosure } from "../../closure"
-import { EvaluationError } from "../../errors"
+import * as Errors from "../../errors"
 import * as Values from "../../value"
 import { assertClazz, Value } from "../../value"
 
 export function fulfillClazz(clazz: Values.Clazz, arg: Value): Values.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
-      throw new EvaluationError("cannot apply argument to ClazzNull")
+      throw new Errors.EvaluationError("cannot apply argument to ClazzNull")
     }
 
     case "ClazzCons": {

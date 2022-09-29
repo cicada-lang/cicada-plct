@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { EquationError } from "../errors"
+import * as Errors from "../errors"
 import { Solution, unifyNeutral } from "../solution"
 import { Value } from "../value"
 
@@ -23,12 +23,12 @@ export function unifyByValue(
       return
     }
 
-    throw new EquationError(
+    throw new Errors.EquationError(
       `unifyByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
     )
   }
 
-  throw new EquationError(
+  throw new Errors.EquationError(
     `unifyByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }

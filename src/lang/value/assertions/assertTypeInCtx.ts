@@ -1,5 +1,5 @@
 import { Ctx } from "../../ctx"
-import { ElaborationError } from "../../errors"
+import * as Errors from "../../errors"
 import { AlreadyType, Value } from "../../value"
 
 type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
@@ -18,7 +18,7 @@ export function assertTypeInCtx<T extends AlreadyTypeConstructor>(
   const kind = alreadyTypeConstructor.name
 
   if (value.kind !== kind) {
-    throw new ElaborationError(
+    throw new Errors.ElaborationError(
       `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`,
     )
   }

@@ -1,4 +1,4 @@
-import { InternalError } from "../../errors"
+import * as Errors from "../../errors"
 import * as Values from "../../value"
 
 export function prependFulfilledClazz(left: Values.Clazz, right: Values.Clazz): Values.Clazz {
@@ -8,7 +8,7 @@ export function prependFulfilledClazz(left: Values.Clazz, right: Values.Clazz): 
     }
 
     case "ClazzCons": {
-      throw new InternalError(`prependFulfilledClazz can not append ClazzCons.`)
+      throw new Errors.InternalError(`prependFulfilledClazz can not append ClazzCons.`)
     }
 
     case "ClazzFulfilled": {

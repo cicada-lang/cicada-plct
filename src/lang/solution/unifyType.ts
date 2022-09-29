@@ -1,6 +1,6 @@
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import { EquationError } from "../errors"
+import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import { Solution, unifyClazz, unifyNeutral, unifyPatternVar } from "../solution"
 import { freshen } from "../utils/freshen"
@@ -85,7 +85,7 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
     return
   }
 
-  throw new EquationError(
+  throw new Errors.EquationError(
     `unifyType is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

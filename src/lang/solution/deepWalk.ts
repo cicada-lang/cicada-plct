@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import { EquationError } from "../errors"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { deepWalkNeutral, deepWalkProperties, deepWalkType } from "../solution"
@@ -173,7 +173,7 @@ function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
     const valueNames = Object.keys(value.properties)
     const extraNames = _.difference(valueNames, clazzNames)
     if (extraNames.length > 0) {
-      throw new EquationError(`expect no extra common names: ${extraNames}`)
+      throw new Errors.EquationError(`expect no extra common names: ${extraNames}`)
     }
   }
 }

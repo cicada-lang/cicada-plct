@@ -2,7 +2,7 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
@@ -92,7 +92,7 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
     }
 
     default: {
-      throw new ElaborationError(`readbackType is not implemented for type: ${type.kind}`)
+      throw new Errors.ElaborationError(`readbackType is not implemented for type: ${type.kind}`)
     }
   }
 }

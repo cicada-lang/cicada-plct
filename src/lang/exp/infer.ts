@@ -2,7 +2,7 @@ import { applyClosure, Closure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, CtxFulfilled, lookupTypeInCtx, lookupValueInCtx } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
@@ -29,7 +29,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         return Inferred(type, Cores.Var(exp.name))
       }
 
-      throw new ElaborationError(`Undefined name ${exp.name}`)
+      throw new Errors.ElaborationError(`Undefined name ${exp.name}`)
     }
 
     case "Pi": {
@@ -191,7 +191,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "New": {
       const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
-        throw new ElaborationError(`undefined class: ${exp.name}`)
+        throw new Errors.ElaborationError(`undefined class: ${exp.name}`)
       }
 
       Values.assertClazzInCtx(ctx, clazz)
@@ -216,7 +216,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "NewAp": {
       const clazz = lookupValueInCtx(ctx, exp.name)
       if (clazz === undefined) {
-        throw new ElaborationError(`undefined class: ${exp.name}`)
+        throw new Errors.ElaborationError(`undefined class: ${exp.name}`)
       }
 
       Values.assertClazzInCtx(ctx, clazz)
@@ -260,7 +260,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     default: {
-      throw new ElaborationError(`infer is not implemented for: ${exp.kind}`)
+      throw new Errors.ElaborationError(`infer is not implemented for: ${exp.kind}`)
     }
   }
 }

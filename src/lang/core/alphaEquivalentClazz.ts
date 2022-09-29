@@ -1,6 +1,6 @@
 import * as Cores from "../core"
 import { AlphaCtx, alphaEquivalent } from "../core"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 
 /**
 
@@ -41,7 +41,7 @@ function alphaEquivalentClazzAfterReorder(
     return
   }
 
-  throw new ElaborationError(`alphaEquivalentClazz fail`)
+  throw new Errors.ElaborationError(`alphaEquivalentClazz fail`)
 }
 
 function reorderTheRightByTheLeft(
@@ -55,7 +55,7 @@ function reorderTheRightByTheLeft(
         return reordered
       }
 
-      throw new ElaborationError(`extract properties on the right clazz`)
+      throw new Errors.ElaborationError(`extract properties on the right clazz`)
     }
 
     case "ClazzCons": {
@@ -113,7 +113,7 @@ function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
 function findPropertyAndCreateClazz(name: string, clazz: Cores.Clazz): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
-      throw new ElaborationError(`expect to find ${name} in clazz`)
+      throw new Errors.ElaborationError(`expect to find ${name} in clazz`)
     }
 
     case "ClazzCons": {

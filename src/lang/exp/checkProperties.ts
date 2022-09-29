@@ -1,7 +1,7 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
-import { ElaborationError } from "../errors"
+import * as Errors from "../errors"
 import { check, Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
@@ -22,7 +22,7 @@ export function checkProperties(
       const property = properties[clazz.name]
       if (property === undefined) {
         // TODO improve error report
-        throw new ElaborationError(`missing property: ${clazz.name}`)
+        throw new Errors.ElaborationError(`missing property: ${clazz.name}`)
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
@@ -40,7 +40,7 @@ export function checkProperties(
       const property = properties[clazz.name]
       if (property === undefined) {
         // TODO improve error report
-        throw new ElaborationError(`missing property: ${clazz.name}`)
+        throw new Errors.ElaborationError(`missing property: ${clazz.name}`)
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
