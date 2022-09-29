@@ -40,13 +40,13 @@ export function inclusionClazz(
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
-      throw new Errors.ElaborationError(
+      throw new Errors.InclusionError(
         `inclusionClazz found missing property on subclazz class: ${name}`,
       )
     }
 
     if (subclazzProperty.value === undefined && clazzProperty.value !== undefined) {
-      throw new Errors.ElaborationError(
+      throw new Errors.InclusionError(
         `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
       )
     }

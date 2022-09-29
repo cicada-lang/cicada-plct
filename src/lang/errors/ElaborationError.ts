@@ -1,16 +1,8 @@
+import { Span } from "../span"
 import { LangError } from "./LangError"
 
 export class ElaborationError extends LangError {
-  constructor(public message: string) {
+  constructor(public message: string, public options: { span?: Span }) {
     super(message)
   }
 }
-
-// import { Span } from "../span"
-// import { LangError } from "./LangError"
-
-// export class ElaborationError extends LangError {
-//   constructor(public message: string, public options: { span: Span }) {
-//     super(message)
-//   }
-// }

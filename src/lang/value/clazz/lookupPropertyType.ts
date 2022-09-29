@@ -35,7 +35,7 @@ export function lookupPropertyType(
 export function lookupPropertyTypeOrFail(clazz: Values.Clazz, target: Value, name: string): Value {
   const propertyType = lookupPropertyType(clazz, target, name)
   if (propertyType === undefined) {
-    throw new Errors.ElaborationError(`Undefined property type name: ${name}`)
+    throw new Errors.EvaluationError(`Undefined property type name: ${name}`)
   }
 
   return propertyType

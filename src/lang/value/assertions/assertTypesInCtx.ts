@@ -21,7 +21,7 @@ export function assertTypesInCtx<T extends Array<AlreadyTypeConstructor>>(
   const kinds = alreadyTypeConstructors.map((x) => x.name)
 
   if (!kinds.includes(value.kind)) {
-    throw new Errors.ElaborationError(
+    throw new Errors.AssertionError(
       `expect value to be type and to have kind: ${kinds}, instead of: ${value.kind}`,
     )
   }

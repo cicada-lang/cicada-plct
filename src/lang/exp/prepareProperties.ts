@@ -16,7 +16,7 @@ export function prepareProperties(
   for (const property of properties) {
     for (const [name, exp] of prepareProperty(mod, ctx, property)) {
       if (found.has(name)) {
-        throw new Errors.ElaborationError(`duplicate properties: ${name}`)
+        throw new Errors.ElaborationError(`duplicate properties: ${name}`, {})
       }
 
       record[name] = exp

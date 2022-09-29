@@ -20,7 +20,7 @@ export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): 
     }
 
     default: {
-      throw new Errors.ElaborationError(
+      throw new Errors.ReadbackError(
         `readbackByValue is not implemented for type: ${type.kind}, and value: ${value.kind}`,
       )
     }

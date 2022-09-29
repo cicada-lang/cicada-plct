@@ -9,7 +9,9 @@ import { check } from "./check"
 export function checkClazzArg(mod: Mod, ctx: Ctx, clazz: Values.Clazz, arg: Exp): Core {
   switch (clazz.kind) {
     case "ClazzNull": {
-      throw new Errors.ElaborationError("cannot apply argument to ClazzNull")
+      throw new Errors.ElaborationError("cannot apply argument to ClazzNull", {
+        span: arg.span,
+      })
     }
 
     case "ClazzCons": {

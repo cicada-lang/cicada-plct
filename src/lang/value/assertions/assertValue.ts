@@ -10,8 +10,6 @@ export function assertValue<T extends ValueConstructor>(
   const kind = valueConstructor.name
 
   if (value.kind !== kind) {
-    throw new Errors.ElaborationError(
-      `expect value to have kind: ${kind}, instead of: ${value.kind}`,
-    )
+    throw new Errors.AssertionError(`expect value to have kind: ${kind}, instead of: ${value.kind}`)
   }
 }

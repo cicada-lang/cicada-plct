@@ -18,7 +18,7 @@ export function assertTypeInCtx<T extends AlreadyTypeConstructor>(
   const kind = alreadyTypeConstructor.name
 
   if (value.kind !== kind) {
-    throw new Errors.ElaborationError(
+    throw new Errors.AssertionError(
       `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`,
     )
   }

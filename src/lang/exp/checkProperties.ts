@@ -21,8 +21,7 @@ export function checkProperties(
     case "ClazzCons": {
       const property = properties[clazz.name]
       if (property === undefined) {
-        // TODO improve error report
-        throw new Errors.ElaborationError(`missing property: ${clazz.name}`)
+        throw new Errors.ElaborationError(`missing property: ${clazz.name}`, {})
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
@@ -39,8 +38,7 @@ export function checkProperties(
     case "ClazzFulfilled": {
       const property = properties[clazz.name]
       if (property === undefined) {
-        // TODO improve error report
-        throw new Errors.ElaborationError(`missing property: ${clazz.name}`)
+        throw new Errors.ElaborationError(`missing property: ${clazz.name}`, {})
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)

@@ -53,7 +53,9 @@ function enrichWithoutInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred
     }
 
     default: {
-      throw new Errors.ElaborationError(`enrichWithoutInfer is not implemented for: ${exp.kind}`)
+      throw new Errors.ElaborationError(`enrichWithoutInfer is not implemented for: ${exp.kind}`, {
+        span: exp.span,
+      })
     }
   }
 }

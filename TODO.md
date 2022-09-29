@@ -2,8 +2,6 @@
 
 https://github.com/cicada-lang/cicada/issues/40
 
-`ElaborationError` has `span`
-
 catch `ElaborationError` and print with `span`
 
 # [feature] unification need to implement occur check #52

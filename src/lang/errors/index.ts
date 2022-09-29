@@ -1,3 +1,4 @@
+export * from "./AssertionError"
 export * from "./ConversionError"
 export * from "./ElaborationError"
 export * from "./EquationError"
