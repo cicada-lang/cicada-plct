@@ -4,10 +4,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-extract deepWalkNeutral
-
-deepWalk -- fix TypedNeutral -- call deepWalkNeutral
-
 deepWalkNeutral
 
 - fix test "solve Ap -- deepWalk"

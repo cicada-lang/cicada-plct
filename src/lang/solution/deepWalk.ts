@@ -4,7 +4,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { EquationError } from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { deepWalkProperties, deepWalkType } from "../solution"
+import { deepWalkNeutral, deepWalkProperties, deepWalkType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -27,8 +27,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 
   switch (value.kind) {
     case "TypedNeutral": {
-      // TODO Maybe blocked can be eliminated now!
-      return value
+      return Values.TypedNeutral(value.type, deepWalkNeutral(mod, ctx, value.neutral))
     }
 
     case "Type": {
