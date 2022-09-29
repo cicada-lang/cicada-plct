@@ -12,14 +12,9 @@ export class Compute extends Stmt {
 
   async execute(mod: Mod): Promise<StmtOutput> {
     const inferred = infer(mod, mod.ctx, this.exp)
-    const value = evaluate(mod.env, inferred.core)
-    return formatTypedValue(
-      mod,
-      mod.ctx,
-      TypedValue(
-        mod.solution.deepWalk(mod, mod.ctx, inferred.type),
-        mod.solution.deepWalk(mod, mod.ctx, value),
-      ),
-    )
+    let value = evaluate(mod.env, inferred.core)
+    const type = mod.solution.deepWalkType(mod, mod.ctx, inferred.type)
+    value = mod.solution.deepWalk(mod, mod.ctx, type, value)
+    return formatTypedValue(mod, mod.ctx, TypedValue(type, value))
   }
 }

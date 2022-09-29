@@ -26,3 +26,18 @@ solve () {
 
   expect(output).toMatchInlineSnapshot('"{  }"')
 })
+
+test("solve FnImplicit -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (T: Type, f: (implicit _: Trivial) -> Type) {
+  unify f = (implicit _) => T
+  unify T = String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"{ T: String, f: (implicit _2) => String }"',
+  )
+})

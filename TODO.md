@@ -1,39 +1,46 @@
-drop some type in solve-objekt.test.ts
-
 # [feature] deepWalk
 
 https://github.com/cicada-lang/cicada/issues/78
 
-**Problem:** `deepWalk` need to do partial evaluation on `Fn`
+fix type of recursive call deepWalk in "Objekt"
 
-- **Solution 1:** `deepWalk` takes `type` as argument,
-  NOT because of it is doing eta-expansion,
-  but because of it need to do partial evaluation of `Fn`,
-  thus need `argType` to construct a `TypedNeutral`.
+- extract `deepWalkProperties`
 
-- **Solution 2:** `Values.Fn` and `Cores.Fn` always have `argType`
+- assert not extra properties
 
-deepWalk -- Fn
+deepWalk -- ClazzCons & ClazzFulfilled
 
-- "solve Fn -- deepWalk"
+- "solve Clazz -- deepWalk"
 
-deepWalk -- FnImplicit
+extract deepWalkNeutral
 
-- "solve FnImplicit -- deepWalk"
+deepWalk -- fix TypedNeutral -- call deepWalkNeutral
 
-deepWalk -- ClazzNull ClazzCons ClazzFulfilled
-
-deepWalk -- TypedNeutral
+deepWalkNeutral
 
 # [feature] unification between two Sigmas #53
 
 https://github.com/cicada-lang/cicada/issues/53
 
-extract deepWalkNeutral
-
 # format
 
 `formatCore` -- `Sigma` -- print `Pair` if not occured
+
+# [DX] error report #40
+
+https://github.com/cicada-lang/cicada/issues/40
+
+# [feature] support running markdown file directly #61
+
+https://github.com/cicada-lang/cicada/issues/61
+
+# [feature] unification need to implement occur check #52
+
+https://github.com/cicada-lang/cicada/issues/52
+
+# [feature] playground website #63
+
+https://github.com/cicada-lang/cicada/issues/63
 
 # [feature] equivalence #43
 

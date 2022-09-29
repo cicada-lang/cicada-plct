@@ -62,6 +62,6 @@ solve (a: String, b: String, c: Pair(String, String)) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: cons(\\"a\\", \\"a\\") }"',
+    '"{ a: \\"a\\", b: \\"b\\", c: cons(\\"a\\", \\"b\\") }"',
   )
 })

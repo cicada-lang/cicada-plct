@@ -9,7 +9,7 @@ compute the
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"(T1, x1) => x1: (T1: Type, x1: T1) -> T1"',
+    '"(T2, x11) => x11: (T2: Type, x11: T2) -> T2"',
   )
 })
 
