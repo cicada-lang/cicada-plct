@@ -26,8 +26,7 @@ export function unifyByType(
       return "ok"
     }
 
-    case "Pi":
-    case "PiImplicit": {
+    case "Pi": {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...solution.names]
       const freshName = freshen(usedNames, name)
@@ -37,6 +36,20 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
+      unify(solution, ctx, retType, leftRet, rightRet)
+      return "ok"
+    }
+
+    case "PiImplicit": {
+      const name = type.retTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, name)
+      const variable = Neutrals.Var(freshName)
+      const typedNeutral = Values.TypedNeutral(type.argType, variable)
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      ctx = CtxCons(freshName, type.argType, ctx)
+      const leftRet = Actions.doApImplicit(left, typedNeutral)
+      const rightRet = Actions.doApImplicit(right, typedNeutral)
       unify(solution, ctx, retType, leftRet, rightRet)
       return "ok"
     }

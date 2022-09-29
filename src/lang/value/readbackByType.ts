@@ -63,7 +63,7 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
       const typedNeutral = Values.TypedNeutral(type.argType, variable)
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const ret = Actions.doAp(value, typedNeutral)
+      const ret = Actions.doApImplicit(value, typedNeutral)
       return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
     }
 
