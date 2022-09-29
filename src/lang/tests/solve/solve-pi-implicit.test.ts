@@ -28,6 +28,6 @@ solve (A: Type, B: Type, C: Type) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ A: String, B: String, C: (implicit _1: String) -> String }"',
+    '"{ A: String, B: String, C: (implicit _: String) -> String }"',
   )
 })

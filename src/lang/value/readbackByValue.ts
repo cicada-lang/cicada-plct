@@ -5,12 +5,7 @@ import { ElaborationError } from "../errors"
 import { Mod } from "../mod"
 import { readbackNeutral, Value } from "../value"
 
-export function readbackByValue(
-  mod: Mod,
-  ctx: Ctx,
-  type: Value,
-  value: Value,
-): Core {
+export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
   switch (value.kind) {
     case "TypedNeutral": {
       /**

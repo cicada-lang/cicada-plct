@@ -1,10 +1,7 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function foldSigma(
-  bindings: Array<Exps.SigmaBinding>,
-  cdrType: Exp,
-): Exp {
+export function foldSigma(bindings: Array<Exps.SigmaBinding>, cdrType: Exp): Exp {
   if (bindings.length === 0) return cdrType
 
   const [binding, ...restBindings] = bindings
@@ -15,11 +12,7 @@ export function foldSigma(
     }
 
     case "SigmaBindingNamed": {
-      return Exps.Sigma(
-        binding.name,
-        binding.type,
-        foldSigma(restBindings, cdrType),
-      )
+      return Exps.Sigma(binding.name, binding.type, foldSigma(restBindings, cdrType))
     }
   }
 }

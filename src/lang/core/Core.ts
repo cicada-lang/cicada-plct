@@ -55,11 +55,7 @@ export type PiImplicit = {
   retType: Core
 }
 
-export function PiImplicit(
-  name: string,
-  argType: Core,
-  retType: Core,
-): PiImplicit {
+export function PiImplicit(name: string, argType: Core, retType: Core): PiImplicit {
   return {
     family: "Core",
     kind: "PiImplicit",
@@ -212,8 +208,8 @@ export function Quote(data: string): Quote {
 
    ## name v.s. localName in Clazz
 
-   We can not only use `name` we also need `localName`,
-   because of `subst` might rename bound variables.
+   We can not only use `name`, we also need `localName`,
+   because during `readback` bound variables might be renamed.
 
 **/
 

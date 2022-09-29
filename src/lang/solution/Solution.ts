@@ -48,9 +48,7 @@ export class Solution {
     if (value.kind !== "TypedNeutral") return false
     if (value.neutral.kind !== "Var") return false
     const name = value.neutral.name
-    return Boolean(
-      this.patternVars.find((patternVar) => patternVar.neutral.name === name),
-    )
+    return Boolean(this.patternVars.find((patternVar) => patternVar.neutral.name === name))
   }
 
   bind(name: string, value: Value): void {
@@ -60,8 +58,7 @@ export class Solution {
   private lookupValue(name: string): Value | undefined {
     const value = this.bindings.get(name)
     if (value === undefined) return undefined
-    if (this.isPatternVar(value) && value.neutral.name === name)
-      return undefined
+    if (this.isPatternVar(value) && value.neutral.name === name) return undefined
     return value
   }
 

@@ -1,13 +1,7 @@
 import { ElaborationError } from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import {
-  assertClazz,
-  assertValue,
-  isValue,
-  lookupPropertyTypeOrFail,
-  Value,
-} from "../value"
+import { assertClazz, assertValue, isValue, lookupPropertyTypeOrFail, Value } from "../value"
 
 export function doDot(target: Value, name: string): Value {
   if (isValue(target, Values.Objekt)) {

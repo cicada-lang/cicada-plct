@@ -9,9 +9,7 @@ export class AppReplEventHandler extends ReplEventHandler {
 
   constructor() {
     super()
-    this.loader.fetcher.register("file", (url) =>
-      fs.promises.readFile(url.pathname, "utf8"),
-    )
+    this.loader.fetcher.register("file", (url) => fs.promises.readFile(url.pathname, "utf8"))
     this.loader.fetcher.register("repl", (url) =>
       url.pathname ? fs.promises.readFile("./" + url.pathname, "utf8") : "",
     )

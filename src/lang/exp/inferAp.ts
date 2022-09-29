@@ -9,12 +9,7 @@ import { unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
-export function inferAp(
-  mod: Mod,
-  ctx: Ctx,
-  inferred: Inferred,
-  argExp: Exp,
-): Inferred {
+export function inferAp(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
   if (Values.isValue(inferred.type, Values.PiImplicit)) {
     return inferApPiImplicit(mod, ctx, inferred, argExp)
   } else {
@@ -22,12 +17,7 @@ export function inferAp(
   }
 }
 
-function inferApPiImplicit(
-  mod: Mod,
-  ctx: Ctx,
-  inferred: Inferred,
-  argExp: Exp,
-): Inferred {
+function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
   Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
 
   const name = inferred.type.retTypeClosure.name
@@ -35,36 +25,21 @@ function inferApPiImplicit(
      NOTE `freshName` might occur in `argExp`.
    **/
   const boundNames = new Set(ctxNames(ctx))
-  const usedNames = [
-    ...boundNames,
-    ...mod.solution.names,
-    ...Exps.freeNames(boundNames, argExp),
-  ]
+  const usedNames = [...boundNames, ...mod.solution.names, ...Exps.freeNames(boundNames, argExp)]
   const freshName = freshen(usedNames, name)
-  const patternVar = mod.solution.createPatternVar(
-    freshName,
-    inferred.type.argType,
-  )
+  const patternVar = mod.solution.createPatternVar(freshName, inferred.type.argType)
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 
   /**
      `ApImplicit` insertion.
   **/
-  inferred = Inferred(
-    retType,
-    Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
-  )
+  inferred = Inferred(retType, Cores.ApImplicit(inferred.core, Cores.Var(freshName)))
 
   return inferAp(mod, ctx, inferred, argExp)
 }
 
-function inferApPi(
-  mod: Mod,
-  ctx: Ctx,
-  inferred: Inferred,
-  argExp: Exp,
-): Inferred {
+function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
   Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)

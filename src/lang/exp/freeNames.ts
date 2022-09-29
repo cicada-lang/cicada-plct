@@ -26,17 +26,11 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Ap": {
-      return new Set([
-        ...freeNames(boundNames, exp.target),
-        ...freeNames(boundNames, exp.arg),
-      ])
+      return new Set([...freeNames(boundNames, exp.target), ...freeNames(boundNames, exp.arg)])
     }
 
     case "ApImplicit": {
-      return new Set([
-        ...freeNames(boundNames, exp.target),
-        ...freeNames(boundNames, exp.arg),
-      ])
+      return new Set([...freeNames(boundNames, exp.target), ...freeNames(boundNames, exp.arg)])
     }
 
     case "ApUnfolded": {
@@ -44,9 +38,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Fn": {
-      return new Set([
-        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-      ])
+      return new Set([...freeNames(new Set([...boundNames, exp.name]), exp.ret)])
     }
 
     case "FnAnnotated": {
@@ -57,9 +49,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "FnImplicit": {
-      return new Set([
-        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-      ])
+      return new Set([...freeNames(new Set([...boundNames, exp.name]), exp.ret)])
     }
 
     case "FnImplicitAnnotated": {
@@ -74,10 +64,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "FnUnfoldedWithRetType": {
-      return freeNames(
-        boundNames,
-        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
-      )
+      return freeNames(boundNames, Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret))
     }
 
     case "Sigma": {
@@ -92,10 +79,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Cons": {
-      return new Set([
-        ...freeNames(boundNames, exp.car),
-        ...freeNames(boundNames, exp.cdr),
-      ])
+      return new Set([...freeNames(boundNames, exp.car), ...freeNames(boundNames, exp.cdr)])
     }
 
     case "Car": {
@@ -143,9 +127,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
 
     case "ObjektUnfolded": {
       return new Set(
-        exp.properties.flatMap((property) =>
-          Array.from(freeNames(boundNames, property.exp)),
-        ),
+        exp.properties.flatMap((property) => Array.from(freeNames(boundNames, property.exp))),
       )
     }
 
@@ -159,16 +141,12 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
 
     case "NewUnfolded": {
       return new Set(
-        exp.properties.flatMap((property) =>
-          Array.from(freeNames(boundNames, property.exp)),
-        ),
+        exp.properties.flatMap((property) => Array.from(freeNames(boundNames, property.exp))),
       )
     }
 
     case "NewAp": {
-      return new Set(
-        exp.args.flatMap((arg) => Array.from(freeNames(boundNames, arg.exp))),
-      )
+      return new Set(exp.args.flatMap((arg) => Array.from(freeNames(boundNames, arg.exp))))
     }
 
     case "Dot": {

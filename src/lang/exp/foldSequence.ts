@@ -1,21 +1,14 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function foldSequence(
-  bindings: Array<Exps.SequenceBinding>,
-  ret: Exp,
-): Exp {
+export function foldSequence(bindings: Array<Exps.SequenceBinding>, ret: Exp): Exp {
   if (bindings.length === 0) return ret
 
   const [binding, ...restBindings] = bindings
 
   switch (binding.kind) {
     case "SequenceBindingLet": {
-      return Exps.SequenceLet(
-        binding.name,
-        binding.exp,
-        foldSequence(restBindings, ret),
-      )
+      return Exps.SequenceLet(binding.name, binding.exp, foldSequence(restBindings, ret))
     }
 
     case "SequenceBindingLetThe": {
@@ -28,11 +21,7 @@ export function foldSequence(
     }
 
     case "SequenceBindingCheck": {
-      return Exps.SequenceCheck(
-        binding.exp,
-        binding.type,
-        foldSequence(restBindings, ret),
-      )
+      return Exps.SequenceCheck(binding.exp, binding.type, foldSequence(restBindings, ret))
     }
   }
 }

@@ -17,10 +17,7 @@ export function lookupPropertyType(
     case "ClazzCons": {
       if (clazz.name === name) return clazz.propertyType
 
-      const rest = applyClosure(
-        clazz.restClosure,
-        Actions.doDot(target, clazz.name),
-      )
+      const rest = applyClosure(clazz.restClosure, Actions.doDot(target, clazz.name))
 
       assertClazz(rest)
 
@@ -35,11 +32,7 @@ export function lookupPropertyType(
   }
 }
 
-export function lookupPropertyTypeOrFail(
-  clazz: Values.Clazz,
-  target: Value,
-  name: string,
-): Value {
+export function lookupPropertyTypeOrFail(clazz: Values.Clazz, target: Value, name: string): Value {
   const propertyType = lookupPropertyType(clazz, target, name)
   if (propertyType === undefined) {
     throw new ElaborationError(`Undefined property type name: ${name}`)

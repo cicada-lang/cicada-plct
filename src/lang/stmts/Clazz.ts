@@ -6,11 +6,7 @@ import { Span } from "../span"
 import { Stmt } from "../stmt"
 
 export class Clazz extends Stmt {
-  constructor(
-    public name: string,
-    public clazz: Exps.ClazzUnfolded,
-    public span?: Span,
-  ) {
+  constructor(public name: string, public clazz: Exps.ClazzUnfolded, public span?: Span) {
     super()
   }
 

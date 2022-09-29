@@ -1,13 +1,7 @@
 import { applyClosure, Closure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import {
-  Ctx,
-  CtxCons,
-  CtxFulfilled,
-  lookupTypeInCtx,
-  lookupValueInCtx,
-} from "../ctx"
+import { Ctx, CtxCons, CtxFulfilled, lookupTypeInCtx, lookupValueInCtx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
@@ -43,10 +37,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
-      return Inferred(
-        Values.Type(),
-        Cores.Pi(exp.name, argTypeCore, retTypeCore),
-      )
+      return Inferred(Values.Type(), Cores.Pi(exp.name, argTypeCore, retTypeCore))
     }
 
     case "PiImplicit": {
@@ -54,10 +45,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
-      return Inferred(
-        Values.Type(),
-        Cores.PiImplicit(exp.name, argTypeCore, retTypeCore),
-      )
+      return Inferred(Values.Type(), Cores.PiImplicit(exp.name, argTypeCore, retTypeCore))
     }
 
     case "PiUnfolded": {
@@ -71,10 +59,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
       const retTypeClosure = Closure(mod.ctxToEnv(ctx), exp.name, retTypeCore)
-      return Inferred(
-        Values.Pi(argTypeValue, retTypeClosure),
-        Cores.Fn(exp.name, retInferred.core),
-      )
+      return Inferred(Values.Pi(argTypeValue, retTypeClosure), Cores.Fn(exp.name, retInferred.core))
     }
 
     case "FnImplicitAnnotated": {
@@ -95,11 +80,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "FnUnfoldedWithRetType": {
-      return infer(
-        mod,
-        ctx,
-        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
-      )
+      return infer(mod, ctx, Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret))
     }
 
     case "Ap": {
@@ -130,10 +111,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const carTypeValue = evaluate(mod.ctxToEnv(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = Exps.checkType(mod, ctx, exp.cdrType)
-      return Inferred(
-        Values.Type(),
-        Cores.Sigma(exp.name, carTypeCore, cdrTypeCore),
-      )
+      return Inferred(Values.Type(), Cores.Sigma(exp.name, carTypeCore, cdrTypeCore))
     }
 
     case "SigmaUnfolded": {
@@ -152,10 +130,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
       const sigma = inferred.type
       const carValue = evaluate(mod.ctxToEnv(ctx), Cores.Car(inferred.core))
-      return Inferred(
-        applyClosure(sigma.cdrTypeClosure, carValue),
-        Cores.Cdr(inferred.core),
-      )
+      return Inferred(applyClosure(sigma.cdrTypeClosure, carValue), Cores.Cdr(inferred.core))
     }
 
     case "Cons": {
@@ -197,36 +172,20 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ObjektUnfolded": {
-      return infer(
-        mod,
-        ctx,
-        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
-      )
+      return infer(mod, ctx, Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)))
     }
 
     case "Dot": {
       const inferred = infer(mod, ctx, exp.target)
       const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(ctx, inferred.type)
-      const propertyType = Values.lookupPropertyTypeOrFail(
-        inferred.type,
-        targetValue,
-        exp.name,
-      )
-      const property = Values.lookupPropertyOrFail(
-        inferred.type,
-        targetValue,
-        exp.name,
-      )
+      const propertyType = Values.lookupPropertyTypeOrFail(inferred.type, targetValue, exp.name)
+      const property = Values.lookupPropertyOrFail(inferred.type, targetValue, exp.name)
       return Inferred(propertyType, readback(mod, ctx, propertyType, property))
     }
 
     case "NewUnfolded": {
-      return infer(
-        mod,
-        ctx,
-        Exps.New(exp.name, Exps.prepareProperties(mod, ctx, exp.properties)),
-      )
+      return infer(mod, ctx, Exps.New(exp.name, Exps.prepareProperties(mod, ctx, exp.properties)))
     }
 
     case "New": {

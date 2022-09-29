@@ -57,9 +57,7 @@ compute new The {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ T: String, x: \\"x\\" }: class { T: Type, x: T }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ T: String, x: \\"x\\" }: class { T: Type, x: T }"')
 })
 
 test("compute New -- extra properties", async () => {

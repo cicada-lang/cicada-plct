@@ -78,10 +78,7 @@ class {
         Exps.ClazzBindingFulfilled(
           "id",
           Exps.PiUnfolded(
-            [
-              Exps.PiBindingNamed("T", Exps.Var("Type")),
-              Exps.PiBindingNamed("x", Exps.Var("T")),
-            ],
+            [Exps.PiBindingNamed("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
             Exps.Var("T"),
           ),
           Exps.FnUnfolded(

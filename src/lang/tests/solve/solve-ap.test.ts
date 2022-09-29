@@ -10,9 +10,7 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((_: String) -> String), x: TODO(String) }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ f: TODO((_: String) -> String), x: TODO(String) }"')
 })
 
 test("solve Ap -- PatternVar v.s. String", async () => {
@@ -24,7 +22,20 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
+  expect(output).toMatchInlineSnapshot('"{ f: TODO((_: String) -> String), x: \\"abc\\" }"')
+})
+
+test("solve Ap -- deepWalk", async () => {
+  const output = await runCode(`
+
+solve (f: (String) -> String, x: String, c: String) {
+  unify c = f(x)
+  unify f(x) = f("abc")
+}
+
+`)
+
   expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((_: String) -> String), x: \\"abc\\" }"',
+    '"{ f: TODO((_: String) -> String), x: \\"abc\\", c: f(x) }"',
   )
 })

@@ -16,11 +16,7 @@ export function foldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
     }
 
     case "PiBindingImplicit": {
-      return Exps.PiImplicit(
-        binding.name,
-        binding.type,
-        foldPi(restBindings, retType),
-      )
+      return Exps.PiImplicit(binding.name, binding.type, foldPi(restBindings, retType))
     }
   }
 }

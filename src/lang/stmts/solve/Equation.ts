@@ -9,11 +9,7 @@ export type EquationUnifyTyped = {
   type: Exp
 }
 
-export function EquationUnifyTyped(
-  left: Exp,
-  right: Exp,
-  type: Exp,
-): EquationUnifyTyped {
+export function EquationUnifyTyped(left: Exp, right: Exp, type: Exp): EquationUnifyTyped {
   return {
     kind: "EquationUnifyTyped",
     left,

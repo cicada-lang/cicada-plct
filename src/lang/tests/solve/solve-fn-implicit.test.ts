@@ -6,6 +6,20 @@ test("solve FnImplicit", async () => {
 
 solve (x: String) {
   unify
+    (implicit A: Type, a: A) => x =
+    (implicit A: Type, a: A) => "abc"
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
+})
+
+test("solve FnImplicit -- 2", async () => {
+  const output = await runCode(`
+
+solve (x: String) {
+  unify
     (implicit A: Type, implicit B: Type, a: A, b: B) => x =
     (implicit A: Type, implicit B: Type, a: A, b: B) => "abc"
 }
@@ -37,7 +51,5 @@ solve (T: Type, f: (implicit _: Trivial) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ T: String, f: (implicit _2) => String }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ T: String, f: (implicit _) => String }"')
 })

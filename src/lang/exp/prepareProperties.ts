@@ -27,11 +27,7 @@ export function prepareProperties(
   return record
 }
 
-export function prepareProperty(
-  mod: Mod,
-  ctx: Ctx,
-  property: Exps.Property,
-): Array<[string, Exp]> {
+export function prepareProperty(mod: Mod, ctx: Ctx, property: Exps.Property): Array<[string, Exp]> {
   switch (property.kind) {
     case "PropertyPlain": {
       return [[property.name, property.exp]]

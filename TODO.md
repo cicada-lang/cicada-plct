@@ -1,18 +1,13 @@
+[maybe] do not need `freshen` in `readback` and `deepWalk`
+
 # [feature] deepWalk
 
 https://github.com/cicada-lang/cicada/issues/78
 
-fix type of recursive call deepWalk in "Objekt"
-
-- extract `deepWalkProperties`
-
-- assert not extra properties
-
-deepWalk -- ClazzCons & ClazzFulfilled
-
-- "solve Clazz -- deepWalk"
-
 extract deepWalkNeutral
+add "solve Ap -- deepWalk"
+
+- pass "solve Ap -- deepWalk"
 
 deepWalk -- fix TypedNeutral -- call deepWalkNeutral
 

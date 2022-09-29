@@ -5,9 +5,7 @@ import { deleteUndefined } from "../utils"
 
 test("parse ApImplicit", () => {
   expect(parseExp("f(implicit x)")).toMatchObject(
-    deleteUndefined(
-      Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgImplicit(Exps.Var("x"))]),
-    ),
+    deleteUndefined(Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgImplicit(Exps.Var("x"))])),
   )
 
   expect(parseExp("f(implicit x, y)")).toMatchObject(

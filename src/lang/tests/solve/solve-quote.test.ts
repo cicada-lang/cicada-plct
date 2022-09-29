@@ -26,9 +26,7 @@ solve (a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"')
 })
 
 test("solve Quote -- walk", async () => {
@@ -42,7 +40,5 @@ solve (a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"a\\", c: \\"a\\" }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"a\\", c: \\"a\\" }"')
 })

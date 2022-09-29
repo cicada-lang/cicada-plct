@@ -49,29 +49,9 @@ export const operator = {
 
 export const operand = {
   $grammar: {
-    "operand:pi": [
-      '"("',
-      { bindings: "pi_bindings" },
-      '")"',
-      '"-"',
-      '">"',
-      { ret_t: "exp" },
-    ],
-    "operand:pi_forall": [
-      '"forall"',
-      '"("',
-      { bindings: "pi_bindings" },
-      '")"',
-      { ret_t: "exp" },
-    ],
-    "operand:fn": [
-      '"("',
-      { bindings: "fn_bindings" },
-      '")"',
-      '"="',
-      '">"',
-      { ret: "exp" },
-    ],
+    "operand:pi": ['"("', { bindings: "pi_bindings" }, '")"', '"-"', '">"', { ret_t: "exp" }],
+    "operand:pi_forall": ['"forall"', '"("', { bindings: "pi_bindings" }, '")"', { ret_t: "exp" }],
+    "operand:fn": ['"("', { bindings: "fn_bindings" }, '")"', '"="', '">"', { ret: "exp" }],
     "operand:fn_function": [
       '"function"',
       '"("',
@@ -95,14 +75,7 @@ export const operand = {
       '")"',
       { cdr_t: "exp" },
     ],
-    "operand:cons": [
-      '"cons"',
-      '"("',
-      { car: "exp" },
-      '","',
-      { cdr: "exp" },
-      '")"',
-    ],
+    "operand:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "operand:quote": [{ data: { $pattern: ["string"] } }],
     "operand:clazz": [
       '"class"',
@@ -126,12 +99,6 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:new_ap": [
-      '"new"',
-      { name: "name" },
-      '"("',
-      { args: "args" },
-      '")"',
-    ],
+    "operand:new_ap": ['"new"', { name: "name" }, '"("', { args: "args" }, '")"'],
   },
 }

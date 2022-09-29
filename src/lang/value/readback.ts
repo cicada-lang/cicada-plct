@@ -18,8 +18,5 @@ import { readbackByType, readbackByValue, Value } from "../value"
 **/
 
 export function readback(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
-  return (
-    readbackByType(mod, ctx, type, value) ||
-    readbackByValue(mod, ctx, type, value)
-  )
+  return readbackByType(mod, ctx, type, value) || readbackByValue(mod, ctx, type, value)
 }

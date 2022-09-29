@@ -17,14 +17,7 @@ export type Value =
   | Clazz
   | Objekt
 
-export type AlreadyType =
-  | Type
-  | Pi
-  | PiImplicit
-  | Sigma
-  | String
-  | Trivial
-  | Clazz
+export type AlreadyType = Type | Pi | PiImplicit | Sigma | String | Trivial | Clazz
 
 export type TypedNeutral = {
   family: "Value"
@@ -77,10 +70,7 @@ export type PiImplicit = {
   retTypeClosure: Closure
 }
 
-export function PiImplicit(
-  argType: Value,
-  retTypeClosure: Closure,
-): PiImplicit {
+export function PiImplicit(argType: Value, retTypeClosure: Closure): PiImplicit {
   return {
     family: "Value",
     kind: "PiImplicit",
@@ -221,11 +211,7 @@ export type ClazzCons = {
   restClosure: Closure
 }
 
-export function ClazzCons(
-  name: string,
-  propertyType: Value,
-  restClosure: Closure,
-): ClazzCons {
+export function ClazzCons(name: string, propertyType: Value, restClosure: Closure): ClazzCons {
   return {
     family: "Value",
     kind: "ClazzCons",

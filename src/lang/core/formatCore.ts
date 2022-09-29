@@ -55,11 +55,10 @@ export function formatCore(core: Core): string {
     }
 
     case "Objekt": {
-      const properties = Object.entries(core.properties).map(
-        ([name, property]) =>
-          isIdentifier(name)
-            ? `${name}: ${formatCore(property)}`
-            : `"${name}": ${formatCore(property)}`,
+      const properties = Object.entries(core.properties).map(([name, property]) =>
+        isIdentifier(name)
+          ? `${name}: ${formatCore(property)}`
+          : `"${name}": ${formatCore(property)}`,
       )
 
       return `{ ${properties.join(", ")} }`

@@ -89,12 +89,7 @@ export type PiImplicit = {
   retType: Exp
 } & ExpMeta
 
-export function PiImplicit(
-  name: string,
-  argType: Exp,
-  retType: Exp,
-  span?: Span,
-): PiImplicit {
+export function PiImplicit(name: string, argType: Exp, retType: Exp, span?: Span): PiImplicit {
   return {
     family: "Exp",
     kind: "PiImplicit",
@@ -112,11 +107,7 @@ export type PiUnfolded = {
   retType: Exp
 } & ExpMeta
 
-export function PiUnfolded(
-  bindings: Array<PiBinding>,
-  retType: Exp,
-  span?: Span,
-): PiUnfolded {
+export function PiUnfolded(bindings: Array<PiBinding>, retType: Exp, span?: Span): PiUnfolded {
   return {
     family: "Exp",
     kind: "PiUnfolded",
@@ -193,12 +184,7 @@ export type FnAnnotated = {
   ret: Exp
 } & ExpMeta
 
-export function FnAnnotated(
-  name: string,
-  argType: Exp,
-  ret: Exp,
-  span?: Span,
-): FnAnnotated {
+export function FnAnnotated(name: string, argType: Exp, ret: Exp, span?: Span): FnAnnotated {
   return {
     family: "Exp",
     kind: "FnAnnotated",
@@ -257,11 +243,7 @@ export type FnUnfolded = {
   ret: Exp
 } & ExpMeta
 
-export function FnUnfolded(
-  bindings: Array<FnBinding>,
-  ret: Exp,
-  span?: Span,
-): FnUnfolded {
+export function FnUnfolded(bindings: Array<FnBinding>, ret: Exp, span?: Span): FnUnfolded {
   return {
     family: "Exp",
     kind: "FnUnfolded",
@@ -319,10 +301,7 @@ export type FnBindingAnnotated = {
   type: Exp
 }
 
-export function FnBindingAnnotated(
-  name: string,
-  type: Exp,
-): FnBindingAnnotated {
+export function FnBindingAnnotated(name: string, type: Exp): FnBindingAnnotated {
   return {
     kind: "FnBindingAnnotated",
     name,
@@ -348,10 +327,7 @@ export type FnBindingAnnotatedImplicit = {
   type: Exp
 }
 
-export function FnBindingAnnotatedImplicit(
-  name: string,
-  type: Exp,
-): FnBindingAnnotatedImplicit {
+export function FnBindingAnnotatedImplicit(name: string, type: Exp): FnBindingAnnotatedImplicit {
   return {
     kind: "FnBindingAnnotatedImplicit",
     name,
@@ -400,11 +376,7 @@ export type ApUnfolded = {
   args: Array<Arg>
 } & ExpMeta
 
-export function ApUnfolded(
-  target: Exp,
-  args: Array<Arg>,
-  span?: Span,
-): ApUnfolded {
+export function ApUnfolded(target: Exp, args: Array<Arg>, span?: Span): ApUnfolded {
   return {
     family: "Exp",
     kind: "ApUnfolded",
@@ -448,12 +420,7 @@ export type Sigma = {
   cdrType: Exp
 } & ExpMeta
 
-export function Sigma(
-  name: string,
-  carType: Exp,
-  cdrType: Exp,
-  span?: Span,
-): Sigma {
+export function Sigma(name: string, carType: Exp, cdrType: Exp, span?: Span): Sigma {
   return {
     family: "Exp",
     kind: "Sigma",
@@ -598,12 +565,7 @@ export type ClazzCons = {
   rest: Clazz
 } & ExpMeta
 
-export function ClazzCons(
-  name: string,
-  propertyType: Exp,
-  rest: Clazz,
-  span?: Span,
-): ClazzCons {
+export function ClazzCons(name: string, propertyType: Exp, rest: Clazz, span?: Span): ClazzCons {
   return {
     family: "Exp",
     kind: "ClazzCons",
@@ -647,10 +609,7 @@ export type ClazzUnfolded = {
   bindings: Array<ClazzBinding>
 } & ExpMeta
 
-export function ClazzUnfolded(
-  bindings: Array<ClazzBinding>,
-  span?: Span,
-): ClazzUnfolded {
+export function ClazzUnfolded(bindings: Array<ClazzBinding>, span?: Span): ClazzUnfolded {
   return {
     family: "Exp",
     kind: "ClazzUnfolded",
@@ -667,10 +626,7 @@ export type ClazzBindingAbstract = {
   propertyType: Exp
 }
 
-export function ClazzBindingAbstract(
-  name: string,
-  propertyType: Exp,
-): ClazzBindingAbstract {
+export function ClazzBindingAbstract(name: string, propertyType: Exp): ClazzBindingAbstract {
   return {
     kind: "ClazzBindingAbstract",
     name,
@@ -719,10 +675,7 @@ export type ObjektUnfolded = {
   properties: Array<Property>
 } & ExpMeta
 
-export function ObjektUnfolded(
-  properties: Array<Property>,
-  span?: Span,
-): ObjektUnfolded {
+export function ObjektUnfolded(properties: Array<Property>, span?: Span): ObjektUnfolded {
   return {
     family: "Exp",
     kind: "ObjektUnfolded",
@@ -766,11 +719,7 @@ export type New = {
   properties: Record<string, Exp>
 } & ExpMeta
 
-export function New(
-  name: string,
-  properties: Record<string, Exp>,
-  span?: Span,
-): New {
+export function New(name: string, properties: Record<string, Exp>, span?: Span): New {
   return {
     family: "Exp",
     kind: "New",
@@ -787,11 +736,7 @@ export type NewUnfolded = {
   properties: Array<Property>
 } & ExpMeta
 
-export function NewUnfolded(
-  name: string,
-  properties: Array<Property>,
-  span?: Span,
-): NewUnfolded {
+export function NewUnfolded(name: string, properties: Array<Property>, span?: Span): NewUnfolded {
   return {
     family: "Exp",
     kind: "NewUnfolded",
@@ -845,12 +790,7 @@ export type SequenceLet = {
   ret: Exp
 } & ExpMeta
 
-export function SequenceLet(
-  name: string,
-  exp: Exp,
-  ret: Exp,
-  span?: Span,
-): SequenceLet {
+export function SequenceLet(name: string, exp: Exp, ret: Exp, span?: Span): SequenceLet {
   return {
     family: "Exp",
     kind: "SequenceLet",
@@ -896,12 +836,7 @@ export type SequenceCheck = {
   ret: Exp
 } & ExpMeta
 
-export function SequenceCheck(
-  exp: Exp,
-  type: Exp,
-  ret: Exp,
-  span?: Span,
-): SequenceCheck {
+export function SequenceCheck(exp: Exp, type: Exp, ret: Exp, span?: Span): SequenceCheck {
   return {
     family: "Exp",
     kind: "SequenceCheck",
@@ -933,10 +868,7 @@ export function SequenceUnfolded(
   }
 }
 
-export type SequenceBinding =
-  | SequenceBindingLet
-  | SequenceBindingLetThe
-  | SequenceBindingCheck
+export type SequenceBinding = SequenceBindingLet | SequenceBindingLetThe | SequenceBindingCheck
 
 export type SequenceBindingLet = {
   kind: "SequenceBindingLet"
@@ -959,11 +891,7 @@ export type SequenceBindingLetThe = {
   exp: Exp
 }
 
-export function SequenceBindingLetThe(
-  name: string,
-  type: Exp,
-  exp: Exp,
-): SequenceBindingLetThe {
+export function SequenceBindingLetThe(name: string, type: Exp, exp: Exp): SequenceBindingLetThe {
   return {
     kind: "SequenceBindingLetThe",
     name,
@@ -978,10 +906,7 @@ export type SequenceBindingCheck = {
   type: Exp
 }
 
-export function SequenceBindingCheck(
-  exp: Exp,
-  type: Exp,
-): SequenceBindingCheck {
+export function SequenceBindingCheck(exp: Exp, type: Exp): SequenceBindingCheck {
   return {
     kind: "SequenceBindingCheck",
     exp,

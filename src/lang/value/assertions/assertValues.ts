@@ -13,8 +13,6 @@ export function assertValues<T extends Array<ValueConstructor>>(
   const kinds = valueConstructors.map((x) => x.name)
 
   if (!kinds.includes(value.kind)) {
-    throw new ElaborationError(
-      `expect value to have kind: ${kinds}, instead of: ${value.kind}`,
-    )
+    throw new ElaborationError(`expect value to have kind: ${kinds}, instead of: ${value.kind}`)
   }
 }

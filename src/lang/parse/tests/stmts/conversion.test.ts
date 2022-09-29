@@ -16,10 +16,7 @@ conversion Trivial [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [
-        Exps.Var("sole"),
-        Exps.Var("sole"),
-      ]),
+      new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole"), Exps.Var("sole")]),
     ]),
   )
 })
@@ -36,10 +33,7 @@ conversion Trivial [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [
-        Exps.Var("sole"),
-        Exps.Var("sole"),
-      ]),
+      new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole"), Exps.Var("sole")]),
     ]),
   )
 })
@@ -53,9 +47,5 @@ conversion Trivial [
 ]
 
 `),
-  ).toMatchObject(
-    deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")]),
-    ]),
-  )
+  ).toMatchObject(deleteUndefined([new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")])]))
 })

@@ -11,8 +11,8 @@ compute id(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T2, x11) => x11: (T2: Type, x11: T2) -> T2
-    (x2) => x2: (x2: Type) -> Type"
+    "(T, x) => x: (T: Type, x: T) -> T
+    (x) => x: (x: Type) -> Type"
   `)
 })
 
@@ -35,7 +35,5 @@ compute id
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"(T2, x11) => x11: (T2: Type, x11: T2) -> T2"',
-  )
+  expect(output).toMatchInlineSnapshot('"(T, x) => x: (T: Type, x: T) -> T"')
 })

@@ -101,8 +101,8 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   }
 
   throw new ElaborationError(
-    `alphaEquivalent is not implemented for left: ${formatCore(
-      left,
-    )}, and right: ${formatCore(right)}`,
+    `alphaEquivalent is not implemented for left: ${formatCore(left)}, and right: ${formatCore(
+      right,
+    )}`,
   )
 }

@@ -12,8 +12,6 @@ test("parse Let", () => {
 
 test("parse LetThe", () => {
   expect(parseStmts("let U: Type = Type")).toMatchObject(
-    deleteUndefined([
-      new Stmts.LetThe("U", Exps.Var("Type"), Exps.Var("Type")),
-    ]),
+    deleteUndefined([new Stmts.LetThe("U", Exps.Var("Type"), Exps.Var("Type"))]),
   )
 })

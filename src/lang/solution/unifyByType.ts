@@ -7,7 +7,7 @@ import * as Neutrals from "../neutral"
 import { Solution, unify, unifyProperties, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { isValue, Value } from "../value"
+import { Value } from "../value"
 
 export function unifyByType(
   solution: Solution,
@@ -63,12 +63,8 @@ export function unifyByType(
   }
 }
 
-function assertNoExtraCommonProperties(
-  clazz: Values.Clazz,
-  left: Value,
-  right: Value,
-): void {
-  if (isValue(left, Values.Objekt) && isValue(right, Values.Objekt)) {
+function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: Value): void {
+  if (Values.isValue(left, Values.Objekt) && Values.isValue(right, Values.Objekt)) {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
     const rightNames = Object.keys(right.properties)
@@ -78,9 +74,7 @@ function assertNoExtraCommonProperties(
     )
 
     if (extraCommonNames.length > 0) {
-      throw new EquationError(
-        `expect no extra common names: ${extraCommonNames}`,
-      )
+      throw new EquationError(`expect no extra common names: ${extraCommonNames}`)
     }
   }
 }
