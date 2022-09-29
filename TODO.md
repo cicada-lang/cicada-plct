@@ -1,10 +1,8 @@
-# [feature] unification between two Sigmas #53
-
-https://github.com/cicada-lang/cicada/issues/53
-
 # format
 
 `formatCore` -- `Sigma` -- print `Pair` if not occured
+
+formatExp -- for error report
 
 # [DX] error report #40
 
