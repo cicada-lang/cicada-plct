@@ -4,9 +4,15 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalkNeutral
+extract deepWalkTypedValue
 
-- fix test "solve Ap -- deepWalk"
+- pass test "solve Ap -- deepWalk"
+- pass test "solve ApImplicit -- deepWalk"
+
+- pass test "solve Car -- deepWalk"
+- pass test "solve Cdr -- deepWalk"
+
+- pass test "solve Dot -- deepWalk"
 
 # [feature] unification between two Sigmas #53
 
