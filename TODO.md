@@ -4,7 +4,7 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalkNeutral try to reduce further
+deepWalk try to reduce further
 
 pass test "solve Car -- deepWalk"
 pass test "solve Cdr -- deepWalk"
