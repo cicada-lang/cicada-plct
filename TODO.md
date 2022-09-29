@@ -4,13 +4,16 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-extract deepWalkTypedValue
+deepWalkTypedValue ApImplicit
 
-- pass test "solve Ap -- deepWalk"
 - pass test "solve ApImplicit -- deepWalk"
+
+deepWalkTypedValue -- Car & Cdr
 
 - pass test "solve Car -- deepWalk"
 - pass test "solve Cdr -- deepWalk"
+
+deepWalkTypedValue -- Dot
 
 - pass test "solve Dot -- deepWalk"
 
