@@ -1,4 +1,5 @@
 export * from "./deepWalk"
+export * from "./deepWalkProperties"
 export * from "./deepWalkType"
 export * from "./PatternVar"
 export * from "./Solution"

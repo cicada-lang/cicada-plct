@@ -2,7 +2,7 @@ import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { deepWalkType } from "../solution"
+import { deepWalkProperties, deepWalkType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -115,7 +115,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 
     case "Cons": {
       type = deepWalkType(mod, ctx, type)
-      Values.assertValue(type, Values.Sigma)
+      Values.assertTypeInCtx(ctx, type, Values.Sigma)
 
       return Values.Cons(
         deepWalk(mod, ctx, type.carType, value.car),
@@ -159,14 +159,10 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     }
 
     case "Objekt": {
-      return Values.Objekt(
-        Object.fromEntries(
-          Object.entries(value.properties).map(([name, property]) => [
-            name,
-            deepWalk(mod, ctx, type, property),
-          ]),
-        ),
-      )
+      type = deepWalkType(mod, ctx, type)
+      Values.assertClazzInCtx(ctx, type)
+
+      return Values.Objekt(deepWalkProperties(mod, ctx, type, value))
     }
   }
 }

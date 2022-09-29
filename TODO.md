@@ -2,11 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-fix type of recursive call deepWalk in "Objekt"
-
-- extract `deepWalkProperties`
-
-- assert not extra properties
+assert not extra properties after deepWalkProperties
 
 deepWalk -- ClazzCons & ClazzFulfilled
 
