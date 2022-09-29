@@ -67,11 +67,5 @@ export function formatCore(core: Core): string {
     case "Dot": {
       return `${formatCore(core.target)}.${core.name}`
     }
-
-    // default: {
-    //   throw new EvaluationError(
-    //     `formatCore is not implemented for ${core.kind}`,
-    //   )
-    // }
   }
 }

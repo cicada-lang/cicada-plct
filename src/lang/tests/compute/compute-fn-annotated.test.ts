@@ -10,5 +10,5 @@ compute id(Type)
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(x) => x: (x: Type) -> Type"')
+  expect(output).toMatchInlineSnapshot('"(x) => x: (Type) -> Type"')
 })

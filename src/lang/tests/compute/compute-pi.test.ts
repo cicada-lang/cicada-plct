@@ -8,5 +8,5 @@ compute (T: Type, x: T) -> T
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(T: Type, x: T) -> T: Type"')
+  expect(output).toMatchInlineSnapshot('"(T: Type, T) -> T: Type"')
 })

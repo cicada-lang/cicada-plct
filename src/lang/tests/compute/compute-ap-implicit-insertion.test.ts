@@ -169,5 +169,5 @@ compute idString
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(_) => _: (_: String) -> String"')
+  expect(output).toMatchInlineSnapshot('"(_) => _: (String) -> String"')
 })

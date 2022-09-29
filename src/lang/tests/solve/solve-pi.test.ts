@@ -51,5 +51,5 @@ solve (A: Type, B: Type, C: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String, C: (_: String) -> String }"')
+  expect(output).toMatchInlineSnapshot('"{ A: String, B: String, C: (String) -> String }"')
 })

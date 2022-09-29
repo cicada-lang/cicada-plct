@@ -11,7 +11,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ id: TODO((implicit T2: Type, x1: T2) -> T2), x: TODO(String) }"',
+    '"{ id: TODO((implicit T2: Type, T2) -> T2), x: TODO(String) }"',
   )
 })
 
@@ -25,7 +25,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ id: TODO((implicit T: Type, x1: T) -> T), x: \\"abc\\", A: String }"',
+    '"{ id: TODO((implicit T: Type, T) -> T), x: \\"abc\\", A: String }"',
   )
 })
 
@@ -39,7 +39,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ id: TODO((implicit T2: Type, x1: T2) -> T2), x: \\"abc\\" }"',
+    '"{ id: TODO((implicit T2: Type, T2) -> T2), x: \\"abc\\" }"',
   )
 })
 
@@ -54,7 +54,7 @@ solve (id: (implicit T: Type, x: T) -> T, A: Type, idA: (x: A) -> A) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ id: TODO((implicit T: Type, x: T) -> T), A: String, idA: (x) => id(implicit String, x) }"',
+    '"{ id: TODO((implicit T: Type, T) -> T), A: String, idA: (x) => id(implicit String, x) }"',
   )
 })
 
@@ -69,6 +69,6 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ id: TODO((implicit T3: Type, x1: T3) -> T3), x: \\"abc\\", c: id(implicit String, \\"abc\\") }"',
+    '"{ id: TODO((implicit T3: Type, T3) -> T3), x: \\"abc\\", c: id(implicit String, \\"abc\\") }"',
   )
 })
