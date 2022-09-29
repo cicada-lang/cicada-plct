@@ -4,7 +4,11 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk -- and try to reduce `TypedValue` further
+[maybe] `Values.Fn` and `Cores.Fn` both have `argType` -- so that `deepWalk` can avoid taking `type`
+
+[maybe] deepWalk -- should not take `type` -- for reduce `TypedValue` further
+
+deepWalk -- try to reduce `TypedValue` further
 
 pass test "solve Car -- deepWalk"
 pass test "solve Cdr -- deepWalk"

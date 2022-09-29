@@ -28,8 +28,7 @@ export function expelClazz(
         throw new InternalError(`expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`)
       }
 
-      const variable = Neutrals.Var(freshName)
-      const typedNeutral = Values.TypedNeutral(clazz.propertyType, variable)
+      const typedNeutral = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const rest = applyClosure(clazz.restClosure, typedNeutral)
       assertClazz(rest)
       return expelClazz(freshNameMap, rest, propertyMap)

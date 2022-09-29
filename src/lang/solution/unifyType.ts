@@ -45,8 +45,7 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
     const usedNames = [...ctxNames(ctx), ...solution.names]
     const freshName = freshen(usedNames, name)
-    const variable = Neutrals.Var(freshName)
-    const typedNeutral = Values.TypedNeutral(argType, variable)
+    const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, argType, ctx)
 
@@ -67,8 +66,7 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
     const usedNames = [...ctxNames(ctx), ...solution.names]
     const freshName = freshen(usedNames, name)
-    const variable = Neutrals.Var(freshName)
-    const typedNeutral = Values.TypedNeutral(carType, variable)
+    const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, carType, ctx)
 
