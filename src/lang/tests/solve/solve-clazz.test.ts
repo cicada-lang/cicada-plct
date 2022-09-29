@@ -63,7 +63,7 @@ solve (A: Type, B: Type, C: Type) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ A: String, B: String, C: class { a: A, b: B } }"',
+    '"{ A: String, B: String, C: class { a: String, b: String } }"',
   )
 })
 

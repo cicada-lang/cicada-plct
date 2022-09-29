@@ -4,10 +4,6 @@ https://github.com/cicada-lang/cicada/issues/78
 
 [maybe] do not need `freshen` in `readback` and `deepWalk`
 
-deepWalk -- ClazzCons
-
-- fix "solve ClazzCons -- deepWalk"
-
 extract deepWalkNeutral
 
 deepWalk -- fix TypedNeutral -- call deepWalkNeutral

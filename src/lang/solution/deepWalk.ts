@@ -165,26 +165,27 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     }
 
     case "ClazzCons": {
-      // TODO
-      return value
-      // const name = value.name
-      // const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      // const freshName = freshen(usedNames, name)
-      // const propertyType = deepWalkType(mod, ctx, value.propertyType)
-      // const typedNeutral = Values.TypedNeutral(
-      //   propertyType,
-      //   Neutrals.Var(freshName),
-      // )
-      // let rest = applyClosure(value.restClosure, typedNeutral)
-      // rest = deepWalkType(mod, ctx, rest)
-      // ctx = CtxCons(freshName, propertyType, ctx)
-      // const restCore = readbackType(mod, ctx, rest)
-      // const env = mod.ctxToEnv(ctx)
-      // return Values.ClazzCons(
-      //   value.name,
-      //   propertyType,
-      //   Closure(env, freshName, restCore),
-      // )
+      const name = value.name
+      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const freshName = freshen(usedNames, name)
+      const propertyType = deepWalkType(mod, ctx, value.propertyType)
+      const typedNeutral = Values.TypedNeutral(
+        propertyType,
+        Neutrals.Var(freshName),
+      )
+      ctx = CtxCons(freshName, propertyType, ctx)
+      const rest = deepWalkType(
+        mod,
+        ctx,
+        applyClosure(value.restClosure, typedNeutral),
+      )
+      const restCore = readbackType(mod, ctx, rest)
+      const env = mod.ctxToEnv(ctx)
+      return Values.ClazzCons(
+        value.name,
+        propertyType,
+        Closure(env, freshName, restCore),
+      )
     }
 
     case "ClazzFulfilled": {
