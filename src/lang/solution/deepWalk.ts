@@ -27,7 +27,10 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 
   switch (value.kind) {
     case "TypedNeutral": {
-      return Values.TypedNeutral(value.type, deepWalkNeutral(mod, ctx, value.neutral))
+      return Values.TypedNeutral(
+        deepWalkType(mod, ctx, value.type),
+        deepWalkNeutral(mod, ctx, value.neutral),
+      )
     }
 
     case "Type": {

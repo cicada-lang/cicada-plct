@@ -4,14 +4,11 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalkTypedValue -- Car & Cdr
+deepWalkNeutral try to reduce further
 
-- pass test "solve Car -- deepWalk"
-- pass test "solve Cdr -- deepWalk"
-
-deepWalkTypedValue -- Dot
-
-- pass test "solve Dot -- deepWalk"
+pass test "solve Car -- deepWalk"
+pass test "solve Cdr -- deepWalk"
+pass test "solve Dot -- deepWalk"
 
 # [feature] unification between two Sigmas #53
 

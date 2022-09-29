@@ -25,15 +25,15 @@ export function deepWalkNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Neutral {
     }
 
     case "Car": {
-      return neutral
+      return Neutrals.Car(deepWalkNeutral(mod, ctx, neutral.target))
     }
 
     case "Cdr": {
-      return neutral
+      return Neutrals.Cdr(deepWalkNeutral(mod, ctx, neutral.target))
     }
 
     case "Dot": {
-      return neutral
+      return Neutrals.Dot(deepWalkNeutral(mod, ctx, neutral.target), neutral.name)
     }
   }
 }
