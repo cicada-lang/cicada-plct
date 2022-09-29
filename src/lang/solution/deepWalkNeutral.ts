@@ -18,7 +18,10 @@ export function deepWalkNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Neutral {
     }
 
     case "ApImplicit": {
-      return neutral
+      return Neutrals.ApImplicit(
+        deepWalkNeutral(mod, ctx, neutral.target),
+        deepWalkTypedValue(mod, ctx, neutral.arg),
+      )
     }
 
     case "Car": {

@@ -4,10 +4,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalkTypedValue ApImplicit
-
-- pass test "solve ApImplicit -- deepWalk"
-
 deepWalkTypedValue -- Car & Cdr
 
 - pass test "solve Car -- deepWalk"
