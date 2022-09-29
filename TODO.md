@@ -4,7 +4,9 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk try to reduce further
+extract doApImplicit
+
+deepWalk -- and try to reduce `TypedValue` further
 
 pass test "solve Car -- deepWalk"
 pass test "solve Cdr -- deepWalk"
