@@ -2,7 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/40
 
-catch `ElaborationError` and print with `span`
+rename EquationError to UnificationError
 
 # [feature] unification need to implement occur check #52
 
