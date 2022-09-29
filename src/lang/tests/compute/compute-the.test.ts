@@ -8,9 +8,7 @@ compute the
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"(T2, x11) => x11: (T2: Type, x11: T2) -> T2"',
-  )
+  expect(output).toMatchInlineSnapshot('"(T, x) => x: (T: Type, x: T) -> T"')
 })
 
 test("compute the applied", async () => {

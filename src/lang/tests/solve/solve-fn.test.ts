@@ -35,5 +35,5 @@ solve (T: Type, f: (Trivial) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ T: String, f: (_2) => String }"')
+  expect(output).toMatchInlineSnapshot('"{ T: String, f: (_) => String }"')
 })

@@ -2,10 +2,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk should not call `solution.bind`
-
-- maybe `evaluate` take `mod` as argument
-
 [maybe] do not need `freshen` in `readback` and `deepWalk`
 
 deepWalk -- ClazzCons

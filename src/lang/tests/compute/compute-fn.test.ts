@@ -11,8 +11,8 @@ compute id(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T2, x11) => x11: (T2: Type, x11: T2) -> T2
-    (x2) => x2: (x2: Type) -> Type"
+    "(T, x) => x: (T: Type, x: T) -> T
+    (x) => x: (x: Type) -> Type"
   `)
 })
 
@@ -29,8 +29,8 @@ compute id2(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T2, x11) => x11: (T2: Type, x11: T2) -> T2
-    (x2) => x2: (x2: Type) -> Type"
+    "(T, x) => x: (T: Type, x: T) -> T
+    (x) => x: (x: Type) -> Type"
   `)
 })
 
@@ -48,9 +48,9 @@ compute apply(Type, Type, (x) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T2, x11, f11) => f11(x11): (T2: Type, x11: T2, f11: (_11: T2) -> T2) -> T2
-    (x2, f11) => f11(x2): (x2: Type, f11: (_11: Type) -> Type) -> Type
-    (f2) => f2(Type): (f2: (_2: Type) -> Type) -> Type
+    "(T, x, f) => f(x): (T: Type, x: T, f: (_: T) -> T) -> T
+    (x, f) => f(x): (x: Type, f: (_: Type) -> Type) -> Type
+    (f) => f(Type): (f: (_: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -70,10 +70,10 @@ compute apply2(Type, Type, Type, (x, y) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T2, x11, y11, f11) => f11(x11, y11): (T2: Type, x11: T2, y11: T2, f11: (_21: T2, _111: T2) -> T2) -> T2
-    (x2, y11, f11) => f11(x2, y11): (x2: Type, y11: Type, f11: (_21: Type, _111: Type) -> Type) -> Type
-    (y2, f11) => f11(Type, y2): (y2: Type, f11: (_21: Type, _111: Type) -> Type) -> Type
-    (f2) => f2(Type, Type): (f2: (_3: Type, _111: Type) -> Type) -> Type
+    "(T, x, y, f) => f(x, y): (T: Type, x: T, y: T, f: (_: T, _1: T) -> T) -> T
+    (x, y, f) => f(x, y): (x: Type, y: Type, f: (_: Type, _1: Type) -> Type) -> Type
+    (y, f) => f(Type, y): (y: Type, f: (_: Type, _1: Type) -> Type) -> Type
+    (f) => f(Type, Type): (f: (_: Type, _1: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -89,7 +89,5 @@ compute id
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"(T2, x11) => x11: (T2: Type, x11: T2) -> T2"',
-  )
+  expect(output).toMatchInlineSnapshot('"(T, x) => x: (T: Type, x: T) -> T"')
 })
