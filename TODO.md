@@ -2,15 +2,17 @@
 
 https://github.com/cicada-lang/cicada/issues/40
 
-`formatExp` -- for error report
+`ElaborationError` has `span`
 
-# [feature] support running markdown file directly #61
-
-https://github.com/cicada-lang/cicada/issues/61
+catch `ElaborationError` and print with `span`
 
 # [feature] unification need to implement occur check #52
 
 https://github.com/cicada-lang/cicada/issues/52
+
+# [feature] support running markdown file directly #61
+
+https://github.com/cicada-lang/cicada/issues/61
 
 # [feature] playground website #63
 
