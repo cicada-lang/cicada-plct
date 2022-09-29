@@ -212,8 +212,8 @@ export function Quote(data: string): Quote {
 
    ## name v.s. localName in Clazz
 
-   We can not only use `name` we also need `localName`,
-   because of `subst` might rename bound variables.
+   We can not only use `name`, we also need `localName`,
+   because during `readback` bound variables might be renamed.
 
 **/
 

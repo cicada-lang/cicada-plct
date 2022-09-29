@@ -2,9 +2,9 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk -- ClazzCons & ClazzFulfilled
+deepWalk -- ClazzCons
 
-- "solve Clazz -- deepWalk"
+- "solve ClazzCons -- deepWalk"
 
 extract deepWalkNeutral
 
