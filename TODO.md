@@ -1,10 +1,13 @@
+[maybe] do not need `freshen` in `readback` and `deepWalk`
+
 # [feature] deepWalk
 
 https://github.com/cicada-lang/cicada/issues/78
 
-[maybe] do not need `freshen` in `readback` and `deepWalk`
-
 extract deepWalkNeutral
+add "solve Ap -- deepWalk"
+
+- pass "solve Ap -- deepWalk"
 
 deepWalk -- fix TypedNeutral -- call deepWalkNeutral
 
