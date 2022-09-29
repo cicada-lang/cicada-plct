@@ -85,7 +85,7 @@ function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: 
     )
 
     if (extraCommonNames.length > 0) {
-      throw new Errors.EquationError(`expect no extra common names: ${extraCommonNames}`)
+      throw new Errors.UnificationError(`expect no extra common names: ${extraCommonNames}`)
     }
   }
 }

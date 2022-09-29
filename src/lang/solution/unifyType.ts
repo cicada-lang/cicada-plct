@@ -85,7 +85,7 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
     return
   }
 
-  throw new Errors.EquationError(
+  throw new Errors.UnificationError(
     `unifyType is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

@@ -6,7 +6,7 @@ import { Solution, unifyTypedValue } from "../solution"
 export function unifyNeutral(solution: Solution, ctx: Ctx, left: Neutral, right: Neutral): void {
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
-      throw new Errors.EquationError(
+      throw new Errors.UnificationError(
         `unifyNeutral expect left name: ${left.name}, to be equal to right name: ${right.name}`,
       )
     }
@@ -38,7 +38,7 @@ export function unifyNeutral(solution: Solution, ctx: Ctx, left: Neutral, right:
 
   if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
-      throw new Errors.EquationError(
+      throw new Errors.UnificationError(
         `unifyNeutral expect left property name: ${left.name}, to be equal to right property name: ${right.name}`,
       )
     }
@@ -47,7 +47,7 @@ export function unifyNeutral(solution: Solution, ctx: Ctx, left: Neutral, right:
     return
   }
 
-  throw new Errors.EquationError(
+  throw new Errors.UnificationError(
     `unifyNeutral is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
 }

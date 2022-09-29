@@ -2,8 +2,6 @@
 
 https://github.com/cicada-lang/cicada/issues/40
 
-rename EquationError to UnificationError
-
 # [feature] unification need to implement occur check #52
 
 https://github.com/cicada-lang/cicada/issues/52

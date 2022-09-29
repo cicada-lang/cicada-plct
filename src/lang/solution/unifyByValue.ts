@@ -23,12 +23,12 @@ export function unifyByValue(
       return
     }
 
-    throw new Errors.EquationError(
+    throw new Errors.UnificationError(
       `unifyByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
     )
   }
 
-  throw new Errors.EquationError(
+  throw new Errors.UnificationError(
     `unifyByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
   )
 }

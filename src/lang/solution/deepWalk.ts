@@ -173,7 +173,7 @@ function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
     const valueNames = Object.keys(value.properties)
     const extraNames = _.difference(valueNames, clazzNames)
     if (extraNames.length > 0) {
-      throw new Errors.EquationError(`expect no extra common names: ${extraNames}`)
+      throw new Errors.UnificationError(`expect no extra common names: ${extraNames}`)
     }
   }
 }
