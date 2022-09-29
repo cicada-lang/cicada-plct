@@ -2,12 +2,7 @@ export const pi_binding = {
   $grammar: {
     "pi_binding:nameless": [{ exp: "exp" }],
     "pi_binding:named": [{ name: "name" }, '":"', { exp: "exp" }],
-    "pi_binding:implicit": [
-      '"implicit"',
-      { name: "name" },
-      '":"',
-      { exp: "exp" },
-    ],
+    "pi_binding:implicit": ['"implicit"', { name: "name" }, '":"', { exp: "exp" }],
   },
 }
 

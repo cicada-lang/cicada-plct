@@ -3,12 +3,7 @@ import { EquationError } from "../errors"
 import { Neutral } from "../neutral"
 import { Solution, unifyTypedValue } from "../solution"
 
-export function unifyNeutral(
-  solution: Solution,
-  ctx: Ctx,
-  left: Neutral,
-  right: Neutral,
-): void {
+export function unifyNeutral(solution: Solution, ctx: Ctx, left: Neutral, right: Neutral): void {
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new EquationError(

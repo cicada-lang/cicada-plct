@@ -25,9 +25,7 @@ export function expelClazz(
 
       const freshName = freshNameMap.get(clazz.name)
       if (freshName === undefined) {
-        throw new InternalError(
-          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
-        )
+        throw new InternalError(`expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`)
       }
 
       const variable = Neutrals.Var(freshName)

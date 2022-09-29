@@ -17,9 +17,7 @@ export function checkNewArgs(
   switch (clazz.kind) {
     case "ClazzNull": {
       if (args.length !== 0) {
-        throw new ElaborationError(
-          `checkNewArgs too many arguments when calling new`,
-        )
+        throw new ElaborationError(`checkNewArgs too many arguments when calling new`)
       }
 
       return {}
@@ -45,12 +43,7 @@ export function checkNewArgs(
     }
 
     case "ClazzFulfilled": {
-      const propertyCore = readback(
-        mod,
-        ctx,
-        clazz.propertyType,
-        clazz.property,
-      )
+      const propertyCore = readback(mod, ctx, clazz.propertyType, clazz.property)
 
       return {
         [clazz.name]: propertyCore,

@@ -15,7 +15,4 @@ import pt from "@cicada-lang/partech"
 
 **/
 
-export const name = pt.grammars.pattern_unless_preserved("identifier", [
-  "car",
-  "cdr",
-])
+export const name = pt.grammars.pattern_unless_preserved("identifier", ["car", "cdr"])

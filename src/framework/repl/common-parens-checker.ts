@@ -30,21 +30,14 @@ export class CommonParensChecker extends ParensChecker {
   }
 }
 
-type CommonParensCheckResult =
-  | { kind: "balance" }
-  | { kind: "lack" }
-  | CommonParensCheckError
+type CommonParensCheckResult = { kind: "balance" } | { kind: "lack" } | CommonParensCheckError
 
 class CommonParensCheckError extends Error {
   kind: "excess" | "mismatch"
   token: pt.Token
   text: string
 
-  constructor(opts: {
-    kind: "excess" | "mismatch"
-    token: pt.Token
-    text: string
-  }) {
+  constructor(opts: { kind: "excess" | "mismatch"; token: pt.Token; text: string }) {
     super()
     this.kind = opts.kind
     this.token = opts.token

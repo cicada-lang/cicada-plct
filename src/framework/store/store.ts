@@ -10,19 +10,17 @@ export class StoreError extends Error {
 export abstract class Store<T, Key extends string | number | symbol = string> {
   create(value: T): Promise<Key> {
     throw new StoreError(
-      [
-        `The method is not implemented: create`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: create`, `  class name: ${this.constructor.name}`].join(
+        "\n",
+      ),
     )
   }
 
   createMany(array: Array<T>): Promise<Array<Key>> {
     throw new StoreError(
-      [
-        `The method is not implemented: createMany`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: createMany`, `  class name: ${this.constructor.name}`].join(
+        "\n",
+      ),
     )
   }
 
@@ -45,10 +43,7 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
 
   all(): Promise<Record<string, T>> {
     throw new StoreError(
-      [
-        `The method is not implemented: all`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: all`, `  class name: ${this.constructor.name}`].join("\n"),
     )
   }
 
@@ -58,10 +53,7 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
 
   find(query: Partial<T>): Promise<Record<string, T>> {
     throw new StoreError(
-      [
-        `The method is not implemented: find`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: find`, `  class name: ${this.constructor.name}`].join("\n"),
     )
   }
 
@@ -101,19 +93,15 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
 
   update(key: Key, value: Partial<T>): Promise<boolean> {
     throw new StoreError(
-      [
-        `The method is not implemented: patch`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: patch`, `  class name: ${this.constructor.name}`].join("\n"),
     )
   }
 
   delete(key: Key): Promise<boolean> {
     throw new StoreError(
-      [
-        `The method is not implemented: delete`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n"),
+      [`The method is not implemented: delete`, `  class name: ${this.constructor.name}`].join(
+        "\n",
+      ),
     )
   }
 }

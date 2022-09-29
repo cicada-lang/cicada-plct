@@ -31,10 +31,7 @@ export function inclusionClazz(
 ): void {
   const freshNameMap = freshenNames(
     [...ctxNames(ctx)],
-    [
-      ...Values.clazzPropertyNames(subclazz),
-      ...Values.clazzPropertyNames(clazz),
-    ],
+    [...Values.clazzPropertyNames(subclazz), ...Values.clazzPropertyNames(clazz)],
   )
 
   const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
@@ -43,15 +40,10 @@ export function inclusionClazz(
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
-      throw new ElaborationError(
-        `inclusionClazz found missing property on subclazz class: ${name}`,
-      )
+      throw new ElaborationError(`inclusionClazz found missing property on subclazz class: ${name}`)
     }
 
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value !== undefined
-    ) {
+    if (subclazzProperty.value === undefined && clazzProperty.value !== undefined) {
       throw new ElaborationError(
         `inclusionClazz expect subproperty to have fulfilled property: ${name}`,
       )
@@ -59,17 +51,8 @@ export function inclusionClazz(
 
     inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
 
-    if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      conversion(
-        mod,
-        ctx,
-        clazzProperty.type,
-        subclazzProperty.value,
-        clazzProperty.value,
-      )
+    if (subclazzProperty.value !== undefined && clazzProperty.value !== undefined) {
+      conversion(mod, ctx, clazzProperty.type, subclazzProperty.value, clazzProperty.value)
     }
   }
 }

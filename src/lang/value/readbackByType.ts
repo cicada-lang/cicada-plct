@@ -19,12 +19,7 @@ import { readback, readbackProperties, readbackType, Value } from "../value"
 
 **/
 
-export function readbackByType(
-  mod: Mod,
-  ctx: Ctx,
-  type: Value,
-  value: Value,
-): Core | undefined {
+export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): Core | undefined {
   switch (type.kind) {
     case "Type": {
       return readbackType(mod, ctx, value)
@@ -84,10 +79,7 @@ export function readbackByType(
       const cdr = Actions.doCdr(value)
       const cdrType = applyClosure(type.cdrTypeClosure, car)
 
-      return Cores.Cons(
-        readback(mod, ctx, type.carType, car),
-        readback(mod, ctx, cdrType, cdr),
-      )
+      return Cores.Cons(readback(mod, ctx, type.carType, car), readback(mod, ctx, cdrType, cdr))
     }
 
     case "ClazzNull":

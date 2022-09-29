@@ -14,16 +14,6 @@ import { readback, Value } from "../value"
 
 **/
 
-export function conversion(
-  mod: Mod,
-  ctx: Ctx,
-  type: Value,
-  left: Value,
-  right: Value,
-): void {
-  alphaEquivalent(
-    new AlphaCtx(),
-    readback(mod, ctx, type, left),
-    readback(mod, ctx, type, right),
-  )
+export function conversion(mod: Mod, ctx: Ctx, type: Value, left: Value, right: Value): void {
+  alphaEquivalent(new AlphaCtx(), readback(mod, ctx, type, left), readback(mod, ctx, type, right))
 }

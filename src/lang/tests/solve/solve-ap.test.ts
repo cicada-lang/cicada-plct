@@ -10,9 +10,7 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((_: String) -> String), x: TODO(String) }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ f: TODO((_: String) -> String), x: TODO(String) }"')
 })
 
 test("solve Ap -- PatternVar v.s. String", async () => {
@@ -24,7 +22,5 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((_: String) -> String), x: \\"abc\\" }"',
-  )
+  expect(output).toMatchInlineSnapshot('"{ f: TODO((_: String) -> String), x: \\"abc\\" }"')
 })

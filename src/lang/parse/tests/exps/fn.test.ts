@@ -10,10 +10,7 @@ test("parse Fn", () => {
 
   expect(parseExp("function (x) { return x }")).toMatchObject(
     deleteUndefined(
-      Exps.FnUnfolded(
-        [Exps.FnBindingName("x")],
-        Exps.SequenceUnfolded([], Exps.Var("x")),
-      ),
+      Exps.FnUnfolded([Exps.FnBindingName("x")], Exps.SequenceUnfolded([], Exps.Var("x"))),
     ),
   )
 })
@@ -21,10 +18,7 @@ test("parse Fn", () => {
 test("parse Fn -- multiple bindings", () => {
   expect(parseExp("(x, y) => x")).toMatchObject(
     deleteUndefined(
-      Exps.FnUnfolded(
-        [Exps.FnBindingName("x"), Exps.FnBindingName("y")],
-        Exps.Var("x"),
-      ),
+      Exps.FnUnfolded([Exps.FnBindingName("x"), Exps.FnBindingName("y")], Exps.Var("x")),
     ),
   )
 

@@ -10,10 +10,7 @@ export function formatDate(t: Date | number): string {
   return `${YYYY}-${MM}-${DD}`
 }
 
-export function formatTime(
-  t: Date | number,
-  opts?: { withMilliseconds?: boolean },
-): string {
+export function formatTime(t: Date | number, opts?: { withMilliseconds?: boolean }): string {
   if (typeof t === "number") t = new Date(t)
 
   const hh = leftPad(t.getHours().toString(), 2, "0")
@@ -29,10 +26,7 @@ export function formatTime(
   }
 }
 
-export function formatDateTime(
-  t: Date | number,
-  opts?: { withMilliseconds?: boolean },
-): string {
+export function formatDateTime(t: Date | number, opts?: { withMilliseconds?: boolean }): string {
   if (typeof t === "number") t = new Date(t)
 
   const date = formatDate(t)

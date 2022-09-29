@@ -29,12 +29,7 @@ import { conversion, inclusionClazz, Value } from "../value"
 
 **/
 
-export function inclusion(
-  mod: Mod,
-  ctx: Ctx,
-  subtype: Value,
-  type: Value,
-): void {
+export function inclusion(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**
        Contravariant in argument position.

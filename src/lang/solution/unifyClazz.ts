@@ -32,13 +32,7 @@ export function unifyClazz(
     unifyType(solution, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      unify(
-        solution,
-        ctx,
-        leftProperty.type,
-        leftProperty.value,
-        rightProperty.value,
-      )
+      unify(solution, ctx, leftProperty.type, leftProperty.value, rightProperty.value)
     }
   }
 

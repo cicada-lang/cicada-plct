@@ -17,10 +17,7 @@ export function lookupProperty(
     case "ClazzCons": {
       if (clazz.name === name) return Actions.doDot(target, clazz.name)
 
-      const rest = applyClosure(
-        clazz.restClosure,
-        Actions.doDot(target, clazz.name),
-      )
+      const rest = applyClosure(clazz.restClosure, Actions.doDot(target, clazz.name))
 
       assertClazz(rest)
 
@@ -35,11 +32,7 @@ export function lookupProperty(
   }
 }
 
-export function lookupPropertyOrFail(
-  clazz: Values.Clazz,
-  target: Value,
-  name: string,
-): Value {
+export function lookupPropertyOrFail(clazz: Values.Clazz, target: Value, name: string): Value {
   const property = lookupProperty(clazz, target, name)
   if (property === undefined) {
     throw new ElaborationError(`Undefined property name: ${name}`)

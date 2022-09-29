@@ -48,12 +48,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FnUnfoldedWithRetType": {
-      return check(
-        mod,
-        ctx,
-        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
-        type,
-      )
+      return check(mod, ctx, Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret), type)
     }
 
     case "Ap":
@@ -124,9 +119,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     default: {
-      throw new ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`,
-      )
+      throw new ElaborationError(`check is not implemented for exp: ${exp.kind}`)
     }
   }
 }

@@ -55,11 +55,7 @@ export type PiImplicit = {
   retType: Core
 }
 
-export function PiImplicit(
-  name: string,
-  argType: Core,
-  retType: Core,
-): PiImplicit {
+export function PiImplicit(name: string, argType: Core, retType: Core): PiImplicit {
   return {
     family: "Core",
     kind: "PiImplicit",

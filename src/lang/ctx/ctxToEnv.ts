@@ -10,11 +10,7 @@ export function ctxToEnv(ctx: Ctx): Env {
     }
 
     case "CtxCons": {
-      return EnvCons(
-        ctx.name,
-        TypedNeutral(ctx.type, Var(ctx.name)),
-        ctxToEnv(ctx.rest),
-      )
+      return EnvCons(ctx.name, TypedNeutral(ctx.type, Var(ctx.name)), ctxToEnv(ctx.rest))
     }
 
     case "CtxFulfilled": {

@@ -9,16 +9,8 @@ import { ElaborationError } from "../errors"
 
 **/
 
-export function alphaEquivalentClazz(
-  ctx: AlphaCtx,
-  left: Cores.Clazz,
-  right: Cores.Clazz,
-): void {
-  alphaEquivalentClazzAfterReorder(
-    ctx,
-    left,
-    reorderTheRightByTheLeft(left, right),
-  )
+export function alphaEquivalentClazz(ctx: AlphaCtx, left: Cores.Clazz, right: Cores.Clazz): void {
+  alphaEquivalentClazzAfterReorder(ctx, left, reorderTheRightByTheLeft(left, right))
 }
 
 function alphaEquivalentClazzAfterReorder(
@@ -118,10 +110,7 @@ function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
   }
 }
 
-function findPropertyAndCreateClazz(
-  name: string,
-  clazz: Cores.Clazz,
-): Cores.Clazz {
+function findPropertyAndCreateClazz(name: string, clazz: Cores.Clazz): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new ElaborationError(`expect to find ${name} in clazz`)
@@ -129,12 +118,7 @@ function findPropertyAndCreateClazz(
 
     case "ClazzCons": {
       if (clazz.name === name) {
-        return Cores.ClazzCons(
-          clazz.name,
-          clazz.localName,
-          clazz.propertyType,
-          Cores.ClazzNull(),
-        )
+        return Cores.ClazzCons(clazz.name, clazz.localName, clazz.propertyType, Cores.ClazzNull())
       }
 
       return findPropertyAndCreateClazz(name, clazz.rest)

@@ -1,11 +1,7 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function foldFnWithRetType(
-  bindings: Array<Exps.FnBinding>,
-  retType: Exp,
-  ret: Exp,
-): Exp {
+export function foldFnWithRetType(bindings: Array<Exps.FnBinding>, retType: Exp, ret: Exp): Exp {
   /**
      We implement the restriction of returnType by adding a `the` around the `ret`.
   **/
@@ -18,10 +14,7 @@ export function foldFnWithRetType(
 
   switch (binding.kind) {
     case "FnBindingName": {
-      return Exps.Fn(
-        binding.name,
-        foldFnWithRetType(restBindings, retType, ret),
-      )
+      return Exps.Fn(binding.name, foldFnWithRetType(restBindings, retType, ret))
     }
 
     case "FnBindingAnnotated": {
@@ -33,10 +26,7 @@ export function foldFnWithRetType(
     }
 
     case "FnBindingImplicit": {
-      return Exps.FnImplicit(
-        binding.name,
-        foldFnWithRetType(restBindings, retType, ret),
-      )
+      return Exps.FnImplicit(binding.name, foldFnWithRetType(restBindings, retType, ret))
     }
 
     case "FnBindingAnnotatedImplicit": {

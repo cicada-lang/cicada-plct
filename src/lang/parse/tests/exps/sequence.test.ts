@@ -22,11 +22,7 @@ begin {
     deleteUndefined(
       Exps.SequenceUnfolded(
         [
-          Exps.SequenceBindingLetThe(
-            "x",
-            Exps.Var("Trivial"),
-            Exps.Var("sole"),
-          ),
+          Exps.SequenceBindingLetThe("x", Exps.Var("Trivial"), Exps.Var("sole")),
           Exps.SequenceBindingCheck(Exps.Var("sole"), Exps.Var("Trivial")),
           Exps.SequenceBindingLet("y", Exps.Var("sole")),
           Exps.SequenceBindingLet("z", Exps.Var("sole")),
@@ -73,10 +69,7 @@ begin {
           Exps.SequenceBindingLetThe(
             "id",
             Exps.PiUnfolded(
-              [
-                Exps.PiBindingNamed("T", Exps.Var("Type")),
-                Exps.PiBindingNamed("x", Exps.Var("T")),
-              ],
+              [Exps.PiBindingNamed("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
               Exps.Var("T"),
             ),
             Exps.FnUnfolded(
