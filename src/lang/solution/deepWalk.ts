@@ -1,5 +1,7 @@
+import _ from "lodash"
 import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { EquationError } from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { deepWalkProperties, deepWalkType } from "../solution"
@@ -162,7 +164,22 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       type = deepWalkType(mod, ctx, type)
       Values.assertClazzInCtx(ctx, type)
 
-      return Values.Objekt(deepWalkProperties(mod, ctx, type, value))
+      const result = Values.Objekt(deepWalkProperties(mod, ctx, type, value))
+      assertNoExtraProperties(type, result)
+
+      return result
+    }
+  }
+}
+
+function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
+  if (Values.isValue(value, Values.Objekt)) {
+    const clazzNames = Values.clazzPropertyNames(clazz)
+    const valueNames = Object.keys(value.properties)
+    const extraNames = _.difference(valueNames, clazzNames)
+
+    if (extraNames.length > 0) {
+      throw new EquationError(`expect no extra common names: ${extraNames}`)
     }
   }
 }

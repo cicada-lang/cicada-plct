@@ -7,7 +7,7 @@ import * as Neutrals from "../neutral"
 import { Solution, unify, unifyProperties, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { isValue, Value } from "../value"
+import { Value } from "../value"
 
 export function unifyByType(
   solution: Solution,
@@ -68,7 +68,10 @@ function assertNoExtraCommonProperties(
   left: Value,
   right: Value,
 ): void {
-  if (isValue(left, Values.Objekt) && isValue(right, Values.Objekt)) {
+  if (
+    Values.isValue(left, Values.Objekt) &&
+    Values.isValue(right, Values.Objekt)
+  ) {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
     const rightNames = Object.keys(right.properties)

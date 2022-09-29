@@ -2,8 +2,6 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-assert not extra properties after deepWalkProperties
-
 deepWalk -- ClazzCons & ClazzFulfilled
 
 - "solve Clazz -- deepWalk"
