@@ -2,9 +2,8 @@
 
 https://github.com/cicada-lang/cicada/issues/78
 
-deepWalk -- Fn
-
-- "solve Fn -- deepWalk"
+fix type of deepWalk "Cons"
+fix type of deepWalk "Objekt"
 
 deepWalk -- FnImplicit
 

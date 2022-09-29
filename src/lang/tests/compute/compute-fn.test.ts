@@ -11,8 +11,8 @@ compute id(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T1, x1) => x1: (T1: Type, x1: T1) -> T1
-    (x1) => x1: (x1: Type) -> Type"
+    "(T2, x11) => x11: (T2: Type, x11: T2) -> T2
+    (x2) => x2: (x2: Type) -> Type"
   `)
 })
 
@@ -29,8 +29,8 @@ compute id2(Type)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T1, x1) => x1: (T1: Type, x1: T1) -> T1
-    (x1) => x1: (x1: Type) -> Type"
+    "(T2, x11) => x11: (T2: Type, x11: T2) -> T2
+    (x2) => x2: (x2: Type) -> Type"
   `)
 })
 
@@ -48,9 +48,9 @@ compute apply(Type, Type, (x) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T1, x1, f1) => f1(x1): (T1: Type, x1: T1, f1: (_1: T1) -> T1) -> T1
-    (x1, f1) => f1(x1): (x1: Type, f1: (_1: Type) -> Type) -> Type
-    (f1) => f1(Type): (f1: (_1: Type) -> Type) -> Type
+    "(T2, x11, f11) => f11(x11): (T2: Type, x11: T2, f11: (_11: T2) -> T2) -> T2
+    (x2, f11) => f11(x2): (x2: Type, f11: (_11: Type) -> Type) -> Type
+    (f2) => f2(Type): (f2: (_2: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -70,10 +70,10 @@ compute apply2(Type, Type, Type, (x, y) => x)
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "(T1, x1, y1, f1) => f1(x1, y1): (T1: Type, x1: T1, y1: T1, f1: (_2: T1, _11: T1) -> T1) -> T1
-    (x1, y1, f1) => f1(x1, y1): (x1: Type, y1: Type, f1: (_2: Type, _11: Type) -> Type) -> Type
-    (y1, f1) => f1(Type, y1): (y1: Type, f1: (_2: Type, _11: Type) -> Type) -> Type
-    (f1) => f1(Type, Type): (f1: (_2: Type, _11: Type) -> Type) -> Type
+    "(T2, x11, y11, f11) => f11(x11, y11): (T2: Type, x11: T2, y11: T2, f11: (_21: T2, _111: T2) -> T2) -> T2
+    (x2, y11, f11) => f11(x2, y11): (x2: Type, y11: Type, f11: (_21: Type, _111: Type) -> Type) -> Type
+    (y2, f11) => f11(Type, y2): (y2: Type, f11: (_21: Type, _111: Type) -> Type) -> Type
+    (f2) => f2(Type, Type): (f2: (_3: Type, _111: Type) -> Type) -> Type
     Type: Type"
   `)
 })
@@ -90,6 +90,6 @@ compute id
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"(T1, x1) => x1: (T1: Type, x1: T1) -> T1"',
+    '"(T2, x11) => x11: (T2: Type, x11: T2) -> T2"',
   )
 })
