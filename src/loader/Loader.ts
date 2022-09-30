@@ -8,10 +8,10 @@ export class Loader {
   cache: Map<string, Mod> = new Map()
   fetcher = new Fetcher()
 
-  async load(url: URL): Promise<Mod> {
+  async load(url: URL, options?: { code?: string }): Promise<Mod> {
     const found = this.cache.get(url.href)
     if (found !== undefined) return found
-    const code = await this.fetcher.fetch(url)
+    const code = options?.code || (await this.fetcher.fetch(url))
 
     try {
       const stmts = parseStmts(code)
