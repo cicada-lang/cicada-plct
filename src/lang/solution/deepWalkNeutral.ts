@@ -1,11 +1,10 @@
-import * as Cores from "../core"
-import { evaluate } from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import * as Actions from "../actions"
+import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
 import { deepWalkType, deepWalkTypedValue } from "../solution"
 import * as Values from "../value"
-import { readback, Value } from "../value"
+import { Value } from "../value"
 
 export function deepWalkNeutral(mod: Mod, ctx: Ctx, type: Value, neutral: Neutral): Value {
   type = deepWalkType(mod, ctx, type)
@@ -18,40 +17,33 @@ export function deepWalkNeutral(mod: Mod, ctx: Ctx, type: Value, neutral: Neutra
     case "Ap": {
       const targetType = deepWalkType(mod, ctx, neutral.targetType)
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      const targetCore = readback(mod, ctx, targetType, target)
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      const argCore = readback(mod, ctx, arg.type, arg.value)
-      return evaluate(ctxToEnv(ctx), Cores.Ap(targetCore, argCore))
+      return Actions.doAp(target, arg.value)
     }
 
     case "ApImplicit": {
       const targetType = deepWalkType(mod, ctx, neutral.targetType)
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      const targetCore = readback(mod, ctx, targetType, target)
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      const argCore = readback(mod, ctx, arg.type, arg.value)
-      return evaluate(ctxToEnv(ctx), Cores.ApImplicit(targetCore, argCore))
+      return Actions.doApImplicit(target, arg.value)
     }
 
     case "Car": {
       const targetType = deepWalkType(mod, ctx, neutral.targetType)
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      const targetCore = readback(mod, ctx, targetType, target)
-      return evaluate(ctxToEnv(ctx), Cores.Car(targetCore))
+      return Actions.doCar(target)
     }
 
     case "Cdr": {
       const targetType = deepWalkType(mod, ctx, neutral.targetType)
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      const targetCore = readback(mod, ctx, targetType, target)
-      return evaluate(ctxToEnv(ctx), Cores.Cdr(targetCore))
+      return Actions.doCdr(target)
     }
 
     case "Dot": {
       const targetType = deepWalkType(mod, ctx, neutral.targetType)
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      const targetCore = readback(mod, ctx, targetType, target)
-      return evaluate(ctxToEnv(ctx), Cores.Dot(targetCore, neutral.name))
+      return Actions.doDot(target, neutral.name)
     }
   }
 }
