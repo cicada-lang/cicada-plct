@@ -22,7 +22,6 @@ solve (A: Type, B: Type, C: Type) {
   unify C = (implicit _: A) -> B
   unify A = String
   unify B = String
-
 }
 
 `)
