@@ -1,8 +1,6 @@
 import { Value } from "../../value"
 
-type ValueConstructor = (...args: Array<any>) => Value
-
-export function isValue<Kind extends string>(
+export function isValue<Kind extends Value["kind"]>(
   value: Value,
   kind: Kind,
 ): value is Extract<Value, { kind: Kind }> {
