@@ -15,68 +15,68 @@ export function deepWalkNeutral(mod: Mod, ctx: Ctx, typeNeutral: TypedNeutral): 
     }
 
     case "Ap": {
-      let targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
-      let targetValue = deepWalkNeutral(
+      const targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
+      const targetValue = deepWalkNeutral(
         mod,
         ctx,
         Values.TypedNeutral(targetType, typeNeutral.neutral.target),
       )
-      let targetCore = readback(mod, ctx, targetType, targetValue)
+      const targetCore = readback(mod, ctx, targetType, targetValue)
 
-      let argValue = deepWalkTypedValue(mod, ctx, typeNeutral.neutral.arg)
-      let argCore = readback(mod, ctx, argValue.type, argValue.value)
-      let target = evaluate(ctxToEnv(ctx), Cores.Ap(targetCore, argCore))
+      const argValue = deepWalkTypedValue(mod, ctx, typeNeutral.neutral.arg)
+      const argCore = readback(mod, ctx, argValue.type, argValue.value)
+      const target = evaluate(ctxToEnv(ctx), Cores.Ap(targetCore, argCore))
       return target
     }
 
     case "ApImplicit": {
-      let targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
-      let targetValue = deepWalkNeutral(
+      const targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
+      const targetValue = deepWalkNeutral(
         mod,
         ctx,
         Values.TypedNeutral(targetType, typeNeutral.neutral.target),
       )
-      let targetCore = readback(mod, ctx, targetType, targetValue)
+      const targetCore = readback(mod, ctx, targetType, targetValue)
 
-      let argValue = deepWalkTypedValue(mod, ctx, typeNeutral.neutral.arg)
-      let argCore = readback(mod, ctx, argValue.type, argValue.value)
-      let target = evaluate(ctxToEnv(ctx), Cores.ApImplicit(targetCore, argCore))
+      const argValue = deepWalkTypedValue(mod, ctx, typeNeutral.neutral.arg)
+      const argCore = readback(mod, ctx, argValue.type, argValue.value)
+      const target = evaluate(ctxToEnv(ctx), Cores.ApImplicit(targetCore, argCore))
       return target
     }
 
     case "Car": {
-      let targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
-      let targetValue = deepWalkNeutral(
+      const targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
+      const targetValue = deepWalkNeutral(
         mod,
         ctx,
         Values.TypedNeutral(targetType, typeNeutral.neutral.target),
       )
-      let targetCore = readback(mod, ctx, targetType, targetValue)
-      let target = evaluate(ctxToEnv(ctx), Cores.Car(targetCore))
+      const targetCore = readback(mod, ctx, targetType, targetValue)
+      const target = evaluate(ctxToEnv(ctx), Cores.Car(targetCore))
       return target
     }
 
     case "Cdr": {
-      let targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
-      let targetValue = deepWalkNeutral(
+      const targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
+      const targetValue = deepWalkNeutral(
         mod,
         ctx,
         Values.TypedNeutral(targetType, typeNeutral.neutral.target),
       )
-      let targetCore = readback(mod, ctx, targetType, targetValue)
-      let target = evaluate(ctxToEnv(ctx), Cores.Cdr(targetCore))
+      const targetCore = readback(mod, ctx, targetType, targetValue)
+      const target = evaluate(ctxToEnv(ctx), Cores.Cdr(targetCore))
       return target
     }
 
     case "Dot": {
-      let targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
-      let targetValue = deepWalkNeutral(
+      const targetType = deepWalkType(mod, ctx, typeNeutral.neutral.targetType)
+      const targetValue = deepWalkNeutral(
         mod,
         ctx,
         Values.TypedNeutral(targetType, typeNeutral.neutral.target),
       )
-      let targetCore = readback(mod, ctx, targetType, targetValue)
-      let target = evaluate(ctxToEnv(ctx), Cores.Dot(targetCore, typeNeutral.neutral.name))
+      const targetCore = readback(mod, ctx, targetType, targetValue)
+      const target = evaluate(ctxToEnv(ctx), Cores.Dot(targetCore, typeNeutral.neutral.name))
       return target
     }
   }
