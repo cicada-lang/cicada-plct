@@ -27,7 +27,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 
   switch (value.kind) {
     case "TypedNeutral": {
-      return deepWalkNeutral(mod, ctx, value)
+      return deepWalkNeutral(mod, ctx, value.type, value.neutral)
     }
 
     case "Type": {
