@@ -3,7 +3,7 @@ import * as Values from "../value"
 import { assertValue, isValue, Value } from "../value"
 
 export function doCar(target: Value): Value {
-  if (isValue(target, Values.Cons)) {
+  if (isValue(target, "Cons")) {
     return target.car
   }
 

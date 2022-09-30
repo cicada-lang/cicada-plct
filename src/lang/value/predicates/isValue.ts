@@ -2,9 +2,9 @@ import { Value } from "../../value"
 
 type ValueConstructor = (...args: Array<any>) => Value
 
-export function isValue<T extends ValueConstructor>(
+export function isValue<Kind extends string>(
   value: Value,
-  valueConstructor: T,
-): value is ReturnType<T> {
-  return value.kind === valueConstructor.name
+  kind: Kind,
+): value is Extract<Value, { kind: Kind }> {
+  return value.kind === kind
 }

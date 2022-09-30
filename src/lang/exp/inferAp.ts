@@ -10,7 +10,7 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
 export function inferAp(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
-  if (Values.isValue(inferred.type, Values.PiImplicit)) {
+  if (Values.isValue(inferred.type, "PiImplicit")) {
     return inferApPiImplicit(mod, ctx, inferred, argExp)
   } else {
     return inferApPi(mod, ctx, inferred, argExp)

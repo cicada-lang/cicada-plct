@@ -75,7 +75,7 @@ export function unifyByType(
 }
 
 function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: Value): void {
-  if (Values.isValue(left, Values.Objekt) && Values.isValue(right, Values.Objekt)) {
+  if (Values.isValue(left, "Objekt") && Values.isValue(right, "Objekt")) {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
     const rightNames = Object.keys(right.properties)

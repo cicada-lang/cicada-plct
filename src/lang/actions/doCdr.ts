@@ -5,7 +5,7 @@ import { assertValue, isValue, Value } from "../value"
 import { doCar } from "./doCar"
 
 export function doCdr(target: Value): Value {
-  if (isValue(target, Values.Cons)) {
+  if (isValue(target, "Cons")) {
     return target.cdr
   }
 

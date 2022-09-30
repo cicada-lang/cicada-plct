@@ -4,7 +4,7 @@ import * as Values from "../value"
 import { assertClazz, assertValue, isValue, lookupPropertyTypeOrFail, Value } from "../value"
 
 export function doDot(target: Value, name: string): Value {
-  if (isValue(target, Values.Objekt)) {
+  if (isValue(target, "Objekt")) {
     const property = target.properties[name]
     if (property === undefined) {
       throw new Errors.EvaluationError(`Undefined property name: ${name}`)

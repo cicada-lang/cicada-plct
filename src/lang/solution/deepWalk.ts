@@ -168,7 +168,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 }
 
 function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
-  if (Values.isValue(value, Values.Objekt)) {
+  if (Values.isValue(value, "Objekt")) {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const valueNames = Object.keys(value.properties)
     const extraNames = _.difference(valueNames, clazzNames)
