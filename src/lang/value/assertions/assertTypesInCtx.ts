@@ -2,25 +2,21 @@ import { Ctx } from "../../ctx"
 import * as Errors from "../../errors"
 import { AlreadyType, Value } from "../../value"
 
-type AlreadyTypeConstructor = (...args: Array<any>) => AlreadyType
-
 /**
 
    TODO Given the `ctx`, we have the opportunity to `readback` the `value` and print it in error report.
 
 **/
 
-type ElementReturnTypeUnion<T extends Array<AlreadyTypeConstructor>> =
-  T extends (infer E extends AlreadyTypeConstructor)[] ? ReturnType<E> : never
+type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
+  Kinds extends (infer Kind extends AlreadyType["kind"])[] ? Extract<Value, { kind: Kind }> : never
 
-export function assertTypesInCtx<T extends Array<AlreadyTypeConstructor>>(
+export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
   ctx: Ctx,
   value: Value,
-  alreadyTypeConstructors: T,
-): asserts value is ElementReturnTypeUnion<T> {
-  const kinds = alreadyTypeConstructors.map((x) => x.name)
-
-  if (!kinds.includes(value.kind)) {
+  kinds: Kinds,
+): asserts value is ElementExtractTypeUnion<Kinds> {
+  if (!kinds.includes(value.kind as any)) {
     throw new Errors.AssertionError(
       `expect value to be type and to have kind: ${kinds}, instead of: ${value.kind}`,
     )

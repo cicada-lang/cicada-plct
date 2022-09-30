@@ -1,6 +1,3 @@
-assertValue -- avoid using `constructor.name` for frontend
-assertTypeInCtx -- avoid using `constructor.name` for frontend
-
 # [feature] unification need to implement occur check #52
 
 https://github.com/cicada-lang/cicada/issues/52

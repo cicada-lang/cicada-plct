@@ -95,7 +95,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "ApImplicit": {
       const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
+      Values.assertTypeInCtx(ctx, inferred.type, "PiImplicit")
       const argCore = Exps.check(mod, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
       return Inferred(
@@ -122,14 +122,14 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Car": {
       const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
+      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
       const sigma = inferred.type
       return Inferred(sigma.carType, Cores.Car(inferred.core))
     }
 
     case "Cdr": {
       const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, Values.Sigma)
+      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
       const sigma = inferred.type
       const carValue = evaluate(mod.ctxToEnv(ctx), Cores.Car(inferred.core))
       return Inferred(applyClosure(sigma.cdrTypeClosure, carValue), Cores.Cdr(inferred.core))

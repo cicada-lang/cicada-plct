@@ -1,17 +1,13 @@
 import * as Errors from "../../errors"
 import { Value } from "../../value"
 
-type ValueConstructor = (...args: Array<any>) => Value
+type ElementExtractTypeUnion<Kinds extends Array<Value["kind"]>> =
+  Kinds extends (infer Kind extends Value["kind"])[] ? Extract<Value, { kind: Kind }> : never
 
-type ElementReturnTypeUnion<T extends Array<ValueConstructor>> =
-  T extends (infer E extends ValueConstructor)[] ? ReturnType<E> : never
-
-export function assertValues<T extends Array<ValueConstructor>>(
+export function assertValues<Kinds extends Array<Value["kind"]>>(
   value: Value,
-  valueConstructors: T,
-): asserts value is ElementReturnTypeUnion<T> {
-  const kinds = valueConstructors.map((x) => x.name)
-
+  kinds: Kinds,
+): asserts value is ElementExtractTypeUnion<Kinds> {
   if (!kinds.includes(value.kind)) {
     throw new Errors.AssertionError(
       `expect value to have kind: ${kinds}, instead of: ${value.kind}`,

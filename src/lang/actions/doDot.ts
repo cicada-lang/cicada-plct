@@ -13,7 +13,7 @@ export function doDot(target: Value, name: string): Value {
     return property
   }
 
-  assertValue(target, Values.TypedNeutral)
+  assertValue(target, "TypedNeutral")
   assertClazz(target.type)
 
   return Values.TypedNeutral(

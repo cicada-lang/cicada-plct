@@ -18,7 +18,7 @@ export function inferAp(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): In
 }
 
 function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
-  Values.assertTypeInCtx(ctx, inferred.type, Values.PiImplicit)
+  Values.assertTypeInCtx(ctx, inferred.type, "PiImplicit")
 
   const name = inferred.type.retTypeClosure.name
   /**
@@ -40,7 +40,7 @@ function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp):
 }
 
 function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
-  Values.assertTypeInCtx(ctx, inferred.type, Values.Pi)
+  Values.assertTypeInCtx(ctx, inferred.type, "Pi")
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {

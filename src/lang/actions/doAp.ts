@@ -12,8 +12,8 @@ export function doAp(target: Value, arg: Value): Value {
     return Values.fulfillClazz(target, arg)
   }
 
-  Values.assertValue(target, Values.TypedNeutral)
-  Values.assertValue(target.type, Values.Pi)
+  Values.assertValue(target, "TypedNeutral")
+  Values.assertValue(target.type, "Pi")
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),

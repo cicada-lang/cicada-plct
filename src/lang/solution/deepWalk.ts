@@ -67,7 +67,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const name = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      Values.assertTypeInCtx(ctx, type, Values.Pi)
+      Values.assertTypeInCtx(ctx, type, "Pi")
       const argType = deepWalkType(mod, ctx, type.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
@@ -82,7 +82,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const name = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      Values.assertTypeInCtx(ctx, type, Values.PiImplicit)
+      Values.assertTypeInCtx(ctx, type, "PiImplicit")
       const argType = deepWalkType(mod, ctx, type.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
@@ -108,7 +108,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
 
     case "Cons": {
       type = deepWalkType(mod, ctx, type)
-      Values.assertTypeInCtx(ctx, type, Values.Sigma)
+      Values.assertTypeInCtx(ctx, type, "Sigma")
       const cdrType = applyClosure(type.cdrTypeClosure, value.car)
       return Values.Cons(
         deepWalk(mod, ctx, type.carType, value.car),

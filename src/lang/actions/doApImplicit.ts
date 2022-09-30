@@ -8,8 +8,8 @@ export function doApImplicit(target: Value, arg: Value): Value {
     return applyClosure(target.retClosure, arg)
   }
 
-  Values.assertValue(target, Values.TypedNeutral)
-  Values.assertValue(target.type, Values.PiImplicit)
+  Values.assertValue(target, "TypedNeutral")
+  Values.assertValue(target.type, "PiImplicit")
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),

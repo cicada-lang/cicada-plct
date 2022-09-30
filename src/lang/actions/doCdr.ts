@@ -9,8 +9,8 @@ export function doCdr(target: Value): Value {
     return target.cdr
   }
 
-  assertValue(target, Values.TypedNeutral)
-  assertValue(target.type, Values.Sigma)
+  assertValue(target, "TypedNeutral")
+  assertValue(target.type, "Sigma")
 
   return Values.TypedNeutral(
     applyClosure(target.type.cdrTypeClosure, doCar(target)),
