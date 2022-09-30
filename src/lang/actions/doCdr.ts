@@ -14,6 +14,6 @@ export function doCdr(target: Value): Value {
 
   return Values.TypedNeutral(
     applyClosure(target.type.cdrTypeClosure, doCar(target)),
-    Neutrals.Cdr(target.type, target.neutral),
+    Neutrals.Cdr(target.neutral, target.type),
   )
 }

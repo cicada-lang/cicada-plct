@@ -28,8 +28,8 @@ export function Ap(target: Neutral, targetType: Value, arg: TypedValue): Ap {
   return {
     family: "Neutral",
     kind: "Ap",
-    targetType,
     target,
+    targetType,
     arg,
   }
 }
@@ -59,12 +59,12 @@ export type Car = {
   targetType: Value
 }
 
-export function Car(targetType: Value, target: Neutral): Car {
+export function Car(target: Neutral, targetType: Value): Car {
   return {
     family: "Neutral",
     kind: "Car",
-    targetType,
     target,
+    targetType,
   }
 }
 
@@ -75,12 +75,12 @@ export type Cdr = {
   targetType: Value
 }
 
-export function Cdr(targetType: Value, target: Neutral): Cdr {
+export function Cdr(target: Neutral, targetType: Value): Cdr {
   return {
     family: "Neutral",
     kind: "Cdr",
-    targetType,
     target,
+    targetType,
   }
 }
 
@@ -92,12 +92,12 @@ export type Dot = {
   name: string
 }
 
-export function Dot(targetType: Value, target: Neutral, name: string): Dot {
+export function Dot(target: Neutral, targetType: Value, name: string): Dot {
   return {
     family: "Neutral",
     kind: "Dot",
-    targetType,
     target,
+    targetType,
     name,
   }
 }

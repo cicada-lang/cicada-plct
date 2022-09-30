@@ -10,5 +10,5 @@ export function doCar(target: Value): Value {
   assertValue(target, "TypedNeutral")
   assertValue(target.type, "Sigma")
 
-  return Values.TypedNeutral(target.type.carType, Neutrals.Car(target.type, target.neutral))
+  return Values.TypedNeutral(target.type.carType, Neutrals.Car(target.neutral, target.type))
 }

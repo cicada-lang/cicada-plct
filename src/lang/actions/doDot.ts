@@ -18,6 +18,6 @@ export function doDot(target: Value, name: string): Value {
 
   return Values.TypedNeutral(
     lookupPropertyTypeOrFail(target.type, target, name),
-    Neutrals.Dot(target.type, target.neutral, name),
+    Neutrals.Dot(target.neutral, target.type, name),
   )
 }
