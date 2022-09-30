@@ -20,6 +20,6 @@ solve (abc: ABC, a: String, b: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ abc: { a: \\"a\\", b: \\"b\\", c: \\"c\\" }, a: abc.a, b: abc.b, c: abc.c }"',
+    '"{ abc: { a: \\"a\\", b: \\"b\\", c: \\"c\\" }, a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
   )
 })
