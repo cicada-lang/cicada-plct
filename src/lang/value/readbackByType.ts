@@ -5,7 +5,6 @@ import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackProperties, readbackType, Value } from "../value"
 
@@ -46,23 +45,21 @@ export function readbackByType(mod: Mod, ctx: Ctx, type: Value, value: Value): C
 
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(name))
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
-      ctx = CtxCons(freshName, type.argType, ctx)
+      ctx = CtxCons(name, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
-      return Cores.Fn(freshName, readback(mod, ctx, retType, ret))
+      return Cores.Fn(name, readback(mod, ctx, retType, ret))
     }
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(name))
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
-      ctx = CtxCons(freshName, type.argType, ctx)
+      ctx = CtxCons(name, type.argType, ctx)
       const ret = Actions.doApImplicit(value, typedNeutral)
-      return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
+      return Cores.FnImplicit(name, readback(mod, ctx, retType, ret))
     }
 
     case "Sigma": {
