@@ -1,1 +1,5 @@
 I can not circular import: ./circular-import.error.cic
+
+ 1 |import { y } from "./circular-import.error.cic"
+ 2 |
+ 3 |let x = "x"
