@@ -10,12 +10,31 @@ export class MarkdownScript extends Script {
   }
 
   async run(): Promise<void> {
+    for (const block of collectBlocks(this.text)) {
+      await this.runBlock(block)
+    }
+  }
+
+  buildText(block: Block): string | undefined {
+    if (block.info === "cicada") {
+      return block.code
+    }
+
+    if (block.info.startsWith("cicada") && (block.info + " ").includes(" compute ")) {
+      return "compute " + block.code
+    }
+  }
+
+  async runBlock(block: Block): Promise<void> {
+    const text = this.buildText(block)
+    if (text === undefined) return
+
     try {
-      const stmts = parseStmts(this.text)
+      const stmts = parseStmts(text)
       await this.mod.executeStmts(stmts)
     } catch (error) {
       if (error instanceof Errors.ElaborationError) {
-        throw new Errors.ErrorReport(error.report({ text: this.text }))
+        throw new Errors.ErrorReport(error.report({ text }))
       }
 
       throw error
@@ -23,22 +42,21 @@ export class MarkdownScript extends Script {
   }
 }
 
-type Entry = { index: number; info: string; code: string }
+type Block = { index: number; info: string; code: string }
 
-function collect(text: string): Array<Entry> {
+function collectBlocks(text: string): Array<Block> {
   const reader = new commonmark.Parser()
   const parsed: commonmark.Node = reader.parse(text)
-  const entries = []
+  const blocks = []
   const walker = parsed.walker()
   let counter = 0
   let event, node
   while ((event = walker.next())) {
     node = event.node
-
     if (event.entering && node.type === "code_block") {
       const [start_pos, _end_pos] = node.sourcepos
       const [row, col] = start_pos
-      entries.push({
+      blocks.push({
         index: counter++,
         info: node.info || "",
         code: node.literal || "",
@@ -46,5 +64,5 @@ function collect(text: string): Array<Entry> {
     }
   }
 
-  return entries
+  return blocks
 }
