@@ -3,5 +3,9 @@ import { Script } from "./Script"
 import * as Scripts from "./scripts"
 
 export function createScript(mod: Mod, text: string): Script {
-  return new Scripts.PlainScript(mod, text)
+  if (mod.options.url.href.endsWith(".md")) {
+    return new Scripts.MarkdownScript(mod, text)
+  } else {
+    return new Scripts.DefaultScript(mod, text)
+  }
 }

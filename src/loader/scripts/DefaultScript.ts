@@ -3,7 +3,7 @@ import { Mod } from "../../lang/mod"
 import { parseStmts } from "../../lang/parse"
 import { Script } from "../Script"
 
-export class PlainScript extends Script {
+export class DefaultScript extends Script {
   constructor(public mod: Mod, public text: string) {
     super()
   }
