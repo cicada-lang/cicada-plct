@@ -1,7 +1,6 @@
 import { Fetcher } from "../framework/fetcher"
 import { Mod } from "../lang/mod"
-import { createScript } from "./createScript"
-import { Script } from "./Script"
+import { createScript, Script } from "../script"
 
 export class Loader {
   cache: Map<string, Script> = new Map()

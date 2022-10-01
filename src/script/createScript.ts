@@ -1,6 +1,6 @@
 import { Mod } from "../lang/mod"
+import * as Scripts from "../scripts"
 import { Script } from "./Script"
-import * as Scripts from "./scripts"
 
 export function createScript(mod: Mod, text: string): Script {
   if (mod.options.url.href.endsWith(".md")) {
