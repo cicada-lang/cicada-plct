@@ -1,3 +1,4 @@
+import * as commonmark from "commonmark"
 import * as Errors from "../lang/errors"
 import { Mod } from "../lang/mod"
 import { parseStmts } from "../lang/parse"
@@ -20,4 +21,30 @@ export class MarkdownScript extends Script {
       throw error
     }
   }
+}
+
+type Entry = { index: number; info: string; code: string }
+
+function collect(text: string): Array<Entry> {
+  const reader = new commonmark.Parser()
+  const parsed: commonmark.Node = reader.parse(text)
+  const entries = []
+  const walker = parsed.walker()
+  let counter = 0
+  let event, node
+  while ((event = walker.next())) {
+    node = event.node
+
+    if (event.entering && node.type === "code_block") {
+      const [start_pos, _end_pos] = node.sourcepos
+      const [row, col] = start_pos
+      entries.push({
+        index: counter++,
+        info: node.info || "",
+        code: node.literal || "",
+      })
+    }
+  }
+
+  return entries
 }

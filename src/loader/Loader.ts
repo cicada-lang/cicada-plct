@@ -1,6 +1,7 @@
 import { Fetcher } from "../framework/fetcher"
 import { Mod } from "../lang/mod"
-import { createScript, Script } from "../script"
+import { Script } from "../script"
+import * as Scripts from "../scripts"
 
 export class Loader {
   cache: Map<string, Script> = new Map()
@@ -12,7 +13,7 @@ export class Loader {
 
     const text = options?.text || (await this.fetcher.fetch(url))
     const mod = new Mod({ loader: this, url })
-    const script = createScript(mod, text)
+    const script = Scripts.createScript(mod, text)
     await script.run()
     this.cache.set(url.href, script)
     return script.mod
