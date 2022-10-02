@@ -14,7 +14,7 @@ export function unifyPatternVar(solution: Solution, left: Value, right: Value): 
 
   if (solution.isPatternVar(left)) {
     if (occur(left.neutral.name, right)) {
-      throw new UnificationError(`${left.neutral.name} occurs in ${right}`)
+      throw new UnificationError(`${left.neutral.name} occurs in ${right.kind}`)
     }
 
     solution.bind(left.neutral.name, right)
@@ -23,7 +23,7 @@ export function unifyPatternVar(solution: Solution, left: Value, right: Value): 
 
   if (solution.isPatternVar(right)) {
     if (occur(right.neutral.name, left)) {
-      throw new UnificationError(`${right.neutral.name} occurs in ${left}`)
+      throw new UnificationError(`${right.neutral.name} occurs in ${left.kind}`)
     }
 
     solution.bind(right.neutral.name, left)
