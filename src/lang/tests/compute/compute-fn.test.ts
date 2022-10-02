@@ -16,6 +16,21 @@ compute id(Type)
   `)
 })
 
+test("compute Fn -- no freshen", async () => {
+  const output = await runCode(`
+
+function f(x: (Type) -> Type): (Type) -> Type {
+  let f = x
+  return the((Type) -> Type, (x) => f(x))
+}
+
+compute f
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"(x, _) => x(_): ((Type) -> Type, Type) -> Type"')
+})
+
 test("compute Fn -- partial evaluation", async () => {
   const output = await runCode(`
 
