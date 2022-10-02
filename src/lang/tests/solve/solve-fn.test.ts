@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Fn", async () => {
   const output = await runCode(`
@@ -36,4 +36,26 @@ solve (T: Type, f: (Trivial) -> Type) {
 `)
 
   expect(output).toMatchInlineSnapshot('"{ T: String, f: (_) => String }"')
+})
+
+test("solve Fn -- occur in fn", async () => {
+  await expectCodeToFail(`
+  
+solve (x: (Type) -> Type) {
+  unify x = (y: Type) => x(y)
+}
+
+`)
+})
+
+test("solve Fn -- occur shadowed by Fn", async () => {
+  const output = await runCode(`
+  
+solve (x: (Type) -> Type) {
+  unify x = (x: Type) => x
+}
+  
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ x: (_) => _ }"')
 })

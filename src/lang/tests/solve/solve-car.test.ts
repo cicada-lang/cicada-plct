@@ -32,3 +32,15 @@ solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String,
     '"{ ab: cons(\\"a\\", \\"b\\"), ba: cons(\\"b\\", \\"a\\"), a: \\"a\\", b: \\"b\\", b2: b }"',
   )
 })
+
+test("solve Car -- car cons", async () => {
+  const output = await runCode(`
+
+solve(a: String) {
+  unify a = car(cons(a, "b"))
+}
+  
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ a: TODO(String) }"')
+})
