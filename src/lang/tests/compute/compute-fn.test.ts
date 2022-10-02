@@ -16,8 +16,14 @@ compute id(Type)
   `)
 })
 
-test("compute Fn -- no freshen", async () => {
+test("compute Fn -- freshen is necessary", async () => {
   const output = await runCode(`
+
+// (lambda (x) ((lambda (f x) (f x)) x))
+// with freshen:
+//   (lambda (x1) (lambda (x) (x1 x)))
+// without freshen:
+//   (lambda (x) (lambda (x) (x x)))
 
 function f(x: (Type) -> Type): (Type) -> Type {
   let f = x
@@ -96,8 +102,8 @@ compute apply2(Type, Type, Type, (x, y) => x)
 test("compute Fn -- stmts", async () => {
   const output = await runCode(`
 
-function id(T: Type, x: T) { 
-  return x 
+function id(T: Type, x: T) {
+  return x
 }
 
 compute id
