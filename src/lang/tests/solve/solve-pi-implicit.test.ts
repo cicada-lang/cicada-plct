@@ -1,5 +1,6 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import * as Errors from "../../errors"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("solve PiImplicit -- occur twice", async () => {
   const output = await runCode(`
@@ -28,5 +29,18 @@ solve (A: Type, B: Type, C: Type) {
 
   expect(output).toMatchInlineSnapshot(
     '"{ A: String, B: String, C: (implicit _: String) -> String }"',
+  )
+})
+
+test("solve PiImplicit -- occur", async () => {
+  await expectCodeToFail(
+    `
+  
+solve (T: Type) {
+  unify T = (implicit _: T) -> T
+}
+
+`,
+    Errors.UnificationError,
   )
 })

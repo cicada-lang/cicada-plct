@@ -1,5 +1,6 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import * as Errors from "../../errors"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Sigma", async () => {
   const output = await runCode(`
@@ -49,4 +50,17 @@ solve (A: Type, B: (x: A) -> Type) {
 `)
 
   expect(output).toMatchInlineSnapshot()
+})
+
+test("solve Sigma -- occur in pair", async () => {
+  await expectCodeToFail(
+    `
+
+solve (x: Type) {
+  unify x = Pair(x, x)
+}
+
+`,
+    Errors.UnificationError,
+  )
 })

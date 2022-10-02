@@ -1,5 +1,6 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import * as Errors from "../../errors"
+import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Clazz", async () => {
   const output = await runCode(`
@@ -82,5 +83,18 @@ solve (A: Type, B: Type, C: Type, a: A, b: B) {
 
   expect(output).toMatchInlineSnapshot(
     '"{ A: String, B: String, C: class { a: String = \\"a\\", b: String = \\"b\\" }, a: \\"a\\", b: \\"b\\" }"',
+  )
+})
+
+test("solve Clazz -- occur", async () => {
+  await expectCodeToFail(
+    `
+
+solve (A: Type) {
+  unify class { a: A } = A
+}
+
+`,
+    Errors.UnificationError,
   )
 })

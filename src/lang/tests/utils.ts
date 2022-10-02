@@ -13,6 +13,13 @@ export async function runCode(code: string): Promise<string> {
   return outputs.join("\n")
 }
 
-export async function expectCodeToFail(code: string): Promise<void> {
-  await expect(runCode(code)).rejects.toThrowError(Errors.LangError)
+interface ErrorConstructor {
+  new (...args: any[]): Error
+}
+
+export async function expectCodeToFail(
+  code: string,
+  errorConstructor?: ErrorConstructor,
+): Promise<void> {
+  await expect(runCode(code)).rejects.toThrowError(errorConstructor ?? Errors.LangError)
 }
