@@ -1,4 +1,5 @@
 import { expect, test } from "vitest"
+import * as Errors from "../../errors"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Pi", async () => {
@@ -55,23 +56,29 @@ solve (A: Type, B: Type, C: Type) {
 })
 
 test("solve Pi -- occur in Pi", async () => {
-  await expectCodeToFail(`
+  await expectCodeToFail(
+    `
   
 solve (T: Type) {
   unify T = (T) -> T
 }
 
-`)
+`,
+    Errors.UnificationError,
+  )
 })
 
 test("solve Pi -- occur in Pi -- nested", async () => {
-  await expectCodeToFail(`
+  await expectCodeToFail(
+    `
 
 solve (A: Type, B: Type) {
   unify (A) -> B = (A) -> (B) -> B
 }
-  
-`)
+
+`,
+    Errors.UnificationError,
+  )
 })
 
 test("solve Pi -- occur shadowed by Pi", async () => {

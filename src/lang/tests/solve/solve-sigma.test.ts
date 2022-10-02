@@ -1,4 +1,5 @@
 import { expect, test } from "vitest"
+import * as Errors from "../../errors"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Sigma", async () => {
@@ -52,11 +53,14 @@ solve (A: Type, B: (x: A) -> Type) {
 })
 
 test("solve Sigma -- occur in pair", async () => {
-  await expectCodeToFail(`
+  await expectCodeToFail(
+    `
 
 solve (x: Type) {
   unify x = Pair(x, x)
 }
 
-`)
+`,
+    Errors.UnificationError,
+  )
 })

@@ -1,4 +1,5 @@
 import { expect, test } from "vitest"
+import * as Errors from "../../errors"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("solve FnImplicit", async () => {
@@ -55,11 +56,14 @@ solve (T: Type, f: (implicit _: Trivial) -> Type) {
 })
 
 test("solve FnImplicit -- occur", async () => {
-  await expectCodeToFail(`
+  await expectCodeToFail(
+    `
   
 solve (x: (implicit _: Type) -> Type) {
   unify x = (implicit y: Type) => x(implicit y)
 }
 
-`)
+`,
+    Errors.UnificationError,
+  )
 })
