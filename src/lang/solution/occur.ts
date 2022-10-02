@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Neutral } from "../neutral"
 import { TypedValue, Value } from "../value"
 
-export function occur(name: String, value: Value): Boolean {
+export function occur(name: string, value: Value): boolean {
   switch (value.kind) {
     case "TypedNeutral": {
       return occurNeutral(name, value.neutral)
@@ -80,7 +80,7 @@ export function occur(name: String, value: Value): Boolean {
   }
 }
 
-function occurCore(name: String, core: Core): Boolean {
+function occurCore(name: string, core: Core): boolean {
   switch (core.kind) {
     case "Var": {
       return name === core.name
@@ -155,15 +155,15 @@ function occurCore(name: String, core: Core): Boolean {
   }
 }
 
-function occurClosure(name: String, closure: Closure): Boolean {
+function occurClosure(name: string, closure: Closure): boolean {
   return name != closure.name && occurCore(name, closure.body)
 }
 
-function occurTypedValue(name: String, typedValue: TypedValue): Boolean {
+function occurTypedValue(name: string, typedValue: TypedValue): boolean {
   return occur(name, typedValue.type) || occur(name, typedValue.value)
 }
 
-function occurNeutral(name: String, neutral: Neutral): Boolean {
+function occurNeutral(name: string, neutral: Neutral): boolean {
   switch (neutral.kind) {
     case "Var": {
       return name === neutral.name
