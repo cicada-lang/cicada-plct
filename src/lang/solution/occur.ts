@@ -1,4 +1,5 @@
 import { Closure } from "../closure"
+import * as Cores from "../core"
 import { Core } from "../core"
 import { Neutral } from "../neutral"
 import { TypedValue, Value } from "../value"
@@ -81,78 +82,7 @@ export function occur(name: string, value: Value): boolean {
 }
 
 function occurCore(name: string, core: Core): boolean {
-  switch (core.kind) {
-    case "Var": {
-      return name === core.name
-    }
-
-    case "Pi": {
-      return occurCore(name, core.argType) || (core.name !== name && occurCore(name, core.retType))
-    }
-
-    case "PiImplicit": {
-      return occurCore(name, core.argType) || (core.name !== name && occurCore(name, core.retType))
-    }
-
-    case "Fn": {
-      return core.name !== name && occurCore(name, core.ret)
-    }
-
-    case "FnImplicit": {
-      return core.name !== name && occurCore(name, core.ret)
-    }
-
-    case "Ap": {
-      return occurCore(name, core.target) || occurCore(name, core.arg)
-    }
-
-    case "ApImplicit": {
-      return occurCore(name, core.target) || occurCore(name, core.arg)
-    }
-
-    case "Sigma": {
-      return occurCore(name, core.carType) || (core.name !== name && occurCore(name, core.cdrType))
-    }
-
-    case "Cons": {
-      return occurCore(name, core.car) || occurCore(name, core.cdr)
-    }
-
-    case "Car":
-    case "Cdr": {
-      return occurCore(name, core.target)
-    }
-
-    case "Quote": {
-      return false
-    }
-
-    case "ClazzNull": {
-      return false
-    }
-    case "ClazzCons": {
-      return (
-        occurCore(name, core.propertyType) || (core.name !== name && occurCore(name, core.rest))
-      )
-    }
-    case "ClazzFulfilled": {
-      return (
-        occurCore(name, core.propertyType) ||
-        occurCore(name, core.property) ||
-        (core.name !== name && occurCore(name, core.rest))
-      )
-    }
-
-    case "Objekt": {
-      return Object.entries(core.properties).some(([key, value]) => {
-        return occurCore(name, value)
-      })
-    }
-
-    case "Dot": {
-      return occurCore(name, core.target)
-    }
-  }
+  return Cores.freeNames(new Set(), core).has(name)
 }
 
 function occurClosure(name: string, closure: Closure): boolean {
