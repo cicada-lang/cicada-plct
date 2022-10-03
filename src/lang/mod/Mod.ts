@@ -43,7 +43,9 @@ export class Mod {
     const outputs = []
     const offset = this.stmts.length
     for (const [index, stmt] of stmts.entries()) {
-      const output = await this.executeStmt(stmt)
+      const output = await stmt.execute(this)
+      this.stmts.push(stmt)
+      this.solution.cleanup()
       if (output) {
         this.outputs.set(offset + index, output)
         outputs.push(output)
@@ -51,13 +53,6 @@ export class Mod {
     }
 
     return outputs
-  }
-
-  private async executeStmt(stmt: Stmt): Promise<StmtOutput | undefined> {
-    const output = await stmt.execute(this)
-    this.stmts.push(stmt)
-    this.solution.cleanup()
-    return output || undefined
   }
 
   define(name: string, type: Value, value: Value): void {
