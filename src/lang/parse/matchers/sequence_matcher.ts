@@ -22,11 +22,11 @@ export function sequence_entry_matcher(tree: pt.Tree): Exps.SequenceBinding {
     "sequence_entry:check": ({ exp, t }, { span }) =>
       Exps.SequenceBindingCheck(matchers.exp_matcher(exp), matchers.exp_matcher(t)),
     "sequence_entry:let_function": ({ name, bindings, ret_t, sequence }, { span }) =>
-      Exps.SequenceBindingLetThe(
+      Exps.SequenceBindingLet(
         pt.str(name),
-        Exps.PiUnfolded(matchers.pi_bindings_matcher(bindings), matchers.exp_matcher(ret_t)),
-        Exps.FnUnfolded(
-          matchers.pi_bindings_matcher(bindings).map(matchers.piBindingtoFnBindingFrom),
+        Exps.FnUnfoldedWithRetType(
+          matchers.fn_bindings_matcher(bindings),
+          matchers.exp_matcher(ret_t),
           matchers.sequence_matcher(sequence),
         ),
       ),

@@ -66,14 +66,14 @@ begin {
     deleteUndefined(
       Exps.SequenceUnfolded(
         [
-          Exps.SequenceBindingLetThe(
+          Exps.SequenceBindingLet(
             "id",
-            Exps.PiUnfolded(
-              [Exps.PiBindingNamed("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
+            Exps.FnUnfoldedWithRetType(
+              [
+                Exps.FnBindingAnnotated("T", Exps.Var("Type")),
+                Exps.FnBindingAnnotated("x", Exps.Var("T")),
+              ],
               Exps.Var("T"),
-            ),
-            Exps.FnUnfolded(
-              [Exps.FnBindingName("T"), Exps.FnBindingName("x")],
               Exps.SequenceUnfolded([], Exps.Var("x")),
             ),
           ),

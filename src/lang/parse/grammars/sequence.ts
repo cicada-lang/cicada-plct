@@ -26,7 +26,7 @@ export const sequence_entry = {
       '"function"',
       { name: "name" },
       '"("',
-      { bindings: "pi_bindings" },
+      { bindings: "fn_bindings" },
       '")"',
       '":"',
       { ret_t: "exp" },
