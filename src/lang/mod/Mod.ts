@@ -1,10 +1,10 @@
 import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
 import { Env } from "../env"
+import { globals } from "../globals"
 import { Solution } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
-import { globals } from "./globals"
 
 export interface ModOptions {
   loader: Loader

@@ -1,3 +1,10 @@
+# improve globals API
+
+https://github.com/cicada-lang/cicada/issues/106
+
+globals.claim
+globals.define
+
 # [feature] equivalence #43
 
 https://github.com/cicada-lang/cicada/issues/43
