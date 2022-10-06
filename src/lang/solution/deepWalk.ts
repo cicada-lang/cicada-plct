@@ -50,7 +50,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
     case "PiImplicit": {
       const name = value.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = name // freshen(usedNames, name)
+      const freshName = freshen(usedNames, name)
       const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
