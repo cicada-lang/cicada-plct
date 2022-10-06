@@ -17,7 +17,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
       pt.matchers
         .one_or_more_matcher(args_group)
         .map((args) => matchers.args_matcher(args))
-        .reduce((result, args) => Exps.ApUnfolded(result, args, span), operator_matcher(target)),
+        .reduce(
+          (result, args) => Exps.ApUnfolded(result, args, span),
+          operator_matcher(target),
+        ),
     "operator:car": ({ target }, { span }) => Exps.Car(exp_matcher(target), span),
     "operator:cdr": ({ target }, { span }) => Exps.Cdr(exp_matcher(target), span),
     "operator:dot_field": ({ target, name }, { span }) =>
@@ -48,7 +51,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
             pt.span_closure([target.span, data.span]),
           ),
         ),
-    "operator:sequence_begin": ({ sequence }, { span }) => matchers.sequence_matcher(sequence),
+    "operator:sequence_begin": ({ sequence }, { span }) =>
+      matchers.sequence_matcher(sequence),
   })(tree)
 }
 
@@ -79,8 +83,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
         matchers.exp_matcher(cdr_t),
         span,
       ),
-    "operand:cons": ({ car, cdr }, { span }) => Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
-    "operand:quote": ({ data }, { span }) => Exps.Quote(pt.trim_boundary(pt.str(data), 1), span),
+    "operand:cons": ({ car, cdr }, { span }) =>
+      Exps.Cons(exp_matcher(car), exp_matcher(cdr), span),
+    "operand:quote": ({ data }, { span }) =>
+      Exps.Quote(pt.trim_boundary(pt.str(data), 1), span),
     "operand:clazz": ({ bindings }, { span }) =>
       Exps.ClazzUnfolded(
         pt.matchers.zero_or_more_matcher(bindings).map(matchers.clazz_binding_matcher),

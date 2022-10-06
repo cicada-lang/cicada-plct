@@ -59,7 +59,10 @@ test("parse Objekt -- method", () => {
   expect(parseExp("{ f: (x) => x }")).toMatchObject(
     deleteUndefined(
       Exps.ObjektUnfolded([
-        Exps.PropertyPlain("f", Exps.FnUnfolded([Exps.FnBindingName("x")], Exps.Var("x"))),
+        Exps.PropertyPlain(
+          "f",
+          Exps.FnUnfolded([Exps.FnBindingName("x")], Exps.Var("x")),
+        ),
       ]),
     ),
   )

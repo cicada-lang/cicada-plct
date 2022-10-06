@@ -1,7 +1,10 @@
 import * as Errors from "../../errors"
 import * as Values from "../../value"
 
-export function prependFulfilledClazz(left: Values.Clazz, right: Values.Clazz): Values.Clazz {
+export function prependFulfilledClazz(
+  left: Values.Clazz,
+  right: Values.Clazz,
+): Values.Clazz {
   switch (left.kind) {
     case "ClazzNull": {
       return right

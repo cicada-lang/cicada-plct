@@ -47,5 +47,7 @@ conversion Trivial [
 ]
 
 `),
-  ).toMatchObject(deleteUndefined([new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")])]))
+  ).toMatchObject(
+    deleteUndefined([new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")])]),
+  )
 })

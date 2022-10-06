@@ -2,7 +2,9 @@ import * as Errors from "../../errors"
 import { Value } from "../../value"
 
 type ElementExtractTypeUnion<Kinds extends Array<Value["kind"]>> =
-  Kinds extends (infer Kind extends Value["kind"])[] ? Extract<Value, { kind: Kind }> : never
+  Kinds extends (infer Kind extends Value["kind"])[]
+    ? Extract<Value, { kind: Kind }>
+    : never
 
 export function assertValues<Kinds extends Array<Value["kind"]>>(
   value: Value,

@@ -32,7 +32,11 @@ export function lookupProperty(
   }
 }
 
-export function lookupPropertyOrFail(clazz: Values.Clazz, target: Value, name: string): Value {
+export function lookupPropertyOrFail(
+  clazz: Values.Clazz,
+  target: Value,
+  name: string,
+): Value {
   const property = lookupProperty(clazz, target, name)
   if (property === undefined) {
     throw new Errors.EvaluationError(`Undefined property name: ${name}`)

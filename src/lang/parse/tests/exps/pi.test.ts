@@ -5,11 +5,15 @@ import { deleteUndefined } from "../utils"
 
 test("parse Pi", () => {
   expect(parseExp("(n: Nat) -> Nat")).toMatchObject(
-    deleteUndefined(Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat"))),
+    deleteUndefined(
+      Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat")),
+    ),
   )
 
   expect(parseExp("forall (n: Nat) Nat")).toMatchObject(
-    deleteUndefined(Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat"))),
+    deleteUndefined(
+      Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat")),
+    ),
   )
 })
 
@@ -17,7 +21,10 @@ test("parse Pi -- multiple bindings", () => {
   expect(parseExp("(T: Type, x: T) -> T")).toMatchObject(
     deleteUndefined(
       Exps.PiUnfolded(
-        [Exps.PiBindingNamed("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
+        [
+          Exps.PiBindingNamed("T", Exps.Var("Type")),
+          Exps.PiBindingNamed("x", Exps.Var("T")),
+        ],
         Exps.Var("T"),
       ),
     ),
@@ -26,7 +33,10 @@ test("parse Pi -- multiple bindings", () => {
   expect(parseExp("forall (T: Type, x: T) T")).toMatchObject(
     deleteUndefined(
       Exps.PiUnfolded(
-        [Exps.PiBindingNamed("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
+        [
+          Exps.PiBindingNamed("T", Exps.Var("Type")),
+          Exps.PiBindingNamed("x", Exps.Var("T")),
+        ],
         Exps.Var("T"),
       ),
     ),
@@ -35,10 +45,14 @@ test("parse Pi -- multiple bindings", () => {
 
 test("parse Pi -- nameless binding", () => {
   expect(parseExp("(Nat) -> Nat")).toMatchObject(
-    deleteUndefined(Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat"))),
+    deleteUndefined(
+      Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat")),
+    ),
   )
 
   expect(parseExp("forall (Nat) Nat")).toMatchObject(
-    deleteUndefined(Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat"))),
+    deleteUndefined(
+      Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat")),
+    ),
   )
 })

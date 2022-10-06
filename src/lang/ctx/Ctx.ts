@@ -36,7 +36,12 @@ export type CtxFulfilled = {
   rest: Ctx
 }
 
-export function CtxFulfilled(name: string, type: Value, value: Value, rest: Ctx): CtxFulfilled {
+export function CtxFulfilled(
+  name: string,
+  type: Value,
+  value: Value,
+  rest: Ctx,
+): CtxFulfilled {
   return {
     kind: "CtxFulfilled",
     name,

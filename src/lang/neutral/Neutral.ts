@@ -42,7 +42,11 @@ export type ApImplicit = {
   arg: TypedValue
 }
 
-export function ApImplicit(target: Neutral, targetType: Value, arg: TypedValue): ApImplicit {
+export function ApImplicit(
+  target: Neutral,
+  targetType: Value,
+  arg: TypedValue,
+): ApImplicit {
   return {
     family: "Neutral",
     kind: "ApImplicit",

@@ -15,12 +15,20 @@ export function clazz_binding_matcher(tree: pt.Tree): Exps.ClazzBinding {
     "clazz_binding:method_abstract": ({ key, bindings, ret_t }, { span }) =>
       Exps.ClazzBindingAbstract(
         matchers.key_matcher(key),
-        Exps.PiUnfolded(matchers.pi_bindings_matcher(bindings), matchers.exp_matcher(ret_t), span),
+        Exps.PiUnfolded(
+          matchers.pi_bindings_matcher(bindings),
+          matchers.exp_matcher(ret_t),
+          span,
+        ),
       ),
     "clazz_binding:method_fulfilled": ({ key, bindings, ret_t, sequence }, { span }) =>
       Exps.ClazzBindingFulfilled(
         matchers.key_matcher(key),
-        Exps.PiUnfolded(matchers.pi_bindings_matcher(bindings), matchers.exp_matcher(ret_t), span),
+        Exps.PiUnfolded(
+          matchers.pi_bindings_matcher(bindings),
+          matchers.exp_matcher(ret_t),
+          span,
+        ),
         Exps.FnUnfolded(
           matchers.pi_bindings_matcher(bindings).map(matchers.piBindingtoFnBindingFrom),
           matchers.sequence_matcher(sequence),

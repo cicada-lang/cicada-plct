@@ -17,7 +17,10 @@ export function readbackClazz(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Cores.Cl
       const name = clazz.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(
+        clazz.propertyType,
+        Neutrals.Var(freshName),
+      )
       const restValue = applyClosure(clazz.restClosure, typedNeutral)
       assertClazzInCtx(ctx, restValue)
       ctx = CtxCons(freshName, clazz.propertyType, ctx)

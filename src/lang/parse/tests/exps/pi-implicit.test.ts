@@ -7,7 +7,10 @@ test("parse PiImplicit", () => {
   expect(parseExp("(implicit T: Type, x: T) -> Type")).toMatchObject(
     deleteUndefined(
       Exps.PiUnfolded(
-        [Exps.PiBindingImplicit("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
+        [
+          Exps.PiBindingImplicit("T", Exps.Var("Type")),
+          Exps.PiBindingNamed("x", Exps.Var("T")),
+        ],
         Exps.Var("Type"),
       ),
     ),
@@ -16,7 +19,10 @@ test("parse PiImplicit", () => {
   expect(parseExp("forall (implicit T: Type, x: T) Type")).toMatchObject(
     deleteUndefined(
       Exps.PiUnfolded(
-        [Exps.PiBindingImplicit("T", Exps.Var("Type")), Exps.PiBindingNamed("x", Exps.Var("T"))],
+        [
+          Exps.PiBindingImplicit("T", Exps.Var("Type")),
+          Exps.PiBindingNamed("x", Exps.Var("T")),
+        ],
         Exps.Var("Type"),
       ),
     ),

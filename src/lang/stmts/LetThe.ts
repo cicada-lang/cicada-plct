@@ -5,7 +5,12 @@ import { Span } from "../span"
 import { Stmt } from "../stmt"
 
 export class LetThe extends Stmt {
-  constructor(public name: string, public type: Exp, public exp: Exp, public span?: Span) {
+  constructor(
+    public name: string,
+    public type: Exp,
+    public exp: Exp,
+    public span?: Span,
+  ) {
     super()
   }
 

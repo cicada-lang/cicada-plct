@@ -11,7 +11,12 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:let": ({ name, exp }, { span }) =>
       new Stmts.Let(pt.str(name), matchers.exp_matcher(exp), span),
     "stmt:let_the": ({ name, t, exp }, { span }) =>
-      new Stmts.LetThe(pt.str(name), matchers.exp_matcher(t), matchers.exp_matcher(exp), span),
+      new Stmts.LetThe(
+        pt.str(name),
+        matchers.exp_matcher(t),
+        matchers.exp_matcher(exp),
+        span,
+      ),
     "stmt:let_function": ({ name, bindings, sequence }, { span }) =>
       new Stmts.Let(
         pt.str(name),
@@ -29,7 +34,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           matchers.sequence_matcher(sequence),
         ),
       ),
-    "stmt:compute": ({ exp }, { span }) => new Stmts.Compute(matchers.exp_matcher(exp), span),
+    "stmt:compute": ({ exp }, { span }) =>
+      new Stmts.Compute(matchers.exp_matcher(exp), span),
     "stmt:clazz": ({ name, bindings }, { span }) =>
       new Stmts.Clazz(
         pt.str(name),
@@ -79,6 +85,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
   return pt.matcher({
-    "stmts:stmts": ({ stmts }) => pt.matchers.zero_or_more_matcher(stmts).map(stmt_matcher),
+    "stmts:stmts": ({ stmts }) =>
+      pt.matchers.zero_or_more_matcher(stmts).map(stmt_matcher),
   })(tree)
 }

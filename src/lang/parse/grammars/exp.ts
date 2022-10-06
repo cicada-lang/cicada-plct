@@ -49,9 +49,29 @@ export const operator = {
 
 export const operand = {
   $grammar: {
-    "operand:pi": ['"("', { bindings: "pi_bindings" }, '")"', '"-"', '">"', { ret_t: "exp" }],
-    "operand:pi_forall": ['"forall"', '"("', { bindings: "pi_bindings" }, '")"', { ret_t: "exp" }],
-    "operand:fn": ['"("', { bindings: "fn_bindings" }, '")"', '"="', '">"', { ret: "exp" }],
+    "operand:pi": [
+      '"("',
+      { bindings: "pi_bindings" },
+      '")"',
+      '"-"',
+      '">"',
+      { ret_t: "exp" },
+    ],
+    "operand:pi_forall": [
+      '"forall"',
+      '"("',
+      { bindings: "pi_bindings" },
+      '")"',
+      { ret_t: "exp" },
+    ],
+    "operand:fn": [
+      '"("',
+      { bindings: "fn_bindings" },
+      '")"',
+      '"="',
+      '">"',
+      { ret: "exp" },
+    ],
     "operand:fn_function": [
       '"function"',
       '"("',

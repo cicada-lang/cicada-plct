@@ -19,7 +19,10 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Pi": {
-      return Values.Pi(evaluate(env, core.argType), ClosureSimple(env, core.name, core.retType))
+      return Values.Pi(
+        evaluate(env, core.argType),
+        ClosureSimple(env, core.name, core.retType),
+      )
     }
 
     case "PiImplicit": {
@@ -46,7 +49,10 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Sigma": {
-      return Values.Sigma(evaluate(env, core.carType), ClosureSimple(env, core.name, core.cdrType))
+      return Values.Sigma(
+        evaluate(env, core.carType),
+        ClosureSimple(env, core.name, core.cdrType),
+      )
     }
 
     case "Cons": {
@@ -89,7 +95,10 @@ export function evaluate(env: Env, core: Core): Value {
 
     case "Objekt": {
       const properties = Object.fromEntries(
-        Object.entries(core.properties).map(([name, core]) => [name, evaluate(env, core)]),
+        Object.entries(core.properties).map(([name, core]) => [
+          name,
+          evaluate(env, core),
+        ]),
       )
 
       return Values.Objekt(properties)

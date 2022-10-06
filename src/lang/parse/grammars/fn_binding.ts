@@ -3,7 +3,12 @@ export const fn_binding = {
     "fn_binding:name": [{ name: "name" }],
     "fn_binding:annotated": [{ name: "name" }, '":"', { t: "exp" }],
     "fn_binding:implicit": ['"implicit"', { name: "name" }],
-    "fn_binding:annotated_implicit": ['"implicit"', { name: "name" }, '":"', { t: "exp" }],
+    "fn_binding:annotated_implicit": [
+      '"implicit"',
+      { name: "name" },
+      '":"',
+      { t: "exp" },
+    ],
   },
 }
 

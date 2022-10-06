@@ -17,7 +17,12 @@ export function inferAp(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): In
   }
 }
 
-function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
+function inferApPiImplicit(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
   Values.assertTypeInCtx(ctx, inferred.type, "PiImplicit")
 
   const name = inferred.type.retTypeClosure.name
@@ -25,12 +30,19 @@ function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp):
      NOTE `freshName` might occur in `argExp`.
    **/
   const boundNames = new Set(ctxNames(ctx))
-  const usedNames = [...boundNames, ...mod.solution.names, ...Exps.freeNames(boundNames, argExp)]
+  const usedNames = [
+    ...boundNames,
+    ...mod.solution.names,
+    ...Exps.freeNames(boundNames, argExp),
+  ]
   const freshName = freshen(usedNames, name)
   const patternVar = mod.solution.createPatternVar(freshName, inferred.type.argType)
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-  const inserted = Inferred(retType, Cores.ApImplicit(inferred.core, Cores.Var(freshName)))
+  const inserted = Inferred(
+    retType,
+    Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
+  )
   return inferAp(mod, ctx, inserted, argExp)
 }
 

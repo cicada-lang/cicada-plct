@@ -26,7 +26,10 @@ export type ClosureNative = {
   native: (arg: Value) => Value
 }
 
-export function ClosureNative(name: string, native: (arg: Value) => Value): ClosureNative {
+export function ClosureNative(
+  name: string,
+  native: (arg: Value) => Value,
+): ClosureNative {
   return {
     kind: "ClosureNative",
     name,

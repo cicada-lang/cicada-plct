@@ -17,7 +17,10 @@ export function checkNewArgs(
   switch (clazz.kind) {
     case "ClazzNull": {
       if (args.length !== 0) {
-        throw new Errors.ElaborationError(`checkNewArgs too many arguments when calling new`, {})
+        throw new Errors.ElaborationError(
+          `checkNewArgs too many arguments when calling new`,
+          {},
+        )
       }
 
       return {}

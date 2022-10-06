@@ -7,7 +7,12 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function insertApImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Inferred {
+export function insertApImplicit(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  type: Value,
+): Inferred {
   if (!Values.isValue(inferred.type, "PiImplicit")) {
     return inferred
   }
@@ -20,6 +25,9 @@ export function insertApImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, type: V
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 
-  const insertedInferred = Inferred(retType, Cores.ApImplicit(inferred.core, Cores.Var(freshName)))
+  const insertedInferred = Inferred(
+    retType,
+    Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
+  )
   return insertApImplicit(mod, ctx, insertedInferred, type)
 }

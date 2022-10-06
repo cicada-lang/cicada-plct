@@ -6,7 +6,12 @@ import { deepWalkType, deepWalkTypedValue } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function deepWalkNeutral(mod: Mod, ctx: Ctx, type: Value, neutral: Neutral): Value {
+export function deepWalkNeutral(
+  mod: Mod,
+  ctx: Ctx,
+  type: Value,
+  neutral: Neutral,
+): Value {
   type = deepWalkType(mod, ctx, type)
 
   switch (neutral.kind) {

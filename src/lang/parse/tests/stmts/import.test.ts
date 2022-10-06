@@ -7,7 +7,11 @@ test("parse Import", () => {
   expect(parseStmts('import { a, b, c } from "./abc.cic"')).toMatchObject(
     deleteUndefined([
       new Stmts.Import(
-        [Stmts.ImportBindingName("a"), Stmts.ImportBindingName("b"), Stmts.ImportBindingName("c")],
+        [
+          Stmts.ImportBindingName("a"),
+          Stmts.ImportBindingName("b"),
+          Stmts.ImportBindingName("c"),
+        ],
         "./abc.cic",
       ),
     ]),

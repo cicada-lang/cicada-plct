@@ -10,7 +10,10 @@ test("parse Fn", () => {
 
   expect(parseExp("function (x) { return x }")).toMatchObject(
     deleteUndefined(
-      Exps.FnUnfolded([Exps.FnBindingName("x")], Exps.SequenceUnfolded([], Exps.Var("x"))),
+      Exps.FnUnfolded(
+        [Exps.FnBindingName("x")],
+        Exps.SequenceUnfolded([], Exps.Var("x")),
+      ),
     ),
   )
 })

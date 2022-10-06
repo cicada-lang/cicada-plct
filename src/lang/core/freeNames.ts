@@ -21,11 +21,17 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
     }
 
     case "Ap": {
-      return new Set([...freeNames(boundNames, core.target), ...freeNames(boundNames, core.arg)])
+      return new Set([
+        ...freeNames(boundNames, core.target),
+        ...freeNames(boundNames, core.arg),
+      ])
     }
 
     case "ApImplicit": {
-      return new Set([...freeNames(boundNames, core.target), ...freeNames(boundNames, core.arg)])
+      return new Set([
+        ...freeNames(boundNames, core.target),
+        ...freeNames(boundNames, core.arg),
+      ])
     }
 
     case "Fn": {
@@ -44,7 +50,10 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
     }
 
     case "Cons": {
-      return new Set([...freeNames(boundNames, core.car), ...freeNames(boundNames, core.cdr)])
+      return new Set([
+        ...freeNames(boundNames, core.car),
+        ...freeNames(boundNames, core.cdr),
+      ])
     }
 
     case "Car": {

@@ -2,7 +2,14 @@ export const stmt = {
   $grammar: {
     "stmt:check": ['"check"', { exp: "exp" }, '":"', { t: "exp" }],
     "stmt:let": ['"let"', { name: "name" }, '"="', { exp: "exp" }],
-    "stmt:let_the": ['"let"', { name: "name" }, '":"', { t: "exp" }, '"="', { exp: "exp" }],
+    "stmt:let_the": [
+      '"let"',
+      { name: "name" },
+      '":"',
+      { t: "exp" },
+      '"="',
+      { exp: "exp" },
+    ],
     "stmt:let_function": [
       '"function"',
       { name: "name" },

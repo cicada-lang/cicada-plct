@@ -30,7 +30,12 @@ export function enrich(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
 function enrichWithoutInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
   switch (exp.kind) {
     case "ObjektUnfolded": {
-      return enrich(mod, ctx, Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)), type)
+      return enrich(
+        mod,
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
+        type,
+      )
     }
 
     case "Objekt": {
@@ -53,9 +58,12 @@ function enrichWithoutInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred
     }
 
     default: {
-      throw new Errors.ElaborationError(`enrichWithoutInfer is not implemented for: ${exp.kind}`, {
-        span: exp.span,
-      })
+      throw new Errors.ElaborationError(
+        `enrichWithoutInfer is not implemented for: ${exp.kind}`,
+        {
+          span: exp.span,
+        },
+      )
     }
   }
 }

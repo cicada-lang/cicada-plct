@@ -52,7 +52,9 @@ solve (A: Type, B: Type, C: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String, C: (String) -> String }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ A: String, B: String, C: (String) -> String }"',
+  )
 })
 
 test("solve Pi -- occur in Pi", async () => {

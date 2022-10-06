@@ -21,7 +21,11 @@ export function foldSequence(bindings: Array<Exps.SequenceBinding>, ret: Exp): E
     }
 
     case "SequenceBindingCheck": {
-      return Exps.SequenceCheck(binding.exp, binding.type, foldSequence(restBindings, ret))
+      return Exps.SequenceCheck(
+        binding.exp,
+        binding.type,
+        foldSequence(restBindings, ret),
+      )
     }
   }
 }

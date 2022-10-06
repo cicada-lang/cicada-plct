@@ -74,7 +74,11 @@ export function unifyByType(
   }
 }
 
-function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: Value): void {
+function assertNoExtraCommonProperties(
+  clazz: Values.Clazz,
+  left: Value,
+  right: Value,
+): void {
   if (Values.isValue(left, "Objekt") && Values.isValue(right, "Objekt")) {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
@@ -85,7 +89,9 @@ function assertNoExtraCommonProperties(clazz: Values.Clazz, left: Value, right: 
     )
 
     if (extraCommonNames.length > 0) {
-      throw new Errors.UnificationError(`expect no extra common names: ${extraCommonNames}`)
+      throw new Errors.UnificationError(
+        `expect no extra common names: ${extraCommonNames}`,
+      )
     }
   }
 }

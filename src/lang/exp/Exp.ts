@@ -89,7 +89,12 @@ export type PiImplicit = {
   retType: Exp
 } & ExpMeta
 
-export function PiImplicit(name: string, argType: Exp, retType: Exp, span?: Span): PiImplicit {
+export function PiImplicit(
+  name: string,
+  argType: Exp,
+  retType: Exp,
+  span?: Span,
+): PiImplicit {
   return {
     family: "Exp",
     kind: "PiImplicit",
@@ -107,7 +112,11 @@ export type PiUnfolded = {
   retType: Exp
 } & ExpMeta
 
-export function PiUnfolded(bindings: Array<PiBinding>, retType: Exp, span?: Span): PiUnfolded {
+export function PiUnfolded(
+  bindings: Array<PiBinding>,
+  retType: Exp,
+  span?: Span,
+): PiUnfolded {
   return {
     family: "Exp",
     kind: "PiUnfolded",
@@ -184,7 +193,12 @@ export type FnAnnotated = {
   ret: Exp
 } & ExpMeta
 
-export function FnAnnotated(name: string, argType: Exp, ret: Exp, span?: Span): FnAnnotated {
+export function FnAnnotated(
+  name: string,
+  argType: Exp,
+  ret: Exp,
+  span?: Span,
+): FnAnnotated {
   return {
     family: "Exp",
     kind: "FnAnnotated",
@@ -243,7 +257,11 @@ export type FnUnfolded = {
   ret: Exp
 } & ExpMeta
 
-export function FnUnfolded(bindings: Array<FnBinding>, ret: Exp, span?: Span): FnUnfolded {
+export function FnUnfolded(
+  bindings: Array<FnBinding>,
+  ret: Exp,
+  span?: Span,
+): FnUnfolded {
   return {
     family: "Exp",
     kind: "FnUnfolded",
@@ -327,7 +345,10 @@ export type FnBindingAnnotatedImplicit = {
   type: Exp
 }
 
-export function FnBindingAnnotatedImplicit(name: string, type: Exp): FnBindingAnnotatedImplicit {
+export function FnBindingAnnotatedImplicit(
+  name: string,
+  type: Exp,
+): FnBindingAnnotatedImplicit {
   return {
     kind: "FnBindingAnnotatedImplicit",
     name,
@@ -565,7 +586,12 @@ export type ClazzCons = {
   rest: Clazz
 } & ExpMeta
 
-export function ClazzCons(name: string, propertyType: Exp, rest: Clazz, span?: Span): ClazzCons {
+export function ClazzCons(
+  name: string,
+  propertyType: Exp,
+  rest: Clazz,
+  span?: Span,
+): ClazzCons {
   return {
     family: "Exp",
     kind: "ClazzCons",
@@ -626,7 +652,10 @@ export type ClazzBindingAbstract = {
   propertyType: Exp
 }
 
-export function ClazzBindingAbstract(name: string, propertyType: Exp): ClazzBindingAbstract {
+export function ClazzBindingAbstract(
+  name: string,
+  propertyType: Exp,
+): ClazzBindingAbstract {
   return {
     kind: "ClazzBindingAbstract",
     name,
@@ -736,7 +765,11 @@ export type NewUnfolded = {
   properties: Array<Property>
 } & ExpMeta
 
-export function NewUnfolded(name: string, properties: Array<Property>, span?: Span): NewUnfolded {
+export function NewUnfolded(
+  name: string,
+  properties: Array<Property>,
+  span?: Span,
+): NewUnfolded {
   return {
     family: "Exp",
     kind: "NewUnfolded",
@@ -868,7 +901,10 @@ export function SequenceUnfolded(
   }
 }
 
-export type SequenceBinding = SequenceBindingLet | SequenceBindingLetThe | SequenceBindingCheck
+export type SequenceBinding =
+  | SequenceBindingLet
+  | SequenceBindingLetThe
+  | SequenceBindingCheck
 
 export type SequenceBindingLet = {
   kind: "SequenceBindingLet"
@@ -891,7 +927,11 @@ export type SequenceBindingLetThe = {
   exp: Exp
 }
 
-export function SequenceBindingLetThe(name: string, type: Exp, exp: Exp): SequenceBindingLetThe {
+export function SequenceBindingLetThe(
+  name: string,
+  type: Exp,
+  exp: Exp,
+): SequenceBindingLetThe {
   return {
     kind: "SequenceBindingLetThe",
     name,

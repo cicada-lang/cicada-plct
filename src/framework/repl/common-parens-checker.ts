@@ -30,7 +30,10 @@ export class CommonParensChecker extends ParensChecker {
   }
 }
 
-type CommonParensCheckResult = { kind: "balance" } | { kind: "lack" } | CommonParensCheckError
+type CommonParensCheckResult =
+  | { kind: "balance" }
+  | { kind: "lack" }
+  | CommonParensCheckError
 
 class CommonParensCheckError extends Error {
   kind: "excess" | "mismatch"

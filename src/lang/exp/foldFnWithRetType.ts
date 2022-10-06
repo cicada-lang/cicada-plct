@@ -1,7 +1,11 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 
-export function foldFnWithRetType(bindings: Array<Exps.FnBinding>, retType: Exp, ret: Exp): Exp {
+export function foldFnWithRetType(
+  bindings: Array<Exps.FnBinding>,
+  retType: Exp,
+  ret: Exp,
+): Exp {
   /**
      We implement the restriction of returnType by adding a `the` around the `ret`.
   **/

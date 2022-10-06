@@ -5,7 +5,9 @@ export class Runner {
   loader = new Loader()
 
   constructor() {
-    this.loader.fetcher.register("file", (url) => fs.promises.readFile(url.pathname, "utf8"))
+    this.loader.fetcher.register("file", (url) =>
+      fs.promises.readFile(url.pathname, "utf8"),
+    )
   }
 
   async run(url: URL, opts?: { silent?: boolean }): Promise<{ error?: unknown }> {

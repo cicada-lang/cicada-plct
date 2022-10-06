@@ -102,7 +102,9 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
     }
 
     default: {
-      throw new Errors.ReadbackError(`readbackType is not implemented for type: ${type.kind}`)
+      throw new Errors.ReadbackError(
+        `readbackType is not implemented for type: ${type.kind}`,
+      )
     }
   }
 }

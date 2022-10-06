@@ -10,7 +10,10 @@ test("parse Ap", () => {
 
   expect(parseExp("f(x, y)")).toMatchObject(
     deleteUndefined(
-      Exps.ApUnfolded(Exps.Var("f"), [Exps.ArgPlain(Exps.Var("x")), Exps.ArgPlain(Exps.Var("y"))]),
+      Exps.ApUnfolded(Exps.Var("f"), [
+        Exps.ArgPlain(Exps.Var("x")),
+        Exps.ArgPlain(Exps.Var("y")),
+      ]),
     ),
   )
 

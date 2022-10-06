@@ -61,7 +61,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
       const retTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), exp.name, retTypeCore)
-      return Inferred(Values.Pi(argTypeValue, retTypeClosure), Cores.Fn(exp.name, retInferred.core))
+      return Inferred(
+        Values.Pi(argTypeValue, retTypeClosure),
+        Cores.Fn(exp.name, retInferred.core),
+      )
     }
 
     case "FnImplicitAnnotated": {
@@ -132,7 +135,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
       const sigma = inferred.type
       const carValue = evaluate(mod.ctxToEnv(ctx), Cores.Car(inferred.core))
-      return Inferred(applyClosure(sigma.cdrTypeClosure, carValue), Cores.Cdr(inferred.core))
+      return Inferred(
+        applyClosure(sigma.cdrTypeClosure, carValue),
+        Cores.Cdr(inferred.core),
+      )
     }
 
     case "Cons": {
@@ -173,20 +179,32 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ObjektUnfolded": {
-      return infer(mod, ctx, Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)))
+      return infer(
+        mod,
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
+      )
     }
 
     case "Dot": {
       const inferred = infer(mod, ctx, exp.target)
       const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(ctx, inferred.type)
-      const propertyType = Values.lookupPropertyTypeOrFail(inferred.type, targetValue, exp.name)
+      const propertyType = Values.lookupPropertyTypeOrFail(
+        inferred.type,
+        targetValue,
+        exp.name,
+      )
       const property = Values.lookupPropertyOrFail(inferred.type, targetValue, exp.name)
       return Inferred(propertyType, readback(mod, ctx, propertyType, property))
     }
 
     case "NewUnfolded": {
-      return infer(mod, ctx, Exps.New(exp.name, Exps.prepareProperties(mod, ctx, exp.properties)))
+      return infer(
+        mod,
+        ctx,
+        Exps.New(exp.name, Exps.prepareProperties(mod, ctx, exp.properties)),
+      )
     }
 
     case "New": {

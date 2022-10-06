@@ -69,3 +69,21 @@ globals.registerTypedValue(
     ),
   ),
 )
+
+globals.registerTypedValue(
+  "same",
+  Values.PiImplicit(
+    Values.Type(),
+    ClosureNative("T", (T) =>
+      Values.Pi(
+        T,
+        ClosureNative("value", (value) => Values.Equal(T, value, value)),
+      ),
+    ),
+  ),
+  Values.FnImplicit(
+    ClosureNative("T", (T) =>
+      Values.Fn(ClosureNative("value", (value) => Values.Refl(T, value))),
+    ),
+  ),
+)

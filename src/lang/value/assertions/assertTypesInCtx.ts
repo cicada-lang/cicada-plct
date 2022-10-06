@@ -9,7 +9,9 @@ import { AlreadyType, Value } from "../../value"
 **/
 
 type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
-  Kinds extends (infer Kind extends AlreadyType["kind"])[] ? Extract<Value, { kind: Kind }> : never
+  Kinds extends (infer Kind extends AlreadyType["kind"])[]
+    ? Extract<Value, { kind: Kind }>
+    : never
 
 export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
   ctx: Ctx,

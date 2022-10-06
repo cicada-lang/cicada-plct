@@ -18,7 +18,10 @@ solve (A: Type, B: Type) {
   ).toMatchObject(
     deleteUndefined([
       new Stmts.Solve(
-        [Stmts.SolveBinding("A", Exps.Var("Type")), Stmts.SolveBinding("B", Exps.Var("Type"))],
+        [
+          Stmts.SolveBinding("A", Exps.Var("Type")),
+          Stmts.SolveBinding("B", Exps.Var("Type")),
+        ],
         [
           Stmts.EquationUnifyTyped(Exps.Var("A"), Exps.Var("Trivial"), Exps.Var("Type")),
           Stmts.EquationUnifyTyped(Exps.Var("B"), Exps.Var("String"), Exps.Var("Type")),

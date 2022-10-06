@@ -54,7 +54,13 @@ export function inclusionClazz(
     inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
 
     if (subclazzProperty.value !== undefined && clazzProperty.value !== undefined) {
-      conversion(mod, ctx, clazzProperty.type, subclazzProperty.value, clazzProperty.value)
+      conversion(
+        mod,
+        ctx,
+        clazzProperty.type,
+        subclazzProperty.value,
+        clazzProperty.value,
+      )
     }
   }
 }
