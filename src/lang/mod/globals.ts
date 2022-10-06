@@ -17,6 +17,10 @@ function Pair(A: Type, B: Type): Type {
   return exists (A) B
 }
 
+`)
+
+globals.registerCode(`
+
 function the(T: Type, x: T): T {
   return x
 }

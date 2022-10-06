@@ -17,6 +17,7 @@ export type Value =
   | Clazz
   | Objekt
   | Equal
+  | Refl
 
 export type AlreadyType = Type | Pi | PiImplicit | Sigma | String | Trivial | Clazz | Equal
 
@@ -276,5 +277,21 @@ export function Equal(type: Value, from: Value, to: Value): Equal {
     type,
     from,
     to,
+  }
+}
+
+export type Refl = {
+  family: "Value"
+  kind: "Refl"
+  type: Value
+  value: Value
+}
+
+export function Refl(type: Value, value: Value): Refl {
+  return {
+    family: "Value",
+    kind: "Refl",
+    type,
+    value,
   }
 }

@@ -82,6 +82,10 @@ export function occur(name: string, value: Value): boolean {
     case "Equal": {
       return occur(name, value.type) || occur(name, value.from) || occur(name, value.to)
     }
+
+    case "Refl": {
+      return occur(name, value.type) || occur(name, value.value)
+    }
   }
 }
 

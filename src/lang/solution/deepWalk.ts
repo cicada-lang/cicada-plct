@@ -170,6 +170,11 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
         deepWalk(mod, ctx, equalType, value.to),
       )
     }
+
+    case "Refl": {
+      const equalType = deepWalkType(mod, ctx, value.type)
+      return Values.Refl(equalType, deepWalk(mod, ctx, equalType, value.value))
+    }
   }
 }
 
