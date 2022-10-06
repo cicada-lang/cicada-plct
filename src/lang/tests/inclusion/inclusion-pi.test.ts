@@ -9,18 +9,18 @@ function id(T: Type, x: T): T {
 }
 
 class ABC {
-  A: String
-  B: String
-  C: String
+  a: String
+  b: String
+  c: String
 }
 
 class AB {
-  A: String
-  B: String
+  a: String
+  b: String
 }
 
 class A {
-  A: String
+  a: String
 }
 
 inclusion [
@@ -52,12 +52,12 @@ test("inclusion Pi -- fail", async () => {
   await expectCodeToFail(`
 
 class AB {
-  A: String
-  B: String
+  a: String
+  b: String
 }
 
 class A {
-  A: String
+  a: String
 }
 
 inclusion [

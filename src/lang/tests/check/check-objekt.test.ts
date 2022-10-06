@@ -13,6 +13,56 @@ check {
 `)
 })
 
+test("check Objekt -- during infer Ap", async () => {
+  await runCode(`
+
+function id(T: Type, x: T): T {
+  return x
+}
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+class AB {
+  a: String
+  b: String
+}
+
+let a = "a"
+let b = "b"
+let c = "c"
+
+check id(AB, { a, b }): AB
+check id(ABC, { a, b, c }): ABC
+
+`)
+})
+
+test("check Objekt -- during infer Ap -- fail", async () => {
+  await expectCodeToFail(`
+
+function id(T: Type, x: T): T {
+  return x
+}
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+let a = "a"
+let b = "b"
+let c = "c"
+
+check id(ABC, { a, b }): ABC
+
+`)
+})
+
 test("check Objekt -- missing property", async () => {
   await expectCodeToFail(`
 

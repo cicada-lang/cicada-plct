@@ -82,5 +82,12 @@ export function inclusion(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void
     return
   }
 
+  if (subtype.kind === "Equal" && type.kind === "Equal") {
+    inclusion(mod, ctx, subtype.type, type.type)
+    conversion(mod, ctx, type.type, subtype.from, type.from)
+    conversion(mod, ctx, type.type, subtype.to, type.to)
+    return
+  }
+
   conversion(mod, ctx, Values.Type(), subtype, type)
 }
