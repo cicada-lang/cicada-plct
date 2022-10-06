@@ -1,21 +1,30 @@
-import { Value } from "../value"
+import * as Actions from "../actions"
+import { ClosureNative } from "../closure"
+import * as Neutrals from "../neutral"
+import * as Values from "../value"
+import { TypedValue, Value } from "../value"
 
 export function doReplace(target: Value, motive: Value, base: Value): Value {
-  throw new Error("TODO")
+  if (Values.isValue(target, "Refl")) {
+    return base
+  }
 
-  // if (Values.isValue(target, "Fn")) {
-  //   return applyClosure(target.retClosure, arg)
-  // }
+  Values.assertValue(target, "TypedNeutral")
+  Values.assertValue(target.type, "Equal")
 
-  // if (Values.isClazz(target)) {
-  //   return Values.fulfillClazz(target, arg)
-  // }
+  const baseType = Actions.doAp(motive, target.type.from)
+  const motiveType = Values.Pi(
+    target.type.type,
+    ClosureNative("target", () => Values.Type()),
+  )
 
-  // Values.assertValue(target, "TypedNeutral")
-  // Values.assertValue(target.type, "Pi")
-
-  // return Values.TypedNeutral(
-  //   applyClosure(target.type.retTypeClosure, arg),
-  //   Neutrals.Ap(target.neutral, target.type, TypedValue(target.type.argType, arg)),
-  // )
+  return Values.TypedNeutral(
+    Actions.doAp(motive, target.type.to),
+    Neutrals.Replace(
+      target.neutral,
+      target.type,
+      TypedValue(motiveType, motive),
+      TypedValue(baseType, base),
+    ),
+  )
 }
