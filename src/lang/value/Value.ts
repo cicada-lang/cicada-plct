@@ -16,8 +16,9 @@ export type Value =
   | Sole
   | Clazz
   | Objekt
+  | Equal
 
-export type AlreadyType = Type | Pi | PiImplicit | Sigma | String | Trivial | Clazz
+export type AlreadyType = Type | Pi | PiImplicit | Sigma | String | Trivial | Clazz | Equal
 
 export type TypedNeutral = {
   family: "Value"
@@ -257,5 +258,23 @@ export function Objekt(properties: Record<string, Value>): Objekt {
     family: "Value",
     kind: "Objekt",
     properties,
+  }
+}
+
+export type Equal = {
+  family: "Value"
+  kind: "Equal"
+  type: Value
+  from: Value
+  to: Value
+}
+
+export function Equal(type: Value, from: Value, to: Value): Equal {
+  return {
+    family: "Value",
+    kind: "Equal",
+    type,
+    from,
+    to,
   }
 }

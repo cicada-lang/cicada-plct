@@ -161,6 +161,15 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       assertNoExtraProperties(type, result)
       return result
     }
+
+    case "Equal": {
+      const equalType = deepWalkType(mod, ctx, value.type)
+      return Values.Equal(
+        equalType,
+        deepWalk(mod, ctx, equalType, value.from),
+        deepWalk(mod, ctx, equalType, value.to),
+      )
+    }
   }
 }
 
