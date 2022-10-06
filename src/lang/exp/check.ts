@@ -14,7 +14,8 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
       const inferred = Exps.infer(mod, ctx, exp)
-      return Exps.checkVar(mod, ctx, inferred, type)
+      const inserted = Exps.insertApImplicit(mod, ctx, inferred, type)
+      return Exps.checkInferred(mod, ctx, inserted, type)
     }
 
     case "Pi":

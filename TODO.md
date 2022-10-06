@@ -2,7 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-fix recursion structure of `checkVar` and `inferAp`
+fix `inferAp`
 
 - compute-refl.test.ts -- under the
 
