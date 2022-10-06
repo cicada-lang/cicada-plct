@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readbackNeutral, Value } from "../value"
+import { readback, readbackNeutral, readbackType, Value } from "../value"
 
 export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
   switch (value.kind) {
@@ -17,6 +17,13 @@ export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): 
 
     case "Quote": {
       return Cores.Quote(value.data)
+    }
+
+    case "Refl": {
+      return Cores.ApImplicit(
+        Cores.ApImplicit(Cores.Var("refl"), readbackType(mod, ctx, value.type)),
+        readback(mod, ctx, value.type, value.value),
+      )
     }
 
     default: {
