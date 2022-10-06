@@ -30,26 +30,16 @@ function inferApPiImplicit(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp):
   const patternVar = mod.solution.createPatternVar(freshName, inferred.type.argType)
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-
-  /**
-     `ApImplicit` insertion.
-  **/
-  inferred = Inferred(retType, Cores.ApImplicit(inferred.core, Cores.Var(freshName)))
-
-  return inferAp(mod, ctx, inferred, argExp)
+  const inserted = Inferred(retType, Cores.ApImplicit(inferred.core, Cores.Var(freshName)))
+  return inferAp(mod, ctx, inserted, argExp)
 }
 
 function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
   Values.assertTypeInCtx(ctx, inferred.type, "Pi")
 
-  const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
-
-  /**
-     TODO If `argInferred.type` is `PiImplicit`,
-     we need to use `inferred.type.argType` to elaborate `argExp` in check mod.
-  **/
-
+  let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
+    argInferred = Exps.insertApImplicit(mod, ctx, argInferred, inferred.type.argType)
     unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
@@ -60,7 +50,6 @@ function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferre
 
   const argCore = Exps.check(mod, ctx, argExp, inferred.type.argType)
   const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
-
   return Inferred(
     applyClosure(inferred.type.retTypeClosure, argValue),
     Cores.Ap(inferred.core, argCore),
