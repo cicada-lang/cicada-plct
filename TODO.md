@@ -1,8 +1,4 @@
-# improve globals API
-
-https://github.com/cicada-lang/cicada/issues/106
-
-globals.define -- handle string
+refactor globals.claim & globals.define
 
 # [feature] equivalence #43
 

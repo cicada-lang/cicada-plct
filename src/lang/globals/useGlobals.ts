@@ -21,21 +21,11 @@ export function useGlobals(): GlobalStore {
   globals.claim("sole", "Trivial")
   globals.define("sole", Values.Sole())
 
-  globals.registerCode(`
+  globals.claim("Pair", "(A: Type, B: Type) -> Type")
+  globals.define("Pair", "(A, B) => exists (A) B")
 
-function Pair(A: Type, B: Type): Type {
-return exists (A) B
-}
-
-`)
-
-  globals.registerCode(`
-
-function the(T: Type, x: T): T {
-return x
-}
-
-`)
+  globals.claim("the", "(T: Type, x: T) -> T")
+  globals.define("the", "(T, x) => x")
 
   globals.claim(
     "Equal",
