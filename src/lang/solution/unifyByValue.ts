@@ -18,6 +18,10 @@ export function unifyByValue(
     return
   }
 
+  if (left.kind === "Sole" && right.kind === "Sole") {
+    return
+  }
+
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.data === right.data) {
       return

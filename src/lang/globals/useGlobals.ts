@@ -1,3 +1,4 @@
+import * as Actions from "../actions"
 import { ClosureNative } from "../closure"
 import * as Values from "../value"
 import { GlobalStore } from "./GlobalStore"
@@ -57,6 +58,47 @@ export function useGlobals(): GlobalStore {
     Values.FnImplicit(
       ClosureNative("T", (T) =>
         Values.Fn(ClosureNative("value", (value) => Values.Refl(T, value))),
+      ),
+    ),
+  )
+
+  globals.claim(
+    "replace",
+    `(
+  implicit T: Type,
+  implicit from: T,
+  implicit to: T,
+  target: Equal(T, from, to),
+  motive: (T) -> Type,
+  base: motive(from),
+) -> motive(to)
+`,
+  )
+  globals.define(
+    "replace",
+    Values.FnImplicit(
+      ClosureNative("T", (T) =>
+        Values.FnImplicit(
+          ClosureNative("from", (from) =>
+            Values.FnImplicit(
+              ClosureNative("to", (to) =>
+                Values.Fn(
+                  ClosureNative("target", (target) =>
+                    Values.Fn(
+                      ClosureNative("motive", (motive) =>
+                        Values.Fn(
+                          ClosureNative("base", (base) =>
+                            Actions.doReplace(target, motive, base),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   )
