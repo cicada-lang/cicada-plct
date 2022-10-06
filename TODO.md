@@ -2,7 +2,9 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-compute-refl.test.ts -- under the
+fix recursion structure of `checkVar` and `inferAp`
+
+- compute-refl.test.ts -- under the
 
 Globals.Same
 

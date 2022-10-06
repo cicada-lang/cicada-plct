@@ -43,6 +43,12 @@ function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferre
   Values.assertTypeInCtx(ctx, inferred.type, "Pi")
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
+
+  /**
+     TODO If `argInferred.type` is `PiImplicit`,
+     we need to use `inferred.type.argType` to elaborate `argExp` in check mod.
+  **/
+
   if (argInferred !== undefined) {
     unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
