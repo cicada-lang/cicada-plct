@@ -50,5 +50,13 @@ export function deepWalkNeutral(
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
       return Actions.doDot(target, neutral.name)
     }
+
+    case "Replace": {
+      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const motive = deepWalkTypedValue(mod, ctx, neutral.motive)
+      const base = deepWalkTypedValue(mod, ctx, neutral.base)
+      return Actions.doReplace(target, motive.value, base.value)
+    }
   }
 }

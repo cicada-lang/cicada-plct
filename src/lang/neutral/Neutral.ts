@@ -1,6 +1,6 @@
 import { TypedValue, Value } from "../value"
 
-export type Neutral = Var | Ap | ApImplicit | Car | Cdr | Dot
+export type Neutral = Var | Ap | ApImplicit | Car | Cdr | Dot | Replace
 
 export type Var = {
   family: "Neutral"
@@ -103,5 +103,30 @@ export function Dot(target: Neutral, targetType: Value, name: string): Dot {
     target,
     targetType,
     name,
+  }
+}
+
+export type Replace = {
+  family: "Neutral"
+  kind: "Replace"
+  target: Neutral
+  targetType: Value
+  motive: TypedValue
+  base: TypedValue
+}
+
+export function Replace(
+  target: Neutral,
+  targetType: Value,
+  motive: TypedValue,
+  base: TypedValue,
+): Replace {
+  return {
+    family: "Neutral",
+    kind: "Replace",
+    target,
+    targetType,
+    motive,
+    base,
   }
 }

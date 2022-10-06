@@ -136,5 +136,13 @@ function occurNeutral(name: string, neutral: Neutral): boolean {
     case "Dot": {
       return occurNeutral(name, neutral.target)
     }
+
+    case "Replace": {
+      return (
+        occurNeutral(name, neutral.target) ||
+        occurTypedValue(name, neutral.motive) ||
+        occurTypedValue(name, neutral.base)
+      )
+    }
   }
 }
