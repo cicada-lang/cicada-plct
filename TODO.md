@@ -2,8 +2,10 @@
 
 https://github.com/cicada-lang/cicada/issues/106
 
-globals.claim
-globals.define
+globals.claim -- handle string
+globals.define -- handle string
+
+globals -- has scope
 
 # [feature] equivalence #43
 

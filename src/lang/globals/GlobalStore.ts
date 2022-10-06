@@ -10,10 +10,17 @@ type CodeEntry = {
 }
 
 export class GlobalStore {
+  claimed: Map<string, Value> = new Map()
   typedValues: Map<string, { type: Value; value: Value }> = new Map()
   codeEntries: Array<CodeEntry> = []
 
-  registerTypedValue(name: string, type: Value, value: Value): void {
+  claim(name: string, type: Value): void {
+    this.claimed.set(name, type)
+  }
+
+  define(name: string, value: Value): void {
+    const type = this.claimed.get(name)
+    if (type === undefined) throw new Error(`unclaimed: ${name}`)
     this.typedValues.set(name, { type, value })
   }
 

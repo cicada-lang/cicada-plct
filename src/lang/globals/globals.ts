@@ -4,10 +4,17 @@ import { GlobalStore } from "./GlobalStore"
 
 export const globals = new GlobalStore()
 
-globals.registerTypedValue("Type", Values.Type(), Values.Type())
-globals.registerTypedValue("String", Values.Type(), Values.String())
-globals.registerTypedValue("Trivial", Values.Type(), Values.Trivial())
-globals.registerTypedValue("sole", Values.Trivial(), Values.Sole())
+globals.claim("Type", Values.Type())
+globals.define("Type", Values.Type())
+
+globals.claim("String", Values.Type())
+globals.define("String", Values.String())
+
+globals.claim("Trivial", Values.Type())
+globals.define("Trivial", Values.Trivial())
+
+globals.claim("sole", Values.Trivial())
+globals.define("sole", Values.Sole())
 
 globals.registerCode(`
 
@@ -25,7 +32,7 @@ function the(T: Type, x: T): T {
 
 `)
 
-globals.registerTypedValue(
+globals.claim(
   "Equal",
   Values.Pi(
     Values.Type(),
@@ -41,6 +48,10 @@ globals.registerTypedValue(
       ),
     ),
   ),
+)
+
+globals.define(
+  "Equal",
   Values.Fn(
     ClosureNative("T", (T) =>
       Values.Fn(
@@ -52,7 +63,7 @@ globals.registerTypedValue(
   ),
 )
 
-globals.registerTypedValue(
+globals.claim(
   "refl",
   Values.PiImplicit(
     Values.Type(),
@@ -63,6 +74,10 @@ globals.registerTypedValue(
       ),
     ),
   ),
+)
+
+globals.define(
+  "refl",
   Values.FnImplicit(
     ClosureNative("T", (T) =>
       Values.FnImplicit(ClosureNative("value", (value) => Values.Refl(T, value))),
@@ -70,7 +85,7 @@ globals.registerTypedValue(
   ),
 )
 
-globals.registerTypedValue(
+globals.claim(
   "same",
   Values.PiImplicit(
     Values.Type(),
@@ -81,6 +96,10 @@ globals.registerTypedValue(
       ),
     ),
   ),
+)
+
+globals.define(
+  "same",
   Values.FnImplicit(
     ClosureNative("T", (T) =>
       Values.Fn(ClosureNative("value", (value) => Values.Refl(T, value))),
