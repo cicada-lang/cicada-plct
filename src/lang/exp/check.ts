@@ -4,7 +4,7 @@ import { Core, evaluate } from "../core"
 import { Ctx, CtxCons } from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
-import { checkByInfer, enrich, Exp } from "../exp"
+import { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -13,12 +13,17 @@ import { Value } from "../value"
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
-      return checkByInfer(mod, ctx, exp, type)
+      const inferred = Exps.infer(mod, ctx, exp)
+      if (Values.isValue(inferred.type, "PiImplicit")) {
+        // TODO
+      }
+
+      return Exps.checkInferred(mod, ctx, inferred, type)
     }
 
     case "Pi":
     case "PiUnfolded": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "Fn": {
@@ -40,7 +45,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FnAnnotated": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "FnUnfolded": {
@@ -53,12 +58,12 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Ap":
     case "ApUnfolded": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "Sigma":
     case "SigmaUnfolded": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "Cons": {
@@ -73,28 +78,28 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Car":
     case "Cdr": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "Quote": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled":
     case "ClazzUnfolded": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "ObjektUnfolded":
     case "Objekt": {
-      const { core } = enrich(mod, ctx, exp, type)
+      const { core } = Exps.enrich(mod, ctx, exp, type)
       return core
     }
 
     case "Dot": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "NewUnfolded": {
@@ -108,14 +113,14 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "New":
     case "NewAp": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     case "SequenceUnfolded":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {
-      return checkByInfer(mod, ctx, exp, type)
+      return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
     default: {
