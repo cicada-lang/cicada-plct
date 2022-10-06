@@ -2,7 +2,6 @@ import { ClosureNative, ClosureSimple } from "../closure"
 import * as Cores from "../core"
 import { EnvCons, EnvNull } from "../env"
 import * as Values from "../value"
-import { Value } from "../value"
 import { GlobalStore } from "./GlobalStore"
 
 export const globals = new GlobalStore()
@@ -35,10 +34,10 @@ globals.registerTypedValue(
     ),
   ),
   Values.Fn(
-    ClosureNative("T", (T: Value) =>
+    ClosureNative("T", (T) =>
       Values.Fn(
-        ClosureNative("from", (from: Value) =>
-          Values.Fn(ClosureNative("to", (to: Value) => Values.Equal(T, from, to))),
+        ClosureNative("from", (from) =>
+          Values.Fn(ClosureNative("to", (to) => Values.Equal(T, from, to))),
         ),
       ),
     ),

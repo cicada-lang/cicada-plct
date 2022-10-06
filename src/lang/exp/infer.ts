@@ -1,4 +1,4 @@
-import { applyClosure, ClosureSimple } from "../closure"
+import { applyClosure, ClosureNative, ClosureSimple } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, CtxFulfilled, lookupTypeInCtx, lookupValueInCtx } from "../ctx"
@@ -138,8 +138,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "Cons": {
       const carInferred = infer(mod, ctx, exp.car)
       const cdrInferred = infer(mod, ctx, exp.cdr)
-      const cdrTypeCore = readbackType(mod, ctx, cdrInferred.type)
-      const cdrTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), "_", cdrTypeCore)
+      const cdrTypeClosure = ClosureNative("_", () => cdrInferred.type)
       return Inferred(
         Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),
