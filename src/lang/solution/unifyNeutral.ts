@@ -52,6 +52,13 @@ export function unifyNeutral(
     return
   }
 
+  if (left.kind === "Replace" && right.kind === "Replace") {
+    unifyNeutral(solution, ctx, left.target, right.target)
+    unifyTypedValue(solution, ctx, left.motive, right.motive)
+    unifyTypedValue(solution, ctx, left.base, right.base)
+    return
+  }
+
   throw new Errors.UnificationError(
     `unifyNeutral is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
