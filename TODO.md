@@ -2,7 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-Globals.Refl
+Globals.refl
 
 check-refl.test.ts
 compute-refl.test.ts

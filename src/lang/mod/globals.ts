@@ -1,6 +1,4 @@
-import { ClosureNative, ClosureSimple } from "../closure"
-import * as Cores from "../core"
-import { EnvCons, EnvNull } from "../env"
+import { ClosureNative } from "../closure"
 import * as Values from "../value"
 import { GlobalStore } from "./GlobalStore"
 
@@ -31,10 +29,16 @@ globals.registerTypedValue(
   "Equal",
   Values.Pi(
     Values.Type(),
-    ClosureSimple(
-      EnvCons("Type", Values.Type(), EnvNull()),
-      "T",
-      Cores.Pi("from", Cores.Var("T"), Cores.Pi("to", Cores.Var("T"), Cores.Var("Type"))),
+    ClosureNative("T", (T) =>
+      Values.Pi(
+        T,
+        ClosureNative("from", (from) =>
+          Values.Pi(
+            T,
+            ClosureNative("to", (to) => Values.Type()),
+          ),
+        ),
+      ),
     ),
   ),
   Values.Fn(
