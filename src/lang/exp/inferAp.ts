@@ -47,6 +47,11 @@ function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferre
     unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
+  /**
+     NOTE We can not use `argInferred.core` here,
+     check against the given type is necessary.
+  **/
+
   const argCore = Exps.check(mod, ctx, argExp, inferred.type.argType)
   const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
 
