@@ -2,7 +2,7 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, unifyClazz, unifyNeutral, unifyPatternVar } from "../solution"
+import { Solution, unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
@@ -82,6 +82,14 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
   if (isClazz(left) && isClazz(right)) {
     unifyClazz(solution, ctx, left, right)
+    return
+  }
+
+  if (left.kind === "Equal" && right.kind === "Equal") {
+    unifyType(solution, ctx, left.type, right.type)
+    const equalType = right.type
+    unify(solution, ctx, equalType, left.from, right.from)
+    unify(solution, ctx, equalType, left.to, right.to)
     return
   }
 

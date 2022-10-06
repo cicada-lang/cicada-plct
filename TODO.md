@@ -2,11 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-unifyType -- Equal
-
-check-refl.test.ts
-
-- check refl(implicit String, implicit "123"): Equal(String, "123", "123")
+check-refl.test.ts -- elab implicit
 
 Refl -- readback
 

@@ -63,7 +63,9 @@ globals.registerTypedValue(
       ),
     ),
   ),
-  Values.Fn(
-    ClosureNative("T", (T) => Values.Fn(ClosureNative("value", (value) => Values.Refl(T, value)))),
+  Values.FnImplicit(
+    ClosureNative("T", (T) =>
+      Values.FnImplicit(ClosureNative("value", (value) => Values.Refl(T, value))),
+    ),
   ),
 )
