@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { applyClosure, Closure } from "../closure"
+import { applyClosure, ClosureSimple } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -44,7 +44,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const retType = deepWalkType(mod, ctx, applyClosure(value.retTypeClosure, typedNeutral))
       const retTypeCore = readbackType(mod, ctx, retType)
       const env = mod.ctxToEnv(ctx)
-      return Values.Pi(argType, Closure(env, freshName, retTypeCore))
+      return Values.Pi(argType, ClosureSimple(env, freshName, retTypeCore))
     }
 
     case "PiImplicit": {
@@ -57,7 +57,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const retType = deepWalkType(mod, ctx, applyClosure(value.retTypeClosure, typedNeutral))
       const retTypeCore = readbackType(mod, ctx, retType)
       const env = mod.ctxToEnv(ctx)
-      return Values.PiImplicit(argType, Closure(env, freshName, retTypeCore))
+      return Values.PiImplicit(argType, ClosureSimple(env, freshName, retTypeCore))
     }
 
     case "Fn": {
@@ -72,7 +72,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
-      return Values.Fn(Closure(env, freshName, retCore))
+      return Values.Fn(ClosureSimple(env, freshName, retCore))
     }
 
     case "FnImplicit": {
@@ -87,7 +87,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const ret = deepWalk(mod, ctx, retType, applyClosure(value.retClosure, typedNeutral))
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
-      return Values.FnImplicit(Closure(env, freshName, retCore))
+      return Values.FnImplicit(ClosureSimple(env, freshName, retCore))
     }
 
     case "Sigma": {
@@ -100,7 +100,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const cdrType = deepWalkType(mod, ctx, applyClosure(value.cdrTypeClosure, typedNeutral))
       const cdrTypeCore = readbackType(mod, ctx, cdrType)
       const env = mod.ctxToEnv(ctx)
-      return Values.Sigma(carType, Closure(env, freshName, cdrTypeCore))
+      return Values.Sigma(carType, ClosureSimple(env, freshName, cdrTypeCore))
     }
 
     case "Cons": {
@@ -143,7 +143,7 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const rest = deepWalkType(mod, ctx, applyClosure(value.restClosure, typedNeutral))
       const restCore = readbackType(mod, ctx, rest)
       const env = mod.ctxToEnv(ctx)
-      return Values.ClazzCons(value.name, propertyType, Closure(env, freshName, restCore))
+      return Values.ClazzCons(value.name, propertyType, ClosureSimple(env, freshName, restCore))
     }
 
     case "ClazzFulfilled": {

@@ -1,16 +1,35 @@
 import { Core } from "../core"
 import { Env } from "../env"
+import { Value } from "../value"
 
-export type Closure = {
+export type Closure = ClosureSimple | ClosureNative
+
+export type ClosureSimple = {
+  kind: "ClosureSimple"
   env: Env
   name: string
   body: Core
 }
 
-export function Closure(env: Env, name: string, body: Core): Closure {
+export function ClosureSimple(env: Env, name: string, body: Core): Closure {
   return {
+    kind: "ClosureSimple",
     env,
     name,
     body,
+  }
+}
+
+export type ClosureNative = {
+  kind: "ClosureNative"
+  name: string
+  native: (arg: Value) => Value
+}
+
+export function ClosureNative(name: string, native: (arg: Value) => Value): ClosureNative {
+  return {
+    kind: "ClosureNative",
+    name,
+    native,
   }
 }

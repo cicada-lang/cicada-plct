@@ -1,4 +1,4 @@
-import { applyClosure, Closure } from "../closure"
+import { applyClosure, ClosureSimple } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, CtxFulfilled, lookupTypeInCtx, lookupValueInCtx } from "../ctx"
@@ -60,7 +60,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = Closure(mod.ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(Values.Pi(argTypeValue, retTypeClosure), Cores.Fn(exp.name, retInferred.core))
     }
 
@@ -70,7 +70,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = Closure(mod.ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
         Cores.FnImplicit(exp.name, retInferred.core),
@@ -139,7 +139,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const carInferred = infer(mod, ctx, exp.car)
       const cdrInferred = infer(mod, ctx, exp.cdr)
       const cdrTypeCore = readbackType(mod, ctx, cdrInferred.type)
-      const cdrTypeClosure = Closure(mod.ctxToEnv(ctx), "_", cdrTypeCore)
+      const cdrTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), "_", cdrTypeCore)
       return Inferred(
         Values.Sigma(carInferred.type, cdrTypeClosure),
         Cores.Cons(carInferred.core, cdrInferred.core),

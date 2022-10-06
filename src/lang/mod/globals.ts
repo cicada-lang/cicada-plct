@@ -1,4 +1,8 @@
+import { ClosureNative, ClosureSimple } from "../closure"
+import * as Cores from "../core"
+import { EnvCons, EnvNull } from "../env"
 import * as Values from "../value"
+import { Value } from "../value"
 import { GlobalStore } from "./GlobalStore"
 
 export const globals = new GlobalStore()
@@ -19,3 +23,24 @@ function the(T: Type, x: T): T {
 }
 
 `)
+
+globals.registerTypedValue(
+  "Equal",
+  Values.Pi(
+    Values.Type(),
+    ClosureSimple(
+      EnvCons("Type", Values.Type(), EnvNull()),
+      "T",
+      Cores.Pi("from", Cores.Var("T"), Cores.Pi("to", Cores.Var("T"), Cores.Var("Type"))),
+    ),
+  ),
+  Values.Fn(
+    ClosureNative("T", (T: Value) =>
+      Values.Fn(
+        ClosureNative("from", (from: Value) =>
+          Values.Fn(ClosureNative("to", (to: Value) => Values.Equal(T, from, to))),
+        ),
+      ),
+    ),
+  ),
+)

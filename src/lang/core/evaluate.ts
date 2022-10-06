@@ -1,5 +1,5 @@
 import * as Actions from "../actions"
-import { Closure } from "../closure"
+import { ClosureSimple } from "../closure"
 import { Core } from "../core"
 import { Env, EnvCons, lookupValueInEnv } from "../env"
 import * as Errors from "../errors"
@@ -19,19 +19,22 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Pi": {
-      return Values.Pi(evaluate(env, core.argType), Closure(env, core.name, core.retType))
+      return Values.Pi(evaluate(env, core.argType), ClosureSimple(env, core.name, core.retType))
     }
 
     case "PiImplicit": {
-      return Values.PiImplicit(evaluate(env, core.argType), Closure(env, core.name, core.retType))
+      return Values.PiImplicit(
+        evaluate(env, core.argType),
+        ClosureSimple(env, core.name, core.retType),
+      )
     }
 
     case "Fn": {
-      return Values.Fn(Closure(env, core.name, core.ret))
+      return Values.Fn(ClosureSimple(env, core.name, core.ret))
     }
 
     case "FnImplicit": {
-      return Values.FnImplicit(Closure(env, core.name, core.ret))
+      return Values.FnImplicit(ClosureSimple(env, core.name, core.ret))
     }
 
     case "Ap": {
@@ -43,7 +46,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "Sigma": {
-      return Values.Sigma(evaluate(env, core.carType), Closure(env, core.name, core.cdrType))
+      return Values.Sigma(evaluate(env, core.carType), ClosureSimple(env, core.name, core.cdrType))
     }
 
     case "Cons": {
@@ -70,7 +73,7 @@ export function evaluate(env: Env, core: Core): Value {
       return Values.ClazzCons(
         core.name,
         evaluate(env, core.propertyType),
-        Closure(env, core.localName, core.rest),
+        ClosureSimple(env, core.localName, core.rest),
       )
     }
 

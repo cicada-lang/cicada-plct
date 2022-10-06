@@ -4,5 +4,13 @@ import { EnvCons } from "../env"
 import { Value } from "../value"
 
 export function applyClosure(closure: Closure, arg: Value): Value {
-  return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
+  switch (closure.kind) {
+    case "ClosureSimple": {
+      return evaluate(EnvCons(closure.name, arg, closure.env), closure.body)
+    }
+
+    case "ClosureNative": {
+      return closure.native(arg)
+    }
+  }
 }

@@ -90,7 +90,20 @@ function occurCore(name: string, core: Core): boolean {
 }
 
 function occurClosure(name: string, closure: Closure): boolean {
-  return name != closure.name && occurCore(name, closure.body)
+  if (name === closure.name) {
+    return false
+  }
+
+  switch (closure.kind) {
+    case "ClosureSimple": {
+      return occurCore(name, closure.body)
+    }
+
+    case "ClosureNative": {
+      // TODO
+      return false
+    }
+  }
 }
 
 function occurTypedValue(name: string, typedValue: TypedValue): boolean {
