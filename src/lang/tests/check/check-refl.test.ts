@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("check Equal", async () => {
+test("check Refl", async () => {
   await runCode(`
 
 check refl: Equal(String, "abc", "abc")
@@ -9,7 +9,7 @@ check refl: Equal(String, "abc", "abc")
 `)
 })
 
-test("check Equal -- fail", async () => {
+test("check Refl -- fail", async () => {
   await expectCodeToFail(`
 
 check refl: Equal(String, "abc", "123")
@@ -17,7 +17,7 @@ check refl: Equal(String, "abc", "123")
 `)
 })
 
-test("check Equal -- given implicit", async () => {
+test("check Refl -- given implicit", async () => {
   await runCode(`
 
 check refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")
@@ -25,7 +25,7 @@ check refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")
 `)
 })
 
-test("check Equal -- given implicit -- fail", async () => {
+test("check Refl -- given implicit -- fail", async () => {
   await expectCodeToFail(`
 
 check refl(implicit String, implicit "abc"): Equal(String, "abc", "123")

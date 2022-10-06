@@ -1,7 +1,17 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("compute Equal -- given implicit", async () => {
+test.todo("compute Refl -- under the", async () => {
+  const output = await runCode(`
+
+compute the(Equal(String, "abc", "abc"), refl)
+
+`)
+
+  expect(output).toMatchInlineSnapshot()
+})
+
+test("compute Refl -- given implicit", async () => {
   const output = await runCode(`
 
 compute refl(implicit String, implicit "abc")

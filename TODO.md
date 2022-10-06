@@ -2,11 +2,7 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-compute-refl.test.ts
-
-```
-compute the(Equal(String, "abc", "abc"), refl)
-```
+compute-refl.test.ts -- under the
 
 Globals.Same
 
