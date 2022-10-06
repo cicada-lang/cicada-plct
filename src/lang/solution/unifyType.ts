@@ -102,6 +102,29 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
   )
 }
 
+/**
+
+   # unification between two Sigmas
+
+   Problem: We we must be able to solve the following equation:
+
+   ```
+   solve (A: Type, B: (x: A) -> Type) {
+     unify exists (x: A) B(x) = exists (_: String) String
+   }
+   ```
+
+   The same problem occurs for unification between two Pis.
+
+   Solution: Handle unification between Sigma specially,
+   to generate a const function (x: String) => String for B:
+
+   ```
+   { A: String, B: (x: String) => String }
+   ```
+
+**/
+
 function unifyClosure(
   solution: Solution,
   ctx: Ctx,
