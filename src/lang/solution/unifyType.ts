@@ -1,4 +1,4 @@
-import { applyClosure } from "../closure"
+import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
@@ -49,11 +49,13 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
     ctx = CtxCons(freshName, argType, ctx)
 
-    unifyType(
+    unifyClosure(
       solution,
       ctx,
-      applyClosure(right.retTypeClosure, typedNeutral),
-      applyClosure(left.retTypeClosure, typedNeutral),
+      right.retTypeClosure,
+      left.retTypeClosure,
+      typedNeutral,
+      freshName,
     )
 
     return
@@ -70,11 +72,13 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
     ctx = CtxCons(freshName, carType, ctx)
 
-    unifyType(
+    unifyClosure(
       solution,
       ctx,
-      applyClosure(right.cdrTypeClosure, typedNeutral),
-      applyClosure(left.cdrTypeClosure, typedNeutral),
+      right.cdrTypeClosure,
+      left.cdrTypeClosure,
+      typedNeutral,
+      freshName,
     )
 
     return
@@ -96,4 +100,43 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
   throw new Errors.UnificationError(
     `unifyType is not implemented for left: ${left.kind}, right: ${right.kind}`,
   )
+}
+
+function unifyClosure(
+  solution: Solution,
+  ctx: Ctx,
+  left: Closure,
+  right: Closure,
+  typedNeutral: Values.TypedNeutral,
+  name: string,
+): void {
+  const leftRet = applyClosure(left, typedNeutral)
+  const rightRet = applyClosure(right, typedNeutral)
+
+  const leftApTarget = extractApTarget(leftRet, name)
+  if (leftApTarget) {
+    unify(solution, ctx, leftApTarget.type, leftApTarget, Values.Fn(right))
+    return
+  }
+
+  const rightApTarget = extractApTarget(rightRet, name)
+  if (rightApTarget) {
+    unify(solution, ctx, rightApTarget.type, rightApTarget, Values.Fn(left))
+    return
+  }
+
+  unifyType(solution, ctx, leftRet, rightRet)
+}
+
+function extractApTarget(value: Value, name: string): Values.TypedNeutral | undefined {
+  if (
+    Values.isValue(value, "TypedNeutral") &&
+    value.neutral.kind === "Ap" &&
+    value.neutral.target.kind === "Var" &&
+    Values.isValue(value.neutral.arg.value, "TypedNeutral") &&
+    value.neutral.arg.value.neutral.kind === "Var" &&
+    value.neutral.arg.value.neutral.name === name
+  ) {
+    return Values.TypedNeutral(value.neutral.targetType, value.neutral.target)
+  }
 }

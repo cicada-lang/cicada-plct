@@ -40,18 +40,6 @@ solve (A: Type, B: Type) {
   expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
 })
 
-test.todo("solve Sigma -- generate const function", async () => {
-  const output = await runCode(`
-
-solve (A: Type, B: (x: A) -> Type) {
-  unify exists (x: A) B(x) = exists (_: String) String
-}
-
-`)
-
-  expect(output).toMatchInlineSnapshot()
-})
-
 test("solve Sigma -- occur in pair", async () => {
   await expectCodeToFail(
     `
@@ -63,4 +51,16 @@ solve (x: Type) {
 `,
     Errors.UnificationError,
   )
+})
+
+test("solve Sigma -- generate const function", async () => {
+  const output = await runCode(`
+
+solve (A: Type, B: (x: A) -> Type) {
+  unify exists (x: A) B(x) = exists (_: String) String
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"{ A: String, B: (x) => String }"')
 })
