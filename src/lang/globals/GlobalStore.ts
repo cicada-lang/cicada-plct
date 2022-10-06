@@ -27,16 +27,6 @@ export class GlobalStore {
     }
   }
 
-  private claimValue(name: string, type: Value): void {
-    if (typeof type === "string") {
-      const exp = parseExp(type)
-      const core = Exps.checkType(this.mod, this.mod.ctx, exp)
-      type = Cores.evaluate(this.mod.env, core)
-    }
-
-    this.claimed.set(name, type)
-  }
-
   define(name: string, value: Value | string): void {
     const type = this.claimed.get(name)
     if (type === undefined) {
