@@ -9,25 +9,6 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { readback, readbackClazz, readbackNeutral, Value } from "../value"
 
-/**
-
-   TODO Maybe a scope bug.
-
-   Take Type as a example.
-
-   let U = Type
-
-   function f(Type: (Type) -> Type) {
-   // Problem: In this scope,
-   // `U` is `readback` to `Cores.Var("Type")`,
-   // `Type` is also `readback` to `Cores.Var("Type")`,
-   // but they should not be equal (if we implement equal by NbE).
-
-   // Solution: `Type` should not be `readback` to `Cores.Var("Type")`.
-   }
-
-**/
-
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
   switch (type.kind) {
     case "TypedNeutral": {

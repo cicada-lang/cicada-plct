@@ -32,3 +32,22 @@ check (A) => A: (A: Type) -> A
 
 `)
 })
+
+test("check Fn -- readback and scope", async () => {
+  /**
+     In the scope of `f` body,
+     `U` will be `readback` to `Cores.Var("Type")`,
+     `Type` will also be `readback` to `Cores.Var("Type")`,
+     but they should not be equal.
+  **/
+
+  await expectCodeToFail(`
+
+let U = Type
+
+function f(Type: (Type) -> Type) {
+  return Equal(U, Type, U)
+}
+
+`)
+})
