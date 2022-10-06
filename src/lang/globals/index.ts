@@ -1,1 +1,1 @@
-export * from "./globals"
+export * from "./useGlobals"

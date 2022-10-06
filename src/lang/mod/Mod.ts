@@ -1,7 +1,7 @@
 import { Loader } from "../../loader"
 import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
 import { Env } from "../env"
-import { globals } from "../globals"
+import { useGlobals } from "../globals"
 import { Solution } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
@@ -34,7 +34,7 @@ export class Mod {
 
   async initialize(): Promise<void> {
     if (this.initialized) return
-
+    const globals = useGlobals()
     await globals.mount(this)
   }
 
