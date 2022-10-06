@@ -51,3 +51,19 @@ globals.registerTypedValue(
     ),
   ),
 )
+
+globals.registerTypedValue(
+  "refl",
+  Values.PiImplicit(
+    Values.Type(),
+    ClosureNative("T", (T) =>
+      Values.PiImplicit(
+        T,
+        ClosureNative("value", (value) => Values.Equal(T, value, value)),
+      ),
+    ),
+  ),
+  Values.Fn(
+    ClosureNative("T", (T) => Values.Fn(ClosureNative("value", (value) => Values.Refl(T, value)))),
+  ),
+)
