@@ -19,6 +19,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
+    case "PiImplicit":
     case "PiUnfolded": {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }

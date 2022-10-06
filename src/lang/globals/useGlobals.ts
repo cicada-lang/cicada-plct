@@ -27,24 +27,7 @@ export function useGlobals(): GlobalStore {
   globals.claim("the", "(T: Type, x: T) -> T")
   globals.define("the", "(T, x) => x")
 
-  globals.claim(
-    "Equal",
-    Values.Pi(
-      Values.Type(),
-      ClosureNative("T", (T) =>
-        Values.Pi(
-          T,
-          ClosureNative("from", (from) =>
-            Values.Pi(
-              T,
-              ClosureNative("to", (to) => Values.Type()),
-            ),
-          ),
-        ),
-      ),
-    ),
-  )
-
+  globals.claim("Equal", "(T: Type, from: T, to: T) -> Type")
   globals.define(
     "Equal",
     Values.Fn(
@@ -58,19 +41,7 @@ export function useGlobals(): GlobalStore {
     ),
   )
 
-  globals.claim(
-    "refl",
-    Values.PiImplicit(
-      Values.Type(),
-      ClosureNative("T", (T) =>
-        Values.PiImplicit(
-          T,
-          ClosureNative("value", (value) => Values.Equal(T, value, value)),
-        ),
-      ),
-    ),
-  )
-
+  globals.claim("refl", "(implicit T: Type, implicit x: T) -> Equal(T, x, x)")
   globals.define(
     "refl",
     Values.FnImplicit(
@@ -80,19 +51,7 @@ export function useGlobals(): GlobalStore {
     ),
   )
 
-  globals.claim(
-    "same",
-    Values.PiImplicit(
-      Values.Type(),
-      ClosureNative("T", (T) =>
-        Values.Pi(
-          T,
-          ClosureNative("value", (value) => Values.Equal(T, value, value)),
-        ),
-      ),
-    ),
-  )
-
+  globals.claim("same", "(implicit T: Type, x: T) -> Equal(T, x, x)")
   globals.define(
     "same",
     Values.FnImplicit(
