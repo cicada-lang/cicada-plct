@@ -14,11 +14,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
       const inferred = Exps.infer(mod, ctx, exp)
-      if (Values.isValue(inferred.type, "PiImplicit")) {
-        // TODO
-      }
-
-      return Exps.checkInferred(mod, ctx, inferred, type)
+      return Exps.checkVar(mod, ctx, inferred, type)
     }
 
     case "Pi":

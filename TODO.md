@@ -2,9 +2,11 @@
 
 https://github.com/cicada-lang/cicada/issues/43
 
-check -- Var -- elab implicit
+compute-refl.test.ts
 
-check-refl.test.ts -- elab implicit
+```
+compute the(Equal(String, "abc", "abc"), refl)
+```
 
 Globals.Same
 

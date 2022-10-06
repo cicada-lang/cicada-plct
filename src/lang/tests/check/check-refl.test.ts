@@ -1,10 +1,18 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test.todo("check Equal", async () => {
+test("check Equal", async () => {
   await runCode(`
 
 check refl: Equal(String, "abc", "abc")
+
+`)
+})
+
+test("check Equal -- fail", async () => {
+  await expectCodeToFail(`
+
+check refl: Equal(String, "abc", "123")
 
 `)
 })
