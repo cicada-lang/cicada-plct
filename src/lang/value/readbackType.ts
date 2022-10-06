@@ -7,7 +7,7 @@ import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { readbackClazz, readbackNeutral, Value } from "../value"
+import { readback, readbackClazz, readbackNeutral, Value } from "../value"
 
 /**
 
@@ -89,6 +89,16 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
     case "ClazzCons":
     case "ClazzFulfilled": {
       return readbackClazz(mod, ctx, type)
+    }
+
+    case "Equal": {
+      return Cores.Ap(
+        Cores.Ap(
+          Cores.Ap(Cores.Var("Equal"), readbackType(mod, ctx, type.type)),
+          readback(mod, ctx, type.type, type.from),
+        ),
+        readback(mod, ctx, type.type, type.to),
+      )
     }
 
     default: {
