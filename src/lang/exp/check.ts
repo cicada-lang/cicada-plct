@@ -19,9 +19,12 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Pi":
-    case "PiImplicit":
-    case "PiUnfolded": {
+    case "PiImplicit": {
       return Exps.checkByInfer(mod, ctx, exp, type)
+    }
+
+    case "PiUnfolded": {
+      return check(mod, ctx, Exps.foldPi(exp.bindings, exp.retType), type)
     }
 
     case "Fn": {
@@ -60,13 +63,20 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Ap":
-    case "ApUnfolded": {
+    case "ApImplicit": {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
-    case "Sigma":
-    case "SigmaUnfolded": {
+    case "ApUnfolded": {
+      return check(mod, ctx, Exps.foldAp(exp.target, exp.args), type)
+    }
+
+    case "Sigma": {
       return Exps.checkByInfer(mod, ctx, exp, type)
+    }
+
+    case "SigmaUnfolded": {
+      return check(mod, ctx, Exps.foldSigma(exp.bindings, exp.cdrType), type)
     }
 
     case "Cons": {
@@ -90,15 +100,26 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "ClazzNull":
     case "ClazzCons":
-    case "ClazzFulfilled":
-    case "ClazzUnfolded": {
+    case "ClazzFulfilled": {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
-    case "ObjektUnfolded":
+    case "ClazzUnfolded": {
+      return check(mod, ctx, Exps.foldClazz(exp.bindings), type)
+    }
+
     case "Objekt": {
       const { core } = Exps.enrich(mod, ctx, exp, type)
       return core
+    }
+
+    case "ObjektUnfolded": {
+      return check(
+        mod,
+        ctx,
+        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
+        type,
+      )
     }
 
     case "Dot": {
@@ -119,11 +140,14 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
-    case "SequenceUnfolded":
     case "SequenceLet":
     case "SequenceLetThe":
     case "SequenceCheck": {
       return Exps.checkByInfer(mod, ctx, exp, type)
+    }
+
+    case "SequenceUnfolded": {
+      return check(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret), type)
     }
 
     default: {

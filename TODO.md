@@ -1,5 +1,3 @@
-fix check Refl
-
 add test my_cdr
 
 globals.car

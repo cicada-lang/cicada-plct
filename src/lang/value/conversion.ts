@@ -1,5 +1,6 @@
-import { AlphaCtx, alphaEquivalent } from "../core"
+import { AlphaCtx, alphaEquivalent, formatCore } from "../core"
 import { Ctx } from "../ctx"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { readback, Value } from "../value"
 
@@ -21,9 +22,21 @@ export function conversion(
   left: Value,
   right: Value,
 ): void {
-  alphaEquivalent(
-    new AlphaCtx(),
-    readback(mod, ctx, type, left),
-    readback(mod, ctx, type, right),
-  )
+  const leftCore = readback(mod, ctx, type, left)
+  const rightCore = readback(mod, ctx, type, right)
+  try {
+    alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
+  } catch (error) {
+    if (error instanceof Errors.ConversionError) {
+      throw new Errors.ConversionError(
+        [
+          error.message,
+          ` left: ${formatCore(leftCore)}`,
+          ` right: ${formatCore(rightCore)}`,
+        ].join("\n"),
+      )
+    }
+
+    throw error
+  }
 }

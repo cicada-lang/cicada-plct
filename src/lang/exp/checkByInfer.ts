@@ -12,27 +12,37 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   try {
     checkInferred(mod, ctx, inferred, type)
   } catch (error) {
-    if (error instanceof Errors.LangError) {
+    if (error instanceof Errors.LangError)
       throw new Errors.ElaborationError(error.message, { span: exp.span })
-    }
     throw error
   }
 
   return inferred.core
 }
 
-// export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
-//   const inferredType = mod.solution.deepWalkType(mod, ctx, inferred.type)
-//   const givenType = mod.solution.deepWalkType(mod, ctx, type)
-//   unifyType(mod.solution, ctx, inferredType, givenType)
-//   inclusion(mod, ctx, inferredType, givenType)
-//   return inferred.core
-// }
-
 export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
-  unifyType(mod.solution, ctx, inferred.type, type)
-  const inferredType = mod.solution.deepWalkType(mod, ctx, inferred.type)
-  const givenType = mod.solution.deepWalkType(mod, ctx, type)
+  let inferredType = inferred.type
+  let givenType = type
+
+  /**
+     NOTE We need to use `deepWalkType` before `unifyType`,
+     because `deepWalkType` might further `evaluate` a `Neutral`.
+  **/
+
+  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
+  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+
+  unifyType(mod.solution, ctx, inferredType, givenType)
+
+  /**
+     NOTE Because `unifyType` might do side-effect on `mod.solution`,
+     we need to do `deepWalkType` again.
+  **/
+
+  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
+  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+
   inclusion(mod, ctx, inferredType, givenType)
+
   return inferred.core
 }
