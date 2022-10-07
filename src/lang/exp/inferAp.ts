@@ -2,6 +2,7 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { evaluate } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp, Inferred } from "../exp"
 import { Mod } from "../mod"
@@ -52,7 +53,30 @@ function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferre
   let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
     argInferred = Exps.insertApImplicit(mod, ctx, argInferred, inferred.type.argType)
-    unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
+    try {
+      /**
+         NOTE We need to use `deepWalkType` before `unifyType`,
+         because `deepWalkType` might further `evaluate` a `Neutral`.
+      **/
+      unifyType(
+        mod.solution,
+        ctx,
+        mod.solution.deepWalkType(mod, ctx, argInferred.type),
+        mod.solution.deepWalkType(mod, ctx, inferred.type.argType),
+      )
+    } catch (error) {
+      if (error instanceof Errors.UnificationError) {
+        throw new Errors.ElaborationError(
+          [
+            `inferApPi fail to unify inferred arg type (left) with given arg type (right).`,
+            error.message,
+          ].join("\n"),
+          { span: argExp.span },
+        )
+      }
+
+      throw error
+    }
   }
 
   /**
