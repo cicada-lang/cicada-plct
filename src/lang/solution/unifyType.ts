@@ -104,7 +104,7 @@ export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Valu
 
 /**
 
-   # unification between two Sigmas
+   # unification between two `Sigma`s
 
    Problem: We we must be able to solve the following equation:
 
