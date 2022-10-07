@@ -64,6 +64,15 @@ export class Solution {
     return value
   }
 
+  walkOrUndefined(value: Value): Value | undefined {
+    if (this.isPatternVar(value)) {
+      const found = this.lookupValue(value.neutral.name)
+      if (found !== undefined) return this.walk(value)
+    }
+
+    return undefined
+  }
+
   walk(value: Value): Value {
     while (this.isPatternVar(value)) {
       const found = this.lookupValue(value.neutral.name)

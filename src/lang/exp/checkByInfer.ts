@@ -21,10 +21,18 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   return inferred.core
 }
 
+// export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
+//   const inferredType = mod.solution.deepWalkType(mod, ctx, inferred.type)
+//   const givenType = mod.solution.deepWalkType(mod, ctx, type)
+//   unifyType(mod.solution, ctx, inferredType, givenType)
+//   inclusion(mod, ctx, inferredType, givenType)
+//   return inferred.core
+// }
+
 export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
+  unifyType(mod.solution, ctx, inferred.type, type)
   const inferredType = mod.solution.deepWalkType(mod, ctx, inferred.type)
   const givenType = mod.solution.deepWalkType(mod, ctx, type)
-  unifyType(mod.solution, ctx, inferredType, givenType)
   inclusion(mod, ctx, inferredType, givenType)
   return inferred.core
 }

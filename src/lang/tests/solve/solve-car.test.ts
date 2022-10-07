@@ -28,7 +28,7 @@ solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String,
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ ab: cons(\\"a\\", \\"b\\"), ba: cons(\\"b\\", \\"a\\"), a: \\"a\\", b: \\"b\\", b2: b }"',
+    '"{ ab: cons(\\"a\\", \\"b\\"), ba: cons(\\"b\\", \\"a\\"), a: \\"a\\", b: \\"b\\", b2: \\"b\\" }"',
   )
 })
 
