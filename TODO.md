@@ -1,6 +1,6 @@
-unification with postpone
+constraint based unification
 
-- pass test "check Cons -- my_cons -- unification with postpone"
+- pass test "check Cons -- my_cons -- constraint based unification"
 
 globals.cons
 

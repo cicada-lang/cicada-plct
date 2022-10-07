@@ -9,7 +9,7 @@ check cons(Type, Type): exists (Type) Type
 `)
 })
 
-test("check Cons -- my_cons -- unification with postpone", async () => {
+test.todo("check Cons -- my_cons -- constraint based unification", async () => {
   await runCode(`
 
 function my_cons(
