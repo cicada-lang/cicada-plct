@@ -23,7 +23,6 @@ solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String,
   unify a = car(ab)
   unify b = cdr(ab)
   unify ab = cons("a", "b")
-
 }
 
 `)
@@ -39,7 +38,7 @@ test("solve Car -- car cons", async () => {
 solve(a: String) {
   unify a = car(cons(a, "b"))
 }
-  
+
 `)
 
   expect(output).toMatchInlineSnapshot('"{ a: TODO(String) }"')

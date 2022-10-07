@@ -27,5 +27,5 @@ compute my_car(cons("a", "b"))
 
 `)
 
-  expect(output).toMatchInlineSnapshot()
+  expect(output).toMatchInlineSnapshot('"\\"a\\": String"')
 })

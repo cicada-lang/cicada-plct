@@ -14,19 +14,17 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   } catch (error) {
     if (error instanceof Errors.LangError) {
       throw new Errors.ElaborationError(error.message, { span: exp.span })
-    } else throw error
+    }
+    throw error
   }
 
   return inferred.core
 }
 
 export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
-  unifyType(mod.solution, ctx, inferred.type, type)
-  inclusion(
-    mod,
-    ctx,
-    mod.solution.deepWalkType(mod, ctx, inferred.type),
-    mod.solution.deepWalkType(mod, ctx, type),
-  )
+  const inferredType = mod.solution.deepWalkType(mod, ctx, inferred.type)
+  const givenType = mod.solution.deepWalkType(mod, ctx, type)
+  unifyType(mod.solution, ctx, inferredType, givenType)
+  inclusion(mod, ctx, inferredType, givenType)
   return inferred.core
 }
