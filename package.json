@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
     "@types/lodash": "^4.14.186",
-    "@types/node": "^18.8.4",
+    "@types/node": "^18.8.5",
     "@vitest/coverage-c8": "^0.24.1",
     "@vitest/coverage-istanbul": "^0.24.1",
     "@vitest/ui": "^0.24.1",
@@ -46,7 +46,7 @@
     "prettier-plugin-organize-imports": "^3.1.1",
     "pretty-quick": "^3.1.3",
     "typescript": "^4.8.4",
-    "vite": "^3.1.7",
+    "vite": "^3.1.8",
     "vitest": "^0.24.1"
   },
   "license": "GPL-3.0-or-later"
