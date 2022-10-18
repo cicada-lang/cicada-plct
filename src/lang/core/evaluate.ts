@@ -10,7 +10,6 @@ export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
       const value = lookupValueInEnv(env, core.name)
-
       if (value === undefined) {
         throw new Errors.EvaluationError(`Undefined name: ${core.name}`)
       }
