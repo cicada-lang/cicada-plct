@@ -1,5 +1,3 @@
-console/Runner -- handle watch in Runner
-
 globals.car
 globals.cdr
 

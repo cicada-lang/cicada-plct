@@ -1,7 +1,6 @@
 import { Command, CommandRunner } from "@xieyuheng/command-line"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
-import watcher from "node-watch"
 import Path from "path"
 import { Runner } from "../Runner"
 
@@ -47,44 +46,12 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     const url = createURL(argv["file"])
+    const { error } = await this.runner.run(url)
+    if (error) process.exit(1)
+
     if (argv["watch"]) {
-      await this.runner.run(url)
-
-      if (url.protocol === "file:") {
-        app.logger.info(`Initial run complete, now watching for changes.`)
-        await this.watch(url.pathname)
-      } else {
-        app.logger.info(`Can not watch non-local file.`)
-      }
-    } else {
-      const { error } = await this.runner.run(url)
-      if (error) {
-        process.exit(1)
-      }
+      await this.runner.watch(url)
     }
-  }
-
-  async watch(path: string): Promise<void> {
-    watcher(path, async (event, file) => {
-      const url = new URL(`file:${path}`)
-
-      if (event === "remove") {
-        this.runner.loader.cache.delete(url.href)
-        app.logger.info({ tag: event, msg: path })
-        process.exit(1)
-      }
-
-      if (event === "update") {
-        this.runner.loader.cache.delete(url.href)
-        const { error } = await this.runner.run(url)
-
-        if (error) {
-          app.logger.error({ tag: event, msg: path })
-        } else {
-          app.logger.info({ tag: event, msg: path })
-        }
-      }
-    })
   }
 }
 
