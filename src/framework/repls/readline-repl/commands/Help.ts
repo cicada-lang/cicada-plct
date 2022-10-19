@@ -1,6 +1,6 @@
 import { rightPad } from "../../../../utils/rightPad"
-import { Command } from "../command"
-import { ReadlineRepl } from "../readline-repl"
+import { ReadlineRepl } from "../../readline-repl"
+import { Command } from "../Command"
 
 export class Help extends Command {
   name = "help"

@@ -1,4 +1,4 @@
-import { ReadlineRepl } from "./readline-repl"
+import { ReadlineRepl } from "./ReadlineRepl"
 
 export abstract class Command {
   abstract name: string

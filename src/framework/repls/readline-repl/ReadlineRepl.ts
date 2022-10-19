@@ -1,7 +1,7 @@
 import Readline from "readline"
 import { FileStore } from "../../file-store"
 import { Repl, ReplEvent, ReplEventHandler } from "../../repl"
-import { Command } from "./command"
+import { Command } from "./Command"
 import * as Commands from "./commands"
 
 export class ReadlineRepl extends Repl {

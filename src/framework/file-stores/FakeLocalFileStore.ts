@@ -1,4 +1,4 @@
-import { LocalFileStore } from "./local-file-store"
+import { LocalFileStore } from "../file-stores"
 
 export class FakeLocalFileStore extends LocalFileStore {
   faked: Record<string, string>
