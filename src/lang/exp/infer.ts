@@ -123,24 +123,6 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return infer(mod, ctx, Exps.foldSigma(exp.bindings, exp.cdrType))
     }
 
-    case "Car": {
-      const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
-      const sigma = inferred.type
-      return Inferred(sigma.carType, Cores.Car(inferred.core))
-    }
-
-    case "Cdr": {
-      const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
-      const sigma = inferred.type
-      const carValue = evaluate(mod.ctxToEnv(ctx), Cores.Car(inferred.core))
-      return Inferred(
-        applyClosure(sigma.cdrTypeClosure, carValue),
-        Cores.Cdr(inferred.core),
-      )
-    }
-
     case "Cons": {
       const carInferred = infer(mod, ctx, exp.car)
       const cdrInferred = infer(mod, ctx, exp.cdr)

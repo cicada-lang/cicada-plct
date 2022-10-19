@@ -89,11 +89,6 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return Cores.Cons(carCore, cdrCore)
     }
 
-    case "Car":
-    case "Cdr": {
-      return Exps.checkByInfer(mod, ctx, exp, type)
-    }
-
     case "Quote": {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }

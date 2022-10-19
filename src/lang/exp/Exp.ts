@@ -33,8 +33,6 @@ export type Exp =
   | Sigma
   | SigmaUnfolded
   | Cons
-  | Car
-  | Cdr
   | Quote
   | Clazz
   | ClazzUnfolded
@@ -514,36 +512,6 @@ export function Cons(car: Exp, cdr: Exp, span?: Span): Cons {
     kind: "Cons",
     car,
     cdr,
-    span,
-  }
-}
-
-export type Car = {
-  family: "Exp"
-  kind: "Car"
-  target: Exp
-} & ExpMeta
-
-export function Car(target: Exp, span?: Span): Car {
-  return {
-    family: "Exp",
-    kind: "Car",
-    target,
-    span,
-  }
-}
-
-export type Cdr = {
-  family: "Exp"
-  kind: "Cdr"
-  target: Exp
-} & ExpMeta
-
-export function Cdr(target: Exp, span?: Span): Cdr {
-  return {
-    family: "Exp",
-    kind: "Cdr",
-    target,
     span,
   }
 }

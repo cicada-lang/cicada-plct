@@ -1,4 +1,4 @@
-remove Exps.Car & Exps.Cdr
+remove Cores.Car & Cores.Cdr
 
 # [feature] constraint-based unification
 

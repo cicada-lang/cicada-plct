@@ -94,14 +94,6 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       ])
     }
 
-    case "Car": {
-      return new Set([...freeNames(boundNames, exp.target)])
-    }
-
-    case "Cdr": {
-      return new Set([...freeNames(boundNames, exp.target)])
-    }
-
     case "Quote": {
       return new Set()
     }
