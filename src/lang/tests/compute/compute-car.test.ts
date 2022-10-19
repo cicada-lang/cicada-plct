@@ -12,6 +12,18 @@ compute car(pair)
   expect(output).toMatchInlineSnapshot('"Type: Type"')
 })
 
+test("compute Car -- just car", async () => {
+  const output = await runCode(`
+
+compute car
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"',
+  )
+})
+
 test("compute Car -- my_car", async () => {
   const output = await runCode(`
 

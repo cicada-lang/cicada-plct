@@ -1,4 +1,6 @@
-remove Cores.Car & Cores.Cdr
+Cores.Replace -- should not readback to `Cores.Ap`
+
+- add test compute just `replace`
 
 # [feature] constraint-based unification
 
@@ -7,3 +9,5 @@ https://github.com/cicada-lang/cicada/issues/111
 pass test "check Cons -- my_cons -- constraint-based unification"
 
 globals.cons
+
+add test compute just `cons`

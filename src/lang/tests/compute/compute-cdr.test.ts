@@ -12,17 +12,49 @@ compute cdr(pair)
   expect(output).toMatchInlineSnapshot('"Type: Type"')
 })
 
+test("compute Cdr -- just cdr", async () => {
+  const output = await runCode(`
+
+compute cdr
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"(implicit A, implicit B, target) => cdr(target): (implicit A: Type, implicit B: (A) -> Type, target: exists (A) B(x)) -> B(car(target))"',
+  )
+})
+
 test("compute Cdr -- my_cdr", async () => {
+  const output = await runCode(`
+
+let cdrType = (
+  implicit A: Type,
+  implicit B: (x: A) -> Type,
+  target: exists (x: A) B(x),
+) -> B(car(target))
+
+
+let my_cdr: cdrType = (implicit A, implicit B, target) => begin {
+  return cdr(target)
+}
+
+compute my_cdr(cons("a", "b"))
+
+`)
+
+  expect(output).toMatchInlineSnapshot('"\\"b\\": String"')
+})
+
+test("compute Cdr -- my_cdr -- infer FnImplicitAnnotated", async () => {
   const output = await runCode(`
 
 function my_cdr(
   implicit A: Type,
   implicit B: (x: A) -> Type,
-  pair: exists (x: A) B(x),
-): B(car(pair)) {
-  return cdr(pair)
+  target: exists (x: A) B(x),
+): B(car(implicit A, implicit B, target)) {
+  return cdr(target)
 }
-
 
 compute my_cdr(cons("a", "b"))
 
