@@ -21,8 +21,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
           (result, args) => Exps.ApUnfolded(result, args, span),
           operator_matcher(target),
         ),
-    "operator:car": ({ target }, { span }) => Exps.Car(exp_matcher(target), span),
-    "operator:cdr": ({ target }, { span }) => Exps.Cdr(exp_matcher(target), span),
     "operator:dot_field": ({ target, name }, { span }) =>
       Exps.Dot(operator_matcher(target), pt.str(name), span),
     "operator:dot_field_quote": ({ target, data }, { span }) =>

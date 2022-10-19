@@ -21,8 +21,6 @@ export const operator = {
       { target: "operator" },
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
-    "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
-    "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [{ target: "operator" }, '"."', { name: "name" }],
     "operator:dot_field_quote": [
       { target: "operator" },

@@ -1,7 +1,4 @@
-globals.car
-globals.cdr
-
-remove preserved keywords
+remove Exps.Car & Exps.Cdr
 
 # [feature] constraint-based unification
 
