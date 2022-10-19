@@ -71,5 +71,12 @@ export function formatCore(core: Core): string {
     case "Dot": {
       return `${formatCore(core.target)}.${core.name}`
     }
+
+    case "Replace": {
+      const target = formatCore(core.target)
+      const motive = formatCore(core.motive)
+      const base = formatCore(core.base)
+      return `replace(${target}, ${motive}, ${base})`
+    }
   }
 }

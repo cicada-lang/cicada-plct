@@ -107,6 +107,14 @@ export function evaluate(env: Env, core: Core): Value {
       return Actions.doDot(evaluate(env, core.target), core.name)
     }
 
+    case "Replace": {
+      return Actions.doReplace(
+        evaluate(env, core.target),
+        evaluate(env, core.motive),
+        evaluate(env, core.base),
+      )
+    }
+
     // default: {
     //   throw new Errors.EvaluationError(
     //     `evaluate is not implemented for core: ${core.kind}`,

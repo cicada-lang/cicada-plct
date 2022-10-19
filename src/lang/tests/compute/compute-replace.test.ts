@@ -1,6 +1,18 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
+test("compute Replace -- just replace", async () => {
+  const output = await runCode(`
+
+compute replace
+
+`)
+
+  expect(output).toMatchInlineSnapshot(
+    '"(implicit T, implicit from, implicit to, target, motive, base) => replace(target, (target1) => motive(target1), base): (implicit T: Type, implicit from: T, implicit to: T, Equal(T, from, to), motive: (T) -> Type, motive(from)) -> motive(to)"',
+  )
+})
+
 test("compute Replace", async () => {
   const output = await runCode(`
 

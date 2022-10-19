@@ -98,5 +98,13 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
     case "Dot": {
       return new Set([...freeNames(boundNames, core.target)])
     }
+
+    case "Replace": {
+      return new Set([
+        ...freeNames(boundNames, core.target),
+        ...freeNames(boundNames, core.motive),
+        ...freeNames(boundNames, core.base),
+      ])
+    }
   }
 }

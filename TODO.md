@@ -1,7 +1,3 @@
-Cores.Replace -- should not readback to `Cores.Ap`
-
-- add test compute just `replace`
-
 # [feature] constraint-based unification
 
 https://github.com/cicada-lang/cicada/issues/111
