@@ -17,10 +17,6 @@ export class RunCommand extends Command<Args, Opts> {
 
   runner = new Runner()
 
-  constructor() {
-    super()
-  }
-
   // prettier-ignore
   help(runner: CommandRunner): string {
     const { blue } = this.colors
