@@ -41,7 +41,7 @@ export const operator = {
       '"]"',
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
-    "operator:sequence_begin": ['"begin"', { sequence: "sequence" }],
+    "operator:sequence": [{ sequence: "sequence" }],
   },
 }
 

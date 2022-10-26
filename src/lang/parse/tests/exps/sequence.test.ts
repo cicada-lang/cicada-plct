@@ -8,7 +8,7 @@ test("parse Sequence", () => {
     parseExp(
       `
 
-begin {
+{
   let x: Trivial = sole
   check sole: Trivial
   let y = sole
@@ -38,7 +38,7 @@ test("parse Sequence -- only return", () => {
     parseExp(
       `
 
-begin {
+{
   return x
 }
 
@@ -52,7 +52,7 @@ test("parse Sequence -- let function", () => {
     parseExp(
       `
 
-begin {
+{
   function id(T: Type, x: T): T {
     return x
   }

@@ -49,8 +49,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
             pt.span_closure([target.span, data.span]),
           ),
         ),
-    "operator:sequence_begin": ({ sequence }, { span }) =>
-      matchers.sequence_matcher(sequence),
+    "operator:sequence": ({ sequence }, { span }) => matchers.sequence_matcher(sequence),
   })(tree)
 }
 

@@ -1,4 +1,4 @@
-let x = begin {
+let x = {
   let y = sole
   return y
 }

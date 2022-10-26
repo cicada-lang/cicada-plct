@@ -1,6 +1,6 @@
 compute the(Type, String)
 
-compute begin {
+compute {
   let the: String = "redefine the in local scope"
   return the
 }

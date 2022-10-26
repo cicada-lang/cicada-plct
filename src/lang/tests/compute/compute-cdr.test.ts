@@ -34,7 +34,7 @@ let cdrType = (
 ) -> B(car(target))
 
 
-let my_cdr: cdrType = (implicit A, implicit B, target) => begin {
+let my_cdr: cdrType = (implicit A, implicit B, target) => {
   return cdr(target)
 }
 

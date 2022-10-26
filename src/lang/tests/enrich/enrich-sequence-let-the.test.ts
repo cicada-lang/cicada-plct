@@ -4,7 +4,7 @@ import { runCode } from "../utils"
 test("enrich SequenceLetThe -- should not break normal let", async () => {
   await runCode(`
 
-let x = begin {
+let x = {
   let id: (T: Type, T) -> T = (T, x) => x
   return id
 }
@@ -26,7 +26,7 @@ class ABC {
   c: String
 }
 
-check begin {
+check {
   let abc: AB = {
     a: "a",
     b: "b",
@@ -66,7 +66,7 @@ class ABC {
   c: String
 }
 
-check begin {
+check {
   let abc: AB = {
     a: "a",
     b: "b",
