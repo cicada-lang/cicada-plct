@@ -9,7 +9,10 @@ export class ElaborationError extends LangError {
 
   report(options?: { text?: string }): string {
     if (this.options.span && options?.text) {
-      return [this.message + "\n", pt.report(this.options.span, options.text)].join("\n")
+      return [
+        this.message + "\n",
+        pt.report(this.options.span, options.text),
+      ].join("\n")
     }
 
     return this.message

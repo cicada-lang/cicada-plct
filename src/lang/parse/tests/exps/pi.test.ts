@@ -6,13 +6,19 @@ import { deleteUndefined } from "../utils"
 test("parse Pi", () => {
   expect(parseExp("(n: Nat) -> Nat")).toMatchObject(
     deleteUndefined(
-      Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.PiUnfolded(
+        [Exps.PiBindingNamed("n", Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 
   expect(parseExp("forall (n: Nat) Nat")).toMatchObject(
     deleteUndefined(
-      Exps.PiUnfolded([Exps.PiBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.PiUnfolded(
+        [Exps.PiBindingNamed("n", Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 })
@@ -46,13 +52,19 @@ test("parse Pi -- multiple bindings", () => {
 test("parse Pi -- nameless binding", () => {
   expect(parseExp("(Nat) -> Nat")).toMatchObject(
     deleteUndefined(
-      Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.PiUnfolded(
+        [Exps.PiBindingNameless(Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 
   expect(parseExp("forall (Nat) Nat")).toMatchObject(
     deleteUndefined(
-      Exps.PiUnfolded([Exps.PiBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.PiUnfolded(
+        [Exps.PiBindingNameless(Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 })

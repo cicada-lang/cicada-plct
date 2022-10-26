@@ -4,7 +4,10 @@ export class FakeLocalFileStore extends LocalFileStore {
   faked: Record<string, string>
   fallback: LocalFileStore
 
-  constructor(opts: { faked?: Record<string, string>; fallback: LocalFileStore }) {
+  constructor(opts: {
+    faked?: Record<string, string>
+    fallback: LocalFileStore
+  }) {
     const { dir } = opts.fallback
     super({ dir })
     this.faked = opts.faked || {}

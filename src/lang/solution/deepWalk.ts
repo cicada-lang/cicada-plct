@@ -65,7 +65,10 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       )
       const retTypeCore = readbackType(mod, ctx, retType)
       const env = mod.ctxToEnv(ctx)
-      return Values.PiImplicit(argType, ClosureSimple(env, freshName, retTypeCore))
+      return Values.PiImplicit(
+        argType,
+        ClosureSimple(env, freshName, retTypeCore),
+      )
     }
 
     case "Fn": {
@@ -168,9 +171,16 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
       const propertyType = deepWalkType(mod, ctx, value.propertyType)
-      const typedNeutral = Values.TypedNeutral(propertyType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(
+        propertyType,
+        Neutrals.Var(freshName),
+      )
       ctx = CtxCons(freshName, propertyType, ctx)
-      const rest = deepWalkType(mod, ctx, applyClosure(value.restClosure, typedNeutral))
+      const rest = deepWalkType(
+        mod,
+        ctx,
+        applyClosure(value.restClosure, typedNeutral),
+      )
       const restCore = readbackType(mod, ctx, rest)
       const env = mod.ctxToEnv(ctx)
       return Values.ClazzCons(
@@ -218,7 +228,9 @@ function assertNoExtraProperties(clazz: Values.Clazz, value: Value): void {
     const valueNames = Object.keys(value.properties)
     const extraNames = _.difference(valueNames, clazzNames)
     if (extraNames.length > 0) {
-      throw new Errors.UnificationError(`expect no extra common names: ${extraNames}`)
+      throw new Errors.UnificationError(
+        `expect no extra common names: ${extraNames}`,
+      )
     }
   }
 }

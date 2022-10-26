@@ -26,7 +26,12 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(exp.name, propertyTypeValue, propertyValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
-      return Cores.ClazzFulfilled(exp.name, propertyTypeCore, propertyCore, restCore)
+      return Cores.ClazzFulfilled(
+        exp.name,
+        propertyTypeCore,
+        propertyCore,
+        restCore,
+      )
     }
   }
 }

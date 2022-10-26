@@ -11,7 +11,9 @@ solve (ab: Pair(String, String), a: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ ab: cons(\\"a\\", \\"b\\"), a: \\"a\\" }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ ab: cons(\\"a\\", \\"b\\"), a: \\"a\\" }"',
+  )
 })
 
 test("solve Car -- nested", async () => {

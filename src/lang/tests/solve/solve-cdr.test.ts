@@ -11,5 +11,7 @@ solve (ab: Pair(String, String), b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ ab: cons(\\"a\\", \\"b\\"), b: \\"b\\" }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ ab: cons(\\"a\\", \\"b\\"), b: \\"b\\" }"',
+  )
 })

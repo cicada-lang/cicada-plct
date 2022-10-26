@@ -80,7 +80,10 @@ export type PiImplicit = {
   retTypeClosure: Closure
 }
 
-export function PiImplicit(argType: Value, retTypeClosure: Closure): PiImplicit {
+export function PiImplicit(
+  argType: Value,
+  retTypeClosure: Closure,
+): PiImplicit {
   return {
     family: "Value",
     kind: "PiImplicit",

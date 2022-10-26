@@ -40,7 +40,9 @@ export function useGlobals(): GlobalStore {
       ClosureNative("A", (A) =>
         Values.FnImplicit(
           ClosureNative("B", (B) =>
-            Values.Fn(ClosureNative("target", (target) => Actions.doCar(target))),
+            Values.Fn(
+              ClosureNative("target", (target) => Actions.doCar(target)),
+            ),
           ),
         ),
       ),
@@ -62,7 +64,9 @@ export function useGlobals(): GlobalStore {
       ClosureNative("A", (A) =>
         Values.FnImplicit(
           ClosureNative("B", (B) =>
-            Values.Fn(ClosureNative("target", (target) => Actions.doCdr(target))),
+            Values.Fn(
+              ClosureNative("target", (target) => Actions.doCdr(target)),
+            ),
           ),
         ),
       ),
@@ -91,7 +95,9 @@ export function useGlobals(): GlobalStore {
     "refl",
     Values.FnImplicit(
       ClosureNative("T", (T) =>
-        Values.FnImplicit(ClosureNative("value", (value) => Values.Refl(T, value))),
+        Values.FnImplicit(
+          ClosureNative("value", (value) => Values.Refl(T, value)),
+        ),
       ),
     ),
   )

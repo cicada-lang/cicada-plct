@@ -11,7 +11,10 @@ export class Runner {
     )
   }
 
-  async run(url: URL, opts?: { silent?: boolean }): Promise<{ error?: unknown }> {
+  async run(
+    url: URL,
+    opts?: { silent?: boolean },
+  ): Promise<{ error?: unknown }> {
     try {
       const mod = await this.loader.load(url)
       const outputs = Array.from(mod.outputs.values())

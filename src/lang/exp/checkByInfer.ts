@@ -20,7 +20,12 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   return inferred.core
 }
 
-export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
+export function checkInferred(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  type: Value,
+): Core {
   let inferredType = inferred.type
   let givenType = type
 

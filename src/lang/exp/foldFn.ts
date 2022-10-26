@@ -12,7 +12,11 @@ export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
     }
 
     case "FnBindingAnnotated": {
-      return Exps.FnAnnotated(binding.name, binding.type, foldFn(restBindings, ret))
+      return Exps.FnAnnotated(
+        binding.name,
+        binding.type,
+        foldFn(restBindings, ret),
+      )
     }
 
     case "FnBindingImplicit": {

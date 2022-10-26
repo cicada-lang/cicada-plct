@@ -21,7 +21,10 @@ export function insertApImplicit(
   const boundNames = new Set(ctxNames(ctx))
   const usedNames = [...boundNames, ...mod.solution.names]
   const freshName = freshen(usedNames, name)
-  const patternVar = mod.solution.createPatternVar(freshName, inferred.type.argType)
+  const patternVar = mod.solution.createPatternVar(
+    freshName,
+    inferred.type.argType,
+  )
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
 

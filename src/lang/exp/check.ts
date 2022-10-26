@@ -146,9 +146,12 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     default: {
-      throw new Errors.ElaborationError(`check is not implemented for exp: ${exp.kind}`, {
-        span: exp.span,
-      })
+      throw new Errors.ElaborationError(
+        `check is not implemented for exp: ${exp.kind}`,
+        {
+          span: exp.span,
+        },
+      )
     }
   }
 }

@@ -7,7 +7,11 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazzInCtx, readback, readbackType } from "../value"
 
-export function readbackClazz(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
+export function readbackClazz(
+  mod: Mod,
+  ctx: Ctx,
+  clazz: Values.Clazz,
+): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       return Cores.ClazzNull()

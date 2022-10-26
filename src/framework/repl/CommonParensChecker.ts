@@ -40,7 +40,11 @@ class CommonParensCheckError extends Error {
   token: pt.Token
   text: string
 
-  constructor(opts: { kind: "excess" | "mismatch"; token: pt.Token; text: string }) {
+  constructor(opts: {
+    kind: "excess" | "mismatch"
+    token: pt.Token
+    text: string
+  }) {
     super()
     this.kind = opts.kind
     this.token = opts.token

@@ -1,5 +1,10 @@
 import { Ctx } from "../ctx"
-import { Solution, unifyByType, unifyByValue, unifyPatternVar } from "../solution"
+import {
+  Solution,
+  unifyByType,
+  unifyByValue,
+  unifyPatternVar,
+} from "../solution"
 import { Value } from "../value"
 
 /**

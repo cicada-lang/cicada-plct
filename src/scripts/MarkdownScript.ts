@@ -20,7 +20,10 @@ export class MarkdownScript extends Script {
       return block.code
     }
 
-    if (block.info.startsWith("cicada") && (block.info + " ").includes(" compute ")) {
+    if (
+      block.info.startsWith("cicada") &&
+      (block.info + " ").includes(" compute ")
+    ) {
       return "compute " + block.code
     }
   }

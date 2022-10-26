@@ -14,7 +14,11 @@ export function alphaEquivalentClazz(
   left: Cores.Clazz,
   right: Cores.Clazz,
 ): void {
-  alphaEquivalentClazzAfterReorder(ctx, left, reorderTheRightByTheLeft(left, right))
+  alphaEquivalentClazzAfterReorder(
+    ctx,
+    left,
+    reorderTheRightByTheLeft(left, right),
+  )
 }
 
 function alphaEquivalentClazzAfterReorder(
@@ -114,7 +118,10 @@ function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
   }
 }
 
-function findPropertyAndCreateClazz(name: string, clazz: Cores.Clazz): Cores.Clazz {
+function findPropertyAndCreateClazz(
+  name: string,
+  clazz: Cores.Clazz,
+): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new Errors.ConversionError(`expect to find ${name} in clazz`)

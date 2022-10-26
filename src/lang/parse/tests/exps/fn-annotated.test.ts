@@ -19,7 +19,10 @@ test("parse Fn -- annotated", () => {
   expect(parseExp("(x: Type, y) => x")).toMatchObject(
     deleteUndefined(
       Exps.FnUnfolded(
-        [Exps.FnBindingAnnotated("x", Exps.Var("Type")), Exps.FnBindingName("y")],
+        [
+          Exps.FnBindingAnnotated("x", Exps.Var("Type")),
+          Exps.FnBindingName("y"),
+        ],
         Exps.Var("x"),
       ),
     ),

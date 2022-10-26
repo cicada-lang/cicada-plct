@@ -18,7 +18,10 @@ export function foldFnWithRetType(
 
   switch (binding.kind) {
     case "FnBindingName": {
-      return Exps.Fn(binding.name, foldFnWithRetType(restBindings, retType, ret))
+      return Exps.Fn(
+        binding.name,
+        foldFnWithRetType(restBindings, retType, ret),
+      )
     }
 
     case "FnBindingAnnotated": {
@@ -30,7 +33,10 @@ export function foldFnWithRetType(
     }
 
     case "FnBindingImplicit": {
-      return Exps.FnImplicit(binding.name, foldFnWithRetType(restBindings, retType, ret))
+      return Exps.FnImplicit(
+        binding.name,
+        foldFnWithRetType(restBindings, retType, ret),
+      )
     }
 
     case "FnBindingAnnotatedImplicit": {

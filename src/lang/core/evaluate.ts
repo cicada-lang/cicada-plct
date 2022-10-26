@@ -44,7 +44,10 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ApImplicit": {
-      return Actions.doApImplicit(evaluate(env, core.target), evaluate(env, core.arg))
+      return Actions.doApImplicit(
+        evaluate(env, core.target),
+        evaluate(env, core.arg),
+      )
     }
 
     case "Sigma": {

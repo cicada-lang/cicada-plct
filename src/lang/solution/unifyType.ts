@@ -2,12 +2,23 @@ import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
-import { Solution, unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../solution"
+import {
+  Solution,
+  unify,
+  unifyClazz,
+  unifyNeutral,
+  unifyPatternVar,
+} from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
 
-export function unifyType(solution: Solution, ctx: Ctx, left: Value, right: Value): void {
+export function unifyType(
+  solution: Solution,
+  ctx: Ctx,
+  left: Value,
+  right: Value,
+): void {
   left = solution.walk(left)
   right = solution.walk(right)
 
@@ -151,7 +162,10 @@ function unifyClosure(
   unifyType(solution, ctx, leftRet, rightRet)
 }
 
-function extractApTarget(value: Value, name: string): Values.TypedNeutral | undefined {
+function extractApTarget(
+  value: Value,
+  name: string,
+): Values.TypedNeutral | undefined {
   if (
     Values.isValue(value, "TypedNeutral") &&
     value.neutral.kind === "Ap" &&

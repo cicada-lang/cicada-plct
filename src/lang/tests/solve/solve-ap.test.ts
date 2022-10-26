@@ -24,7 +24,9 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ f: TODO((String) -> String), x: \\"abc\\" }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ f: TODO((String) -> String), x: \\"abc\\" }"',
+  )
 })
 
 test("solve Ap -- deepWalk", async () => {

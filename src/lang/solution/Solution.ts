@@ -60,7 +60,8 @@ export class Solution {
   private lookupValue(name: string): Value | undefined {
     const value = this.bindings.get(name)
     if (value === undefined) return undefined
-    if (this.isPatternVar(value) && value.neutral.name === name) return undefined
+    if (this.isPatternVar(value) && value.neutral.name === name)
+      return undefined
     return value
   }
 

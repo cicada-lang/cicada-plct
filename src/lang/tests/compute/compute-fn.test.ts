@@ -34,7 +34,9 @@ compute f
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(x, _) => x(_): ((Type) -> Type, Type) -> Type"')
+  expect(output).toMatchInlineSnapshot(
+    '"(x, _) => x(_): ((Type) -> Type, Type) -> Type"',
+  )
 })
 
 test("compute Fn -- partial evaluation", async () => {

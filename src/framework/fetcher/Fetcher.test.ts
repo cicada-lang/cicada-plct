@@ -11,7 +11,9 @@ test("A fetcher can handle http and https by default.", async () => {
 test("A fetcher can not handler other protocols by default.", async () => {
   const fetcher = new Fetcher()
 
-  await expect(fetcher.fetch(new URL("file-store:example-file.txt"))).rejects.toThrow()
+  await expect(
+    fetcher.fetch(new URL("file-store:example-file.txt")),
+  ).rejects.toThrow()
 })
 
 test("We can extend a fetcher by registering new handler to protocol.", async () => {

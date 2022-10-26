@@ -93,7 +93,14 @@ export const operand = {
       '")"',
       { cdr_t: "exp" },
     ],
-    "operand:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
+    "operand:cons": [
+      '"cons"',
+      '"("',
+      { car: "exp" },
+      '","',
+      { cdr: "exp" },
+      '")"',
+    ],
     "operand:quote": [{ data: { $pattern: ["string"] } }],
     "operand:clazz": [
       '"class"',
@@ -117,6 +124,12 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:new_ap": ['"new"', { name: "name" }, '"("', { args: "args" }, '")"'],
+    "operand:new_ap": [
+      '"new"',
+      { name: "name" },
+      '"("',
+      { args: "args" },
+      '")"',
+    ],
   },
 }

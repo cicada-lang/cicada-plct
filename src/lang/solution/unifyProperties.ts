@@ -20,7 +20,13 @@ export function unifyProperties(
     case "ClazzCons": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      unify(solution, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
+      unify(
+        solution,
+        ctx,
+        clazz.propertyType,
+        leftPropertyValue,
+        rightPropertyValue,
+      )
       const rest = applyClosure(clazz.restClosure, leftPropertyValue)
       assertClazzInCtx(ctx, rest)
       return unifyProperties(solution, ctx, rest, left, right)
@@ -29,7 +35,13 @@ export function unifyProperties(
     case "ClazzFulfilled": {
       const leftPropertyValue = Actions.doDot(left, clazz.name)
       const rightPropertyValue = Actions.doDot(right, clazz.name)
-      unify(solution, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
+      unify(
+        solution,
+        ctx,
+        clazz.propertyType,
+        leftPropertyValue,
+        rightPropertyValue,
+      )
       return unifyProperties(solution, ctx, clazz.rest, left, right)
     }
   }

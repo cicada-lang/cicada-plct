@@ -5,13 +5,18 @@ import { deleteUndefined } from "../utils"
 
 test("parse Fn -- implicit", () => {
   expect(parseExp("(implicit x) => x")).toMatchObject(
-    deleteUndefined(Exps.FnUnfolded([Exps.FnBindingImplicit("x")], Exps.Var("x"))),
+    deleteUndefined(
+      Exps.FnUnfolded([Exps.FnBindingImplicit("x")], Exps.Var("x")),
+    ),
   )
 
   expect(parseExp("function (implicit T, y: T) { return T }")).toMatchObject(
     deleteUndefined(
       Exps.FnUnfolded(
-        [Exps.FnBindingImplicit("T"), Exps.FnBindingAnnotated("y", Exps.Var("T"))],
+        [
+          Exps.FnBindingImplicit("T"),
+          Exps.FnBindingAnnotated("y", Exps.Var("T")),
+        ],
         Exps.SequenceUnfolded([], Exps.Var("T")),
       ),
     ),

@@ -15,11 +15,15 @@ export function occur(name: string, value: Value): boolean {
     }
 
     case "Pi": {
-      return occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
+      return (
+        occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
+      )
     }
 
     case "PiImplicit": {
-      return occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
+      return (
+        occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
+      )
     }
 
     case "Fn": {
@@ -31,7 +35,9 @@ export function occur(name: string, value: Value): boolean {
     }
 
     case "Sigma": {
-      return occur(name, value.carType) || occurClosure(name, value.cdrTypeClosure)
+      return (
+        occur(name, value.carType) || occurClosure(name, value.cdrTypeClosure)
+      )
     }
 
     case "Cons": {
@@ -80,7 +86,11 @@ export function occur(name: string, value: Value): boolean {
     }
 
     case "Equal": {
-      return occur(name, value.type) || occur(name, value.from) || occur(name, value.to)
+      return (
+        occur(name, value.type) ||
+        occur(name, value.from) ||
+        occur(name, value.to)
+      )
     }
 
     case "Refl": {
@@ -121,11 +131,15 @@ function occurNeutral(name: string, neutral: Neutral): boolean {
     }
 
     case "Ap": {
-      return occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+      return (
+        occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+      )
     }
 
     case "ApImplicit": {
-      return occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+      return (
+        occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+      )
     }
 
     case "Car":

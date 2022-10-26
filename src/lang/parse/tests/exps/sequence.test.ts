@@ -22,7 +22,11 @@ test("parse Sequence", () => {
     deleteUndefined(
       Exps.SequenceUnfolded(
         [
-          Exps.SequenceBindingLetThe("x", Exps.Var("Trivial"), Exps.Var("sole")),
+          Exps.SequenceBindingLetThe(
+            "x",
+            Exps.Var("Trivial"),
+            Exps.Var("sole"),
+          ),
           Exps.SequenceBindingCheck(Exps.Var("sole"), Exps.Var("Trivial")),
           Exps.SequenceBindingLet("y", Exps.Var("sole")),
           Exps.SequenceBindingLet("z", Exps.Var("sole")),

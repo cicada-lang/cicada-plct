@@ -11,7 +11,9 @@ export function prependFulfilledClazz(
     }
 
     case "ClazzCons": {
-      throw new Errors.InternalError(`prependFulfilledClazz can not append ClazzCons.`)
+      throw new Errors.InternalError(
+        `prependFulfilledClazz can not append ClazzCons.`,
+      )
     }
 
     case "ClazzFulfilled": {
