@@ -42,11 +42,15 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     const url = createURL(argv["file"])
-    const { error } = await this.runner.run(url)
-    if (error) process.exit(1)
 
     if (argv["watch"]) {
+      await this.runner.run(url)
       await this.runner.watch(url)
+    } else {
+      const { error } = await this.runner.run(url)
+      if (error) {
+        process.exit(1)
+      }
     }
   }
 }
