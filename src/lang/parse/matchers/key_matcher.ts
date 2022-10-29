@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 
 export function key_matcher(tree: pt.Tree): string {
   return pt.matcher({

@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import { Span } from "../span"
 import { LangError } from "./LangError"
 

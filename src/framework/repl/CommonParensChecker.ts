@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import { ParensChecker } from "./ParensChecker"
 
 export class CommonParensChecker extends ParensChecker {

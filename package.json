@@ -23,7 +23,7 @@
     "format": "prettier src --write"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.22",
+    "@cicada-lang/partech": "^0.1.23",
     "@xieyuheng/command-line": "^0.0.7",
     "@xieyuheng/ty": "^0.1.17",
     "commonmark": "^0.30.0",
