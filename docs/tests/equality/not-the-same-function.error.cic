@@ -1,0 +1,6 @@
+compute the(
+  Equal(
+    (String) -> (String) -> Pair(String, String),
+    (x, y) => cons(x, y),
+    (y, x) => cons(x, y)),
+  refl)

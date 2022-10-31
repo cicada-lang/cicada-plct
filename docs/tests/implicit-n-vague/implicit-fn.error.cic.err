@@ -1,0 +1,8 @@
+I meet undefined variable name: C
+
+  3 |  implicit A,
+  4 |  implicit B,
+  5 |  triple,
+  6 |) => C : (
+  7 |  implicit A: Type,
+  8 |  implicit B: Type,

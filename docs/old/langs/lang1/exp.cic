@@ -1,0 +1,13 @@
+@module lang1
+
+@datatype Exp {
+  v(name: String): Exp
+  fn(name: String, ret: Exp): Exp
+  ap(target: Exp, arg: Exp): Exp
+  zero: Exp
+  add1(prev: Exp): Exp
+  rec(t: Ty, target: Exp, base: Exp, step: Exp): Exp
+  let(name: String, exp: Exp, ret: Exp): Exp
+  begin(defs: List({ name: String, exp: Exp }), ret: Exp): Exp
+  the(t: Ty, exp: Exp): Exp
+}

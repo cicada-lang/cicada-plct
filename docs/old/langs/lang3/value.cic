@@ -1,0 +1,13 @@
+@module lang3
+
+@datatype Value {
+  pi(arg_t: Value, ret_t_cl: Closure): Value
+  fn(ret_cl: Closure): Value
+
+  cls(sat: Array({ name: String, t: Value, value: Value }), tel: Telescope): Value
+  obj(properties: Map(String, Value)): Value
+
+  type: Value
+
+  not_yet(t: Value, neutral: Neutral): Value
+}

@@ -1,0 +1,9 @@
+@module lang3
+
+Telescope.fill(Telescope, Value): Telescope
+Telescope.fill(Telescope.tel(env, next, scope), value) = {
+  env = Env.extend(env, next.name, value)
+  [entry, ...rest] = scope
+  t = Exp.evaluate(env, entry.t)
+  Telescope.tel(env, { name: entry.name, t }, rest)
+}

@@ -1,0 +1,20 @@
+datatype Either(L: Type, R: Type) {
+  inl(left: L): Either(L, R)
+  inr(right: R): Either(L, R)
+}
+
+let a: String = TODO_NOTE("A trivial String")
+let b: Trivial = TODO_NOTE("It's not Trivial")
+let c: Absurd = TODO_NOTE("Absurd!")
+let d: Absurd = TODO // NOTE Even without a note?
+
+compute a
+compute b
+compute c
+compute d
+
+function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
+  return TODO_NOTE("tertium non datur")
+}
+
+compute law_of_excluded_middle

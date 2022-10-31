@@ -1,0 +1,53 @@
+@module lang1
+
+{
+  ctx = Map.empty
+  x = Exp.v("x")
+  A = Ty.nat
+
+  { Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
+    ------------------------------------------- Check.fn
+    Check(Map.extend(ctx, "x", A), x, A)
+    ------------------------------------------- Check.v
+    Map.Find(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Find.here }
+}
+
+{
+  ctx = Map.empty
+  x = Exp.v("x")
+  A = Ty.nat
+  B = Ty.arrow(Ty.nat, Ty.nat)
+
+  { Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
+    --------------------------------------------------------------------- Check.fn
+    Check(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
+    ------------------------------------------------------------------ Check.fn
+    Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
+    ---------------------------------------------------------------- Check.v
+    Map.Find(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
+    ----------------------------------------------------------------- Map.Find.there
+    Map.Find(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Find.here }
+}
+
+{
+  ctx = Map.extend(Map.empty, "y", Ty.nat)
+  x = Exp.v("x")
+  y = Exp.v("y")
+  id = Exp.fn("x", x)
+  A = Ty.nat
+
+  { Check(ctx, Exp.ap(id, y), A)
+    ---------------------------------------- Check.ap
+    { Check(ctx, id, Ty.arrow(A, A))
+      ---------------------------------------- Check.fn
+      Check(Map.extend(ctx, "x", A), x, A)
+      ----------------------------------------------- Check.v
+      Map.Find(Map.extend(ctx, "x", A), "x", A)
+      ---------------------------------------------- Map.Find.here }
+    { Check(ctx, y, A)
+      ---------------------------------------- Check.v
+      Map.Find(ctx, "y", A)
+      ---------------------------------------- Map.Find.here } }
+}

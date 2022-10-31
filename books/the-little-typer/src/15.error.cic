@@ -1,0 +1,45 @@
+// NOTE There was a scope BUG revealed by this example.
+//   Thus we keep this as a regression test.
+
+import { Nat, zero } from "./02.md"
+import { zero_add1_equal_absurd, sub1_equal } from "./15.md"
+import { Vector } from "./06.md"
+
+function rest_bug(E: Type, n: Nat, vector: Vector(E, Nat.add1(n))): Vector(E, n) {
+  function motive(length: Nat, target: Vector(E, length)): Type {
+    return (j: Nat, equal: Equal(Nat, length, Nat.add1(j))) -> Vector(E, j)
+  }
+
+  let aux: motive(Nat.add1(n), vector) = {
+    let base: motive(zero, Vector.null) =
+      (j, equal) => from_falsehood_anything(zero_add1_equal_absurd(j, equal), Vector(E, j))
+
+    function step(
+      prev: Nat,
+      head: E,
+      tail: Vector(E, prev),
+      almost: (j: Nat, equal: Equal(Nat, prev, Nat.add1(j))) -> Vector(E, j)
+    ): (j: Nat, equal: Equal(Nat, Nat.add1(prev), Nat.add1(j))) -> Vector(E, j) {
+      return (j, equal) => replace(sub1_equal(prev, j, equal), (x) => Vector(E, x) , tail)
+    }
+
+    return induction (vector) {
+      motive motive
+      case null => base
+      case cons(vague prev, head, tail, almost) =>
+        // NOTE The following will not pass type checker.
+        //   (j, equal) => tail
+        // NOTE The right argument is:
+        //   step(prev, head, tail, almost.tail)
+        // NOTE The following should also not pass type checker.
+        //   but it does pass type checker, if we do not ensure names in `ctx` are unique.
+        //   - Pie ensures this by adding a `renaming` argument
+        //     to all type checking functions,
+        //     and use `reanming` during `readback`.
+        //   - I handle this by using `subst` to rename bound variables.
+        (prev, equal) => tail
+    }
+  }
+
+  return aux(n, refl)
+}

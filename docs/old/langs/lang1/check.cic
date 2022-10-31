@@ -1,0 +1,57 @@
+@module lang1
+
+@judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
+  Check(ctx, Exp.v(name), t)
+  -------------------------- v
+  Map.Find(ctx, name, t)
+
+  Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+  ----------------------------------------------------- fn
+  Check(Map.extend(ctx, name, arg_t), ret, ret_t)
+
+  Check(ctx, Exp.ap(target, arg), ret_t)
+  -------------------------------------- ap
+  Check(ctx, target, Ty.arrow(arg_t, ret_t))
+  Check(ctx, arg, arg_t)
+
+  // We can use Exp.let instead of Exp.begin,
+  // compile Exp.begin to Exp.let before check.
+
+  // Note that the exp_t in the first argument type,
+  // is not given by the return type.
+
+  Check(ctx, Exp.let(name, exp, ret), t)
+  ------------------------------------------- let
+  Check(Map.extend(ctx, name, exp_t), ret, t)
+  Check(ctx, exp, exp_t)
+
+  // We can also handle Exp.begin directly,
+  // where the branching of List will be distributed out here,
+  // to form two cases of judgments.
+
+  Check(ctx, Exp.begin(List.null, ret), t)
+  --------------------------------------- begin_null
+  Check(ctx, ret, t)
+
+  Check(ctx, Exp.begin(List.cons({ name, exp }, defs), ret), t)
+  -------------------------------------------------- begin_cons
+  Check(ctx, exp, exp_t)
+  Check(Map.extend(ctx, name, exp_t), Exp.begin(defs, ret), t)
+
+  Check(ctx, Exp.zero, Ty.nat)
+  ---------------------------- zero
+
+  Check(ctx, Exp.add1(prev), Ty.nat)
+  ---------------------------------- add1
+  Check(ctx, prev, Ty.nat)
+
+  Check(ctx, Exp.rec(t, target, base, step), t)
+  --------------------------------------------- rec
+  Check(ctx, target, Ty.nat)
+  Check(ctx, base, t)
+  Check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
+
+  Check(ctx, Exp.the(t, exp), t)
+  ------------------------------ the
+  Check(ctx, exp, t)
+}

@@ -1,0 +1,17 @@
+I found duplicated field name in object
+field name:
+  b
+field name list:
+  a, b, b, c
+
+  4 |  b: String
+  5 |}
+  6 |
+  7 |compute the(Test, {
+  8 |  a: "1",
+  9 |  b: "2",
+ 10 |  b: "6",
+ 11 |  c: "3",
+ 12 |})
+ 13 |
+
