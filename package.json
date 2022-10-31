@@ -23,7 +23,7 @@
     "format": "prettier src --write"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.23",
+    "@cicada-lang/partech": "^0.2.2",
     "@xieyuheng/command-line": "^0.0.7",
     "@xieyuheng/ty": "^0.1.17",
     "commonmark": "^0.30.0",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
     "@types/lodash": "^4.14.186",
-    "@types/node": "^18.11.7",
+    "@types/node": "^18.11.8",
     "@vitest/coverage-c8": "^0.24.3",
     "@vitest/coverage-istanbul": "^0.24.3",
     "@vitest/ui": "^0.24.3",
