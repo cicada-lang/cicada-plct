@@ -1,4 +1,4 @@
-<theme color="orange" />
+<theme color="red" />
 
 <question>
   What is a judgment?
@@ -159,7 +159,7 @@
     Part of explaining a new type is to say what its constructors are.
 
     The constructor expressions are the direct ways
-    of building expressions of the new type.
+    of building expressions with the new type.
 
     Constructors build values, type constructors build types.
   </answer>
@@ -343,5 +343,147 @@
 
     Understanding the answer is at least
     as important as having the correct answer.
+  </answer>
+</question>
+
+
+<question>
+  What is the relation between sameness the judgment and Equal the type constructor?
+
+  <answer>
+    Sameness is indeed a judgment.
+
+    With the type constructor Equal,
+    types can express the idea of equality.
+
+    We can express two functions always find the same result.
+  </answer>
+</question>
+
+<question>
+  Why type constructed by Equal can be read as statement?
+
+  <answer>
+    Because all types can be read as statements (propositions).
+
+    This is a new perspective on types.
+  </answer>
+</question>
+
+<question>
+  What recursive about the relation between judgment and type?
+
+  <answer>
+    A judgment is an attitude that a person takes towards expressions.
+
+    Type expressions can express the idea of judgment.
+
+    This is a recursion.
+  </answer>
+</question>
+
+<question>
+  What is the difference between judgment and type?
+
+  <answer>
+    A type is a judgment expressed formally.
+
+    We should not mix the two terms "judgment" and "type",
+    because in some moment, maybe we do not know
+    how to express a form of judgment as type.
+  </answer>
+</question>
+
+<question>
+  What is internalizing the form of judgment?
+
+  <answer>
+    Creating expressions that capture the ideas behind a form of judgment
+    is sometimes called internalizing the form of judgment.
+
+    For example Equal internalize the sameness judgment.
+
+    Beside Equal, we can also use Check to internalize the type checking judgment.
+  </answer>
+</question>
+
+<question>
+  In type theory, what do we mean
+  when we judge a statement to be true?
+
+  <answer>
+    If a type can be read as a statement,
+    then judging the statement to be true means that
+    there is an expression with that type.
+
+    Thus in this view,
+    truth means that we have evidenced,
+    and this evidence is called a proof.
+  </answer>
+</question>
+
+<question>
+  Define neutral expressions in a more precise way.
+
+  <answer>
+    A more precise way to define neutral
+    expressions is to start with the simplest
+    neutral expressions and build from there.
+
+    Variables are neutral, unless they refer to definitions,
+    because a defined name is the same as its definition.
+
+    Also, if the target of an eliminator expression is neutral,
+    then the entire expression is neutral.
+  </answer>
+</question>
+
+<question>
+  Why judgments are a suitable basis for knowledge?
+
+  <answer>
+    Judgments often can be mechanically checked using relatively simple rules.
+
+    This is why judgments are a suitable basis for knowledge.
+  </answer>
+</question>
+
+<question>
+  What is a proof?
+
+  <answer>
+    A proof is any completely convincing argument.
+
+    -- Errett Bishop
+  </answer>
+</question>
+
+<question>
+  What is a formal proof?
+
+  <answer>
+    A formal proof is a recording of steps of deduction.
+  </answer>
+</question>
+
+<question>
+  What is the relation between expression and proof?
+
+  <answer>
+    Expressions can encode interesting patterns of reasoning,
+    such as using induction to try each possibility
+    for the variable in a neutral expression.
+
+    Expressions the syntax we designed to record the steps of deduction.
+
+    Expressions are proofs.
+  </answer>
+</question>
+
+<question>
+  Why it is important that all functions should be total?
+
+  <answer>
+    Because only total functions can be viewed as proof.
   </answer>
 </question>

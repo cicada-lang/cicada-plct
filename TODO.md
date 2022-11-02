@@ -1,4 +1,3 @@
-[mimor] the-little-typer/08.md
 [mimor] the-little-typer/09.md
 [mimor] the-little-typer/10.md
 [mimor] the-little-typer/11.md
