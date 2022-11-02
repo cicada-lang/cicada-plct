@@ -487,3 +487,12 @@
     Because only total functions can be viewed as proof.
   </answer>
 </question>
+
+<question>
+  When in doubt, evaluate!
+
+  <answer>
+    Gain insight by finding the values of expressions in types
+    and working out examples in "same-as" charts.
+  </answer>
+</question>
