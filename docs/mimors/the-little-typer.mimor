@@ -1,7 +1,5 @@
 <theme color="green" />
 
-<!-- chapter 1 -->
-
 <question>
   What is a judgment?
 
@@ -121,5 +119,196 @@
     and thus the syntax of its normal forms.
 
     -- "NbE Tutorial", David.
+  </answer>
+</question>
+
+<question>
+  What is a value?
+
+  <answer>
+    An expression with a constructor at the top is called a value.
+  </answer>
+</question>
+
+<question>
+  What is evaluation?
+
+  <answer>
+    Finding a value that is the same as
+    some starting expression is called evaluation.
+  </answer>
+</question>
+
+<question>
+  What is a neutral expression?
+
+  <answer>
+    Expressions that are not values
+    and cannot yet be evaluated due to a variable
+    are called neutral.
+  </answer>
+</question>
+
+<question>
+  What is a constructor?
+
+  <answer>
+    Some expressions, such as Nat or (Pair Nat Atom), are types.
+
+    Part of explaining a new type is to say what its constructors are.
+
+    The constructor expressions are the direct ways
+    of building expressions of the new type.
+
+    Constructors build values, type constructors build types.
+  </answer>
+</question>
+
+<question>
+  What is the difference between value and normal form?
+
+  <answer>
+    Not every value is in normal form.
+
+    This is because the arguments to a constructor need not be normal.
+
+    Each expression has only one normal form,
+    but it is sometimes possible to write it as a value in more than one way.
+
+    A normal expression has no remaining opportunities for evaluation.
+    Usually, expressions that are normal are easier to understand.
+
+    Finding a value is often enough, however,
+    because the top constructor can be used to determine what must happen next.
+  </answer>
+</question>
+
+<question>
+  Doesn't evaluation refer to
+  finding the meaning of an expression,
+  not just some simpler expression?
+
+  <answer>
+    Not here. Expressions do not refer to some external notion of meaning
+    -- in Pie, there is nothing but expressions and what we judge about them.
+  </answer>
+</question>
+
+<question>
+  What is the idea of "everything is an expression"?
+
+  <answer>
+    In Pie, values are also expressions.
+    Evaluation in Pie finds an expression,
+    not some other kind of thing.
+  </answer>
+</question>
+
+<question>
+  How should we implement "everything is an expression"
+  in a language with static type checking?
+
+  <answer>
+    We should NOT implement value and neutral as predicate functions over expression.
+
+    We should make use of the type system by defining Exp as a recursive datatype,
+    and also defining Value and Neutral as recursive datatypes.
+  </answer>
+</question>
+
+<question>
+  What is an eliminator?
+
+  <answer>
+    Constructors build values,
+    and eliminators take apart values built by constructors.
+
+    Another way to see the difference is that
+    values contain information, and eliminators
+    allow that information to be used.
+
+    All neutral expressions (if we do not include variables)
+    are eliminator expressions.
+  </answer>
+</question>
+
+<question>
+  What are the constructors and eliminators of Sigma type?
+
+  <answer>
+    One constructor: cons.
+
+    Two eliminators: car, cdr.
+  </answer>
+</question>
+
+<question>
+  What are the constructors and eliminators of Pi type?
+
+  <answer>
+    One constructor: function abstraction -- lambda.
+
+    One eliminator: function application.
+  </answer>
+</question>
+
+<question>
+  What is substitution?
+
+  <answer>
+    Consistently replacing a variable with an expression
+    is sometimes called substitution.
+  </answer>
+</question>
+
+<question>
+  What is a "same as" chart?
+
+  <answer>
+    When expressions are listed, assume that "is the same as" follows all but the last one.
+
+    This kind of chart is called a "same as" chart.
+
+    If a "same as" chart could show that two expressions are the same,
+    then this fact can be used anywhere without further justification.
+
+    "Same As" charts are only to help build understanding.
+  </answer>
+</question>
+
+<question>
+  What is a total function?
+
+  <answer>
+    A function that always assigns a value to every
+    possible argument is called a total function.
+  </answer>
+</question>
+
+<question>
+  How to design total functions?
+
+  <answer>
+    We can make a function total
+    by using a more specific type
+    to rule out unwanted arguments.
+  </answer>
+</question>
+
+<question>
+  What is the eliminator of an inductive type?
+
+  <answer>
+    Remember that, eliminators expose the information in values.
+
+    We can define an inductive type's eliminator as a recursive combinator
+    (we only need one eliminator for the inductive type).
+
+    The recursive combinator takes the target as the first argument,
+    and one handler function argument for each constructor.
+
+    Beside taking the destructured arguments,
+    a handler function also takes the recursive elimination
+    of the smaller values as the "almost" arguments.
   </answer>
 </question>

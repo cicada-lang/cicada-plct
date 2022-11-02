@@ -35,19 +35,19 @@
   },
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
-    "@types/lodash": "^4.14.186",
-    "@types/node": "^18.11.8",
-    "@vitest/coverage-c8": "^0.24.3",
-    "@vitest/coverage-istanbul": "^0.24.3",
-    "@vitest/ui": "^0.24.3",
+    "@types/lodash": "^4.14.187",
+    "@types/node": "^18.11.9",
+    "@vitest/coverage-c8": "^0.24.5",
+    "@vitest/coverage-istanbul": "^0.24.5",
+    "@vitest/ui": "^0.24.5",
     "@xieyuheng/test-runner": "^0.2.7",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.1",
     "pretty-quick": "^3.1.3",
     "typescript": "^4.8.4",
-    "vite": "^3.2.1",
-    "vitest": "^0.24.3"
+    "vite": "^3.2.2",
+    "vitest": "^0.24.5"
   },
   "license": "GPL-3.0-or-later"
 }
