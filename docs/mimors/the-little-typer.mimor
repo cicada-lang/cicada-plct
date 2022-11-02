@@ -1,4 +1,4 @@
-<theme color="green" />
+<theme color="orange" />
 
 <question>
   What is a judgment?
@@ -51,12 +51,13 @@
   <answer>
     We have four forms of judgment.
 
-    <code>
-    (1)                  ____ is a ____.
-    (2)   ____ is the same ____ as ____.
-    (3)                  ____ is a type.
+    (1) ____ is a ____.
+
+    (2) ____ is the same ____ as ____.
+
+    (3) ____ is a type.
+
     (4) ____ and ____ are the same type.
-    </code>
   </answer>
 </question>
 
