@@ -3,7 +3,7 @@
 <!-- chapter 1 -->
 
 <question>
-  What is judgment?
+  What is a judgment?
 
   <answer>
     A judgment is an attitude that a person takes towards expressions.
@@ -25,13 +25,101 @@
 </question>
 
 <question>
-  Given a judgment, what we can say about it?
+  What is a form of judgment?
 
   <answer>
-    About a judgment, we can say:
+    A form of judgment is an observation
+    with blank spaces in it, such as
 
-    - We have reason to believe ____.
+    ____ is a ____.
+  </answer>
+</question>
 
-    - We have no reason to believe ____.
+<question>
+  What are types?
+
+  <answer>
+    Expressions that describe other expressions are called types.
+
+    Is not this definition simple?
+
+    When we say "x is P", we mean "P" describe "x".
+  </answer>
+</question>
+
+<question>
+  What forms of judgment do we have in the language Pie?
+
+  <answer>
+    We have four forms of judgment.
+
+    <code>
+    (1)                  ____ is a ____.
+    (2)   ____ is the same ____ as ____.
+    (3)                  ____ is a type.
+    (4) ____ and ____ are the same type.
+    </code>
+  </answer>
+</question>
+
+<question>
+  What is the relation between judgment and knowledge?
+
+  <answer>
+    Judgments are acts of knowing, and believing is part of knowing.
+  </answer>
+</question>
+
+<question>
+  What is the relation between judgment natural language?
+
+  <answer>
+    Judgments are sentences.
+
+    Sentences get their meaning from those who understand them.
+
+    The sentences capture thoughts that we have,
+    and thoughts are more important than the words we use to express them.
+  </answer>
+</question>
+
+<question>
+  What are normal forms?
+
+  <answer>
+    Expressions that are written differently may nevertheless be the same,
+
+    One way of writing these expressions is more direct than the others.
+
+    The normal form of an expression is the most direct way of writing it.
+  </answer>
+</question>
+
+<question>
+  What is the use of the idea of normal forms?
+
+  <answer>
+    We can use the idea of normal forms to implement equivalence.
+
+    Given a type, every expression described by that type
+    has a normal form, which is the most direct way of writing it.
+
+    If two expressions are the same, then they have identical normal forms,
+    and if they have identical normal forms, then they are the same.
+  </answer>
+</question>
+
+<question>
+  Why we always need to specify the type,
+  when talking about normal form of an expression?
+
+  <answer>
+    Sameness is always according to a type,
+    so normal forms are also determined by a type.
+
+    Each type can specify its own notion of equality,
+    and thus the syntax of its normal forms.
+
+    -- "NbE Tutorial", David.
   </answer>
 </question>
