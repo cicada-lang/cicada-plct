@@ -312,3 +312,35 @@
     of the smaller values as the "almost" arguments.
   </answer>
 </question>
+
+<question>
+  What is a dependent type?
+
+  <answer>
+    A type that is determined by
+    something that is not a type
+    is called a dependent.
+  </answer>
+</question>
+
+<question>
+  What is the motive of an eliminator?
+
+  <answer>
+    The motive explains why the target is to be eliminated.
+  </answer>
+</question>
+
+<question>
+  Why readable expressions are important?
+
+  <answer>
+    Because readable expressions help us understand.
+
+    Getting the right answer is worthless
+    if we do not know that it is correct.
+
+    Understanding the answer is at least
+    as important as having the correct answer.
+  </answer>
+</question>
