@@ -1,5 +1,7 @@
 <theme color="green" />
 
+<!-- chapter 1 -->
+
 <question>
   What is judgment?
 
@@ -7,5 +9,29 @@
     A judgment is an attitude that a person takes towards expressions.
 
     When we come to know something, we are making a judgment.
+  </answer>
+</question>
+
+<question>
+  Given a judgment, what we can say about it?
+
+  <answer>
+    About a judgment, we can say:
+
+    - We have reason to believe ____.
+
+    - We have no reason to believe ____.
+  </answer>
+</question>
+
+<question>
+  Given a judgment, what we can say about it?
+
+  <answer>
+    About a judgment, we can say:
+
+    - We have reason to believe ____.
+
+    - We have no reason to believe ____.
   </answer>
 </question>
