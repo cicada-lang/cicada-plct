@@ -496,3 +496,40 @@
     and working out examples in "same-as" charts.
   </answer>
 </question>
+
+<question>
+  Why we should choose definitions carefully?
+
+  <answer>
+    Because carefully-chosen definitions can greatly simplify later proofs.
+  </answer>
+</question>
+
+<question>
+  The Commandment of Absurdities
+
+  <answer>
+    Every expression of type Absurd is neutral, and all of them are the same.
+  </answer>
+</question>
+
+<question>
+  What are decidable statements?
+
+  <answer>
+    There are some statements that are either true or false.
+
+    These statements are called decidable because there is a function
+    that decides whether they are true or false.
+  </answer>
+</question>
+
+<question>
+  What is a type system?
+
+  <answer>
+    A Type system is a system for guiding human judgment,
+    In an implementation, each form of judgment corresponds to a function that determines
+    whether a particular judgment is believable.
+  </answer>
+</question>
