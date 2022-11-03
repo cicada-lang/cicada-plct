@@ -1,4 +1,3 @@
-[optimize] use loop -- lookupTypeInCtx
 [optimize] use loop -- lookupValueInCtx
 
 # std
