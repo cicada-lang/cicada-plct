@@ -218,6 +218,17 @@
 </question>
 
 <question>
+  When defining Exp, Value and Neutral,
+  why Neutral is embedded in Value as a variant TypedNeutral?
+
+  <answer>
+    The return type of evaluate is Value.
+
+    Viewing Neutral as Value allow us to do partial evaluation under closure.
+  </answer>
+</question>
+
+<question>
   What is an eliminator?
 
   <answer>
@@ -528,8 +539,11 @@
   What is a type system?
 
   <answer>
-    A Type system is a system for guiding human judgment,
-    In an implementation, each form of judgment corresponds to a function that determines
+    A Type system is a system for guiding human judgment.
+
+    In an implementation, each form of judgment
+
+    corresponds to a function that determines
     whether a particular judgment is believable.
   </answer>
 </question>
