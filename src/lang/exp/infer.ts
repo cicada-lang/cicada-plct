@@ -35,9 +35,12 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         return Inferred(type, Cores.Var(exp.name))
       }
 
-      throw new Errors.ElaborationError(`Undefined name ${exp.name}`, {
-        span: exp.span,
-      })
+      throw new Errors.ElaborationError(
+        `Undefined name during infer: ${exp.name}`,
+        {
+          span: exp.span,
+        },
+      )
     }
 
     case "Pi": {

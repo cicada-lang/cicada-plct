@@ -66,27 +66,15 @@ class Category {
 ## A trivial category
 
 ```cicada
-let trivial_category: Category = {
+let trivial_category = new Category {
   Object: Trivial,
   Morphism: (dom, cod) => Trivial,
-
-  hom_set(x, y) {
-    return {
-      Element: Trivial,
-      Eq: (x, y) => Equal(Trivial, x, y),
-      reflexive: (x) => refl,
-      transitive: (x_eq_y, y_eq_z) => refl,
-      symmetric: (x_eq_y) => refl,
-    }
-  },
-
   id: (x) => sole,
 
-  compose: (f, g) => sole,
-  id_left: (f) => refl,
-  id_right: (f) => refl,
-
-  compose_is_associative: (f, g, h) => refl,
+  compose: (implicit x, implicit y, f, implicit z, g) => sole,
+  id_left: (implicit x, implicit y, f) => refl,
+  id_right: (implicit x, implicit y, f) => refl,
+  compose_is_associative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl,
 }
 ```
 

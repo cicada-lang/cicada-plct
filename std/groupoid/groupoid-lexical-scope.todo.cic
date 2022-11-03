@@ -1,4 +1,4 @@
-import { Category, Isomorphism } from "./category.md"
+import { Category, Isomorphism } from "../category/index.cic"
 
 class GroupoidLexicalScopeTest extends Category {
   inv(

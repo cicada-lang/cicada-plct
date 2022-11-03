@@ -3,20 +3,20 @@ too slow
 - example:
 
   ```
-  cic run docs/manual/structures/boolean-lattice.md
+  cic run std/boolean-lattice/BooleanLattice.md
   ```
 
 - profile:
 
   ```
-  0x ./bin/cic.js run docs/manual/structures/boolean-lattice.md
+  0x ./bin/cic.js run std/boolean-lattice/BooleanLattice.md
   ```
 
 # std
 
-move manual/structures/equality to std/
-
-test script with `.todo.md`
+pass std/category/initial-and-terminal-objects.md -- maybe quit using `deepWalk`
+pass std/groupoid -- need `super`
+pass std/order -- need datatype
 
 # maybe
 

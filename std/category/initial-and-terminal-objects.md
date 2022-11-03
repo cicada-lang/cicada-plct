@@ -5,7 +5,7 @@ title: Initial and Terminal Objects
 # Dependencies
 
 ```cicada
-import { Category } from "./category.md"
+import { Category } from "../category/index.cic"
 ```
 
 # Initial
@@ -46,9 +46,41 @@ If a terminal object exists, it is unique up to unique isomorphism.
 
 <https://github.com/xieyuheng/cat/blob/master/src/category.agda>
 
-```cicada
-import { Isomorphism } from "./category.md"
-import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
+```cicada todo
+import { Isomorphism } from "../category/index.cic"
+import { equal_swap, equal_compose } from "../equality/index.cic"
+
+function terminal_object_isomorphism(
+  cat: Category,
+  x: Terminal(cat),
+  y: Terminal(cat),
+): Isomorphism(cat, x.object, y.object) {
+  let f = x.morphism(y.object)
+  let g = y.morphism(x.object)
+
+  return {
+    cat,
+    dom: x.object,
+    cod: y.object,
+    morphism: y.morphism(x.object),
+    inverse: x.morphism(y.object),
+
+    inverse_left: equal_compose(
+      x.morphism_unique(cat.compose(g, f)),
+      equal_swap(x.morphism_unique(cat.id(x.object)))
+    ),
+
+    inverse_right: equal_compose(
+      y.morphism_unique(cat.compose(f, g)),
+      equal_swap(y.morphism_unique(cat.id(y.object)))
+    ),
+  }
+}
+```
+
+```cicada todo
+import { Isomorphism } from "../category/index.cic"
+import { equal_swap, equal_compose } from "../equality/index.cic"
 
 function terminal_object_isomorphism(
   cat: Category,
