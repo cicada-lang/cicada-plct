@@ -63,7 +63,7 @@ A function is a single-valued (univalent) relation,
 where an argument of the relation is viewed as output,
 and the output is uniquely determined by all other arguments (inputs).
 
-To translate relations to functions,
+To translate a relation to a function,
 we must observe which argument of the relation is its output,
 and writing them in form of `(input, ...) -> output`.
 

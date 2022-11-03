@@ -1,5 +1,3 @@
-[mimor] the-little-typer.mimor -- Translate inference rules to functions
-[mimor] the-little-typer.mimor -- Categories of inference rules
 [mimor] the-little-typer.mimor -- Note about Sameness
 
 # std
