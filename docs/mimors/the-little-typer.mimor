@@ -113,7 +113,7 @@
   when talking about normal form of an expression?
 
   <answer>
-    Sameness is always according to a type,
+    Because sameness is always according to a type,
     so normal forms are also determined by a type.
 
     Each type can specify its own notion of equality,
@@ -453,9 +453,9 @@
   Why judgments are a suitable basis for knowledge?
 
   <answer>
-    Judgments often can be mechanically checked using relatively simple rules.
+    Because judgments often can be mechanically checked using relatively simple rules.
 
-    This is why judgments are a suitable basis for knowledge.
+    Judgments are formal knowledge.
   </answer>
 </question>
 
@@ -544,6 +544,15 @@
 </question>
 
 <question>
+  How to implement form of judgment in a functional language?
+
+  <answer>
+    Each form of judgment corresponds to a function
+    that determines whether a particular judgment is believable.
+  </answer>
+</question>
+
+<question>
   How to important form of judgment in a logic programming language?
 
   <answer>
@@ -553,10 +562,45 @@
 </question>
 
 <question>
-  How to implement form of judgment in a functional language?
+  What is an inference rule?
 
   <answer>
-    Each form of judgment corresponds to a function
-    that determines whether a particular judgment is believable.
+    An inference rule consists of a horizontal line.
+    Below the line is a conclusion,
+    and above the line is any number of premises.
+
+    Forms of judgment occur within the conclusion and premises of a inference rule.
+  </answer>
+</question>
+
+<question>
+  How to implement inference rules a logic programming language?
+
+  <answer>
+    Inference rules are clauses that define a form of judgment.
+
+    Given a form of judgment (a relation),
+    each inference rule whose conclusion is this form of judgment
+    is a Horn clause of this relation.
+
+    Reverse the "above" and "below" of an inference rule we get a Horn clause.
+  </answer>
+</question>
+
+<question>
+  What is the meaning of a inference rule?
+
+  <answer>
+    The meaning of a inference rule is that,
+    if one believes in the premises,
+    then one should also believe in the conclusion.
+  </answer>
+</question>
+
+<question>
+  Why belief in the premises cannot be derived from belief in the conclusion?
+
+  <answer>
+    Because the same conclusion can occur in multiple rules.
   </answer>
 </question>

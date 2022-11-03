@@ -52,9 +52,28 @@ then one should also believe in the conclusion.
 Because the same conclusion can occur in multiple rules,
 belief in the premises cannot be derived from belief in the conclusion.
 
-Each rule has a name, written in `[...]` to the right of the rule.
+# Translate inference rules to functions
 
-## The interactions between checking and inferring
+A form of judgment is a relation.
+
+A inference rule conclude a form of judgment
+is a Horn clause that defines the relation.
+
+A function is a single-valued (univalent) relation,
+where an argument of the relation is viewed as output,
+and the output is uniquely determined by all other arguments (inputs).
+
+To translate relations to functions,
+we must observe which argument of the relation is its output,
+and writing them in form of `(input, ...) -> output`.
+
+| Parts of inference rule  | Parts of function                         |
+| ------------------------ | ----------------------------------------- |
+| input of the conclusion  | arguments                                 |
+| output of the conclusion | return value                              |
+| a promise                | a recursive call to a translated function |
+| input of a promise       | arguments of recursive call               |
+| output of a promise      | return value of recursive call            |
 
 In the following examples, we use `^o` as postfix superscript,
 to denote elaboratation result of the corresponding variable.
@@ -72,13 +91,6 @@ infer(ctx, the(X, exp)) ~> the(X^o, exp^o)
 In bidirectional type checking,
 we can read the above inference rule as a function
 implementing `infer` in the case of the `the` expression.
-
-Note that:
-
-- The input of the conclusion is read as arguments of the function.
-- The output of the conclusion is read as return value of the function.
-- The input of a promise is read as arguments of recursive call to form of judgments.
-- The output of a promise is read as return value of recursive call to form of judgments.
 
 ```
 infer(ctx, the(X, exp)) {
@@ -109,10 +121,6 @@ check(ctx, exp, X2) {
 }
 ```
 
-- Xie: Knowing how to read bidirectional type inference rules as functions,
-  it almost does not make sense to keep using the traditional syntax of inference rules,
-  but people in the community are so familiar with it.
-
 A the-expression is the same as its second argument.
 
 ```
@@ -129,7 +137,7 @@ the_same(ctx, X, the(X, exp1), exp2) {
 }
 ```
 
-## Categories of inference rules
+# Categories of inference rules
 
 Aside from [the], [switch], and one of the rules for `Type`,
 the rules fall into one of a few categories:
@@ -140,6 +148,8 @@ the rules fall into one of a few categories:
 4. _computation rules_, which describe the behavior of eliminators whose targets are constructors;
 5. _eta-rules_, which describe how to turn neutral expressions into values for some types;
 6. _other sameness rules_, which describe when sameness of subexpressions implies sameness.
+
+# Reading inference rules
 
 ## Sameness
 
