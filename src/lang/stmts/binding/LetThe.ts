@@ -1,8 +1,8 @@
-import { evaluate } from "../core"
-import { checkType, enrichOrCheck, Exp } from "../exp"
-import { Mod } from "../mod"
-import { Span } from "../span"
-import { Stmt } from "../stmt"
+import { evaluate } from "../../core"
+import { checkType, enrichOrCheck, Exp } from "../../exp"
+import { Mod } from "../../mod"
+import { Span } from "../../span"
+import { Stmt } from "../../stmt"
 
 export class LetThe extends Stmt {
   constructor(

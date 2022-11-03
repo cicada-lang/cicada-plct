@@ -1,7 +1,14 @@
+inline stmts/import/
+inline stmts/solve/
+stmts by category -- testing
+stmts by category -- clazz
+
+`Stmts.ClazzExtends` -- support `class ... extends ...`
+
 # std
 
-support `class ... extends ...`
 move manual/structures/equality to std/
+
 test script with `.todo.md`
 
 # maybe
