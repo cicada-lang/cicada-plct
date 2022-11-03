@@ -70,7 +70,10 @@ function reorderTheRightByTheLeft(
       return reorderTheRightByTheLeft(
         left.rest,
         deleteProperty(left.name, right),
-        appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
+        Cores.appendClazz(
+          reordered,
+          findPropertyAndCreateClazz(left.name, right),
+        ),
       )
     }
 
@@ -78,7 +81,10 @@ function reorderTheRightByTheLeft(
       return reorderTheRightByTheLeft(
         left.rest,
         deleteProperty(left.name, right),
-        appendClazz(reordered, findPropertyAndCreateClazz(left.name, right)),
+        Cores.appendClazz(
+          reordered,
+          findPropertyAndCreateClazz(left.name, right),
+        ),
       )
     }
   }
@@ -151,32 +157,6 @@ function findPropertyAndCreateClazz(
       }
 
       return findPropertyAndCreateClazz(name, clazz.rest)
-    }
-  }
-}
-
-function appendClazz(left: Cores.Clazz, right: Cores.Clazz): Cores.Clazz {
-  switch (left.kind) {
-    case "ClazzNull": {
-      return right
-    }
-
-    case "ClazzCons": {
-      return Cores.ClazzCons(
-        left.name,
-        left.localName,
-        left.propertyType,
-        appendClazz(left.rest, right),
-      )
-    }
-
-    case "ClazzFulfilled": {
-      return Cores.ClazzFulfilled(
-        left.name,
-        left.propertyType,
-        left.property,
-        appendClazz(left.rest, right),
-      )
     }
   }
 }

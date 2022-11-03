@@ -1,4 +1,3 @@
-extract `Cores.appendClazz` from `alphaEquivalentClazz`
 `Stmts.ClazzExtends` -- syntax
 
 # std
