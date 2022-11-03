@@ -14,7 +14,8 @@ too slow
 
 # std
 
-pass std/category/initial-and-terminal-objects.md -- maybe quit using `deepWalk`
+pass std/boolean-lattice -- maybe quit using `deepWalk`
+pass std/category/initial-and-terminal-objects.md -- maybe quit using `deepWalk` can fix this
 pass std/groupoid -- need `super`
 pass std/order -- need datatype
 
