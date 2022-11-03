@@ -1,6 +1,3 @@
-inline stmts/import/
-inline stmts/solve/
-
 `Stmts.ClazzExtends` -- support `class ... extends ...`
 
 # std
