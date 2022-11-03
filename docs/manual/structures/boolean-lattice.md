@@ -230,7 +230,7 @@ function meet_unique_identity(
 import { equal_map } from "../equality/equal-utilities.md"
 ```
 
-```cicada todo
+```cicada
 function join_is_idempotent(
   lattice: BooleanLattice,
   x: lattice.Element,
