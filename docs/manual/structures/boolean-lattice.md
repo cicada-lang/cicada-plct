@@ -139,11 +139,11 @@ function dual_is_involutive(lattice: BooleanLattice): Equal(
 
 # Unique identity
 
-```cicada todo
+```cicada
 import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
 ```
 
-```cicada todo
+```cicada
 function join_unique_identity(
   lattice: BooleanLattice,
   o: lattice.Element,
@@ -204,7 +204,7 @@ function join_unique_identity(
 }
 ```
 
-```cicada todo
+```cicada
 function meet_unique_identity(
   lattice: BooleanLattice,
   i: lattice.Element,
@@ -226,7 +226,7 @@ function meet_unique_identity(
 
 <https://en.wikipedia.org/wiki/Idempotence>
 
-```cicada todo
+```cicada
 import { equal_map } from "../equality/equal-utilities.md"
 ```
 

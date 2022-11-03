@@ -41,11 +41,12 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(value.retTypeClosure, typedNeutral),
-      )
+      // const retType = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(value.retTypeClosure, typedNeutral),
+      // )
+      const retType = applyClosure(value.retTypeClosure, typedNeutral)
       const retTypeCore = readbackType(mod, ctx, retType)
       const env = mod.ctxToEnv(ctx)
       return Values.Pi(argType, ClosureSimple(env, freshName, retTypeCore))
@@ -58,11 +59,12 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const argType = deepWalkType(mod, ctx, value.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(value.retTypeClosure, typedNeutral),
-      )
+      // const retType = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(value.retTypeClosure, typedNeutral),
+      // )
+      const retType = applyClosure(value.retTypeClosure, typedNeutral)
       const retTypeCore = readbackType(mod, ctx, retType)
       const env = mod.ctxToEnv(ctx)
       return Values.PiImplicit(
@@ -79,17 +81,19 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const argType = deepWalkType(mod, ctx, type.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(type.retTypeClosure, typedNeutral),
-      )
-      const ret = deepWalk(
-        mod,
-        ctx,
-        retType,
-        applyClosure(value.retClosure, typedNeutral),
-      )
+      // const retType = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(type.retTypeClosure, typedNeutral),
+      // )
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      // const ret = deepWalk(
+      //   mod,
+      //   ctx,
+      //   retType,
+      //   applyClosure(value.retClosure, typedNeutral),
+      // )
+      const ret = applyClosure(value.retClosure, typedNeutral)
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
       return Values.Fn(ClosureSimple(env, freshName, retCore))
@@ -103,17 +107,19 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const argType = deepWalkType(mod, ctx, type.argType)
       const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, argType, ctx)
-      const retType = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(type.retTypeClosure, typedNeutral),
-      )
-      const ret = deepWalk(
-        mod,
-        ctx,
-        retType,
-        applyClosure(value.retClosure, typedNeutral),
-      )
+      // const retType = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(type.retTypeClosure, typedNeutral),
+      // )
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      // const ret = deepWalk(
+      //   mod,
+      //   ctx,
+      //   retType,
+      //   applyClosure(value.retClosure, typedNeutral),
+      // )
+      const ret = applyClosure(value.retClosure, typedNeutral)
       const retCore = readback(mod, ctx, retType, ret)
       const env = mod.ctxToEnv(ctx)
       return Values.FnImplicit(ClosureSimple(env, freshName, retCore))
@@ -126,11 +132,12 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
       const carType = deepWalkType(mod, ctx, value.carType)
       const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
       ctx = CtxCons(freshName, carType, ctx)
-      const cdrType = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(value.cdrTypeClosure, typedNeutral),
-      )
+      const cdrType = applyClosure(value.cdrTypeClosure, typedNeutral)
+      // const cdrType = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(value.cdrTypeClosure, typedNeutral),
+      // )
       const cdrTypeCore = readbackType(mod, ctx, cdrType)
       const env = mod.ctxToEnv(ctx)
       return Values.Sigma(carType, ClosureSimple(env, freshName, cdrTypeCore))
@@ -176,11 +183,12 @@ export function deepWalk(mod: Mod, ctx: Ctx, type: Value, value: Value): Value {
         Neutrals.Var(freshName),
       )
       ctx = CtxCons(freshName, propertyType, ctx)
-      const rest = deepWalkType(
-        mod,
-        ctx,
-        applyClosure(value.restClosure, typedNeutral),
-      )
+      // const rest = deepWalkType(
+      //   mod,
+      //   ctx,
+      //   applyClosure(value.restClosure, typedNeutral),
+      // )
+      const rest = applyClosure(value.restClosure, typedNeutral)
       const restCore = readbackType(mod, ctx, rest)
       const env = mod.ctxToEnv(ctx)
       return Values.ClazzCons(
