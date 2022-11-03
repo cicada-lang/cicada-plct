@@ -36,6 +36,15 @@ export const stmt = {
       { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
+    "stmt:class_extends": [
+      '"class"',
+      { name: "name" },
+      '"extends"',
+      { parent: "operator" },
+      '"{"',
+      { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
+      '"}"',
+    ],
     "stmt:conversion": [
       '"conversion"',
       { type: "exp" },

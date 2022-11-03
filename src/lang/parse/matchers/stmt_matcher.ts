@@ -50,6 +50,18 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ),
         span,
       ),
+    "stmt:class_extends": ({ name, parent, bindings }, { span }) =>
+      new Stmts.ClazzExtends(
+        pt.str(name),
+        matchers.operator_matcher(parent),
+        Exps.ClazzUnfolded(
+          pt.matchers
+            .zero_or_more_matcher(bindings)
+            .map(matchers.clazz_binding_matcher),
+          span,
+        ),
+        span,
+      ),
     "stmt:conversion": ({ type, exps, last_exp }, { span }) =>
       new Stmts.Conversion(
         matchers.exp_matcher(type),

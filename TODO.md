@@ -1,5 +1,3 @@
-`Stmts.ClazzExtends` -- syntax
-
 # std
 
 move manual/structures/equality to std/
