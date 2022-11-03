@@ -1,6 +1,5 @@
 [optimize] use loop -- lookupTypeInCtx
 [optimize] use loop -- lookupValueInCtx
-[optimize] use loop -- lookupValueInEnv
 
 # std
 
