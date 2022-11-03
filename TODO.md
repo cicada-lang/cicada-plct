@@ -21,6 +21,7 @@ pass std/order -- need datatype
 
 # maybe
 
+[maybe] `FnImplicit` insertion -- much needed in `std/category/Category.md`
 [maybe] [mimor] reading-inference-rules.mimor
 [maybe] [book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
 [maybe] `Stmts.ClazzExtends` support `super` -- need `substExp`
