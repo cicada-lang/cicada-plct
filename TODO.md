@@ -1,3 +1,5 @@
+the-little-typer/99-appendix-b.md -- use whereabouts syntax
+
 [mimor] the-little-typer/99-appendix-b.md
 
 # std

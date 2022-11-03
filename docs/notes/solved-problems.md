@@ -10,11 +10,12 @@ Use closure.
 
 Use bidirectional type checking.
 
-Using both `check` and `infer`.
+To translate inference rules to type checking functions,
+we do not just implement `check` or `infer`, but both.
 
 ```
-check: (Ctx, Exp, Value) -> Void
-infer: (Ctx, Exp) -> Value
+check(ctx: Ctx, exp: Exp, type: Value): Void
+infer(ctx: Ctx, exp: Exp): Value
 ```
 
 # How to implement equivalence of lambda expressions?
@@ -30,9 +31,32 @@ A.k.a. NbE.
 
 Use elaboratation -- `Core` v.s. `Exp`.
 
-- `check` and `infer` should return extra `Core`.
-- Use unification to get information from type during elaboratation.
-- Use implicit application insertion to generate more elaborate `Core` from `Exp`.
+We do not only use the datatype `Exp` but also `Core`.
+
+`check` and `infer` should return an extra value -- the elaborated `Core`.
+
+- `check` and `infer` WITHOUT `Core`:
+
+  ```
+  check(ctx: Ctx, exp: Exp, type: Value)
+  infer(ctx: Ctx, exp: Exp): Value
+  ```
+
+- `check` and `infer` WITH `Core`:
+
+  ```
+  check(ctx: Ctx, exp: Exp, type: Value): Core
+  infer(ctx: Ctx, exp: Exp): { type: Value, core: Core }
+  ```
+
+During the process of type checking, we can get a lot of information as by-product,
+we should not waste them, we should use a extra datatype `Core` to capture them.
+
+`Core` can be viewed as a simpler core language.
+
+Use unification to get information from type during elaboratation.
+
+Use _implicit application insertion_ to generate more elaborate `Core` from `Exp`.
 
 # How to implement termination check?
 

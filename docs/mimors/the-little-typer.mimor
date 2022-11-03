@@ -540,10 +540,23 @@
 
   <answer>
     A Type system is a system for guiding human judgment.
+  </answer>
+</question>
 
-    In an implementation, each form of judgment
+<question>
+  How to important form of judgment in a logic programming language?
 
-    corresponds to a function that determines
-    whether a particular judgment is believable.
+  <answer>
+    Each form of judgment corresponds to a relation
+    that determines whether a particular judgment is believable.
+  </answer>
+</question>
+
+<question>
+  How to implement form of judgment in a functional language?
+
+  <answer>
+    Each form of judgment corresponds to a function
+    that determines whether a particular judgment is believable.
   </answer>
 </question>
