@@ -127,7 +127,7 @@ function dual(lattice: BooleanLattice): BooleanLattice {
 
 The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/Involution_(mathematics)>).
 
-```cicada todo
+```cicada
 function dual_is_involutive(lattice: BooleanLattice): Equal(
   BooleanLattice,
   lattice,

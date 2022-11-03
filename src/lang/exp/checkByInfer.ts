@@ -37,6 +37,7 @@ export function checkInferred(
   inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
   givenType = mod.solution.deepWalkType(mod, ctx, givenType)
 
+  const solutionSize = mod.solution.bindings.size
   unifyType(mod.solution, ctx, inferredType, givenType)
 
   /**
@@ -44,8 +45,10 @@ export function checkInferred(
      we need to do `deepWalkType` again.
   **/
 
-  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+  if (mod.solution.bindings.size > solutionSize) {
+    inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
+    givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+  }
 
   inclusion(mod, ctx, inferredType, givenType)
 

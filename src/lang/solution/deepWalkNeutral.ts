@@ -19,7 +19,8 @@ export function deepWalkNeutral(
       const value = mod.solution.walkOrUndefined(
         Values.TypedNeutral(type, neutral),
       )
-      if (value) {
+
+      if (value !== undefined) {
         return deepWalk(mod, ctx, type, value)
       } else {
         return mod.solution.walk(Values.TypedNeutral(type, neutral))
@@ -27,72 +28,43 @@ export function deepWalkNeutral(
     }
 
     case "Ap": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doAp(target, arg.value)
-      } else {
-        return deepWalk(mod, ctx, type, Actions.doAp(target, arg.value))
-      }
+      return Actions.doAp(target, arg.value)
     }
 
     case "ApImplicit": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doApImplicit(target, arg.value)
-      } else {
-        return deepWalk(mod, ctx, type, Actions.doApImplicit(target, arg.value))
-      }
+      return Actions.doApImplicit(target, arg.value)
     }
 
     case "Car": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doCar(target)
-      } else {
-        return deepWalk(mod, ctx, type, Actions.doCar(target))
-      }
+      return Actions.doCar(target)
     }
 
     case "Cdr": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doCdr(target)
-      } else {
-        return deepWalk(mod, ctx, type, Actions.doCdr(target))
-      }
+      return Actions.doCdr(target)
     }
 
     case "Dot": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doDot(target, neutral.name)
-      } else {
-        return deepWalk(mod, ctx, type, Actions.doDot(target, neutral.name))
-      }
+      return Actions.doDot(target, neutral.name)
     }
 
     case "Replace": {
-      const targetType = deepWalkType(mod, ctx, neutral.targetType)
+      const targetType = neutral.targetType
       const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
       const motive = deepWalkTypedValue(mod, ctx, neutral.motive)
       const base = deepWalkTypedValue(mod, ctx, neutral.base)
-      if (Values.isValue(target, "TypedNeutral")) {
-        return Actions.doReplace(target, motive.value, base.value)
-      } else {
-        return deepWalk(
-          mod,
-          ctx,
-          type,
-          Actions.doReplace(target, motive.value, base.value),
-        )
-      }
+      return Actions.doReplace(target, motive.value, base.value)
     }
   }
 }
