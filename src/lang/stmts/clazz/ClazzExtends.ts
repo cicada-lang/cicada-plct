@@ -1,11 +1,11 @@
-import { evaluate } from "../core"
-import * as Exps from "../exp"
-import { infer } from "../exp"
-import { Mod } from "../mod"
-import { Span } from "../span"
-import { Stmt } from "../stmt"
+import { evaluate } from "../../core"
+import * as Exps from "../../exp"
+import { infer } from "../../exp"
+import { Mod } from "../../mod"
+import { Span } from "../../span"
+import { Stmt } from "../../stmt"
 
-export class Clazz extends Stmt {
+export class ClazzExtends extends Stmt {
   constructor(
     public name: string,
     public clazz: Exps.ClazzUnfolded,

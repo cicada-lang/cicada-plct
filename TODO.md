@@ -1,7 +1,6 @@
 inline stmts/import/
 inline stmts/solve/
 stmts by category -- testing
-stmts by category -- clazz
 
 `Stmts.ClazzExtends` -- support `class ... extends ...`
 
