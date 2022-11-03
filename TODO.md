@@ -1,5 +1,3 @@
-[mimor] the-little-typer.mimor -- Note about Sameness
-
 # std
 
 support `class ... extends ...`

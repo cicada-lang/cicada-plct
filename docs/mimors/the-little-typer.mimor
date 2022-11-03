@@ -639,3 +639,13 @@
     "How to translate a function to a relation".
   </answer>
 </question>
+
+<question>
+  Why we can not translate sameness judgment to function?
+
+  <answer>
+    Because inference rules whose conclusions are sameness judgments
+    are specifications for a normalization algorithm,
+    rather than a description of the algorithm itself.
+  </answer>
+</question>
