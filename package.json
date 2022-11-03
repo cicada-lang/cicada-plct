@@ -19,7 +19,9 @@
     "test:gui": "vitest --dir src --threads false --ui",
     "test:tests": "test-runner snapshot './bin/cic.js' 'tests/**/*.(cic|md)' --exclude 'tests/**/*.error.(cic|md)'",
     "test:tests-error": "test-runner snapshot-error './bin/cic.js' 'tests/**/*.error.(cic|md)'",
-    "test": "npm run test:ts && npm run test:tests && npm run test:tests-error",
+    "test:std": "test-runner snapshot './bin/cic.js' 'std/**/*.(cic|md)' --exclude 'std/**/*.error.(cic|md)'",
+    "test:std-error": "test-runner snapshot-error './bin/cic.js' 'std/**/*.error.(cic|md)'",
+    "test": "npm run test:ts && npm run test:tests && npm run test:tests-error && npm run test:std && npm run test:std-error",
     "format": "prettier src --write"
   },
   "dependencies": {
