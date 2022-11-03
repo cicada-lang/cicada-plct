@@ -1,5 +1,3 @@
-[optimize] use loop -- lookupValueInCtx
-
 # std
 
 move manual/structures/equality to std/
