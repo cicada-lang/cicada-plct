@@ -1,3 +1,17 @@
+too slow
+
+- example:
+
+  ```
+  cic run docs/manual/structures/boolean-lattice.md
+  ```
+
+- profile:
+
+  ```
+  0x ./bin/cic.js run docs/manual/structures/boolean-lattice.md
+  ```
+
 # std
 
 move manual/structures/equality to std/

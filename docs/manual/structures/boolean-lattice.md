@@ -127,7 +127,7 @@ function dual(lattice: BooleanLattice): BooleanLattice {
 
 The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/Involution_(mathematics)>).
 
-```cicada
+```cicada todo
 function dual_is_involutive(lattice: BooleanLattice): Equal(
   BooleanLattice,
   lattice,
@@ -139,11 +139,11 @@ function dual_is_involutive(lattice: BooleanLattice): Equal(
 
 # Unique identity
 
-```cicada
+```cicada todo
 import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
 ```
 
-```cicada
+```cicada todo
 function join_unique_identity(
   lattice: BooleanLattice,
   o: lattice.Element,
@@ -204,7 +204,7 @@ function join_unique_identity(
 }
 ```
 
-```cicada
+```cicada todo
 function meet_unique_identity(
   lattice: BooleanLattice,
   i: lattice.Element,
@@ -226,11 +226,11 @@ function meet_unique_identity(
 
 <https://en.wikipedia.org/wiki/Idempotence>
 
-```cicada
+```cicada todo
 import { equal_map } from "../equality/equal-utilities.md"
 ```
 
-```cicada
+```cicada todo
 function join_is_idempotent(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -321,7 +321,7 @@ function join_is_idempotent(
 }
 ```
 
-```cicada
+```cicada todo
 function meet_is_idempotent(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -338,7 +338,7 @@ function meet_is_idempotent(
 
 We can define order relation by lattice operations.
 
-```cicada
+```cicada todo
 function Under(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -352,7 +352,7 @@ function Under(
 }
 ```
 
-```cicada
+```cicada todo
 function Above(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -370,7 +370,7 @@ TODO `Under` is the swap of `Above`
 
 <https://en.wikipedia.org/wiki/Bounded_lattice>
 
-```cicada
+```cicada todo
 function top_is_at_the_top(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -468,7 +468,7 @@ function top_is_at_the_top(
 }
 ```
 
-```cicada
+```cicada todo
 function bottom_is_at_the_bottom(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -485,7 +485,7 @@ function bottom_is_at_the_bottom(
 
 The terminology, which might be introduced by Russell and Whitehead, is very confusing.
 
-```cicada
+```cicada todo
 function join_absorb_over_meet(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -553,7 +553,7 @@ function join_absorb_over_meet(
 }
 ```
 
-```cicada
+```cicada todo
 function meet_absorb_over_join(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -569,7 +569,7 @@ function meet_absorb_over_join(
 
 # Associativity
 
-```cicada
+```cicada todo
 function join_is_associative(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -603,6 +603,6 @@ function meet_is_associative(
 
 TODO
 
-```cicada
+```cicada todo
 
 ```
