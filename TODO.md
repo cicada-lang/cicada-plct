@@ -1,3 +1,7 @@
+[optimize] use loop -- lookupTypeInCtx
+[optimize] use loop -- lookupValueInCtx
+[optimize] use loop -- lookupValueInEnv
+
 # std
 
 move manual/structures/equality to std/

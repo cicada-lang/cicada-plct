@@ -1,14 +1,10 @@
 import { Ctx } from "../ctx"
 
-export function ctxNames(ctx: Ctx): Array<string> {
-  switch (ctx.kind) {
-    case "CtxNull": {
-      return []
-    }
-
-    case "CtxCons":
-    case "CtxFulfilled": {
-      return [ctx.name, ...ctxNames(ctx.rest)]
-    }
+export function ctxNames(ctx: Ctx, names: Array<string> = []): Array<string> {
+  while (ctx.kind !== "CtxNull") {
+    names.unshift(ctx.name)
+    ctx = ctx.rest
   }
+
+  return names
 }
