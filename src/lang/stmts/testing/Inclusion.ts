@@ -1,9 +1,9 @@
-import { evaluate } from "../core"
-import { checkType, Exp } from "../exp"
-import { Mod } from "../mod"
-import { Span } from "../span"
-import { Stmt } from "../stmt"
-import { inclusion } from "../value"
+import { evaluate } from "../../core"
+import { checkType, Exp } from "../../exp"
+import { Mod } from "../../mod"
+import { Span } from "../../span"
+import { Stmt } from "../../stmt"
+import { inclusion } from "../../value"
 
 export class Inclusion extends Stmt {
   constructor(public exps: Array<Exp>, public span?: Span) {

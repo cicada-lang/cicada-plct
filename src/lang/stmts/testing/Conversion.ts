@@ -1,9 +1,9 @@
-import { evaluate } from "../core"
-import { check, checkType, Exp } from "../exp"
-import { Mod } from "../mod"
-import { Span } from "../span"
-import { Stmt } from "../stmt"
-import { conversion } from "../value"
+import { evaluate } from "../../core"
+import { check, checkType, Exp } from "../../exp"
+import { Mod } from "../../mod"
+import { Span } from "../../span"
+import { Stmt } from "../../stmt"
+import { conversion } from "../../value"
 
 export class Conversion extends Stmt {
   constructor(public type: Exp, public exps: Array<Exp>, public span?: Span) {

@@ -1,9 +1,9 @@
-import { evaluate } from "../core"
-import { Exp, infer } from "../exp"
-import { Mod } from "../mod"
-import { Span } from "../span"
-import { Stmt, StmtOutput } from "../stmt"
-import { formatTypedValue, TypedValue } from "../value"
+import { evaluate } from "../../core"
+import { Exp, infer } from "../../exp"
+import { Mod } from "../../mod"
+import { Span } from "../../span"
+import { Stmt, StmtOutput } from "../../stmt"
+import { formatTypedValue, TypedValue } from "../../value"
 
 export class Compute extends Stmt {
   constructor(public exp: Exp, public span?: Span) {
