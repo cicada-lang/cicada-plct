@@ -1,4 +1,5 @@
-`Stmts.ClazzExtends` -- support `class ... extends ...`
+extract `Cores.appendClazz` from `alphaEquivalentClazz`
+`Stmts.ClazzExtends` -- syntax
 
 # std
 
@@ -10,3 +11,4 @@ test script with `.todo.md`
 
 [maybe] [mimor] reading-inference-rules.mimor
 [maybe] [book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
+[maybe] `Stmts.ClazzExtends` support `super` -- need `substExp`

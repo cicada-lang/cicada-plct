@@ -18,9 +18,8 @@ export function readbackClazz(
     }
 
     case "ClazzCons": {
-      const name = clazz.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = freshen(usedNames, name)
+      const freshName = freshen(usedNames, clazz.name)
       const typedNeutral = Values.TypedNeutral(
         clazz.propertyType,
         Neutrals.Var(freshName),
