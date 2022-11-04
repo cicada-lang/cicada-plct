@@ -74,10 +74,16 @@ export class Solution {
   }
 
   walk(value: Value): Value {
+    let list = []
     while (this.isPatternVar(value)) {
+      list.push(value)
       const found = this.lookupValue(value.neutral.name)
-      if (found === undefined) return value
+      if (found === undefined) break
       value = found
+    }
+
+    for (const patternVar of list) {
+      this.bind(patternVar.neutral.name, value)
     }
 
     return value
