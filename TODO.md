@@ -1,4 +1,3 @@
-`occur` -- `Cons`
 `occur` -- `ClazzCons`
 `occur` -- `Objekt`
 

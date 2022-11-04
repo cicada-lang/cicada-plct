@@ -106,8 +106,11 @@ export function occur(
 
     case "Cons": {
       Values.assertValue(type, "Sigma")
-      return false
-      // return occur(name, value.car) || occur(name, value.cdr)
+
+      if (occur(solution, ctx, name, type.carType, value.car)) return true
+
+      const cdrType = applyClosure(type.cdrTypeClosure, value.car)
+      return occur(solution, ctx, name, cdrType, value.cdr)
     }
 
     case "String": {
