@@ -1,7 +1,3 @@
-# std
-
-extract `prepareValueForUnify`
-
 `occur` -- `Cons`
 `occur` -- `ClazzCons`
 `occur` -- `Objekt`
@@ -11,6 +7,8 @@ extract `prepareValueForUnify`
 - `readback` take `mod` and use `prepareValueForUnify`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
+
+# std
 
 pass std/boolean-lattice
 pass std/category/initial-and-terminal-objects.md -- maybe quit using `deepWalk` can fix this
