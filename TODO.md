@@ -1,10 +1,14 @@
 # std
 
+extract `prepareValueForUnify`
+
 `occur` -- `Cons`
 `occur` -- `ClazzCons`
 `occur` -- `Objekt`
 
-quit using `deepWalk` before `inclusion`
+`checkByInfer` -- should not use `deepWalk` before `inclusion`
+
+- `readback` take `mod` and use `prepareValueForUnify`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 

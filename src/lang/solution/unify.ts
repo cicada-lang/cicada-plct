@@ -29,8 +29,8 @@ export function unify(
   left: Value,
   right: Value,
 ): void {
-  left = prepareValue(solution, left)
-  right = prepareValue(solution, right)
+  left = prepareValueForUnify(solution, left)
+  right = prepareValueForUnify(solution, right)
 
   if (unifyPatternVar(solution, ctx, type, left, right)) return
   if (unifyByType(solution, ctx, type, left, right)) return
@@ -38,15 +38,15 @@ export function unify(
   unifyByValue(solution, ctx, type, left, right)
 }
 
-export function prepareValue(solution: Solution, value: Value): Value {
+export function prepareValueForUnify(solution: Solution, value: Value): Value {
   if (value.kind === "TypedNeutral") {
-    return prepareNeutral(solution, value.type, value.neutral)
+    return prepareNeutralForUnify(solution, value.type, value.neutral)
   }
 
   return value
 }
 
-function prepareNeutral(
+function prepareNeutralForUnify(
   solution: Solution,
   type: Value,
   neutral: Neutral,
@@ -57,7 +57,7 @@ function prepareNeutral(
     }
 
     case "Ap": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
@@ -66,7 +66,7 @@ function prepareNeutral(
     }
 
     case "ApImplicit": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
@@ -75,7 +75,7 @@ function prepareNeutral(
     }
 
     case "Car": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
@@ -84,7 +84,7 @@ function prepareNeutral(
     }
 
     case "Cdr": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
@@ -93,7 +93,7 @@ function prepareNeutral(
     }
 
     case "Dot": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
@@ -102,7 +102,7 @@ function prepareNeutral(
     }
 
     case "Replace": {
-      const target = prepareNeutral(
+      const target = prepareNeutralForUnify(
         solution,
         neutral.targetType,
         neutral.target,
