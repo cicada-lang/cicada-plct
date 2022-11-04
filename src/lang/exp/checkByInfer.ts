@@ -34,10 +34,9 @@ export function checkInferred(
      because `deepWalkType` might further `evaluate` a `Neutral`.
   **/
 
-  inferredType = deepWalkType(mod, ctx, inferredType)
-  givenType = deepWalkType(mod, ctx, givenType)
+  // inferredType = deepWalkType(mod, ctx, inferredType)
+  // givenType = deepWalkType(mod, ctx, givenType)
 
-  const solutionSize = mod.solution.bindings.size
   unifyType(mod.solution, ctx, inferredType, givenType)
 
   /**
@@ -45,10 +44,8 @@ export function checkInferred(
      we need to do `deepWalkType` again.
   **/
 
-  if (mod.solution.bindings.size > solutionSize) {
-    inferredType = deepWalkType(mod, ctx, inferredType)
-    givenType = deepWalkType(mod, ctx, givenType)
-  }
+  inferredType = deepWalkType(mod, ctx, inferredType)
+  givenType = deepWalkType(mod, ctx, givenType)
 
   inclusion(mod, ctx, inferredType, givenType)
 

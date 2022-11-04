@@ -1,10 +1,7 @@
 import * as Actions from "../actions"
 import { Ctx } from "../ctx"
-import { Mod } from "../mod"
 import { Neutral } from "../neutral"
 import {
-  deepWalk,
-  deepWalkTypedValue,
   Solution,
   unifyByType,
   unifyByValue,
@@ -32,8 +29,8 @@ export function unify(
   left: Value,
   right: Value,
 ): void {
-  left = prepare(solution, ctx, type, left)
-  right = prepare(solution, ctx, type, right)
+  left = prepareValue(solution, left)
+  right = prepareValue(solution, right)
 
   if (unifyPatternVar(solution, left, right)) return
   if (unifyByType(solution, ctx, type, left, right)) return
@@ -41,57 +38,45 @@ export function unify(
   unifyByValue(solution, ctx, type, left, right)
 }
 
-function prepare(
-  solution: Solution,
-  ctx: Ctx,
-  type: Value,
-  value: Value,
-): Value {
-  return solution.walk(value)
+export function prepareValue(solution: Solution, value: Value): Value {
+  if (value.kind === "TypedNeutral") {
+    return prepareNeutral(solution, value.type, value.neutral)
+  }
+
+  return value
 }
 
-function deepWalkNeutral(
-  mod: Mod,
-  ctx: Ctx,
+function prepareNeutral(
+  solution: Solution,
   type: Value,
   neutral: Neutral,
 ): Value {
   switch (neutral.kind) {
     case "Var": {
-      const typedNeutral = Values.TypedNeutral(type, neutral)
-      if (mod.solution.needWalk(typedNeutral)) {
-        return deepWalk(mod, ctx, type, mod.solution.walk(typedNeutral))
-      } else {
-        return typedNeutral
-      }
+      return solution.walk(Values.TypedNeutral(type, neutral))
     }
 
     case "Ap": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
-      const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      return Actions.doAp(target, arg.value)
+      return Actions.doAp(target, neutral.arg.value)
     }
 
     case "ApImplicit": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
-      const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
-      return Actions.doApImplicit(target, arg.value)
+      return Actions.doApImplicit(target, neutral.arg.value)
     }
 
     case "Car": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
@@ -99,9 +84,8 @@ function deepWalkNeutral(
     }
 
     case "Cdr": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
@@ -109,9 +93,8 @@ function deepWalkNeutral(
     }
 
     case "Dot": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
@@ -119,15 +102,12 @@ function deepWalkNeutral(
     }
 
     case "Replace": {
-      const target = deepWalkNeutral(
-        mod,
-        ctx,
+      const target = prepareNeutral(
+        solution,
         neutral.targetType,
         neutral.target,
       )
-      const motive = deepWalkTypedValue(mod, ctx, neutral.motive)
-      const base = deepWalkTypedValue(mod, ctx, neutral.base)
-      return Actions.doReplace(target, motive.value, base.value)
+      return Actions.doReplace(target, neutral.motive.value, neutral.base.value)
     }
   }
 }

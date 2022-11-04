@@ -1,8 +1,8 @@
 # std
 
-quit using `deepWalk` -- before `unify` -- no need to be "deep"
+fix `occur` check -- should check Value instead of Core -- for partial evaluation
 
-quit using `deepWalk`
+quit using `deepWalk` before `inclusion`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 

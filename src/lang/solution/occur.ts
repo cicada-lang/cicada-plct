@@ -1,6 +1,7 @@
 import { Closure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
+import { envNames } from "../env"
 import { Neutral } from "../neutral"
 import { TypedValue, Value } from "../value"
 
@@ -110,11 +111,12 @@ function occurClosure(name: string, closure: Closure): boolean {
 
   switch (closure.kind) {
     case "ClosureSimple": {
+      // if (envNames(closure.env).includes(name)) return false
+      envNames
       return occurCore(name, closure.body)
     }
 
     case "ClosureNative": {
-      // TODO
       return false
     }
   }

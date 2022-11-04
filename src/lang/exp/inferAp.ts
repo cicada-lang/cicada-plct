@@ -76,8 +76,13 @@ function inferApPi(
          because `deepWalkType` might further `evaluate` a `Neutral`.
     **/
 
-    const left = deepWalkType(mod, ctx, argInferred.type)
-    const right = deepWalkType(mod, ctx, inferred.type.argType)
+    // const left = deepWalkType(mod, ctx, argInferred.type)
+    // const right = deepWalkType(mod, ctx, inferred.type.argType)
+
+    deepWalkType
+
+    const left = argInferred.type
+    const right = inferred.type.argType
 
     unifyType(mod.solution, ctx, left, right)
   }

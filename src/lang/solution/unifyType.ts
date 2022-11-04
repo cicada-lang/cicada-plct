@@ -3,6 +3,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import {
+  prepareValue,
   Solution,
   unify,
   unifyClazz,
@@ -19,8 +20,8 @@ export function unifyType(
   left: Value,
   right: Value,
 ): void {
-  left = solution.walk(left)
-  right = solution.walk(right)
+  left = prepareValue(solution, left)
+  right = prepareValue(solution, right)
 
   const success = unifyPatternVar(solution, left, right)
   if (success) return
