@@ -1,7 +1,4 @@
-`checkByInfer` -- should not use `deepWalk` before `inclusion`
-
-- `inclusion` take `mod` and use `advanceValue`
-- `readback` take `mod` and use `advanceValue`
+remove `deepWalk`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 

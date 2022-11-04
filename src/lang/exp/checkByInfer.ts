@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Exp, infer, Inferred } from "../exp"
 import { Mod } from "../mod"
-import { deepWalkType, unifyType } from "../solution"
+import { unifyType } from "../solution"
 import { inclusion, Value } from "../value"
 
 export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
@@ -27,17 +27,6 @@ export function checkInferred(
   type: Value,
 ): Core {
   unifyType(mod.solution, ctx, inferred.type, type)
-
-  /**
-     TODO Should not `deepWalkType` before `inclusion`.
-  **/
-
-  inclusion(
-    mod,
-    ctx,
-    deepWalkType(mod, ctx, inferred.type),
-    deepWalkType(mod, ctx, type),
-  )
-
+  inclusion(mod, ctx, inferred.type, type)
   return inferred.core
 }
