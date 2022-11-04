@@ -1,3 +1,4 @@
+import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import * as Neutrals from "../neutral"
@@ -36,7 +37,7 @@ export function occur(
       if (occurType(solution, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         value.argType,
@@ -50,7 +51,7 @@ export function occur(
       if (occurType(solution, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         value.argType,
@@ -64,7 +65,7 @@ export function occur(
       Values.assertValue(type, "Pi")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         type.argType,
@@ -79,7 +80,7 @@ export function occur(
       Values.assertValue(type, "PiImplicit")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         type.argType,
@@ -94,7 +95,7 @@ export function occur(
       if (occurType(solution, ctx, name, value.carType)) return true
 
       const boundName = value.cdrTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         value.carType,
@@ -137,7 +138,7 @@ export function occur(
       if (occurType(solution, ctx, name, value.propertyType)) return true
 
       const boundName = value.restClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...solution.names, name]
       const freshName = freshen(usedNames, boundName)
       const typedNeutral = Values.TypedNeutral(
         value.propertyType,
@@ -157,10 +158,8 @@ export function occur(
 
     case "Objekt": {
       Values.assertClazz(type)
-      return false
-      // return Object.entries(value.properties).some(([key, value]) => {
-      //   return occur(name, value)
-      // })
+
+      return occurProperties(solution, ctx, name, type, value)
     }
 
     case "Equal": {
@@ -175,6 +174,38 @@ export function occur(
       return (
         occurType(solution, ctx, name, value.type) ||
         occur(solution, ctx, name, value.type, value.value)
+      )
+    }
+  }
+}
+
+function occurProperties(
+  solution: Solution,
+  ctx: Ctx,
+  name: string,
+  clazz: Values.Clazz,
+  value: Value,
+): boolean {
+  switch (clazz.kind) {
+    case "ClazzNull": {
+      return false
+    }
+
+    case "ClazzCons": {
+      const propertyValue = Actions.doDot(value, clazz.name)
+      const rest = applyClosure(clazz.restClosure, propertyValue)
+      Values.assertClazzInCtx(ctx, rest)
+      return (
+        occur(solution, ctx, name, clazz.propertyType, propertyValue) ||
+        occurProperties(solution, ctx, name, rest, value)
+      )
+    }
+
+    case "ClazzFulfilled": {
+      const propertyValue = Actions.doDot(value, clazz.name)
+      return (
+        occur(solution, ctx, name, clazz.propertyType, propertyValue) ||
+        occurProperties(solution, ctx, name, clazz.rest, value)
       )
     }
   }

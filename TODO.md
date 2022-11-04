@@ -1,5 +1,3 @@
-`occur` -- `Objekt`
-
 `checkByInfer` -- should not use `deepWalk` before `inclusion`
 
 - `readback` take `mod` and use `prepareValueForUnify`
