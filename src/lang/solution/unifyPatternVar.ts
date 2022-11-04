@@ -5,6 +5,7 @@ import { occur } from "./occur"
 
 export function unifyPatternVar(
   solution: Solution,
+  type: Value,
   left: Value,
   right: Value,
 ): "ok" | undefined {
@@ -17,7 +18,7 @@ export function unifyPatternVar(
   }
 
   if (solution.isPatternVar(left)) {
-    if (occur(left.neutral.name, right)) {
+    if (occur(left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
         `${left.neutral.name} occurs in ${right.kind}`,
       )
@@ -28,7 +29,7 @@ export function unifyPatternVar(
   }
 
   if (solution.isPatternVar(right)) {
-    if (occur(right.neutral.name, left)) {
+    if (occur(right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
         `${right.neutral.name} occurs in ${left.kind}`,
       )

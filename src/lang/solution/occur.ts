@@ -1,11 +1,12 @@
-import { Closure } from "../closure"
-import * as Cores from "../core"
-import { Core } from "../core"
-import { envNames } from "../env"
 import { Neutral } from "../neutral"
+import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
-export function occur(name: string, value: Value): boolean {
+function occurType(name: string, value: Value): boolean {
+  return occur(name, Values.Type(), value)
+}
+
+export function occur(name: string, type: Value, value: Value): boolean {
   switch (value.kind) {
     case "TypedNeutral": {
       return occurNeutral(name, value.neutral)
@@ -16,33 +17,37 @@ export function occur(name: string, value: Value): boolean {
     }
 
     case "Pi": {
-      return (
-        occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
-      )
+      return occurType(name, value.argType)
+      // ||      occurClosure(name, value.argType, value.retTypeClosure)
     }
 
     case "PiImplicit": {
-      return (
-        occur(name, value.argType) || occurClosure(name, value.retTypeClosure)
-      )
+      return occurType(name, value.argType)
+      // ||        occurClosure(name, value.argType, value.retTypeClosure)
     }
 
     case "Fn": {
-      return occurClosure(name, value.retClosure)
+      Values.assertValue(type, "Pi")
+      return false
+      // return occurClosure(name, value.retClosure)
     }
 
     case "FnImplicit": {
-      return occurClosure(name, value.retClosure)
+      Values.assertValue(type, "PiImplicit")
+      return false
+      // return occurClosure(name, value.retClosure)
     }
 
     case "Sigma": {
-      return (
-        occur(name, value.carType) || occurClosure(name, value.cdrTypeClosure)
-      )
+      return occurType(name, value.carType)
+
+      // ||         occurClosure(name, value.carType, value.cdrTypeClosure)
     }
 
     case "Cons": {
-      return occur(name, value.car) || occur(name, value.cdr)
+      Values.assertValue(type, "Sigma")
+      return false
+      // return occur(name, value.car) || occur(name, value.cdr)
     }
 
     case "String": {
@@ -66,64 +71,45 @@ export function occur(name: string, value: Value): boolean {
     }
 
     case "ClazzCons": {
-      return (
-        occur(name, value.propertyType) ||
-        (name != value.name && occurClosure(name, value.restClosure))
-      )
+      return occurType(name, value.propertyType)
+      // ||      occurClosure(name, value.propertyType, value.restClosure)
     }
 
     case "ClazzFulfilled": {
       return (
-        occur(name, value.propertyType) ||
-        occur(name, value.property) ||
-        (name != value.name && occur(name, value.rest))
+        occurType(name, value.propertyType) ||
+        occur(name, value.propertyType, value.property) ||
+        occurType(name, value.rest)
       )
     }
 
     case "Objekt": {
-      return Object.entries(value.properties).some(([key, value]) => {
-        return occur(name, value)
-      })
+      Values.assertClazz(type)
+      return false
+      // return Object.entries(value.properties).some(([key, value]) => {
+      //   return occur(name, value)
+      // })
     }
 
     case "Equal": {
       return (
-        occur(name, value.type) ||
-        occur(name, value.from) ||
-        occur(name, value.to)
+        occurType(name, value.type) ||
+        occur(name, value.type, value.from) ||
+        occur(name, value.type, value.to)
       )
     }
 
     case "Refl": {
-      return occur(name, value.type) || occur(name, value.value)
-    }
-  }
-}
-
-function occurCore(name: string, core: Core): boolean {
-  return Cores.freeNames(new Set(), core).has(name)
-}
-
-function occurClosure(name: string, closure: Closure): boolean {
-  if (name === closure.name) {
-    return false
-  }
-
-  switch (closure.kind) {
-    case "ClosureSimple": {
-      // if (envNames(closure.env).includes(name)) return false
-      envNames
-      return occurCore(name, closure.body)
-    }
-
-    case "ClosureNative": {
-      return false
+      return occurType(name, value.type) || occur(name, value.type, value.value)
     }
   }
 }
 
 function occurTypedValue(name: string, typedValue: TypedValue): boolean {
-  return occur(name, typedValue.type) || occur(name, typedValue.value)
+  return (
+    occurType(name, typedValue.type) ||
+    occur(name, typedValue.type, typedValue.value)
+  )
 }
 
 function occurNeutral(name: string, neutral: Neutral): boolean {

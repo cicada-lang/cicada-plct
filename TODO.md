@@ -1,6 +1,6 @@
 # std
 
-fix `occur` check -- should check Value instead of Core -- for partial evaluation
+`occur` -- should check `Value` instead of `Core` -- for partial evaluation
 
 quit using `deepWalk` before `inclusion`
 
