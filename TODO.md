@@ -1,6 +1,5 @@
-`unifyEquation` should not use `deepWalk`
 [maybe] `formatSolution` should not use `deepWalk`
-[maybe] we can not remove `deepWalk`, still need it for printing output
+[maybe] remove `deepWalk`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 
