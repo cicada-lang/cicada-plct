@@ -62,14 +62,32 @@ export function occur(
 
     case "Fn": {
       Values.assertValue(type, "Pi")
-      return false
-      // return occurClosure(name, value.retClosure)
+
+      const boundName = value.retClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        type.argType,
+        Neutrals.Var(freshName),
+      )
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      const ret = applyClosure(value.retClosure, typedNeutral)
+      return occur(solution, ctx, name, retType, ret)
     }
 
     case "FnImplicit": {
       Values.assertValue(type, "PiImplicit")
-      return false
-      // return occurClosure(name, value.retClosure)
+
+      const boundName = value.retClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        type.argType,
+        Neutrals.Var(freshName),
+      )
+      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      const ret = applyClosure(value.retClosure, typedNeutral)
+      return occur(solution, ctx, name, retType, ret)
     }
 
     case "Sigma": {

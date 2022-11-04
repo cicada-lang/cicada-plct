@@ -1,9 +1,6 @@
 # std
 
 `occur` -- `Cons`
-
-`occur` -- `Fn` & `FnImplicit`
-
 `occur` -- `ClazzCons`
 `occur` -- `Objekt`
 
