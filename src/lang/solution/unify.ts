@@ -32,7 +32,7 @@ export function unify(
   left = prepareValue(solution, left)
   right = prepareValue(solution, right)
 
-  if (unifyPatternVar(solution, type, left, right)) return
+  if (unifyPatternVar(solution, ctx, type, left, right)) return
   if (unifyByType(solution, ctx, type, left, right)) return
 
   unifyByValue(solution, ctx, type, left, right)

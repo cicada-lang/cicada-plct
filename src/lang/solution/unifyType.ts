@@ -23,7 +23,7 @@ export function unifyType(
   left = prepareValue(solution, left)
   right = prepareValue(solution, right)
 
-  const success = unifyPatternVar(solution, Values.Type(), left, right)
+  const success = unifyPatternVar(solution, ctx, Values.Type(), left, right)
   if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {

@@ -1,15 +1,28 @@
+import { Ctx } from "../ctx"
 import { Neutral } from "../neutral"
+import { Solution } from "../solution"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
-function occurType(name: string, value: Value): boolean {
-  return occur(name, Values.Type(), value)
+function occurType(
+  solution: Solution,
+  ctx: Ctx,
+  name: string,
+  value: Value,
+): boolean {
+  return occur(solution, ctx, name, Values.Type(), value)
 }
 
-export function occur(name: string, type: Value, value: Value): boolean {
+export function occur(
+  solution: Solution,
+  ctx: Ctx,
+  name: string,
+  type: Value,
+  value: Value,
+): boolean {
   switch (value.kind) {
     case "TypedNeutral": {
-      return occurNeutral(name, value.neutral)
+      return occurNeutral(solution, ctx, name, value.neutral)
     }
 
     case "Type": {
@@ -17,12 +30,12 @@ export function occur(name: string, type: Value, value: Value): boolean {
     }
 
     case "Pi": {
-      return occurType(name, value.argType)
+      return occurType(solution, ctx, name, value.argType)
       // ||      occurClosure(name, value.argType, value.retTypeClosure)
     }
 
     case "PiImplicit": {
-      return occurType(name, value.argType)
+      return occurType(solution, ctx, name, value.argType)
       // ||        occurClosure(name, value.argType, value.retTypeClosure)
     }
 
@@ -39,7 +52,7 @@ export function occur(name: string, type: Value, value: Value): boolean {
     }
 
     case "Sigma": {
-      return occurType(name, value.carType)
+      return occurType(solution, ctx, name, value.carType)
 
       // ||         occurClosure(name, value.carType, value.cdrTypeClosure)
     }
@@ -71,15 +84,15 @@ export function occur(name: string, type: Value, value: Value): boolean {
     }
 
     case "ClazzCons": {
-      return occurType(name, value.propertyType)
+      return occurType(solution, ctx, name, value.propertyType)
       // ||      occurClosure(name, value.propertyType, value.restClosure)
     }
 
     case "ClazzFulfilled": {
       return (
-        occurType(name, value.propertyType) ||
-        occur(name, value.propertyType, value.property) ||
-        occurType(name, value.rest)
+        occurType(solution, ctx, name, value.propertyType) ||
+        occur(solution, ctx, name, value.propertyType, value.property) ||
+        occurType(solution, ctx, name, value.rest)
       )
     }
 
@@ -93,26 +106,39 @@ export function occur(name: string, type: Value, value: Value): boolean {
 
     case "Equal": {
       return (
-        occurType(name, value.type) ||
-        occur(name, value.type, value.from) ||
-        occur(name, value.type, value.to)
+        occurType(solution, ctx, name, value.type) ||
+        occur(solution, ctx, name, value.type, value.from) ||
+        occur(solution, ctx, name, value.type, value.to)
       )
     }
 
     case "Refl": {
-      return occurType(name, value.type) || occur(name, value.type, value.value)
+      return (
+        occurType(solution, ctx, name, value.type) ||
+        occur(solution, ctx, name, value.type, value.value)
+      )
     }
   }
 }
 
-function occurTypedValue(name: string, typedValue: TypedValue): boolean {
+function occurTypedValue(
+  solution: Solution,
+  ctx: Ctx,
+  name: string,
+  typedValue: TypedValue,
+): boolean {
   return (
-    occurType(name, typedValue.type) ||
-    occur(name, typedValue.type, typedValue.value)
+    occurType(solution, ctx, name, typedValue.type) ||
+    occur(solution, ctx, name, typedValue.type, typedValue.value)
   )
 }
 
-function occurNeutral(name: string, neutral: Neutral): boolean {
+function occurNeutral(
+  solution: Solution,
+  ctx: Ctx,
+  name: string,
+  neutral: Neutral,
+): boolean {
   switch (neutral.kind) {
     case "Var": {
       return name === neutral.name
@@ -120,30 +146,32 @@ function occurNeutral(name: string, neutral: Neutral): boolean {
 
     case "Ap": {
       return (
-        occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+        occurNeutral(solution, ctx, name, neutral.target) ||
+        occurTypedValue(solution, ctx, name, neutral.arg)
       )
     }
 
     case "ApImplicit": {
       return (
-        occurNeutral(name, neutral.target) || occurTypedValue(name, neutral.arg)
+        occurNeutral(solution, ctx, name, neutral.target) ||
+        occurTypedValue(solution, ctx, name, neutral.arg)
       )
     }
 
     case "Car":
     case "Cdr": {
-      return occurNeutral(name, neutral.target)
+      return occurNeutral(solution, ctx, name, neutral.target)
     }
 
     case "Dot": {
-      return occurNeutral(name, neutral.target)
+      return occurNeutral(solution, ctx, name, neutral.target)
     }
 
     case "Replace": {
       return (
-        occurNeutral(name, neutral.target) ||
-        occurTypedValue(name, neutral.motive) ||
-        occurTypedValue(name, neutral.base)
+        occurNeutral(solution, ctx, name, neutral.target) ||
+        occurTypedValue(solution, ctx, name, neutral.motive) ||
+        occurTypedValue(solution, ctx, name, neutral.base)
       )
     }
   }
