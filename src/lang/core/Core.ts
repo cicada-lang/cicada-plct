@@ -14,6 +14,7 @@ export type Core =
   | Clazz
   | Objekt
   | Dot
+  | Replace
 
 export type Var = {
   family: "Core"
@@ -55,7 +56,11 @@ export type PiImplicit = {
   retType: Core
 }
 
-export function PiImplicit(name: string, argType: Core, retType: Core): PiImplicit {
+export function PiImplicit(
+  name: string,
+  argType: Core,
+  retType: Core,
+): PiImplicit {
   return {
     family: "Core",
     kind: "PiImplicit",
@@ -304,5 +309,23 @@ export function Dot(target: Core, name: string): Dot {
     kind: "Dot",
     target,
     name,
+  }
+}
+
+export type Replace = {
+  family: "Core"
+  kind: "Replace"
+  target: Core
+  motive: Core
+  base: Core
+}
+
+export function Replace(target: Core, motive: Core, base: Core): Replace {
+  return {
+    family: "Core",
+    kind: "Replace",
+    target,
+    motive,
+    base,
   }
 }

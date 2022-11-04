@@ -7,7 +7,11 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
 
   switch (binding.kind) {
     case "ClazzBindingAbstract": {
-      return Exps.ClazzCons(binding.name, binding.propertyType, foldClazz(restBindings))
+      return Exps.ClazzCons(
+        binding.name,
+        binding.propertyType,
+        foldClazz(restBindings),
+      )
     }
 
     case "ClazzBindingFulfilled": {

@@ -1,0 +1,14 @@
+I am expecting the following two values to be the same Pair(String, String).
+But they are not.
+
+from left hand side (from) of Equal:
+  cons("ratatouille", "baguette")
+to right hand side (to) of Equal:
+  cons("baguette", "ratatouille")
+
+ 3 |    Pair(String, String),
+ 4 |    cons("ratatouille", "baguette"),
+ 5 |    cons("baguette", "ratatouille")),
+ 6 |  refl)
+ 7 |
+

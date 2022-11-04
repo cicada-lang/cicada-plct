@@ -1,0 +1,29 @@
+class ABC {
+  a: Type
+  b: a
+  c: String
+}
+
+class ABCEFG extends ABC {
+  e: Type
+  f: e
+  g: String
+}
+
+let abcefg: ABCEFG = {
+  a: Trivial,
+  b: sole,
+  c: "c",
+  e: Trivial,
+  f: sole,
+  g: "g",
+}
+
+compute abcefg
+
+compute abcefg.a
+compute abcefg.b
+compute abcefg.c
+compute abcefg.e
+compute abcefg.f
+compute abcefg.g

@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import * as Exps from "../../exp"
 import * as matchers from "../matchers"
 
@@ -11,7 +11,9 @@ export function sigma_binding_matcher(tree: pt.Tree): Exps.SigmaBinding {
   })(tree)
 }
 
-export function sigma_bindings_matcher(tree: pt.Tree): Array<Exps.SigmaBinding> {
+export function sigma_bindings_matcher(
+  tree: pt.Tree,
+): Array<Exps.SigmaBinding> {
   return pt.matcher({
     "sigma_bindings:sigma_bindings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(sigma_binding_matcher),

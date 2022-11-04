@@ -1,0 +1,39 @@
+@module lang1
+
+Exp.check(Map(String, Ty), Exp, Ty): Trivial
+
+Exp.check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t)) =
+  Exp.check(Map.extend(ctx, name, arg_t), ret, ret_t)
+
+// - 注意 let 不是 constructor 也不是 eliminator，
+//   而是反向的 beta reduction。
+// - let 应该被 check 而不应该被 infer，
+//   因为我们不想要求末尾的 ret 可以被 infer。
+//   我们想要写成 { x = a : A; y } : B
+//   而不想要写成 { x = a : A; y : B }
+//   - 也许这是一个一般原则？
+//     所有可以被写在外面的类型注解（type annotation）
+//     都应该被写在外面？
+
+Exp.check(ctx, Exp.let(name, exp, ret), t) = {
+  Exp.infer(ctx, exp) >>> exp_t
+  Exp.check(Map.extend(ctx, name, exp_t), ret, t)
+}
+
+Exp.check(ctx, Exp.begin(List.null, ret), t) =
+  Exp.check(ctx, ret, t)
+
+Exp.check(ctx, Exp.begin(List.cons({ name, exp }, defs), ret), t) = {
+  Exp.infer(ctx, exp) >>> exp_t
+  Exp.check(Map.extend(ctx, name, exp_t), Exp.begin(defs, ret), t)
+}
+
+Exp.check(ctx, Exp.zero, Ty.nat) = Trivial.sole
+
+Exp.check(ctx, Exp.add1(prev), Ty.nat) =
+  Exp.check(ctx, prev, Ty.nat)
+
+Exp.check(ctx, exp, t) = {
+  Exp.infer(ctx, exp) >>> u
+  Ty.equal(t, u)
+}

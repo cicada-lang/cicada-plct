@@ -4,6 +4,7 @@
 
 **/
 
+export * from "./clazzExtendCtx"
 export * from "./clazzFromTypedValues"
 export * from "./clazzPropertyNames"
 export * from "./expelClazz"

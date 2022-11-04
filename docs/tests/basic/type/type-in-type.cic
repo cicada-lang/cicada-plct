@@ -1,0 +1,7 @@
+let t: Type = Type
+
+compute t
+
+let pair_of_types: Type = Pair(Type, Type)
+
+compute pair_of_types

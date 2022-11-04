@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import * as Stmts from "../../stmts"
 import * as matchers from "../matchers"
 
@@ -11,6 +11,9 @@ export function equation_matcher(tree: pt.Tree): Stmts.Equation {
         matchers.exp_matcher(type),
       ),
     "equation:unify": ({ left, right }, { span }) =>
-      Stmts.EquationUnify(matchers.exp_matcher(left), matchers.exp_matcher(right)),
+      Stmts.EquationUnify(
+        matchers.exp_matcher(left),
+        matchers.exp_matcher(right),
+      ),
   })(tree)
 }

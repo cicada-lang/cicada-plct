@@ -11,30 +11,25 @@ export function deepWalkProperties(
   ctx: Ctx,
   clazz: Values.Clazz,
   value: Value,
+  properties: Record<string, Value> = {},
 ): Record<string, Value> {
-  switch (clazz.kind) {
-    case "ClazzNull": {
-      return {}
-    }
-
-    case "ClazzCons": {
+  while (clazz.kind !== "ClazzNull") {
+    if (clazz.kind === "ClazzCons") {
       let propertyValue = Actions.doDot(value, clazz.name)
       propertyValue = deepWalk(mod, ctx, clazz.propertyType, propertyValue)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       assertClazzInCtx(ctx, rest)
-      return {
-        [clazz.name]: propertyValue,
-        ...deepWalkProperties(mod, ctx, rest, value),
-      }
+      properties[clazz.name] = propertyValue
+      clazz = rest
     }
 
-    case "ClazzFulfilled": {
+    if (clazz.kind === "ClazzFulfilled") {
       let propertyValue = Actions.doDot(value, clazz.name)
       propertyValue = deepWalk(mod, ctx, clazz.propertyType, propertyValue)
-      return {
-        [clazz.name]: propertyValue,
-        ...deepWalkProperties(mod, ctx, clazz.rest, value),
-      }
+      properties[clazz.name] = propertyValue
+      clazz = clazz.rest
     }
   }
+
+  return properties
 }

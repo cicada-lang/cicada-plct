@@ -6,7 +6,10 @@ import { deleteUndefined } from "../utils"
 test("parse Sigma", () => {
   expect(parseExp("exists (n: Nat) Nat")).toMatchObject(
     deleteUndefined(
-      Exps.SigmaUnfolded([Exps.SigmaBindingNamed("n", Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.SigmaUnfolded(
+        [Exps.SigmaBindingNamed("n", Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 })
@@ -28,7 +31,10 @@ test("parse Sigma -- multiple bindings", () => {
 test("parse Sigma -- nameless binding", () => {
   expect(parseExp("exists (Nat) Nat")).toMatchObject(
     deleteUndefined(
-      Exps.SigmaUnfolded([Exps.SigmaBindingNameless(Exps.Var("Nat"))], Exps.Var("Nat")),
+      Exps.SigmaUnfolded(
+        [Exps.SigmaBindingNameless(Exps.Var("Nat"))],
+        Exps.Var("Nat"),
+      ),
     ),
   )
 })

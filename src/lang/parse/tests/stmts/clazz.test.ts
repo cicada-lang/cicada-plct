@@ -5,7 +5,9 @@ import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Clazz", () => {
-  expect(parseStmts("class ABC { a: String, b: String, c: String }")).toMatchObject(
+  expect(
+    parseStmts("class ABC { a: String, b: String, c: String }"),
+  ).toMatchObject(
     deleteUndefined([
       new Stmts.Clazz(
         "ABC",

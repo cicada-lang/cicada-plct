@@ -21,5 +21,7 @@ export async function expectCodeToFail(
   code: string,
   errorConstructor?: ErrorConstructor,
 ): Promise<void> {
-  await expect(runCode(code)).rejects.toThrowError(errorConstructor ?? Errors.LangError)
+  await expect(runCode(code)).rejects.toThrowError(
+    errorConstructor ?? Errors.LangError,
+  )
 }

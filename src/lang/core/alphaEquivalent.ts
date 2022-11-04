@@ -100,6 +100,13 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
+  if (left.kind === "Replace" && right.kind === "Replace") {
+    alphaEquivalent(ctx, left.target, right.target)
+    alphaEquivalent(ctx, left.motive, right.motive)
+    alphaEquivalent(ctx, left.base, right.base)
+    return
+  }
+
   throw new Errors.ConversionError(
     `alphaEquivalent is not implemented for left: ${formatCore(
       left,

@@ -5,7 +5,9 @@ import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
 test("parse Let -- function with implicit", () => {
-  expect(parseStmts("function id(implicit T: Type, x: T): T { return x }")).toMatchObject(
+  expect(
+    parseStmts("function id(implicit T: Type, x: T): T { return x }"),
+  ).toMatchObject(
     deleteUndefined([
       new Stmts.Let(
         "id",

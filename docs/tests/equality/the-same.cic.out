@@ -1,0 +1,1 @@
+refl(vague String, vague "a"): Equal(String, "a", "a")

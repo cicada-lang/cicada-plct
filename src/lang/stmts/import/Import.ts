@@ -18,9 +18,12 @@ export class Import extends Stmt {
   async execute(mod: Mod): Promise<void> {
     const url = mod.resolve(this.path)
     if (url.href === mod.options.url.href) {
-      throw new Errors.ElaborationError(`I can not circular import: ${this.path}`, {
-        span: this.span,
-      })
+      throw new Errors.ElaborationError(
+        `I can not circular import: ${this.path}`,
+        {
+          span: this.span,
+        },
+      )
     }
 
     const importedMod = await mod.options.loader.load(url)

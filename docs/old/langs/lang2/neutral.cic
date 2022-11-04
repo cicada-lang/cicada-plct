@@ -1,0 +1,16 @@
+@module lang2
+
+@datatype Neutral {
+  v(name: String): Neutral
+
+  ap(target: Neutral, arg: Normal): Neutral
+
+  car(target: Neutral): Neutral
+  cdr(target: Neutral): Neutral
+
+  nat_ind(target: Neutral, motive: Normal, base: Normal, step: Normal): Neutral
+
+  replace(target: Neutral, motive: Normal, base: Normal): Neutral
+
+  from_falsehood_anything(target: Neutral, motive: Normal): Neutral
+}

@@ -48,7 +48,12 @@ export function inferProperties(
         conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
-      const propertyCore = Values.readback(mod, ctx, clazz.propertyType, clazz.property)
+      const propertyCore = Values.readback(
+        mod,
+        ctx,
+        clazz.propertyType,
+        clazz.property,
+      )
 
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, clazz.property, ctx)
 

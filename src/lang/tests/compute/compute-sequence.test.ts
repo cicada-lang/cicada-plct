@@ -4,7 +4,7 @@ import { runCode } from "../utils"
 test("compute Sequence -- single return", async () => {
   const output = await runCode(`
 
-compute begin {
+compute {
   return sole
 }
 
@@ -16,7 +16,7 @@ compute begin {
 test("compute Sequence -- Let", async () => {
   const output = await runCode(`
 
-compute begin {
+compute {
   let x = sole
   return x
 }
@@ -29,7 +29,7 @@ compute begin {
 test("compute Sequence -- LetThe", async () => {
   const output = await runCode(`
 
-compute begin {
+compute {
   let x: Trivial = sole
   return x
 }
@@ -42,7 +42,7 @@ compute begin {
 test("compute Sequence -- Check", async () => {
   const output = await runCode(`
 
-compute begin {
+compute {
   check sole: Trivial
   return sole
 }

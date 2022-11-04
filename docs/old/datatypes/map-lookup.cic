@@ -1,0 +1,11 @@
+@module datatype
+
+@given K: Type, V: Type
+@judgment Map.Find(map: Map(K, V), key: K, value: V) {
+  Map.Find(Map.extend(map, key, value), key, value)
+  --------------------------------------------------- here
+
+  Map.Find(Map.extend(rest, any_key, any_value), key, value)
+  ------------------------------------------------------------ there
+  prev: Map.Find(rest, key, value)
+}

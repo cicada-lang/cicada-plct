@@ -35,11 +35,15 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
     }
 
     case "Fn": {
-      return new Set([...freeNames(new Set([...boundNames, core.name]), core.ret)])
+      return new Set([
+        ...freeNames(new Set([...boundNames, core.name]), core.ret),
+      ])
     }
 
     case "FnImplicit": {
-      return new Set([...freeNames(new Set([...boundNames, core.name]), core.ret)])
+      return new Set([
+        ...freeNames(new Set([...boundNames, core.name]), core.ret),
+      ])
     }
 
     case "Sigma": {
@@ -97,6 +101,14 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
 
     case "Dot": {
       return new Set([...freeNames(boundNames, core.target)])
+    }
+
+    case "Replace": {
+      return new Set([
+        ...freeNames(boundNames, core.target),
+        ...freeNames(boundNames, core.motive),
+        ...freeNames(boundNames, core.base),
+      ])
     }
   }
 }

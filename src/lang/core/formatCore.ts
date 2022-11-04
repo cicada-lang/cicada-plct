@@ -59,10 +59,11 @@ export function formatCore(core: Core): string {
     }
 
     case "Objekt": {
-      const properties = Object.entries(core.properties).map(([name, property]) =>
-        isIdentifier(name)
-          ? `${name}: ${formatCore(property)}`
-          : `"${name}": ${formatCore(property)}`,
+      const properties = Object.entries(core.properties).map(
+        ([name, property]) =>
+          isIdentifier(name)
+            ? `${name}: ${formatCore(property)}`
+            : `"${name}": ${formatCore(property)}`,
       )
 
       return `{ ${properties.join(", ")} }`
@@ -70,6 +71,13 @@ export function formatCore(core: Core): string {
 
     case "Dot": {
       return `${formatCore(core.target)}.${core.name}`
+    }
+
+    case "Replace": {
+      const target = formatCore(core.target)
+      const motive = formatCore(core.motive)
+      const base = formatCore(core.base)
+      return `replace(${target}, ${motive}, ${base})`
     }
   }
 }

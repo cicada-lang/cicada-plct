@@ -52,7 +52,9 @@ solve (T: Type, f: (implicit _: Trivial) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ T: String, f: (implicit _) => String }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ T: String, f: (implicit _) => String }"',
+  )
 })
 
 test("solve FnImplicit -- occur", async () => {

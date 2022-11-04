@@ -44,7 +44,9 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Fn": {
-      return new Set([...freeNames(new Set([...boundNames, exp.name]), exp.ret)])
+      return new Set([
+        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
+      ])
     }
 
     case "FnAnnotated": {
@@ -55,7 +57,9 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "FnImplicit": {
-      return new Set([...freeNames(new Set([...boundNames, exp.name]), exp.ret)])
+      return new Set([
+        ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
+      ])
     }
 
     case "FnImplicitAnnotated": {
@@ -92,14 +96,6 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
         ...freeNames(boundNames, exp.car),
         ...freeNames(boundNames, exp.cdr),
       ])
-    }
-
-    case "Car": {
-      return new Set([...freeNames(boundNames, exp.target)])
-    }
-
-    case "Cdr": {
-      return new Set([...freeNames(boundNames, exp.target)])
     }
 
     case "Quote": {

@@ -1,0 +1,55 @@
+@module datatype
+
+// Why it is easier to prove the existence of normal forms in sequent calculus than natural deduction.
+
+// Every elimination rule in natural deduction are synthetic,
+// i.e. reading from bottom to up there are information lost.
+
+// In sequent calculus only the cut rule is synthetic, all other rules are analytic.
+
+// Natural deduction and sequent calculus will always have the same introduction rule,
+//   which is called the right rule in sequent calculus.
+// And the left rule of sequent calculus
+//   is just the currying version of the elimination rule of natural deduction.
+
+// - https://en.wikipedia.org/wiki/Analytic-synthetic_distinction
+
+@datatype Either(A: Type, B: Type) {
+
+  // Either(A, B)
+  // ------------ intro_l
+  // l: A
+
+  intro_l(l: A): Either(A, B)
+
+  // Either(A, B)
+  // ------------ intro_r
+  // r: B
+
+  intro_r(r: B): Either(A, B)
+}
+
+// in natural deduction:
+
+// C
+// -------------------- Either.elim
+// target: Either(A, B)
+// lf: (A) -> C
+// rf: (B) -> C
+
+Either.elim(Either(A, B), (A) -> C, (B) -> C): C
+Either.elim(Either.intro_l(l), lf, rf) = lf(l)
+Either.elim(Either.intro_r(r), lf, rf) = rf(r)
+
+// in sequent calculus:
+
+// Either(A, B) -> C
+// ----------------- Either.left
+// lf: (A) -> C
+// rf: (B) -> C
+
+Either.left((A) -> C, (B) -> C): Either(A, B) -> C
+Either.left(lf, rf) = @cases {
+  Either.intro_l(l) => lf(l)
+  Either.intro_r(r) => rf(r)
+}

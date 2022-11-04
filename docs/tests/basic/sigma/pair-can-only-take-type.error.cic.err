@@ -1,0 +1,8 @@
+I infer the type to be:
+  String
+But the expected type is:
+  Type
+
+ 1 |compute exists (_: "oil") String
+ 2 |
+

@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
-import { deepWalk, deepWalkType } from "../solution"
+import { deepWalk } from "../solution"
 import { TypedValue } from "../value"
 
 export function deepWalkTypedValue(
@@ -8,7 +8,6 @@ export function deepWalkTypedValue(
   ctx: Ctx,
   typedValue: TypedValue,
 ): TypedValue {
-  const type = deepWalkType(mod, ctx, typedValue.type)
-  const value = deepWalk(mod, ctx, type, typedValue.value)
-  return TypedValue(type, value)
+  const value = deepWalk(mod, ctx, typedValue.type, typedValue.value)
+  return TypedValue(typedValue.type, value)
 }

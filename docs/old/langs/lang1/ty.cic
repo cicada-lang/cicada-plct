@@ -1,0 +1,6 @@
+@module lang1
+
+@datatype Ty {
+  nat: Ty
+  arrow(arg_t: Ty, ret_t: Ty): Ty
+}

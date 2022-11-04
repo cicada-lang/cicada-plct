@@ -1,0 +1,5 @@
+import {
+  equal_map,
+  equal_swap,
+  equal_compose,
+} from "equal-utilities.md"

@@ -5,7 +5,12 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { readback, readbackNeutral, readbackType, Value } from "../value"
 
-export function readbackByValue(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
+export function readbackByValue(
+  mod: Mod,
+  ctx: Ctx,
+  type: Value,
+  value: Value,
+): Core {
   switch (value.kind) {
     case "TypedNeutral": {
       /**

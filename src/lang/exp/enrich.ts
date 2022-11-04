@@ -27,7 +27,12 @@ export function enrich(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
   }
 }
 
-function enrichWithoutInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
+function enrichWithoutInfer(
+  mod: Mod,
+  ctx: Ctx,
+  exp: Exp,
+  type: Value,
+): Inferred {
   switch (exp.kind) {
     case "ObjektUnfolded": {
       return enrich(

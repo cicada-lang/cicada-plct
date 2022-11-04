@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import * as Exps from "../../exp"
 import { Stmt } from "../../stmt"
 import * as Stmts from "../../stmts"
@@ -25,7 +25,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           matchers.sequence_matcher(sequence),
         ),
       ),
-    "stmt:let_function_with_ret_type": ({ name, bindings, ret_t, sequence }, { span }) =>
+    "stmt:let_function_with_ret_type": (
+      { name, bindings, ret_t, sequence },
+      { span },
+    ) =>
       new Stmts.Let(
         pt.str(name),
         Exps.FnUnfoldedWithRetType(
@@ -40,7 +43,21 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       new Stmts.Clazz(
         pt.str(name),
         Exps.ClazzUnfolded(
-          pt.matchers.zero_or_more_matcher(bindings).map(matchers.clazz_binding_matcher),
+          pt.matchers
+            .zero_or_more_matcher(bindings)
+            .map(matchers.clazz_binding_matcher),
+          span,
+        ),
+        span,
+      ),
+    "stmt:class_extends": ({ name, parent, bindings }, { span }) =>
+      new Stmts.ClazzExtends(
+        pt.str(name),
+        matchers.operator_matcher(parent),
+        Exps.ClazzUnfolded(
+          pt.matchers
+            .zero_or_more_matcher(bindings)
+            .map(matchers.clazz_binding_matcher),
           span,
         ),
         span,
@@ -65,18 +82,24 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:solve": ({ bindings, equations }, { span }) =>
       new Stmts.Solve(
         matchers.solve_bindings_matcher(bindings),
-        pt.matchers.zero_or_more_matcher(equations).map(matchers.equation_matcher),
+        pt.matchers
+          .zero_or_more_matcher(equations)
+          .map(matchers.equation_matcher),
         span,
       ),
     "stmt:solve_empty_bindings": ({ equations }, { span }) =>
       new Stmts.Solve(
         [],
-        pt.matchers.zero_or_more_matcher(equations).map(matchers.equation_matcher),
+        pt.matchers
+          .zero_or_more_matcher(equations)
+          .map(matchers.equation_matcher),
         span,
       ),
     "stmt:import": ({ bindings, path }, { span }) =>
       new Stmts.Import(
-        pt.matchers.zero_or_more_matcher(bindings).map(matchers.import_binding_matcher),
+        pt.matchers
+          .zero_or_more_matcher(bindings)
+          .map(matchers.import_binding_matcher),
         pt.trim_boundary(pt.str(path), 1),
         span,
       ),

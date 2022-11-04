@@ -9,7 +9,12 @@ import { unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
-export function inferAp(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
+export function inferAp(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
   if (Values.isValue(inferred.type, "PiImplicit")) {
     return inferApPiImplicit(mod, ctx, inferred, argExp)
   } else {
@@ -36,7 +41,10 @@ function inferApPiImplicit(
     ...Exps.freeNames(boundNames, argExp),
   ]
   const freshName = freshen(usedNames, name)
-  const patternVar = mod.solution.createPatternVar(freshName, inferred.type.argType)
+  const patternVar = mod.solution.createPatternVar(
+    freshName,
+    inferred.type.argType,
+  )
   ctx = CtxCons(freshName, inferred.type.argType, ctx)
   const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
   const inserted = Inferred(
@@ -46,12 +54,22 @@ function inferApPiImplicit(
   return inferAp(mod, ctx, inserted, argExp)
 }
 
-function inferApPi(mod: Mod, ctx: Ctx, inferred: Inferred, argExp: Exp): Inferred {
+function inferApPi(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  argExp: Exp,
+): Inferred {
   Values.assertTypeInCtx(ctx, inferred.type, "Pi")
 
   let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    argInferred = Exps.insertApImplicit(mod, ctx, argInferred, inferred.type.argType)
+    argInferred = Exps.insertApImplicit(
+      mod,
+      ctx,
+      argInferred,
+      inferred.type.argType,
+    )
     /**
          NOTE We need to us `deepWalkType` before `unifyType`,
          because `deepWalkType` might further `evaluate` a `Neutral`.

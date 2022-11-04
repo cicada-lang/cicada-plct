@@ -1,6 +1,6 @@
 {
   "name": "@cicada-lang/cicada",
-  "version": "0.8.7",
+  "version": "0.8.9",
   "repository": "github:cicada-lang/cicada",
   "main": "./lib/index.js",
   "files": [
@@ -17,13 +17,15 @@
     "test:watch": "vitest --dir src --threads false",
     "test:coverage": "vitest --dir src --threads false --run --coverage ",
     "test:gui": "vitest --dir src --threads false --ui",
-    "test:tests": "test-runner snapshot './bin/cic.js' 'docs/tests/**/*.(cic|md)' --exclude 'docs/tests/**/*.error.(cic|md)'",
-    "test:tests-error": "test-runner snapshot-error './bin/cic.js' 'docs/tests/**/*.error.(cic|md)'",
-    "test": "npm run test:ts && npm run test:tests && npm run test:tests-error",
+    "test:tests": "test-runner snapshot './bin/cic.js' 'tests/**/*.(cic|md)' --exclude 'tests/**/*.(error|todo).(cic|md)'",
+    "test:tests-error": "test-runner snapshot-error './bin/cic.js' 'tests/**/*.error.(cic|md)'",
+    "test:std": "test-runner snapshot './bin/cic.js' 'std/**/*.(cic|md)' --exclude 'std/**/*.(error|todo).(cic|md)'",
+    "test:std-error": "test-runner snapshot-error './bin/cic.js' 'std/**/*.error.(cic|md)'",
+    "test": "npm run test:ts && npm run test:tests && npm run test:tests-error && npm run test:std && npm run test:std-error",
     "format": "prettier src --write"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.22",
+    "@cicada-lang/partech": "^0.2.2",
     "@xieyuheng/command-line": "^0.0.7",
     "@xieyuheng/ty": "^0.1.17",
     "commonmark": "^0.30.0",
@@ -35,19 +37,19 @@
   },
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
-    "@types/lodash": "^4.14.186",
-    "@types/node": "^18.11.0",
-    "@vitest/coverage-c8": "^0.24.3",
-    "@vitest/coverage-istanbul": "^0.24.3",
-    "@vitest/ui": "^0.24.3",
-    "@xieyuheng/test-runner": "^0.2.5",
+    "@types/lodash": "^4.14.187",
+    "@types/node": "^18.11.9",
+    "@vitest/coverage-c8": "^0.24.5",
+    "@vitest/coverage-istanbul": "^0.24.5",
+    "@vitest/ui": "^0.24.5",
+    "@xieyuheng/test-runner": "^0.2.7",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.1",
     "pretty-quick": "^3.1.3",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8",
-    "vitest": "^0.24.3"
+    "vite": "^3.2.2",
+    "vitest": "^0.24.5"
   },
   "license": "GPL-3.0-or-later"
 }

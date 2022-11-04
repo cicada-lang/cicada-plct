@@ -25,6 +25,54 @@ export function useGlobals(): GlobalStore {
   globals.claim("Pair", "(A: Type, B: Type) -> Type")
   globals.define("Pair", "(A, B) => exists (A) B")
 
+  globals.claim(
+    "car",
+    `(
+  implicit A: Type,
+  implicit B: (x: A) -> Type,
+  target: exists (x: A) B(x),
+) -> A
+`,
+  )
+  globals.define(
+    "car",
+    Values.FnImplicit(
+      ClosureNative("A", (A) =>
+        Values.FnImplicit(
+          ClosureNative("B", (B) =>
+            Values.Fn(
+              ClosureNative("target", (target) => Actions.doCar(target)),
+            ),
+          ),
+        ),
+      ),
+    ),
+  )
+
+  globals.claim(
+    "cdr",
+    `(
+  implicit A: Type,
+  implicit B: (x: A) -> Type,
+  target: exists (x: A) B(x),
+) -> B(car(target))
+`,
+  )
+  globals.define(
+    "cdr",
+    Values.FnImplicit(
+      ClosureNative("A", (A) =>
+        Values.FnImplicit(
+          ClosureNative("B", (B) =>
+            Values.Fn(
+              ClosureNative("target", (target) => Actions.doCdr(target)),
+            ),
+          ),
+        ),
+      ),
+    ),
+  )
+
   globals.claim("the", "(T: Type, x: T) -> T")
   globals.define("the", "(T, x) => x")
 
@@ -47,7 +95,9 @@ export function useGlobals(): GlobalStore {
     "refl",
     Values.FnImplicit(
       ClosureNative("T", (T) =>
-        Values.FnImplicit(ClosureNative("value", (value) => Values.Refl(T, value))),
+        Values.FnImplicit(
+          ClosureNative("value", (value) => Values.Refl(T, value)),
+        ),
       ),
     ),
   )

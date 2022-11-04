@@ -21,8 +21,6 @@ export const operator = {
       { target: "operator" },
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
-    "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
-    "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [{ target: "operator" }, '"."', { name: "name" }],
     "operator:dot_field_quote": [
       { target: "operator" },
@@ -43,7 +41,7 @@ export const operator = {
       '"]"',
       { args_group: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
-    "operator:sequence_begin": ['"begin"', { sequence: "sequence" }],
+    "operator:sequence": [{ sequence: "sequence" }],
   },
 }
 
@@ -95,7 +93,14 @@ export const operand = {
       '")"',
       { cdr_t: "exp" },
     ],
-    "operand:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
+    "operand:cons": [
+      '"cons"',
+      '"("',
+      { car: "exp" },
+      '","',
+      { cdr: "exp" },
+      '")"',
+    ],
     "operand:quote": [{ data: { $pattern: ["string"] } }],
     "operand:clazz": [
       '"class"',
@@ -119,6 +124,12 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:new_ap": ['"new"', { name: "name" }, '"("', { args: "args" }, '")"'],
+    "operand:new_ap": [
+      '"new"',
+      { name: "name" },
+      '"("',
+      { args: "args" },
+      '")"',
+    ],
   },
 }

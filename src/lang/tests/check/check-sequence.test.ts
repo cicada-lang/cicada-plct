@@ -4,7 +4,7 @@ import { runCode } from "../utils"
 test("check Sequence -- single return", async () => {
   await runCode(`
 
-check begin {
+check {
   return sole
 }: Trivial
 
@@ -14,7 +14,7 @@ check begin {
 test("check Sequence -- Let", async () => {
   await runCode(`
 
-check begin {
+check {
   let x = sole
   return x
 }: Trivial
@@ -25,7 +25,7 @@ check begin {
 test("check Sequence -- LetThe", async () => {
   await runCode(`
 
-check begin {
+check {
   let x: Trivial = sole
   return x
 }: Trivial
@@ -40,7 +40,7 @@ function id(T: Type, x: T): T {
   return x
 }
 
-check begin {
+check {
   let x: Trivial = sole
   let y = id(Trivial, sole)
   return y
@@ -52,7 +52,7 @@ check begin {
 test("check Sequence -- Check", async () => {
   await runCode(`
 
-check begin {
+check {
   check sole: Trivial
   return sole
 }: Trivial

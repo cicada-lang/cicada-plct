@@ -1,7 +1,13 @@
 import { applyClosure, ClosureNative, ClosureSimple } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
-import { Ctx, CtxCons, CtxFulfilled, lookupTypeInCtx, lookupValueInCtx } from "../ctx"
+import {
+  Ctx,
+  CtxCons,
+  CtxFulfilled,
+  lookupTypeInCtx,
+  lookupValueInCtx,
+} from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
@@ -29,9 +35,12 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         return Inferred(type, Cores.Var(exp.name))
       }
 
-      throw new Errors.ElaborationError(`Undefined name ${exp.name}`, {
-        span: exp.span,
-      })
+      throw new Errors.ElaborationError(
+        `Undefined name during infer: ${exp.name}`,
+        {
+          span: exp.span,
+        },
+      )
     }
 
     case "Pi": {
@@ -39,7 +48,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
-      return Inferred(Values.Type(), Cores.Pi(exp.name, argTypeCore, retTypeCore))
+      return Inferred(
+        Values.Type(),
+        Cores.Pi(exp.name, argTypeCore, retTypeCore),
+      )
     }
 
     case "PiImplicit": {
@@ -47,7 +59,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = Exps.checkType(mod, ctx, exp.retType)
-      return Inferred(Values.Type(), Cores.PiImplicit(exp.name, argTypeCore, retTypeCore))
+      return Inferred(
+        Values.Type(),
+        Cores.PiImplicit(exp.name, argTypeCore, retTypeCore),
+      )
     }
 
     case "PiUnfolded": {
@@ -60,7 +75,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = ClosureSimple(
+        mod.ctxToEnv(ctx),
+        exp.name,
+        retTypeCore,
+      )
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
         Cores.Fn(exp.name, retInferred.core),
@@ -73,7 +92,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = ClosureSimple(mod.ctxToEnv(ctx), exp.name, retTypeCore)
+      const retTypeClosure = ClosureSimple(
+        mod.ctxToEnv(ctx),
+        exp.name,
+        retTypeCore,
+      )
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
         Cores.FnImplicit(exp.name, retInferred.core),
@@ -85,7 +108,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "FnUnfoldedWithRetType": {
-      return infer(mod, ctx, Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret))
+      return infer(
+        mod,
+        ctx,
+        Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
+      )
     }
 
     case "Ap": {
@@ -116,29 +143,14 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const carTypeValue = evaluate(mod.ctxToEnv(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = Exps.checkType(mod, ctx, exp.cdrType)
-      return Inferred(Values.Type(), Cores.Sigma(exp.name, carTypeCore, cdrTypeCore))
+      return Inferred(
+        Values.Type(),
+        Cores.Sigma(exp.name, carTypeCore, cdrTypeCore),
+      )
     }
 
     case "SigmaUnfolded": {
       return infer(mod, ctx, Exps.foldSigma(exp.bindings, exp.cdrType))
-    }
-
-    case "Car": {
-      const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
-      const sigma = inferred.type
-      return Inferred(sigma.carType, Cores.Car(inferred.core))
-    }
-
-    case "Cdr": {
-      const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, "Sigma")
-      const sigma = inferred.type
-      const carValue = evaluate(mod.ctxToEnv(ctx), Cores.Car(inferred.core))
-      return Inferred(
-        applyClosure(sigma.cdrTypeClosure, carValue),
-        Cores.Cdr(inferred.core),
-      )
     }
 
     case "Cons": {
@@ -195,7 +207,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         targetValue,
         exp.name,
       )
-      const property = Values.lookupPropertyOrFail(inferred.type, targetValue, exp.name)
+      const property = Values.lookupPropertyOrFail(
+        inferred.type,
+        targetValue,
+        exp.name,
+      )
       return Inferred(propertyType, readback(mod, ctx, propertyType, property))
     }
 
@@ -283,9 +299,12 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     default: {
-      throw new Errors.ElaborationError(`infer is not implemented for: ${exp.kind}`, {
-        span: exp.span,
-      })
+      throw new Errors.ElaborationError(
+        `infer is not implemented for: ${exp.kind}`,
+        {
+          span: exp.span,
+        },
+      )
     }
   }
 }

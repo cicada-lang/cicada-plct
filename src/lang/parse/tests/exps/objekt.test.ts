@@ -39,7 +39,9 @@ test("parse Objekt -- shorthand", () => {
 
 test("parse Objekt -- shorthand -- single one", () => {
   expect(parseExp("{ x }")).toMatchObject(
-    deleteUndefined(Exps.ObjektUnfolded([Exps.PropertyPlain("x", Exps.Var("x"))])),
+    deleteUndefined(
+      Exps.ObjektUnfolded([Exps.PropertyPlain("x", Exps.Var("x"))]),
+    ),
   )
 })
 
@@ -73,7 +75,11 @@ test("parse Objekt -- method", () => {
         Exps.PropertyPlain(
           "f",
           Exps.FnUnfolded(
-            [Exps.FnBindingName("x"), Exps.FnBindingName("y"), Exps.FnBindingName("z")],
+            [
+              Exps.FnBindingName("x"),
+              Exps.FnBindingName("y"),
+              Exps.FnBindingName("z"),
+            ],
             Exps.Var("x"),
           ),
         ),

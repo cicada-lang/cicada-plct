@@ -17,7 +17,10 @@ export function lookupPropertyType(
     case "ClazzCons": {
       if (clazz.name === name) return clazz.propertyType
 
-      const rest = applyClosure(clazz.restClosure, Actions.doDot(target, clazz.name))
+      const rest = applyClosure(
+        clazz.restClosure,
+        Actions.doDot(target, clazz.name),
+      )
 
       assertClazz(rest)
 

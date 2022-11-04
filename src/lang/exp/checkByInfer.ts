@@ -20,7 +20,12 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   return inferred.core
 }
 
-export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Value): Core {
+export function checkInferred(
+  mod: Mod,
+  ctx: Ctx,
+  inferred: Inferred,
+  type: Value,
+): Core {
   let inferredType = inferred.type
   let givenType = type
 
@@ -32,6 +37,7 @@ export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Valu
   inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
   givenType = mod.solution.deepWalkType(mod, ctx, givenType)
 
+  const solutionSize = mod.solution.bindings.size
   unifyType(mod.solution, ctx, inferredType, givenType)
 
   /**
@@ -39,8 +45,10 @@ export function checkInferred(mod: Mod, ctx: Ctx, inferred: Inferred, type: Valu
      we need to do `deepWalkType` again.
   **/
 
-  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+  if (mod.solution.bindings.size > solutionSize) {
+    inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
+    givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+  }
 
   inclusion(mod, ctx, inferredType, givenType)
 

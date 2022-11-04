@@ -10,9 +10,10 @@ export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
     case "Var": {
       const value = lookupValueInEnv(env, core.name)
-
       if (value === undefined) {
-        throw new Errors.EvaluationError(`Undefined name: ${core.name}`)
+        throw new Errors.EvaluationError(
+          `Undefined name during evaluate: ${core.name}`,
+        )
       }
 
       return value
@@ -45,7 +46,10 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ApImplicit": {
-      return Actions.doApImplicit(evaluate(env, core.target), evaluate(env, core.arg))
+      return Actions.doApImplicit(
+        evaluate(env, core.target),
+        evaluate(env, core.arg),
+      )
     }
 
     case "Sigma": {
@@ -106,6 +110,14 @@ export function evaluate(env: Env, core: Core): Value {
 
     case "Dot": {
       return Actions.doDot(evaluate(env, core.target), core.name)
+    }
+
+    case "Replace": {
+      return Actions.doReplace(
+        evaluate(env, core.target),
+        evaluate(env, core.motive),
+        evaluate(env, core.base),
+      )
     }
 
     // default: {

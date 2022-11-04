@@ -21,7 +21,10 @@ test("parse Fn", () => {
 test("parse Fn -- multiple bindings", () => {
   expect(parseExp("(x, y) => x")).toMatchObject(
     deleteUndefined(
-      Exps.FnUnfolded([Exps.FnBindingName("x"), Exps.FnBindingName("y")], Exps.Var("x")),
+      Exps.FnUnfolded(
+        [Exps.FnBindingName("x"), Exps.FnBindingName("y")],
+        Exps.Var("x"),
+      ),
     ),
   )
 

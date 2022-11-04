@@ -1,0 +1,139 @@
+@module lang2
+
+@judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
+  Check(ctx, Exp.v(name), t)
+  -------------------------------- v
+  Map.Find(ctx, name, t)
+
+  Check(ctx, Exp.pi(name, arg_t, ret_t), Value.type)
+  -------------------------------------------------- pi
+  Check(ctx, arg_t, Value.type)
+  Check(Map.extend(ctx, name, arg_t_value), ret_t, Value.type)
+  @where {
+    arg_t_value = Exp.evaluate(ctx.to_env(), arg_t)
+  }
+
+  Check(ctx, Exp.arrow(arg_t, ret_t), Value.type)
+  ----------------------------------------------- arrow
+  Check(ctx, arg_t, Value.type)
+  Check(ctx, ret_t, Value.type)
+
+  Check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl))
+  ------------------------------------------------------- fn_pi
+  Check(Map.extend(ctx, name, arg_t), ret, ret_t)
+  @where {
+    arg = new NotYetValue(arg_t, new VariableNeutral(name))
+    ret_t = Closure.apply(ret_t_cl, arg)
+  }
+
+  Check(ctx, Exp.fn(name, ret), Value.arrow(arg_t, ret_t))
+  ------------------------------------------------------- fn_arrow
+  Check(Map.extend(ctx, name, arg_t), ret, ret_t)
+
+  Check(ctx, Exp.ap(target, arg), ret_t)
+  -------------------------------------- ap
+  Check(ctx, target, new PiValue(arg_t, ret_t_cl))
+  Check(ctx, arg, arg_t)
+  @where {
+    arg_value = Exp.evaluate(ctx.to_env(), arg)
+    ret_t = Closure.apply(ret_t_cl, arg_value)
+  }
+
+  Check(ctx, Exp.sigma(name, car_t, cdr_t), Value.type)
+  -------------------------------------------------- sigma
+  Check(ctx, car_t, Value.type)
+  Check(Map.extend(ctx, name, car_t_value), cdr_t, Value.type)
+  @where {
+    car_t_value = Exp.evaluate(ctx.to_env(), car_t)
+  }
+
+  Check(ctx, Exp.pair(car_t, cdr_t), Value.type)
+  -------------------------------------------------- pair
+  Check(ctx, car_t, Value.type)
+  Check(ctx, cdr_t, Value.type)
+
+  Check(ctx, Exp.cons(car, cdr), Value.sigma(car_t, cdr_t_cl))
+  ------------------------------------------------------- cons_sigma
+  Check(ctx, car, car_t)
+  Check(ctx, cdr, cdr_t)
+  @where {
+    car_value = Exp.evaluate(ctx.to_env(), car)
+    cdr_t = Closure.apply(cdr_t_cl, car_value)
+  }
+
+  Check(ctx, Exp.cons(car, cdr), Value.pair(car_t, cdr_t))
+  ------------------------------------------------------- cons_pair
+  Check(ctx, car, car_t)
+  Check(ctx, cdr, cdr_t)
+
+  Check(ctx, Exp.car(target), car_t)
+  --------------------------------- car
+  Check(ctx, target, Value.sigma(car_t, ret_t_cl))
+
+  Check(ctx, Exp.cdr(target), cdr_t)
+  --------------------------------- cdr
+  Check(ctx, target, Value.sigma(car_t, cdr_t_cl))
+  @where {
+    car = new NotYetValue(car_t, new VariableNeutral(name))
+    cdr_t = Closure.apply(cdr_t_cl, car)
+  }
+
+  Check(ctx, Exp.nat, Value.type)
+  ------------------------------- nat
+
+  Check(ctx, Exp.zero, Value.nat)
+  ------------------------------- zero
+
+  Check(ctx, Exp.add1(prev), Value.nat)
+  ------------------------------------- prev
+  Check(ctx, prev, Value.nat)
+
+  Check(ctx, Exp.nat_ind(target, motive, base, step), t)
+  ------------------------------------------------------ nat_ind
+  Check(ctx, target, Value.nat)
+  Check(ctx, motive, Value.arrow(Value.nat, Value.type))
+  Check(ctx, base, base_t)
+  Check(ctx, step, step_t)
+  @where {
+    motive_value = Exp.evaluate(ctx.to_env(), motive)
+    base_t = Exp.do_ap(motive_value, Value.zero)
+    step_t = Exp.nat_ind_step_t(motive_value)
+    target_value = Exp.evaluate(ctx.to_env(), target)
+    t = Exp.do_ap(motive_value, target_value)
+  }
+
+  Check(ctx, Exp.equal(t, from, to), Value.type)
+  ---------------------------------------------- equal
+  Check(ctx, t, Value.type)
+  Check(ctx, from, t_value)
+  Check(ctx, to, t_value)
+  @where {
+    t_value = Exp.evaluate(ctx.to_env(), t)
+  }
+
+  Check(ctx, same, Value.equal(t, from, to))
+  ------------------------------------------ same
+  Value.equivalent(ctx, t, from, to)
+
+  Check(ctx, Value.replace(target, motive, base), t)
+  -------------------------------------------------- replace
+  Check(ctx, target, Value.equal(t, from, to))
+  Check(ctx, motive, Value.arrow(t, Value.type))
+  Check(ctx, base, base_t)
+  @where {
+    motive_value = Exp.evaluate(ctx.to_env(), motive)
+    base_t = Exp.do_ap(motive_value, from)
+    t = Exp.do_ap(motive_value, to)
+  }
+
+  Check(ctx, Exp.absurd, Value.type)
+  ---------------------------------- absurd
+
+  Check(ctx, Exp.from_falsehood_anything(target, motive), motive_value)
+  -------------------------------------------------- from_falsehood_anything
+  Check(ctx, target, Value.absurd)
+  Check(ctx, motive, Value.type)
+  @where {
+    motive_value = Exp.evaluate(motive)
+  }
+}

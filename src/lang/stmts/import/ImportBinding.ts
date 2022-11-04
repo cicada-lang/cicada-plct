@@ -18,7 +18,10 @@ export type ImportBindingAlias = {
   alias: string
 }
 
-export function ImportBindingAlias(name: string, alias: string): ImportBindingAlias {
+export function ImportBindingAlias(
+  name: string,
+  alias: string,
+): ImportBindingAlias {
   return {
     kind: "ImportBindingAlias",
     name,

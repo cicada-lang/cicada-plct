@@ -16,7 +16,9 @@ solve (a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"')
+  expect(output).toMatchInlineSnapshot(
+    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
+  )
 })
 
 test("solve Objekt -- occur twice", async () => {

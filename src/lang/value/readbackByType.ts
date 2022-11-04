@@ -52,7 +52,10 @@ export function readbackByType(
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(
+        type.argType,
+        Neutrals.Var(freshName),
+      )
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, typedNeutral)
@@ -63,7 +66,10 @@ export function readbackByType(
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const typedNeutral = Values.TypedNeutral(
+        type.argType,
+        Neutrals.Var(freshName),
+      )
       const retType = applyClosure(type.retTypeClosure, typedNeutral)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doApImplicit(value, typedNeutral)

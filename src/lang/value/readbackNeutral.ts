@@ -39,9 +39,14 @@ export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
 
     case "Replace": {
       const target = readbackNeutral(mod, ctx, neutral.target)
-      const motive = readback(mod, ctx, neutral.motive.type, neutral.motive.value)
+      const motive = readback(
+        mod,
+        ctx,
+        neutral.motive.type,
+        neutral.motive.value,
+      )
       const base = readback(mod, ctx, neutral.base.type, neutral.base.value)
-      return Cores.Ap(Cores.Ap(Cores.Ap(Cores.Var("replace"), target), motive), base)
+      return Cores.Replace(target, motive, base)
     }
   }
 }

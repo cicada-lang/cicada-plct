@@ -15,7 +15,9 @@ inclusion [
 
 `),
   ).toMatchObject(
-    deleteUndefined([new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")])]),
+    deleteUndefined([
+      new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")]),
+    ]),
   )
 })
 
@@ -30,7 +32,9 @@ inclusion [
 
 `),
   ).toMatchObject(
-    deleteUndefined([new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")])]),
+    deleteUndefined([
+      new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")]),
+    ]),
   )
 })
 

@@ -7,16 +7,19 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazzInCtx, readback, readbackType } from "../value"
 
-export function readbackClazz(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Cores.Clazz {
+export function readbackClazz(
+  mod: Mod,
+  ctx: Ctx,
+  clazz: Values.Clazz,
+): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       return Cores.ClazzNull()
     }
 
     case "ClazzCons": {
-      const name = clazz.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
-      const freshName = freshen(usedNames, name)
+      const freshName = freshen(usedNames, clazz.name)
       const typedNeutral = Values.TypedNeutral(
         clazz.propertyType,
         Neutrals.Var(freshName),

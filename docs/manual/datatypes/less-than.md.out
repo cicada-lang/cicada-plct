@@ -1,0 +1,3 @@
+(j, k) => LessThan(j, k): (Nat, Nat) -> Type
+(k) => LessThan(Nat.add1(Nat.zero), k): (Nat) -> Type
+LessThan(Nat.add1(Nat.zero), Nat.add1(Nat.add1(Nat.zero))): Type

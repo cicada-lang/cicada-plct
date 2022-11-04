@@ -1,2 +1,2 @@
-export * from "./pretty-logger"
-export * from "./silent-logger"
+export * from "./PrettyLogger"
+export * from "./SilentLogger"
