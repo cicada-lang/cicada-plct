@@ -134,8 +134,17 @@ export function occur(
     }
 
     case "ClazzCons": {
-      return occurType(solution, ctx, name, value.propertyType)
-      // ||      occurClosure(name, value.propertyType, value.restClosure)
+      if (occurType(solution, ctx, name, value.propertyType)) return true
+
+      const boundName = value.restClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        value.propertyType,
+        Neutrals.Var(freshName),
+      )
+      const rest = applyClosure(value.restClosure, typedNeutral)
+      return occurType(solution, ctx, name, rest)
     }
 
     case "ClazzFulfilled": {

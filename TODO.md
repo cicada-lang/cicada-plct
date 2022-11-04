@@ -1,4 +1,3 @@
-`occur` -- `ClazzCons`
 `occur` -- `Objekt`
 
 `checkByInfer` -- should not use `deepWalk` before `inclusion`
