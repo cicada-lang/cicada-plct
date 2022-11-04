@@ -4,7 +4,7 @@ import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { assertClazzInCtx, readback, Value } from "../value"
+import { readback, Value } from "../value"
 
 export function readbackProperties(
   mod: Mod,
@@ -20,7 +20,7 @@ export function readbackProperties(
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, clazz.name)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(ctx, rest)
       const propertyCore = readback(mod, ctx, clazz.propertyType, propertyValue)
       return {
         [clazz.name]: propertyCore,

@@ -3,6 +3,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import {
+  advanceValue,
   Solution,
   unify,
   unifyClazz,
@@ -19,10 +20,10 @@ export function unifyType(
   left: Value,
   right: Value,
 ): void {
-  left = solution.walk(left)
-  right = solution.walk(right)
+  left = advanceValue(solution, left)
+  right = advanceValue(solution, right)
 
-  const success = unifyPatternVar(solution, left, right)
+  const success = unifyPatternVar(solution, ctx, Values.Type(), left, right)
   if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {

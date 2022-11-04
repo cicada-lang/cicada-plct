@@ -2,6 +2,7 @@ import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { advanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { conversion, inclusionClazz, Value } from "../value"
@@ -35,6 +36,9 @@ export function inclusion(
   subtype: Value,
   type: Value,
 ): void {
+  subtype = advanceValue(mod.solution, subtype)
+  type = advanceValue(mod.solution, type)
+
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**
        Contravariant in argument position.

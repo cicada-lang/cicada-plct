@@ -26,31 +26,7 @@ export function checkInferred(
   inferred: Inferred,
   type: Value,
 ): Core {
-  let inferredType = inferred.type
-  let givenType = type
-
-  /**
-     NOTE We need to use `deepWalkType` before `unifyType`,
-     because `deepWalkType` might further `evaluate` a `Neutral`.
-  **/
-
-  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
-
-  const solutionSize = mod.solution.bindings.size
-  unifyType(mod.solution, ctx, inferredType, givenType)
-
-  /**
-     NOTE Because `unifyType` might do side-effect on `mod.solution`,
-     we need to do `deepWalkType` again.
-  **/
-
-  if (mod.solution.bindings.size > solutionSize) {
-    inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-    givenType = mod.solution.deepWalkType(mod, ctx, givenType)
-  }
-
-  inclusion(mod, ctx, inferredType, givenType)
-
+  unifyType(mod.solution, ctx, inferred.type, type)
+  inclusion(mod, ctx, inferred.type, type)
   return inferred.core
 }

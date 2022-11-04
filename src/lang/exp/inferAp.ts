@@ -70,16 +70,8 @@ function inferApPi(
       argInferred,
       inferred.type.argType,
     )
-    /**
-         NOTE We need to us `deepWalkType` before `unifyType`,
-         because `deepWalkType` might further `evaluate` a `Neutral`.
-      **/
-    unifyType(
-      mod.solution,
-      ctx,
-      mod.solution.deepWalkType(mod, ctx, argInferred.type),
-      mod.solution.deepWalkType(mod, ctx, inferred.type.argType),
-    )
+
+    unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
   /**

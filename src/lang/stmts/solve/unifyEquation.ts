@@ -24,13 +24,8 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       const rightInferred = inferOrUndefined(mod, ctx, equation.right)
 
       if (leftInferred !== undefined && rightInferred !== undefined) {
-        const leftType = mod.solution.deepWalkType(mod, ctx, leftInferred.type)
-        const rightType = mod.solution.deepWalkType(
-          mod,
-          ctx,
-          rightInferred.type,
-        )
-        // conversionType(mod, ctx, leftType, rightType)
+        const leftType = leftInferred.type
+        const rightType = rightInferred.type
         unifyType(mod.solution, ctx, leftType, rightType)
         const typeValue = leftType
         const env = mod.ctxToEnv(ctx)
@@ -41,7 +36,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       }
 
       if (leftInferred !== undefined) {
-        const typeValue = mod.solution.deepWalkType(mod, ctx, leftInferred.type)
+        const typeValue = leftInferred.type
         const env = mod.ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)
         const rightCore = check(mod, ctx, equation.right, typeValue)
@@ -51,11 +46,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       }
 
       if (rightInferred !== undefined) {
-        const typeValue = mod.solution.deepWalkType(
-          mod,
-          ctx,
-          rightInferred.type,
-        )
+        const typeValue = rightInferred.type
         const env = mod.ctxToEnv(ctx)
         const leftCore = check(mod, ctx, equation.left, typeValue)
         const leftValue = evaluate(env, leftCore)
