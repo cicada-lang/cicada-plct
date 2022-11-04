@@ -1,6 +1,3 @@
-[maybe] `formatSolution` should not use `deepWalk`
-[maybe] remove `deepWalk`
-
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 
 # std

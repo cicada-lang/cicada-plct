@@ -3,7 +3,7 @@ import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { Env, EnvCons } from "../env"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { deepWalk, PatternVar } from "../solution"
+import { PatternVar } from "../solution"
 import { readback, readbackType, Value } from "../value"
 
 export class Solution {
@@ -97,7 +97,6 @@ export class Solution {
         const typeCore = readbackType(mod, ctx, type)
         properties.push(`${name}: TODO(${formatCore(typeCore)})`)
       } else {
-        value = deepWalk(mod, ctx, type, value)
         const core = readback(mod, ctx, type, value)
         properties.push(`${name}: ${formatCore(core)}`)
       }

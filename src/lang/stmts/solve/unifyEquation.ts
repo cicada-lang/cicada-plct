@@ -26,7 +26,6 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       if (leftInferred !== undefined && rightInferred !== undefined) {
         const leftType = leftInferred.type
         const rightType = rightInferred.type
-        // conversionType(mod, ctx, leftType, rightType)
         unifyType(mod.solution, ctx, leftType, rightType)
         const typeValue = leftType
         const env = mod.ctxToEnv(ctx)
