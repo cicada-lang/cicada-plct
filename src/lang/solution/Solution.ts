@@ -77,9 +77,9 @@ export class Solution {
   walk(value: Value): Value {
     let list = []
     while (this.isPatternVar(value)) {
-      list.push(value)
       const found = this.lookupValue(value.neutral.name)
       if (found === undefined) break
+      list.push(value)
       value = found
     }
 
