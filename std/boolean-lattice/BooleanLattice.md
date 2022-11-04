@@ -230,7 +230,7 @@ function meet_unique_identity(
 import { equal_map } from "../equality/index.cic"
 ```
 
-```cicada todo
+```cicada
 function join_is_idempotent(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -321,7 +321,7 @@ function join_is_idempotent(
 }
 ```
 
-```cicada todo
+```cicada
 function meet_is_idempotent(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -338,7 +338,7 @@ function meet_is_idempotent(
 
 We can define order relation by lattice operations.
 
-```cicada todo
+```cicada
 function Under(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -352,7 +352,7 @@ function Under(
 }
 ```
 
-```cicada todo
+```cicada
 function Above(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -370,7 +370,7 @@ TODO `Under` is the swap of `Above`
 
 <https://en.wikipedia.org/wiki/Bounded_lattice>
 
-```cicada todo
+```cicada
 function top_is_at_the_top(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -468,7 +468,7 @@ function top_is_at_the_top(
 }
 ```
 
-```cicada todo
+```cicada
 function bottom_is_at_the_bottom(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -485,7 +485,7 @@ function bottom_is_at_the_bottom(
 
 The terminology, which might be introduced by Russell and Whitehead, is very confusing.
 
-```cicada todo
+```cicada
 function join_absorb_over_meet(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -553,7 +553,7 @@ function join_absorb_over_meet(
 }
 ```
 
-```cicada todo
+```cicada
 function meet_absorb_over_join(
   lattice: BooleanLattice,
   x: lattice.Element,

@@ -26,40 +26,64 @@ export function deepWalkNeutral(
     }
 
     case "Ap": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
       return Actions.doAp(target, arg.value)
     }
 
     case "ApImplicit": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       const arg = deepWalkTypedValue(mod, ctx, neutral.arg)
       return Actions.doApImplicit(target, arg.value)
     }
 
     case "Car": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       return Actions.doCar(target)
     }
 
     case "Cdr": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       return Actions.doCdr(target)
     }
 
     case "Dot": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       return Actions.doDot(target, neutral.name)
     }
 
     case "Replace": {
-      const targetType = neutral.targetType
-      const target = deepWalkNeutral(mod, ctx, targetType, neutral.target)
+      const target = deepWalkNeutral(
+        mod,
+        ctx,
+        neutral.targetType,
+        neutral.target,
+      )
       const motive = deepWalkTypedValue(mod, ctx, neutral.motive)
       const base = deepWalkTypedValue(mod, ctx, neutral.base)
       return Actions.doReplace(target, motive.value, base.value)
