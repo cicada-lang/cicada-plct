@@ -2,7 +2,7 @@ import * as Actions from "../actions"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { deepWalk, deepWalkType, deepWalkTypedValue } from "../solution"
+import { deepWalk, deepWalkTypedValue } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -12,8 +12,6 @@ export function deepWalkNeutral(
   type: Value,
   neutral: Neutral,
 ): Value {
-  type = deepWalkType(mod, ctx, type)
-
   switch (neutral.kind) {
     case "Var": {
       const value = mod.solution.walkOrUndefined(
