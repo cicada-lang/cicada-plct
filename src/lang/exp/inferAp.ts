@@ -5,7 +5,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { Exp, Inferred } from "../exp"
 import { Mod } from "../mod"
-import { deepWalkType, unifyType } from "../solution"
+import { unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
@@ -71,20 +71,7 @@ function inferApPi(
       inferred.type.argType,
     )
 
-    /**
-         NOTE We need to us `deepWalkType` before `unifyType`,
-         because `deepWalkType` might further `evaluate` a `Neutral`.
-    **/
-
-    // const left = deepWalkType(mod, ctx, argInferred.type)
-    // const right = deepWalkType(mod, ctx, inferred.type.argType)
-
-    deepWalkType
-
-    const left = argInferred.type
-    const right = inferred.type.argType
-
-    unifyType(mod.solution, ctx, left, right)
+    unifyType(mod.solution, ctx, argInferred.type, inferred.type.argType)
   }
 
   /**

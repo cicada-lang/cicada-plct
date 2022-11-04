@@ -26,28 +26,18 @@ export function checkInferred(
   inferred: Inferred,
   type: Value,
 ): Core {
-  let inferredType = inferred.type
-  let givenType = type
+  unifyType(mod.solution, ctx, inferred.type, type)
 
   /**
-     NOTE We need to use `deepWalkType` before `unifyType`,
-     because `deepWalkType` might further `evaluate` a `Neutral`.
+     TODO Should not `deepWalkType` before `inclusion`.
   **/
 
-  // inferredType = deepWalkType(mod, ctx, inferredType)
-  // givenType = deepWalkType(mod, ctx, givenType)
-
-  unifyType(mod.solution, ctx, inferredType, givenType)
-
-  /**
-     NOTE Because `unifyType` might do side-effect on `mod.solution`,
-     we need to do `deepWalkType` again.
-  **/
-
-  inferredType = deepWalkType(mod, ctx, inferredType)
-  givenType = deepWalkType(mod, ctx, givenType)
-
-  inclusion(mod, ctx, inferredType, givenType)
+  inclusion(
+    mod,
+    ctx,
+    deepWalkType(mod, ctx, inferred.type),
+    deepWalkType(mod, ctx, type),
+  )
 
   return inferred.core
 }
