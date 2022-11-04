@@ -4,9 +4,9 @@ import { Solution } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function prepareValueForUnify(solution: Solution, value: Value): Value {
+export function advanceValue(solution: Solution, value: Value): Value {
   if (value.kind === "TypedNeutral") {
-    return prepareNeutralForUnify(solution, value.type, value.neutral)
+    return advanceNeutral(solution, value.type, value.neutral)
   }
 
   return value
@@ -22,7 +22,7 @@ export function prepareValueForUnify(solution: Solution, value: Value): Value {
 
 **/
 
-function prepareNeutralForUnify(
+function advanceNeutral(
   solution: Solution,
   type: Value,
   neutral: Neutral,
@@ -34,40 +34,40 @@ function prepareNeutralForUnify(
 
     case "Ap": {
       return Actions.doAp(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "ApImplicit": {
       return Actions.doApImplicit(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "Car": {
       return Actions.doCar(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
       )
     }
 
     case "Cdr": {
       return Actions.doCdr(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
       )
     }
 
     case "Dot": {
       return Actions.doDot(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
         neutral.name,
       )
     }
 
     case "Replace": {
       return Actions.doReplace(
-        prepareNeutralForUnify(solution, neutral.targetType, neutral.target),
+        advanceNeutral(solution, neutral.targetType, neutral.target),
         neutral.motive.value,
         neutral.base.value,
       )
