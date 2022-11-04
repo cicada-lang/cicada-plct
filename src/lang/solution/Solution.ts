@@ -75,7 +75,11 @@ export class Solution {
   }
 
   walk(value: Value): Value {
-    let list = []
+    // optimized by the idea of path compression
+    // in disjoint-set data structure
+    // you can get more information in wiki:
+    // https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Finding_set_representatives
+    const list = []
     while (this.isPatternVar(value)) {
       const found = this.lookupValue(value.neutral.name)
       if (found === undefined) break
