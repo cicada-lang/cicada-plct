@@ -1,6 +1,5 @@
 # std
 
-`occur` -- `Sigma`
 `occur` -- `Cons`
 
 `occur` -- `Fn` & `FnImplicit`

@@ -73,9 +73,17 @@ export function occur(
     }
 
     case "Sigma": {
-      return occurType(solution, ctx, name, value.carType)
+      if (occurType(solution, ctx, name, value.carType)) return true
 
-      // ||         occurClosure(name, value.carType, value.cdrTypeClosure)
+      const boundName = value.cdrTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        value.carType,
+        Neutrals.Var(freshName),
+      )
+      const cdrType = applyClosure(value.cdrTypeClosure, typedNeutral)
+      return occurType(solution, ctx, name, cdrType)
     }
 
     case "Cons": {
