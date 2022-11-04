@@ -1,6 +1,9 @@
-import { Ctx } from "../ctx"
+import { applyClosure } from "../closure"
+import { Ctx, ctxNames } from "../ctx"
+import * as Neutrals from "../neutral"
 import { Neutral } from "../neutral"
 import { Solution } from "../solution"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
@@ -30,13 +33,31 @@ export function occur(
     }
 
     case "Pi": {
-      return occurType(solution, ctx, name, value.argType)
-      // ||      occurClosure(name, value.argType, value.retTypeClosure)
+      if (occurType(solution, ctx, name, value.argType)) return true
+
+      const boundName = value.retTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        value.argType,
+        Neutrals.Var(freshName),
+      )
+      const retType = applyClosure(value.retTypeClosure, typedNeutral)
+      return occurType(solution, ctx, name, retType)
     }
 
     case "PiImplicit": {
-      return occurType(solution, ctx, name, value.argType)
-      // ||        occurClosure(name, value.argType, value.retTypeClosure)
+      if (occurType(solution, ctx, name, value.argType)) return true
+
+      const boundName = value.retTypeClosure.name
+      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const freshName = freshen(usedNames, boundName)
+      const typedNeutral = Values.TypedNeutral(
+        value.argType,
+        Neutrals.Var(freshName),
+      )
+      const retType = applyClosure(value.retTypeClosure, typedNeutral)
+      return occurType(solution, ctx, name, retType)
     }
 
     case "Fn": {

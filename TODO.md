@@ -1,6 +1,12 @@
 # std
 
-`occur` -- should check `Value` instead of `Core` -- for partial evaluation
+`occur` -- `Sigma`
+`occur` -- `Cons`
+
+`occur` -- `Fn` & `FnImplicit`
+
+`occur` -- `ClazzCons`
+`occur` -- `Objekt`
 
 quit using `deepWalk` before `inclusion`
 
