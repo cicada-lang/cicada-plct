@@ -14,14 +14,11 @@ export function deepWalkNeutral(
 ): Value {
   switch (neutral.kind) {
     case "Var": {
-      const value = mod.solution.walkOrUndefined(
-        Values.TypedNeutral(type, neutral),
-      )
-
-      if (value !== undefined) {
-        return deepWalk(mod, ctx, type, value)
+      const typedNeutral = Values.TypedNeutral(type, neutral)
+      if (mod.solution.needWalk(typedNeutral)) {
+        return deepWalk(mod, ctx, type, mod.solution.walk(typedNeutral))
       } else {
-        return mod.solution.walk(Values.TypedNeutral(type, neutral))
+        return typedNeutral
       }
     }
 

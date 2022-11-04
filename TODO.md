@@ -1,5 +1,7 @@
 # std
 
+quit using `deepWalk` -- before `unify` -- no need to be "deep"
+
 quit using `deepWalk`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`

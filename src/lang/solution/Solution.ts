@@ -65,13 +65,13 @@ export class Solution {
     return value
   }
 
-  walkOrUndefined(value: Value): Value | undefined {
+  needWalk(value: Value): boolean {
     if (this.isPatternVar(value)) {
       const found = this.lookupValue(value.neutral.name)
-      if (found !== undefined) return this.walk(value)
+      if (found !== undefined) return true
     }
 
-    return undefined
+    return false
   }
 
   walk(value: Value): Value {
