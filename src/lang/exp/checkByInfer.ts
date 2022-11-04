@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Exp, infer, Inferred } from "../exp"
 import { Mod } from "../mod"
-import { unifyType } from "../solution"
+import { deepWalkType, unifyType } from "../solution"
 import { inclusion, Value } from "../value"
 
 export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
@@ -34,8 +34,8 @@ export function checkInferred(
      because `deepWalkType` might further `evaluate` a `Neutral`.
   **/
 
-  inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-  givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+  inferredType = deepWalkType(mod, ctx, inferredType)
+  givenType = deepWalkType(mod, ctx, givenType)
 
   const solutionSize = mod.solution.bindings.size
   unifyType(mod.solution, ctx, inferredType, givenType)
@@ -46,8 +46,8 @@ export function checkInferred(
   **/
 
   if (mod.solution.bindings.size > solutionSize) {
-    inferredType = mod.solution.deepWalkType(mod, ctx, inferredType)
-    givenType = mod.solution.deepWalkType(mod, ctx, givenType)
+    inferredType = deepWalkType(mod, ctx, inferredType)
+    givenType = deepWalkType(mod, ctx, givenType)
   }
 
   inclusion(mod, ctx, inferredType, givenType)

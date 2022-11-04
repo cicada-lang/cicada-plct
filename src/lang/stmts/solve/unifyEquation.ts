@@ -2,7 +2,7 @@ import { Mod } from "src/lang/mod"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer, inferOrUndefined } from "../../exp"
-import { unify, unifyType } from "../../solution"
+import { deepWalkType, unify, unifyType } from "../../solution"
 import { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
@@ -24,12 +24,8 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       const rightInferred = inferOrUndefined(mod, ctx, equation.right)
 
       if (leftInferred !== undefined && rightInferred !== undefined) {
-        const leftType = mod.solution.deepWalkType(mod, ctx, leftInferred.type)
-        const rightType = mod.solution.deepWalkType(
-          mod,
-          ctx,
-          rightInferred.type,
-        )
+        const leftType = deepWalkType(mod, ctx, leftInferred.type)
+        const rightType = deepWalkType(mod, ctx, rightInferred.type)
         // conversionType(mod, ctx, leftType, rightType)
         unifyType(mod.solution, ctx, leftType, rightType)
         const typeValue = leftType
@@ -41,7 +37,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       }
 
       if (leftInferred !== undefined) {
-        const typeValue = mod.solution.deepWalkType(mod, ctx, leftInferred.type)
+        const typeValue = deepWalkType(mod, ctx, leftInferred.type)
         const env = mod.ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)
         const rightCore = check(mod, ctx, equation.right, typeValue)
@@ -51,11 +47,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       }
 
       if (rightInferred !== undefined) {
-        const typeValue = mod.solution.deepWalkType(
-          mod,
-          ctx,
-          rightInferred.type,
-        )
+        const typeValue = deepWalkType(mod, ctx, rightInferred.type)
         const env = mod.ctxToEnv(ctx)
         const leftCore = check(mod, ctx, equation.left, typeValue)
         const leftValue = evaluate(env, leftCore)
