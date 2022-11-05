@@ -302,12 +302,13 @@ export type FnBinding =
 export type FnBindingName = {
   kind: "FnBindingName"
   name: string
-}
+} & ExpMeta
 
-export function FnBindingName(name: string): FnBindingName {
+export function FnBindingName(name: string, span?: Span): FnBindingName {
   return {
     kind: "FnBindingName",
     name,
+    span,
   }
 }
 
@@ -315,28 +316,34 @@ export type FnBindingAnnotated = {
   kind: "FnBindingAnnotated"
   name: string
   type: Exp
-}
+} & ExpMeta
 
 export function FnBindingAnnotated(
   name: string,
   type: Exp,
+  span?: Span,
 ): FnBindingAnnotated {
   return {
     kind: "FnBindingAnnotated",
     name,
     type,
+    span,
   }
 }
 
 export type FnBindingImplicit = {
   kind: "FnBindingImplicit"
   name: string
-}
+} & ExpMeta
 
-export function FnBindingImplicit(name: string): FnBindingImplicit {
+export function FnBindingImplicit(
+  name: string,
+  span?: Span,
+): FnBindingImplicit {
   return {
     kind: "FnBindingImplicit",
     name,
+    span,
   }
 }
 
@@ -344,16 +351,18 @@ export type FnBindingAnnotatedImplicit = {
   kind: "FnBindingAnnotatedImplicit"
   name: string
   type: Exp
-}
+} & ExpMeta
 
 export function FnBindingAnnotatedImplicit(
   name: string,
   type: Exp,
+  span?: Span,
 ): FnBindingAnnotatedImplicit {
   return {
     kind: "FnBindingAnnotatedImplicit",
     name,
     type,
+    span,
   }
 }
 
