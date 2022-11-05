@@ -1,11 +1,6 @@
 # std
 
-fix `unifyClazz`
-
-pass std/category/initial-and-terminal-objects.md
-
-- Why `dom` occurred?
-  Why it has not been evaluated to the fulfilled `x.object` already?
+[refactor] `unifyClazz`
 
 improve `unify` error report -- use `readback`
 

@@ -1,4 +1,5 @@
 import { Ctx, ctxNames } from "../ctx" //
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Solution, unify, unifyType } from "../solution"
 import { freshenNames } from "../utils/freshen"
@@ -30,6 +31,13 @@ export function unifyClazz(
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
 
+    const freshName = freshNameMap.get(name)
+    if (freshName === undefined) {
+      throw new Errors.InternalError(
+        `unifyClazz expect ${name} to be found in freshNameMap`,
+      )
+    }
+
     unifyType(mod, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
@@ -38,6 +46,26 @@ export function unifyClazz(
         ctx,
         leftProperty.type,
         leftProperty.value,
+        rightProperty.value,
+      )
+    }
+
+    if (leftProperty.value !== undefined) {
+      unify(
+        mod,
+        ctx,
+        leftProperty.type,
+        leftProperty.value,
+        mod.solution.createPatternVar(freshName, rightProperty.type),
+      )
+    }
+
+    if (rightProperty.value !== undefined) {
+      unify(
+        mod,
+        ctx,
+        rightProperty.type,
+        mod.solution.createPatternVar(freshName, leftProperty.type),
         rightProperty.value,
       )
     }
