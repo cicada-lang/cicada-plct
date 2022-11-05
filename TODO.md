@@ -1,4 +1,3 @@
-construct new Exp with span -- foldFn.ts
 construct new Exp with span -- foldFnWithRetType.ts
 construct new Exp with span -- foldPi.ts
 construct new Exp with span -- foldSequence.ts

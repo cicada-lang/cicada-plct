@@ -1,5 +1,6 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { spanUnion } from "../span"
 
 export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
   if (bindings.length === 0) return ret
@@ -8,7 +9,11 @@ export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
 
   switch (binding.kind) {
     case "FnBindingName": {
-      return Exps.Fn(binding.name, foldFn(restBindings, ret))
+      return Exps.Fn(
+        binding.name,
+        foldFn(restBindings, ret),
+        spanUnion(binding.span, ret.span),
+      )
     }
 
     case "FnBindingAnnotated": {
@@ -16,11 +21,16 @@ export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
         binding.name,
         binding.type,
         foldFn(restBindings, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
 
     case "FnBindingImplicit": {
-      return Exps.FnImplicit(binding.name, foldFn(restBindings, ret))
+      return Exps.FnImplicit(
+        binding.name,
+        foldFn(restBindings, ret),
+        spanUnion(binding.span, ret.span),
+      )
     }
 
     case "FnBindingAnnotatedImplicit": {
@@ -28,6 +38,7 @@ export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
         binding.name,
         binding.type,
         foldFn(restBindings, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
   }
