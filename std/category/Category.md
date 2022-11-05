@@ -244,13 +244,13 @@ class Isomorphism {
   inverse_left: Equal(
     cat.Morphism(dom, dom),
     cat.compose(morphism, inverse),
-    cat.id(dom)
+    cat.id(dom),
   )
 
   inverse_right: Equal(
     cat.Morphism(cod, cod),
     cat.compose(inverse, morphism),
-    cat.id(cod)
+    cat.id(cod),
   )
 }
 ```

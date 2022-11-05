@@ -67,12 +67,12 @@ function terminal_object_isomorphism(
 
     inverse_left: equal_compose(
       x.morphism_unique(cat.compose(g, f)),
-      equal_swap(x.morphism_unique(cat.id(x.object)))
+      equal_swap(x.morphism_unique(cat.id(x.object))),
     ),
 
     inverse_right: equal_compose(
       y.morphism_unique(cat.compose(f, g)),
-      equal_swap(y.morphism_unique(cat.id(y.object)))
+      equal_swap(y.morphism_unique(cat.id(y.object))),
     ),
   }
 }
