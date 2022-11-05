@@ -9,12 +9,8 @@ export function lookupPropertyType(
   target: Value,
   name: string,
 ): Value | undefined {
-  switch (clazz.kind) {
-    case "ClazzNull": {
-      return undefined
-    }
-
-    case "ClazzCons": {
+  while (clazz.kind !== "ClazzNull") {
+    if (clazz.kind === "ClazzCons") {
       if (clazz.name === name) return clazz.propertyType
 
       const rest = applyClosure(
@@ -24,15 +20,17 @@ export function lookupPropertyType(
 
       assertClazz(rest)
 
-      return lookupPropertyType(rest, target, name)
+      clazz = rest
     }
 
-    case "ClazzFulfilled": {
+    if (clazz.kind === "ClazzFulfilled") {
       if (clazz.name === name) return clazz.propertyType
 
-      return lookupPropertyType(clazz.rest, target, name)
+      clazz = clazz.rest
     }
   }
+
+  return undefined
 }
 
 export function lookupPropertyTypeOrFail(

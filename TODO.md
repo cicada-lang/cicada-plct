@@ -1,6 +1,3 @@
-[optimize] lookupProperty
-[optimize] lookupPropertyType
-
 implement `conversion` directly instead of using `readback` and `alphaEquivalent`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
