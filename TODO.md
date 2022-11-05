@@ -1,10 +1,28 @@
-`FnImplicit` insertion -- much needed in `std/category/Category.md`
+FnBinding with span
+construct new Exp with span -- foldFn.ts
+construct new Exp with span -- foldFnWithRetType.ts
+
+PiBinding with span
+construct new Exp with span -- foldPi.ts
+
+SequenceBinding with span
+construct new Exp with span -- foldSequence.ts
+
+construct new Exp with span -- foldSigma.ts
 
 # std
 
+pass std/category/initial-and-terminal-objects.md
+
+- Why `dom` occurred?
+  Why it has not been evaluated to the fulfilled `x.object` already?
+
+`FnImplicit` insertion -- much needed in `std/category/Category.md`
+
 pass std/boolean-lattice -- use `FnImplicit`
-pass std/category/initial-and-terminal-objects.md -- maybe quit using `deepWalk` can fix this
+
 pass std/groupoid -- need `super`
+
 pass std/order -- need datatype
 
 # maybe

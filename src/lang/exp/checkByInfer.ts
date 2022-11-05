@@ -12,8 +12,10 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   try {
     checkInferred(mod, ctx, inferred, type)
   } catch (error) {
-    if (error instanceof Errors.LangError)
+    if (error instanceof Errors.LangError) {
       throw new Errors.ElaborationError(error.message, { span: exp.span })
+    }
+
     throw error
   }
 

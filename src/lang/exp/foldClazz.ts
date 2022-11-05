@@ -1,4 +1,5 @@
 import * as Exps from "../exp"
+import { spanUnion } from "../span"
 
 export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
   if (bindings.length === 0) return Exps.ClazzNull()
@@ -11,6 +12,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.name,
         binding.propertyType,
         foldClazz(restBindings),
+        binding.propertyType.span,
       )
     }
 
@@ -20,6 +22,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.propertyType,
         binding.property,
         foldClazz(restBindings),
+        spanUnion(binding.propertyType.span, binding.property.span),
       )
     }
   }
