@@ -50,7 +50,7 @@ export function unifyClazz(
       )
     }
 
-    if (leftProperty.value !== undefined) {
+    if (leftProperty.value !== undefined && rightProperty.value === undefined) {
       unify(
         mod,
         ctx,
@@ -60,7 +60,7 @@ export function unifyClazz(
       )
     }
 
-    if (rightProperty.value !== undefined) {
+    if (leftProperty.value === undefined && rightProperty.value !== undefined) {
       unify(
         mod,
         ctx,
