@@ -16,11 +16,6 @@ export class Solution {
   }
 
   enrichCtx(mod: Mod, ctx: Ctx): Env {
-    /**
-       `enrichCtx` should not call `deepWalk`,
-       will lead to infinite loop.
-    **/
-
     let env = ctxToEnv(ctx)
 
     for (const patternVar of this.patternVars) {

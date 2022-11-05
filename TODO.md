@@ -1,5 +1,7 @@
 # std
 
+inline Solution.bind
+
 pass std/category/initial-and-terminal-objects.md
 
 - Why `dom` occurred?
