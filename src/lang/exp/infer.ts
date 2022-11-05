@@ -119,7 +119,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       return (
         Exps.inferFulfillingType(mod, ctx, inferred, exp.arg) ||
-        Exps.inferAp(mod, ctx, inferred, exp.arg)
+        Exps.inferAp(mod, ctx, inferred.type, inferred.core, exp.arg)
       )
     }
 
