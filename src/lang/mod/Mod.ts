@@ -36,6 +36,7 @@ export class Mod {
     if (this.initialized) return
     const globals = useGlobals()
     await globals.mount(this)
+    this.initialized = true
   }
 
   async executeStmts(stmts: Array<Stmt>): Promise<Array<StmtOutput>> {

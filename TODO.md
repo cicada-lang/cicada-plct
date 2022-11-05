@@ -1,5 +1,7 @@
 # std
 
+improve `unify` error report -- use `readback`
+
 pass std/category/initial-and-terminal-objects.md
 
 - Why `dom` occurred?
