@@ -13,7 +13,11 @@ export function unifyNeutral(
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
-        `unifyNeutral expect left name: ${left.name}, to be equal to right name: ${right.name}`,
+        [
+          `unifyNeutral expect variable names to be equal`,
+          `  left: ${left.name}`,
+          `  right: ${right.name}`,
+        ].join("\n"),
       )
     }
 
@@ -45,7 +49,11 @@ export function unifyNeutral(
   if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
-        `unifyNeutral expect left property name: ${left.name}, to be equal to right property name: ${right.name}`,
+        [
+          `unifyNeutral expect dot neutrals to have the same property name`,
+          `  left: ${left.name}`,
+          `  right: ${right.name}`,
+        ].join("\n"),
       )
     }
 
@@ -61,6 +69,10 @@ export function unifyNeutral(
   }
 
   throw new Errors.UnificationError(
-    `unifyNeutral is not implemented for left: ${left.kind}, right: ${right.kind}`,
+    [
+      `unifyNeutral is not implemented for the pair of neutrals`,
+      `  left kind: ${left.kind}`,
+      `  right kind: ${right.kind}`,
+    ].join("\n"),
   )
 }
