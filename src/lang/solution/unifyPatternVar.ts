@@ -1,8 +1,9 @@
+import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { occur } from "../solution"
-import { Value } from "../value"
+import { readback, readbackType, Value } from "../value"
 
 export function unifyPatternVar(
   mod: Mod,
@@ -22,7 +23,12 @@ export function unifyPatternVar(
   if (mod.solution.isPatternVar(left)) {
     if (occur(mod, ctx, left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
-        `${left.neutral.name} occurs in ${right.kind}`,
+        [
+          `unifyPatternVar find the left name occurs in the right value`,
+          `  type: ${formatCore(readbackType(mod, ctx, type))}`,
+          `  left name: ${left.neutral.name}`,
+          `  right value: ${formatCore(readback(mod, ctx, type, right))}`,
+        ].join("\n"),
       )
     }
 
@@ -33,7 +39,12 @@ export function unifyPatternVar(
   if (mod.solution.isPatternVar(right)) {
     if (occur(mod, ctx, right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
-        `${right.neutral.name} occurs in ${left.kind}`,
+        [
+          `unifyPatternVar find the right name occurs in the left value`,
+          `  type: ${formatCore(readbackType(mod, ctx, type))}`,
+          `  left value: ${formatCore(readback(mod, ctx, type, left))}`,
+          `  right name: ${right.neutral.name}`,
+        ].join("\n"),
       )
     }
 
