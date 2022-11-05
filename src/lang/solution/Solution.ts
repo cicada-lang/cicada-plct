@@ -48,10 +48,6 @@ export class Solution {
     )
   }
 
-  bind(name: string, value: Value): void {
-    this.bindings.set(name, value)
-  }
-
   private lookupValue(name: string): Value | undefined {
     const value = this.bindings.get(name)
     if (value === undefined) return undefined

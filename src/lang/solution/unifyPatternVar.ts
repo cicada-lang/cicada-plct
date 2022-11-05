@@ -25,7 +25,7 @@ export function unifyPatternVar(
       )
     }
 
-    solution.bind(left.neutral.name, right)
+    solution.bindings.set(left.neutral.name, right)
     return "ok"
   }
 
@@ -36,7 +36,7 @@ export function unifyPatternVar(
       )
     }
 
-    solution.bind(right.neutral.name, left)
+    solution.bindings.set(right.neutral.name, left)
     return "ok"
   }
 }
