@@ -1,7 +1,9 @@
+import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { unifyNeutral } from "../solution"
+import * as Values from "../value"
 import { Value } from "../value"
 
 export function unifyByValue(
@@ -15,8 +17,29 @@ export function unifyByValue(
     /**
        The `type` in `TypedNeutral` are not used.
     **/
-    unifyNeutral(mod, ctx, left.neutral, right.neutral)
-    return
+
+    // unifyNeutral(mod, ctx, left.neutral, right.neutral)
+    // return
+
+    try {
+      unifyNeutral(mod, ctx, left.neutral, right.neutral)
+      return
+    } catch (error) {
+      console.log("------")
+      console.log(
+        " type :",
+        Cores.formatCore(Values.readbackType(mod, ctx, type)),
+      )
+      console.log(
+        " left :",
+        Cores.formatCore(Values.readback(mod, ctx, type, left)),
+      )
+      console.log(
+        "right :",
+        Cores.formatCore(Values.readback(mod, ctx, type, right)),
+      )
+      throw error
+    }
   }
 
   if (left.kind === "Sole" && right.kind === "Sole") {

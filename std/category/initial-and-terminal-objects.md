@@ -46,7 +46,7 @@ If a terminal object exists, it is unique up to unique isomorphism.
 
 <https://github.com/xieyuheng/cat/blob/master/src/category.agda>
 
-```cicada todo
+```cicada
 import { Isomorphism } from "../category/index.cic"
 import { equal_swap, equal_compose } from "../equality/index.cic"
 
