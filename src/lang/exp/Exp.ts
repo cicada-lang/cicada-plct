@@ -508,12 +508,16 @@ export type SigmaBinding = SigmaBindingNameless | SigmaBindingNamed
 export type SigmaBindingNameless = {
   kind: "SigmaBindingNameless"
   type: Exp
-}
+} & ExpMeta
 
-export function SigmaBindingNameless(type: Exp): SigmaBindingNameless {
+export function SigmaBindingNameless(
+  type: Exp,
+  span?: Span,
+): SigmaBindingNameless {
   return {
     kind: "SigmaBindingNameless",
     type,
+    span,
   }
 }
 
@@ -521,13 +525,18 @@ export type SigmaBindingNamed = {
   kind: "SigmaBindingNamed"
   name: string
   type: Exp
-}
+} & ExpMeta
 
-export function SigmaBindingNamed(name: string, type: Exp): SigmaBindingNamed {
+export function SigmaBindingNamed(
+  name: string,
+  type: Exp,
+  span?: Span,
+): SigmaBindingNamed {
   return {
     kind: "SigmaBindingNamed",
     name,
     type,
+    span,
   }
 }
 

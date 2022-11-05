@@ -4,10 +4,10 @@ import * as matchers from "../matchers"
 
 export function sigma_binding_matcher(tree: pt.Tree): Exps.SigmaBinding {
   return pt.matcher<Exps.SigmaBinding>({
-    "sigma_binding:nameless": ({ exp }) =>
-      Exps.SigmaBindingNameless(matchers.exp_matcher(exp)),
-    "sigma_binding:named": ({ name, exp }) =>
-      Exps.SigmaBindingNamed(pt.str(name), matchers.exp_matcher(exp)),
+    "sigma_binding:nameless": ({ exp }, { span }) =>
+      Exps.SigmaBindingNameless(matchers.exp_matcher(exp), span),
+    "sigma_binding:named": ({ name, exp }, { span }) =>
+      Exps.SigmaBindingNamed(pt.str(name), matchers.exp_matcher(exp), span),
   })(tree)
 }
 
