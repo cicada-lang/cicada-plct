@@ -1,12 +1,9 @@
+SequenceBinding with span
+
 construct new Exp with span -- foldFn.ts
 construct new Exp with span -- foldFnWithRetType.ts
-
-PiBinding with span
 construct new Exp with span -- foldPi.ts
-
-SequenceBinding with span
 construct new Exp with span -- foldSequence.ts
-
 construct new Exp with span -- foldSigma.ts
 
 # std

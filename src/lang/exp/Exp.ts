@@ -129,12 +129,13 @@ export type PiBinding = PiBindingNameless | PiBindingNamed | PiBindingImplicit
 export type PiBindingNameless = {
   kind: "PiBindingNameless"
   type: Exp
-}
+} & ExpMeta
 
-export function PiBindingNameless(type: Exp): PiBindingNameless {
+export function PiBindingNameless(type: Exp, span?: Span): PiBindingNameless {
   return {
     kind: "PiBindingNameless",
     type,
+    span,
   }
 }
 
@@ -142,13 +143,18 @@ export type PiBindingNamed = {
   kind: "PiBindingNamed"
   name: string
   type: Exp
-}
+} & ExpMeta
 
-export function PiBindingNamed(name: string, type: Exp): PiBindingNamed {
+export function PiBindingNamed(
+  name: string,
+  type: Exp,
+  span?: Span,
+): PiBindingNamed {
   return {
     kind: "PiBindingNamed",
     name,
     type,
+    span,
   }
 }
 
@@ -156,13 +162,18 @@ export type PiBindingImplicit = {
   kind: "PiBindingImplicit"
   name: string
   type: Exp
-}
+} & ExpMeta
 
-export function PiBindingImplicit(name: string, type: Exp): PiBindingImplicit {
+export function PiBindingImplicit(
+  name: string,
+  type: Exp,
+  span?: Span,
+): PiBindingImplicit {
   return {
     kind: "PiBindingImplicit",
     name,
     type,
+    span,
   }
 }
 

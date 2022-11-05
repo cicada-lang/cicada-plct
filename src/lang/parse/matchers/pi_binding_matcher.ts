@@ -4,12 +4,12 @@ import * as matchers from "../matchers"
 
 export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
   return pt.matcher<Exps.PiBinding>({
-    "pi_binding:nameless": ({ exp }) =>
-      Exps.PiBindingNameless(matchers.exp_matcher(exp)),
-    "pi_binding:named": ({ name, exp }) =>
-      Exps.PiBindingNamed(pt.str(name), matchers.exp_matcher(exp)),
-    "pi_binding:implicit": ({ name, exp }) =>
-      Exps.PiBindingImplicit(pt.str(name), matchers.exp_matcher(exp)),
+    "pi_binding:nameless": ({ exp }, { span }) =>
+      Exps.PiBindingNameless(matchers.exp_matcher(exp), span),
+    "pi_binding:named": ({ name, exp }, { span }) =>
+      Exps.PiBindingNamed(pt.str(name), matchers.exp_matcher(exp), span),
+    "pi_binding:implicit": ({ name, exp }, { span }) =>
+      Exps.PiBindingImplicit(pt.str(name), matchers.exp_matcher(exp), span),
   })(tree)
 }
 
