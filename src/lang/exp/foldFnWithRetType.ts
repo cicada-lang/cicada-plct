@@ -1,5 +1,6 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { spanUnion } from "../span"
 
 export function foldFnWithRetType(
   bindings: Array<Exps.FnBinding>,
@@ -11,7 +12,13 @@ export function foldFnWithRetType(
   **/
 
   if (bindings.length === 0) {
-    return Exps.SequenceLetThe("_", retType, ret, Exps.Var("_"))
+    return Exps.SequenceLetThe(
+      "_",
+      retType,
+      ret,
+      Exps.Var("_"),
+      spanUnion(retType.span, ret.span),
+    )
   }
 
   const [binding, ...restBindings] = bindings
@@ -21,6 +28,7 @@ export function foldFnWithRetType(
       return Exps.Fn(
         binding.name,
         foldFnWithRetType(restBindings, retType, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
 
@@ -29,6 +37,7 @@ export function foldFnWithRetType(
         binding.name,
         binding.type,
         foldFnWithRetType(restBindings, retType, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
 
@@ -36,6 +45,7 @@ export function foldFnWithRetType(
       return Exps.FnImplicit(
         binding.name,
         foldFnWithRetType(restBindings, retType, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
 
@@ -44,6 +54,7 @@ export function foldFnWithRetType(
         binding.name,
         binding.type,
         foldFnWithRetType(restBindings, retType, ret),
+        spanUnion(binding.span, ret.span),
       )
     }
   }
