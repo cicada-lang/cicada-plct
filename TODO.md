@@ -2,8 +2,6 @@
 
 improve `unify` error report -- use `readback`
 
-`unifyClazz` -- extract `unifyClazzProperty`
-
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 
 pass std/boolean-lattice -- use `FnImplicit`

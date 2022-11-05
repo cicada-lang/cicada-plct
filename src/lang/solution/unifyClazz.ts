@@ -1,10 +1,10 @@
 import { Ctx, ctxNames } from "../ctx" //
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { Solution, unify, unifyType } from "../solution"
+import { unify, unifyType } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { expelClazz } from "../value"
+import { expelClazz, Value } from "../value"
 
 /**
 
@@ -18,7 +18,7 @@ export function unifyClazz(
   ctx: Ctx,
   left: Values.Clazz,
   right: Values.Clazz,
-): Solution {
+): void {
   const freshNameMap = freshenNames(
     [...ctxNames(ctx), ...mod.solution.names],
     [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
@@ -30,7 +30,6 @@ export function unifyClazz(
   for (const [name, rightProperty] of rightPropertyMap.entries()) {
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
-
     const freshName = freshNameMap.get(name)
     if (freshName === undefined) {
       throw new Errors.InternalError(
@@ -38,38 +37,30 @@ export function unifyClazz(
       )
     }
 
-    unifyType(mod, ctx, leftProperty.type, rightProperty.type)
+    unifyClazzProperty(mod, ctx, freshName, leftProperty, rightProperty)
+  }
+}
 
-    if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
-      unify(
-        mod,
-        ctx,
-        leftProperty.type,
-        leftProperty.value,
-        rightProperty.value,
-      )
-    }
+function unifyClazzProperty(
+  mod: Mod,
+  ctx: Ctx,
+  freshName: string,
+  left: { type: Value; value?: Value },
+  right: { type: Value; value?: Value },
+): void {
+  unifyType(mod, ctx, left.type, right.type)
 
-    if (leftProperty.value !== undefined && rightProperty.value === undefined) {
-      unify(
-        mod,
-        ctx,
-        leftProperty.type,
-        leftProperty.value,
-        mod.solution.createPatternVar(freshName, rightProperty.type),
-      )
-    }
-
-    if (leftProperty.value === undefined && rightProperty.value !== undefined) {
-      unify(
-        mod,
-        ctx,
-        rightProperty.type,
-        mod.solution.createPatternVar(freshName, leftProperty.type),
-        rightProperty.value,
-      )
-    }
+  if (left.value !== undefined && right.value !== undefined) {
+    unify(mod, ctx, left.type, left.value, right.value)
   }
 
-  return mod.solution
+  if (left.value !== undefined && right.value === undefined) {
+    const patternVar = mod.solution.createPatternVar(freshName, right.type)
+    unify(mod, ctx, left.type, left.value, patternVar)
+  }
+
+  if (left.value === undefined && right.value !== undefined) {
+    const patternVar = mod.solution.createPatternVar(freshName, right.type)
+    unify(mod, ctx, right.type, patternVar, right.value)
+  }
 }
