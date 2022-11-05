@@ -930,13 +930,18 @@ export type SequenceBindingLet = {
   kind: "SequenceBindingLet"
   name: string
   exp: Exp
-}
+} & ExpMeta
 
-export function SequenceBindingLet(name: string, exp: Exp): SequenceBindingLet {
+export function SequenceBindingLet(
+  name: string,
+  exp: Exp,
+  span?: Span,
+): SequenceBindingLet {
   return {
     kind: "SequenceBindingLet",
     name,
     exp,
+    span,
   }
 }
 
@@ -945,18 +950,20 @@ export type SequenceBindingLetThe = {
   name: string
   type: Exp
   exp: Exp
-}
+} & ExpMeta
 
 export function SequenceBindingLetThe(
   name: string,
   type: Exp,
   exp: Exp,
+  span?: Span,
 ): SequenceBindingLetThe {
   return {
     kind: "SequenceBindingLetThe",
     name,
     type,
     exp,
+    span,
   }
 }
 
@@ -964,15 +971,17 @@ export type SequenceBindingCheck = {
   kind: "SequenceBindingCheck"
   exp: Exp
   type: Exp
-}
+} & ExpMeta
 
 export function SequenceBindingCheck(
   exp: Exp,
   type: Exp,
+  span?: Span,
 ): SequenceBindingCheck {
   return {
     kind: "SequenceBindingCheck",
     exp,
     type,
+    span,
   }
 }
