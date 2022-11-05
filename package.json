@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
-    "@types/lodash": "^4.14.187",
+    "@types/lodash": "^4.14.188",
     "@types/node": "^18.11.9",
     "@vitest/coverage-c8": "^0.24.5",
     "@vitest/coverage-istanbul": "^0.24.5",
