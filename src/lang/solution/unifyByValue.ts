@@ -1,10 +1,9 @@
-import * as Cores from "../core"
+import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { unifyNeutral } from "../solution"
-import * as Values from "../value"
-import { Value } from "../value"
+import { readback, readbackType, Value } from "../value"
 
 export function unifyByValue(
   mod: Mod,
@@ -18,26 +17,14 @@ export function unifyByValue(
        The `type` in `TypedNeutral` are not used.
     **/
 
-    // unifyNeutral(mod, ctx, left.neutral, right.neutral)
-    // return
-
     try {
       unifyNeutral(mod, ctx, left.neutral, right.neutral)
       return
     } catch (error) {
       console.log("------")
-      console.log(
-        " type :",
-        Cores.formatCore(Values.readbackType(mod, ctx, type)),
-      )
-      console.log(
-        " left :",
-        Cores.formatCore(Values.readback(mod, ctx, type, left)),
-      )
-      console.log(
-        "right :",
-        Cores.formatCore(Values.readback(mod, ctx, type, right)),
-      )
+      console.log(" type :", formatCore(readbackType(mod, ctx, type)))
+      console.log(" left :", formatCore(readback(mod, ctx, type, left)))
+      console.log("right :", formatCore(readback(mod, ctx, type, right)))
       throw error
     }
   }
@@ -52,11 +39,20 @@ export function unifyByValue(
     }
 
     throw new Errors.UnificationError(
-      `unifyByValue expect left.data: ${left.data} to be the same as right.data: ${right.data}`,
+      [
+        `unifyByValue expect strings to be the same`,
+        `  left: ${left.data}`,
+        `  right: ${right.data}`,
+      ].join("\n"),
     )
   }
 
   throw new Errors.UnificationError(
-    `unifyByValue is not implemented for type: ${type.kind}, left: ${left.kind}, right: ${right.kind}`,
+    [
+      `unifyByValue is not implemented for the pair of values`,
+      `  type: ${formatCore(readbackType(mod, ctx, type))}`,
+      `  left: ${formatCore(readback(mod, ctx, type, left))}`,
+      `  right: ${formatCore(readback(mod, ctx, type, right))}`,
+    ].join("\n"),
   )
 }
