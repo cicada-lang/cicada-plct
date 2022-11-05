@@ -27,6 +27,7 @@ export function unify(
   left: Value,
   right: Value,
 ): void {
+  type = advanceValue(solution, type)
   left = advanceValue(solution, left)
   right = advanceValue(solution, right)
 

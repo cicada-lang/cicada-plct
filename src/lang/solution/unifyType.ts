@@ -103,7 +103,7 @@ export function unifyType(
 
   if (left.kind === "Equal" && right.kind === "Equal") {
     unifyType(solution, ctx, left.type, right.type)
-    const equalType = right.type
+    const equalType = left.type
     unify(solution, ctx, equalType, left.from, right.from)
     unify(solution, ctx, equalType, left.to, right.to)
     return
