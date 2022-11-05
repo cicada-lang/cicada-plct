@@ -1,8 +1,6 @@
 # std
 
-improve `unifyType` error message -- use `readback`
-improve `unify` error message -- use `readback` -- trace the values in `UnificationError`
-improve `unifyByValue` error message -- trace the values in `UnificationError`
+improve `unifyType` error message -- the values in `UnificationError`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 

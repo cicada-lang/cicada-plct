@@ -1,4 +1,6 @@
+import { formatCore } from "../core"
 import { Ctx } from "../ctx"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import {
   advanceValue,
@@ -6,7 +8,7 @@ import {
   unifyByValue,
   unifyPatternVar,
 } from "../solution"
-import { Value } from "../value"
+import { readback, readbackType, Value } from "../value"
 
 /**
 
@@ -34,5 +36,20 @@ export function unify(
   if (unifyPatternVar(mod, ctx, type, left, right)) return
   if (unifyByType(mod, ctx, type, left, right)) return
 
-  unifyByValue(mod, ctx, type, left, right)
+  try {
+    unifyByValue(mod, ctx, type, left, right)
+  } catch (error) {
+    if (error instanceof Errors.UnificationError) {
+      error.trace.unshift(
+        [
+          `trace`,
+          `  type: ${formatCore(readbackType(mod, ctx, type))}`,
+          `  left: ${formatCore(readback(mod, ctx, type, left))}`,
+          `  right: ${formatCore(readback(mod, ctx, type, right))}`,
+        ].join("\n"),
+      )
+    }
+
+    throw error
+  }
 }

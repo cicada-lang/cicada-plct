@@ -17,16 +17,8 @@ export function unifyByValue(
        The `type` in `TypedNeutral` are not used.
     **/
 
-    try {
-      unifyNeutral(mod, ctx, left.neutral, right.neutral)
-      return
-    } catch (error) {
-      console.log("------")
-      console.log(" type :", formatCore(readbackType(mod, ctx, type)))
-      console.log(" left :", formatCore(readback(mod, ctx, type, left)))
-      console.log("right :", formatCore(readback(mod, ctx, type, right)))
-      throw error
-    }
+    unifyNeutral(mod, ctx, left.neutral, right.neutral)
+    return
   }
 
   if (left.kind === "Sole" && right.kind === "Sole") {

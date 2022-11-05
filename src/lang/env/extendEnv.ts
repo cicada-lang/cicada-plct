@@ -2,7 +2,7 @@ import { Env, EnvCons } from "../env"
 import { Value } from "../value"
 
 export function extendEnv(env: Env, name: string, value: Value): Env {
-  env = substInEnv(env, name, value)
+  // env = substInEnv(env, name, value)
   return EnvCons(name, value, env)
 }
 
