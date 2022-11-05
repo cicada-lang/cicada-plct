@@ -1,5 +1,6 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { spanUnion } from "../span"
 
 export function foldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
   if (bindings.length === 0) return retType
@@ -8,11 +9,21 @@ export function foldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
 
   switch (binding.kind) {
     case "PiBindingNameless": {
-      return Exps.Pi("_", binding.type, foldPi(restBindings, retType))
+      return Exps.Pi(
+        "_",
+        binding.type,
+        foldPi(restBindings, retType),
+        spanUnion(binding.span, retType.span),
+      )
     }
 
     case "PiBindingNamed": {
-      return Exps.Pi(binding.name, binding.type, foldPi(restBindings, retType))
+      return Exps.Pi(
+        binding.name,
+        binding.type,
+        foldPi(restBindings, retType),
+        spanUnion(binding.span, retType.span),
+      )
     }
 
     case "PiBindingImplicit": {
@@ -20,6 +31,7 @@ export function foldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {
         binding.name,
         binding.type,
         foldPi(restBindings, retType),
+        spanUnion(binding.span, retType.span),
       )
     }
   }
