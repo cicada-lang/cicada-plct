@@ -1,5 +1,6 @@
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { spanUnion } from "../span"
 
 export function foldSigma(
   bindings: Array<Exps.SigmaBinding>,
@@ -11,7 +12,12 @@ export function foldSigma(
 
   switch (binding.kind) {
     case "SigmaBindingNameless": {
-      return Exps.Sigma("_", binding.type, foldSigma(restBindings, cdrType))
+      return Exps.Sigma(
+        "_",
+        binding.type,
+        foldSigma(restBindings, cdrType),
+        spanUnion(binding.span, cdrType.span),
+      )
     }
 
     case "SigmaBindingNamed": {
@@ -19,6 +25,7 @@ export function foldSigma(
         binding.name,
         binding.type,
         foldSigma(restBindings, cdrType),
+        spanUnion(binding.span, cdrType.span),
       )
     }
   }

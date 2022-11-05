@@ -1,5 +1,3 @@
-construct new Exp with span -- foldSigma.ts
-
 # std
 
 pass std/category/initial-and-terminal-objects.md
