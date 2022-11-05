@@ -1,4 +1,5 @@
 import { applyClosure, Closure } from "../closure"
+import { formatCore } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -12,7 +13,7 @@ import {
 } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { isClazz, Value } from "../value"
+import { isClazz, readbackType, Value } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = advanceValue(mod, left)
@@ -105,7 +106,11 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   }
 
   throw new Errors.UnificationError(
-    `unifyType is not implemented for left: ${left.kind}, right: ${right.kind}`,
+    [
+      `unifyType is not implemented for the pair of type values`,
+      `  left kind: ${formatCore(readbackType(mod, ctx, left))}`,
+      `  right kind: ${formatCore(readbackType(mod, ctx, right))}`,
+    ].join("\n"),
   )
 }
 
