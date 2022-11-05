@@ -1,4 +1,3 @@
-construct new Exp with span -- foldSequence.ts
 construct new Exp with span -- foldSigma.ts
 
 # std
