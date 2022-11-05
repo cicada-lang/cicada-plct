@@ -36,8 +36,8 @@ export function inclusion(
   subtype: Value,
   type: Value,
 ): void {
-  subtype = advanceValue(mod.solution, subtype)
-  type = advanceValue(mod.solution, type)
+  subtype = advanceValue(mod, subtype)
+  type = advanceValue(mod, type)
 
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**

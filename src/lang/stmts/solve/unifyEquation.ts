@@ -15,7 +15,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         env,
         check(mod, ctx, equation.right, typeValue),
       )
-      unify(mod.solution, ctx, typeValue, leftValue, rightValue)
+      unify(mod, ctx, typeValue, leftValue, rightValue)
       return
     }
 
@@ -26,12 +26,12 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
       if (leftInferred !== undefined && rightInferred !== undefined) {
         const leftType = leftInferred.type
         const rightType = rightInferred.type
-        unifyType(mod.solution, ctx, leftType, rightType)
+        unifyType(mod, ctx, leftType, rightType)
         const typeValue = leftType
         const env = mod.ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)
         const rightValue = evaluate(env, rightInferred.core)
-        unify(mod.solution, ctx, typeValue, leftValue, rightValue)
+        unify(mod, ctx, typeValue, leftValue, rightValue)
         return
       }
 
@@ -41,7 +41,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         const leftValue = evaluate(env, leftInferred.core)
         const rightCore = check(mod, ctx, equation.right, typeValue)
         const rightValue = evaluate(env, rightCore)
-        unify(mod.solution, ctx, typeValue, leftValue, rightValue)
+        unify(mod, ctx, typeValue, leftValue, rightValue)
         return
       }
 
@@ -51,7 +51,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         const leftCore = check(mod, ctx, equation.left, typeValue)
         const leftValue = evaluate(env, leftCore)
         const rightValue = evaluate(env, rightInferred.core)
-        unify(mod.solution, ctx, typeValue, leftValue, rightValue)
+        unify(mod, ctx, typeValue, leftValue, rightValue)
         return
       }
 

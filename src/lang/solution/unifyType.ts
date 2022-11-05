@@ -1,10 +1,10 @@
 import { applyClosure, Closure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import {
   advanceValue,
-  Solution,
   unify,
   unifyClazz,
   unifyNeutral,
@@ -14,16 +14,11 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, Value } from "../value"
 
-export function unifyType(
-  solution: Solution,
-  ctx: Ctx,
-  left: Value,
-  right: Value,
-): void {
-  left = advanceValue(solution, left)
-  right = advanceValue(solution, right)
+export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
+  left = advanceValue(mod, left)
+  right = advanceValue(mod, right)
 
-  const success = unifyPatternVar(solution, ctx, Values.Type(), left, right)
+  const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
   if (success) return
 
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
@@ -31,7 +26,7 @@ export function unifyType(
        The `type` in `TypedNeutral` are not used.
     **/
 
-    unifyNeutral(solution, ctx, left.neutral, right.neutral)
+    unifyNeutral(mod, ctx, left.neutral, right.neutral)
     return
   }
 
@@ -51,18 +46,18 @@ export function unifyType(
     (left.kind === "Pi" && right.kind === "Pi") ||
     (left.kind === "PiImplicit" && right.kind === "PiImplicit")
   ) {
-    unifyType(solution, ctx, left.argType, right.argType)
+    unifyType(mod, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const usedNames = [...ctxNames(ctx), ...solution.names]
+    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
     const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, argType, ctx)
 
     unifyClosure(
-      solution,
+      mod,
       ctx,
       right.retTypeClosure,
       left.retTypeClosure,
@@ -74,18 +69,18 @@ export function unifyType(
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    unifyType(solution, ctx, left.carType, right.carType)
+    unifyType(mod, ctx, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
-    const usedNames = [...ctxNames(ctx), ...solution.names]
+    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
     const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, carType, ctx)
 
     unifyClosure(
-      solution,
+      mod,
       ctx,
       right.cdrTypeClosure,
       left.cdrTypeClosure,
@@ -97,15 +92,15 @@ export function unifyType(
   }
 
   if (isClazz(left) && isClazz(right)) {
-    unifyClazz(solution, ctx, left, right)
+    unifyClazz(mod, ctx, left, right)
     return
   }
 
   if (left.kind === "Equal" && right.kind === "Equal") {
-    unifyType(solution, ctx, left.type, right.type)
+    unifyType(mod, ctx, left.type, right.type)
     const equalType = left.type
-    unify(solution, ctx, equalType, left.from, right.from)
-    unify(solution, ctx, equalType, left.to, right.to)
+    unify(mod, ctx, equalType, left.from, right.from)
+    unify(mod, ctx, equalType, left.to, right.to)
     return
   }
 
@@ -138,7 +133,7 @@ export function unifyType(
 **/
 
 function unifyClosure(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   left: Closure,
   right: Closure,
@@ -150,17 +145,17 @@ function unifyClosure(
 
   const leftApTarget = extractApTarget(leftRet, name)
   if (leftApTarget) {
-    unify(solution, ctx, leftApTarget.type, leftApTarget, Values.Fn(right))
+    unify(mod, ctx, leftApTarget.type, leftApTarget, Values.Fn(right))
     return
   }
 
   const rightApTarget = extractApTarget(rightRet, name)
   if (rightApTarget) {
-    unify(solution, ctx, rightApTarget.type, rightApTarget, Values.Fn(left))
+    unify(mod, ctx, rightApTarget.type, rightApTarget, Values.Fn(left))
     return
   }
 
-  unifyType(solution, ctx, leftRet, rightRet)
+  unifyType(mod, ctx, leftRet, rightRet)
 }
 
 function extractApTarget(

@@ -1,4 +1,5 @@
-import { Ctx, ctxNames } from "../ctx"
+import { Ctx, ctxNames } from "../ctx" //
+import { Mod } from "../mod"
 import { Solution, unify, unifyType } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
@@ -12,13 +13,13 @@ import { expelClazz } from "../value"
 **/
 
 export function unifyClazz(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   left: Values.Clazz,
   right: Values.Clazz,
 ): Solution {
   const freshNameMap = freshenNames(
-    [...ctxNames(ctx), ...solution.names],
+    [...ctxNames(ctx), ...mod.solution.names],
     [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
   )
 
@@ -29,11 +30,11 @@ export function unifyClazz(
     const leftProperty = leftPropertyMap.get(name)
     if (leftProperty === undefined) continue
 
-    unifyType(solution, ctx, leftProperty.type, rightProperty.type)
+    unifyType(mod, ctx, leftProperty.type, rightProperty.type)
 
     if (leftProperty.value !== undefined && rightProperty.value !== undefined) {
       unify(
-        solution,
+        mod,
         ctx,
         leftProperty.type,
         leftProperty.value,
@@ -42,5 +43,5 @@ export function unifyClazz(
     }
   }
 
-  return solution
+  return mod.solution
 }

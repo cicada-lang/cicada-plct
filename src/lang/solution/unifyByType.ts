@@ -3,14 +3,15 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
+import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { Solution, unify, unifyProperties, unifyType } from "../solution"
+import { unify, unifyProperties, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
 
 export function unifyByType(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   type: Value,
   left: Value,
@@ -18,7 +19,7 @@ export function unifyByType(
 ): "ok" | undefined {
   switch (type.kind) {
     case "Type": {
-      unifyType(solution, ctx, left, right)
+      unifyType(mod, ctx, left, right)
       return "ok"
     }
 
@@ -28,7 +29,7 @@ export function unifyByType(
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
       const typedNeutral = Values.TypedNeutral(
         type.argType,
@@ -38,13 +39,13 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, typedNeutral)
       const rightRet = Actions.doAp(right, typedNeutral)
-      unify(solution, ctx, retType, leftRet, rightRet)
+      unify(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solution.names]
+      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
       const typedNeutral = Values.TypedNeutral(
         type.argType,
@@ -54,19 +55,19 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doApImplicit(left, typedNeutral)
       const rightRet = Actions.doApImplicit(right, typedNeutral)
-      unify(solution, ctx, retType, leftRet, rightRet)
+      unify(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }
 
     case "Sigma": {
       const leftCar = Actions.doCar(left)
       const rightCar = Actions.doCar(right)
-      unify(solution, ctx, type.carType, leftCar, rightCar)
+      unify(mod, ctx, type.carType, leftCar, rightCar)
       const car = Actions.doCar(left)
       const cdrType = applyClosure(type.cdrTypeClosure, car)
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
-      unify(solution, ctx, cdrType, leftCdr, rightCdr)
+      unify(mod, ctx, cdrType, leftCdr, rightCdr)
       return "ok"
     }
 
@@ -74,7 +75,7 @@ export function unifyByType(
     case "ClazzCons":
     case "ClazzFulfilled": {
       assertNoExtraCommonProperties(type, left, right)
-      unifyProperties(solution, ctx, type, left, right)
+      unifyProperties(mod, ctx, type, left, right)
       return "ok"
     }
   }

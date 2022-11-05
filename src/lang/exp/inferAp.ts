@@ -68,7 +68,7 @@ function inferApPi(
   let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
     argInferred = Exps.insertApImplicit(mod, ctx, argInferred, type.argType)
-    unifyType(mod.solution, ctx, argInferred.type, type.argType)
+    unifyType(mod, ctx, argInferred.type, type.argType)
   }
 
   /**

@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
+import { Mod } from "../mod"
 import {
   advanceValue,
-  Solution,
   unifyByType,
   unifyByValue,
   unifyPatternVar,
@@ -21,18 +21,18 @@ import { Value } from "../value"
 **/
 
 export function unify(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   type: Value,
   left: Value,
   right: Value,
 ): void {
-  type = advanceValue(solution, type)
-  left = advanceValue(solution, left)
-  right = advanceValue(solution, right)
+  type = advanceValue(mod, type)
+  left = advanceValue(mod, left)
+  right = advanceValue(mod, right)
 
-  if (unifyPatternVar(solution, ctx, type, left, right)) return
-  if (unifyByType(solution, ctx, type, left, right)) return
+  if (unifyPatternVar(mod, ctx, type, left, right)) return
+  if (unifyByType(mod, ctx, type, left, right)) return
 
-  unifyByValue(solution, ctx, type, left, right)
+  unifyByValue(mod, ctx, type, left, right)
 }

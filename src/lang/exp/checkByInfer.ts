@@ -28,7 +28,7 @@ export function checkInferred(
   inferred: Inferred,
   type: Value,
 ): Core {
-  unifyType(mod.solution, ctx, inferred.type, type)
+  unifyType(mod, ctx, inferred.type, type)
   inclusion(mod, ctx, inferred.type, type)
   return inferred.core
 }

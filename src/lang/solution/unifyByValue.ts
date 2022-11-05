@@ -1,10 +1,11 @@
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
-import { Solution, unifyNeutral } from "../solution"
+import { Mod } from "../mod"
+import { unifyNeutral } from "../solution"
 import { Value } from "../value"
 
 export function unifyByValue(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   type: Value,
   left: Value,
@@ -14,7 +15,7 @@ export function unifyByValue(
     /**
        The `type` in `TypedNeutral` are not used.
     **/
-    unifyNeutral(solution, ctx, left.neutral, right.neutral)
+    unifyNeutral(mod, ctx, left.neutral, right.neutral)
     return
   }
 

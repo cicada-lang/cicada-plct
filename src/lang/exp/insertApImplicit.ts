@@ -32,5 +32,6 @@ export function insertApImplicit(
     retType,
     Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
   )
+
   return insertApImplicit(mod, ctx, insertedInferred, type)
 }

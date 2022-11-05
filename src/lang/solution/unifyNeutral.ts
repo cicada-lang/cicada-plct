@@ -1,10 +1,11 @@
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
+import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { Solution, unifyTypedValue } from "../solution"
+import { unifyTypedValue } from "../solution"
 
 export function unifyNeutral(
-  solution: Solution,
+  mod: Mod,
   ctx: Ctx,
   left: Neutral,
   right: Neutral,
@@ -20,24 +21,24 @@ export function unifyNeutral(
   }
 
   if (left.kind === "Ap" && right.kind === "Ap") {
-    unifyNeutral(solution, ctx, left.target, right.target)
-    unifyTypedValue(solution, ctx, left.arg, right.arg)
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
   if (left.kind === "ApImplicit" && right.kind === "ApImplicit") {
-    unifyNeutral(solution, ctx, left.target, right.target)
-    unifyTypedValue(solution, ctx, left.arg, right.arg)
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
   if (left.kind === "Car" && right.kind === "Car") {
-    unifyNeutral(solution, ctx, left.target, right.target)
+    unifyNeutral(mod, ctx, left.target, right.target)
     return
   }
 
   if (left.kind === "Cdr" && right.kind === "Cdr") {
-    unifyNeutral(solution, ctx, left.target, right.target)
+    unifyNeutral(mod, ctx, left.target, right.target)
     return
   }
 
@@ -48,14 +49,14 @@ export function unifyNeutral(
       )
     }
 
-    unifyNeutral(solution, ctx, left.target, right.target)
+    unifyNeutral(mod, ctx, left.target, right.target)
     return
   }
 
   if (left.kind === "Replace" && right.kind === "Replace") {
-    unifyNeutral(solution, ctx, left.target, right.target)
-    unifyTypedValue(solution, ctx, left.motive, right.motive)
-    unifyTypedValue(solution, ctx, left.base, right.base)
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.motive, right.motive)
+    unifyTypedValue(mod, ctx, left.base, right.base)
     return
   }
 

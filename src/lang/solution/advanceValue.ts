@@ -1,12 +1,12 @@
 import * as Actions from "../actions"
+import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { Solution } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function advanceValue(solution: Solution, value: Value): Value {
+export function advanceValue(mod: Mod, value: Value): Value {
   if (value.kind === "TypedNeutral") {
-    return advanceNeutral(solution, value.type, value.neutral)
+    return advanceNeutral(mod, value.type, value.neutral)
   }
 
   return value
@@ -22,52 +22,48 @@ export function advanceValue(solution: Solution, value: Value): Value {
 
 **/
 
-function advanceNeutral(
-  solution: Solution,
-  type: Value,
-  neutral: Neutral,
-): Value {
+function advanceNeutral(mod: Mod, type: Value, neutral: Neutral): Value {
   switch (neutral.kind) {
     case "Var": {
-      return solution.walk(Values.TypedNeutral(type, neutral))
+      return mod.solution.walk(Values.TypedNeutral(type, neutral))
     }
 
     case "Ap": {
       return Actions.doAp(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "ApImplicit": {
       return Actions.doApImplicit(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "Car": {
       return Actions.doCar(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
       )
     }
 
     case "Cdr": {
       return Actions.doCdr(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
       )
     }
 
     case "Dot": {
       return Actions.doDot(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.name,
       )
     }
 
     case "Replace": {
       return Actions.doReplace(
-        advanceNeutral(solution, neutral.targetType, neutral.target),
+        advanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.motive.value,
         neutral.base.value,
       )
