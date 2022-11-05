@@ -1,7 +1,7 @@
 import * as Actions from "../actions"
-import { ClosureSimple, substInEnv } from "../closure"
+import { ClosureSimple } from "../closure"
 import { Core } from "../core"
-import { Env, EnvCons, lookupValueInEnv } from "../env"
+import { Env, extendEnv, lookupValueInEnv } from "../env"
 import * as Errors from "../errors"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
@@ -90,13 +90,8 @@ export function evaluate(env: Env, core: Core): Value {
     case "ClazzFulfilled": {
       const propertyType = evaluate(env, core.propertyType)
       const property = evaluate(env, core.property)
-      const rest = evaluate(
-        EnvCons(core.name, property, substInEnv(env, core.name, property)),
-        core.rest,
-      )
-
+      const rest = evaluate(extendEnv(env, core.name, property), core.rest)
       assertClazz(rest)
-
       return Values.ClazzFulfilled(core.name, propertyType, property, rest)
     }
 

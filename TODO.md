@@ -1,11 +1,13 @@
 # std
 
-improve `unify` error report -- use `readback`
+fix `unifyClazz`
 
 pass std/category/initial-and-terminal-objects.md
 
 - Why `dom` occurred?
   Why it has not been evaluated to the fulfilled `x.object` already?
+
+improve `unify` error report -- use `readback`
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 
