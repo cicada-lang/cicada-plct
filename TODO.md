@@ -1,5 +1,3 @@
-`occor` takes `mod` instead of `solution`
-
 # std
 
 pass std/category/initial-and-terminal-objects.md

@@ -20,7 +20,7 @@ export function unifyPatternVar(
   }
 
   if (mod.solution.isPatternVar(left)) {
-    if (occur(mod.solution, ctx, left.neutral.name, type, right)) {
+    if (occur(mod, ctx, left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
         `${left.neutral.name} occurs in ${right.kind}`,
       )
@@ -31,7 +31,7 @@ export function unifyPatternVar(
   }
 
   if (mod.solution.isPatternVar(right)) {
-    if (occur(mod.solution, ctx, right.neutral.name, type, left)) {
+    if (occur(mod, ctx, right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
         `${right.neutral.name} occurs in ${left.kind}`,
       )
