@@ -1,4 +1,3 @@
-Functor.cic & NaturalTransformation.cic
 Isomorphism.cic
 terminalUniqueIso.cic
 ambr "Category.md" "Category.cic"

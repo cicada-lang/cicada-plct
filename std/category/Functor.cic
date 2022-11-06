@@ -1,0 +1,45 @@
+import { Category } from "Category.md"
+
+// To any natural construction on structures of one species,
+// yielding structures of another species,
+// there corresponds a functor
+// from the category of the first species
+// to the category of the second.
+
+// For example, in the category of types in a programming language,
+// type constructors are endo-functors,
+// and endo-functors are often containers.
+
+// Functor can also be called natural-construction,
+// which will let the term `NaturalTransformation` make sense.
+
+class Functor {
+  dom: Category
+  cod: Category
+  map(x: dom.Object): cod.Object
+
+  fmap(
+    implicit x: dom.Object,
+    implicit y: dom.Object,
+    f: dom.Morphism(x, y)
+  ): cod.Morphism(map(x), map(y))
+
+  fmapRespectCompose(
+    implicit x: dom.Object,
+    implicit y: dom.Object,
+    f: dom.Morphism(x, y),
+    implicit z: dom.Object,
+    g: dom.Morphism(y, z),
+  ): Equal(
+    cod.Morphism(map(x), map(z)),
+    fmap(dom.compose(f, g)),
+    cod.compose(fmap(f), fmap(g))
+  )
+
+  fmapRespectId(
+    x: dom.Object
+  ): Equal(
+    cod.Morphism(map(x), map(x)),
+    fmap(dom.id(x)),
+    cod.id(map(x)))
+}
