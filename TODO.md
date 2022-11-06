@@ -1,3 +1,5 @@
+fix docs/langs syntax
+
 [book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
 
 [mimor] reading-inference-rules.mimor -- use whereabouts syntax
