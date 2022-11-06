@@ -1,3 +1,7 @@
+re structure std/group
+trivialSemigroup
+trivialGroup
+
 why we need `freshenNames`?
 
 - why without it the following test will fail?
