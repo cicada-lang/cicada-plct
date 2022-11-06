@@ -1,8 +1,10 @@
+import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
 import { unifyTypedValue } from "../solution"
+import { readbackNeutral } from "../value"
 
 export function unifyNeutral(
   mod: Mod,
@@ -71,8 +73,8 @@ export function unifyNeutral(
   throw new Errors.UnificationError(
     [
       `unifyNeutral is not implemented for the pair of neutrals`,
-      `  left kind: ${left.kind}`,
-      `  right kind: ${right.kind}`,
+      `  left: ${formatCore(readbackNeutral(mod, ctx, left))}`,
+      `  right: ${formatCore(readbackNeutral(mod, ctx, right))}`,
     ].join("\n"),
   )
 }
