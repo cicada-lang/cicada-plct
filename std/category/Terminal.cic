@@ -1,0 +1,12 @@
+import { Category } from "Category.cic"
+
+class Terminal {
+  cat: Category
+
+  object: cat.Object
+  morphism(x: cat.Object): cat.Morphism(x, object)
+  morphismUnique(
+    implicit x: cat.Object,
+    f: cat.Morphism(x, object),
+  ): Equal(cat.Morphism(x, object), f, morphism(x))
+}

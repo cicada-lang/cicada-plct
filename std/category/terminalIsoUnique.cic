@@ -1,0 +1,45 @@
+import { Category } from "Category.cic"
+import { Terminal } from "Terminal.cic"
+import { Isomorphism } from "Isomorphism.cic"
+import { equalSwap, equalCompose } from "../equality/index.cic"
+
+// Terminal is an universal construction,
+// if a terminal object exists, it is unique up to unique isomorphism.
+// - https://github.com/xieyuheng/cat/blob/master/src/category.agda
+
+function terminalIso(
+  cat: Category,
+  x: Terminal(cat),
+  y: Terminal(cat),
+): Isomorphism(cat, x.object, y.object) {
+  let f = x.morphism(y.object)
+  let g = y.morphism(x.object)
+
+  return {
+    cat,
+    dom: x.object,
+    cod: y.object,
+    morphism: y.morphism(x.object),
+    inverse: x.morphism(y.object),
+
+    inverseLeft: equalCompose(
+      x.morphismUnique(cat.compose(g, f)),
+      equalSwap(x.morphismUnique(cat.id(x.object))),
+    ),
+
+    inverseRight: equalCompose(
+      y.morphismUnique(cat.compose(f, g)),
+      equalSwap(y.morphismUnique(cat.id(y.object))),
+    ),
+  }
+}
+
+// function terminalIsoUnique(
+//   cat: Category,
+//   x: Terminal(cat),
+//   y: Terminal(cat),
+//   f: Isomorphism(cat, x.object, y.object),
+//   g: Isomorphism(cat, x.object, y.object),
+// ): Equal(Isomorphism(cat, x.object, y.object), f, g) {
+//   return TODO
+// }

@@ -1,0 +1,31 @@
+import { Category } from "Category.cic"
+import { Terminal } from "Terminal.cic"
+import { Isomorphism } from "Isomorphism.cic"
+import { equalSwap, equalCompose } from "../equality/index.cic"
+
+function terminalIsoWithoutFulfillingClass(
+  cat: Category,
+  x: Terminal(cat),
+  y: Terminal(cat),
+): Isomorphism {
+  let f = x.morphism(y.object)
+  let g = y.morphism(x.object)
+
+  return {
+    cat,
+    dom: x.object,
+    cod: y.object,
+    morphism: y.morphism(x.object),
+    inverse: x.morphism(y.object),
+
+    inverseLeft: equalCompose(
+      x.morphismUnique(cat.compose(g, f)),
+      equalSwap(x.morphismUnique(cat.id(x.object))),
+    ),
+
+    inverseRight: equalCompose(
+      y.morphismUnique(cat.compose(f, g)),
+      equalSwap(y.morphismUnique(cat.id(y.object))),
+    ),
+  }
+}
