@@ -14,7 +14,7 @@
 
 // - https://en.wikipedia.org/wiki/Analytic-synthetic_distinction
 
-@datatype Either(A: Type, B: Type) {
+datatype Either(A: Type, B: Type) {
 
   // Either(A, B)
   // ------------ intro_l

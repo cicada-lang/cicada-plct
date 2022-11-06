@@ -1,5 +1,3 @@
-@module lang3
-
 Telescope.fill(Telescope, Value): Telescope
 Telescope.fill(Telescope.tel(env, next, scope), value) = {
   env = Env.extend(env, next.name, value)

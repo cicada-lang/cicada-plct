@@ -1,5 +1,3 @@
-@module lang1
-
 Exp.check(Map(String, Ty), Exp, Ty): Trivial
 
 Exp.check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t)) =

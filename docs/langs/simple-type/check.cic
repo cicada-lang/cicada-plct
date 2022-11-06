@@ -1,6 +1,4 @@
-@module lang1
-
-@judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
+judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
   Check(ctx, Exp.v(name), t)
   -------------------------- v
   Map.Find(ctx, name, t)

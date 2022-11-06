@@ -21,7 +21,7 @@ In general, inductive datatype in dependent can have computation.
 // in cicada:
 
 @given A: Type
-@datatype List.Append(x: List(A), y: List(A), z: List(A)) {
+datatype List.Append(x: List(A), y: List(A), z: List(A)) {
   null: List.Append(List.null, z, z)
   @given head: A
   cons(prev: List.Append(x, y, z)): List.Append(List.cons(head, x), y, List.cons(head, z))
@@ -30,7 +30,7 @@ In general, inductive datatype in dependent can have computation.
 // in cicada with inference syntax:
 
 @given A: Type
-@judgment List.Append(x: List(A), y: List(A), z: List(A)) {
+judgment List.Append(x: List(A), y: List(A), z: List(A)) {
   List.Append(List.null, z, z)
   ---------------------------- null
 

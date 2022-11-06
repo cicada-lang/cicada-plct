@@ -1,6 +1,4 @@
-@module lang2
-
-@datatype Exp {
+datatype Exp {
   v(name: String): Exp
 
   pi(name: String, arg_t: Exp, ret_t: Exp): Exp

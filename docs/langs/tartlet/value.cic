@@ -1,6 +1,4 @@
-@module lang2
-
-@datatype Value {
+datatype Value {
   pi(arg_t: Value, ret_t_cl: Closure): Value
   arrow(arg_t: Value, ret_t: Value): Value
   fn(ret_cl: Closure): Value

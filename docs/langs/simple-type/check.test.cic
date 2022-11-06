@@ -1,5 +1,3 @@
-@module lang1
-
 {
   ctx = Map.empty
   x = Exp.v("x")

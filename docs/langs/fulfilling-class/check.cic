@@ -1,6 +1,4 @@
-@module lang3
-
-@judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
+judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
   Check(ctx, Exp.cls(List.null), Value.type)
   ----------------------------------------- cls_null
 
@@ -8,7 +6,7 @@
   ------------------------------------------------------------ cons_cls
   Check(ctx, t, Value.type)
   Check(Map.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
-  @where {
+  where {
     t_value = Exp.evaluate(ctx.to_env(), t)
   }
 
@@ -20,7 +18,7 @@
   Map.Find(properties, name, exp)
   Check(ctx, exp, t)
   Check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
-  @where {
+  where {
     { name, t } = tel.next
     less_properties = Map.remove(properties, name)
     value = Exp.evaluate(ctx.to_env(), exp)
@@ -30,7 +28,7 @@
   Check(ctx, Exp.dot(target, name), t)
   ------------------------------------ dot
   Check(ctx, target, Value.cls(tel))
-  @where {
+  where {
     t = Telescope.dot(tel, name)
   }
 }

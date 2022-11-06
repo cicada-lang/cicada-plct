@@ -1,6 +1,4 @@
-@module lang1
-
-@datatype Exp {
+datatype Exp {
   v(name: String): Exp
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp

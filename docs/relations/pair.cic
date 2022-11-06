@@ -2,7 +2,7 @@
 
 // in natural deduction:
 
-@datatype Pair(A: Type, B: Type) {
+datatype Pair(A: Type, B: Type) {
 
   // Pair(A, B)
   // ---------- intro

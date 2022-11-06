@@ -1,6 +1,4 @@
-@module lang2
-
-@judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
+judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
   Check(ctx, Exp.v(name), t)
   -------------------------------- v
   Map.Find(ctx, name, t)
@@ -9,7 +7,7 @@
   -------------------------------------------------- pi
   Check(ctx, arg_t, Value.type)
   Check(Map.extend(ctx, name, arg_t_value), ret_t, Value.type)
-  @where {
+  where {
     arg_t_value = Exp.evaluate(ctx.to_env(), arg_t)
   }
 
@@ -21,7 +19,7 @@
   Check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl))
   ------------------------------------------------------- fn_pi
   Check(Map.extend(ctx, name, arg_t), ret, ret_t)
-  @where {
+  where {
     arg = new NotYetValue(arg_t, new VariableNeutral(name))
     ret_t = Closure.apply(ret_t_cl, arg)
   }
@@ -34,7 +32,7 @@
   -------------------------------------- ap
   Check(ctx, target, new PiValue(arg_t, ret_t_cl))
   Check(ctx, arg, arg_t)
-  @where {
+  where {
     arg_value = Exp.evaluate(ctx.to_env(), arg)
     ret_t = Closure.apply(ret_t_cl, arg_value)
   }
@@ -43,7 +41,7 @@
   -------------------------------------------------- sigma
   Check(ctx, car_t, Value.type)
   Check(Map.extend(ctx, name, car_t_value), cdr_t, Value.type)
-  @where {
+  where {
     car_t_value = Exp.evaluate(ctx.to_env(), car_t)
   }
 
@@ -56,7 +54,7 @@
   ------------------------------------------------------- cons_sigma
   Check(ctx, car, car_t)
   Check(ctx, cdr, cdr_t)
-  @where {
+  where {
     car_value = Exp.evaluate(ctx.to_env(), car)
     cdr_t = Closure.apply(cdr_t_cl, car_value)
   }
@@ -73,7 +71,7 @@
   Check(ctx, Exp.cdr(target), cdr_t)
   --------------------------------- cdr
   Check(ctx, target, Value.sigma(car_t, cdr_t_cl))
-  @where {
+  where {
     car = new NotYetValue(car_t, new VariableNeutral(name))
     cdr_t = Closure.apply(cdr_t_cl, car)
   }
@@ -94,7 +92,7 @@
   Check(ctx, motive, Value.arrow(Value.nat, Value.type))
   Check(ctx, base, base_t)
   Check(ctx, step, step_t)
-  @where {
+  where {
     motive_value = Exp.evaluate(ctx.to_env(), motive)
     base_t = Exp.do_ap(motive_value, Value.zero)
     step_t = Exp.nat_ind_step_t(motive_value)
@@ -107,7 +105,7 @@
   Check(ctx, t, Value.type)
   Check(ctx, from, t_value)
   Check(ctx, to, t_value)
-  @where {
+  where {
     t_value = Exp.evaluate(ctx.to_env(), t)
   }
 
@@ -120,7 +118,7 @@
   Check(ctx, target, Value.equal(t, from, to))
   Check(ctx, motive, Value.arrow(t, Value.type))
   Check(ctx, base, base_t)
-  @where {
+  where {
     motive_value = Exp.evaluate(ctx.to_env(), motive)
     base_t = Exp.do_ap(motive_value, from)
     t = Exp.do_ap(motive_value, to)
@@ -133,7 +131,7 @@
   -------------------------------------------------- from_falsehood_anything
   Check(ctx, target, Value.absurd)
   Check(ctx, motive, Value.type)
-  @where {
+  where {
     motive_value = Exp.evaluate(motive)
   }
 }

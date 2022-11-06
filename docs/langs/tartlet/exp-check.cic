@@ -1,5 +1,3 @@
-@module lang2
-
 Exp.check(Map(String, Value), Exp, Value): Trivial
 
 Exp.check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl)) = {

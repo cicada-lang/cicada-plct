@@ -1,6 +1,6 @@
 @module datatype
 
-@datatype Vec(A: Type, length: Nat) {
+datatype Vec(A: Type, length: Nat) {
   null: Vec(A, Nat.zero)
   @given n: Nat
   cons(head: A, tail: Vec(A, n)): Vec(A, Nat.add1(n))

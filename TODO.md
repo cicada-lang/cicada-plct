@@ -1,4 +1,4 @@
-fix docs/langs syntax
+fix docs/langs naming
 
 [book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
 

@@ -1,6 +1,4 @@
-@module lang3
-
-@datatype Telescope {
+datatype Telescope {
   tel(
     env: Map(String, Value),
     next?: { name: String, t: Value },
