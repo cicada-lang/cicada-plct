@@ -3,7 +3,7 @@ class Semigroup {
 
   mul(x: Element, y: Element): Element
 
-  mul_is_associative(
+  mulAssociative(
     x: Element,
     y: Element,
     z: Element,

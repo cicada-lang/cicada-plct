@@ -3,7 +3,7 @@ import { Semigroup } from "Semigroup.cic"
 let trivialSemigroup = new Semigroup {
   Element: Trivial,
   mul: (x, y) => sole,
-  mul_is_associative: (x, y, z) => refl,
+  mulAssociative: (x, y, z) => refl,
 }
 
 compute trivialSemigroup

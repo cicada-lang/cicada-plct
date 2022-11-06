@@ -10,7 +10,7 @@ class Semigroup {
 
   mul(x: Element, y: Element): Element
 
-  mul_is_associative(
+  mulAssociative(
     x: Element,
     y: Element,
     z: Element,
@@ -33,7 +33,7 @@ class Semigroup {
 }
 ```
 
-In which propositional equality in `mul_is_associative`
+In which propositional equality in `mulAssociative`
 is transfered the definitional equality of `List`.
 
 TODO how about `Monoid` and `Group`?

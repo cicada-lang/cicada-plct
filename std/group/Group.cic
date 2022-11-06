@@ -3,8 +3,8 @@ import { Monoid } from "Monoid.cic"
 class Group extends Monoid {
   inv(x: Element): Element
 
-  inv_left(x: Element): Equal(Element, mul(inv(x), x), id)
-  inv_right(x: Element): Equal(Element, mul(x, inv(x)), id)
+  invLeft(x: Element): Equal(Element, mul(inv(x), x), id)
+  invRight(x: Element): Equal(Element, mul(x, inv(x)), id)
 
   div(x: Element, y: Element): Element {
     return mul(x, inv(y))
