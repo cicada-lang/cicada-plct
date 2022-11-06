@@ -1,5 +1,3 @@
-@module lang1
-
 Exp.infer(Map(String, Ty), Exp): Ty
 
 Exp.infer(ctx, Exp.v(name)) = Map.find(ctx, name)
