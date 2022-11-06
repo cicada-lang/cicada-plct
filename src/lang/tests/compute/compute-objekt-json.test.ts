@@ -11,7 +11,7 @@ compute { "Hello, World!": "Hi!" }
   expect(output).toMatchInlineSnapshot(
     `
     "{ \\"Hello, World!\\": \\"Hi!\\" }: class {
-       \\"Hello, World!\\": String = \\"Hi!\\" 
+      \\"Hello, World!\\": String = \\"Hi!\\"
     }"
   `,
   )

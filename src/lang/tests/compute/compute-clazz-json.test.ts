@@ -11,10 +11,10 @@ compute class { "Hello, World!": String = "Hi!" }
 
   expect(output).toMatchInlineSnapshot(`
     "class {
-       \\"Hello, World!\\": String 
+      \\"Hello, World!\\": String
     }: Type
     class {
-       \\"Hello, World!\\": String = \\"Hi!\\" 
+      \\"Hello, World!\\": String = \\"Hi!\\"
     }: Type"
   `)
 })

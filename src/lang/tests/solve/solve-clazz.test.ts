@@ -66,8 +66,8 @@ solve (A: Type, B: Type, C: Type) {
   expect(output).toMatchInlineSnapshot(
     `
     "{ A: String, B: String, C: class {
-       a: String,
-        b: String 
+      a: String
+      b: String
     } }"
   `,
   )
@@ -89,8 +89,8 @@ solve (A: Type, B: Type, C: Type, a: A, b: B) {
   expect(output).toMatchInlineSnapshot(
     `
     "{ A: String, B: String, C: class {
-       a: String = \\"a\\",
-        b: String = \\"b\\" 
+      a: String = \\"a\\"
+      b: String = \\"b\\"
     }, a: \\"a\\", b: \\"b\\" }"
   `,
   )

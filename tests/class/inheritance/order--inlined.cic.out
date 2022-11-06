@@ -1,1 +1,19 @@
-refl(implicit Type, implicit class { Element: Type, Under: (Element, Element) -> Type, reflexive: (x2: Element) -> Under(x2, x2), transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z), antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y) }): Equal(Type, class { Element: Type, Under: (Element, Element) -> Type, reflexive: (x2: Element) -> Under(x2, x2), transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z), antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y) }, class { Element: Type, Under: (Element, Element) -> Type, reflexive: (x2: Element) -> Under(x2, x2), transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z), antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y) })
+refl(implicit Type, implicit class {
+  Element: Type
+  Under: (Element, Element) -> Type
+  reflexive: (x2: Element) -> Under(x2, x2)
+  transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z)
+  antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y)
+}): Equal(Type, class {
+  Element: Type
+  Under: (Element, Element) -> Type
+  reflexive: (x2: Element) -> Under(x2, x2)
+  transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z)
+  antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y)
+}, class {
+  Element: Type
+  Under: (Element, Element) -> Type
+  reflexive: (x2: Element) -> Under(x2, x2)
+  transitive: (implicit x2: Element, implicit y: Element, Under(x2, y), implicit z: Element, Under(y, z)) -> Under(x2, z)
+  antisymmetric: (implicit x2: Element, implicit y: Element, Under(x2, y), Under(y, x2)) -> Equal(Element, x2, y)
+})

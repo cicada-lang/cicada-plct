@@ -21,9 +21,9 @@ compute new ABC {
   expect(output).toMatchInlineSnapshot(
     `
     "{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class {
-       a: String,
-        b: String,
-        c: String 
+      a: String
+      b: String
+      c: String
     }"
   `,
   )
@@ -46,8 +46,8 @@ compute new AB {
   expect(output).toMatchInlineSnapshot(
     `
     "{ a: \\"Hello, World!\\", b: \\"Hello, World!\\" }: class {
-       a: String,
-        b: String = a 
+      a: String
+      b: String = a
     }"
   `,
   )
@@ -71,8 +71,8 @@ compute new The {
   expect(output).toMatchInlineSnapshot(
     `
     "{ T: String, x: \\"x\\" }: class {
-       T: Type,
-        x: T 
+      T: Type
+      x: T
     }"
   `,
   )
@@ -99,10 +99,10 @@ compute new ABC {
   expect(output).toMatchInlineSnapshot(
     `
     "{ d: \\"d\\", a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class {
-       d: String = \\"d\\",
-        a: String,
-        b: String,
-        c: String 
+      d: String = \\"d\\"
+      a: String
+      b: String
+      c: String
     }"
   `,
   )
