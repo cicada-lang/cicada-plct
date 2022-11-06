@@ -1,35 +1,46 @@
-why we need `freshenNames`?
+fix `unifyClazz`
+
+- should not use `freshenNames` and `expelClazz`
+
+Why we need `freshenNames`?
 
 - why without it the following test will fail?
 
-  src/lang/tests/solve/solve-dot.test.ts > solve Dot
+  `src/lang/tests/solve/solve-dot.test.ts > solve Dot`
 
-```
+  ```
+  class ABC {
+    a: String
+    b: String
+    c: String
+  }
 
-class ABC {
-  a: String
-  b: String
-  c: String
-}
+  solve (abc: ABC, a: String, b: String, c: String) {
+    a = abc.a
+    b = abc.b
+    c = abc.c
+    abc = { a: "a", b: "b", c: "c" }
+  }
+  ```
 
-solve (abc: ABC, a: String, b: String, c: String) {
-  a = abc.a
-  b = abc.b
-  c = abc.c
-  abc = { a: "a", b: "b", c: "c" }
-}
+  Because without a freshen name for `a`,
+  when `a` should be a neutral variable (from class definition),
+  the `a` in the scope of `solve` will be seen,
+  which is bound to `abc.a`.
 
-```
-
-[maybe] `expelClazz` should take a pair of classes
-
-# std
+# later
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
+
+# std
 
 pass std/boolean-lattice -- use `FnImplicit`
 
 `Stmts.ClazzExtends` support `super` -- need `substExp`
+
+[maybe] `class` support `self`
+
+- we use `self` instead of `this` because of sefl-type
 
 pass std/groupoid -- need `super`
 

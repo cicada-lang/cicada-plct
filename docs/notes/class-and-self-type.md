@@ -44,26 +44,7 @@ Maybe we can learn from self type.
 
 See [`cicada-lang/lambda` - `tests/nat-self.md`](https://github.com/cicada-lang/lambda/blob/master/tests/nat-self.md)
 
-# The `this` or `self` keyword is like self type
-
-```cicada
-class Semigroup {
-  Element: Type
-
-  mul(x: Element, y: Element): Element
-
-  mulAssociative(
-    x: Element,
-    y: Element,
-    z: Element,
-  ): Equal(
-    Element,
-    mul(x, mul(y, z)),
-    mul(mul(x, y), z)
-  )
-}
-
-```
+# The `self` keyword is like self type
 
 ```cicada
 class Semigroup {
