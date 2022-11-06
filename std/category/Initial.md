@@ -18,7 +18,7 @@ class Initial {
 
   morphism(x: cat.Object): cat.Morphism(object, x)
 
-  morphism_unique(
+  morphismUnique(
     implicit x: cat.Object,
     f: cat.Morphism(object, x),
   ): Equal(cat.Morphism(object, x), f, morphism(x))

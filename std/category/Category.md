@@ -35,19 +35,19 @@ class Category {
     g: Morphism(y, z),
   ): Morphism(x, z)
 
-  id_left(
+  idLeft(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y)
   ): Equal(Morphism(x, y), compose(id(x), f), f)
 
-  id_right(
+  idRight(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
   ): Equal(Morphism(x, y), compose(f, id(y)), f)
 
-  compose_is_associative(
+  composeAssociative(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
@@ -66,15 +66,15 @@ class Category {
 ## A trivial category
 
 ```cicada
-let trivial_category = new Category {
+let trivialCategory = new Category {
   Object: Trivial,
   Morphism: (dom, cod) => Trivial,
   id: (x) => sole,
 
   compose: (implicit x, implicit y, f, implicit z, g) => sole,
-  id_left: (implicit x, implicit y, f) => refl,
-  id_right: (implicit x, implicit y, f) => refl,
-  compose_is_associative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl,
+  idLeft: (implicit x, implicit y, f) => refl,
+  idRight: (implicit x, implicit y, f) => refl,
+  composeAssociative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl,
 }
 ```
 
@@ -105,7 +105,7 @@ class Functor {
     f: dom.Morphism(x, y)
   ): cod.Morphism(map(x), map(y))
 
-  fmap_respect_compose(
+  fmapRespectCompose(
     implicit x: dom.Object,
     implicit y: dom.Object,
     f: dom.Morphism(x, y),
@@ -117,7 +117,7 @@ class Functor {
     cod.compose(fmap(f), fmap(g))
   )
 
-  fmap_respect_id(
+  fmapRespectId(
     x: dom.Object
   ): Equal(
     cod.Morphism(map(x), map(x)),
@@ -191,7 +191,7 @@ class Epimorphism {
   cod: cat.Object
   morphism: cat.Morphism(dom, cod)
 
-  cancel_left(
+  cancelLeft(
     implicit x: cat.Object,
     implicit f: cat.Morphism(cod, x),
     implicit g: cat.Morphism(cod, x),
@@ -212,7 +212,7 @@ class Monomorphism {
   cod: cat.Object
   morphism: cat.Morphism(dom, cod)
 
-  cancel_right(
+  cancelRight(
     implicit x: cat.Object,
     implicit f: cat.Morphism(x, dom),
     implicit g: cat.Morphism(x, dom),
@@ -241,13 +241,13 @@ class Isomorphism {
   morphism: cat.Morphism(dom, cod)
   inverse: cat.Morphism(cod, dom)
 
-  inverse_left: Equal(
+  inverseLeft: Equal(
     cat.Morphism(dom, dom),
     cat.compose(morphism, inverse),
     cat.id(dom),
   )
 
-  inverse_right: Equal(
+  inverseRight: Equal(
     cat.Morphism(cod, cod),
     cat.compose(inverse, morphism),
     cat.id(cod),

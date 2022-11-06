@@ -16,10 +16,10 @@ It expresses a common sense,
 
 > If two things are the same, they can replace each other.
 
-# equal_map
+# equalMap
 
 ```cicada
-function equal_map(
+function equalMap(
   implicit X: Type,
   implicit from: X,
   implicit to: X,
@@ -35,10 +35,10 @@ function equal_map(
 }
 ```
 
-# equal_swap
+# equalSwap
 
 ```cicada
-function equal_swap(
+function equalSwap(
   implicit A: Type,
   implicit x: A,
   implicit y: A,
@@ -52,10 +52,10 @@ function equal_swap(
 }
 ```
 
-# equal_compose
+# equalCompose
 
 ```cicada
-function equal_compose(
+function equalCompose(
   implicit A: Type,
   implicit x: A,
   implicit y: A,

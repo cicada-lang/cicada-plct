@@ -248,11 +248,11 @@ We will extract two helper functions,
 one for the **Base case**,
 one for **Lemma 2**.
 
-Before we dive into them, we need a utility function about `Equal` first -- `equal_map`.
+Before we dive into them, we need a utility function about `Equal` first -- `equalMap`.
 
 ```cicada
 import {
-  equal_map,
+  equalMap,
 } from "../equality/equal-utilities.md"
 ```
 
@@ -264,7 +264,7 @@ Let's practice using it first.
 check same(zero):
   Equal(Nat, zero, zero)
 
-check equal_map(same(zero), add1):
+check equalMap(same(zero), add1):
   Equal(Nat, add1(zero), add1(zero))
 ```
 
@@ -287,7 +287,7 @@ function add_is_commutative_on_zero(
     motive (x) => Equal(Nat, add(zero, x), add(x, zero))
     case zero => refl
     case add1(prev, almost) =>
-      equal_map(almost.prev, add1)
+      equalMap(almost.prev, add1)
   }
 }
 ```
@@ -309,7 +309,7 @@ function add_is_commutative_on_add1(
     motive (x) => Equal(Nat, add(x, add1(y)), add1(add(x, y)))
     case zero => refl
     case add1(_prev, almost) =>
-      equal_map(almost.prev, add1)
+      equalMap(almost.prev, add1)
   }
 }
 ```
@@ -320,14 +320,14 @@ We need two more utility functions about `Equal`.
 
 ```cicada
 import {
-  equal_swap,
-  equal_compose,
+  equalSwap,
+  equalCompose,
 } from "../equality/equal-utilities.md"
 ```
 
 Let's practice using them.
 
-`equal_swap` can swap the left and right hand side of the `Equal`.
+`equalSwap` can swap the left and right hand side of the `Equal`.
 
 ```cicada
 import { one } from "./nat.md"
@@ -335,11 +335,11 @@ import { one } from "./nat.md"
 check same(add1(zero)):
   Equal(Nat, add(one, zero), add1(zero))
 
-check equal_swap(same(add1(zero))):
+check equalSwap(same(add1(zero))):
   Equal(Nat, add1(zero), add(one, zero))
 ```
 
-`equal_compose` can compose two `Equal`s,
+`equalCompose` can compose two `Equal`s,
 if the right hand side of the first `Equal`,
 matchs the left hand side of the second `Equal`.
 
@@ -350,7 +350,7 @@ check same(add1(zero)):
 check same(add1(zero)):
   Equal(Nat, add1(zero), add(zero, one))
 
-check equal_compose(same(add1(zero)), same(add1(zero))):
+check equalCompose(same(add1(zero)), same(add1(zero))):
   Equal(Nat, add(one, zero), add(zero, one))
 ```
 
@@ -368,9 +368,9 @@ function add_is_commutative(
     case add1(prev, almost) =>
       // Induction step.
       // `almost.prev` is the inductive hypothesis.
-      equal_compose(
-        equal_map(almost.prev, add1),
-        equal_swap(add_is_commutative_on_add1(y, prev)),
+      equalCompose(
+        equalMap(almost.prev, add1),
+        equalSwap(add_is_commutative_on_add1(y, prev)),
       )
   }
 }

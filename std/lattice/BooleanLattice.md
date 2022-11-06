@@ -140,7 +140,7 @@ function dual_is_involutive(lattice: BooleanLattice): Equal(
 # Unique identity
 
 ```cicada
-import { equal_swap, equal_compose } from "../equality/index.cic"
+import { equalSwap, equalCompose } from "../equality/index.cic"
 ```
 
 ```cicada
@@ -153,7 +153,7 @@ function join_unique_identity(
     x,
   ),
 ): Equal(lattice.Element, o, lattice.bottom) {
-  check equal_swap(o_is_identity_of_join(lattice.bottom)): Equal(
+  check equalSwap(o_is_identity_of_join(lattice.bottom)): Equal(
     lattice.Element,
     lattice.bottom,
     lattice.join(lattice.bottom, o),
@@ -171,10 +171,10 @@ function join_unique_identity(
     o,
   )
 
-  return equal_swap(
-    equal_compose(
-      equal_swap(o_is_identity_of_join(lattice.bottom)),
-      equal_compose(
+  return equalSwap(
+    equalCompose(
+      equalSwap(o_is_identity_of_join(lattice.bottom)),
+      equalCompose(
         lattice.join_is_commutative(lattice.bottom, o),
         lattice.bottom_is_identity_of_join(o)),
     )
@@ -194,7 +194,7 @@ function join_unique_identity(
 ): Equal(lattice.Element, o, lattice.bottom) {
   return equal_rewrite (lattice.Element) {
     lattice.bottom
-    by equal_swap(o_is_identity_of_join(lattice.bottom))
+    by equalSwap(o_is_identity_of_join(lattice.bottom))
     lattice.join(lattice.bottom, o)
     by lattice.join_is_commutative(lattice.bottom, o)
     lattice.join(o, lattice.bottom)
@@ -227,7 +227,7 @@ function meet_unique_identity(
 <https://en.wikipedia.org/wiki/Idempotence>
 
 ```cicada
-import { equal_map } from "../equality/index.cic"
+import { equalMap } from "../equality/index.cic"
 ```
 
 ```cicada
@@ -239,20 +239,20 @@ function join_is_idempotent(
   lattice.join(x, x),
   x,
 ) {
-  check equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, x))): Equal(
+  check equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, x))): Equal(
     lattice.Element,
     lattice.join(x, x),
     lattice.meet(lattice.join(x, x), lattice.top),
   )
 
-  check equal_swap(lattice.complement_join_for_top(x)): Equal(
+  check equalSwap(lattice.complement_join_for_top(x)): Equal(
     lattice.Element,
     lattice.top,
     lattice.join(x, lattice.complement(x)),
   )
 
-  check equal_map(
-    equal_swap(lattice.complement_join_for_top(x)),
+  check equalMap(
+    equalSwap(lattice.complement_join_for_top(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(lattice.join(x, x), z),
@@ -263,7 +263,7 @@ function join_is_idempotent(
     lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
   )
 
-  check equal_swap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))): Equal(
+  check equalSwap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
     lattice.join(x, lattice.meet(x, lattice.complement(x))),
@@ -275,7 +275,7 @@ function join_is_idempotent(
     lattice.bottom,
   )
 
-  check equal_map(
+  check equalMap(
     lattice.complement_meet_for_bottom(x),
     the(
       (lattice.Element) -> lattice.Element,
@@ -293,20 +293,20 @@ function join_is_idempotent(
     x,
   )
 
-  return equal_compose(
-    equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, x))),
-    equal_compose(
-      equal_map(
-        equal_swap(lattice.complement_join_for_top(x)),
+  return equalCompose(
+    equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, x))),
+    equalCompose(
+      equalMap(
+        equalSwap(lattice.complement_join_for_top(x)),
         the(
           (lattice.Element) -> lattice.Element,
           (z) => lattice.meet(lattice.join(x, x), z),
         ),
       ),
-      equal_compose(
-        equal_swap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))),
-        equal_compose(
-          equal_map(
+      equalCompose(
+        equalSwap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))),
+        equalCompose(
+          equalMap(
             lattice.complement_meet_for_bottom(x),
             the(
               (lattice.Element) -> lattice.Element,
@@ -385,7 +385,7 @@ function top_is_at_the_top(
     )
   )
 
-  check equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))): Equal(
+  check equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))): Equal(
     lattice.Element,
     lattice.join(x, lattice.top),
     lattice.meet(lattice.join(x, lattice.top), lattice.top),
@@ -397,8 +397,8 @@ function top_is_at_the_top(
     lattice.meet(lattice.top, lattice.join(x, lattice.top)),
   )
 
-  check equal_map(
-    equal_swap(lattice.complement_join_for_top(x)),
+  check equalMap(
+    equalSwap(lattice.complement_join_for_top(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(z, lattice.join(x, lattice.top)),
@@ -409,7 +409,7 @@ function top_is_at_the_top(
     lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
   )
 
-  check equal_swap(
+  check equalSwap(
     lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
   ): Equal(
     lattice.Element,
@@ -417,7 +417,7 @@ function top_is_at_the_top(
     lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
   )
 
-  check equal_map(
+  check equalMap(
     lattice.top_is_identity_of_meet(lattice.complement(x)),
     the(
       (lattice.Element) -> lattice.Element,
@@ -435,24 +435,24 @@ function top_is_at_the_top(
     lattice.top,
   )
 
-  return equal_compose(
-    equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))),
-    equal_compose(
+  return equalCompose(
+    equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))),
+    equalCompose(
       lattice.meet_is_commutative(lattice.join(x, lattice.top), lattice.top),
-      equal_compose(
-        equal_map(
-          equal_swap(lattice.complement_join_for_top(x)),
+      equalCompose(
+        equalMap(
+          equalSwap(lattice.complement_join_for_top(x)),
           the(
             (lattice.Element) -> lattice.Element,
             (z) => lattice.meet(z, lattice.join(x, lattice.top)),
           )
         ),
-        equal_compose(
-          equal_swap(
+        equalCompose(
+          equalSwap(
             lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
           ),
-          equal_compose(
-            equal_map(
+          equalCompose(
+            equalMap(
               lattice.top_is_identity_of_meet(lattice.complement(x)),
               the(
                 (lattice.Element) -> lattice.Element,
@@ -499,8 +499,8 @@ function join_absorb_over_meet(
     lattice.Element,
     lattice.join(x, lattice.meet(x, y)),
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
-  ) = equal_map(
-    equal_swap(lattice.top_is_identity_of_meet(x)),
+  ) = equalMap(
+    equalSwap(lattice.top_is_identity_of_meet(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(z, lattice.meet(x, y)),
@@ -511,13 +511,13 @@ function join_absorb_over_meet(
     lattice.Element,
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
     lattice.meet(x, lattice.join(lattice.top, y)),
-  ) = equal_swap(lattice.meet_can_distribute_over_join(x, lattice.top, y))
+  ) = equalSwap(lattice.meet_can_distribute_over_join(x, lattice.top, y))
 
   let eq3: Equal(
     lattice.Element,
     lattice.meet(x, lattice.join(lattice.top, y)),
     lattice.meet(x, lattice.join(y, lattice.top)),
-  ) = equal_map(
+  ) = equalMap(
     lattice.join_is_commutative(lattice.top, y),
     the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
   )
@@ -526,7 +526,7 @@ function join_absorb_over_meet(
     lattice.Element,
     lattice.meet(x, lattice.join(y, lattice.top)),
     lattice.meet(x, lattice.top),
-  ) = equal_map(
+  ) = equalMap(
     top_is_at_the_top(lattice, y),
     the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
   )
@@ -537,13 +537,13 @@ function join_absorb_over_meet(
     x,
   ) = lattice.top_is_identity_of_meet(x)
 
-  return equal_compose(
+  return equalCompose(
     eq1,
-    equal_compose(
+    equalCompose(
       eq2,
-      equal_compose(
+      equalCompose(
         eq3,
-        equal_compose(
+        equalCompose(
           eq4,
           eq5,
         )

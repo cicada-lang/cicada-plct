@@ -31,24 +31,24 @@ class Groupoid extends Category {
 ## A trivial groupoid
 
 ```cicada
-import { trivial_category } from "../category/index.cic"
+import { trivialCategory } from "../category/index.cic"
 
-let trivial_isomorphism_t = Isomorphism(trivial_category, sole, sole, sole, sole)
+let trivial_isomorphism_t = Isomorphism(trivialCategory, sole, sole, sole, sole)
 
 let trivial_isomorphism: trivial_isomorphism_t = {
-  cat: trivial_category,
+  cat: trivialCategory,
 
   dom: sole,
   cod: sole,
   morphism: sole,
   inverse: sole,
 
-  inverse_left: refl,
-  inverse_right: refl,
+  inverseLeft: refl,
+  inverseRight: refl,
 }
 
 let trivial_groupoid: Groupoid = {
-  ...trivial_category,
+  ...trivialCategory,
 
   inv: (f) => sole,
   inv_iso: (f) => trivial_isomorphism,

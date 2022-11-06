@@ -12,7 +12,7 @@ A [semigroup](https://en.wikipedia.org/wiki/Semigroup) is
 
 - a set -- `Element: Type`,
 - a binary operation -- `mul`,
-- an a proof that the binary operation is associative -- `mul_is_associative`.
+- an a proof that the binary operation is associative -- `mulAssociative`.
 
 ```cicada
 class Semigroup {
@@ -20,7 +20,7 @@ class Semigroup {
 
   mul(x: Element, y: Element): Element
 
-  mul_is_associative(
+  mulAssociative(
     x: Element,
     y: Element,
     z: Element,

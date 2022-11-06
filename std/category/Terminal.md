@@ -16,7 +16,7 @@ class Terminal {
 
   object: cat.Object
   morphism(x: cat.Object): cat.Morphism(x, object)
-  morphism_unique(
+  morphismUnique(
     implicit x: cat.Object,
     f: cat.Morphism(x, object),
   ): Equal(cat.Morphism(x, object), f, morphism(x))
@@ -31,7 +31,7 @@ If a terminal object exists, it is unique up to unique isomorphism.
 
 ```cicada
 import { Isomorphism } from "Category.md"
-import { equal_swap, equal_compose } from "../equality/index.cic"
+import { equalSwap, equalCompose } from "../equality/index.cic"
 
 function terminal_object_isomorphism(
   cat: Category,
@@ -48,14 +48,14 @@ function terminal_object_isomorphism(
     morphism: y.morphism(x.object),
     inverse: x.morphism(y.object),
 
-    inverse_left: equal_compose(
-      x.morphism_unique(cat.compose(g, f)),
-      equal_swap(x.morphism_unique(cat.id(x.object))),
+    inverseLeft: equalCompose(
+      x.morphismUnique(cat.compose(g, f)),
+      equalSwap(x.morphismUnique(cat.id(x.object))),
     ),
 
-    inverse_right: equal_compose(
-      y.morphism_unique(cat.compose(f, g)),
-      equal_swap(y.morphism_unique(cat.id(y.object))),
+    inverseRight: equalCompose(
+      y.morphismUnique(cat.compose(f, g)),
+      equalSwap(y.morphismUnique(cat.id(y.object))),
     ),
   }
 }
@@ -77,21 +77,21 @@ function terminal_object_isomorphism_without_Fulfilling_class(
     morphism: y.morphism(x.object),
     inverse: x.morphism(y.object),
 
-    inverse_left: equal_compose(
-      x.morphism_unique(cat.compose(g, f)),
-      equal_swap(x.morphism_unique(cat.id(x.object))),
+    inverseLeft: equalCompose(
+      x.morphismUnique(cat.compose(g, f)),
+      equalSwap(x.morphismUnique(cat.id(x.object))),
     ),
 
-    inverse_right: equal_compose(
-      y.morphism_unique(cat.compose(f, g)),
-      equal_swap(y.morphism_unique(cat.id(y.object))),
+    inverseRight: equalCompose(
+      y.morphismUnique(cat.compose(f, g)),
+      equalSwap(y.morphismUnique(cat.id(y.object))),
     ),
   }
 }
 ```
 
 ```cicada todo
-function terminal_object_isomorphism_unique(
+function terminal_object_isomorphismUnique(
   cat: Category,
   x: Terminal(cat),
   y: Terminal(cat),

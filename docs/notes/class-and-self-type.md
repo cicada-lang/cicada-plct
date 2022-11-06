@@ -14,7 +14,7 @@ class Semigroup {
 
   mul(x: Element, y: Element): Element
 
-  mul_is_associative(
+  mulAssociative(
     x: Element,
     y: Element,
     z: Element,
@@ -50,18 +50,19 @@ See [`cicada-lang/lambda` - `tests/nat-self.md`](https://github.com/cicada-lang/
 class Semigroup {
   Element: Type
 
-  mul(x: this.Element, y: this.Element): this.Element
+  mul(x: Element, y: Element): Element
 
-  mul_is_associative(
-    x: this.Element,
-    y: this.Element,
-    z: this.Element,
+  mulAssociative(
+    x: Element,
+    y: Element,
+    z: Element,
   ): Equal(
-    this.Element,
-    this.mul(x, this.mul(y, z)),
-    this.mul(this.mul(x, y), z)
+    Element,
+    mul(x, mul(y, z)),
+    mul(mul(x, y), z)
   )
 }
+
 ```
 
 ```cicada
@@ -70,7 +71,7 @@ class Semigroup {
 
   mul(x: self.Element, y: self.Element): self.Element
 
-  mul_is_associative(
+  mulAssociative(
     x: self.Element,
     y: self.Element,
     z: self.Element,

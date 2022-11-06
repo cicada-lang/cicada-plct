@@ -16,7 +16,7 @@ compute replace
 test("compute Replace", async () => {
   const output = await runCode(`
 
-function equal_compose(
+function equalCompose(
   implicit A: Type,
   implicit x: A,
   implicit y: A,
@@ -33,8 +33,8 @@ function equal_compose(
 
 let sole_eq: Equal(Trivial, sole, sole) = refl
 
-compute equal_compose(sole_eq, sole_eq)
-compute equal_compose(equal_compose(sole_eq, sole_eq), equal_compose(sole_eq, sole_eq))
+compute equalCompose(sole_eq, sole_eq)
+compute equalCompose(equalCompose(sole_eq, sole_eq), equalCompose(sole_eq, sole_eq))
 
 `)
 
