@@ -49,7 +49,7 @@ solve (x: Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })
 

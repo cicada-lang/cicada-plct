@@ -34,13 +34,11 @@ export function unify(
   left = advanceValue(mod, left)
   right = advanceValue(mod, right)
 
-  if (unifyPatternVar(mod, ctx, type, left, right)) return
-  if (unifyByType(mod, ctx, type, left, right)) return
-
   try {
+    if (unifyPatternVar(mod, ctx, type, left, right)) return
+    if (unifyByType(mod, ctx, type, left, right)) return
     unifyByValue(mod, ctx, type, left, right)
   } catch (error) {
-    console.log(error)
     if (error instanceof Errors.UnificationError) {
       error.trace.unshift(
         [

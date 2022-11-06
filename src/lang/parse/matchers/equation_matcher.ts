@@ -9,11 +9,13 @@ export function equation_matcher(tree: pt.Tree): Stmts.Equation {
         matchers.exp_matcher(left),
         matchers.exp_matcher(right),
         matchers.exp_matcher(type),
+        span,
       ),
     "equation:unify": ({ left, right }, { span }) =>
       Stmts.EquationUnify(
         matchers.exp_matcher(left),
         matchers.exp_matcher(right),
+        span,
       ),
   })(tree)
 }

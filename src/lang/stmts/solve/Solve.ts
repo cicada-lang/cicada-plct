@@ -1,5 +1,6 @@
 import { evaluate } from "../../core"
 import { CtxCons } from "../../ctx"
+import * as Errors from "../../errors"
 import { checkType } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
@@ -27,7 +28,18 @@ export class Solve extends Stmt {
     }
 
     for (const equation of this.equations) {
-      unifyEquation(mod, ctx, equation)
+      try {
+        unifyEquation(mod, ctx, equation)
+      } catch (error) {
+        if (error instanceof Errors.UnificationError) {
+          throw new Errors.ElaborationError(
+            ["solve fail", ...error.trace, error.message].join("\n"),
+            { span: equation.span },
+          )
+        }
+
+        throw error
+      }
     }
 
     return mod.solution.formatSolution(mod, ctx, names)

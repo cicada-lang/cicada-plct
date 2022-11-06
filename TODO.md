@@ -4,6 +4,23 @@ why we need `freshenNames`?
 
   src/lang/tests/solve/solve-dot.test.ts > solve Dot
 
+```
+
+class ABC {
+  a: String
+  b: String
+  c: String
+}
+
+solve (abc: ABC, a: String, b: String, c: String) {
+  a = abc.a
+  b = abc.b
+  c = abc.c
+  abc = { a: "a", b: "b", c: "c" }
+}
+
+```
+
 [maybe] `expelClazz` should take a pair of classes
 
 # std

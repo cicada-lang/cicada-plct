@@ -41,6 +41,6 @@ solve (T: Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })

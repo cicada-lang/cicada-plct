@@ -64,6 +64,6 @@ solve (x: (implicit _: Type) -> Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })

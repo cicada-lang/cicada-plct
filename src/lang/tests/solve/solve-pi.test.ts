@@ -66,7 +66,7 @@ solve (T: Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })
 
@@ -79,7 +79,7 @@ solve (A: Type, B: Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })
 

@@ -104,6 +104,6 @@ solve (A: Type) {
 }
 
 `,
-    Errors.UnificationError,
+    Errors.ElaborationError,
   )
 })
