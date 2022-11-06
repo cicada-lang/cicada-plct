@@ -4,8 +4,18 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { unifyTypedValue } from "../solution"
-import { readbackNeutral } from "../value"
+import { unify, unifyType } from "../solution"
+import { readbackNeutral, TypedValue } from "../value"
+
+function unifyTypedValue(
+  mod: Mod,
+  ctx: Ctx,
+  left: TypedValue,
+  right: TypedValue,
+): void {
+  unifyType(mod, ctx, left.type, right.type)
+  unify(mod, ctx, left.type, left.value, right.value)
+}
 
 export function unifyNeutral(
   mod: Mod,

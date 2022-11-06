@@ -40,6 +40,7 @@ export function unify(
   try {
     unifyByValue(mod, ctx, type, left, right)
   } catch (error) {
+    console.log(error)
     if (error instanceof Errors.UnificationError) {
       error.trace.unshift(
         [
