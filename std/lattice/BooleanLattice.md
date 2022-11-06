@@ -23,7 +23,7 @@ class BooleanLattice {
   bottom: Element
   top: Element
 
-  join_is_commutative(
+  joinCommutative(
     x: Element,
     y: Element,
   ): Equal(
@@ -32,7 +32,7 @@ class BooleanLattice {
     join(y, x),
   )
 
-  meet_is_commutative(
+  meetCommutative(
     x: Element,
     y: Element,
   ): Equal(
@@ -41,7 +41,7 @@ class BooleanLattice {
     meet(y, x),
   )
 
-  bottom_is_identity_of_join(
+  bottomIdJoin(
     x: Element
   ): Equal(
     Element,
@@ -49,7 +49,7 @@ class BooleanLattice {
     x,
   )
 
-  top_is_identity_of_meet(
+  topIdMeet(
     x: Element
   ): Equal(
     Element,
@@ -57,7 +57,7 @@ class BooleanLattice {
     x,
   )
 
-  join_can_distribute_over_meet(
+  joinDistributeMeet(
     x: Element,
     y: Element,
     z: Element
@@ -67,7 +67,7 @@ class BooleanLattice {
     meet(join(x, y), join(x, z)),
   )
 
-  meet_can_distribute_over_join(
+  meetDistributeJoin(
     x: Element,
     y: Element,
     z: Element
@@ -77,7 +77,7 @@ class BooleanLattice {
     join(meet(x, y), meet(x, z)),
   )
 
-  complement_join_for_top(
+  complementJoinForTop(
     x: Element
   ): Equal(
     Element,
@@ -85,7 +85,7 @@ class BooleanLattice {
     top,
   )
 
-  complement_meet_for_bottom(
+  complementMeetForBottom(
     x: Element
   ): Equal(
     Element,
@@ -110,17 +110,17 @@ function dual(lattice: BooleanLattice): BooleanLattice {
     bottom: lattice.top,
     top: lattice.bottom,
 
-    join_is_commutative: lattice.meet_is_commutative,
-    meet_is_commutative: lattice.join_is_commutative,
+    joinCommutative: lattice.meetCommutative,
+    meetCommutative: lattice.joinCommutative,
 
-    bottom_is_identity_of_join: lattice.top_is_identity_of_meet,
-    top_is_identity_of_meet: lattice.bottom_is_identity_of_join,
+    bottomIdJoin: lattice.topIdMeet,
+    topIdMeet: lattice.bottomIdJoin,
 
-    join_can_distribute_over_meet: lattice.meet_can_distribute_over_join,
-    meet_can_distribute_over_join: lattice.join_can_distribute_over_meet,
+    joinDistributeMeet: lattice.meetDistributeJoin,
+    meetDistributeJoin: lattice.joinDistributeMeet,
 
-    complement_join_for_top: lattice.complement_meet_for_bottom,
-    complement_meet_for_bottom: lattice.complement_join_for_top,
+    complementJoinForTop: lattice.complementMeetForBottom,
+    complementMeetForBottom: lattice.complementJoinForTop,
   }
 }
 ```
@@ -128,7 +128,7 @@ function dual(lattice: BooleanLattice): BooleanLattice {
 The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/Involution_(mathematics)>).
 
 ```cicada
-function dual_is_involutive(lattice: BooleanLattice): Equal(
+function dualInvolutive(lattice: BooleanLattice): Equal(
   BooleanLattice,
   lattice,
   dual(dual(lattice)),
@@ -144,7 +144,7 @@ import { equalSwap, equalCompose } from "../equality/index.cic"
 ```
 
 ```cicada
-function join_unique_identity(
+function joinUniqueId(
   lattice: BooleanLattice,
   o: lattice.Element,
   o_is_identity_of_join: (x: lattice.Element) -> Equal(
@@ -159,13 +159,13 @@ function join_unique_identity(
     lattice.join(lattice.bottom, o),
   )
 
-  check lattice.join_is_commutative(lattice.bottom, o): Equal(
+  check lattice.joinCommutative(lattice.bottom, o): Equal(
     lattice.Element,
     lattice.join(lattice.bottom, o),
     lattice.join(o, lattice.bottom),
   )
 
-  check lattice.bottom_is_identity_of_join(o): Equal(
+  check lattice.bottomIdJoin(o): Equal(
     lattice.Element,
     lattice.join(o, lattice.bottom),
     o,
@@ -175,15 +175,15 @@ function join_unique_identity(
     equalCompose(
       equalSwap(o_is_identity_of_join(lattice.bottom)),
       equalCompose(
-        lattice.join_is_commutative(lattice.bottom, o),
-        lattice.bottom_is_identity_of_join(o)),
+        lattice.joinCommutative(lattice.bottom, o),
+        lattice.bottomIdJoin(o)),
     )
   )
 }
 ```
 
 ```cicada wishful-thinking
-function join_unique_identity(
+function joinUniqueId(
   lattice: BooleanLattice,
   o: lattice.Element,
   o_is_identity_of_join: (x: lattice.Element) -> Equal(
@@ -196,9 +196,9 @@ function join_unique_identity(
     lattice.bottom
     by equalSwap(o_is_identity_of_join(lattice.bottom))
     lattice.join(lattice.bottom, o)
-    by lattice.join_is_commutative(lattice.bottom, o)
+    by lattice.joinCommutative(lattice.bottom, o)
     lattice.join(o, lattice.bottom)
-    by lattice.bottom_is_identity_of_join(o)
+    by lattice.bottomIdJoin(o)
     o
   }
 }
@@ -214,7 +214,7 @@ function meet_unique_identity(
     x,
   ),
 ): Equal(lattice.Element, i, lattice.top) {
-  return join_unique_identity(
+  return joinUniqueId(
     dual(lattice),
     i,
     i_is_identity_of_meet,
@@ -239,20 +239,20 @@ function join_is_idempotent(
   lattice.join(x, x),
   x,
 ) {
-  check equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, x))): Equal(
+  check equalSwap(lattice.topIdMeet(lattice.join(x, x))): Equal(
     lattice.Element,
     lattice.join(x, x),
     lattice.meet(lattice.join(x, x), lattice.top),
   )
 
-  check equalSwap(lattice.complement_join_for_top(x)): Equal(
+  check equalSwap(lattice.complementJoinForTop(x)): Equal(
     lattice.Element,
     lattice.top,
     lattice.join(x, lattice.complement(x)),
   )
 
   check equalMap(
-    equalSwap(lattice.complement_join_for_top(x)),
+    equalSwap(lattice.complementJoinForTop(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(lattice.join(x, x), z),
@@ -263,20 +263,20 @@ function join_is_idempotent(
     lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
   )
 
-  check equalSwap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))): Equal(
+  check equalSwap(lattice.joinDistributeMeet(x, x, lattice.complement(x))): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
     lattice.join(x, lattice.meet(x, lattice.complement(x))),
   )
 
-  check lattice.complement_meet_for_bottom(x): Equal(
+  check lattice.complementMeetForBottom(x): Equal(
     lattice.Element,
     lattice.meet(x, lattice.complement(x)),
     lattice.bottom,
   )
 
   check equalMap(
-    lattice.complement_meet_for_bottom(x),
+    lattice.complementMeetForBottom(x),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(x, z),
@@ -287,33 +287,33 @@ function join_is_idempotent(
     lattice.join(x, lattice.bottom),
   )
 
-  check lattice.bottom_is_identity_of_join(x): Equal(
+  check lattice.bottomIdJoin(x): Equal(
     lattice.Element,
     lattice.join(x, lattice.bottom),
     x,
   )
 
   return equalCompose(
-    equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, x))),
+    equalSwap(lattice.topIdMeet(lattice.join(x, x))),
     equalCompose(
       equalMap(
-        equalSwap(lattice.complement_join_for_top(x)),
+        equalSwap(lattice.complementJoinForTop(x)),
         the(
           (lattice.Element) -> lattice.Element,
           (z) => lattice.meet(lattice.join(x, x), z),
         ),
       ),
       equalCompose(
-        equalSwap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))),
+        equalSwap(lattice.joinDistributeMeet(x, x, lattice.complement(x))),
         equalCompose(
           equalMap(
-            lattice.complement_meet_for_bottom(x),
+            lattice.complementMeetForBottom(x),
             the(
               (lattice.Element) -> lattice.Element,
               (z) => lattice.join(x, z),
             )
           ),
-          lattice.bottom_is_identity_of_join(x)
+          lattice.bottomIdJoin(x)
         )
       )
     )
@@ -385,20 +385,20 @@ function top_is_at_the_top(
     )
   )
 
-  check equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))): Equal(
+  check equalSwap(lattice.topIdMeet(lattice.join(x, lattice.top))): Equal(
     lattice.Element,
     lattice.join(x, lattice.top),
     lattice.meet(lattice.join(x, lattice.top), lattice.top),
   )
 
-  check lattice.meet_is_commutative(lattice.join(x, lattice.top), lattice.top): Equal(
+  check lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, lattice.top), lattice.top),
     lattice.meet(lattice.top, lattice.join(x, lattice.top)),
   )
 
   check equalMap(
-    equalSwap(lattice.complement_join_for_top(x)),
+    equalSwap(lattice.complementJoinForTop(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(z, lattice.join(x, lattice.top)),
@@ -410,7 +410,7 @@ function top_is_at_the_top(
   )
 
   check equalSwap(
-    lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
+    lattice.joinDistributeMeet(x, lattice.complement(x), lattice.top)
   ): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
@@ -418,7 +418,7 @@ function top_is_at_the_top(
   )
 
   check equalMap(
-    lattice.top_is_identity_of_meet(lattice.complement(x)),
+    lattice.topIdMeet(lattice.complement(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(x, z),
@@ -429,19 +429,19 @@ function top_is_at_the_top(
     lattice.join(x, lattice.complement(x)),
   )
 
-  check lattice.complement_join_for_top(x): Equal(
+  check lattice.complementJoinForTop(x): Equal(
     lattice.Element,
     lattice.join(x, lattice.complement(x)),
     lattice.top,
   )
 
   return equalCompose(
-    equalSwap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))),
+    equalSwap(lattice.topIdMeet(lattice.join(x, lattice.top))),
     equalCompose(
-      lattice.meet_is_commutative(lattice.join(x, lattice.top), lattice.top),
+      lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top),
       equalCompose(
         equalMap(
-          equalSwap(lattice.complement_join_for_top(x)),
+          equalSwap(lattice.complementJoinForTop(x)),
           the(
             (lattice.Element) -> lattice.Element,
             (z) => lattice.meet(z, lattice.join(x, lattice.top)),
@@ -449,17 +449,17 @@ function top_is_at_the_top(
         ),
         equalCompose(
           equalSwap(
-            lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
+            lattice.joinDistributeMeet(x, lattice.complement(x), lattice.top)
           ),
           equalCompose(
             equalMap(
-              lattice.top_is_identity_of_meet(lattice.complement(x)),
+              lattice.topIdMeet(lattice.complement(x)),
               the(
                 (lattice.Element) -> lattice.Element,
                 (z) => lattice.join(x, z),
               ),
             ),
-            lattice.complement_join_for_top(x),
+            lattice.complementJoinForTop(x),
           )
         )
       )
@@ -500,7 +500,7 @@ function join_absorb_over_meet(
     lattice.join(x, lattice.meet(x, y)),
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
   ) = equalMap(
-    equalSwap(lattice.top_is_identity_of_meet(x)),
+    equalSwap(lattice.topIdMeet(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(z, lattice.meet(x, y)),
@@ -511,14 +511,14 @@ function join_absorb_over_meet(
     lattice.Element,
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
     lattice.meet(x, lattice.join(lattice.top, y)),
-  ) = equalSwap(lattice.meet_can_distribute_over_join(x, lattice.top, y))
+  ) = equalSwap(lattice.meetDistributeJoin(x, lattice.top, y))
 
   let eq3: Equal(
     lattice.Element,
     lattice.meet(x, lattice.join(lattice.top, y)),
     lattice.meet(x, lattice.join(y, lattice.top)),
   ) = equalMap(
-    lattice.join_is_commutative(lattice.top, y),
+    lattice.joinCommutative(lattice.top, y),
     the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
   )
 
@@ -535,7 +535,7 @@ function join_absorb_over_meet(
     lattice.Element,
     lattice.meet(x, lattice.top),
     x,
-  ) = lattice.top_is_identity_of_meet(x)
+  ) = lattice.topIdMeet(x)
 
   return equalCompose(
     eq1,
@@ -570,7 +570,7 @@ function meet_absorb_over_join(
 # Associativity
 
 ```cicada todo
-function join_is_associative(
+function joinAssociative(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,
@@ -583,7 +583,7 @@ function join_is_associative(
   return TODO
 }
 
-function meet_is_associative(
+function meetAssociative(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,

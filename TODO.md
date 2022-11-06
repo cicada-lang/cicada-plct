@@ -1,5 +1,3 @@
-std/lattice -- change naming convention to camelCase
-
 why we need `freshenNames`?
 
 - why without it the following test will fail?

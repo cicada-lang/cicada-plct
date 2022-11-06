@@ -4,8 +4,8 @@
 
 - [manual] `relations/list-append.md`
 
-- [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
-- [manual] `structures/boolean-lattice.md` -- `join_is_associative`
+- [manual] `structures/boolean-lattice.md` -- `meetAssociative`
+- [manual] `structures/boolean-lattice.md` -- `joinAssociative`
 
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
 - [manual] `structures/boolean-lattice.md` -- prove complement is unique
