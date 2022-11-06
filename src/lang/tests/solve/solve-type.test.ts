@@ -5,7 +5,7 @@ test("solve Type", async () => {
   const output = await runCode(`
 
 solve () {
-  unify Type = Type
+  Type = Type
 }
 
 `)

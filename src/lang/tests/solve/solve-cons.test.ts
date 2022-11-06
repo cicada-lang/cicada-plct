@@ -5,7 +5,7 @@ test("solve Cons -- car", async () => {
   const output = await runCode(`
 
 solve (a: String) {
-  unify cons(a, "b") = cons("a", "b")
+  cons(a, "b") = cons("a", "b")
 }
 
 `)
@@ -17,7 +17,7 @@ test("solve Cons -- cdr", async () => {
   const output = await runCode(`
 
 solve (b: String) {
-  unify cons("a", "b") = cons("a", b)
+  cons("a", "b") = cons("a", b)
 }
 
 `)
@@ -29,7 +29,7 @@ test("solve Cons -- car and cdr", async () => {
   const output = await runCode(`
 
 solve (a: String, b: String) {
-  unify cons(a, "b") = cons("a", b)
+  cons(a, "b") = cons("a", b)
 }
 
 `)
@@ -41,7 +41,7 @@ test("solve Cons -- nested", async () => {
   const output = await runCode(`
 
 solve (a: String, b: String) {
-  unify cons(a, cons("b", "c")) = cons("a", cons(b, "c"))
+  cons(a, cons("b", "c")) = cons("a", cons(b, "c"))
 }
 
 `)
@@ -54,9 +54,9 @@ test("solve Cons -- deepWalk", async () => {
 
 solve (a: String, b: String, c: Pair(String, String)) {
 
-  unify cons(a, b) = c
-  unify a = "a"
-  unify b = "b"
+  cons(a, b) = c
+  a = "a"
+  b = "b"
 }
 
 `)

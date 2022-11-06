@@ -5,7 +5,7 @@ test("solve ApImplicit -- same PatternVar", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String) {
-  unify id(x) = id(x)
+  id(x) = id(x)
 }
 
 `)
@@ -19,7 +19,7 @@ test("solve ApImplicit -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
-  unify id(implicit String, x) = id(implicit A, "abc")
+  id(implicit String, x) = id(implicit A, "abc")
 }
 
 `)
@@ -33,7 +33,7 @@ test("solve ApImplicit -- insertion", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String) {
-  unify id(x) = id("abc")
+  id(x) = id("abc")
 }
 
 `)
@@ -47,8 +47,8 @@ test("solve ApImplicit -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, A: Type, idA: (x: A) -> A) {
-  unify idA = id(implicit A)
-  unify A = String
+  idA = id(implicit A)
+  A = String
 }
 
 `)
@@ -62,8 +62,8 @@ test("solve ApImplicit -- deepWalk -- inserted", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String, c: String) {
-  unify c = id(x)
-  unify id(x) = id("abc")
+  c = id(x)
+  id(x) = id("abc")
 }
 
 `)

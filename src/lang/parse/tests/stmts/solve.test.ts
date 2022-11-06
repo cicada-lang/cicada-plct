@@ -9,9 +9,9 @@ test("parse Solve", () => {
     parseStmts(`
 
 solve (A: Type, B: Type) {
-  unify A = Trivial : Type
-  unify B = String : Type
-  unify A = B : Type
+  A = Trivial : Type
+  B = String : Type
+  A = B : Type
 }
 
 `),
@@ -49,9 +49,9 @@ test("parse Solve -- empty bindings", () => {
     parseStmts(`
 
 solve () {
-  unify A = Trivial : Type
-  unify B = String : Type
-  unify A = B : Type
+  A = Trivial : Type
+  B = String : Type
+  A = B : Type
 }
 
 `),
@@ -86,9 +86,9 @@ test("parse Solve -- untyped unify", () => {
     parseStmts(`
 
 solve () {
-  unify A = Trivial
-  unify B = String
-  unify A = B : Type
+  A = Trivial
+  B = String
+  A = B : Type
 }
 
 `),

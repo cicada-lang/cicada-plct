@@ -6,9 +6,8 @@ test("solve FnImplicit", async () => {
   const output = await runCode(`
 
 solve (x: String) {
-  unify
-    (implicit A: Type, a: A) => x =
-    (implicit A: Type, a: A) => "abc"
+  (implicit A: Type, a: A) => x =
+  (implicit A: Type, a: A) => "abc"
 }
 
 `)
@@ -20,9 +19,8 @@ test("solve FnImplicit -- 2", async () => {
   const output = await runCode(`
 
 solve (x: String) {
-  unify
-    (implicit A: Type, implicit B: Type, a: A, b: B) => x =
-    (implicit A: Type, implicit B: Type, a: A, b: B) => "abc"
+  (implicit A: Type, implicit B: Type, a: A, b: B) => x =
+  (implicit A: Type, implicit B: Type, a: A, b: B) => "abc"
 }
 
 `)
@@ -34,7 +32,7 @@ test("solve FnImplicit -- alpha equivalence", async () => {
   const output = await runCode(`
 
 solve () {
-  unify (implicit A: Type, a: A) => a = (implicit B: Type, b: B) => b
+  (implicit A: Type, a: A) => a = (implicit B: Type, b: B) => b
 }
 
 `)
@@ -46,8 +44,8 @@ test("solve FnImplicit -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (T: Type, f: (implicit _: Trivial) -> Type) {
-  unify f = (implicit _) => T
-  unify T = String
+  f = (implicit _) => T
+  T = String
 }
 
 `)
@@ -62,7 +60,7 @@ test("solve FnImplicit -- occur", async () => {
     `
   
 solve (x: (implicit _: Type) -> Type) {
-  unify x = (implicit y: Type) => x(implicit y)
+  x = (implicit y: Type) => x(implicit y)
 }
 
 `,

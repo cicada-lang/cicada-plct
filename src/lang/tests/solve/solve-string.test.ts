@@ -5,7 +5,7 @@ test("solve String", async () => {
   const output = await runCode(`
 
 solve () {
-  unify String = String
+  String = String
 }
 
 `)

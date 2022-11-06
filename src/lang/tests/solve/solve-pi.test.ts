@@ -6,7 +6,7 @@ test("solve Pi", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify (A) -> B = (String) -> String
+  (A) -> B = (String) -> String
 }
 
 `)
@@ -18,8 +18,8 @@ test("solve Pi -- nested", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify (A, String) -> B = (String, String) -> String
-  unify (A, String) -> String = (String, String) -> B
+  (A, String) -> B = (String, String) -> String
+  (A, String) -> String = (String, String) -> B
 }
 
 `)
@@ -31,8 +31,8 @@ test("solve Pi -- occur twice", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify (A, B) -> B = (String, String) -> String
-  unify (A, B) -> String = (String, String) -> B
+  (A, B) -> B = (String, String) -> String
+  (A, B) -> String = (String, String) -> B
 }
 
 `)
@@ -45,9 +45,9 @@ test("solve Pi -- deepWalk", async () => {
 
 solve (A: Type, B: Type, C: Type) {
   // NOTE To test deepWalk, the order matters here.
-  unify C = (A) -> B
-  unify A = String
-  unify B = String
+  C = (A) -> B
+  A = String
+  B = String
 }
 
 `)
@@ -62,7 +62,7 @@ test("solve Pi -- occur in Pi", async () => {
     `
   
 solve (T: Type) {
-  unify T = (T) -> T
+  T = (T) -> T
 }
 
 `,
@@ -75,7 +75,7 @@ test("solve Pi -- occur in Pi -- nested", async () => {
     `
 
 solve (A: Type, B: Type) {
-  unify (A) -> B = (A) -> (B) -> B
+  (A) -> B = (A) -> (B) -> B
 }
 
 `,
@@ -87,7 +87,7 @@ test("solve Pi -- occur shadowed by Pi", async () => {
   const output = await runCode(`
   
 solve (X: Type) {
-  unify X = (X: Type) -> X
+  X = (X: Type) -> X
 }
   
 `)

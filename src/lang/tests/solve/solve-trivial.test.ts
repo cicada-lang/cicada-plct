@@ -5,7 +5,7 @@ test("solve Trivial", async () => {
   const output = await runCode(`
 
 solve () {
-  unify Trivial = Trivial
+  Trivial = Trivial
 }
 
 `)

@@ -5,7 +5,7 @@ test("solve Fn", async () => {
   const output = await runCode(`
 
 solve (x: String) {
-  unify (_: Trivial) => x = (_: Trivial) => "abc"
+  (_: Trivial) => x = (_: Trivial) => "abc"
 }
 
 `)
@@ -17,7 +17,7 @@ test("solve Fn -- alpha equivalence", async () => {
   const output = await runCode(`
 
 solve () {
-  unify (A: Type, a: A) => a = (B: Type, b: B) => b
+  (A: Type, a: A) => a = (B: Type, b: B) => b
 }
 
 `)
@@ -29,8 +29,8 @@ test("solve Fn -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (T: Type, f: (Trivial) -> Type) {
-  unify f = (_) => T
-  unify T = String
+  f = (_) => T
+  T = String
 }
 
 `)
@@ -42,7 +42,7 @@ test("solve Fn -- occur in fn", async () => {
   await expectCodeToFail(`
   
 solve (x: (Type) -> Type) {
-  unify x = (y: Type) => x(y)
+  x = (y: Type) => x(y)
 }
 
 `)
@@ -52,7 +52,7 @@ test("solve Fn -- occur shadowed by Fn", async () => {
   const output = await runCode(`
   
 solve (x: (Type) -> Type) {
-  unify x = (x: Type) => x
+  x = (x: Type) => x
 }
   
 `)

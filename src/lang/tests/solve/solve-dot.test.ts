@@ -11,10 +11,10 @@ class ABC {
 }
 
 solve (abc: ABC, a: String, b: String, c: String) {
-  unify a = abc.a
-  unify b = abc.b
-  unify c = abc.c
-  unify abc = { a: "a", b: "b", c: "c" }
+  a = abc.a
+  b = abc.b
+  c = abc.c
+  abc = { a: "a", b: "b", c: "c" }
 }
 
 `)

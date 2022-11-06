@@ -6,7 +6,7 @@ test("solve Clazz", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify class { a: A, b: B } = class { a: String, b: String }
+  class { a: A, b: B } = class { a: String, b: String }
 }
 
 `)
@@ -18,7 +18,7 @@ test("solve Clazz -- subclazz", async () => {
   const output = await runCode(`
 
 solve (A: Type) {
-  unify class { a: A } = class { a: String, b: String }
+  class { a: A } = class { a: String, b: String }
 }
 
 `)
@@ -30,7 +30,7 @@ test("solve Clazz -- nested", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify class { c: class { a: A, b: B } } = class { c: class { a: String, b: String } }
+  class { c: class { a: A, b: B } } = class { c: class { a: String, b: String } }
 }
 
 `)
@@ -42,9 +42,8 @@ test("solve Clazz -- occur twice", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify
-    class { c: class { a: A, b: B }, b: String } =
-    class { c: class { a: String, b: String }, b: B }
+  class { c: class { a: A, b: B }, b: String } =
+  class { c: class { a: String, b: String }, b: B }
 }
 
 `)
@@ -56,9 +55,9 @@ test("solve ClazzCons -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type, C: Type) {
-  unify C = class { a: A, b: B }
-  unify A = String
-  unify B = String
+  C = class { a: A, b: B }
+  A = String
+  B = String
 }
 
 `)
@@ -77,11 +76,11 @@ test("solve ClazzFulfilled -- deepWalk", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type, C: Type, a: A, b: B) {
-  unify C = class { a: A = a, b: B = b }
-  unify A = String
-  unify B = String
-  unify a = "a"
-  unify b = "b"
+  C = class { a: A = a, b: B = b }
+  A = String
+  B = String
+  a = "a"
+  b = "b"
 }
 
 `)
@@ -101,7 +100,7 @@ test("solve Clazz -- occur", async () => {
     `
 
 solve (A: Type) {
-  unify class { a: A } = A
+  class { a: A } = A
 }
 
 `,

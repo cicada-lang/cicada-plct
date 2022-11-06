@@ -6,8 +6,8 @@ test("solve PiImplicit -- occur twice", async () => {
   const output = await runCode(`
 
 solve (A: Type, B: Type) {
-  unify (implicit _: A, B) -> B = (implicit _: String, String) -> String
-  unify (implicit _: A, B) -> String = (implicit _: String, String) -> B
+  (implicit _: A, B) -> B = (implicit _: String, String) -> String
+  (implicit _: A, B) -> String = (implicit _: String, String) -> B
 }
 
 `)
@@ -20,9 +20,9 @@ test("solve PiImplicit -- deepWalk", async () => {
 
 solve (A: Type, B: Type, C: Type) {
   // NOTE To test deepWalk, the order matters here.
-  unify C = (implicit _: A) -> B
-  unify A = String
-  unify B = String
+  C = (implicit _: A) -> B
+  A = String
+  B = String
 }
 
 `)
@@ -37,7 +37,7 @@ test("solve PiImplicit -- occur", async () => {
     `
   
 solve (T: Type) {
-  unify T = (implicit _: T) -> T
+  T = (implicit _: T) -> T
 }
 
 `,

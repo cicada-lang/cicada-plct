@@ -5,8 +5,8 @@ test("solve Car", async () => {
   const output = await runCode(`
 
 solve (ab: Pair(String, String), a: String) {
-  unify a = car(ab)
-  unify ab = cons("a", "b")
+  a = car(ab)
+  ab = cons("a", "b")
 }
 
 `)
@@ -20,11 +20,11 @@ test("solve Car -- nested", async () => {
   const output = await runCode(`
 
 solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String, b2: String) {
-  unify b2 = car(ba)
-  unify ba = cons(b, a)
-  unify a = car(ab)
-  unify b = cdr(ab)
-  unify ab = cons("a", "b")
+  b2 = car(ba)
+  ba = cons(b, a)
+  a = car(ab)
+  b = cdr(ab)
+  ab = cons("a", "b")
 }
 
 `)
@@ -38,7 +38,7 @@ test("solve Car -- car cons", async () => {
   const output = await runCode(`
 
 solve(a: String) {
-  unify a = car(cons(a, "b"))
+  a = car(cons(a, "b"))
 }
 
 `)

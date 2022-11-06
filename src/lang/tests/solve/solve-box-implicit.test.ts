@@ -13,9 +13,9 @@ function box(implicit T: Type, x: T): Box(T) {
 }
 
 solve (x: String, y: Box(String), z: Box(Box(String))) {
-  unify y = box(x)
-  unify z = box(y)
-  unify x = "abc"
+  y = box(x)
+  z = box(y)
+  x = "abc"
 }
 
 `)
