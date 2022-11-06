@@ -11,7 +11,7 @@ class GroupHom {
     cod.mul(hom(x), hom(y)))
 }
 
-let groupCategory: Category(Group, GroupHom) = new Category {
+let groupCategory = new Category(Group, GroupHom) {
   id(dom: Group): GroupHom(dom, dom) =
     new GroupHom {
       hom(x: dom.Elem): dom.Elem = x

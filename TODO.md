@@ -1,5 +1,4 @@
-trivialSemigroup
-trivialGroup
+trivialGroup.cic
 
 why we need `freshenNames`?
 
