@@ -1,3 +1,9 @@
+[book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
+
+[mimor] reading-inference-rules.mimor -- use whereabouts syntax
+
+note about class and self type
+
 fix `unifyClazz`
 
 - should not use `freshenNames` and `expelClazz`
@@ -47,10 +53,6 @@ pass std/groupoid -- need `super`
 pass std/order -- need datatype
 
 # maybe
-
-[maybe] [mimor] reading-inference-rules.mimor
-
-[maybe] [book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
 
 [maybe] [optimize] implement `conversion` directly instead of using `readback` and `alphaEquivalent`
 
