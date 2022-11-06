@@ -1,4 +1,5 @@
-std -- change naming convention to camelCase
+std/category -- change naming convention to camelCase
+std/lattice -- change naming convention to camelCase
 
 why we need `freshenNames`?
 
