@@ -1,4 +1,4 @@
-import { Category } from "Category.md"
+import { Category } from "Category.cic"
 import { Functor } from "Functor.cic"
 
 // To each natural translation,

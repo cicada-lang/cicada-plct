@@ -1,4 +1,4 @@
-import { Category } from "Category.md"
+import { Category } from "Category.cic"
 
 let trivialCategory = new Category {
   Object: Trivial,

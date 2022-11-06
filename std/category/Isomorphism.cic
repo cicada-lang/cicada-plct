@@ -1,0 +1,24 @@
+import { Category } from "Category.cic"
+
+// Two objects have the same structure iff they are isomorphic,
+// and an "abstract object" is an isomorphism class of objects.
+
+class Isomorphism {
+  cat: Category
+  dom: cat.Object
+  cod: cat.Object
+  morphism: cat.Morphism(dom, cod)
+  inverse: cat.Morphism(cod, dom)
+
+  inverseLeft: Equal(
+    cat.Morphism(dom, dom),
+    cat.compose(morphism, inverse),
+    cat.id(dom),
+  )
+
+  inverseRight: Equal(
+    cat.Morphism(cod, cod),
+    cat.compose(inverse, morphism),
+    cat.id(cod),
+  )
+}

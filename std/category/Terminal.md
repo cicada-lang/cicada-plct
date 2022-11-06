@@ -5,7 +5,7 @@ title: Terminal Objects
 # Dependencies
 
 ```cicada
-import { Category } from "Category.md"
+import { Category } from "Category.cic"
 ```
 
 # Terminal
@@ -31,7 +31,7 @@ If a terminal object exists, it is unique up to unique isomorphism.
 <https://github.com/xieyuheng/cat/blob/master/src/category.agda>
 
 ```cicada
-import { Isomorphism } from "Category.md"
+import { Isomorphism } from "Isomorphism.cic"
 import { equalSwap, equalCompose } from "../equality/index.cic"
 
 function terminal_object_isomorphism(

@@ -1,0 +1,45 @@
+// To each species of mathematical structure,
+// there corresponds a category whose objects have that structure,
+// and whose morphisms preserve it.
+
+class Category {
+  Object: Type
+
+  Morphism(dom: Object, cod: Object): Type
+
+  id(x: Object): Morphism(x, x)
+
+  compose(
+    implicit x: Object,
+    implicit y: Object,
+    f: Morphism(x, y),
+    implicit z: Object,
+    g: Morphism(y, z),
+  ): Morphism(x, z)
+
+  idLeft(
+    implicit x: Object,
+    implicit y: Object,
+    f: Morphism(x, y)
+  ): Equal(Morphism(x, y), compose(id(x), f), f)
+
+  idRight(
+    implicit x: Object,
+    implicit y: Object,
+    f: Morphism(x, y),
+  ): Equal(Morphism(x, y), compose(f, id(y)), f)
+
+  composeAssociative(
+    implicit x: Object,
+    implicit y: Object,
+    f: Morphism(x, y),
+    implicit z: Object,
+    g: Morphism(y, z),
+    implicit w: Object,
+    h: Morphism(z, w),
+  ): Equal(
+    Morphism(x, w),
+    compose(f, compose(g, h)),
+    compose(compose(f, g), h)
+  )
+}

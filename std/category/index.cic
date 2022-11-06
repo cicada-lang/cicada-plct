@@ -1,1 +1,4 @@
-import { Category, Isomorphism } from "Category.md"
+import { Category } from "Category.cic"
+import { Functor } from "Functor.cic"
+import { NaturalTransformation } from "NaturalTransformation.cic"
+import { Isomorphism } from "Isomorphism.cic"

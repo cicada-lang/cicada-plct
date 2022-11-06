@@ -1,4 +1,4 @@
-import { Category } from "Category.md"
+import { Category } from "Category.cic"
 
 // To any natural construction on structures of one species,
 // yielding structures of another species,

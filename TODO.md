@@ -1,6 +1,6 @@
-Isomorphism.cic
+ambr Respect Preserve
+
 terminalUniqueIso.cic
-ambr "Category.md" "Category.cic"
 
 why we need `freshenNames`?
 
