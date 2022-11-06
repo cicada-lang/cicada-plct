@@ -1,0 +1,18 @@
+{ Element: Trivial, mul: (x, y) => sole, mulAssociative: (x, y, z) => refl(implicit Trivial, implicit sole), id: sole, idLeft: (x) => refl(implicit Trivial, implicit sole), idRight: (x) => refl(implicit Trivial, implicit sole), inv: (x) => sole, invLeft: (x) => refl(implicit Trivial, implicit sole), invRight: (x) => refl(implicit Trivial, implicit sole), div: (x, y) => sole }: class {
+  Element: Type
+  mul: (Element, Element) -> Element
+  mulAssociative: (x: Element, y: Element, z: Element) -> Equal(Element, mul(x, mul(y, z)), mul(mul(x, y), z))
+  id: Element
+  idLeft: (x: Element) -> Equal(Element, mul(id, x), x)
+  idRight: (x: Element) -> Equal(Element, mul(x, id), x)
+  inv: (Element) -> Element
+  invLeft: (x: Element) -> Equal(Element, mul(inv(x), x), id)
+  invRight: (x: Element) -> Equal(Element, mul(x, inv(x)), id)
+  div: (Element, Element) -> Element = (x, y) => mul(x, inv(y))
+}
+(x, y) => sole: (Trivial, Trivial) -> Trivial
+(y) => sole: (Trivial) -> Trivial
+sole: Trivial
+(x, y) => sole: (Trivial, Trivial) -> Trivial
+(y) => sole: (Trivial) -> Trivial
+sole: Trivial
