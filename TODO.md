@@ -1,3 +1,11 @@
+why we need `freshenNames`?
+
+- why without it the following test will fail?
+
+  src/lang/tests/solve/solve-dot.test.ts > solve Dot
+
+[maybe] `expelClazz` should take a pair of classes
+
 # std
 
 `FnImplicit` insertion -- much needed in `std/category/Category.md`

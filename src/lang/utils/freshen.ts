@@ -24,6 +24,7 @@ export function freshenNames(
   for (const name of names) {
     const freshName = freshen(usedNames, name)
     freshNameMap.set(name, freshName)
+    // freshNameMap.set(name, name)
     usedNames.add(freshName)
   }
 

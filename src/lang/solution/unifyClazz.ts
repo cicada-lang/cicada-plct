@@ -55,7 +55,7 @@ function unifyClazzProperty(
   }
 
   if (left.value !== undefined && right.value === undefined) {
-    const patternVar = mod.solution.createPatternVar(freshName, right.type)
+    const patternVar = mod.solution.createPatternVar(freshName, left.type)
     unify(mod, ctx, left.type, left.value, patternVar)
   }
 
