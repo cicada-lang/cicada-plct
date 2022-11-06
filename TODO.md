@@ -1,7 +1,5 @@
 # std
 
-improve `unifyType` error message -- the values in `UnificationError`
-
 `FnImplicit` insertion -- much needed in `std/category/Category.md`
 
 pass std/boolean-lattice -- use `FnImplicit`

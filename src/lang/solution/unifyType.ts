@@ -22,6 +22,24 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
   if (success) return
 
+  try {
+    unifyTypeAux(mod, ctx, left, right)
+  } catch (error) {
+    if (error instanceof Errors.UnificationError) {
+      error.trace.unshift(
+        [
+          `[unifyType]`,
+          `  left: ${formatCore(readbackType(mod, ctx, left))}`,
+          `  right: ${formatCore(readbackType(mod, ctx, right))}`,
+        ].join("\n"),
+      )
+    }
+
+    throw error
+  }
+}
+
+function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
