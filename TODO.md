@@ -1,3 +1,7 @@
+ambr "Category.md" "Category.cic"
+
+terminalUniqueIso
+
 why we need `freshenNames`?
 
 - why without it the following test will fail?

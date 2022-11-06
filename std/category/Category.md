@@ -63,21 +63,6 @@ class Category {
 }
 ```
 
-## A trivial category
-
-```cicada
-let trivialCategory = new Category {
-  Object: Trivial,
-  Morphism: (dom, cod) => Trivial,
-  id: (x) => sole,
-
-  compose: (implicit x, implicit y, f, implicit z, g) => sole,
-  idLeft: (implicit x, implicit y, f) => refl,
-  idRight: (implicit x, implicit y, f) => refl,
-  composeAssociative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl,
-}
-```
-
 # Functor
 
 To any natural construction on structures of one species,
@@ -254,32 +239,3 @@ class Isomorphism {
   )
 }
 ```
-
-# Limit
-
-A diagram D in a category C can be seen as a system of constraints,
-and then a limit of D represents all possible solutions of the system.
-
-TODO
-
-# Adjoint
-
-To any canonical construction from one species of structure to another
-corresponds an adjunction between the corresponding categories.
-
-This captures the concept of "canonical construction".
-
-TODO
-
-# Colimit
-
-TODO
-
-# Comma category
-
-Comma categories are another basic construction that
-first appeared in lawvere's thesis.
-
-They tend to arise when morphisms are used as objects.
-
-TODO

@@ -25,6 +25,7 @@ class Terminal {
 
 # Terminal is an universal construction
 
+terminalUniqueIso
 If a terminal object exists, it is unique up to unique isomorphism.
 
 <https://github.com/xieyuheng/cat/blob/master/src/category.agda>

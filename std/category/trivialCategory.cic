@@ -1,0 +1,11 @@
+import { Category } from "Category.md"
+
+let trivialCategory = new Category {
+  Object: Trivial,
+  Morphism: (dom, cod) => Trivial,
+  id: (x) => sole,
+  compose: (implicit x, implicit y, f, implicit z, g) => sole,
+  idLeft: (implicit x, implicit y, f) => refl,
+  idRight: (implicit x, implicit y, f) => refl,
+  composeAssociative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl,
+}

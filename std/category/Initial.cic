@@ -1,16 +1,5 @@
----
-title: Initial Objects
----
-
-# Dependencies
-
-```cicada
 import { Category } from "Category.md"
-```
 
-# Initial
-
-```cicada
 class Initial {
   cat: Category
 
@@ -23,4 +12,3 @@ class Initial {
     f: cat.Morphism(object, x),
   ): Equal(cat.Morphism(object, x), f, morphism(x))
 }
-```

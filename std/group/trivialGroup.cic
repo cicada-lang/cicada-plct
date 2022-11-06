@@ -7,9 +7,9 @@ let trivialGroup = new Group {
   id: sole,
   idLeft: (x) => refl,
   idRight: (x) => refl,
-  inv: (x) => sole,
-  invLeft: (x) => refl,
-  invRight: (x) => refl,
+  inverse: (x) => sole,
+  inverseLeft: (x) => refl,
+  inverseRight: (x) => refl,
 }
 
 compute trivialGroup
