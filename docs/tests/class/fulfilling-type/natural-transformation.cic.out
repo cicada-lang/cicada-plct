@@ -38,8 +38,8 @@ class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   tar: class {
     dom: class {
@@ -62,8 +62,8 @@ class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
@@ -108,8 +108,8 @@ class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   tar: class {
     dom: class {
@@ -132,8 +132,8 @@ class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
@@ -178,8 +178,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   tar: class {
     dom: class {
@@ -202,8 +202,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
@@ -247,8 +247,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   tar: class {
     dom: class {
@@ -271,8 +271,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
@@ -316,8 +316,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   tar: class {
     dom: class {
@@ -340,8 +340,8 @@ refl(vague Type, vague class {
     } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), idLeft: (x, y, f) => cod.idLeft(x, y, f), idRight: (x, y, f) => cod.idRight(x, y, f), composeAssociative: (x, y, z, w, f, g, h) => cod.composeAssociative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
-    fmapRespectCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
-    fmapRespectId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
+    fmapPreserveCompose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
+    fmapPreserveId: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))

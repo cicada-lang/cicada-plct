@@ -48,7 +48,7 @@ class Functor {
     f: dom.Morphism(x, y)
   ): cod.Morphism(map(x), map(y))
 
-  fmapRespectCompose(
+  fmapPreserveCompose(
     x: dom.Object,
     y: dom.Object,
     z: dom.Object,
@@ -59,7 +59,7 @@ class Functor {
     fmap(x, z)(dom.compose(x, y, z)(f, g)),
     cod.compose(map(x), map(y), map(z))(fmap(x, y)(f), fmap(y, z)(g)))
 
-  fmapRespectId(
+  fmapPreserveId(
     x: dom.Object
   ): Equal(
     cod.Morphism(map(x), map(x)),

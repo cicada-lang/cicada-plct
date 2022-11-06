@@ -5,7 +5,7 @@ class GroupHom {
   cod: Group
   hom(dom.Elem): cod.Elem
 
-  homRespectMul(x: dom.Elem, y: dom.Elem): TheEqual(
+  homPreserveMul(x: dom.Elem, y: dom.Elem): TheEqual(
     cod.Elem,
     hom(dom.mul(x, y)),
     cod.mul(hom(x), hom(y)))
@@ -15,7 +15,7 @@ let groupCategory = new Category(Group, GroupHom) {
   id(dom: Group): GroupHom(dom, dom) =
     new GroupHom {
       hom(x: dom.Elem): dom.Elem = x
-      homRespectMul(x: dom.Elem, y: dom.Elem) = Same(dom.mul(x, y))
+      homPreserveMul(x: dom.Elem, y: dom.Elem) = Same(dom.mul(x, y))
     }
 
   // given G: Group, H: Group, K: Group
@@ -24,7 +24,7 @@ let groupCategory = new Category(Group, GroupHom) {
       dom = G
       cod = K
       hom(x: G.Elem) = g.hom(f.hom(x))
-      homRespectMul(x: G.Elem, y: G.Elem) = Same(g.hom(H.mul(f.hom(x), f.hom(y))))
+      homPreserveMul(x: G.Elem, y: G.Elem) = Same(g.hom(H.mul(f.hom(x), f.hom(y))))
     }
 
   // given G: Group, H: Group
