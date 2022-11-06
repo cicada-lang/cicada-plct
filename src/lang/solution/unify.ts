@@ -1,3 +1,4 @@
+import { indent } from "../../utils/indent"
 import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
@@ -43,9 +44,9 @@ export function unify(
       error.trace.unshift(
         [
           `[unify]`,
-          `  type: ${formatCore(readbackType(mod, ctx, type))}`,
-          `  left: ${formatCore(readback(mod, ctx, type, left))}`,
-          `  right: ${formatCore(readback(mod, ctx, type, right))}`,
+          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
+          indent(`left: ${formatCore(readback(mod, ctx, type, left))}`),
+          indent(`right: ${formatCore(readback(mod, ctx, type, right))}`),
         ].join("\n"),
       )
     }

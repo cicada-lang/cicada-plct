@@ -56,7 +56,7 @@ export function formatCore(core: Core): string {
     case "ClazzCons":
     case "ClazzFulfilled": {
       const { bindings } = Cores.unfoldFormatClazz(core)
-      return `class {\n${indent(bindings.join("\n"), "  ")}\n}`
+      return `class {\n${indent(bindings.join("\n"))}\n}`
     }
 
     case "Objekt": {

@@ -1,3 +1,4 @@
+import { indent } from "../../utils/indent"
 import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
@@ -73,8 +74,8 @@ export function unifyNeutral(
   throw new Errors.UnificationError(
     [
       `unifyNeutral is not implemented for the pair of neutrals`,
-      `  left: ${formatCore(readbackNeutral(mod, ctx, left))}`,
-      `  right: ${formatCore(readbackNeutral(mod, ctx, right))}`,
+      indent(`left: ${formatCore(readbackNeutral(mod, ctx, left))}`),
+      indent(`right: ${formatCore(readbackNeutral(mod, ctx, right))}`),
     ].join("\n"),
   )
 }

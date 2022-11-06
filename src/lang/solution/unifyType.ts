@@ -1,3 +1,4 @@
+import { indent } from "../../utils/indent"
 import { applyClosure, Closure } from "../closure"
 import { formatCore } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
@@ -29,8 +30,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       error.trace.unshift(
         [
           `[unifyType]`,
-          `  left: ${formatCore(readbackType(mod, ctx, left))}`,
-          `  right: ${formatCore(readbackType(mod, ctx, right))}`,
+          indent(`left: ${formatCore(readbackType(mod, ctx, left))}`),
+          indent(`right: ${formatCore(readbackType(mod, ctx, right))}`),
         ].join("\n"),
       )
     }
@@ -126,8 +127,8 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   throw new Errors.UnificationError(
     [
       `unifyType is not implemented for the pair of type values`,
-      `  left kind: ${formatCore(readbackType(mod, ctx, left))}`,
-      `  right kind: ${formatCore(readbackType(mod, ctx, right))}`,
+      indent(`left: ${formatCore(readbackType(mod, ctx, left))}`),
+      indent(`right: ${formatCore(readbackType(mod, ctx, right))}`),
     ].join("\n"),
   )
 }
