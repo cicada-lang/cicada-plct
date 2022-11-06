@@ -42,7 +42,7 @@ export function unify(
     if (error instanceof Errors.UnificationError) {
       error.trace.unshift(
         [
-          `trace`,
+          `[unify]`,
           `  type: ${formatCore(readbackType(mod, ctx, type))}`,
           `  left: ${formatCore(readback(mod, ctx, type, left))}`,
           `  right: ${formatCore(readback(mod, ctx, type, right))}`,
