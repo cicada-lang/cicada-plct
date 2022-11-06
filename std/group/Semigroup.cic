@@ -1,0 +1,15 @@
+class Semigroup {
+  Element: Type
+
+  mul(x: Element, y: Element): Element
+
+  mul_is_associative(
+    x: Element,
+    y: Element,
+    z: Element,
+  ): Equal(
+    Element,
+    mul(x, mul(y, z)),
+    mul(mul(x, y), z)
+  )
+}

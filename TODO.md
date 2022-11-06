@@ -1,4 +1,3 @@
-re structure std/group
 trivialSemigroup
 trivialGroup
 

@@ -1,14 +1,5 @@
----
-title: Group Category
----
+// Example of a big category.
 
-Example of a big category.
-
-# GroupHom
-
-TODO
-
-```
 class GroupHom {
   dom: Group
   cod: Group
@@ -19,14 +10,8 @@ class GroupHom {
     hom(dom.mul(x, y)),
     cod.mul(hom(x), hom(y)))
 }
-```
 
-# group_category
-
-TODO
-
-```
-let group_category: Category(Group, GroupHom) = new Category {
+let groupCategory: Category(Group, GroupHom) = new Category {
   id(dom: Group): GroupHom(dom, dom) =
     new GroupHom {
       hom(x: dom.Elem): dom.Elem = x
@@ -51,4 +36,3 @@ let group_category: Category(Group, GroupHom) = new Category {
   // given G: Group, H: Group, K: Group, L: Group
   compose_is_associative(f: GroupHom(G, H), g: GroupHom(H, K), h: GroupHom(K, L)) = Refl
 }
-```
