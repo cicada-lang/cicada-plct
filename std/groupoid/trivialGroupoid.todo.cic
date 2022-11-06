@@ -1,0 +1,21 @@
+import { Groupoid } from "Groupoid.cic"
+import { trivialCategory } from "../category/index.cic"
+
+let trivialIsomorphism = new Isomorphism(trivialCategory, sole, sole, sole, sole) {
+  cat: trivialCategory,
+
+  dom: sole,
+  cod: sole,
+  morphism: sole,
+  inverse: sole,
+
+  inverseLeft: refl,
+  inverseRight: refl,
+}
+
+let trivialGroupoid: Groupoid = {
+  ...trivialCategory,
+
+  inv: (f) => sole,
+  invIso: (f) => trivialIsomorphism,
+}

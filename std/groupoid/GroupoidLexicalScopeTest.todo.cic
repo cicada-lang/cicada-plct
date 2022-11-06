@@ -9,7 +9,7 @@ class GroupoidLexicalScopeTest extends Category {
 
   // NOTE `super` should repsect lexical scope,
   ///  the `id` in `super` should be different from the `id` in current scope.
-  inv_iso(
+  invIso(
     implicit id: Object,
     implicit y: Object,
     f: Morphism(id, y),
