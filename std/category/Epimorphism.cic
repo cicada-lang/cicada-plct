@@ -1,0 +1,18 @@
+import { Category } from "Category.md"
+
+class Epimorphism {
+  cat: Category
+  dom: cat.Object
+  cod: cat.Object
+  morphism: cat.Morphism(dom, cod)
+
+  cancelLeft(
+    implicit x: cat.Object,
+    implicit f: cat.Morphism(cod, x),
+    implicit g: cat.Morphism(cod, x),
+    Equal(
+      cat.Morphism(dom, x),
+      cat.compose(morphism, f),
+      cat.compose(morphism, g)),
+  ): Equal(cat.Morphism(cod, x), f, g)
+}

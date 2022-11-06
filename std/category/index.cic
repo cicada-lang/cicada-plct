@@ -1,1 +1,1 @@
-import { Category, Isomorphism } from "./Category.md"
+import { Category, Isomorphism } from "Category.md"

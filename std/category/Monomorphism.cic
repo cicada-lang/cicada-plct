@@ -1,0 +1,22 @@
+import { Category } from "Category.md"
+
+class Monomorphism {
+  cat: Category
+  dom: cat.Object
+  cod: cat.Object
+  morphism: cat.Morphism(dom, cod)
+
+  cancelRight(
+    implicit x: cat.Object,
+    implicit f: cat.Morphism(x, dom),
+    implicit g: cat.Morphism(x, dom),
+    Equal(
+      cat.Morphism(x, cod),
+      cat.compose(f, morphism),
+      cat.compose(g, morphism)),
+  ): Equal(cat.Morphism(x, dom), f, g)
+}
+
+// NOTE example:
+//   mono: Monomorphism(cat, x, y)
+//   mono.morphism: mono.cat.Morphism(x, y)

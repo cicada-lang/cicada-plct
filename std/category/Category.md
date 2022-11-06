@@ -167,52 +167,6 @@ class NaturalTransformation {
 }
 ```
 
-# Epimorphism
-
-```cicada
-class Epimorphism {
-  cat: Category
-  dom: cat.Object
-  cod: cat.Object
-  morphism: cat.Morphism(dom, cod)
-
-  cancelLeft(
-    implicit x: cat.Object,
-    implicit f: cat.Morphism(cod, x),
-    implicit g: cat.Morphism(cod, x),
-    Equal(
-      cat.Morphism(dom, x),
-      cat.compose(morphism, f),
-      cat.compose(morphism, g)),
-  ): Equal(cat.Morphism(cod, x), f, g)
-}
-```
-
-# Monomorphism
-
-```cicada
-class Monomorphism {
-  cat: Category
-  dom: cat.Object
-  cod: cat.Object
-  morphism: cat.Morphism(dom, cod)
-
-  cancelRight(
-    implicit x: cat.Object,
-    implicit f: cat.Morphism(x, dom),
-    implicit g: cat.Morphism(x, dom),
-    Equal(
-      cat.Morphism(x, cod),
-      cat.compose(f, morphism),
-      cat.compose(g, morphism)),
-  ): Equal(cat.Morphism(x, dom), f, g)
-}
-
-// NOTE example:
-//   mono: Monomorphism(cat, x, y)
-//   mono.morphism: mono.cat.Morphism(x, y)
-```
-
 # Isomorphism
 
 Two objects have the same structure iff they are isomorphic,
