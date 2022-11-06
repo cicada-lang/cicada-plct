@@ -1,1 +1,23 @@
 import { Group } from "Group.cic"
+
+let trivialGroup = new Group {
+  Element: Trivial,
+  mul: (x, y) => sole,
+  mul_is_associative: (x, y, z) => refl,
+  id: sole,
+  id_left: (x) => refl,
+  id_right: (x) => refl,
+  inv: (x) => sole,
+  inv_left: (x) => refl,
+  inv_right: (x) => refl,
+}
+
+compute trivialGroup
+
+compute trivialGroup.mul
+compute trivialGroup.mul(sole)
+compute trivialGroup.mul(sole, sole)
+
+compute trivialGroup.div
+compute trivialGroup.div(sole)
+compute trivialGroup.div(sole, sole)
