@@ -1,28 +1,11 @@
 ---
-title: Initial and Terminal Objects
+title: Terminal Objects
 ---
 
 # Dependencies
 
 ```cicada
-import { Category } from "../category/index.cic"
-```
-
-# Initial
-
-```cicada
-class Initial {
-  cat: Category
-
-  object: cat.Object
-
-  morphism(x: cat.Object): cat.Morphism(object, x)
-
-  morphism_unique(
-    implicit x: cat.Object,
-    f: cat.Morphism(object, x),
-  ): Equal(cat.Morphism(object, x), f, morphism(x))
-}
+import { Category } from "Category.md"
 ```
 
 # Terminal
@@ -47,7 +30,7 @@ If a terminal object exists, it is unique up to unique isomorphism.
 <https://github.com/xieyuheng/cat/blob/master/src/category.agda>
 
 ```cicada
-import { Isomorphism } from "../category/index.cic"
+import { Isomorphism } from "Category.md"
 import { equal_swap, equal_compose } from "../equality/index.cic"
 
 function terminal_object_isomorphism(
@@ -79,14 +62,11 @@ function terminal_object_isomorphism(
 ```
 
 ```cicada todo
-import { Isomorphism } from "../category/index.cic"
-import { equal_swap, equal_compose } from "../equality/index.cic"
-
-function terminal_object_isomorphism(
+function terminal_object_isomorphism_without_Fulfilling_class(
   cat: Category,
   x: Terminal(cat),
   y: Terminal(cat),
-): Isomorphism(cat, x.object, y.object) {
+): Isomorphism {
   let f = x.morphism(y.object)
   let g = y.morphism(x.object)
 
@@ -99,16 +79,18 @@ function terminal_object_isomorphism(
 
     inverse_left: equal_compose(
       x.morphism_unique(cat.compose(g, f)),
-      equal_swap(x.morphism_unique(cat.id(x.object)))
+      equal_swap(x.morphism_unique(cat.id(x.object))),
     ),
 
     inverse_right: equal_compose(
       y.morphism_unique(cat.compose(f, g)),
-      equal_swap(y.morphism_unique(cat.id(y.object)))
+      equal_swap(y.morphism_unique(cat.id(y.object))),
     ),
   }
 }
+```
 
+```cicada todo
 function terminal_object_isomorphism_unique(
   cat: Category,
   x: Terminal(cat),
