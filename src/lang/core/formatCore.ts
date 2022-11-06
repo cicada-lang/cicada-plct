@@ -1,3 +1,4 @@
+import { indent } from "../../utils/indent"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { isIdentifier } from "../utils/isIdentifier"
@@ -55,7 +56,7 @@ export function formatCore(core: Core): string {
     case "ClazzCons":
     case "ClazzFulfilled": {
       const { bindings } = Cores.unfoldFormatClazz(core)
-      return `class { ${bindings.join(", ")} }`
+      return `class {\n ${indent(bindings.join(",\n  "), "  ")} \n}`
     }
 
     case "Objekt": {

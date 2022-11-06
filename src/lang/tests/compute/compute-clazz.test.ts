@@ -11,8 +11,19 @@ compute class { a: String, b: String = "b", c: String }
 `)
 
   expect(output).toMatchInlineSnapshot(`
-    "class { T: Type, x: T }: Type
-    class { a: String, b: String, c: String }: Type
-    class { a: String, b: String = \\"b\\", c: String }: Type"
+    "class {
+       T: Type,
+        x: T 
+    }: Type
+    class {
+       a: String,
+        b: String,
+        c: String 
+    }: Type
+    class {
+       a: String,
+        b: String = \\"b\\",
+        c: String 
+    }: Type"
   `)
 })
