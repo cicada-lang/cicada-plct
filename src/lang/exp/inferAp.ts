@@ -2,6 +2,7 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp, Inferred } from "../exp"
 import { Mod } from "../mod"
@@ -68,7 +69,18 @@ function inferApPi(
   let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
     argInferred = Exps.insertApImplicit(mod, ctx, argInferred, type.argType)
-    unifyType(mod, ctx, argInferred.type, type.argType)
+    try {
+      unifyType(mod, ctx, argInferred.type, type.argType)
+    } catch (error) {
+      if (error instanceof Errors.UnificationError) {
+        throw new Errors.ElaborationError(
+          ["inferApPi fail", ...error.trace, error.message].join("\n"),
+          { span: argExp.span },
+        )
+      }
+
+      throw error
+    }
   }
 
   /**
