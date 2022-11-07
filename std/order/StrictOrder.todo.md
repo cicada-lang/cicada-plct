@@ -23,7 +23,7 @@ class StrictUnder {
 // NOTE Can implement:
 // - topological sort
 class PartialOrder extends PreOrder {
-  @given x: Element, y: Element
+  implicit x: Element, y: Element
   antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
 }
 ```
@@ -39,7 +39,7 @@ class PartialOrder extends PreOrder {
   // Thus in PartialOrder, to prove Equal is equal to prove two Under's.
   // - Maybe easier to use.
   // - Maybe other axiom with one argument can have similar alternative.
-  @given x: Element, y: Element
+  implicit x: Element, y: Element
   reflexive_alt(Equal(x, y)): (Under(x, y), Under(y, x))
   reflexive_alt(equation) =
     (transport(equation, (z: Element) => Under(x, z), reflexive(x)),
