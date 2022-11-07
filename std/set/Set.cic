@@ -22,8 +22,8 @@ class Set {
   transitive(
     implicit x: Element,
     implicit y: Element,
-    Eq(x, y),
     implicit z: Element,
+    Eq(x, y),
     Eq(y, z),
   ): Eq(x, z)
 

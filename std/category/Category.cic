@@ -12,8 +12,8 @@ class Category {
   compose(
     implicit x: Object,
     implicit y: Object,
-    f: Morphism(x, y),
     implicit z: Object,
+    f: Morphism(x, y),
     g: Morphism(y, z),
   ): Morphism(x, z)
 
@@ -32,10 +32,10 @@ class Category {
   composeAssociative(
     implicit x: Object,
     implicit y: Object,
-    f: Morphism(x, y),
     implicit z: Object,
-    g: Morphism(y, z),
     implicit w: Object,
+    f: Morphism(x, y),
+    g: Morphism(y, z),
     h: Morphism(z, w),
   ): Equal(
     Morphism(x, w),

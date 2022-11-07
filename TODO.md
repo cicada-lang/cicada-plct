@@ -1,5 +1,3 @@
-std -- use `FnImplicit` insertion
-
 # std
 
 `Stmts.ClazzExtends` support `super` -- need `substExp`

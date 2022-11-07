@@ -1,9 +1,9 @@
 function equalMap(
   implicit X: Type,
+  implicit Y: Type,
   implicit from: X,
   implicit to: X,
   target: Equal(X, from, to),
-  implicit Y: Type,
   f: (X) -> Y,
 ): Equal(Y, f(from), f(to)) {
   return replace(
@@ -30,8 +30,8 @@ function equalCompose(
   implicit A: Type,
   implicit x: A,
   implicit y: A,
-  xy_equal: Equal(A, x, y),
   implicit z: A,
+  xy_equal: Equal(A, x, y),
   yz_equal: Equal(A, y, z),
 ): Equal(A, x, z) {
   return replace(
