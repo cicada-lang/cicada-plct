@@ -3,6 +3,11 @@ import { Exp } from "../exp"
 import { freshen } from "../utils/freshen"
 
 export function substExp(body: Exp, name: string, exp: Exp): Exp {
+  const freeNames = [
+    ...Exps.freeNames(new Set(), exp),
+    ...Exps.freeNames(new Set(), body),
+  ]
+
   switch (body.kind) {
     case "Var": {
       if (body.name === name) {
@@ -21,11 +26,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const retType = substExp(body.retType, body.name, Exps.Var(freshName))
         return Exps.Pi(
-          body.name,
+          freshName,
           substExp(body.argType, name, exp),
           substExp(retType, name, exp),
           body.span,
@@ -42,11 +46,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const retType = substExp(body.retType, body.name, Exps.Var(freshName))
         return Exps.PiImplicit(
-          body.name,
+          freshName,
           substExp(body.argType, name, exp),
           substExp(retType, name, exp),
           body.span,
@@ -82,10 +85,9 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return body
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
-        return Exps.Fn(body.name, substExp(ret, name, exp), body.span)
+        return Exps.Fn(freshName, substExp(ret, name, exp), body.span)
       }
     }
 
@@ -98,11 +100,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
         return Exps.FnAnnotated(
-          body.name,
+          freshName,
           substExp(body.argType, name, exp),
           substExp(ret, name, exp),
           body.span,
@@ -114,10 +115,9 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return body
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
-        return Exps.FnImplicit(body.name, substExp(ret, name, exp), body.span)
+        return Exps.FnImplicit(freshName, substExp(ret, name, exp), body.span)
       }
     }
 
@@ -130,11 +130,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
         return Exps.FnImplicitAnnotated(
-          body.name,
+          freshName,
           substExp(body.argType, name, exp),
           substExp(ret, name, exp),
           body.span,
@@ -163,11 +162,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const cdrType = substExp(body.cdrType, body.name, Exps.Var(freshName))
         return Exps.Sigma(
-          body.name,
+          freshName,
           substExp(body.carType, name, exp),
           substExp(cdrType, name, exp),
           body.span,
@@ -205,12 +203,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
-        const freshName = freshen(freeNames, body.name)
-        const rest = substExp(body.rest, body.name, Exps.Var(freshName))
+        const freshName = freshen(freeNames, body.localName)
+        const rest = substExp(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzCons(
           body.name,
-          body.localName,
+          freshName,
           substExp(body.propertyType, name, exp),
           substExp(rest, name, exp) as Exps.Clazz,
           body.span,
@@ -229,12 +226,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
-        const freshName = freshen(freeNames, body.name)
-        const rest = substExp(body.rest, body.name, Exps.Var(freshName))
+        const freshName = freshen(freeNames, body.localName)
+        const rest = substExp(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzFulfilled(
           body.name,
-          body.localName,
+          freshName,
           substExp(body.propertyType, name, exp),
           substExp(body.property, name, exp),
           substExp(rest, name, exp) as Exps.Clazz,
@@ -308,11 +304,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
         return Exps.SequenceLet(
-          body.name,
+          freshName,
           substExp(body.exp, name, exp),
           substExp(ret, name, exp),
           body.span,
@@ -330,11 +325,10 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           body.span,
         )
       } else {
-        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
         const freshName = freshen(freeNames, body.name)
         const ret = substExp(body.ret, body.name, Exps.Var(freshName))
         return Exps.SequenceLetThe(
-          body.name,
+          freshName,
           substExp(body.type, name, exp),
           substExp(body.exp, name, exp),
           substExp(ret, name, exp),
