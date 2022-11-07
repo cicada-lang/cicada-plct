@@ -210,9 +210,9 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   ])
     // }
 
-    // case "ClazzUnfolded": {
-    //   return freeNames(boundNames, Exps.foldClazz(exp.bindings))
-    // }
+    case "ClazzUnfolded": {
+      return substExp(Exps.foldClazz(body.bindings), name, exp)
+    }
 
     // case "Objekt": {
     //   return new Set(
@@ -279,9 +279,9 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   ])
     // }
 
-    // case "SequenceUnfolded": {
-    //   return freeNames(boundNames, Exps.foldSequence(exp.bindings, exp.ret))
-    // }
+    case "SequenceUnfolded": {
+      return substExp(Exps.foldSequence(body.bindings, body.ret), name, exp)
+    }
 
     default: {
       return body
