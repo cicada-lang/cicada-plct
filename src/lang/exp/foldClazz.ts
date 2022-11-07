@@ -20,6 +20,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
     case "ClazzBindingFulfilled": {
       return Exps.ClazzFulfilled(
         binding.name,
+        binding.name,
         binding.propertyType,
         binding.property,
         foldClazz(restBindings),
