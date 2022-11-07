@@ -195,12 +195,28 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       return body
     }
 
-    // case "ClazzCons": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.propertyType),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.rest),
-    //   ])
-    // }
+    case "ClazzCons": {
+      if (body.localName === name) {
+        return Exps.ClazzCons(
+          body.name,
+          body.localName,
+          substExp(body.propertyType, name, exp),
+          body.rest,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const rest = substExp(body.rest, body.name, Exps.Var(freshName))
+        return Exps.ClazzCons(
+          body.name,
+          body.localName,
+          substExp(body.propertyType, name, exp),
+          substExp(rest, name, exp) as Exps.Clazz,
+          body.span,
+        )
+      }
+    }
 
     // case "ClazzFulfilled": {
     //   return new Set([

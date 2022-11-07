@@ -1,6 +1,7 @@
 # std
 
-`substExp` -- ClazzCons
+`ClazzFulfilled` also need `localName` because of `substExp`
+
 `substExp` -- ClazzFulfilled
 
 `substExp` -- Objekt
