@@ -1,0 +1,23 @@
+datatype Vector(A: Type, length: Nat) {
+  null: Vector(A, Nat.zero)
+  @given n: Nat
+  cons(head: A, tail: Vector(A, n)): Vector(A, Nat.add1(n))
+}
+
+@given A: Type
+@given m: Nat, n: Nat
+Vector.append(x: Vector(A, m), y: Vector(A, n)): Vector(A, Nat.add(m, n))
+Vector.append(Vector.null, y) = y
+Vector.append(Vector.cons(head, tail), y) = Vector.cons(head, Vector.append(tail, y))
+
+@given A: Type, B: Type
+@given n: Nat
+Vector.map(x: Vector(A, n), f(A): B): Vector(B, n)
+Vector.map(Vector.null) = Vector.null
+Vector.map(Vector.cons(head, tail)) = Vector.cons(f(head), Vector.map(tail, f))
+
+Vector.three_zeros: Vector(Nat, Nat.three) =
+  Vector.cons(Nat.zero, Vector.cons(Nat.zero, Vector.cons(Nat.zero, Vector.null)))
+
+Vector.three_ones: Vector(Nat, Nat.three) =
+  Vector.cons(Nat.one, Vector.cons(Nat.one, Vector.cons(Nat.one, Vector.null)))

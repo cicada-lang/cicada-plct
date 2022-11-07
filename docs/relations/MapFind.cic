@@ -1,0 +1,9 @@
+@given K: Type, V: Type
+judgment MapFind(map: Map(K, V), key: K, value: V) {
+  MapFind(Map.extend(map, key, value), key, value)
+  --------------------------------------------------- here
+
+  MapFind(Map.extend(rest, any_key, any_value), key, value)
+  ------------------------------------------------------------ there
+  prev: MapFind(rest, key, value)
+}
