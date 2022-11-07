@@ -1,10 +1,6 @@
 # std
 
-`Stmts.ClazzExtends` support `super` -- need `substExp`
-
-[maybe] `class` support `self`
-
-- we use `self` instead of `this` because of sefl-type
+`substExp`
 
 pass std/groupoid -- need `super`
 

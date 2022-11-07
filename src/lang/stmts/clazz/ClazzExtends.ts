@@ -21,16 +21,19 @@ export class ClazzExtends extends Stmt {
     const inferredParent = infer(mod, mod.ctx, this.parent)
     const parentClazz = evaluate(mod.env, inferredParent.core)
     Values.assertClazz(parentClazz)
+    const parentClazzCore = Values.readbackClazz(mod, mod.ctx, parentClazz)
     const ctx = Values.clazzExtendCtx(mod, mod.ctx, parentClazz)
-    const inferred = infer(mod, ctx, this.clazz)
-    Cores.assertClazz(inferred.core)
-    const value = evaluate(
-      mod.env,
-      Cores.appendClazz(
-        Values.readbackClazz(mod, mod.ctx, parentClazz),
-        inferred.core,
+    const superObjekt = Exps.ObjektUnfolded(
+      Values.clazzPropertyNames(parentClazz).map((name) =>
+        Exps.PropertyPlain(name, Exps.Var(name)),
       ),
+      this.span,
     )
+    const clazz = Exps.substExp(this.clazz, "super", superObjekt)
+    const inferred = infer(mod, ctx, clazz)
+    Cores.assertClazz(inferred.core)
+    const core = Cores.appendClazz(parentClazzCore, inferred.core)
+    const value = evaluate(mod.env, core)
     mod.define(this.name, inferred.type, value)
   }
 
