@@ -1,8 +1,5 @@
 # std
 
-`substExp` -- Sigma
-`substExp` -- SigmaUnfolded
-`substExp` -- Cons
 `substExp` -- ClazzCons
 `substExp` -- ClazzFulfilled
 `substExp` -- ClazzUnfolded

@@ -154,23 +154,38 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       )
     }
 
-    // case "Sigma": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.carType),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.cdrType),
-    //   ])
-    // }
+    case "Sigma": {
+      if (body.name === name) {
+        return Exps.Sigma(
+          body.name,
+          substExp(body.carType, name, exp),
+          body.cdrType,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const cdrType = substExp(body.cdrType, body.name, Exps.Var(freshName))
+        return Exps.Sigma(
+          body.name,
+          substExp(body.carType, name, exp),
+          substExp(cdrType, name, exp),
+          body.span,
+        )
+      }
+    }
 
-    // case "SigmaUnfolded": {
-    //   return freeNames(boundNames, Exps.foldSigma(exp.bindings, exp.cdrType))
-    // }
+    case "SigmaUnfolded": {
+      return substExp(Exps.foldSigma(body.bindings, body.cdrType), name, exp)
+    }
 
-    // case "Cons": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.car),
-    //     ...freeNames(boundNames, exp.cdr),
-    //   ])
-    // }
+    case "Cons": {
+      return Exps.Cons(
+        substExp(body.car, name, exp),
+        substExp(body.cdr, name, exp),
+        body.span,
+      )
+    }
 
     case "Quote": {
       return body
