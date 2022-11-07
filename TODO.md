@@ -1,6 +1,32 @@
 # std
 
-`substExp`
+`substExp` -- Ap
+`substExp` -- ApImplicit
+`substExp` -- ApUnfolded
+`substExp` -- Fn
+`substExp` -- FnAnnotated
+`substExp` -- FnImplicit
+`substExp` -- FnImplicitAnnotated
+`substExp` -- FnUnfolded
+`substExp` -- FnUnfoldedWithRetType
+`substExp` -- Sigma
+`substExp` -- SigmaUnfolded
+`substExp` -- Cons
+`substExp` -- Quote
+`substExp` -- ClazzNull
+`substExp` -- ClazzCons
+`substExp` -- ClazzFulfilled
+`substExp` -- ClazzUnfolded
+`substExp` -- Objekt
+`substExp` -- ObjektUnfolded
+`substExp` -- New
+`substExp` -- NewUnfolded
+`substExp` -- NewAp
+`substExp` -- Dot
+`substExp` -- SequenceLet
+`substExp` -- SequenceLetThe
+`substExp` -- SequenceCheck
+`substExp` -- SequenceUnfolded
 
 pass std/groupoid -- need `super`
 
