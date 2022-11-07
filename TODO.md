@@ -1,11 +1,5 @@
 # std
 
-`substExp` -- Fn
-`substExp` -- FnAnnotated
-`substExp` -- FnImplicit
-`substExp` -- FnImplicitAnnotated
-`substExp` -- FnUnfolded
-`substExp` -- FnUnfoldedWithRetType
 `substExp` -- Sigma
 `substExp` -- SigmaUnfolded
 `substExp` -- Cons

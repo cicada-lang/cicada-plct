@@ -78,42 +78,81 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       return substExp(Exps.foldAp(body.target, body.args), name, exp)
     }
 
-    // case "Fn": {
-    //   return new Set([
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "Fn": {
+      if (body.name === name) {
+        return body
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.Fn(body.name, substExp(ret, name, exp), body.span)
+      }
+    }
 
-    // case "FnAnnotated": {
-    //   return new Set([
-    //     ...freeNames(new Set(boundNames), exp.argType),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "FnAnnotated": {
+      if (body.name === name) {
+        return Exps.FnAnnotated(
+          body.name,
+          substExp(body.argType, name, exp),
+          body.ret,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.FnAnnotated(
+          body.name,
+          substExp(body.argType, name, exp),
+          substExp(ret, name, exp),
+          body.span,
+        )
+      }
+    }
 
-    // case "FnImplicit": {
-    //   return new Set([
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "FnImplicit": {
+      if (body.name === name) {
+        return body
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.FnImplicit(body.name, substExp(ret, name, exp), body.span)
+      }
+    }
 
-    // case "FnImplicitAnnotated": {
-    //   return new Set([
-    //     ...freeNames(new Set(boundNames), exp.argType),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "FnImplicitAnnotated": {
+      if (body.name === name) {
+        return Exps.FnImplicitAnnotated(
+          body.name,
+          substExp(body.argType, name, exp),
+          body.ret,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.FnImplicitAnnotated(
+          body.name,
+          substExp(body.argType, name, exp),
+          substExp(ret, name, exp),
+          body.span,
+        )
+      }
+    }
 
-    // case "FnUnfolded": {
-    //   return freeNames(boundNames, Exps.foldFn(exp.bindings, exp.ret))
-    // }
+    case "FnUnfolded": {
+      return substExp(Exps.foldFn(body.bindings, body.ret), name, exp)
+    }
 
-    // case "FnUnfoldedWithRetType": {
-    //   return freeNames(
-    //     boundNames,
-    //     Exps.foldFnWithRetType(exp.bindings, exp.retType, exp.ret),
-    //   )
-    // }
+    case "FnUnfoldedWithRetType": {
+      return substExp(
+        Exps.foldFnWithRetType(body.bindings, body.retType, body.ret),
+        name,
+        exp,
+      )
+    }
 
     // case "Sigma": {
     //   return new Set([
