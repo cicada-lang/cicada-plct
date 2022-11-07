@@ -247,13 +247,17 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       return substExp(Exps.foldClazz(body.bindings), name, exp)
     }
 
-    // case "Objekt": {
-    //   return new Set(
-    //     Object.values(exp.properties).flatMap((property) =>
-    //       Array.from(freeNames(boundNames, property)),
-    //     ),
-    //   )
-    // }
+    case "Objekt": {
+      return Exps.Objekt(
+        Object.fromEntries(
+          Object.entries(body.properties).map(([propertyName, property]) => [
+            propertyName,
+            substExp(property, name, exp),
+          ]),
+        ),
+        body.span,
+      )
+    }
 
     // case "ObjektUnfolded": {
     //   return new Set(
@@ -263,13 +267,18 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   )
     // }
 
-    // case "New": {
-    //   return new Set(
-    //     Object.values(exp.properties).flatMap((property) =>
-    //       Array.from(freeNames(boundNames, property)),
-    //     ),
-    //   )
-    // }
+    case "New": {
+      return Exps.New(
+        body.name,
+        Object.fromEntries(
+          Object.entries(body.properties).map(([propertyName, property]) => [
+            propertyName,
+            substExp(property, name, exp),
+          ]),
+        ),
+        body.span,
+      )
+    }
 
     // case "NewUnfolded": {
     //   return new Set(

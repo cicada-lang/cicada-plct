@@ -1,8 +1,5 @@
 # std
 
-`substExp` -- Objekt
-`substExp` -- New
-
 `substExp` -- ObjektUnfolded -- should not unfold
 `substExp` -- NewUnfolded -- should not unfold
 
