@@ -15,7 +15,7 @@ judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
 
   Check(ctx, Exp.obj(properties), Value.cls(tel))
   ---------------------------------------------------------------- obj_next
-  Map.Find(properties, name, exp)
+  MapFind(properties, name, exp)
   Check(ctx, exp, t)
   Check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
   where {
