@@ -58,23 +58,25 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       return substExp(Exps.foldPi(body.bindings, body.retType), name, exp)
     }
 
-    // case "Ap": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.target),
-    //     ...freeNames(boundNames, exp.arg),
-    //   ])
-    // }
+    case "Ap": {
+      return Exps.Ap(
+        substExp(body.target, name, exp),
+        substExp(body.arg, name, exp),
+        body.span,
+      )
+    }
 
-    // case "ApImplicit": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.target),
-    //     ...freeNames(boundNames, exp.arg),
-    //   ])
-    // }
+    case "ApImplicit": {
+      return Exps.ApImplicit(
+        substExp(body.target, name, exp),
+        substExp(body.arg, name, exp),
+        body.span,
+      )
+    }
 
-    // case "ApUnfolded": {
-    //   return freeNames(boundNames, Exps.foldAp(exp.target, exp.args))
-    // }
+    case "ApUnfolded": {
+      return substExp(Exps.foldAp(body.target, body.args), name, exp)
+    }
 
     // case "Fn": {
     //   return new Set([
@@ -228,7 +230,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     // }
 
     default: {
-      return exp
+      return body
     }
   }
 }

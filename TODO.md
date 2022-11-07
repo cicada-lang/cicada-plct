@@ -1,8 +1,5 @@
 # std
 
-`substExp` -- Ap
-`substExp` -- ApImplicit
-`substExp` -- ApUnfolded
 `substExp` -- Fn
 `substExp` -- FnAnnotated
 `substExp` -- FnImplicit
