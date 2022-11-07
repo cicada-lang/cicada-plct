@@ -7,10 +7,8 @@
 `substExp` -- New
 `substExp` -- NewUnfolded
 `substExp` -- NewAp
-`substExp` -- Dot
 `substExp` -- SequenceLet
 `substExp` -- SequenceLetThe
-`substExp` -- SequenceCheck
 
 pass std/groupoid -- need `super`
 

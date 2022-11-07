@@ -252,9 +252,9 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   )
     // }
 
-    // case "Dot": {
-    //   return new Set([...freeNames(boundNames, exp.target)])
-    // }
+    case "Dot": {
+      return Exps.Dot(substExp(body.target, name, exp), body.name, body.span)
+    }
 
     // case "SequenceLet": {
     //   return new Set([
@@ -271,13 +271,14 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   ])
     // }
 
-    // case "SequenceCheck": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.exp),
-    //     ...freeNames(boundNames, exp.type),
-    //     ...freeNames(boundNames, exp.ret),
-    //   ])
-    // }
+    case "SequenceCheck": {
+      return Exps.SequenceCheck(
+        substExp(body.exp, name, exp),
+        substExp(body.type, name, exp),
+        substExp(body.ret, name, exp),
+        body.span,
+      )
+    }
 
     case "SequenceUnfolded": {
       return substExp(Exps.foldSequence(body.bindings, body.ret), name, exp)
