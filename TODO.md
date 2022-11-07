@@ -1,7 +1,3 @@
-# later
-
-`FnImplicit` insertion -- much needed in `std/category/Category.md`
-
 # std
 
 pass std/boolean-lattice -- use `FnImplicit`

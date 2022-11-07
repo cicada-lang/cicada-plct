@@ -28,6 +28,14 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
+      if (Values.isValue(type, "PiImplicit")) {
+        const name = type.retTypeClosure.name
+        const arg = Values.TypedNeutral(type.argType, Neutrals.Var(name))
+        const retType = applyClosure(type.retTypeClosure, arg)
+        const core = check(mod, ctx, exp, retType)
+        return Cores.FnImplicit(name, core)
+      }
+
       Values.assertTypeInCtx(ctx, type, "Pi")
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
