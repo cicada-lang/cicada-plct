@@ -24,6 +24,8 @@ export function unifyClazz(
     [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
   )
 
+  // console.log(freshNameMap)
+
   const leftPropertyMap = expelClazz(freshNameMap, left)
   const rightPropertyMap = expelClazz(freshNameMap, right)
 

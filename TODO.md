@@ -1,12 +1,4 @@
-[book] the-little-typer/99-appendix-b.md -- use whereabouts syntax
-
-[mimor] reading-inference-rules.mimor -- use whereabouts syntax
-
-fix `unifyClazz`
-
-- should not use `freshenNames` and `expelClazz`
-
-[maybe] fix `inclusionClazz`
+note about the-use-of-freshen-during-unify-classes.md
 
 Why we need `freshenNames`?
 
