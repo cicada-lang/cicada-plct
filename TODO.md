@@ -3,8 +3,6 @@
 `substExp` -- Sigma
 `substExp` -- SigmaUnfolded
 `substExp` -- Cons
-`substExp` -- Quote
-`substExp` -- ClazzNull
 `substExp` -- ClazzCons
 `substExp` -- ClazzFulfilled
 `substExp` -- ClazzUnfolded

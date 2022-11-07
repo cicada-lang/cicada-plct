@@ -172,13 +172,13 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   ])
     // }
 
-    // case "Quote": {
-    //   return new Set()
-    // }
+    case "Quote": {
+      return body
+    }
 
-    // case "ClazzNull": {
-    //   return new Set()
-    // }
+    case "ClazzNull": {
+      return body
+    }
 
     // case "ClazzCons": {
     //   return new Set([
