@@ -1,6 +1,6 @@
-# std
+std -- use `FnImplicit` insertion
 
-pass std/boolean-lattice -- use `FnImplicit`
+# std
 
 `Stmts.ClazzExtends` support `super` -- need `substExp`
 
