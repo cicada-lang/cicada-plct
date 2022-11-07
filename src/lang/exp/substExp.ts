@@ -279,11 +279,13 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     //   )
     // }
 
-    // case "NewAp": {
-    //   return new Set(
-    //     exp.args.flatMap((arg) => Array.from(freeNames(boundNames, arg.exp))),
-    //   )
-    // }
+    case "NewAp": {
+      return Exps.NewAp(
+        body.name,
+        body.args.map((arg) => substArg(arg, name, exp)),
+        body.span,
+      )
+    }
 
     case "Dot": {
       return Exps.Dot(substExp(body.target, name, exp), body.name, body.span)
@@ -319,6 +321,18 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
 
     default: {
       return body
+    }
+  }
+}
+
+function substArg(arg: Exps.Arg, name: string, exp: Exp): Exps.Arg {
+  switch (arg.kind) {
+    case "ArgPlain": {
+      return Exps.ArgPlain(substExp(arg.exp, name, exp))
+    }
+
+    case "ArgImplicit": {
+      return Exps.ArgImplicit(substExp(arg.exp, name, exp))
     }
   }
 }

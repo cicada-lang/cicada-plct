@@ -1,14 +1,13 @@
 # std
 
-`substExp` -- Objekt
-`substExp` -- ObjektUnfolded
-
-`substExp` -- New
-`substExp` -- NewUnfolded
-`substExp` -- NewAp
-
 `substExp` -- SequenceLet
 `substExp` -- SequenceLetThe
+
+`substExp` -- Objekt
+`substExp` -- New
+
+`substExp` -- ObjektUnfolded -- should not unfold
+`substExp` -- NewUnfolded -- should not unfold
 
 pass std/groupoid -- need `super`
 
