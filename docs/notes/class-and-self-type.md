@@ -40,26 +40,33 @@ Maybe we should change the data structure.
 
 Maybe we can learn from self type.
 
+Actually it is hard for us to support self type.
+Because during checking of a self type,
+we need to add the `target` of `self (target) ...` into the type context,
+thus we need to get `target`'s type value,
+but we can not get the value before checking it
+(which will elaborate `Exp` to `Core` ).
+
 # Self type
 
 See [`cicada-lang/lambda` - `tests/nat-self.md`](https://github.com/cicada-lang/lambda/blob/master/tests/nat-self.md)
 
-# The `self` keyword is like self type
+# The `this` keyword is like self type
 
 ```cicada
 class Semigroup {
   Element: Type
 
-  mul(x: self.Element, y: self.Element): self.Element
+  mul(x: this.Element, y: this.Element): this.Element
 
   mulAssociative(
-    x: self.Element,
-    y: self.Element,
-    z: self.Element,
+    x: this.Element,
+    y: this.Element,
+    z: this.Element,
   ): Equal(
-    self.Element,
-    self.mul(x, self.mul(y, z)),
-    self.mul(self.mul(x, y), z)
+    this.Element,
+    this.mul(x, this.mul(y, z)),
+    this.mul(this.mul(x, y), z)
   )
 }
 ```

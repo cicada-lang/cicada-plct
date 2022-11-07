@@ -2,8 +2,6 @@
 
 [mimor] reading-inference-rules.mimor -- use whereabouts syntax
 
-note about class and self type
-
 fix `unifyClazz`
 
 - should not use `freshenNames` and `expelClazz`
