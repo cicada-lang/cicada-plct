@@ -1,8 +1,5 @@
 # std
 
-`substExp` -- ObjektUnfolded -- should not unfold
-`substExp` -- NewUnfolded -- should not unfold
-
 pass std/groupoid -- need `super`
 
 pass std/order -- need datatype

@@ -259,13 +259,12 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       )
     }
 
-    // case "ObjektUnfolded": {
-    //   return new Set(
-    //     exp.properties.flatMap((property) =>
-    //       Array.from(freeNames(boundNames, property.exp)),
-    //     ),
-    //   )
-    // }
+    case "ObjektUnfolded": {
+      return Exps.ObjektUnfolded(
+        body.properties.map((property) => substProperty(property, name, exp)),
+        body.span,
+      )
+    }
 
     case "New": {
       return Exps.New(
@@ -280,13 +279,13 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       )
     }
 
-    // case "NewUnfolded": {
-    //   return new Set(
-    //     exp.properties.flatMap((property) =>
-    //       Array.from(freeNames(boundNames, property.exp)),
-    //     ),
-    //   )
-    // }
+    case "NewUnfolded": {
+      return Exps.NewUnfolded(
+        body.name,
+        body.properties.map((property) => substProperty(property, name, exp)),
+        body.span,
+      )
+    }
 
     case "NewAp": {
       return Exps.NewAp(
@@ -371,6 +370,25 @@ function substArg(arg: Exps.Arg, name: string, exp: Exp): Exps.Arg {
 
     case "ArgImplicit": {
       return Exps.ArgImplicit(substExp(arg.exp, name, exp))
+    }
+  }
+}
+
+function substProperty(
+  property: Exps.Property,
+  name: string,
+  exp: Exp,
+): Exps.Property {
+  switch (property.kind) {
+    case "PropertyPlain": {
+      return Exps.PropertyPlain(
+        property.name,
+        substExp(property.exp, name, exp),
+      )
+    }
+
+    case "PropertySpread": {
+      return Exps.PropertySpread(substExp(property.exp, name, exp))
     }
   }
 }
