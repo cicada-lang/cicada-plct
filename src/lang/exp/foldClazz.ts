@@ -10,6 +10,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
     case "ClazzBindingAbstract": {
       return Exps.ClazzCons(
         binding.name,
+        binding.name,
         binding.propertyType,
         foldClazz(restBindings),
         binding.propertyType.span,

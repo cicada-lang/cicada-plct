@@ -2,11 +2,14 @@
 
 `substExp` -- ClazzCons
 `substExp` -- ClazzFulfilled
+
 `substExp` -- Objekt
 `substExp` -- ObjektUnfolded
+
 `substExp` -- New
 `substExp` -- NewUnfolded
 `substExp` -- NewAp
+
 `substExp` -- SequenceLet
 `substExp` -- SequenceLetThe
 

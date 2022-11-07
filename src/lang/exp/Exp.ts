@@ -591,12 +591,14 @@ export type ClazzCons = {
   family: "Exp"
   kind: "ClazzCons"
   name: string
+  localName: string
   propertyType: Exp
   rest: Clazz
 } & ExpMeta
 
 export function ClazzCons(
   name: string,
+  localName: string,
   propertyType: Exp,
   rest: Clazz,
   span?: Span,
@@ -605,6 +607,7 @@ export function ClazzCons(
     family: "Exp",
     kind: "ClazzCons",
     name,
+    localName,
     propertyType,
     rest,
     span,

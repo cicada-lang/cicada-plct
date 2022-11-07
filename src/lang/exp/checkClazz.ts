@@ -14,9 +14,14 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
     case "ClazzCons": {
       const propertyTypeCore = checkType(mod, ctx, exp.propertyType)
       const propertyTypeValue = evaluate(mod.ctxToEnv(ctx), propertyTypeCore)
-      ctx = CtxCons(exp.name, propertyTypeValue, ctx)
+      ctx = CtxCons(exp.localName, propertyTypeValue, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
-      return Cores.ClazzCons(exp.name, exp.name, propertyTypeCore, restCore)
+      return Cores.ClazzCons(
+        exp.name,
+        exp.localName,
+        propertyTypeCore,
+        restCore,
+      )
     }
 
     case "ClazzFulfilled": {
