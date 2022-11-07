@@ -12,7 +12,7 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{  }"')
+  expect(output).toMatchInlineSnapshot('"{}"')
 })
 
 test("solve Quote -- bindings", async () => {
@@ -27,7 +27,13 @@ solve (a: String, b: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
+    `
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }"
+  `,
   )
 })
 
@@ -43,6 +49,12 @@ solve (a: String, b: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"a\\", c: \\"a\\" }"',
+    `
+    "{
+      a: \\"a\\",
+      b: \\"a\\",
+      c: \\"a\\"
+    }"
+  `,
   )
 })

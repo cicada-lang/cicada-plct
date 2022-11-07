@@ -17,7 +17,13 @@ solve (a: String, b: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }"',
+    `
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }"
+  `,
   )
 })
 
@@ -36,7 +42,12 @@ solve (a: String, b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: \\"c\\", b: \\"c\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      a: \\"c\\",
+      b: \\"c\\"
+    }"
+  `)
 })
 
 test("solve Objekt -- extra common properties", async () => {
@@ -71,6 +82,17 @@ solve (a: String, b: String, c: String, abc: ABC) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: \\"c\\", abc: { a: \\"a\\", b: \\"b\\", c: \\"c\\" } }"',
+    `
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\",
+      abc: {
+        a: \\"a\\",
+        b: \\"b\\",
+        c: \\"c\\"
+      }
+    }"
+  `,
   )
 })

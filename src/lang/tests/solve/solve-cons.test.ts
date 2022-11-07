@@ -10,7 +10,11 @@ solve (a: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      a: \\"a\\"
+    }"
+  `)
 })
 
 test("solve Cons -- cdr", async () => {
@@ -22,7 +26,11 @@ solve (b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ b: \\"b\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      b: \\"b\\"
+    }"
+  `)
 })
 
 test("solve Cons -- car and cdr", async () => {
@@ -34,7 +42,12 @@ solve (a: String, b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      a: \\"a\\",
+      b: \\"b\\"
+    }"
+  `)
 })
 
 test("solve Cons -- nested", async () => {
@@ -46,7 +59,12 @@ solve (a: String, b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: \\"a\\", b: \\"b\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      a: \\"a\\",
+      b: \\"b\\"
+    }"
+  `)
 })
 
 test("solve Cons -- deepWalk", async () => {
@@ -62,6 +80,12 @@ solve (a: String, b: String, c: Pair(String, String)) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ a: \\"a\\", b: \\"b\\", c: cons(\\"a\\", \\"b\\") }"',
+    `
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: cons(\\"a\\", \\"b\\")
+    }"
+  `,
   )
 })

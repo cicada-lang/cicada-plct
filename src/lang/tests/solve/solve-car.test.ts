@@ -12,7 +12,12 @@ solve (ab: Pair(String, String), a: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ ab: cons(\\"a\\", \\"b\\"), a: \\"a\\" }"',
+    `
+    "{
+      ab: cons(\\"a\\", \\"b\\"),
+      a: \\"a\\"
+    }"
+  `,
   )
 })
 
@@ -30,7 +35,15 @@ solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String,
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ ab: cons(\\"a\\", \\"b\\"), ba: cons(cdr(ab), car(ab)), a: \\"a\\", b: \\"b\\", b2: b }"',
+    `
+    "{
+      ab: cons(\\"a\\", \\"b\\"),
+      ba: cons(cdr(ab), car(ab)),
+      a: \\"a\\",
+      b: \\"b\\",
+      b2: b
+    }"
+  `,
   )
 })
 
@@ -43,5 +56,9 @@ solve(a: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ a: TODO(String) }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      a: TODO(String)
+    }"
+  `)
 })

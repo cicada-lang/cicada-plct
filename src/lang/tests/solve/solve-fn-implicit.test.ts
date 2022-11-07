@@ -12,7 +12,11 @@ solve (x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      x: \\"abc\\"
+    }"
+  `)
 })
 
 test("solve FnImplicit -- 2", async () => {
@@ -25,7 +29,11 @@ solve (x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ x: \\"abc\\" }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      x: \\"abc\\"
+    }"
+  `)
 })
 
 test("solve FnImplicit -- alpha equivalence", async () => {
@@ -37,7 +45,7 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{  }"')
+  expect(output).toMatchInlineSnapshot('"{}"')
 })
 
 test("solve FnImplicit -- deepWalk", async () => {
@@ -51,7 +59,12 @@ solve (T: Type, f: (implicit _: Trivial) -> Type) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ T: String, f: (implicit _) => String }"',
+    `
+    "{
+      T: String,
+      f: (implicit _) => String
+    }"
+  `,
   )
 })
 

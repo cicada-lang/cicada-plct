@@ -12,7 +12,11 @@ compute abc
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class {
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }: class {
       a: String = \\"a\\"
       b: String = \\"b\\"
       c: String = \\"c\\"
@@ -32,7 +36,11 @@ compute abc
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ a: \\"a\\", b: \\"b\\", c: \\"c\\" }: class {
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }: class {
       a: String = \\"a\\"
       b: String = \\"b\\"
       c: String = \\"c\\"
@@ -52,7 +60,14 @@ compute abcxyz
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ a: \\"a\\", b: \\"b\\", c: \\"c\\", x: \\"x\\", y: \\"y\\", z: \\"z\\" }: class {
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\",
+      x: \\"x\\",
+      y: \\"y\\",
+      z: \\"z\\"
+    }: class {
       a: String = \\"a\\"
       b: String = \\"b\\"
       c: String = \\"c\\"
@@ -73,7 +88,10 @@ compute { a: "c", b: "d" }
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ a: \\"c\\", b: \\"d\\" }: class {
+    "{
+      a: \\"c\\",
+      b: \\"d\\"
+    }: class {
       a: String = \\"c\\"
       b: String = \\"d\\"
     }"

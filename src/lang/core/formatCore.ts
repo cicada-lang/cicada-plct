@@ -67,7 +67,7 @@ export function formatCore(core: Core): string {
             : `"${name}": ${formatCore(property)}`,
       )
 
-      return `{ ${properties.join(", ")} }`
+      return `{\n${indent(properties.join(",\n"))}\n}`
     }
 
     case "Dot": {

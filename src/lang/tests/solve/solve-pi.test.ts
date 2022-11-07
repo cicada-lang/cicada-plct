@@ -11,7 +11,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve Pi -- nested", async () => {
@@ -24,7 +29,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve Pi -- occur twice", async () => {
@@ -37,7 +47,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve Pi -- deepWalk", async () => {
@@ -53,7 +68,13 @@ solve (A: Type, B: Type, C: Type) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ A: String, B: String, C: (String) -> String }"',
+    `
+    "{
+      A: String,
+      B: String,
+      C: (String) -> String
+    }"
+  `,
   )
 })
 
@@ -92,5 +113,9 @@ solve (X: Type) {
   
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ X: (X1: Type) -> X1 }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      X: (X1: Type) -> X1
+    }"
+  `)
 })

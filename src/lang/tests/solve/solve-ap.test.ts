@@ -11,7 +11,12 @@ solve (f: (String) -> String, x: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((String) -> String), x: TODO(String) }"',
+    `
+    "{
+      f: TODO((String) -> String),
+      x: TODO(String)
+    }"
+  `,
   )
 })
 
@@ -25,7 +30,12 @@ solve (f: (String) -> String, x: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((String) -> String), x: \\"abc\\" }"',
+    `
+    "{
+      f: TODO((String) -> String),
+      x: \\"abc\\"
+    }"
+  `,
   )
 })
 
@@ -40,6 +50,12 @@ solve (f: (String) -> String, x: String, c: String) {
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"{ f: TODO((String) -> String), x: \\"abc\\", c: f(\\"abc\\") }"',
+    `
+    "{
+      f: TODO((String) -> String),
+      x: \\"abc\\",
+      c: f(\\"abc\\")
+    }"
+  `,
   )
 })

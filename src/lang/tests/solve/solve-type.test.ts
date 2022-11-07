@@ -10,5 +10,5 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{  }"')
+  expect(output).toMatchInlineSnapshot('"{}"')
 })

@@ -11,7 +11,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve Clazz -- subclazz", async () => {
@@ -23,7 +28,11 @@ solve (A: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String
+    }"
+  `)
 })
 
 test("solve Clazz -- nested", async () => {
@@ -35,7 +44,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve Clazz -- occur twice", async () => {
@@ -48,7 +62,12 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{ A: String, B: String }"')
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      A: String,
+      B: String
+    }"
+  `)
 })
 
 test("solve ClazzCons -- deepWalk", async () => {
@@ -64,10 +83,14 @@ solve (A: Type, B: Type, C: Type) {
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ A: String, B: String, C: class {
-      a: String
-      b: String
-    } }"
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String
+        b: String
+      }
+    }"
   `,
   )
 })
@@ -87,10 +110,16 @@ solve (A: Type, B: Type, C: Type, a: A, b: B) {
 
   expect(output).toMatchInlineSnapshot(
     `
-    "{ A: String, B: String, C: class {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-    }, a: \\"a\\", b: \\"b\\" }"
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String = \\"a\\"
+        b: String = \\"b\\"
+      },
+      a: \\"a\\",
+      b: \\"b\\"
+    }"
   `,
   )
 })

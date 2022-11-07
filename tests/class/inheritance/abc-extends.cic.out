@@ -1,4 +1,11 @@
-{ a: Trivial, b: sole, c: "c", e: Trivial, f: sole, g: "g" }: class {
+{
+  a: Trivial,
+  b: sole,
+  c: "c",
+  e: Trivial,
+  f: sole,
+  g: "g"
+}: class {
   a: Type
   b: a
   c: String

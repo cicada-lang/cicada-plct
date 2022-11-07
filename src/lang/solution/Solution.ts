@@ -1,3 +1,4 @@
+import { indent } from "../../utils/indent"
 import { formatCore } from "../core"
 import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { Env, EnvCons } from "../env"
@@ -93,6 +94,8 @@ export class Solution {
       }
     }
 
-    return `{ ${properties.join(", ")} }`
+    return properties.length === 0
+      ? "{}"
+      : `{\n${indent(properties.join(",\n"))}\n}`
   }
 }
