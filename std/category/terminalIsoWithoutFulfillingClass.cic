@@ -29,3 +29,8 @@ function terminalIsoWithoutFulfillingClass(
     ),
   }
 }
+
+import { trivialCategory } from "trivialCategory.cic"
+
+compute terminalIsoWithoutFulfillingClass
+compute terminalIsoWithoutFulfillingClass(trivialCategory)
