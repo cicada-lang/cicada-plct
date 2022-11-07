@@ -291,20 +291,49 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       return Exps.Dot(substExp(body.target, name, exp), body.name, body.span)
     }
 
-    // case "SequenceLet": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.exp),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "SequenceLet": {
+      if (body.name === name) {
+        return Exps.SequenceLet(
+          body.name,
+          substExp(body.exp, name, exp),
+          body.ret,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.SequenceLet(
+          body.name,
+          substExp(body.exp, name, exp),
+          substExp(ret, name, exp),
+          body.span,
+        )
+      }
+    }
 
-    // case "SequenceLetThe": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.exp),
-    //     ...freeNames(boundNames, exp.type),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.ret),
-    //   ])
-    // }
+    case "SequenceLetThe": {
+      if (body.name === name) {
+        return Exps.SequenceLetThe(
+          body.name,
+          substExp(body.type, name, exp),
+          substExp(body.exp, name, exp),
+          body.ret,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        return Exps.SequenceLetThe(
+          body.name,
+          substExp(body.type, name, exp),
+          substExp(body.exp, name, exp),
+          substExp(ret, name, exp),
+          body.span,
+        )
+      }
+    }
 
     case "SequenceCheck": {
       return Exps.SequenceCheck(

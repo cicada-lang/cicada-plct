@@ -1,8 +1,5 @@
 # std
 
-`substExp` -- SequenceLet
-`substExp` -- SequenceLetThe
-
 `substExp` -- Objekt
 `substExp` -- New
 
