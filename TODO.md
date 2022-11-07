@@ -1,7 +1,5 @@
 # std
 
-`substExp` -- ClazzFulfilled
-
 `substExp` -- Objekt
 `substExp` -- ObjektUnfolded
 

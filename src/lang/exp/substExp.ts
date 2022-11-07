@@ -218,13 +218,30 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       }
     }
 
-    // case "ClazzFulfilled": {
-    //   return new Set([
-    //     ...freeNames(boundNames, exp.propertyType),
-    //     ...freeNames(boundNames, exp.property),
-    //     ...freeNames(new Set([...boundNames, exp.name]), exp.rest),
-    //   ])
-    // }
+    case "ClazzFulfilled": {
+      if (body.localName === name) {
+        return Exps.ClazzFulfilled(
+          body.name,
+          body.localName,
+          substExp(body.propertyType, name, exp),
+          substExp(body.property, name, exp),
+          body.rest,
+          body.span,
+        )
+      } else {
+        const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+        const freshName = freshen(freeNames, body.name)
+        const rest = substExp(body.rest, body.name, Exps.Var(freshName))
+        return Exps.ClazzFulfilled(
+          body.name,
+          body.localName,
+          substExp(body.propertyType, name, exp),
+          substExp(body.property, name, exp),
+          substExp(rest, name, exp) as Exps.Clazz,
+          body.span,
+        )
+      }
+    }
 
     case "ClazzUnfolded": {
       return substExp(Exps.foldClazz(body.bindings), name, exp)
