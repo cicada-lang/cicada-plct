@@ -1,6 +1,13 @@
-# std
-
 pass std/groupoid -- need `super`
+
+- [maybe] remove `enrich`
+- should fulfilled class be subtype of class?
+
+fix catch of `UnificationError` -- for `enrich` and `checkInferred`
+
+error report print stack trace -- for debug and bug report
+
+# std
 
 pass std/order -- need datatype
 
