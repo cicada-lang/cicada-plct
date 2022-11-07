@@ -30,11 +30,8 @@ export function expelClazz(
         )
       }
 
-      const typedNeutral = Values.TypedNeutral(
-        clazz.propertyType,
-        Neutrals.Var(freshName),
-      )
-      const rest = applyClosure(clazz.restClosure, typedNeutral)
+      const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
+      const rest = applyClosure(clazz.restClosure, v)
       assertClazz(rest)
       return expelClazz(freshNameMap, rest, propertyMap)
     }

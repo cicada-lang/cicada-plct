@@ -34,11 +34,8 @@ export function occur(
       const boundName = value.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        value.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(value.retTypeClosure, typedNeutral)
+      const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(value.retTypeClosure, v)
       return occurType(mod, ctx, name, retType)
     }
 
@@ -48,11 +45,8 @@ export function occur(
       const boundName = value.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        value.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(value.retTypeClosure, typedNeutral)
+      const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(value.retTypeClosure, v)
       return occurType(mod, ctx, name, retType)
     }
 
@@ -62,12 +56,9 @@ export function occur(
       const boundName = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(type.retTypeClosure, typedNeutral)
-      const ret = applyClosure(value.retClosure, typedNeutral)
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(type.retTypeClosure, v)
+      const ret = applyClosure(value.retClosure, v)
       return occur(mod, ctx, name, retType, ret)
     }
 
@@ -77,12 +68,9 @@ export function occur(
       const boundName = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(type.retTypeClosure, typedNeutral)
-      const ret = applyClosure(value.retClosure, typedNeutral)
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(type.retTypeClosure, v)
+      const ret = applyClosure(value.retClosure, v)
       return occur(mod, ctx, name, retType, ret)
     }
 
@@ -92,11 +80,8 @@ export function occur(
       const boundName = value.cdrTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        value.carType,
-        Neutrals.Var(freshName),
-      )
-      const cdrType = applyClosure(value.cdrTypeClosure, typedNeutral)
+      const v = Values.TypedNeutral(value.carType, Neutrals.Var(freshName))
+      const cdrType = applyClosure(value.cdrTypeClosure, v)
       return occurType(mod, ctx, name, cdrType)
     }
 
@@ -135,11 +120,8 @@ export function occur(
       const boundName = value.restClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
       const freshName = freshen(usedNames, boundName)
-      const typedNeutral = Values.TypedNeutral(
-        value.propertyType,
-        Neutrals.Var(freshName),
-      )
-      const rest = applyClosure(value.restClosure, typedNeutral)
+      const v = Values.TypedNeutral(value.propertyType, Neutrals.Var(freshName))
+      const rest = applyClosure(value.restClosure, v)
       return occurType(mod, ctx, name, rest)
     }
 

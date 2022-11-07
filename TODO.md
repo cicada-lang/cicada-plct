@@ -6,6 +6,8 @@ fix `unifyClazz`
 
 - should not use `freshenNames` and `expelClazz`
 
+[maybe] fix `inclusionClazz`
+
 Why we need `freshenNames`?
 
 - why without it the following test will fail?

@@ -37,12 +37,9 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const argTypeCore = readbackType(mod, ctx, type.argType)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
+      const retTypeValue = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const retTypeCore = readbackType(mod, ctx, retTypeValue)
       return Cores.Pi(freshName, argTypeCore, retTypeCore)
@@ -52,12 +49,9 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const argTypeCore = readbackType(mod, ctx, type.argType)
-      const retTypeValue = applyClosure(type.retTypeClosure, typedNeutral)
+      const retTypeValue = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const retTypeCore = readbackType(mod, ctx, retTypeValue)
       return Cores.PiImplicit(freshName, argTypeCore, retTypeCore)
@@ -67,12 +61,9 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
       const name = type.cdrTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(
-        type.carType,
-        Neutrals.Var(freshName),
-      )
+      const v = Values.TypedNeutral(type.carType, Neutrals.Var(freshName))
       const carTypeCore = readbackType(mod, ctx, type.carType)
-      const cdrTypeValue = applyClosure(type.cdrTypeClosure, typedNeutral)
+      const cdrTypeValue = applyClosure(type.cdrTypeClosure, v)
       ctx = CtxCons(freshName, type.carType, ctx)
       const cdrTypeCore = readbackType(mod, ctx, cdrTypeValue)
       return Cores.Sigma(freshName, carTypeCore, cdrTypeCore)

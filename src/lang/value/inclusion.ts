@@ -52,15 +52,15 @@ export function inclusion(
     const argType = subtype.argType
 
     const freshName = freshen(ctxNames(ctx), name)
-    const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
+    const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, argType, ctx)
 
     inclusion(
       mod,
       ctx,
-      applyClosure(subtype.retTypeClosure, typedNeutral),
-      applyClosure(type.retTypeClosure, typedNeutral),
+      applyClosure(subtype.retTypeClosure, v),
+      applyClosure(type.retTypeClosure, v),
     )
 
     return
@@ -72,15 +72,15 @@ export function inclusion(
     const carType = subtype.carType
 
     const freshName = freshen(ctxNames(ctx), name)
-    const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
+    const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, carType, ctx)
 
     inclusion(
       mod,
       ctx,
-      applyClosure(subtype.cdrTypeClosure, typedNeutral),
-      applyClosure(type.cdrTypeClosure, typedNeutral),
+      applyClosure(subtype.cdrTypeClosure, v),
+      applyClosure(type.cdrTypeClosure, v),
     )
 
     return

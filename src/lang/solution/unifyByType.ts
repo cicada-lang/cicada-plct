@@ -31,14 +31,11 @@ export function unifyByType(
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const leftRet = Actions.doAp(left, typedNeutral)
-      const rightRet = Actions.doAp(right, typedNeutral)
+      const leftRet = Actions.doAp(left, v)
+      const rightRet = Actions.doAp(right, v)
       unify(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }
@@ -47,14 +44,11 @@ export function unifyByType(
       const name = type.retTypeClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, name)
-      const typedNeutral = Values.TypedNeutral(
-        type.argType,
-        Neutrals.Var(freshName),
-      )
-      const retType = applyClosure(type.retTypeClosure, typedNeutral)
+      const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
+      const retType = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const leftRet = Actions.doApImplicit(left, typedNeutral)
-      const rightRet = Actions.doApImplicit(right, typedNeutral)
+      const leftRet = Actions.doApImplicit(left, v)
+      const rightRet = Actions.doApImplicit(right, v)
       unify(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }

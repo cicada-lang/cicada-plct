@@ -15,11 +15,8 @@ export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
     case "ClazzCons": {
       const usedNames = [...ctxNames(ctx), ...mod.solution.names]
       const freshName = freshen(usedNames, clazz.name)
-      const typedNeutral = Values.TypedNeutral(
-        clazz.propertyType,
-        Neutrals.Var(freshName),
-      )
-      const rest = applyClosure(clazz.restClosure, typedNeutral)
+      const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
+      const rest = applyClosure(clazz.restClosure, v)
       assertClazz(rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
       return clazzExtendCtx(mod, ctx, rest)

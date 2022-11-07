@@ -72,7 +72,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
-    const typedNeutral = Values.TypedNeutral(argType, Neutrals.Var(freshName))
+    const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, argType, ctx)
 
@@ -81,7 +81,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       ctx,
       right.retTypeClosure,
       left.retTypeClosure,
-      typedNeutral,
+      v,
       freshName,
     )
 
@@ -95,7 +95,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
-    const typedNeutral = Values.TypedNeutral(carType, Neutrals.Var(freshName))
+    const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 
     ctx = CtxCons(freshName, carType, ctx)
 
@@ -104,7 +104,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       ctx,
       right.cdrTypeClosure,
       left.cdrTypeClosure,
-      typedNeutral,
+      v,
       freshName,
     )
 

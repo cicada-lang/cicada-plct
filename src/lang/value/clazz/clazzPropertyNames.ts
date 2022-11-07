@@ -10,13 +10,11 @@ export function clazzPropertyNames(clazz: Values.Clazz): Array<string> {
     }
 
     case "ClazzCons": {
-      const typedNeutral = Values.TypedNeutral(
-        clazz.propertyType,
-        Neutrals.Var(clazz.name),
-      )
-      const rest = applyClosure(clazz.restClosure, typedNeutral)
+      const name = clazz.name
+      const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(name))
+      const rest = applyClosure(clazz.restClosure, v)
       assertClazz(rest)
-      return [clazz.name, ...clazzPropertyNames(rest)]
+      return [name, ...clazzPropertyNames(rest)]
     }
 
     case "ClazzFulfilled": {
