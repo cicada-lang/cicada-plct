@@ -1,6 +1,4 @@
-refactor `checkVar`
-
-`checkVar` -- improve error report
+reorg the use of of error types
 
 [question] should fulfilled class be subtype of class?
 
