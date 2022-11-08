@@ -1,57 +1,19 @@
-import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
-import { Core, evaluate, formatCore } from "../core"
+import { Core, evaluate } from "../core"
 import { Ctx, CtxCons } from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { unifyType } from "../solution"
 import * as Values from "../value"
-import { inclusion, readbackType, Value } from "../value"
+import { Value } from "../value"
 
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
-      const inferred = Exps.infer(mod, ctx, exp)
-      const inserted = Exps.insertApImplicit(mod, ctx, inferred)
-
-      try {
-        unifyType(mod, ctx, inserted.type, type)
-        inclusion(mod, ctx, inserted.type, type)
-        return inserted.core
-      } catch (error) {
-        if (
-          error instanceof Errors.UnificationError ||
-          error instanceof Errors.InclusionError
-        ) {
-          throw new Errors.ElaborationError(
-            [
-              `check Var fail to checkInferred`,
-              indent(`var name: ${exp.name}`),
-              indent(
-                `inferred type: ${formatCore(
-                  readbackType(mod, ctx, inferred.type),
-                )}`,
-              ),
-              indent(`inserted core: ${formatCore(inserted.core)}`),
-              indent(
-                `inserted type: ${formatCore(
-                  readbackType(mod, ctx, inserted.type),
-                )}`,
-              ),
-              indent(`given type: ${formatCore(readbackType(mod, ctx, type))}`),
-              ...error.trace,
-              error.message,
-            ].join("\n"),
-            { span: exp.span },
-          )
-        }
-
-        throw error
-      }
+      return Exps.checkVar(mod, ctx, exp, type)
     }
 
     case "Pi":
