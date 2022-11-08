@@ -13,38 +13,47 @@ export function inferProperties(
   ctx: Ctx,
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
-): Record<string, Core> {
+): { properties: Record<string, Core>; clazz: Values.Clazz } {
   switch (clazz.kind) {
     case "ClazzNull": {
-      return {}
+      return { properties: {}, clazz: Values.ClazzNull() }
     }
 
     case "ClazzCons": {
-      const property = properties[clazz.name]
-      if (property === undefined) {
+      const propertyExp = properties[clazz.name]
+      if (propertyExp === undefined) {
         throw new Errors.ElaborationError(`missing property: ${clazz.name}`, {})
       }
 
-      const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
+      const propertyCore = Exps.check(mod, ctx, propertyExp, clazz.propertyType)
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-
       assertClazzInCtx(ctx, rest)
-
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
 
+      const inferred = inferProperties(mod, ctx, properties, rest)
+
       return {
-        [clazz.name]: propertyCore,
-        ...inferProperties(mod, ctx, properties, rest),
+        properties: { [clazz.name]: propertyCore, ...inferred.properties },
+        clazz: Values.ClazzFulfilled(
+          clazz.name,
+          clazz.propertyType,
+          propertyValue,
+          inferred.clazz,
+        ),
       }
     }
 
     case "ClazzFulfilled": {
-      const property = properties[clazz.name]
-      if (property !== undefined) {
-        const propertyCore = Exps.check(mod, ctx, property, clazz.propertyType)
+      const propertyExp = properties[clazz.name]
+      if (propertyExp !== undefined) {
+        const propertyCore = Exps.check(
+          mod,
+          ctx,
+          propertyExp,
+          clazz.propertyType,
+        )
         const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
-
         conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
@@ -54,12 +63,18 @@ export function inferProperties(
         clazz.propertyType,
         clazz.property,
       )
-
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, clazz.property, ctx)
 
+      const inferred = inferProperties(mod, ctx, properties, clazz.rest)
+
       return {
-        [clazz.name]: propertyCore,
-        ...inferProperties(mod, ctx, properties, clazz.rest),
+        properties: { [clazz.name]: propertyCore, ...inferred.properties },
+        clazz: Values.ClazzFulfilled(
+          clazz.name,
+          clazz.propertyType,
+          clazz.property,
+          inferred.clazz,
+        ),
       }
     }
   }

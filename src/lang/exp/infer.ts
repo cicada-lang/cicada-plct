@@ -232,10 +232,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       }
 
       Values.assertClazzInCtx(ctx, clazz)
-
-      const properties = Exps.inferProperties(mod, ctx, exp.properties, clazz)
-      const names = Object.keys(properties)
-
+      const inferred = Exps.inferProperties(mod, ctx, exp.properties, clazz)
+      const names = Object.keys(inferred.properties)
       const extra = Exps.inferExtraProperties(mod, ctx, exp.properties, names)
 
       /**
@@ -245,8 +243,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       **/
 
       return Inferred(
-        Values.prependFulfilledClazz(extra.clazz, clazz),
-        Cores.Objekt({ ...properties, ...extra.properties }),
+        Values.prependFulfilledClazz(extra.clazz, inferred.clazz),
+        Cores.Objekt({ ...inferred.properties, ...extra.properties }),
       )
     }
 

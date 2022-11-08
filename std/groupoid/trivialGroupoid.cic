@@ -1,16 +1,6 @@
 import { Groupoid } from "Groupoid.cic"
 import { Isomorphism, trivialCategory } from "../category/index.cic"
 
-let trivialIsomorphism: Isomorphism(trivialCategory, sole, sole, sole, sole) = {
-  cat: trivialCategory,
-  dom: sole,
-  cod: sole,
-  morphism: sole,
-  inverse: sole,
-  inverseLeft: refl,
-  inverseRight: refl,
-}
-
 let trivialIsomorphism = new Isomorphism {
   cat: trivialCategory,
   dom: sole,

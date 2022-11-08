@@ -25,9 +25,9 @@ compute new ABC {
       b: \\"b\\",
       c: \\"c\\"
     }: class {
-      a: String
-      b: String
-      c: String
+      a: String = \\"a\\"
+      b: String = \\"b\\"
+      c: String = \\"c\\"
     }"
   `,
   )
@@ -53,8 +53,8 @@ compute new AB {
       a: \\"Hello, World!\\",
       b: \\"Hello, World!\\"
     }: class {
-      a: String
-      b: String = a
+      a: String = \\"Hello, World!\\"
+      b: String = \\"Hello, World!\\"
     }"
   `,
   )
@@ -81,8 +81,8 @@ compute new The {
       T: String,
       x: \\"x\\"
     }: class {
-      T: Type
-      x: T
+      T: Type = String
+      x: String = \\"x\\"
     }"
   `,
   )
@@ -115,9 +115,9 @@ compute new ABC {
       c: \\"c\\"
     }: class {
       d: String = \\"d\\"
-      a: String
-      b: String
-      c: String
+      a: String = \\"a\\"
+      b: String = \\"b\\"
+      c: String = \\"c\\"
     }"
   `,
   )

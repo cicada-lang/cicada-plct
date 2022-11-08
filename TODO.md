@@ -1,8 +1,6 @@
-fix `inferProperties`
-
-- `std/groupoid/trivialGroupoid.cic` -- `new Isomorphism` should work
-
 remove `enrich` functions again -- declared type should be the saved type
+
+print formatCore print clazz localName
 
 # std
 

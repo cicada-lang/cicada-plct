@@ -3,7 +3,7 @@
   mul: (x, y) => sole,
   mulAssociative: (x, y, z) => refl(implicit Trivial, implicit sole)
 }: class {
-  Element: Type
-  mul: (Element, Element) -> Element
-  mulAssociative: (x: Element, y: Element, z: Element) -> Equal(Element, mul(x, mul(y, z)), mul(mul(x, y), z))
+  Element: Type = Trivial
+  mul: (Trivial, Trivial) -> Trivial = (x, y) => sole
+  mulAssociative: (Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (x, y, z) => refl(implicit Trivial, implicit sole)
 }

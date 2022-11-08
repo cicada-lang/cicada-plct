@@ -10,16 +10,16 @@
   inverseRight: (x) => refl(implicit Trivial, implicit sole),
   div: (x, y) => sole
 }: class {
-  Element: Type
-  mul: (Element, Element) -> Element
-  mulAssociative: (x: Element, y: Element, z: Element) -> Equal(Element, mul(x, mul(y, z)), mul(mul(x, y), z))
-  id: Element
-  idLeft: (x: Element) -> Equal(Element, mul(id, x), x)
-  idRight: (x: Element) -> Equal(Element, mul(x, id), x)
-  inverse: (Element) -> Element
-  inverseLeft: (x: Element) -> Equal(Element, mul(inverse(x), x), id)
-  inverseRight: (x: Element) -> Equal(Element, mul(x, inverse(x)), id)
-  div: (Element, Element) -> Element = (x, y) => mul(x, inverse(y))
+  Element: Type = Trivial
+  mul: (Trivial, Trivial) -> Trivial = (x, y) => sole
+  mulAssociative: (Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (x, y, z) => refl(implicit Trivial, implicit sole)
+  id: Trivial = sole
+  idLeft: (Trivial) -> Equal(Trivial, sole, sole) = (x) => refl(implicit Trivial, implicit sole)
+  idRight: (Trivial) -> Equal(Trivial, sole, sole) = (x) => refl(implicit Trivial, implicit sole)
+  inverse: (Trivial) -> Trivial = (x) => sole
+  inverseLeft: (Trivial) -> Equal(Trivial, sole, sole) = (x) => refl(implicit Trivial, implicit sole)
+  inverseRight: (Trivial) -> Equal(Trivial, sole, sole) = (x) => refl(implicit Trivial, implicit sole)
+  div: (Trivial, Trivial) -> Trivial = (x, y) => sole
 }
 (x, y) => sole: (Trivial, Trivial) -> Trivial
 (y) => sole: (Trivial) -> Trivial
