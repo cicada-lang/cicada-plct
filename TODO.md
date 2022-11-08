@@ -1,8 +1,4 @@
-reorg the use of of error types
-
-[question] should fulfilled class be subtype of class?
-
-error report print stack trace -- for debug and bug report
+note about "should fulfilled class be subtype of class?"
 
 # std
 

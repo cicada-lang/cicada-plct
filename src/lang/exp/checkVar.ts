@@ -36,7 +36,7 @@ export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
     ) {
       throw new Errors.ElaborationError(
         [
-          `check Var fail to checkInferred`,
+          `checkVar fail to checkInferred`,
           indent(`var name: ${exp.name}`),
           indent(
             `inferred type: ${formatCore(

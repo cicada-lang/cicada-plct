@@ -72,10 +72,7 @@ function inferApPi(
     try {
       unifyType(mod, ctx, argInserted.type, type.argType)
     } catch (error) {
-      if (
-        error instanceof Errors.UnificationError ||
-        error instanceof Errors.InclusionError
-      ) {
+      if (error instanceof Errors.UnificationError) {
         throw new Errors.ElaborationError(
           ["inferApPi fail", ...error.trace, error.message].join("\n"),
           { span: argExp.span },
