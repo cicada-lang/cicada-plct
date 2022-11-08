@@ -1,5 +1,3 @@
-remove `enrich` functions again -- declared type should be the saved type
-
 print formatCore print clazz localName
 
 # std

@@ -109,11 +109,6 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return check(mod, ctx, Exps.foldClazz(exp.bindings), type)
     }
 
-    // case "Objekt": {
-    //   const { core } = Exps.enrich(mod, ctx, exp, type)
-    //   return core
-    // }
-
     case "Objekt": {
       Values.assertClazzInCtx(ctx, type)
       const properties = Exps.checkProperties(mod, ctx, exp.properties, type)
