@@ -1,10 +1,10 @@
+`Mod` has `dependencies`
+
+`cic watch` handle indirect dependencies
+
 # std
 
 `std/order` -- need datatype
-
-# later
-
-command line watch need to trace import dependence
 
 # maybe
 

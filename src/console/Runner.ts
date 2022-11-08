@@ -34,30 +34,43 @@ export class Runner {
     }
   }
 
-  async watch(url: URL): Promise<void> {
-    if (url.protocol !== "file:") {
-      app.logger.info(`Can not watch non-local file.`)
-      process.exit(1)
-    }
+  private get importedUrls(): Array<URL> {
+    return Array.from(this.loader.cache.keys()).map((href) => new URL(href))
+  }
 
-    app.logger.info(`Initial run complete, now watching for changes.`)
-
-    watcher(url.pathname, async (event, file) => {
-      if (event === "remove") {
-        this.loader.cache.delete(url.href)
-        app.logger.info({ tag: event, msg: url.pathname })
-        process.exit(1)
-      }
-
-      if (event === "update") {
-        this.loader.cache.delete(url.href)
-        const { error } = await this.run(url)
-        if (error) {
-          app.logger.error({ tag: event, msg: url.pathname })
-        } else {
-          app.logger.info({ tag: event, msg: url.pathname })
-        }
-      }
+  async watch(main: URL): Promise<void> {
+    app.logger.info({
+      msg: `Watching for changes.`,
+      tracked: this.importedUrls,
     })
+
+    for (const url of this.importedUrls) {
+      if (main.protocol !== "file:") continue
+
+      watcher(url.pathname, async (event) => {
+        if (event === "remove") {
+          this.loader.cache.delete(url.href)
+          this.loader.cache.delete(main.href)
+
+          if (url.href === main.href) {
+            app.logger.info({ tag: event, msg: url.pathname })
+            app.logger.info({ msg: "The main file is removed." })
+          } else {
+            const { error } = await this.run(main)
+            if (error) app.logger.error({ tag: event, msg: url.pathname })
+            else app.logger.info({ tag: event, msg: url.pathname })
+          }
+        }
+
+        if (event === "update") {
+          this.loader.cache.delete(url.href)
+          this.loader.cache.delete(main.href)
+
+          const { error } = await this.run(main)
+          if (error) app.logger.error({ tag: event, msg: url.pathname })
+          else app.logger.info({ tag: event, msg: url.pathname })
+        }
+      })
+    }
   }
 }
