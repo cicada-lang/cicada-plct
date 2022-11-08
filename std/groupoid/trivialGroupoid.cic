@@ -11,15 +11,15 @@ let trivialIsomorphism: Isomorphism(trivialCategory, sole, sole, sole, sole) = {
   inverseRight: refl,
 }
 
-// let trivialIsomorphism = new Isomorphism {
-//   cat: trivialCategory,
-//   dom: sole,
-//   cod: sole,
-//   morphism: sole,
-//   inverse: sole,
-//   inverseLeft: refl,
-//   inverseRight: refl,
-// }
+let trivialIsomorphism = new Isomorphism {
+  cat: trivialCategory,
+  dom: sole,
+  cod: sole,
+  morphism: sole,
+  inverse: sole,
+  inverseLeft: refl,
+  inverseRight: refl,
+}
 
 compute trivialIsomorphism
 

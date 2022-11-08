@@ -1,7 +1,3 @@
-`inclusionClazz` improve error message
-
-- "inclusionClazz expect subproperty to have fulfilled property: cat"
-
 fix `inferProperties`
 
 - `std/groupoid/trivialGroupoid.cic` -- `new Isomorphism` should work
