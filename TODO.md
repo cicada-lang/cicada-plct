@@ -1,6 +1,4 @@
-extract `insertApImplicitStep`
-
-`checkVar` -- try `insertApImplicitStep`
+extract `checkVar` -- try `insertApImplicitStep`
 
 - pass std/groupoid -- need `super`
 

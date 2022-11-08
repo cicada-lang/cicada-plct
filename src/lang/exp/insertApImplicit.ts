@@ -1,5 +1,6 @@
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
+import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Inferred } from "../exp"
 import { Mod } from "../mod"
@@ -11,25 +12,25 @@ export function insertApImplicit(
   ctx: Ctx,
   inferred: Inferred,
 ): Inferred {
-  if (!Values.isValue(inferred.type, "PiImplicit")) {
-    return inferred
+  while (Values.isValue(inferred.type, "PiImplicit")) {
+    inferred = insertApImplicitStep(mod, ctx, inferred.type, inferred.core)
   }
 
-  const name = inferred.type.retTypeClosure.name
+  return inferred
+}
+
+export function insertApImplicitStep(
+  mod: Mod,
+  ctx: Ctx,
+  type: Values.PiImplicit,
+  core: Core,
+): Inferred {
+  const name = type.retTypeClosure.name
   const boundNames = new Set(ctxNames(ctx))
   const usedNames = [...boundNames, ...mod.solution.names]
   const freshName = freshen(usedNames, name)
-  const patternVar = mod.solution.createPatternVar(
-    freshName,
-    inferred.type.argType,
-  )
-  ctx = CtxCons(freshName, inferred.type.argType, ctx)
-  const retType = applyClosure(inferred.type.retTypeClosure, patternVar)
-
-  const insertedInferred = Inferred(
-    retType,
-    Cores.ApImplicit(inferred.core, Cores.Var(freshName)),
-  )
-
-  return insertApImplicit(mod, ctx, insertedInferred)
+  const patternVar = mod.solution.createPatternVar(freshName, type.argType)
+  ctx = CtxCons(freshName, type.argType, ctx)
+  const retType = applyClosure(type.retTypeClosure, patternVar)
+  return Inferred(retType, Cores.ApImplicit(core, Cores.Var(freshName)))
 }
