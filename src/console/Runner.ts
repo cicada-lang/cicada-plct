@@ -34,17 +34,17 @@ export class Runner {
     }
   }
 
-  private get importedUrls(): Array<URL> {
+  private get loadedUrls(): Array<URL> {
     return Array.from(this.loader.cache.keys()).map((href) => new URL(href))
   }
 
   async watch(main: URL): Promise<void> {
     app.logger.info({
       msg: `Watching for changes.`,
-      tracked: this.importedUrls,
+      tracked: this.loadedUrls,
     })
 
-    for (const url of this.importedUrls) {
+    for (const url of this.loadedUrls) {
       if (main.protocol !== "file:") continue
 
       watcher(url.pathname, async (event) => {
