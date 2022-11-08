@@ -278,6 +278,19 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
     }
 
+    // case "SequenceLetThe": {
+    //   const typeCore = Exps.checkType(mod, ctx, exp.type)
+    //   const type = evaluate(mod.ctxToEnv(ctx), typeCore)
+    //   const enriched = Exps.enrichOrCheck(mod, ctx, exp.exp, type)
+    //   const value = evaluate(mod.ctxToEnv(ctx), enriched.core)
+    //   ctx = CtxFulfilled(exp.name, enriched.type, value, ctx)
+    //   const retInferred = infer(mod, ctx, exp.ret)
+    //   return Inferred(
+    //     retInferred.type,
+    //     Cores.Ap(Cores.Fn(exp.name, retInferred.core), enriched.core),
+    //   )
+    // }
+
     case "SequenceLetThe": {
       const typeCore = Exps.checkType(mod, ctx, exp.type)
       const type = evaluate(mod.ctxToEnv(ctx), typeCore)
@@ -293,8 +306,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceCheck": {
       const typeCore = Exps.checkType(mod, ctx, exp.type)
-      const typeValue = evaluate(mod.ctxToEnv(ctx), typeCore)
-      Exps.check(mod, ctx, exp.exp, typeValue)
+      const type = evaluate(mod.ctxToEnv(ctx), typeCore)
+      Exps.check(mod, ctx, exp.exp, type)
       return infer(mod, ctx, exp.ret)
     }
 

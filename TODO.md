@@ -1,4 +1,12 @@
-`std/groupoid/trivialGroupoid.cic` -- should let `trivialIsomorphism` be inferred
+`inclusionClazz` improve error message
+
+- "inclusionClazz expect subproperty to have fulfilled property: cat"
+
+fix `inferProperties`
+
+- `std/groupoid/trivialGroupoid.cic` -- `new Isomorphism` should work
+
+remove `enrich` functions again -- declared type should be the saved type
 
 # std
 
