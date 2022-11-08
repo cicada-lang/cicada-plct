@@ -27,6 +27,7 @@ export class Import extends Stmt {
     }
 
     const importedMod = await mod.options.loader.load(url)
+
     for (const binding of this.bindings) {
       const type = lookupTypeInCtx(importedMod.ctx, binding.name)
       const value = lookupValueInEnv(importedMod.env, binding.name)
@@ -41,6 +42,8 @@ export class Import extends Stmt {
 
       defineBinding(mod, binding, type, value)
     }
+
+    mod.imported.push(url)
   }
 
   undo(mod: Mod): void {

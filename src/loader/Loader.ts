@@ -21,6 +21,12 @@ export class Loader {
 
   delete(url: URL): void {
     this.cache.delete(url.href)
+
+    for (const script of this.cache.values()) {
+      if (script.mod.imported.find(({ href }) => href === url.href)) {
+        this.delete(script.mod.options.url)
+      }
+    }
   }
 
   get loaded(): Array<URL> {

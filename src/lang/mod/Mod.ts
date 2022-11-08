@@ -17,6 +17,7 @@ export class Mod {
   outputs: Map<number, StmtOutput> = new Map()
   stmts: Array<Stmt> = []
   initialized = false
+  imported: Array<URL> = []
 
   constructor(public options: ModOptions) {}
 

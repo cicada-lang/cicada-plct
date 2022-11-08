@@ -1,7 +1,3 @@
-`Mod` has `dependencies`
-
-`cic watch` handle indirect dependencies
-
 # std
 
 `std/order` -- need datatype
