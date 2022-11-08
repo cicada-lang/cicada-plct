@@ -34,23 +34,19 @@ export class Runner {
     }
   }
 
-  private get loadedUrls(): Array<URL> {
-    return Array.from(this.loader.cache.keys()).map((href) => new URL(href))
-  }
-
   async watch(main: URL): Promise<void> {
     app.logger.info({
       msg: `Watching for changes.`,
-      tracked: this.loadedUrls,
+      tracked: this.loader.loaded,
     })
 
-    for (const url of this.loadedUrls) {
+    for (const url of this.loader.loaded) {
       if (main.protocol !== "file:") continue
 
       watcher(url.pathname, async (event) => {
         if (event === "remove") {
-          this.loader.cache.delete(url.href)
-          this.loader.cache.delete(main.href)
+          this.loader.delete(url)
+          this.loader.delete(main)
 
           if (url.href === main.href) {
             app.logger.info({ tag: event, msg: url.pathname })
@@ -63,8 +59,8 @@ export class Runner {
         }
 
         if (event === "update") {
-          this.loader.cache.delete(url.href)
-          this.loader.cache.delete(main.href)
+          this.loader.delete(url)
+          this.loader.delete(main)
 
           const { error } = await this.run(main)
           if (error) app.logger.error({ tag: event, msg: url.pathname })

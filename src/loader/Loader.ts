@@ -4,7 +4,7 @@ import { Script } from "../script"
 import * as Scripts from "../scripts"
 
 export class Loader {
-  cache: Map<string, Script> = new Map()
+  private cache: Map<string, Script> = new Map()
   fetcher = new Fetcher()
 
   async load(url: URL, options?: { text?: string }): Promise<Mod> {
@@ -17,5 +17,13 @@ export class Loader {
     await script.run()
     this.cache.set(url.href, script)
     return script.mod
+  }
+
+  delete(url: URL): void {
+    this.cache.delete(url.href)
+  }
+
+  get loaded(): Array<URL> {
+    return Array.from(this.cache.keys()).map((href) => new URL(href))
   }
 }
