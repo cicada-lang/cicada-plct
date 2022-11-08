@@ -12,9 +12,11 @@ export function unfoldFormatClazz(clazz: Cores.Clazz): {
 
     case "ClazzCons": {
       const propertyType = formatCore(clazz.propertyType)
-      const binding = isIdentifier(clazz.name)
-        ? `${clazz.name}: ${propertyType}`
-        : `"${clazz.name}": ${propertyType}`
+      const key =
+        clazz.name === clazz.localName
+          ? formatName(clazz.name)
+          : `${formatName(clazz.name)} [${formatName(clazz.localName)}]`
+      const binding = `${key}: ${propertyType}`
       const { bindings } = unfoldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }
@@ -22,11 +24,14 @@ export function unfoldFormatClazz(clazz: Cores.Clazz): {
     case "ClazzFulfilled": {
       const propertyType = formatCore(clazz.propertyType)
       const property = formatCore(clazz.property)
-      const binding = isIdentifier(clazz.name)
-        ? `${clazz.name}: ${propertyType} = ${property}`
-        : `"${clazz.name}": ${propertyType} = ${property}`
+      const key = formatName(clazz.name)
+      const binding = `${key}: ${propertyType} = ${property}`
       const { bindings } = unfoldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }
     }
   }
+}
+
+function formatName(name: string): string {
+  return isIdentifier(name) ? name : `"${name}"`
 }

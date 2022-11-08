@@ -65,7 +65,7 @@
   morphism: (x27: cat.Object) -> cat.Morphism(x27, object)
   morphismUnique: (implicit x27: cat.Object, f: cat.Morphism(x27, object)) -> Equal(cat.Morphism(x27, object), f, morphism(x27))
 }) -> class {
-  cat: class {
+  cat [cat1]: class {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)
@@ -99,13 +99,13 @@
   inverseRight: replace(replace(y.morphismUnique(implicit sole, sole), (target) => Equal(cat.Morphism(x12, y.object), target, cat.id(y.object)), refl(implicit cat.Morphism(x12, y.object), implicit cat.id(y.object))), (target) => Equal(cat.Morphism(x2, y.object), cat.compose(implicit y.object, implicit x.object, implicit y.object, x.morphism(y.object), y.morphism(x.object)), target), y.morphismUnique(implicit sole, sole))
 }: (x: class {
   cat: class {
-    Object: Type
-    Morphism: (Object2, Object2) -> Type
-    id: (x: Object2) -> Morphism2(x, x)
-    compose: (implicit x: Object2, implicit y: Object2, implicit z10: Object2, Morphism2(x, y), Morphism2(y, z10)) -> Morphism2(x, z10)
-    idLeft: (implicit x: Object2, implicit y: Object2, f: Morphism2(x, y)) -> Equal(Morphism2(x, y), compose2(implicit x, implicit x, implicit y, id2(x), f), f)
-    idRight: (implicit x: Object2, implicit y: Object2, f: Morphism2(x, y)) -> Equal(Morphism2(x, y), compose2(implicit x, implicit y, implicit y, f, id2(y)), f)
-    composeAssociative: (implicit x: Object2, implicit y: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x, y), g: Morphism2(y, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
+    Object [Object2]: Type
+    Morphism [Morphism2]: (Object2, Object2) -> Type
+    id [id2]: (x: Object2) -> Morphism2(x, x)
+    compose [compose2]: (implicit x: Object2, implicit y: Object2, implicit z10: Object2, Morphism2(x, y), Morphism2(y, z10)) -> Morphism2(x, z10)
+    idLeft [idLeft2]: (implicit x: Object2, implicit y: Object2, f: Morphism2(x, y)) -> Equal(Morphism2(x, y), compose2(implicit x, implicit x, implicit y, id2(x), f), f)
+    idRight [idRight2]: (implicit x: Object2, implicit y: Object2, f: Morphism2(x, y)) -> Equal(Morphism2(x, y), compose2(implicit x, implicit y, implicit y, f, id2(y)), f)
+    composeAssociative [composeAssociative2]: (implicit x: Object2, implicit y: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x, y), g: Morphism2(y, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
   } = {
     Object: Trivial,
     Morphism: (dom1, cod1) => Trivial,
@@ -120,13 +120,13 @@
   morphismUnique: (implicit x: Trivial, Trivial) -> Equal(Trivial, sole, sole)
 }, y: class {
   cat: class {
-    Object: Type
-    Morphism: (Object2, Object2) -> Type
-    id: (x27: Object2) -> Morphism2(x27, x27)
-    compose: (implicit x27: Object2, implicit y: Object2, implicit z10: Object2, Morphism2(x27, y), Morphism2(y, z10)) -> Morphism2(x27, z10)
-    idLeft: (implicit x27: Object2, implicit y: Object2, f: Morphism2(x27, y)) -> Equal(Morphism2(x27, y), compose2(implicit x, implicit x, implicit y, id2(x27), f), f)
-    idRight: (implicit x27: Object2, implicit y: Object2, f: Morphism2(x27, y)) -> Equal(Morphism2(x27, y), compose2(implicit x, implicit y, implicit y, f, id2(y)), f)
-    composeAssociative: (implicit x27: Object2, implicit y: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x27, y), g: Morphism2(y, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x27, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
+    Object [Object2]: Type
+    Morphism [Morphism2]: (Object2, Object2) -> Type
+    id [id2]: (x27: Object2) -> Morphism2(x27, x27)
+    compose [compose2]: (implicit x27: Object2, implicit y: Object2, implicit z10: Object2, Morphism2(x27, y), Morphism2(y, z10)) -> Morphism2(x27, z10)
+    idLeft [idLeft2]: (implicit x27: Object2, implicit y: Object2, f: Morphism2(x27, y)) -> Equal(Morphism2(x27, y), compose2(implicit x, implicit x, implicit y, id2(x27), f), f)
+    idRight [idRight2]: (implicit x27: Object2, implicit y: Object2, f: Morphism2(x27, y)) -> Equal(Morphism2(x27, y), compose2(implicit x, implicit y, implicit y, f, id2(y)), f)
+    composeAssociative [composeAssociative2]: (implicit x27: Object2, implicit y: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x27, y), g: Morphism2(y, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x27, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
   } = {
     Object: Trivial,
     Morphism: (dom1, cod1) => Trivial,
@@ -141,13 +141,13 @@
   morphismUnique: (implicit x27: Trivial, Trivial) -> Equal(Trivial, sole, sole)
 }) -> class {
   cat: class {
-    Object: Type
-    Morphism: (Object2, Object2) -> Type
-    id: (x27: Object2) -> Morphism2(x27, x27)
-    compose: (implicit x27: Object2, implicit y15: Object2, implicit z10: Object2, Morphism2(x27, y15), Morphism2(y15, z10)) -> Morphism2(x27, z10)
-    idLeft: (implicit x27: Object2, implicit y15: Object2, f: Morphism2(x27, y15)) -> Equal(Morphism2(x27, y15), compose2(implicit x, implicit x, implicit y, id2(x27), f), f)
-    idRight: (implicit x27: Object2, implicit y15: Object2, f: Morphism2(x27, y15)) -> Equal(Morphism2(x27, y15), compose2(implicit x, implicit y, implicit y, f, id2(y15)), f)
-    composeAssociative: (implicit x27: Object2, implicit y15: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x27, y15), g: Morphism2(y15, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x27, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
+    Object [Object2]: Type
+    Morphism [Morphism2]: (Object2, Object2) -> Type
+    id [id2]: (x27: Object2) -> Morphism2(x27, x27)
+    compose [compose2]: (implicit x27: Object2, implicit y15: Object2, implicit z10: Object2, Morphism2(x27, y15), Morphism2(y15, z10)) -> Morphism2(x27, z10)
+    idLeft [idLeft2]: (implicit x27: Object2, implicit y15: Object2, f: Morphism2(x27, y15)) -> Equal(Morphism2(x27, y15), compose2(implicit x, implicit x, implicit y, id2(x27), f), f)
+    idRight [idRight2]: (implicit x27: Object2, implicit y15: Object2, f: Morphism2(x27, y15)) -> Equal(Morphism2(x27, y15), compose2(implicit x, implicit y, implicit y, f, id2(y15)), f)
+    composeAssociative [composeAssociative2]: (implicit x27: Object2, implicit y15: Object2, implicit z10: Object2, implicit w: Object2, f: Morphism2(x27, y15), g: Morphism2(y15, z10), h: Morphism2(z10, w)) -> Equal(Morphism2(x27, w), compose2(implicit x, implicit y, implicit w, f, compose2(implicit y, implicit y, implicit w, g, h)), compose2(implicit x, implicit y, implicit w, compose2(implicit x, implicit y, implicit y, f, g), h))
   }
   dom: cat.Object
   cod: cat.Object

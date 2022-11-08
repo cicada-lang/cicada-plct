@@ -1,8 +1,10 @@
-print formatCore print clazz localName
-
 # std
 
 `std/order` -- need datatype
+
+# later
+
+command line watch need to trace import dependence
 
 # maybe
 
