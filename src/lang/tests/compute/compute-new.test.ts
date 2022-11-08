@@ -109,15 +109,15 @@ compute new ABC {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      d: \\"d\\",
       a: \\"a\\",
       b: \\"b\\",
-      c: \\"c\\"
+      c: \\"c\\",
+      d: \\"d\\"
     }: class {
-      d: String = \\"d\\"
       a: String = \\"a\\"
       b: String = \\"b\\"
       c: String = \\"c\\"
+      d: String = \\"d\\"
     }"
   `,
   )

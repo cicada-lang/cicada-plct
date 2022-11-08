@@ -17,11 +17,12 @@
     "test:watch": "vitest --dir src --threads false",
     "test:coverage": "vitest --dir src --threads false --run --coverage ",
     "test:gui": "vitest --dir src --threads false --ui",
-    "test:tests": "test-runner snapshot './bin/cic.js' 'tests/**/*.(cic|md)' --exclude 'tests/**/*.(error|todo).(cic|md)'",
-    "test:tests-error": "test-runner snapshot-error './bin/cic.js' 'tests/**/*.error.(cic|md)'",
-    "test:std": "test-runner snapshot './bin/cic.js' 'std/**/*.(cic|md)' --exclude 'std/**/*.(error|todo).(cic|md)'",
-    "test:std-error": "test-runner snapshot-error './bin/cic.js' 'std/**/*.error.(cic|md)'",
-    "test": "npm run test:ts && npm run test:tests && npm run test:tests-error && npm run test:std && npm run test:std-error",
+    "test:cic:tests": "test-runner snapshot './bin/cic.js' 'tests/**/*.(cic|md)' --exclude 'tests/**/*.(error|todo).(cic|md)'",
+    "test:cic:tests-error": "test-runner snapshot-error './bin/cic.js' 'tests/**/*.error.(cic|md)'",
+    "test:cic:std": "test-runner snapshot './bin/cic.js' 'std/**/*.(cic|md)' --exclude 'std/**/*.(error|todo).(cic|md)'",
+    "test:cic:std-error": "test-runner snapshot-error './bin/cic.js' 'std/**/*.error.(cic|md)'",
+    "test:cic": "npm run test:cic:tests && npm run test:cic:tests-error && npm run test:cic:std && npm run test:cic:std-error",
+    "test": "npm run test:ts && npm run test:cic",
     "format": "prettier src --write"
   },
   "dependencies": {
@@ -39,9 +40,9 @@
     "@types/commonmark": "^0.27.5",
     "@types/lodash": "^4.14.188",
     "@types/node": "^18.11.9",
-    "@vitest/coverage-c8": "^0.25.0",
-    "@vitest/coverage-istanbul": "^0.25.0",
-    "@vitest/ui": "^0.25.0",
+    "@vitest/coverage-c8": "^0.25.1",
+    "@vitest/coverage-istanbul": "^0.25.1",
+    "@vitest/ui": "^0.25.1",
     "@xieyuheng/test-runner": "^0.2.7",
     "husky": "^8.0.2",
     "prettier": "^2.7.1",
@@ -49,7 +50,7 @@
     "pretty-quick": "^3.1.3",
     "typescript": "^4.8.4",
     "vite": "^3.2.3",
-    "vitest": "^0.25.0"
+    "vitest": "^0.25.1"
   },
   "license": "GPL-3.0-or-later"
 }
