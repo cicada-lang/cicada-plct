@@ -1,5 +1,5 @@
 import { evaluate } from "../../core"
-import { checkType, enrichOrCheck, Exp } from "../../exp"
+import { check, checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
@@ -16,10 +16,10 @@ export class LetThe extends Stmt {
 
   async execute(mod: Mod): Promise<void> {
     const typeCore = checkType(mod, mod.ctx, this.type)
-    const typeValue = evaluate(mod.env, typeCore)
-    const enriched = enrichOrCheck(mod, mod.ctx, this.exp, typeValue)
-    const value = evaluate(mod.env, enriched.core)
-    mod.define(this.name, enriched.type, value)
+    const type = evaluate(mod.env, typeCore)
+    const core = check(mod, mod.ctx, this.exp, type)
+    const value = evaluate(mod.env, core)
+    mod.define(this.name, type, value)
   }
 
   undo(mod: Mod): void {

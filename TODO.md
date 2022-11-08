@@ -1,5 +1,3 @@
-remove code about `enrich`
-
 extract `insertApImplicitStep`
 
 `checkVar` -- try `insertApImplicitStep`
