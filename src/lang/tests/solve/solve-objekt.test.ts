@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { expectCodeToFail, runCode } from "../utils"
+import { runCode } from "../utils"
 
 test("solve Objekt", async () => {
   const output = await runCode(`
@@ -51,7 +51,7 @@ solve (a: String, b: String) {
 })
 
 test("solve Objekt -- extra common properties", async () => {
-  await expectCodeToFail(`
+  await runCode(`
 
 class AB {
   a: String

@@ -66,13 +66,16 @@ function inferApPi(
 ): Inferred {
   Values.assertTypeInCtx(ctx, type, "Pi")
 
-  let argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
+  const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    argInferred = Exps.insertApImplicit(mod, ctx, argInferred, type.argType)
+    const argInserted = Exps.insertApImplicit(mod, ctx, argInferred)
     try {
-      unifyType(mod, ctx, argInferred.type, type.argType)
+      unifyType(mod, ctx, argInserted.type, type.argType)
     } catch (error) {
-      if (error instanceof Errors.UnificationError) {
+      if (
+        error instanceof Errors.UnificationError ||
+        error instanceof Errors.InclusionError
+      ) {
         throw new Errors.ElaborationError(
           ["inferApPi fail", ...error.trace, error.message].join("\n"),
           { span: argExp.span },
@@ -84,7 +87,7 @@ function inferApPi(
   }
 
   /**
-     NOTE We can not use `argInferred.core` here,
+     NOTE We can not use `argInserted.core` here,
      check against the given type is necessary.
   **/
 

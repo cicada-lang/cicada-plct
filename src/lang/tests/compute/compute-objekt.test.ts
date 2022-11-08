@@ -17,9 +17,9 @@ compute abc
       b: \\"b\\",
       c: \\"c\\"
     }: class {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
+      a: String
+      b: String
+      c: String
     }"
   `,
   )
@@ -41,9 +41,9 @@ compute abc
       b: \\"b\\",
       c: \\"c\\"
     }: class {
-      a: String = \\"a\\"
+      a: String
       b: String = \\"b\\"
-      c: String = \\"c\\"
+      c: String
     }"
   `,
   )
@@ -63,17 +63,11 @@ compute abcxyz
     "{
       a: \\"a\\",
       b: \\"b\\",
-      c: \\"c\\",
-      x: \\"x\\",
-      y: \\"y\\",
-      z: \\"z\\"
+      c: \\"c\\"
     }: class {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
-      x: String = \\"x\\"
-      y: String = \\"y\\"
-      z: String = \\"z\\"
+      a: String
+      b: String
+      c: String
     }"
   `,
   )

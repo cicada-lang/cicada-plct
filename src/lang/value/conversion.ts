@@ -28,7 +28,7 @@ export function conversion(
     alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
   } catch (error) {
     if (error instanceof Errors.ConversionError) {
-      throw new Errors.ConversionError(
+      throw new Errors.InclusionError(
         [
           error.message,
           ` left: ${formatCore(leftCore)}`,

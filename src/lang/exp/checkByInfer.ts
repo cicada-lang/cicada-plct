@@ -10,9 +10,13 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   const inferred = infer(mod, ctx, exp)
 
   try {
-    checkInferred(mod, ctx, inferred, type)
+    unifyType(mod, ctx, inferred.type, type)
+    inclusion(mod, ctx, inferred.type, type)
   } catch (error) {
-    if (error instanceof Errors.UnificationError) {
+    if (
+      error instanceof Errors.UnificationError ||
+      error instanceof Errors.InclusionError
+    ) {
       throw new Errors.ElaborationError(
         ["checkByInfer fail", ...error.trace, error.message].join("\n"),
         { span: exp.span },

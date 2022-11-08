@@ -4,8 +4,9 @@ import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { checkProperties, Exp, infer, Inferred } from "../exp"
 import { Mod } from "../mod"
+import { unifyType } from "../solution"
 import * as Values from "../value"
-import { Value } from "../value"
+import { inclusion, Value } from "../value"
 
 /**
 
@@ -20,7 +21,8 @@ import { Value } from "../value"
 export function enrich(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Inferred {
   try {
     const inferred = infer(mod, ctx, exp)
-    Values.inclusion(mod, ctx, inferred.type, type)
+    unifyType(mod, ctx, inferred.type, type)
+    inclusion(mod, ctx, inferred.type, type)
     return inferred
   } catch (_error) {
     return enrichWithoutInfer(mod, ctx, exp, type)
@@ -34,15 +36,6 @@ function enrichWithoutInfer(
   type: Value,
 ): Inferred {
   switch (exp.kind) {
-    case "ObjektUnfolded": {
-      return enrich(
-        mod,
-        ctx,
-        Exps.Objekt(Exps.prepareProperties(mod, ctx, exp.properties)),
-        type,
-      )
-    }
-
     case "Objekt": {
       Values.assertClazzInCtx(ctx, type)
 

@@ -57,19 +57,27 @@ export function inclusionClazz(
       )
     }
 
-    inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
+    try {
+      inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
 
-    if (
-      subclazzProperty.value !== undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      conversion(
-        mod,
-        ctx,
-        clazzProperty.type,
-        subclazzProperty.value,
-        clazzProperty.value,
-      )
+      if (
+        subclazzProperty.value !== undefined &&
+        clazzProperty.value !== undefined
+      ) {
+        conversion(
+          mod,
+          ctx,
+          clazzProperty.type,
+          subclazzProperty.value,
+          clazzProperty.value,
+        )
+      }
+    } catch (error) {
+      if (error instanceof Errors.InclusionError) {
+        error.trace.unshift([`[inclusion property] ${name}`].join("\n"))
+      }
+
+      throw error
     }
   }
 }

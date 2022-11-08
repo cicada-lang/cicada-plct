@@ -1,11 +1,14 @@
+import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
+import { formatCore } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { advanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { conversion, inclusionClazz, Value } from "../value"
+import { conversion, inclusionClazz, readbackType, Value } from "../value"
 
 /**
 
@@ -39,6 +42,29 @@ export function inclusion(
   subtype = advanceValue(mod, subtype)
   type = advanceValue(mod, type)
 
+  try {
+    inclusionAux(mod, ctx, subtype, type)
+  } catch (error) {
+    if (error instanceof Errors.InclusionError) {
+      error.trace.unshift(
+        [
+          `[inclusion]`,
+          indent(`subtype: ${formatCore(readbackType(mod, ctx, subtype))}`),
+          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
+        ].join("\n"),
+      )
+    }
+
+    throw error
+  }
+}
+
+export function inclusionAux(
+  mod: Mod,
+  ctx: Ctx,
+  subtype: Value,
+  type: Value,
+): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**
        Contravariant in argument position.

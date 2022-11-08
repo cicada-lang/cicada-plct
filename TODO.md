@@ -1,7 +1,12 @@
-pass std/groupoid -- need `super`
+remove code about `enrich`
 
-- [maybe] remove `enrich`
-- should fulfilled class be subtype of class?
+extract `insertApImplicitStep`
+
+`checkVar` -- try `insertApImplicitStep`
+
+- pass std/groupoid -- need `super`
+
+[question] should fulfilled class be subtype of class?
 
 fix catch of `UnificationError` -- for `enrich` and `checkInferred`
 

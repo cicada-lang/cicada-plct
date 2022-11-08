@@ -158,8 +158,8 @@ check {
 `)
 })
 
-test("check Objekt -- extra properties -- fail -- can not infer", async () => {
-  await expectCodeToFail(`
+test("check Objekt -- extra properties -- ignore what can not infer", async () => {
+  await runCode(`
 
 check {
   a: "a",
