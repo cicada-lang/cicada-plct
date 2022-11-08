@@ -1,5 +1,5 @@
 ---
-title: Inconsistency of fulfilling type
+title: Inconsistency of fulfilling class type
 author: Xie Yuheng
 date: 2021-11-11
 ---

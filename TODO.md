@@ -1,8 +1,6 @@
-note about "should fulfilled class be subtype of class?"
-
 # std
 
-pass std/order -- need datatype
+`std/order` -- need datatype
 
 # maybe
 
