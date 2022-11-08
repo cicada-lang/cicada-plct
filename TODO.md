@@ -1,3 +1,5 @@
+`std/groupoid/trivialGroupoid.cic` -- should let `trivialIsomorphism` be inferred
+
 # std
 
 `std/order` -- need datatype

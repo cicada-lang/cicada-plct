@@ -1,7 +1,7 @@
 import { Category, Isomorphism } from "../category/index.cic"
 
 class Groupoid extends Category {
-  inv(
+  inverse(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
@@ -9,9 +9,9 @@ class Groupoid extends Category {
 
   // NOTE The following use of `Isomorphism`
   //   is an example of "partly fulfilled object construction".
-  invIso(
+  inverseIso(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
-  ): Isomorphism(super, x, y, f, inv(f))
+  ): Isomorphism(super, x, y, f, inverse(f))
 }

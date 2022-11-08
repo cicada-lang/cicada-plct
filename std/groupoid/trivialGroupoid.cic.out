@@ -47,8 +47,8 @@
   idLeft: (implicit x, implicit y, f) => refl(implicit Trivial, implicit sole),
   idRight: (implicit x, implicit y, f) => refl(implicit Trivial, implicit sole),
   composeAssociative: (implicit x, implicit y, implicit z, implicit w, f, g, h) => refl(implicit Trivial, implicit sole),
-  inv: (implicit x, implicit y, f) => sole,
-  invIso: (implicit x, implicit y, f) => {
+  inverse: (implicit x, implicit y, f) => sole,
+  inverseIso: (implicit x, implicit y, f) => {
     cat: {
       Object: Trivial,
       Morphism: (dom, cod) => Trivial,
@@ -73,8 +73,8 @@
   idLeft: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(implicit x, implicit x, implicit y, id(x), f), f)
   idRight: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(implicit x, implicit y, implicit y, f, id(y)), f)
   composeAssociative: (implicit x: Object, implicit y: Object, implicit z: Object, implicit w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(implicit x, implicit y, implicit w, f, compose(implicit y, implicit y, implicit w, g, h)), compose(implicit x, implicit y, implicit w, compose(implicit x, implicit y, implicit y, f, g), h))
-  inv: (implicit x: Object, implicit y: Object, Morphism(x, y)) -> Morphism(y, x)
-  invIso: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> class {
+  inverse: (implicit x: Object, implicit y: Object, Morphism(x, y)) -> Morphism(y, x)
+  inverseIso: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> class {
     cat: class {
       Object: Type
       Morphism: (Object1, Object1) -> Type
@@ -95,8 +95,8 @@
     dom: Object = x
     cod: Object = y
     morphism: Morphism(x, y) = f
-    inverse: Morphism(y, x) = inv(implicit x, implicit y, f)
-    inverseLeft: Equal(Morphism(x, x), compose(implicit dom, implicit cod, implicit dom, f, inv(implicit x, implicit y, f)), id(x))
-    inverseRight: Equal(Morphism(y, y), compose(implicit cod, implicit dom, implicit cod, inv(implicit x, implicit y, f), f), id(y))
+    inverse: Morphism(y, x) = inverse(implicit x, implicit y, f)
+    inverseLeft: Equal(Morphism(x, x), compose(implicit dom, implicit cod, implicit dom, f, inverse(implicit x, implicit y, f)), id(x))
+    inverseRight: Equal(Morphism(y, y), compose(implicit cod, implicit dom, implicit cod, inverse(implicit x, implicit y, f), f), id(y))
   }
 }

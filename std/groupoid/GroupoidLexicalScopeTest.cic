@@ -1,7 +1,7 @@
 import { Category, Isomorphism } from "../category/index.cic"
 
 class GroupoidLexicalScopeTest extends Category {
-  inv(
+  inverse(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
@@ -9,9 +9,9 @@ class GroupoidLexicalScopeTest extends Category {
 
   // NOTE `super` should repsect lexical scope,
   ///  the `id` in `super` should be different from the `id` in current scope.
-  invIso(
+  inverseIso(
     implicit id: Object,
     implicit y: Object,
     f: Morphism(id, y),
-  ): Isomorphism(super, id, y, f, inv(f))
+  ): Isomorphism(super, id, y, f, inverse(f))
 }
