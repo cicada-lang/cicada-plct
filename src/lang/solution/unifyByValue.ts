@@ -3,7 +3,7 @@ import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { unifyNeutral } from "../solution"
+import { unify, unifyNeutral, unifyType } from "../solution"
 import { readback, readbackType, Value } from "../value"
 
 export function unifyByValue(
@@ -38,6 +38,12 @@ export function unifyByValue(
         `  right: ${right.data}`,
       ].join("\n"),
     )
+  }
+
+  if (left.kind === "Refl" && right.kind === "Refl") {
+    unifyType(mod, ctx, left.type, right.type)
+    unify(mod, ctx, left.type, left.value, right.value)
+    return
   }
 
   throw new Errors.UnificationError(

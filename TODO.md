@@ -1,6 +1,6 @@
-`checkVar` -- try `insertApImplicitStep` in a loop
+refactor `checkVar`
 
-- pass std/groupoid -- need `super`
+`checkVar` -- improve error report
 
 [question] should fulfilled class be subtype of class?
 
