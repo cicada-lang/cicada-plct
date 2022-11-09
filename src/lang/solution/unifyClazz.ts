@@ -1,4 +1,4 @@
-import { Ctx, ctxNames } from "../ctx" //
+import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { unify, unifyType } from "../solution"

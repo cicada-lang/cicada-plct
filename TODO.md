@@ -1,3 +1,9 @@
+bug -- `inclusionClazz` after `unifyClazz`
+will call `freshenNames` again, with newly created `PatternVar` in solution,
+thus will general-categorycan not use the
+
+- pass `groupCategory.todo.cic`
+
 # std
 
 `std/order` -- need datatype
