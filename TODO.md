@@ -1,4 +1,6 @@
-move isClazz to value/clazz/
+move value/assertion out to value
+move value/clazz/ out to value
+move core/clazz/ out to core
 
 `inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `expelClazz`
 
