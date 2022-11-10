@@ -4,7 +4,7 @@ import * as Values from "../value"
 import { Value } from "../value"
 
 export function doDot(target: Value, name: string): Value {
-  if (Values.isValue(target, "Objekt")) {
+  if (target.kind === "Objekt") {
     const property = target.properties[name]
     if (property === undefined) {
       throw new Errors.EvaluationError(`Undefined property name: ${name}`)

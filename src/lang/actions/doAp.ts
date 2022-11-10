@@ -4,7 +4,7 @@ import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
 export function doAp(target: Value, arg: Value): Value {
-  if (Values.isValue(target, "Fn")) {
+  if (target.kind === "Fn") {
     return applyClosure(target.retClosure, arg)
   }
 

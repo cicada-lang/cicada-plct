@@ -12,7 +12,7 @@ export function insertApImplicit(
   ctx: Ctx,
   inferred: Inferred,
 ): Inferred {
-  while (Values.isValue(inferred.type, "PiImplicit")) {
+  while (inferred.type.kind === "PiImplicit") {
     inferred = insertApImplicitStep(mod, ctx, inferred.type, inferred.core)
   }
 

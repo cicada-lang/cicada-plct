@@ -3,7 +3,7 @@ import * as Values from "../value"
 import { Value } from "../value"
 
 export function doCar(target: Value): Value {
-  if (Values.isValue(target, "Cons")) {
+  if (target.kind === "Cons") {
     return target.car
   }
 

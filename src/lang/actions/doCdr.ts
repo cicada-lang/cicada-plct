@@ -5,7 +5,7 @@ import { Value } from "../value"
 import { doCar } from "./doCar"
 
 export function doCdr(target: Value): Value {
-  if (Values.isValue(target, "Cons")) {
+  if (target.kind === "Cons") {
     return target.cdr
   }
 

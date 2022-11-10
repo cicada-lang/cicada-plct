@@ -4,7 +4,7 @@ import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
 export function doApImplicit(target: Value, arg: Value): Value {
-  if (Values.isValue(target, "FnImplicit")) {
+  if (target.kind === "FnImplicit") {
     return applyClosure(target.retClosure, arg)
   }
 

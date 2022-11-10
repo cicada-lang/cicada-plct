@@ -18,7 +18,7 @@ export function inferAp(
   core: Core,
   argExp: Exp,
 ): Inferred {
-  if (Values.isValue(type, "PiImplicit")) {
+  if (type.kind === "PiImplicit") {
     return inferApPiImplicit(mod, ctx, type, core, argExp)
   } else {
     return inferApPi(mod, ctx, type, core, argExp)

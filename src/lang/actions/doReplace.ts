@@ -5,7 +5,7 @@ import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
 export function doReplace(target: Value, motive: Value, base: Value): Value {
-  if (Values.isValue(target, "Refl")) {
+  if (target.kind === "Refl") {
     return base
   }
 

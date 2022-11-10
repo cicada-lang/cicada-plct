@@ -187,10 +187,10 @@ function extractApTarget(
   name: string,
 ): Values.TypedNeutral | undefined {
   if (
-    Values.isValue(value, "TypedNeutral") &&
+    value.kind === "TypedNeutral" &&
     value.neutral.kind === "Ap" &&
     value.neutral.target.kind === "Var" &&
-    Values.isValue(value.neutral.arg.value, "TypedNeutral") &&
+    value.neutral.arg.value.kind === "TypedNeutral" &&
     value.neutral.arg.value.neutral.kind === "Var" &&
     value.neutral.arg.value.neutral.name === name
   ) {

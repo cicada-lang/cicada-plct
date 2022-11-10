@@ -80,7 +80,7 @@ function assertNoExtraCommonProperties(
   left: Value,
   right: Value,
 ): void {
-  if (Values.isValue(left, "Objekt") && Values.isValue(right, "Objekt")) {
+  if (left.kind === "Objekt" && right.kind === "Objekt") {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
     const rightNames = Object.keys(right.properties)

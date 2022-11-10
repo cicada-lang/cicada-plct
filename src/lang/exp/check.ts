@@ -25,7 +25,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
-      if (Values.isValue(type, "PiImplicit")) {
+      if (type.kind === "PiImplicit") {
         const name = type.retTypeClosure.name
         const arg = Values.TypedNeutral(type.argType, Neutrals.Var(name))
         const retType = applyClosure(type.retTypeClosure, arg)

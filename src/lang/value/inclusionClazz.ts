@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -30,6 +31,13 @@ export function inclusionClazz(
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): void {
+  const commonNames = new Set(
+    _.intersection(
+      ...Values.clazzPropertyNames(subclazz),
+      ...Values.clazzPropertyNames(clazz),
+    ),
+  )
+
   const freshNameMap = freshenNames(
     [...ctxNames(ctx), ...mod.solution.names],
     [

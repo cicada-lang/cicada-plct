@@ -1,8 +1,16 @@
-`unifyClazz` & `inclusionClazz` require same order of properties
+move isClazz to value/clazz/
 
-- quit using `freshenNames` & `expelClazz`
+`inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `expelClazz`
+
+`unifyClazz` -- require same order of properties -- quit using `freshenNames` & `expelClazz`
+
+update note in `inclusionClazz`
 
 pass `groupCategory.todo.cic`
+
+[syntax] we need a syntax for reasoning about equations
+
+- capture the use of `equalCompose` `equalMap` `equalSwap`
 
 # std
 
