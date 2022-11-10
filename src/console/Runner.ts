@@ -1,5 +1,6 @@
 import fs from "fs"
 import watcher from "node-watch"
+import * as Errors from "../lang/errors"
 import { Loader } from "../loader"
 
 export class Runner {
@@ -26,8 +27,11 @@ export class Runner {
       return { error: undefined }
     } catch (error) {
       if (!opts?.silent) {
-        if (error instanceof Error) console.error(error.message)
-        else console.error(error)
+        if (error instanceof Errors.ErrorReport) {
+          console.error(error.message)
+        } else {
+          console.error(error)
+        }
       }
 
       return { error }
@@ -41,7 +45,7 @@ export class Runner {
     for (const url of tracked) {
       if (main.protocol !== "file:") continue
 
-      watcher(url.pathname, async (event) => {
+      watcher(url.pathname, async (event, _filename) => {
         if (event === "remove") {
           this.loader.delete(url)
           if (url.href === main.href) {
