@@ -1,4 +1,7 @@
-[maybe] top level `evaluate` `check` `infer` and `readback`
+top level `evaluate/`
+top level `check/`
+top level `infer/`
+top level `readback/`
 
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
