@@ -4,12 +4,6 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { AlreadyType, readbackType, Value } from "../value"
 
-/**
-
-   TODO Given the `ctx`, we have the opportunity to `readback` the `value` and print it in error report.
-
-**/
-
 type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
   Kinds extends (infer Kind extends AlreadyType["kind"])[]
     ? Extract<Value, { kind: Kind }>

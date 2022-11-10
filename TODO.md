@@ -1,4 +1,6 @@
-`safeFormatType` & `safeFormat` -- for `readback` might fail
+error message with stack trace -- for easy to debug
+
+`Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
 `unifyClazzOrdered` -- require same order of properties
 
@@ -11,8 +13,6 @@ pass `groupCategory.todo.cic`
 [syntax] we need a syntax for reasoning about equations
 
 - capture the use of `equalCompose` `equalMap` `equalSwap`
-
-error message with stack trace -- for easy to debug
 
 # std
 

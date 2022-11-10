@@ -4,12 +4,6 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { AlreadyType, readbackType, Value } from "../value"
 
-/**
-
-   TODO Given the `ctx`, we have the opportunity to `readback` the `value` and print it in error report.
-
-**/
-
 export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
   mod: Mod,
   ctx: Ctx,
