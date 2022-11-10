@@ -1,5 +1,9 @@
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
+move functions about `alphaEquivalent` to `equivalent/`
+
+[maybe] top level `check` `infer` and `readback`
+
 `unifyClazzOrdered` -- require same order of properties
 
 - quit using `freshenNames` & `clazzExpel`

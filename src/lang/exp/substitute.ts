@@ -2,7 +2,7 @@ import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { freshen } from "../utils/freshen"
 
-export function substExp(body: Exp, name: string, exp: Exp): Exp {
+export function substitute(body: Exp, name: string, exp: Exp): Exp {
   switch (body.kind) {
     case "Var": {
       if (body.name === name) {
@@ -16,7 +16,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.Pi(
           body.name,
-          substExp(body.argType, name, exp),
+          substitute(body.argType, name, exp),
           body.retType,
           body.span,
         )
@@ -26,11 +26,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const retType = substExp(body.retType, body.name, Exps.Var(freshName))
+        const retType = substitute(body.retType, body.name, Exps.Var(freshName))
         return Exps.Pi(
           freshName,
-          substExp(body.argType, name, exp),
-          substExp(retType, name, exp),
+          substitute(body.argType, name, exp),
+          substitute(retType, name, exp),
           body.span,
         )
       }
@@ -40,7 +40,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.PiImplicit(
           body.name,
-          substExp(body.argType, name, exp),
+          substitute(body.argType, name, exp),
           body.retType,
           body.span,
         )
@@ -50,38 +50,38 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const retType = substExp(body.retType, body.name, Exps.Var(freshName))
+        const retType = substitute(body.retType, body.name, Exps.Var(freshName))
         return Exps.PiImplicit(
           freshName,
-          substExp(body.argType, name, exp),
-          substExp(retType, name, exp),
+          substitute(body.argType, name, exp),
+          substitute(retType, name, exp),
           body.span,
         )
       }
     }
 
     case "PiUnfolded": {
-      return substExp(Exps.foldPi(body.bindings, body.retType), name, exp)
+      return substitute(Exps.foldPi(body.bindings, body.retType), name, exp)
     }
 
     case "Ap": {
       return Exps.Ap(
-        substExp(body.target, name, exp),
-        substExp(body.arg, name, exp),
+        substitute(body.target, name, exp),
+        substitute(body.arg, name, exp),
         body.span,
       )
     }
 
     case "ApImplicit": {
       return Exps.ApImplicit(
-        substExp(body.target, name, exp),
-        substExp(body.arg, name, exp),
+        substitute(body.target, name, exp),
+        substitute(body.arg, name, exp),
         body.span,
       )
     }
 
     case "ApUnfolded": {
-      return substExp(Exps.foldAp(body.target, body.args), name, exp)
+      return substitute(Exps.foldAp(body.target, body.args), name, exp)
     }
 
     case "Fn": {
@@ -93,8 +93,8 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
-        return Exps.Fn(freshName, substExp(ret, name, exp), body.span)
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
+        return Exps.Fn(freshName, substitute(ret, name, exp), body.span)
       }
     }
 
@@ -102,7 +102,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.FnAnnotated(
           body.name,
-          substExp(body.argType, name, exp),
+          substitute(body.argType, name, exp),
           body.ret,
           body.span,
         )
@@ -112,11 +112,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
         return Exps.FnAnnotated(
           freshName,
-          substExp(body.argType, name, exp),
-          substExp(ret, name, exp),
+          substitute(body.argType, name, exp),
+          substitute(ret, name, exp),
           body.span,
         )
       }
@@ -131,8 +131,8 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
-        return Exps.FnImplicit(freshName, substExp(ret, name, exp), body.span)
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
+        return Exps.FnImplicit(freshName, substitute(ret, name, exp), body.span)
       }
     }
 
@@ -140,7 +140,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.FnImplicitAnnotated(
           body.name,
-          substExp(body.argType, name, exp),
+          substitute(body.argType, name, exp),
           body.ret,
           body.span,
         )
@@ -150,22 +150,22 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
         return Exps.FnImplicitAnnotated(
           freshName,
-          substExp(body.argType, name, exp),
-          substExp(ret, name, exp),
+          substitute(body.argType, name, exp),
+          substitute(ret, name, exp),
           body.span,
         )
       }
     }
 
     case "FnUnfolded": {
-      return substExp(Exps.foldFn(body.bindings, body.ret), name, exp)
+      return substitute(Exps.foldFn(body.bindings, body.ret), name, exp)
     }
 
     case "FnUnfoldedWithRetType": {
-      return substExp(
+      return substitute(
         Exps.foldFnWithRetType(body.bindings, body.retType, body.ret),
         name,
         exp,
@@ -176,7 +176,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.Sigma(
           body.name,
-          substExp(body.carType, name, exp),
+          substitute(body.carType, name, exp),
           body.cdrType,
           body.span,
         )
@@ -186,24 +186,24 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const cdrType = substExp(body.cdrType, body.name, Exps.Var(freshName))
+        const cdrType = substitute(body.cdrType, body.name, Exps.Var(freshName))
         return Exps.Sigma(
           freshName,
-          substExp(body.carType, name, exp),
-          substExp(cdrType, name, exp),
+          substitute(body.carType, name, exp),
+          substitute(cdrType, name, exp),
           body.span,
         )
       }
     }
 
     case "SigmaUnfolded": {
-      return substExp(Exps.foldSigma(body.bindings, body.cdrType), name, exp)
+      return substitute(Exps.foldSigma(body.bindings, body.cdrType), name, exp)
     }
 
     case "Cons": {
       return Exps.Cons(
-        substExp(body.car, name, exp),
-        substExp(body.cdr, name, exp),
+        substitute(body.car, name, exp),
+        substitute(body.cdr, name, exp),
         body.span,
       )
     }
@@ -221,7 +221,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
         return Exps.ClazzCons(
           body.name,
           body.localName,
-          substExp(body.propertyType, name, exp),
+          substitute(body.propertyType, name, exp),
           body.rest,
           body.span,
         )
@@ -231,12 +231,12 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.localName)
-        const rest = substExp(body.rest, body.localName, Exps.Var(freshName))
+        const rest = substitute(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzCons(
           body.name,
           freshName,
-          substExp(body.propertyType, name, exp),
-          substExp(rest, name, exp) as Exps.Clazz,
+          substitute(body.propertyType, name, exp),
+          substitute(rest, name, exp) as Exps.Clazz,
           body.span,
         )
       }
@@ -247,8 +247,8 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
         return Exps.ClazzFulfilled(
           body.name,
           body.localName,
-          substExp(body.propertyType, name, exp),
-          substExp(body.property, name, exp),
+          substitute(body.propertyType, name, exp),
+          substitute(body.property, name, exp),
           body.rest,
           body.span,
         )
@@ -258,20 +258,20 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.localName)
-        const rest = substExp(body.rest, body.localName, Exps.Var(freshName))
+        const rest = substitute(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzFulfilled(
           body.name,
           freshName,
-          substExp(body.propertyType, name, exp),
-          substExp(body.property, name, exp),
-          substExp(rest, name, exp) as Exps.Clazz,
+          substitute(body.propertyType, name, exp),
+          substitute(body.property, name, exp),
+          substitute(rest, name, exp) as Exps.Clazz,
           body.span,
         )
       }
     }
 
     case "ClazzUnfolded": {
-      return substExp(Exps.foldClazz(body.bindings), name, exp)
+      return substitute(Exps.foldClazz(body.bindings), name, exp)
     }
 
     case "Objekt": {
@@ -279,7 +279,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
         Object.fromEntries(
           Object.entries(body.properties).map(([propertyName, property]) => [
             propertyName,
-            substExp(property, name, exp),
+            substitute(property, name, exp),
           ]),
         ),
         body.span,
@@ -299,7 +299,7 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
         Object.fromEntries(
           Object.entries(body.properties).map(([propertyName, property]) => [
             propertyName,
-            substExp(property, name, exp),
+            substitute(property, name, exp),
           ]),
         ),
         body.span,
@@ -323,14 +323,14 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
     }
 
     case "Dot": {
-      return Exps.Dot(substExp(body.target, name, exp), body.name, body.span)
+      return Exps.Dot(substitute(body.target, name, exp), body.name, body.span)
     }
 
     case "SequenceLet": {
       if (body.name === name) {
         return Exps.SequenceLet(
           body.name,
-          substExp(body.exp, name, exp),
+          substitute(body.exp, name, exp),
           body.ret,
           body.span,
         )
@@ -340,11 +340,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
         return Exps.SequenceLet(
           freshName,
-          substExp(body.exp, name, exp),
-          substExp(ret, name, exp),
+          substitute(body.exp, name, exp),
+          substitute(ret, name, exp),
           body.span,
         )
       }
@@ -354,8 +354,8 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
       if (body.name === name) {
         return Exps.SequenceLetThe(
           body.name,
-          substExp(body.type, name, exp),
-          substExp(body.exp, name, exp),
+          substitute(body.type, name, exp),
+          substitute(body.exp, name, exp),
           body.ret,
           body.span,
         )
@@ -365,12 +365,12 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
           ...Exps.freeNames(new Set(), body),
         ]
         const freshName = freshen(freeNames, body.name)
-        const ret = substExp(body.ret, body.name, Exps.Var(freshName))
+        const ret = substitute(body.ret, body.name, Exps.Var(freshName))
         return Exps.SequenceLetThe(
           freshName,
-          substExp(body.type, name, exp),
-          substExp(body.exp, name, exp),
-          substExp(ret, name, exp),
+          substitute(body.type, name, exp),
+          substitute(body.exp, name, exp),
+          substitute(ret, name, exp),
           body.span,
         )
       }
@@ -378,15 +378,15 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
 
     case "SequenceCheck": {
       return Exps.SequenceCheck(
-        substExp(body.exp, name, exp),
-        substExp(body.type, name, exp),
-        substExp(body.ret, name, exp),
+        substitute(body.exp, name, exp),
+        substitute(body.type, name, exp),
+        substitute(body.ret, name, exp),
         body.span,
       )
     }
 
     case "SequenceUnfolded": {
-      return substExp(Exps.foldSequence(body.bindings, body.ret), name, exp)
+      return substitute(Exps.foldSequence(body.bindings, body.ret), name, exp)
     }
 
     default: {
@@ -398,11 +398,11 @@ export function substExp(body: Exp, name: string, exp: Exp): Exp {
 function substArg(arg: Exps.Arg, name: string, exp: Exp): Exps.Arg {
   switch (arg.kind) {
     case "ArgPlain": {
-      return Exps.ArgPlain(substExp(arg.exp, name, exp))
+      return Exps.ArgPlain(substitute(arg.exp, name, exp))
     }
 
     case "ArgImplicit": {
-      return Exps.ArgImplicit(substExp(arg.exp, name, exp))
+      return Exps.ArgImplicit(substitute(arg.exp, name, exp))
     }
   }
 }
@@ -416,12 +416,12 @@ function substProperty(
     case "PropertyPlain": {
       return Exps.PropertyPlain(
         property.name,
-        substExp(property.exp, name, exp),
+        substitute(property.exp, name, exp),
       )
     }
 
     case "PropertySpread": {
-      return Exps.PropertySpread(substExp(property.exp, name, exp))
+      return Exps.PropertySpread(substitute(property.exp, name, exp))
     }
   }
 }
