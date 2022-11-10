@@ -1,7 +1,8 @@
+import { formatCore } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Errors from "../../errors"
 import { Mod } from "../../mod"
-import { AlreadyType, Value } from "../../value"
+import { AlreadyType, readbackType, Value } from "../../value"
 
 /**
 
@@ -12,12 +13,16 @@ import { AlreadyType, Value } from "../../value"
 export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
   mod: Mod,
   ctx: Ctx,
-  value: Value,
+  type: Value,
   kind: Kind,
-): asserts value is Extract<Value, { kind: Kind }> {
-  if (value.kind !== kind) {
+): asserts type is Extract<Value, { kind: Kind }> {
+  if (type.kind !== kind) {
     throw new Errors.AssertionError(
-      `expect value to be type and to have kind: ${kind}, instead of: ${value.kind}`,
+      [
+        `assertTypeInCtx fail`,
+        `  expect type kind: ${kind}`,
+        `  found type: ${formatCore(readbackType(mod, ctx, type))}`,
+      ].join("\n"),
     )
   }
 }

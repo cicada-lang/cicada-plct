@@ -51,7 +51,7 @@ export function occur(
     }
 
     case "Fn": {
-      Values.assertValue(type, "Pi")
+      Values.assertTypeInCtx(mod, ctx, type, "Pi")
 
       const boundName = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
@@ -63,7 +63,7 @@ export function occur(
     }
 
     case "FnImplicit": {
-      Values.assertValue(type, "PiImplicit")
+      Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
 
       const boundName = value.retClosure.name
       const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
@@ -86,7 +86,7 @@ export function occur(
     }
 
     case "Cons": {
-      Values.assertValue(type, "Sigma")
+      Values.assertTypeInCtx(mod, ctx, type, "Sigma")
 
       if (occur(mod, ctx, name, type.carType, value.car)) return true
 
@@ -134,7 +134,7 @@ export function occur(
     }
 
     case "Objekt": {
-      Values.assertClazz(type)
+      Values.assertClazzInCtx(mod, ctx, type)
 
       return occurProperties(mod, ctx, name, type, value)
     }

@@ -1,14 +1,14 @@
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
-import { assertValue, isValue, Value } from "../value"
+import { Value } from "../value"
 
 export function doCar(target: Value): Value {
-  if (isValue(target, "Cons")) {
+  if (Values.isValue(target, "Cons")) {
     return target.car
   }
 
-  assertValue(target, "TypedNeutral")
-  assertValue(target.type, "Sigma")
+  Values.assertValue(target, "TypedNeutral")
+  Values.assertValue(target.type, "Sigma")
 
   return Values.TypedNeutral(
     target.type.carType,

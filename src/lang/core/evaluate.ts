@@ -4,7 +4,7 @@ import { Core } from "../core"
 import { Env, extendEnv, lookupValueInEnv } from "../env"
 import * as Errors from "../errors"
 import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { Value } from "../value"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {
@@ -91,7 +91,7 @@ export function evaluate(env: Env, core: Core): Value {
       const propertyType = evaluate(env, core.propertyType)
       const property = evaluate(env, core.property)
       const rest = evaluate(extendEnv(env, core.name, property), core.rest)
-      assertClazz(rest)
+      Values.assertClazz(rest)
       return Values.ClazzFulfilled(core.name, propertyType, property, rest)
     }
 

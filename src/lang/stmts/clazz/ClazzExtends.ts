@@ -20,7 +20,7 @@ export class ClazzExtends extends Stmt {
   async execute(mod: Mod): Promise<void> {
     const inferredParent = infer(mod, mod.ctx, this.parent)
     const parentClazz = evaluate(mod.env, inferredParent.core)
-    Values.assertClazz(parentClazz)
+    Values.assertClazzInCtx(mod, mod.ctx, parentClazz)
     const parentClazzCore = Values.readbackClazz(mod, mod.ctx, parentClazz)
     const ctx = Values.clazzExtendCtx(mod, mod.ctx, parentClazz)
     const superObjekt = Exps.ObjektUnfolded(

@@ -4,7 +4,6 @@ import { Mod } from "../../mod"
 import * as Neutrals from "../../neutral"
 import { freshen } from "../../utils/freshen"
 import * as Values from "../../value"
-import { assertClazz } from "../../value"
 
 export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
   switch (clazz.kind) {
@@ -17,7 +16,7 @@ export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
       const freshName = freshen(usedNames, clazz.name)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const rest = applyClosure(clazz.restClosure, v)
-      assertClazz(rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
       return clazzExtendCtx(mod, ctx, rest)
     }

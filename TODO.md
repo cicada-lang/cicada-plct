@@ -1,7 +1,3 @@
-use `assertClazzInCtx` instead of `assertClazz` as much as possible
-
-- remove `assertValues`
-
 pass `groupCategory.todo.cic`
 
 [maybe] `unifyClazz` & `inclusionClazz` should do a reordering of properties,

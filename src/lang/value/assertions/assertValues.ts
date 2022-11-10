@@ -12,7 +12,11 @@ export function assertValues<Kinds extends Array<Value["kind"]>>(
 ): asserts value is ElementExtractTypeUnion<Kinds> {
   if (!kinds.includes(value.kind)) {
     throw new Errors.AssertionError(
-      `expect value to have kind: ${kinds}, instead of: ${value.kind}`,
+      [
+        `assertValues fail`,
+        `  expect value kinds: ${kinds}`,
+        `  found value kind: ${value.kind}`,
+      ].join("\n"),
     )
   }
 }

@@ -1,7 +1,8 @@
+import { formatCore } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Errors from "../../errors"
 import { Mod } from "../../mod"
-import { AlreadyType, Value } from "../../value"
+import { AlreadyType, readbackType, Value } from "../../value"
 
 /**
 
@@ -17,12 +18,16 @@ type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
 export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
   mod: Mod,
   ctx: Ctx,
-  value: Value,
+  type: Value,
   kinds: Kinds,
-): asserts value is ElementExtractTypeUnion<Kinds> {
-  if (!kinds.includes(value.kind as any)) {
+): asserts type is ElementExtractTypeUnion<Kinds> {
+  if (!kinds.includes(type.kind as any)) {
     throw new Errors.AssertionError(
-      `expect value to be type and to have kind: ${kinds}, instead of: ${value.kind}`,
+      [
+        `assertTypesInCtx fail`,
+        `  expect value kinds: ${kinds.join(", ")}`,
+        `  found type: ${formatCore(readbackType(mod, ctx, type))}`,
+      ].join("\n"),
     )
   }
 }

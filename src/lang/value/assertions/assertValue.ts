@@ -7,7 +7,11 @@ export function assertValue<Kind extends Value["kind"]>(
 ): asserts value is Extract<Value, { kind: Kind }> {
   if (value.kind !== kind) {
     throw new Errors.AssertionError(
-      `expect value to have kind: ${kind}, instead of: ${value.kind}`,
+      [
+        `assertValue fail`,
+        `  expect value kind: ${kind}`,
+        `  found value kind: ${value.kind}`,
+      ].join("\n"),
     )
   }
 }
