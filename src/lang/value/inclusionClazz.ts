@@ -1,11 +1,13 @@
 import _ from "lodash"
+import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
+import * as Neutrals from "../neutral"
 import { unify } from "../solution"
-import { freshenNames } from "../utils/freshen"
+import { freshen, freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { clazzExpel, inclusion, Value } from "../value"
+import { assertClazz, clazzExpel, inclusion, Value } from "../value"
 
 /**
 
@@ -25,7 +27,7 @@ import { clazzExpel, inclusion, Value } from "../value"
 
 **/
 
-export function inclusionClazz(
+export function inclusionClazz2(
   mod: Mod,
   ctx: Ctx,
   subclazz: Values.Clazz,
@@ -38,6 +40,39 @@ export function inclusionClazz(
     ),
   )
 
+  while (clazz.kind !== "ClazzNull") {
+    if (clazz.kind === "ClazzCons") {
+      if (commonNames.has(clazz.name)) {
+        //
+      } else {
+        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const freshName = freshen(usedNames, clazz.name)
+        const v = Values.TypedNeutral(
+          clazz.propertyType,
+          Neutrals.Var(freshName),
+        )
+        const rest = applyClosure(clazz.restClosure, v)
+        assertClazz(rest)
+        clazz = rest
+      }
+    }
+
+    if (clazz.kind === "ClazzFulfilled") {
+      if (commonNames.has(clazz.name)) {
+        //
+      } else {
+        //
+      }
+    }
+  }
+}
+
+export function inclusionClazz(
+  mod: Mod,
+  ctx: Ctx,
+  subclazz: Values.Clazz,
+  clazz: Values.Clazz,
+): void {
   const freshNameMap = freshenNames(
     [...ctxNames(ctx), ...mod.solution.names],
     [

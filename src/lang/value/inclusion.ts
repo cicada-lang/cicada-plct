@@ -76,19 +76,16 @@ export function inclusionAux(
     inclusion(mod, ctx, type.argType, subtype.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
-
-    const freshName = freshen(ctxNames(ctx), name)
+    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
-
     ctx = CtxCons(freshName, argType, ctx)
-
     inclusion(
       mod,
       ctx,
       applyClosure(subtype.retTypeClosure, v),
       applyClosure(type.retTypeClosure, v),
     )
-
     return
   }
 
@@ -96,19 +93,16 @@ export function inclusionAux(
     inclusion(mod, ctx, subtype.carType, type.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
-
-    const freshName = freshen(ctxNames(ctx), name)
+    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
-
     ctx = CtxCons(freshName, carType, ctx)
-
     inclusion(
       mod,
       ctx,
       applyClosure(subtype.cdrTypeClosure, v),
       applyClosure(type.cdrTypeClosure, v),
     )
-
     return
   }
 

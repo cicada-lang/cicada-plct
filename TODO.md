@@ -1,5 +1,3 @@
-value/internal.ts vs value/index.ts
-
 `inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
 
 `unifyClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
