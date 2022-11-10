@@ -1,11 +1,11 @@
 import { applyClosure } from "../closure"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
+import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { check, Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { equivalent } from "../value"
 
 export function checkProperties(
   mod: Mod,

@@ -1,9 +1,9 @@
 import { evaluate } from "../../core"
+import { equivalent } from "../../equivalent"
 import { check, checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
-import { equivalent } from "../../value"
 
 export class Equivalent extends Stmt {
   constructor(public type: Exp, public exps: Array<Exp>, public span?: Span) {
