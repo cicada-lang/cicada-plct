@@ -8,7 +8,7 @@ type Property = { type: Value; value?: Value }
 
 type PropertyMap = Map<string, Property>
 
-export function expelClazz(
+export function clazzExpel(
   freshNameMap: Map<string, string>,
   clazz: Values.Clazz,
   propertyMap: PropertyMap = new Map(),
@@ -26,14 +26,14 @@ export function expelClazz(
       const freshName = freshNameMap.get(clazz.name)
       if (freshName === undefined) {
         throw new Errors.InternalError(
-          `expelClazz expect freshNameMap to have clazz.name: ${clazz.name}`,
+          `clazzExpel expect freshNameMap to have clazz.name: ${clazz.name}`,
         )
       }
 
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const rest = applyClosure(clazz.restClosure, v)
       assertClazz(rest)
-      return expelClazz(freshNameMap, rest, propertyMap)
+      return clazzExpel(freshNameMap, rest, propertyMap)
     }
 
     case "ClazzFulfilled": {
@@ -42,7 +42,7 @@ export function expelClazz(
         value: clazz.property,
       })
 
-      return expelClazz(freshNameMap, clazz.rest, propertyMap)
+      return clazzExpel(freshNameMap, clazz.rest, propertyMap)
     }
   }
 }

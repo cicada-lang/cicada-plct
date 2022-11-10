@@ -1,10 +1,11 @@
+rename functions about clazz
 move value/assertion out to value
 move value/clazz/ out to value
 move core/clazz/ out to core
 
-`inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `expelClazz`
+`inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
 
-`unifyClazz` -- require same order of properties -- quit using `freshenNames` & `expelClazz`
+`unifyClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
 
 update note in `inclusionClazz`
 

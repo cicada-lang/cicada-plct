@@ -4,7 +4,7 @@ import { Mod } from "../mod"
 import { unify, unifyType } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { expelClazz, Value } from "../value"
+import { clazzExpel, Value } from "../value"
 
 /**
 
@@ -24,8 +24,8 @@ export function unifyClazz(
     [...Values.clazzPropertyNames(left), ...Values.clazzPropertyNames(right)],
   )
 
-  const leftPropertyMap = expelClazz(freshNameMap, left)
-  const rightPropertyMap = expelClazz(freshNameMap, right)
+  const leftPropertyMap = clazzExpel(freshNameMap, left)
+  const rightPropertyMap = clazzExpel(freshNameMap, right)
 
   for (const [name, rightProperty] of rightPropertyMap.entries()) {
     const leftProperty = leftPropertyMap.get(name)

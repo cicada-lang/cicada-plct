@@ -4,12 +4,12 @@
 
 **/
 
+export * from "./clazzExpel"
 export * from "./clazzExtendCtx"
 export * from "./clazzFromTypedValues"
+export * from "./clazzFulfill"
+export * from "./clazzFulfilledPrepend"
 export * from "./clazzPropertyNames"
-export * from "./expelClazz"
-export * from "./fulfillClazz"
 export * from "./isClazz"
 export * from "./lookupProperty"
 export * from "./lookupPropertyType"
-export * from "./prependFulfilledClazz"

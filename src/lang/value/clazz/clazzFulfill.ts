@@ -3,7 +3,7 @@ import * as Errors from "../../errors"
 import * as Values from "../../value"
 import { assertClazz, Value } from "../../value"
 
-export function fulfillClazz(clazz: Values.Clazz, arg: Value): Values.Clazz {
+export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new Errors.EvaluationError("cannot apply argument to ClazzNull")
@@ -20,7 +20,7 @@ export function fulfillClazz(clazz: Values.Clazz, arg: Value): Values.Clazz {
         clazz.name,
         clazz.propertyType,
         clazz.property,
-        fulfillClazz(clazz.rest, arg),
+        clazzFulfill(clazz.rest, arg),
       )
     }
   }

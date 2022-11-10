@@ -5,7 +5,7 @@ import { Mod } from "../mod"
 import { unify } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { expelClazz, inclusion, Value } from "../value"
+import { clazzExpel, inclusion, Value } from "../value"
 
 /**
 
@@ -19,7 +19,7 @@ import { expelClazz, inclusion, Value } from "../value"
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
 
-   Then `expelClazz` use the `freshName`
+   Then `clazzExpel` use the `freshName`
    to expel all types and values from `Values.Clazz`,
    it returns a `PropertyMap`, so that the order does not matters anymore.
 
@@ -46,8 +46,8 @@ export function inclusionClazz(
     ],
   )
 
-  const subclazzPropertyMap = expelClazz(freshNameMap, subclazz)
-  const clazzPropertyMap = expelClazz(freshNameMap, clazz)
+  const subclazzPropertyMap = clazzExpel(freshNameMap, subclazz)
+  const clazzPropertyMap = clazzExpel(freshNameMap, clazz)
 
   for (const [name, clazzProperty] of clazzPropertyMap.entries()) {
     const subclazzProperty = subclazzPropertyMap.get(name)

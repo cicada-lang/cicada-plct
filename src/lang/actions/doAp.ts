@@ -9,7 +9,7 @@ export function doAp(target: Value, arg: Value): Value {
   }
 
   if (Values.isClazz(target)) {
-    return Values.fulfillClazz(target, arg)
+    return Values.clazzFulfill(target, arg)
   }
 
   Values.assertValue(target, "TypedNeutral")
