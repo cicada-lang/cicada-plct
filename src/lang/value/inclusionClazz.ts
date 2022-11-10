@@ -1,9 +1,10 @@
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
+import { unify } from "../solution"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { conversion, expelClazz, inclusion } from "../value"
+import { expelClazz, inclusion, Value } from "../value"
 
 /**
 
@@ -30,7 +31,7 @@ export function inclusionClazz(
   clazz: Values.Clazz,
 ): void {
   const freshNameMap = freshenNames(
-    [...ctxNames(ctx)],
+    [...ctxNames(ctx), ...mod.solution.names],
     [
       ...Values.clazzPropertyNames(subclazz),
       ...Values.clazzPropertyNames(clazz),
@@ -48,33 +49,22 @@ export function inclusionClazz(
       )
     }
 
-    if (
-      subclazzProperty.value === undefined &&
-      clazzProperty.value !== undefined
-    ) {
-      throw new Errors.InclusionError(
-        [
-          `inclusionClazz expect subclass to have fulfilled property value`,
-          `  property name: ${name}`,
-        ].join("\n"),
+    const freshName = freshNameMap.get(name)
+    if (freshName === undefined) {
+      throw new Errors.InternalError(
+        `unifyClazz expect ${name} to be found in freshNameMap`,
       )
     }
 
     try {
-      inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
-
-      if (
-        subclazzProperty.value !== undefined &&
-        clazzProperty.value !== undefined
-      ) {
-        conversion(
-          mod,
-          ctx,
-          clazzProperty.type,
-          subclazzProperty.value,
-          clazzProperty.value,
-        )
-      }
+      inclusionClazzProperty(
+        mod,
+        ctx,
+        name,
+        freshName,
+        subclazzProperty,
+        clazzProperty,
+      )
     } catch (error) {
       if (error instanceof Errors.InclusionError) {
         error.trace.unshift([`[inclusion property] ${name}`].join("\n"))
@@ -82,5 +72,52 @@ export function inclusionClazz(
 
       throw error
     }
+  }
+}
+
+function inclusionClazzProperty(
+  mod: Mod,
+  ctx: Ctx,
+  name: string,
+  freshName: string,
+  subclazzProperty: { type: Value; value?: Value },
+  clazzProperty: { type: Value; value?: Value },
+): void {
+  if (
+    subclazzProperty.value === undefined &&
+    clazzProperty.value !== undefined
+  ) {
+    throw new Errors.InclusionError(
+      [
+        `inclusionClazz expect subclass to have fulfilled property value`,
+        `  property name: ${name}`,
+      ].join("\n"),
+    )
+  }
+
+  inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
+
+  if (
+    subclazzProperty.value !== undefined &&
+    clazzProperty.value !== undefined
+  ) {
+    unify(
+      mod,
+      ctx,
+      clazzProperty.type,
+      subclazzProperty.value,
+      clazzProperty.value,
+    )
+  }
+
+  if (
+    subclazzProperty.value !== undefined &&
+    clazzProperty.value === undefined
+  ) {
+    const patternVar = mod.solution.createPatternVar(
+      freshName,
+      subclazzProperty.type,
+    )
+    unify(mod, ctx, clazzProperty.type, subclazzProperty.value, patternVar)
   }
 }

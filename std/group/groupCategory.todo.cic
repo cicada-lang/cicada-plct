@@ -18,65 +18,65 @@ class GroupHomomorphism {
 
 import { equalSwap, equalMap, equalCompose } from "../equality/index.cic"
 
-// let groupCategory = new Category {
-//   Object: Group,
-//   Morphism: (dom, cod) => GroupHomomorphism(dom, cod),
+let groupCategory = new Category {
+  Object: Group,
+  Morphism: (dom, cod) => GroupHomomorphism(dom, cod),
 
-//   id: (x: Group) => new GroupHomomorphism {
-//     dom: x,
-//     cod: x,
-//     homo: (x) => x,
-//     homoPreserveMul: (x, y) => refl,
-//   },
+  id: (x: Group) => new GroupHomomorphism {
+    dom: x,
+    cod: x,
+    homo: (x) => x,
+    homoPreserveMul: (x, y) => refl,
+  },
 
-//   compose: (
-//     implicit G,
-//     implicit H,
-//     implicit K,
-//     f,
-//     g,
-//   ) => new GroupHomomorphism {
-//     dom: G,
-//     cod: K,
-//     homo: (x: G.Element) => g.homo(f.homo(x)),
-//     homoPreserveMul: (x, y) => {
-//      let motive = Equal(
-//        K.Element,
-//        g.homo(f.homo(G.mul(x, y))),
-//        K.mul(g.homo(f.homo(x)), g.homo(f.homo(y))),
-//      )
+  compose: (
+    implicit G,
+    implicit H,
+    implicit K,
+    f,
+    g,
+  ) => new GroupHomomorphism {
+    dom: G,
+    cod: K,
+    homo: (x: G.Element) => g.homo(f.homo(x)),
+    homoPreserveMul: (x, y) => {
+     let motive = Equal(
+       K.Element,
+       g.homo(f.homo(G.mul(x, y))),
+       K.mul(g.homo(f.homo(x)), g.homo(f.homo(y))),
+     )
 
-//      check f.homoPreserveMul(x, y): Equal(
-//        H.Element,
-//        f.homo(G.mul(x, y)),
-//        H.mul(f.homo(x), f.homo(y)),
-//      )
+     check f.homoPreserveMul(x, y): Equal(
+       H.Element,
+       f.homo(G.mul(x, y)),
+       H.mul(f.homo(x), f.homo(y)),
+     )
 
-//      check equalMap(f.homoPreserveMul(x, y), g.homo): Equal(
-//        K.Element,
-//        g.homo(f.homo(G.mul(x, y))),
-//        g.homo(H.mul(f.homo(x), f.homo(y))),
-//      )
+     check equalMap(f.homoPreserveMul(x, y), g.homo): Equal(
+       K.Element,
+       g.homo(f.homo(G.mul(x, y))),
+       g.homo(H.mul(f.homo(x), f.homo(y))),
+     )
 
-//      check g.homoPreserveMul(f.homo(x), f.homo(y)): Equal(
-//        K.Element,
-//        g.homo(H.mul(f.homo(x), f.homo(y))),
-//        K.mul(g.homo(f.homo(x)), g.homo(f.homo(y))),
-//      )
+     check g.homoPreserveMul(f.homo(x), f.homo(y)): Equal(
+       K.Element,
+       g.homo(H.mul(f.homo(x), f.homo(y))),
+       K.mul(g.homo(f.homo(x)), g.homo(f.homo(y))),
+     )
 
-//       return equalCompose(
-//         equalMap(f.homoPreserveMul(x, y), g.homo),
-//         g.homoPreserveMul(f.homo(x), f.homo(y)),
-//       )
-//    }
-//   },
+      return equalCompose(
+        equalMap(f.homoPreserveMul(x, y), g.homo),
+        g.homoPreserveMul(f.homo(x), f.homo(y)),
+      )
+   }
+  },
 
-// //   // // given G: Group, H: Group
-// //   // idLeft: (f: GroupHomomorphism(G, H)) => same(f)
+//   // // given G: Group, H: Group
+//   // idLeft: (f: GroupHomomorphism(G, H)) => same(f)
 
-// //   // // given G: Group, H: Group
-// //   // idRight: (f: GroupHomomorphism(G, H)) => same(f)
+//   // // given G: Group, H: Group
+//   // idRight: (f: GroupHomomorphism(G, H)) => same(f)
 
-// //   // // given G: Group, H: Group, K: Group, L: Group
-// //   // composeAssociative: (f: GroupHomomorphism(G, H), g: GroupHomomorphism(H, K), h: GroupHomomorphism(K, L)) => refl
-// }
+//   // // given G: Group, H: Group, K: Group, L: Group
+//   // composeAssociative: (f: GroupHomomorphism(G, H), g: GroupHomomorphism(H, K), h: GroupHomomorphism(K, L)) => refl
+}

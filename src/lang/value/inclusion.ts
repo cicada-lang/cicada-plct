@@ -5,10 +5,10 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { advanceValue } from "../solution"
+import { advanceValue, unify, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { conversion, inclusionClazz, readbackType, Value } from "../value"
+import { inclusionClazz, readbackType, Value } from "../value"
 
 /**
 
@@ -119,10 +119,10 @@ export function inclusionAux(
 
   if (subtype.kind === "Equal" && type.kind === "Equal") {
     inclusion(mod, ctx, subtype.type, type.type)
-    conversion(mod, ctx, type.type, subtype.from, type.from)
-    conversion(mod, ctx, type.type, subtype.to, type.to)
+    unify(mod, ctx, type.type, subtype.from, type.from)
+    unify(mod, ctx, type.type, subtype.to, type.to)
     return
   }
 
-  conversion(mod, ctx, Values.Type(), subtype, type)
+  unifyType(mod, ctx, subtype, type)
 }
