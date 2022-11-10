@@ -1,20 +1,20 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("conversion Fn", async () => {
+test("equivalent Fn", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-conversion forall (T: Type, x: T) T [
+equivalent forall (T: Type, x: T) T [
   id,
   (T, x) => x,
   (T, x) => id(T, x),
 ]
 
-conversion forall (A: Type, B: Type) Type [
+equivalent forall (A: Type, B: Type) Type [
   (A, B) => A,
   (B, A) => B,
 ]
@@ -22,14 +22,14 @@ conversion forall (A: Type, B: Type) Type [
 `)
 })
 
-test("conversion FnAnnotated", async () => {
+test("equivalent FnAnnotated", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-conversion forall (T: Type, x: T) T [
+equivalent forall (T: Type, x: T) T [
   id,
   (T, x) => x,
   (T, x) => id(T, x),
@@ -37,7 +37,7 @@ conversion forall (T: Type, x: T) T [
   (T: Type, x: T) => id(T, x),
 ]
 
-conversion forall (T: Type, x: T) T [
+equivalent forall (T: Type, x: T) T [
   (T: Type, x: T) => x,
   (T: Type, x: T) => x,
   (T: Type, x: T) => id(T, x),
@@ -46,10 +46,10 @@ conversion forall (T: Type, x: T) T [
 `)
 })
 
-test("conversion Fn -- fail", async () => {
+test("equivalent Fn -- fail", async () => {
   await expectCodeToFail(`
 
-conversion forall (A: Type, B: Type) Type [
+equivalent forall (A: Type, B: Type) Type [
   (A, B) => A,
   (A, B) => B,
 ]

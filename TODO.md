@@ -1,3 +1,11 @@
+rename conversion to equivalent
+
+top level equivalent/
+
+rename inclusion to include
+
+move solution/unfiy\* to unify
+
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
 `unifyClazzOrdered` -- require same order of properties
@@ -18,7 +26,7 @@ pass `groupCategory.todo.cic`
 
 # maybe
 
-[maybe] [optimize] implement `conversion` directly instead of using `readback` and `alphaEquivalent`
+[maybe] [optimize] implement `equivalent` directly instead of using `readback` and `alphaEquivalent`
 
 - maybe not, because according to the flamegraph, `readback` is not the bottleneck for now
 

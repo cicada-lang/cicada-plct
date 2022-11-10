@@ -62,8 +62,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ),
         span,
       ),
-    "stmt:conversion": ({ type, exps, last_exp }, { span }) =>
-      new Stmts.Conversion(
+    "stmt:equivalent": ({ type, exps, last_exp }, { span }) =>
+      new Stmts.Equivalent(
         matchers.exp_matcher(type),
         [
           ...pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),

@@ -13,7 +13,7 @@ import { assertClazz, clazzExpel, inclusion, Value } from "../value"
 
    To compare `Clazz`es out of order,
    all we need is to prepare the `freshNames` first,
-   because for example, in the case of `Sigma` in `conversionType`,
+   because for example, in the case of `Sigma` in `equivalentType`,
    all we need is to make sure that the `freshName` are the same
    when building the `TypedNeutral`.
 

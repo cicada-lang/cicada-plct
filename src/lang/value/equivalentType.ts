@@ -1,13 +1,13 @@
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { conversion, Value } from "../value"
+import { equivalent, Value } from "../value"
 
-export function conversionType(
+export function equivalentType(
   mod: Mod,
   ctx: Ctx,
   left: Value,
   right: Value,
 ): void {
-  conversion(mod, ctx, Values.Type(), left, right)
+  equivalent(mod, ctx, Values.Type(), left, right)
 }

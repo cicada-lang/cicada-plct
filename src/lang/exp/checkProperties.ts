@@ -5,7 +5,7 @@ import * as Errors from "../errors"
 import { check, Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { conversion } from "../value"
+import { equivalent } from "../value"
 
 export function checkProperties(
   mod: Mod,
@@ -43,7 +43,7 @@ export function checkProperties(
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
-      conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
+      equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {
         [clazz.name]: propertyCore,

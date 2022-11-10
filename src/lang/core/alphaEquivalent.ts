@@ -67,7 +67,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.data !== right.data) {
-      throw new Errors.ConversionError(
+      throw new Errors.EquivalentError(
         `alphaEquivalent expect left data: ${left.data} to be equal to right data: ${right.data}`,
       )
     }
@@ -91,7 +91,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left.kind === "Dot" && right.kind === "Dot") {
     if (left.name !== right.name) {
-      throw new Errors.ConversionError(
+      throw new Errors.EquivalentError(
         `alphaEquivalent expect left name: ${left.name} to be equal to right name: ${right.name}`,
       )
     }
@@ -107,7 +107,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  throw new Errors.ConversionError(
+  throw new Errors.EquivalentError(
     `alphaEquivalent is not implemented for left: ${formatCore(
       left,
     )}, and right: ${formatCore(right)}`,

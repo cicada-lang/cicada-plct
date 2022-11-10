@@ -1,10 +1,10 @@
 import { test } from "vitest"
 import { runCode } from "../utils"
 
-test("conversion Type", async () => {
+test("equivalent Type", async () => {
   await runCode(`
 
-conversion Type [
+equivalent Type [
   Type,
   Type,
 ]

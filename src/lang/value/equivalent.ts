@@ -6,16 +6,16 @@ import { readback, Value } from "../value"
 
 /**
 
-   # conversion
+   # equivalent
 
-   `conversion` is implemented by `readback` and `alphaEquivalent`,
+   `equivalent` is implemented by `readback` and `alphaEquivalent`,
    not implemented directly by recursion over two values.
 
    Otherwise eta-rules will be tricky to handle.
 
 **/
 
-export function conversion(
+export function equivalent(
   mod: Mod,
   ctx: Ctx,
   type: Value,
@@ -27,7 +27,7 @@ export function conversion(
   try {
     alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
   } catch (error) {
-    if (error instanceof Errors.ConversionError) {
+    if (error instanceof Errors.EquivalentError) {
       throw new Errors.InclusionError(
         [
           error.message,

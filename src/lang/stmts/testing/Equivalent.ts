@@ -3,9 +3,9 @@ import { check, checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
-import { conversion } from "../../value"
+import { equivalent } from "../../value"
 
-export class Conversion extends Stmt {
+export class Equivalent extends Stmt {
   constructor(public type: Exp, public exps: Array<Exp>, public span?: Span) {
     super()
   }
@@ -21,7 +21,7 @@ export class Conversion extends Stmt {
 
     let left = values[0]
     for (const right of values.slice(1)) {
-      conversion(mod, mod.ctx, typeValue, left, right)
+      equivalent(mod, mod.ctx, typeValue, left, right)
       left = right
     }
   }

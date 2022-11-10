@@ -6,7 +6,7 @@ import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { conversion } from "../value"
+import { equivalent } from "../value"
 
 export function inferProperties(
   mod: Mod,
@@ -54,7 +54,7 @@ export function inferProperties(
           clazz.propertyType,
         )
         const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
-        conversion(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
+        equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
       const propertyCore = Values.readback(

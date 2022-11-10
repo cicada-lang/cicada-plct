@@ -1,4 +1,4 @@
 export * from "./Check"
 export * from "./Compute"
-export * from "./Conversion"
+export * from "./Equivalent"
 export * from "./Inclusion"

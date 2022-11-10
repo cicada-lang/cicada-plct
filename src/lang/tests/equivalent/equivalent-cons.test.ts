@@ -1,14 +1,14 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("conversion Cons", async () => {
+test("equivalent Cons", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-conversion exists (T: Type) T [
+equivalent exists (T: Type) T [
   cons(Trivial, sole),
   cons(Trivial, id(Trivial, sole)),
 ]
@@ -16,10 +16,10 @@ conversion exists (T: Type) T [
 `)
 })
 
-test("conversion Cons -- fail", async () => {
+test("equivalent Cons -- fail", async () => {
   await expectCodeToFail(`
 
-conversion exists (T: Type) T [
+equivalent exists (T: Type) T [
   cons(String, "abc"),
   cons(String, "xyz"),
 ]

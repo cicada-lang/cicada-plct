@@ -1,20 +1,20 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("conversion Sigma", async () => {
+test("equivalent Sigma", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-conversion Type [
+equivalent Type [
   exists (A: Type) A,
   exists (B: Type) B,
   exists (B: Type) id(Type, B),
 ]
 
-conversion Type [
+equivalent Type [
   exists (A: Type, B: Type) Pair(A, B),
   exists (B: Type, A: Type) Pair(B, A),
   exists (B: Type, A: Type) Pair(id(Type, B), id(Type, A)),
@@ -24,10 +24,10 @@ conversion Type [
 `)
 })
 
-test("conversion Sigma -- fail", async () => {
+test("equivalent Sigma -- fail", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   exists (A: Type, B: Type) Pair(A, B),
   exists (A: Type, B: Type) Pair(B, A),
 ]

@@ -191,7 +191,7 @@ the_same(ctx, X, x, x)
 ```
 
 > If a variable `x` is given type `X` by the context `ctx`,
-> then conversion checking must find that `x` is the same `X` as `x`.
+> then equivalent checking must find that `x` is the same `X` as `x`.
 
 ## String
 

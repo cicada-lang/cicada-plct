@@ -1,20 +1,20 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("conversion Clazz", async () => {
+test("equivalent Clazz", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-conversion Type [
+equivalent Type [
   class { A: Type, x: A },
   class { A: Type, x: A },
   class { A: Type, x: id(Type, A) },
 ]
 
-conversion Type [
+equivalent Type [
   class { A: Type, B: Type, pair: Pair(A, B) },
   class { A: Type, B: Type, pair: Pair(A, B) },
 ]
@@ -22,10 +22,10 @@ conversion Type [
 `)
 })
 
-test("conversion Clazz -- fail -- different property names", async () => {
+test("equivalent Clazz -- fail -- different property names", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   class { A: Type, x: A },
   class { B: Type, x: B },
 ]
@@ -33,10 +33,10 @@ conversion Type [
 `)
 })
 
-test("conversion Clazz -- fail -- different property type", async () => {
+test("equivalent Clazz -- fail -- different property type", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   class { A: Trivial },
   class { A: String },
 ]
@@ -44,10 +44,10 @@ conversion Type [
 `)
 })
 
-test("conversion Clazz -- fail -- different fulfilled property value", async () => {
+test("equivalent Clazz -- fail -- different fulfilled property value", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   class { A: String = "abc" },
   class { A: String = "xyz" },
 ]
@@ -55,15 +55,15 @@ conversion Type [
 `)
 })
 
-test("conversion Clazz -- fail -- missing fulfilled property value", async () => {
+test("equivalent Clazz -- fail -- missing fulfilled property value", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   class { A: String = "abc" },
   class { A: String },
 ]
 
-conversion Type [
+equivalent Type [
   class { A: String },
   class { A: String = "abc" },
 ]

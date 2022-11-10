@@ -1,7 +1,7 @@
 export { ParsingError } from "@cicada-lang/partech"
 export * from "./AssertionError"
-export * from "./ConversionError"
 export * from "./ElaborationError"
+export * from "./EquivalentError"
 export * from "./ErrorReport"
 export * from "./EvaluationError"
 export * from "./InclusionError"

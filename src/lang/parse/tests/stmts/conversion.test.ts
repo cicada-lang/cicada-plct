@@ -4,11 +4,11 @@ import * as Stmts from "../../../stmts"
 import { parseStmts } from "../../index"
 import { deleteUndefined } from "../utils"
 
-test("parse Conversion", () => {
+test("parse Equivalent", () => {
   expect(
     parseStmts(`
 
-conversion Trivial [
+equivalent Trivial [
   sole,
   sole,
 ]
@@ -16,7 +16,7 @@ conversion Trivial [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [
+      new Stmts.Equivalent(Exps.Var("Trivial"), [
         Exps.Var("sole"),
         Exps.Var("sole"),
       ]),
@@ -24,11 +24,11 @@ conversion Trivial [
   )
 })
 
-test("parse Conversion -- without last comma", () => {
+test("parse Equivalent -- without last comma", () => {
   expect(
     parseStmts(`
 
-conversion Trivial [
+equivalent Trivial [
   sole,
   sole
 ]
@@ -36,7 +36,7 @@ conversion Trivial [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [
+      new Stmts.Equivalent(Exps.Var("Trivial"), [
         Exps.Var("sole"),
         Exps.Var("sole"),
       ]),
@@ -44,18 +44,18 @@ conversion Trivial [
   )
 })
 
-test("parse Conversion -- single", () => {
+test("parse Equivalent -- single", () => {
   expect(
     parseStmts(`
 
-conversion Trivial [
+equivalent Trivial [
   sole,
 ]
 
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Conversion(Exps.Var("Trivial"), [Exps.Var("sole")]),
+      new Stmts.Equivalent(Exps.Var("Trivial"), [Exps.Var("sole")]),
     ]),
   )
 })

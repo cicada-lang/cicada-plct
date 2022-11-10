@@ -17,14 +17,14 @@ import { inclusionClazz, readbackType, Value } from "../value"
    We use the word `inclusion` to name our function
    which implements the subtyping relation.
 
-   Comparing it with the word `conversion`
+   Comparing it with the word `equivalent`
    for equivalent relation between types.
 
-   `inclusion` is like `conversion` but applies only to types,
+   `inclusion` is like `equivalent` but applies only to types,
    and also handles subtyping between classes,
    -- simple attribute based subtype relation.
 
-   `conversion` is implemented by `readback` and `alphaEquivalent`,
+   `equivalent` is implemented by `readback` and `alphaEquivalent`,
 
    We will not implement `Union` and `Intersection` types.
 

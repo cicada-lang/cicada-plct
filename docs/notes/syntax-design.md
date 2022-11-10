@@ -13,12 +13,12 @@ title: Syntax Design
 If we do not want to write semicolons in `{ ... }`,
 we need to add keyword in front of to every stmts (statements).
 
-Take the `conversion` stmt as an example.
+Take the `equivalent` stmt as an example.
 
 We design the grammar to be:
 
 ```
-conversion <exp> [
+equivalent <exp> [
   <exp>,
   <exp>,
   ...,
@@ -28,7 +28,7 @@ conversion <exp> [
 instead of:
 
 ```
-conversion <exp> {
+equivalent <exp> {
   <exp>
   <exp>
   ...
@@ -38,7 +38,7 @@ conversion <exp> {
 Because the following code are ambiguous:
 
 ```
-conversion Type {
+equivalent Type {
   class { A: Type, x: A }
 }
 ```
@@ -46,7 +46,7 @@ conversion Type {
 It can mean (because we do not preserve keywords).
 
 ```
-conversion Type [
+equivalent Type [
   class,
   { A: Type, x: A },
 ]
@@ -55,7 +55,7 @@ conversion Type [
 It can also mean:
 
 ```
-conversion Type [
+equivalent Type [
   class { A: Type, x: A },
 ]
 ```

@@ -11,7 +11,7 @@ import { readbackByType, readbackByValue, Value } from "../value"
    Note that we view "readback" as one word,
    thus we write `readback` instead of `readBack`.
 
-   We will use `readback` to implement `conversion` between values.
+   We will use `readback` to implement `equivalent` between values.
 
    Be careful about the order of arguments of `readback`,
    first the `type`, then the `value`.

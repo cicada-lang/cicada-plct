@@ -1,10 +1,10 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("conversion Trivial", async () => {
+test("equivalent Trivial", async () => {
   await runCode(`
 
-conversion Type [
+equivalent Type [
   Trivial,
   Trivial,
   Trivial,
@@ -13,10 +13,10 @@ conversion Type [
 `)
 })
 
-test("conversion Trivial -- fail", async () => {
+test("equivalent Trivial -- fail", async () => {
   await expectCodeToFail(`
 
-conversion Type [
+equivalent Type [
   Trivial,
   Trivial,
   Type,
