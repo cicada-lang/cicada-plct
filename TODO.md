@@ -1,6 +1,6 @@
 move value/assertion out to value
 move value/clazz/ out to value
-move core/clazz/ out to core
+value/internal.ts vs value/index.ts
 
 `inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
 

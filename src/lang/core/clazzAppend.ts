@@ -1,4 +1,4 @@
-import * as Cores from "../../core"
+import * as Cores from "../core"
 
 export function clazzAppend(
   left: Cores.Clazz,
