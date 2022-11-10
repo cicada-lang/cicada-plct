@@ -1,4 +1,3 @@
-rename functions about clazz
 move value/assertion out to value
 move value/clazz/ out to value
 move core/clazz/ out to core

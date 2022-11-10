@@ -1,6 +1,6 @@
 import * as Cores from "../../core"
 
-export function appendClazz(
+export function clazzAppend(
   left: Cores.Clazz,
   right: Cores.Clazz,
 ): Cores.Clazz {
@@ -14,7 +14,7 @@ export function appendClazz(
         left.name,
         left.localName,
         left.propertyType,
-        appendClazz(left.rest, right),
+        clazzAppend(left.rest, right),
       )
     }
 
@@ -23,7 +23,7 @@ export function appendClazz(
         left.name,
         left.propertyType,
         left.property,
-        appendClazz(left.rest, right),
+        clazzAppend(left.rest, right),
       )
     }
   }

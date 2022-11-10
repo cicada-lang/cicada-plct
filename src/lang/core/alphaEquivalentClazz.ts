@@ -70,7 +70,7 @@ function reorderTheRightByTheLeft(
       return reorderTheRightByTheLeft(
         left.rest,
         deleteProperty(left.name, right),
-        Cores.appendClazz(
+        Cores.clazzAppend(
           reordered,
           findPropertyAndCreateClazz(left.name, right),
         ),
@@ -81,7 +81,7 @@ function reorderTheRightByTheLeft(
       return reorderTheRightByTheLeft(
         left.rest,
         deleteProperty(left.name, right),
-        Cores.appendClazz(
+        Cores.clazzAppend(
           reordered,
           findPropertyAndCreateClazz(left.name, right),
         ),
