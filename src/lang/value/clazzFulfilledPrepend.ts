@@ -1,5 +1,5 @@
-import * as Errors from "../../errors"
-import * as Values from "../../value"
+import * as Errors from "../errors"
+import * as Values from "../value"
 
 export function clazzFulfilledPrepend(
   left: Values.Clazz,

@@ -1,9 +1,9 @@
-import { applyClosure } from "../../closure"
-import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../../ctx"
-import { Mod } from "../../mod"
-import * as Neutrals from "../../neutral"
-import { freshen } from "../../utils/freshen"
-import * as Values from "../../value"
+import { applyClosure } from "../closure"
+import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
+import { Mod } from "../mod"
+import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
+import * as Values from "../value"
 
 export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
   switch (clazz.kind) {

@@ -1,8 +1,8 @@
-import { applyClosure } from "../../closure"
-import * as Errors from "../../errors"
-import * as Neutrals from "../../neutral"
-import * as Values from "../../value"
-import { assertClazz, Value } from "../../value"
+import { applyClosure } from "../closure"
+import * as Errors from "../errors"
+import * as Neutrals from "../neutral"
+import * as Values from "../value"
+import { assertClazz, Value } from "../value"
 
 type Property = { type: Value; value?: Value }
 
