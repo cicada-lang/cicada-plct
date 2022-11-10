@@ -2,7 +2,6 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core, evaluate } from "../core"
 import { Ctx, CtxCons } from "../ctx"
-import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
@@ -52,6 +51,10 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FnAnnotated": {
+      return Exps.checkByInfer(mod, ctx, exp, type)
+    }
+
+    case "FnImplicitAnnotated": {
       return Exps.checkByInfer(mod, ctx, exp, type)
     }
 
@@ -150,15 +153,6 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "SequenceUnfolded": {
       return check(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret), type)
-    }
-
-    default: {
-      throw new Errors.ElaborationError(
-        `check is not implemented for exp: ${exp.kind}`,
-        {
-          span: exp.span,
-        },
-      )
     }
   }
 }
