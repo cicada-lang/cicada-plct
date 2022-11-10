@@ -1,5 +1,3 @@
-extract `unifyClazzOrderless`
-
 top level `evaluate/`
 top level `check/`
 top level `infer/`
