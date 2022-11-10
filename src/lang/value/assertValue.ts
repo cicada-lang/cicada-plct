@@ -1,5 +1,5 @@
-import * as Errors from "../../errors"
-import { Value } from "../../value"
+import * as Errors from "../errors"
+import { Value } from "../value"
 
 export function assertValue<Kind extends Value["kind"]>(
   value: Value,

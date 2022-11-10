@@ -1,8 +1,8 @@
-import { formatCore } from "../../core"
-import { Ctx } from "../../ctx"
-import * as Errors from "../../errors"
-import { Mod } from "../../mod"
-import { AlreadyType, readbackType, Value } from "../../value"
+import { formatCore } from "../core"
+import { Ctx } from "../ctx"
+import * as Errors from "../errors"
+import { Mod } from "../mod"
+import { AlreadyType, readbackType, Value } from "../value"
 
 /**
 

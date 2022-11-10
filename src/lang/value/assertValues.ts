@@ -1,5 +1,5 @@
-import * as Errors from "../../errors"
-import { Value } from "../../value"
+import * as Errors from "../errors"
+import { Value } from "../value"
 
 type ElementExtractTypeUnion<Kinds extends Array<Value["kind"]>> =
   Kinds extends (infer Kind extends Value["kind"])[]

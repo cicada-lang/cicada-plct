@@ -1,4 +1,3 @@
-move value/assertion out to value
 move value/clazz/ out to value
 value/internal.ts vs value/index.ts
 
