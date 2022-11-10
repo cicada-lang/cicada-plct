@@ -2,12 +2,13 @@ import _ from "lodash"
 import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
+import { include } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { unify } from "../unify"
 import { freshen, freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazz, clazzExpel, include, Value } from "../value"
+import { assertClazz, clazzExpel, Value } from "../value"
 
 /**
 

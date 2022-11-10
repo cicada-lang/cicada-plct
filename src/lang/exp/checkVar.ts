@@ -3,8 +3,9 @@ import { Core, formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
+import { include } from "../include"
 import { Mod } from "../mod"
-import { include, readbackType, Value } from "../value"
+import { readbackType, Value } from "../value"
 
 export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
   let inferred = Exps.infer(mod, ctx, exp)
