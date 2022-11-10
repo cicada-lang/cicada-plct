@@ -27,23 +27,34 @@ import { assertClazz, clazzExpel, inclusion, Value } from "../value"
 
 **/
 
-export function inclusionClazz2(
+export function inclusionClazzOrdered(
   mod: Mod,
   ctx: Ctx,
   subclazz: Values.Clazz,
   clazz: Values.Clazz,
 ): void {
-  const commonNames = new Set(
-    _.intersection(
-      ...Values.clazzPropertyNames(subclazz),
-      ...Values.clazzPropertyNames(clazz),
-    ),
-  )
+  const subclazzNames = Values.clazzPropertyNames(subclazz)
+  const clazzNames = Values.clazzPropertyNames(clazz)
+  const missingNames = _.difference(clazzNames, subclazzNames)
+  if (missingNames.length > 0) {
+    throw new Errors.InclusionError(
+      [
+        `inclusionClazz found property names of class not included in the subclass`,
+        `  missing names: ${missingNames.join(", ")}`,
+      ].join("\n"),
+    )
+  }
 
+  const commonNames = new Set(_.intersection(subclazzNames, clazzNames))
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
       if (commonNames.has(clazz.name)) {
-        //
+        const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
+        inclusion(mod, ctx, next.propertyType, clazz.propertyType)
+        const rest = applyClosure(clazz.restClosure, next.property)
+        assertClazz(rest)
+        clazz = rest
+        subclazz = next.subclazz
       } else {
         const usedNames = [...ctxNames(ctx), ...mod.solution.names]
         const freshName = freshen(usedNames, clazz.name)
@@ -59,9 +70,72 @@ export function inclusionClazz2(
 
     if (clazz.kind === "ClazzFulfilled") {
       if (commonNames.has(clazz.name)) {
-        //
+        const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
+        inclusion(mod, ctx, next.propertyType, clazz.propertyType)
+        unify(mod, ctx, next.propertyType, next.property, clazz.property)
+        clazz = clazz.rest
+        subclazz = next.subclazz
       } else {
-        //
+        clazz = clazz.rest
+      }
+    }
+  }
+}
+
+export function nextSubclazz(
+  mod: Mod,
+  ctx: Ctx,
+  name: string,
+  subclazz: Values.Clazz,
+): {
+  propertyType: Value
+  property: Value
+  subclazz: Values.Clazz
+} {
+  switch (subclazz.kind) {
+    case "ClazzNull": {
+      throw new Errors.InclusionError(
+        `inclusionClazz fail to find next subclass of name: ${name}`,
+      )
+    }
+
+    case "ClazzCons": {
+      if (subclazz.name === name) {
+        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const freshName = freshen(usedNames, subclazz.name)
+        const v = Values.TypedNeutral(
+          subclazz.propertyType,
+          Neutrals.Var(freshName),
+        )
+        const rest = applyClosure(subclazz.restClosure, v)
+        assertClazz(rest)
+        return {
+          propertyType: subclazz.propertyType,
+          property: v,
+          subclazz: rest,
+        }
+      } else {
+        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const freshName = freshen(usedNames, subclazz.name)
+        const v = Values.TypedNeutral(
+          subclazz.propertyType,
+          Neutrals.Var(freshName),
+        )
+        const rest = applyClosure(subclazz.restClosure, v)
+        assertClazz(rest)
+        return nextSubclazz(mod, ctx, name, rest)
+      }
+    }
+
+    case "ClazzFulfilled": {
+      if (subclazz.name === name) {
+        return {
+          propertyType: subclazz.propertyType,
+          property: subclazz.property,
+          subclazz: subclazz.rest,
+        }
+      } else {
+        return nextSubclazz(mod, ctx, name, subclazz.rest)
       }
     }
   }

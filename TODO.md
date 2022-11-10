@@ -1,6 +1,8 @@
-`inclusionClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
+`safeFormatType` & `safeFormat` -- for `readback` might fail
 
-`unifyClazz` -- require same order of properties -- quit using `freshenNames` & `clazzExpel`
+`unifyClazzOrdered` -- require same order of properties
+
+- quit using `freshenNames` & `clazzExpel`
 
 update note in `inclusionClazz`
 
@@ -9,6 +11,8 @@ pass `groupCategory.todo.cic`
 [syntax] we need a syntax for reasoning about equations
 
 - capture the use of `equalCompose` `equalMap` `equalSwap`
+
+error message with stack trace -- for easy to debug
 
 # std
 
