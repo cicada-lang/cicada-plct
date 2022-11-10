@@ -8,7 +8,7 @@ import { clazzExpel, Value } from "../value"
 
 /**
 
-   Just like in `inclusionClazz`,
+   Just like in `includeClazz`,
    the order does not matters for unification,
 
 **/

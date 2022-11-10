@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("inclusion Pi", async () => {
+test("include Sigma", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
@@ -23,32 +23,27 @@ class A {
   a: String
 }
 
-inclusion [
-  (A) -> ABC,
-  (A) -> AB,
-  (AB) -> AB,
-  (ABC) -> AB,
-  (ABC) -> A,
+include [
+  Pair(ABC, ABC),
+  Pair(ABC, AB),
+  Pair(AB, AB),
+  Pair(A, AB),
+  Pair(A, A),
 ]
 
-
-inclusion [
-  (A) -> ABC,
-  (A) -> AB,
-  (AB) -> id(Type, AB),
-  (id(Type, ABC)) -> AB,
-  (ABC) -> id(Type, A),
-]
-
-inclusion [
-  (A) -> AB,
-  (AB) -> A,
+include [
+  Pair(ABC, ABC),
+  Pair(ABC, id(Type, AB)),
+  Pair(id(Type, AB), AB),
+  Pair(A, AB),
+  Pair(A, A),
+  Pair(id(Type, A), id(Type, A)),
 ]
 
 `)
 })
 
-test("inclusion Pi -- fail", async () => {
+test("include Sigma -- fail", async () => {
   await expectCodeToFail(`
 
 class AB {
@@ -60,9 +55,9 @@ class A {
   a: String
 }
 
-inclusion [
-  (AB) -> A,
-  (A) -> AB,
+include [
+  Pair(A, AB),
+  Pair(AB, A),
 ]
 
 `)

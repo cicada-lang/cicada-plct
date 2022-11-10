@@ -8,19 +8,19 @@ import * as Neutrals from "../neutral"
 import { advanceValue, unify, unifyType } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { inclusionClazz, readbackType, Value } from "../value"
+import { includeClazz, readbackType, Value } from "../value"
 
 /**
 
    # Subtyping
 
-   We use the word `inclusion` to name our function
+   We use the word `include` to name our function
    which implements the subtyping relation.
 
    Comparing it with the word `equivalent`
    for equivalent relation between types.
 
-   `inclusion` is like `equivalent` but applies only to types,
+   `include` is like `equivalent` but applies only to types,
    and also handles subtyping between classes,
    -- simple attribute based subtype relation.
 
@@ -33,22 +33,17 @@ import { inclusionClazz, readbackType, Value } from "../value"
 
 **/
 
-export function inclusion(
-  mod: Mod,
-  ctx: Ctx,
-  subtype: Value,
-  type: Value,
-): void {
+export function include(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void {
   subtype = advanceValue(mod, subtype)
   type = advanceValue(mod, type)
 
   try {
-    inclusionAux(mod, ctx, subtype, type)
+    includeAux(mod, ctx, subtype, type)
   } catch (error) {
     if (error instanceof Errors.InclusionError) {
       error.trace.unshift(
         [
-          `[inclusion]`,
+          `[include]`,
           indent(`subtype: ${formatCore(readbackType(mod, ctx, subtype))}`),
           indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
         ].join("\n"),
@@ -59,7 +54,7 @@ export function inclusion(
   }
 }
 
-export function inclusionAux(
+export function includeAux(
   mod: Mod,
   ctx: Ctx,
   subtype: Value,
@@ -70,17 +65,17 @@ export function inclusionAux(
        Contravariant in argument position.
 
        The order of type and subtype is swapped
-       in the following recursive call to `inclusion`.
+       in the following recursive call to `include`.
     **/
 
-    inclusion(mod, ctx, type.argType, subtype.argType)
+    include(mod, ctx, type.argType, subtype.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
     ctx = CtxCons(freshName, argType, ctx)
-    inclusion(
+    include(
       mod,
       ctx,
       applyClosure(subtype.retTypeClosure, v),
@@ -90,14 +85,14 @@ export function inclusionAux(
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
-    inclusion(mod, ctx, subtype.carType, type.carType)
+    include(mod, ctx, subtype.carType, type.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
     ctx = CtxCons(freshName, carType, ctx)
-    inclusion(
+    include(
       mod,
       ctx,
       applyClosure(subtype.cdrTypeClosure, v),
@@ -107,12 +102,12 @@ export function inclusionAux(
   }
 
   if (Values.isClazz(subtype) && Values.isClazz(type)) {
-    inclusionClazz(mod, ctx, subtype, type)
+    includeClazz(mod, ctx, subtype, type)
     return
   }
 
   if (subtype.kind === "Equal" && type.kind === "Equal") {
-    inclusion(mod, ctx, subtype.type, type.type)
+    include(mod, ctx, subtype.type, type.type)
     unify(mod, ctx, type.type, subtype.from, type.from)
     unify(mod, ctx, type.type, subtype.to, type.to)
     return

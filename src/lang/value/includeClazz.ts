@@ -7,7 +7,7 @@ import * as Neutrals from "../neutral"
 import { unify } from "../solution"
 import { freshen, freshenNames } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazz, clazzExpel, inclusion, Value } from "../value"
+import { assertClazz, clazzExpel, include, Value } from "../value"
 
 /**
 
@@ -23,7 +23,7 @@ import { assertClazz, clazzExpel, inclusion, Value } from "../value"
 
 **/
 
-export function inclusionClazz(
+export function includeClazz(
   mod: Mod,
   ctx: Ctx,
   subclazz: Values.Clazz,
@@ -44,7 +44,7 @@ export function inclusionClazz(
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
       throw new Errors.InclusionError(
-        `inclusionClazz expect subclass to have property: ${name}`,
+        `includeClazz expect subclass to have property: ${name}`,
       )
     }
 
@@ -56,7 +56,7 @@ export function inclusionClazz(
     }
 
     try {
-      inclusionClazzProperty(
+      includeClazzProperty(
         mod,
         ctx,
         name,
@@ -66,7 +66,7 @@ export function inclusionClazz(
       )
     } catch (error) {
       if (error instanceof Errors.InclusionError) {
-        error.trace.unshift([`[inclusion property] ${name}`].join("\n"))
+        error.trace.unshift([`[include property] ${name}`].join("\n"))
       }
 
       throw error
@@ -74,7 +74,7 @@ export function inclusionClazz(
   }
 }
 
-function inclusionClazzProperty(
+function includeClazzProperty(
   mod: Mod,
   ctx: Ctx,
   name: string,
@@ -88,13 +88,13 @@ function inclusionClazzProperty(
   ) {
     throw new Errors.InclusionError(
       [
-        `inclusionClazz expect subclass to have fulfilled property value`,
+        `includeClazz expect subclass to have fulfilled property value`,
         `  property name: ${name}`,
       ].join("\n"),
     )
   }
 
-  inclusion(mod, ctx, subclazzProperty.type, clazzProperty.type)
+  include(mod, ctx, subclazzProperty.type, clazzProperty.type)
 
   if (
     subclazzProperty.value !== undefined &&
@@ -123,7 +123,7 @@ function inclusionClazzProperty(
   }
 }
 
-export function inclusionClazzOrdered(
+export function includeClazzOrdered(
   mod: Mod,
   ctx: Ctx,
   subclazz: Values.Clazz,
@@ -135,7 +135,7 @@ export function inclusionClazzOrdered(
   if (missingNames.length > 0) {
     throw new Errors.InclusionError(
       [
-        `inclusionClazz found property names of class not included in the subclass`,
+        `includeClazz found property names of class not included in the subclass`,
         `  missing names: ${missingNames.join(", ")}`,
       ].join("\n"),
     )
@@ -146,7 +146,7 @@ export function inclusionClazzOrdered(
     if (clazz.kind === "ClazzCons") {
       if (commonNames.has(clazz.name)) {
         const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
-        inclusion(mod, ctx, next.propertyType, clazz.propertyType)
+        include(mod, ctx, next.propertyType, clazz.propertyType)
         const rest = applyClosure(clazz.restClosure, next.property)
         assertClazz(rest)
         clazz = rest
@@ -167,7 +167,7 @@ export function inclusionClazzOrdered(
     if (clazz.kind === "ClazzFulfilled") {
       if (commonNames.has(clazz.name)) {
         const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
-        inclusion(mod, ctx, next.propertyType, clazz.propertyType)
+        include(mod, ctx, next.propertyType, clazz.propertyType)
         unify(mod, ctx, next.propertyType, next.property, clazz.property)
         clazz = clazz.rest
         subclazz = next.subclazz
@@ -191,7 +191,7 @@ function nextSubclazz(
   switch (subclazz.kind) {
     case "ClazzNull": {
       throw new Errors.InclusionError(
-        `inclusionClazz fail to find next subclass of name: ${name}`,
+        `includeClazz fail to find next subclass of name: ${name}`,
       )
     }
 

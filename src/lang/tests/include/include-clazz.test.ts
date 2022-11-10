@@ -1,21 +1,21 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("inclusion Clazz", async () => {
+test("include Clazz", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-inclusion [
+include [
   class { A: Type, x: A },
   class { A: Type, x: A },
   class { A: Type, x: id(Type, A) },
   class { A: Type },
 ]
 
-inclusion [
+include [
   class { A: Type, B: Type, pair: Pair(A, B) },
   class { A: Type, B: Type, pair: Pair(A, B) },
   class { A: Type, B: Type },
@@ -25,7 +25,7 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- ABC", async () => {
+test("include Clazz -- ABC", async () => {
   await runCode(`
 
 class ABC {
@@ -43,15 +43,15 @@ class A {
   A: String
 }
 
-inclusion [ ABC, AB, A ]
+include [ ABC, AB, A ]
 
 `)
 })
 
-test("inclusion Clazz -- fulfilled v.s. dependent", async () => {
+test("include Clazz -- fulfilled v.s. dependent", async () => {
   await expectCodeToFail(`
 
-inclusion [
+include [
   class { T: Type = String, x: Type = Type },
   class { T: Type, x: T },
 ]
@@ -59,10 +59,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- fail -- different property names", async () => {
+test("include Clazz -- fail -- different property names", async () => {
   await expectCodeToFail(`
 
-inclusion [
+include [
   class { A: Type, x: A },
   class { B: Type, x: B },
 ]
@@ -70,10 +70,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- fail -- different property type", async () => {
+test("include Clazz -- fail -- different property type", async () => {
   await expectCodeToFail(`
 
-inclusion [
+include [
   class { A: Trivial },
   class { A: String },
 ]
@@ -81,10 +81,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- fail -- different fulfilled property value", async () => {
+test("include Clazz -- fail -- different fulfilled property value", async () => {
   await expectCodeToFail(`
 
-inclusion [
+include [
   class { A: String = "abc" },
   class { A: String = "xyz" },
 ]
@@ -92,10 +92,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- subclazz has fulfilled property value", async () => {
+test("include Clazz -- subclazz has fulfilled property value", async () => {
   await runCode(`
 
-inclusion [
+include [
   class { A: String = "abc" },
   class { A: String },
 ]
@@ -103,10 +103,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- fail -- missing fulfilled property value", async () => {
+test("include Clazz -- fail -- missing fulfilled property value", async () => {
   await expectCodeToFail(`
 
-inclusion [
+include [
   class { A: String },
   class { A: String = "abc" },
 ]
@@ -114,10 +114,10 @@ inclusion [
 `)
 })
 
-test("inclusion Clazz -- nested", async () => {
+test("include Clazz -- nested", async () => {
   await runCode(`
 
-inclusion [
+include [
   class { A: String, B: String, C: class { X: String, Y: String, Z: String } },
   class { A: String, B: String, C: class { X: String, Y: String } },
   class { A: String, B: String, C: class { Y: String } },

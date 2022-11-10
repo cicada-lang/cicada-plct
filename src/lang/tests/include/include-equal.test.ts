@@ -1,7 +1,7 @@
 import { test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
-test("inclusion Equal", async () => {
+test("include Equal", async () => {
   await runCode(`
 
 function id(T: Type, x: T): T {
@@ -27,13 +27,13 @@ let a = "a"
 let b = "b"
 let c = "c"
 
-inclusion [
+include [
   Equal(ABC, { a, b, c }, { a, b, c }),
   Equal(AB, { a, b }, { a, b }),
   Equal(A, { a }, { a }),
 ]
 
-inclusion [
+include [
   Equal(id(Type, ABC), id(ABC, { a, b, c }), { a, b, c }),
   Equal(id(Type, AB), { a, b }, id(AB, { a, b })),
   Equal(id(Type, A), { a }, { a }),
@@ -42,7 +42,7 @@ inclusion [
 `)
 })
 
-test("inclusion Equal -- fail", async () => {
+test("include Equal -- fail", async () => {
   await expectCodeToFail(`
 
 class AB {
@@ -57,7 +57,7 @@ class A {
 let a = "a"
 let b = "b"
 
-inclusion [
+include [
   Equal(A, { a }, { a }),
   Equal(AB, { a, b }, { a, b }),
 ]

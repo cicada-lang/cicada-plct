@@ -1,10 +1,8 @@
-rename conversion to equivalent
+swap `include` arguments -- `type, subtype`
 
+top level unify/
+top level include/
 top level equivalent/
-
-rename inclusion to include
-
-move solution/unfiy\* to unify
 
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
@@ -12,7 +10,7 @@ move solution/unfiy\* to unify
 
 - quit using `freshenNames` & `clazzExpel`
 
-update note in `inclusionClazz`
+update note in `includeClazz`
 
 pass `groupCategory.todo.cic`
 
@@ -30,7 +28,7 @@ pass `groupCategory.todo.cic`
 
 - maybe not, because according to the flamegraph, `readback` is not the bottleneck for now
 
-[maybe] `unifyClazz` & `inclusionClazz` support reordering of properties
+[maybe] `unifyClazz` & `includeClazz` support reordering of properties
 
 - should be just like `Sigma`
 - check dependency and evaluate to a version of `ClazzCons` without closure

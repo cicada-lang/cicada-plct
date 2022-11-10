@@ -3,7 +3,7 @@ import { checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
-import { inclusion } from "../../value"
+import { include } from "../../value"
 
 export class Inclusion extends Stmt {
   constructor(public exps: Array<Exp>, public span?: Span) {
@@ -18,7 +18,7 @@ export class Inclusion extends Stmt {
 
     let left = types[0]
     for (const right of types.slice(1)) {
-      inclusion(mod, mod.ctx, left, right)
+      include(mod, mod.ctx, left, right)
       left = right
     }
   }

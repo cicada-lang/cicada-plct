@@ -31,7 +31,7 @@ A later property can reference previous property directly.
 When evaluating a class, `Closure` is formed property by property.
 
 This introduces problem when we want to
-implement `inclusion` and `unify` for and classes.
+implement `include` and `unify` for and classes.
 
 The semantic is orderless, but the order matters so much
 in the data structure that implements class.

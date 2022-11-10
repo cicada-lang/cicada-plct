@@ -54,8 +54,8 @@ export const stmt = {
       { $ap: ["optional", '","'] },
       '"]"',
     ],
-    "stmt:inclusion": [
-      '"inclusion"',
+    "stmt:include": [
+      '"include"',
       '"["',
       { types: { $ap: ["zero_or_more", "exp", '","'] } },
       { last_type: "exp" },

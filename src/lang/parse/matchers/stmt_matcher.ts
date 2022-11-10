@@ -71,7 +71,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ],
         span,
       ),
-    "stmt:inclusion": ({ types, last_type }, { span }) =>
+    "stmt:include": ({ types, last_type }, { span }) =>
       new Stmts.Inclusion(
         [
           ...pt.matchers.zero_or_more_matcher(types).map(matchers.exp_matcher),

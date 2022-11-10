@@ -8,7 +8,7 @@ test("parse Inclusion", () => {
   expect(
     parseStmts(`
 
-inclusion [
+include [
   Trivial,
   Trivial,
 ]
@@ -25,7 +25,7 @@ test("parse Inclusion -- without last comma", () => {
   expect(
     parseStmts(`
 
-inclusion [
+include [
   Trivial,
   Trivial
 ]
@@ -42,7 +42,7 @@ test("parse Inclusion -- single", () => {
   expect(
     parseStmts(`
 
-inclusion [
+include [
   Trivial,
 ]
 
