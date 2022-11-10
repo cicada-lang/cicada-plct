@@ -1,8 +1,14 @@
+`unifyClazz` & `inclusionClazz` require same order of properties
+
+- quit using `freshenNames` & `expelClazz`
+
 pass `groupCategory.todo.cic`
 
-[maybe] `unifyClazz` & `inclusionClazz` should do a reordering of properties,
-to avoid using `freshenNames`,
-making it just like `Sigma`.
+[maybe] `unifyClazz` & `inclusionClazz` support reordering of properties
+
+- should be just like `Sigma`
+- check dependency and evaluate to a version of `ClazzCons` without closure
+  - not only syntax dependency but real dependency -- need `readback` for partial evaluation
 
 # std
 

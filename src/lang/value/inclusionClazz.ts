@@ -114,10 +114,12 @@ function inclusionClazzProperty(
     subclazzProperty.value !== undefined &&
     clazzProperty.value === undefined
   ) {
-    const patternVar = mod.solution.createPatternVar(
-      freshName,
-      subclazzProperty.type,
+    unify(
+      mod,
+      ctx,
+      clazzProperty.type,
+      subclazzProperty.value,
+      mod.solution.createPatternVar(freshName, subclazzProperty.type),
     )
-    unify(mod, ctx, clazzProperty.type, subclazzProperty.value, patternVar)
   }
 }

@@ -55,12 +55,22 @@ function unifyClazzProperty(
   }
 
   if (left.value !== undefined && right.value === undefined) {
-    const patternVar = mod.solution.createPatternVar(freshName, left.type)
-    unify(mod, ctx, left.type, left.value, patternVar)
+    unify(
+      mod,
+      ctx,
+      left.type,
+      left.value,
+      mod.solution.createPatternVar(freshName, left.type),
+    )
   }
 
   if (left.value === undefined && right.value !== undefined) {
-    const patternVar = mod.solution.createPatternVar(freshName, right.type)
-    unify(mod, ctx, right.type, patternVar, right.value)
+    unify(
+      mod,
+      ctx,
+      right.type,
+      mod.solution.createPatternVar(freshName, right.type),
+      right.value,
+    )
   }
 }
