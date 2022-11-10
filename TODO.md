@@ -4,8 +4,6 @@
 
 - quit using `freshenNames` & `clazzExpel`
 
-update note in `includeClazz`
-
 pass `groupCategory.todo.cic`
 
 [syntax] we need a syntax for reasoning about equations
