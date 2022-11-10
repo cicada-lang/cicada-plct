@@ -1,11 +1,10 @@
 import * as Cores from "../core"
+import { Core, formatCore } from "../core"
 import {
   AlphaCtx,
   alphaEquivalentClazz,
   alphaEquivalentProperties,
-  Core,
-  formatCore,
-} from "../core"
+} from "../equivalent"
 import * as Errors from "../errors"
 
 export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {

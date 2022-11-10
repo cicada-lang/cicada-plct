@@ -1,4 +1,5 @@
-import { AlphaCtx, alphaEquivalent, Core } from "../core"
+import { Core } from "../core"
+import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
 
 export function alphaEquivalentProperties(

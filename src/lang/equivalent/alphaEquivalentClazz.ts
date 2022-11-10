@@ -1,5 +1,5 @@
 import * as Cores from "../core"
-import { AlphaCtx, alphaEquivalent } from "../core"
+import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
 
 /**
