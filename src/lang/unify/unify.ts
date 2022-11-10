@@ -3,12 +3,8 @@ import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import {
-  advanceValue,
-  unifyByType,
-  unifyByValue,
-  unifyPatternVar,
-} from "../solution"
+import { advanceValue } from "../solution"
+import { unifyByType, unifyByValue, unifyPatternVar } from "../unify"
 import { readback, readbackType, Value } from "../value"
 
 /**

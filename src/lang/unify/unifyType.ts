@@ -5,13 +5,8 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import {
-  advanceValue,
-  unify,
-  unifyClazz,
-  unifyNeutral,
-  unifyPatternVar,
-} from "../solution"
+import { advanceValue } from "../solution"
+import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { isClazz, readbackType, Value } from "../value"

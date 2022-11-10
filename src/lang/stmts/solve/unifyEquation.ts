@@ -2,7 +2,7 @@ import { Mod } from "src/lang/mod"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, checkType, infer, inferOrUndefined } from "../../exp"
-import { unify, unifyType } from "../../solution"
+import { unify, unifyType } from "../../unify"
 import { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {

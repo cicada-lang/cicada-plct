@@ -4,7 +4,7 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { unify, unifyType } from "../solution"
+import { unify, unifyType } from "../unify"
 import { readbackNeutral, TypedValue } from "../value"
 
 function unifyTypedValue(

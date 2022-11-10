@@ -1,7 +1,7 @@
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { unify, unifyType } from "../solution"
+import { unify, unifyType } from "../unify"
 import { freshenNames } from "../utils/freshen"
 import * as Values from "../value"
 import { clazzExpel, Value } from "../value"

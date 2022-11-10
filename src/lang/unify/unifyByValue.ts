@@ -3,7 +3,7 @@ import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { unify, unifyNeutral, unifyType } from "../solution"
+import { unify, unifyNeutral, unifyType } from "../unify"
 import { readback, readbackType, Value } from "../value"
 
 export function unifyByValue(

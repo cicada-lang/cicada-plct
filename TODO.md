@@ -1,8 +1,7 @@
-swap `include` arguments -- `type, subtype`
-
-top level unify/
 top level include/
 top level equivalent/
+
+swap `include` arguments -- `type, subtype`
 
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 

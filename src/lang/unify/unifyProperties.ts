@@ -2,7 +2,7 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
-import { unify } from "../solution"
+import { unify } from "../unify"
 import * as Values from "../value"
 import { Value } from "../value"
 
