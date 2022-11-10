@@ -1,3 +1,5 @@
+extract `unifyClazzOrderless`
+
 top level `evaluate/`
 top level `check/`
 top level `infer/`
@@ -11,9 +13,12 @@ top level `readback/`
 
 pass `groupCategory.todo.cic`
 
-[syntax] we need a syntax for reasoning about equations
+[syntax] we need a syntax -- `equal` macro -- for reasoning about equality
 
-- capture the use of `equalCompose` `equalMap` `equalSwap`
+- maybe use `equivalent` as keyword
+- capture the use of `equalCompose` only
+
+[maybe] `equalMap` take function as the first argument
 
 # std
 
