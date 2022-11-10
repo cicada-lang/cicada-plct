@@ -28,15 +28,15 @@ let b = "b"
 let c = "c"
 
 include [
-  Equal(ABC, { a, b, c }, { a, b, c }),
-  Equal(AB, { a, b }, { a, b }),
   Equal(A, { a }, { a }),
+  Equal(AB, { a, b }, { a, b }),
+  Equal(ABC, { a, b, c }, { a, b, c }),
 ]
 
 include [
-  Equal(id(Type, ABC), id(ABC, { a, b, c }), { a, b, c }),
-  Equal(id(Type, AB), { a, b }, id(AB, { a, b })),
   Equal(id(Type, A), { a }, { a }),
+  Equal(id(Type, AB), { a, b }, id(AB, { a, b })),
+  Equal(id(Type, ABC), id(ABC, { a, b, c }), { a, b, c }),
 ]
 
 `)
@@ -58,8 +58,8 @@ let a = "a"
 let b = "b"
 
 include [
-  Equal(A, { a }, { a }),
   Equal(AB, { a, b }, { a, b }),
+  Equal(A, { a }, { a }),
 ]
 
 `)

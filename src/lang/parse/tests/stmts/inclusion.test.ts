@@ -16,7 +16,7 @@ include [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")]),
+      new Stmts.Include([Exps.Var("Trivial"), Exps.Var("Trivial")]),
     ]),
   )
 })
@@ -33,7 +33,7 @@ include [
 `),
   ).toMatchObject(
     deleteUndefined([
-      new Stmts.Inclusion([Exps.Var("Trivial"), Exps.Var("Trivial")]),
+      new Stmts.Include([Exps.Var("Trivial"), Exps.Var("Trivial")]),
     ]),
   )
 })
@@ -47,5 +47,5 @@ include [
 ]
 
 `),
-  ).toMatchObject(deleteUndefined([new Stmts.Inclusion([Exps.Var("Trivial")])]))
+  ).toMatchObject(deleteUndefined([new Stmts.Include([Exps.Var("Trivial")])]))
 })

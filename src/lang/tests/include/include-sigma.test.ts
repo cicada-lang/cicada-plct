@@ -24,20 +24,20 @@ class A {
 }
 
 include [
-  Pair(ABC, ABC),
-  Pair(ABC, AB),
-  Pair(AB, AB),
-  Pair(A, AB),
   Pair(A, A),
+  Pair(A, AB),
+  Pair(AB, AB),
+  Pair(ABC, AB),
+  Pair(ABC, ABC),
 ]
 
 include [
-  Pair(ABC, ABC),
-  Pair(ABC, id(Type, AB)),
-  Pair(id(Type, AB), AB),
-  Pair(A, AB),
-  Pair(A, A),
   Pair(id(Type, A), id(Type, A)),
+  Pair(A, A),
+  Pair(A, AB),
+  Pair(id(Type, AB), AB),
+  Pair(ABC, id(Type, AB)),
+  Pair(ABC, ABC),
 ]
 
 `)
@@ -56,8 +56,8 @@ class A {
 }
 
 include [
-  Pair(A, AB),
   Pair(AB, A),
+  Pair(A, AB),
 ]
 
 `)

@@ -27,8 +27,8 @@ import { assertClazz, clazzExpel, Value } from "../value"
 export function includeClazz(
   mod: Mod,
   ctx: Ctx,
-  subclazz: Values.Clazz,
   clazz: Values.Clazz,
+  subclazz: Values.Clazz,
 ): void {
   const freshNameMap = freshenNames(
     [...ctxNames(ctx), ...mod.solution.names],
@@ -62,8 +62,8 @@ export function includeClazz(
         ctx,
         name,
         freshName,
-        subclazzProperty,
         clazzProperty,
+        subclazzProperty,
       )
     } catch (error) {
       if (error instanceof Errors.InclusionError) {
@@ -80,8 +80,8 @@ function includeClazzProperty(
   ctx: Ctx,
   name: string,
   freshName: string,
-  subclazzProperty: { type: Value; value?: Value },
   clazzProperty: { type: Value; value?: Value },
+  subclazzProperty: { type: Value; value?: Value },
 ): void {
   if (
     subclazzProperty.value === undefined &&
@@ -95,7 +95,7 @@ function includeClazzProperty(
     )
   }
 
-  include(mod, ctx, subclazzProperty.type, clazzProperty.type)
+  include(mod, ctx, clazzProperty.type, subclazzProperty.type)
 
   if (
     subclazzProperty.value !== undefined &&
@@ -105,8 +105,8 @@ function includeClazzProperty(
       mod,
       ctx,
       clazzProperty.type,
-      subclazzProperty.value,
       clazzProperty.value,
+      subclazzProperty.value,
     )
   }
 
@@ -118,8 +118,8 @@ function includeClazzProperty(
       mod,
       ctx,
       clazzProperty.type,
-      subclazzProperty.value,
       mod.solution.createPatternVar(freshName, subclazzProperty.type),
+      subclazzProperty.value,
     )
   }
 }
@@ -127,8 +127,8 @@ function includeClazzProperty(
 export function includeClazzOrdered(
   mod: Mod,
   ctx: Ctx,
-  subclazz: Values.Clazz,
   clazz: Values.Clazz,
+  subclazz: Values.Clazz,
 ): void {
   const subclazzNames = Values.clazzPropertyNames(subclazz)
   const clazzNames = Values.clazzPropertyNames(clazz)
@@ -147,7 +147,7 @@ export function includeClazzOrdered(
     if (clazz.kind === "ClazzCons") {
       if (commonNames.has(clazz.name)) {
         const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
-        include(mod, ctx, next.propertyType, clazz.propertyType)
+        include(mod, ctx, clazz.propertyType, next.propertyType)
         const rest = applyClosure(clazz.restClosure, next.property)
         assertClazz(rest)
         clazz = rest
@@ -168,8 +168,8 @@ export function includeClazzOrdered(
     if (clazz.kind === "ClazzFulfilled") {
       if (commonNames.has(clazz.name)) {
         const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
-        include(mod, ctx, next.propertyType, clazz.propertyType)
-        unify(mod, ctx, next.propertyType, next.property, clazz.property)
+        include(mod, ctx, clazz.propertyType, next.propertyType)
+        unify(mod, ctx, next.propertyType, clazz.property, next.property)
         clazz = clazz.rest
         subclazz = next.subclazz
       } else {

@@ -35,12 +35,12 @@ import { readbackType, Value } from "../value"
 
 **/
 
-export function include(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void {
+export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
   subtype = advanceValue(mod, subtype)
   type = advanceValue(mod, type)
 
   try {
-    includeAux(mod, ctx, subtype, type)
+    includeAux(mod, ctx, type, subtype)
   } catch (error) {
     if (error instanceof Errors.InclusionError) {
       error.trace.unshift(
@@ -59,8 +59,8 @@ export function include(mod: Mod, ctx: Ctx, subtype: Value, type: Value): void {
 export function includeAux(
   mod: Mod,
   ctx: Ctx,
-  subtype: Value,
   type: Value,
+  subtype: Value,
 ): void {
   if (subtype.kind === "Pi" && type.kind === "Pi") {
     /**
@@ -70,7 +70,7 @@ export function includeAux(
        in the following recursive call to `include`.
     **/
 
-    include(mod, ctx, type.argType, subtype.argType)
+    include(mod, ctx, subtype.argType, type.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
@@ -80,14 +80,14 @@ export function includeAux(
     include(
       mod,
       ctx,
-      applyClosure(subtype.retTypeClosure, v),
       applyClosure(type.retTypeClosure, v),
+      applyClosure(subtype.retTypeClosure, v),
     )
     return
   }
 
   if (subtype.kind === "Sigma" && type.kind === "Sigma") {
-    include(mod, ctx, subtype.carType, type.carType)
+    include(mod, ctx, type.carType, subtype.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
@@ -97,23 +97,23 @@ export function includeAux(
     include(
       mod,
       ctx,
-      applyClosure(subtype.cdrTypeClosure, v),
       applyClosure(type.cdrTypeClosure, v),
+      applyClosure(subtype.cdrTypeClosure, v),
     )
     return
   }
 
   if (Values.isClazz(subtype) && Values.isClazz(type)) {
-    includeClazz(mod, ctx, subtype, type)
+    includeClazz(mod, ctx, type, subtype)
     return
   }
 
   if (subtype.kind === "Equal" && type.kind === "Equal") {
-    include(mod, ctx, subtype.type, type.type)
-    unify(mod, ctx, type.type, subtype.from, type.from)
-    unify(mod, ctx, type.type, subtype.to, type.to)
+    include(mod, ctx, type.type, subtype.type)
+    unify(mod, ctx, type.type, type.from, subtype.from)
+    unify(mod, ctx, type.type, type.to, subtype.to)
     return
   }
 
-  unifyType(mod, ctx, subtype, type)
+  unifyType(mod, ctx, type, subtype)
 }

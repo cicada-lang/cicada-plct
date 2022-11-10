@@ -24,25 +24,25 @@ class A {
 }
 
 include [
-  (A) -> ABC,
-  (A) -> AB,
-  (AB) -> AB,
-  (ABC) -> AB,
   (ABC) -> A,
-]
-
-
-include [
+  (ABC) -> AB,
+  (AB) -> AB,
+  (A) -> AB,
   (A) -> ABC,
-  (A) -> AB,
-  (AB) -> id(Type, AB),
-  (id(Type, ABC)) -> AB,
+]
+
+
+include [
   (ABC) -> id(Type, A),
+  (id(Type, ABC)) -> AB,
+  (AB) -> id(Type, AB),
+  (A) -> AB,
+  (A) -> ABC,
 ]
 
 include [
-  (A) -> AB,
   (AB) -> A,
+  (A) -> AB,
 ]
 
 `)
@@ -61,8 +61,8 @@ class A {
 }
 
 include [
-  (AB) -> A,
   (A) -> AB,
+  (AB) -> A,
 ]
 
 `)

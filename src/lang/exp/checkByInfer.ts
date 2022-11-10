@@ -10,8 +10,7 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   const inferred = infer(mod, ctx, exp)
 
   try {
-    // unifyType(mod, ctx, inferred.type, type)
-    include(mod, ctx, inferred.type, type)
+    include(mod, ctx, type, inferred.type)
   } catch (error) {
     if (
       error instanceof Errors.UnificationError ||

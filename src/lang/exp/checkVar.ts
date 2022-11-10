@@ -11,7 +11,7 @@ export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
   let inferred = Exps.infer(mod, ctx, exp)
   while (inferred.type.kind === "PiImplicit") {
     try {
-      include(mod, ctx, inferred.type, type)
+      include(mod, ctx, type, inferred.type)
       return inferred.core
     } catch (_error) {
       inferred = Exps.insertApImplicitStep(
@@ -24,7 +24,7 @@ export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
   }
 
   try {
-    include(mod, ctx, inferred.type, type)
+    include(mod, ctx, type, inferred.type)
     return inferred.core
   } catch (error) {
     if (

@@ -5,7 +5,7 @@ import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
-export class Inclusion extends Stmt {
+export class Include extends Stmt {
   constructor(public exps: Array<Exp>, public span?: Span) {
     super()
   }
