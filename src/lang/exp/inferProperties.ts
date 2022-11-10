@@ -6,7 +6,7 @@ import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { assertClazzInCtx, conversion } from "../value"
+import { conversion } from "../value"
 
 export function inferProperties(
   mod: Mod,
@@ -28,7 +28,7 @@ export function inferProperties(
       const propertyCore = Exps.check(mod, ctx, propertyExp, clazz.propertyType)
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
 
       const inferred = inferProperties(mod, ctx, properties, rest)

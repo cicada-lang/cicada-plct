@@ -6,7 +6,7 @@ import * as Exps from "../exp"
 import { check } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { assertClazzInCtx, readback } from "../value"
+import { readback } from "../value"
 
 export function checkNewArgs(
   mod: Mod,
@@ -38,7 +38,7 @@ export function checkNewArgs(
       const propertyCore = check(mod, ctx, arg.exp, clazz.propertyType)
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
       return {
         [clazz.name]: propertyCore,

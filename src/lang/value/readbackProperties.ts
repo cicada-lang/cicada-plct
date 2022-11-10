@@ -20,7 +20,7 @@ export function readbackProperties(
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, clazz.name)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      Values.assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       const propertyCore = readback(mod, ctx, clazz.propertyType, propertyValue)
       return {
         [clazz.name]: propertyCore,

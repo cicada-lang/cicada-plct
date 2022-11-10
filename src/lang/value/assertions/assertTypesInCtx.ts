@@ -1,5 +1,6 @@
 import { Ctx } from "../../ctx"
 import * as Errors from "../../errors"
+import { Mod } from "../../mod"
 import { AlreadyType, Value } from "../../value"
 
 /**
@@ -14,6 +15,7 @@ type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
     : never
 
 export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
+  mod: Mod,
   ctx: Ctx,
   value: Value,
   kinds: Kinds,

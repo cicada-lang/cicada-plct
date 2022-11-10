@@ -42,7 +42,7 @@ export function prepareProperty(
          Type directed spread
       **/
       const inferred = infer(mod, ctx, property.exp)
-      Values.assertClazzInCtx(ctx, inferred.type)
+      Values.assertClazzInCtx(mod, ctx, inferred.type)
       const names = Values.clazzPropertyNames(inferred.type)
       return names.map((name) => [name, Exps.Dot(property.exp, name)])
     }

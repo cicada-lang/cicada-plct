@@ -33,7 +33,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         return Cores.FnImplicit(name, core)
       }
 
-      Values.assertTypeInCtx(ctx, type, "Pi")
+      Values.assertTypeInCtx(mod, ctx, type, "Pi")
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
@@ -42,7 +42,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "FnImplicit": {
-      Values.assertTypeInCtx(ctx, type, "PiImplicit")
+      Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
       const retType = applyClosure(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
@@ -89,7 +89,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Cons": {
-      Values.assertTypeInCtx(ctx, type, "Sigma")
+      Values.assertTypeInCtx(mod, ctx, type, "Sigma")
       const { carType, cdrTypeClosure } = type
       const carCore = check(mod, ctx, exp.car, carType)
       const carValue = evaluate(mod.ctxToEnv(ctx), carCore)
@@ -113,7 +113,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Objekt": {
-      Values.assertClazzInCtx(ctx, type)
+      Values.assertClazzInCtx(mod, ctx, type)
       const properties = Exps.checkProperties(mod, ctx, exp.properties, type)
       return Cores.Objekt(properties)
     }

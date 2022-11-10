@@ -125,7 +125,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "ApImplicit": {
       const inferred = infer(mod, ctx, exp.target)
-      Values.assertTypeInCtx(ctx, inferred.type, "PiImplicit")
+      Values.assertTypeInCtx(mod, ctx, inferred.type, "PiImplicit")
       const argCore = Exps.check(mod, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
       return Inferred(
@@ -201,7 +201,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "Dot": {
       const inferred = infer(mod, ctx, exp.target)
       const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
-      Values.assertClazzInCtx(ctx, inferred.type)
+      Values.assertClazzInCtx(mod, ctx, inferred.type)
       const propertyType = Values.lookupPropertyTypeOrFail(
         inferred.type,
         targetValue,
@@ -231,7 +231,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         })
       }
 
-      Values.assertClazzInCtx(ctx, clazz)
+      Values.assertClazzInCtx(mod, ctx, clazz)
       const inferred = Exps.inferProperties(mod, ctx, exp.properties, clazz)
       const names = Object.keys(inferred.properties)
       const extra = Exps.inferExtraProperties(mod, ctx, exp.properties, names)
@@ -256,7 +256,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         })
       }
 
-      Values.assertClazzInCtx(ctx, clazz)
+      Values.assertClazzInCtx(mod, ctx, clazz)
       const properties = Exps.checkNewArgs(mod, ctx, exp.args, clazz)
       return Inferred(clazz, Cores.Objekt(properties))
     }

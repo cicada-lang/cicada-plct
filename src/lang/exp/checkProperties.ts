@@ -5,7 +5,7 @@ import * as Errors from "../errors"
 import { check, Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
-import { assertClazzInCtx, conversion } from "../value"
+import { conversion } from "../value"
 
 export function checkProperties(
   mod: Mod,
@@ -28,7 +28,7 @@ export function checkProperties(
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
-      assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       return {
         [clazz.name]: propertyCore,
         ...checkProperties(mod, ctx, properties, rest),

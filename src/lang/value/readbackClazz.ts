@@ -5,7 +5,7 @@ import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazzInCtx, readback, readbackType } from "../value"
+import { readback, readbackType } from "../value"
 
 export function readbackClazz(
   mod: Mod,
@@ -22,7 +22,7 @@ export function readbackClazz(
       const freshName = freshen(usedNames, clazz.name)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const restValue = applyClosure(clazz.restClosure, v)
-      assertClazzInCtx(ctx, restValue)
+      Values.assertClazzInCtx(mod, ctx, restValue)
       ctx = CtxCons(freshName, clazz.propertyType, ctx)
       const restCore = readbackClazz(mod, ctx, restValue)
       return Cores.ClazzCons(

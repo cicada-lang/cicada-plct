@@ -32,7 +32,7 @@ function inferApPiImplicit(
   core: Core,
   argExp: Exp,
 ): Inferred {
-  Values.assertTypeInCtx(ctx, type, "PiImplicit")
+  Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
 
   const name = type.retTypeClosure.name
   /**
@@ -64,7 +64,7 @@ function inferApPi(
   core: Core,
   argExp: Exp,
 ): Inferred {
-  Values.assertTypeInCtx(ctx, type, "Pi")
+  Values.assertTypeInCtx(mod, ctx, type, "Pi")
 
   const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {

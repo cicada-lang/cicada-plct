@@ -4,7 +4,7 @@ import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { unify } from "../solution"
 import * as Values from "../value"
-import { assertClazzInCtx, Value } from "../value"
+import { Value } from "../value"
 
 export function unifyProperties(
   mod: Mod,
@@ -19,7 +19,7 @@ export function unifyProperties(
       const rightPropertyValue = Actions.doDot(right, clazz.name)
       unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
       const rest = applyClosure(clazz.restClosure, leftPropertyValue)
-      assertClazzInCtx(ctx, rest)
+      Values.assertClazzInCtx(mod, ctx, rest)
       clazz = rest
     }
 
