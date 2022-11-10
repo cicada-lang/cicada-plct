@@ -1,4 +1,4 @@
-import { evaluate } from "../../core"
+import { evaluate } from "../../evaluate"
 import { check, checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"

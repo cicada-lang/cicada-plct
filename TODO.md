@@ -1,4 +1,3 @@
-top level `evaluate/`
 top level `check/`
 top level `infer/`
 top level `readback/`

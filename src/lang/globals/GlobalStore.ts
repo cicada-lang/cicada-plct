@@ -1,6 +1,6 @@
 import { Loader } from "../../loader"
-import * as Cores from "../core"
 import { CtxFulfilled } from "../ctx"
+import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Mod } from "../mod"
 import { parseExp } from "../parse"
@@ -21,7 +21,7 @@ export class GlobalStore {
     if (typeof type === "string") {
       const exp = parseExp(type)
       const core = Exps.checkType(this.mod, this.mod.ctx, exp)
-      this.claimed.set(name, Cores.evaluate(this.mod.env, core))
+      this.claimed.set(name, evaluate(this.mod.env, core))
     } else {
       this.claimed.set(name, type)
     }
@@ -36,7 +36,7 @@ export class GlobalStore {
     if (typeof value === "string") {
       const exp = parseExp(value)
       const core = Exps.check(this.mod, this.mod.ctx, exp, type)
-      value = Cores.evaluate(this.mod.env, core)
+      value = evaluate(this.mod.env, core)
     }
 
     this.typedValues.set(name, { type, value })

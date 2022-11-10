@@ -1,6 +1,6 @@
 import { Closure } from "../closure"
-import { evaluate } from "../core"
 import { extendEnv } from "../env"
+import { evaluate } from "../evaluate"
 import { Value } from "../value"
 
 export function applyClosure(closure: Closure, arg: Value): Value {

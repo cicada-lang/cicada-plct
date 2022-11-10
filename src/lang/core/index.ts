@@ -1,7 +1,6 @@
 export * from "./assertClazz"
 export * from "./clazzAppend"
 export * from "./Core"
-export * from "./evaluate"
 export * from "./formatCore"
 export * from "./freeNames"
 export * from "./freeOccurred"

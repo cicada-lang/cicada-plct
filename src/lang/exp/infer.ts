@@ -1,6 +1,6 @@
 import { applyClosure, ClosureNative, ClosureSimple } from "../closure"
 import * as Cores from "../core"
-import { Core, evaluate } from "../core"
+import { Core } from "../core"
 import {
   Ctx,
   CtxCons,
@@ -9,6 +9,7 @@ import {
   lookupValueInCtx,
 } from "../ctx"
 import * as Errors from "../errors"
+import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"

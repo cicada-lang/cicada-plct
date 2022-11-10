@@ -1,5 +1,5 @@
 import * as Cores from "../../core"
-import { evaluate } from "../../core"
+import { evaluate } from "../../evaluate"
 import * as Exps from "../../exp"
 import { Exp, infer } from "../../exp"
 import { Mod } from "../../mod"

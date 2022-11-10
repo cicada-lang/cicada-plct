@@ -1,5 +1,5 @@
-import { evaluate } from "../../core"
 import { equivalent } from "../../equivalent"
+import { evaluate } from "../../evaluate"
 import { check, checkType, Exp } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"

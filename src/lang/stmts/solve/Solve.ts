@@ -1,6 +1,6 @@
-import { evaluate } from "../../core"
 import { CtxCons } from "../../ctx"
 import * as Errors from "../../errors"
+import { evaluate } from "../../evaluate"
 import { checkType } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"

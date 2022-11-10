@@ -1,6 +1,6 @@
 import { Mod } from "src/lang/mod"
-import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
+import { evaluate } from "../../evaluate"
 import { check, checkType, infer, inferOrUndefined } from "../../exp"
 import { unify, unifyType } from "../../unify"
 import { Equation } from "../solve"

@@ -1,4 +1,4 @@
-import { evaluate } from "../../core"
+import { evaluate } from "../../evaluate"
 import * as Exps from "../../exp"
 import { infer } from "../../exp"
 import { Mod } from "../../mod"

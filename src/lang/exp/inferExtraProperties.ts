@@ -1,5 +1,6 @@
-import { Core, evaluate } from "../core"
+import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
