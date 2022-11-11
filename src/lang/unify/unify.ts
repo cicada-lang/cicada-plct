@@ -1,12 +1,10 @@
 import { indent } from "../../utils/indent"
-import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readback, readbackType } from "../readback"
 import { advanceValue } from "../solution"
 import { unifyByType, unifyByValue, unifyPatternVar } from "../unify"
-import { Value } from "../value"
+import { safeFormat, safeFormatType, Value } from "../value"
 
 /**
 
@@ -40,9 +38,9 @@ export function unify(
       error.trace.unshift(
         [
           `[unify]`,
-          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
-          indent(`left: ${formatCore(readback(mod, ctx, type, left))}`),
-          indent(`right: ${formatCore(readback(mod, ctx, type, right))}`),
+          indent(`type: ${safeFormatType(mod, ctx, type)}`),
+          indent(`left: ${safeFormat(mod, ctx, type, left)}`),
+          indent(`right: ${safeFormat(mod, ctx, type, right)}`),
         ].join("\n"),
       )
     }

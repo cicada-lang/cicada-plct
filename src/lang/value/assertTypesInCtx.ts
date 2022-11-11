@@ -1,9 +1,7 @@
-import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readbackType } from "../readback"
-import { AlreadyType, Value } from "../value"
+import { AlreadyType, safeFormatType, Value } from "../value"
 
 type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
   Kinds extends (infer Kind extends AlreadyType["kind"])[]
@@ -21,7 +19,7 @@ export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
       [
         `assertTypesInCtx fail`,
         `  expect value kinds: ${kinds.join(", ")}`,
-        `  found type: ${formatCore(readbackType(mod, ctx, type))}`,
+        `  found type: ${safeFormatType(mod, ctx, type)}`,
       ].join("\n"),
     )
   }

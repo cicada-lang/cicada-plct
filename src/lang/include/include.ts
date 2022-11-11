@@ -1,12 +1,10 @@
 import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
-import { formatCore } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { readbackType } from "../readback"
 import { advanceValue } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
@@ -47,8 +45,8 @@ export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
       error.trace.unshift(
         [
           `[include]`,
-          indent(`subtype: ${formatCore(readbackType(mod, ctx, subtype))}`),
-          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
+          indent(`subtype: ${Values.safeFormatType(mod, ctx, subtype)}`),
+          indent(`type: ${Values.safeFormatType(mod, ctx, type)}`),
         ].join("\n"),
       )
     }

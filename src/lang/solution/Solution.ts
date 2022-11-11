@@ -1,11 +1,10 @@
 import { indent } from "../../utils/indent"
-import { formatCore } from "../core"
 import { Ctx, ctxLookupType, ctxToEnv } from "../ctx"
 import { Env, EnvCons } from "../env"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { readback, readbackType } from "../readback"
 import { PatternVar } from "../solution"
+import * as Values from "../value"
 import { Value } from "../value"
 
 export class Solution {
@@ -87,11 +86,11 @@ export class Solution {
 
       let value = this.lookupValue(name)
       if (value === undefined) {
-        const typeCore = readbackType(mod, ctx, type)
-        properties.push(`${name}: TODO(${formatCore(typeCore)})`)
+        properties.push(
+          `${name}: TODO(${Values.safeFormatType(mod, ctx, type)})`,
+        )
       } else {
-        const core = readback(mod, ctx, type, value)
-        properties.push(`${name}: ${formatCore(core)}`)
+        properties.push(`${name}: ${Values.safeFormat(mod, ctx, type, value)}`)
       }
     }
 

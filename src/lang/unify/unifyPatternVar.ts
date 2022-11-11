@@ -1,11 +1,9 @@
 import { indent } from "../../utils/indent"
-import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readback, readbackType } from "../readback"
 import { occur } from "../unify"
-import { Value } from "../value"
+import { safeFormat, safeFormatType, Value } from "../value"
 
 export function unifyPatternVar(
   mod: Mod,
@@ -27,9 +25,9 @@ export function unifyPatternVar(
       throw new Errors.UnificationError(
         [
           `unifyPatternVar find the left name occurs in the right value`,
-          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
+          indent(`type: ${safeFormatType(mod, ctx, type)}`),
           indent(`left name: ${left.neutral.name}`),
-          indent(`right value: ${formatCore(readback(mod, ctx, type, right))}`),
+          indent(`right value: ${safeFormat(mod, ctx, type, right)}`),
         ].join("\n"),
       )
     }
@@ -43,8 +41,8 @@ export function unifyPatternVar(
       throw new Errors.UnificationError(
         [
           `unifyPatternVar find the right name occurs in the left value`,
-          indent(`type: ${formatCore(readbackType(mod, ctx, type))}`),
-          indent(`left value: ${formatCore(readback(mod, ctx, type, left))}`),
+          indent(`type: ${safeFormatType(mod, ctx, type)}`),
+          indent(`left value: ${safeFormat(mod, ctx, type, left)}`),
           indent(`right name: ${right.neutral.name}`),
         ].join("\n"),
       )

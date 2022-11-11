@@ -1,16 +1,14 @@
 import { indent } from "../../utils/indent"
 import { applyClosure, Closure } from "../closure"
-import { formatCore } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { readbackType } from "../readback"
 import { advanceValue } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { isClazz, Value } from "../value"
+import { isClazz, safeFormatType, Value } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = advanceValue(mod, left)
@@ -26,8 +24,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       error.trace.unshift(
         [
           `[unifyType]`,
-          indent(`left: ${formatCore(readbackType(mod, ctx, left))}`),
-          indent(`right: ${formatCore(readbackType(mod, ctx, right))}`),
+          indent(`left: ${safeFormatType(mod, ctx, left)}`),
+          indent(`right: ${safeFormatType(mod, ctx, right)}`),
         ].join("\n"),
       )
     }
@@ -123,8 +121,8 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   throw new Errors.UnificationError(
     [
       `unifyType is not implemented for the pair of type values`,
-      indent(`left: ${formatCore(readbackType(mod, ctx, left))}`),
-      indent(`right: ${formatCore(readbackType(mod, ctx, right))}`),
+      indent(`left: ${safeFormatType(mod, ctx, left)}`),
+      indent(`right: ${safeFormatType(mod, ctx, right)}`),
     ].join("\n"),
   )
 }
