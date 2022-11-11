@@ -1,6 +1,12 @@
 solve implicit pattern variables in place,
 readback solved value, insert readbacked core.
 
+quit using `envExtend` -- just use `EnvCons`
+
+rename `safeFormat` to `formatValue`
+
+- readback value should always be safe
+
 quit using global side-effect on `mod.solution`
 
 - passing `solution`
