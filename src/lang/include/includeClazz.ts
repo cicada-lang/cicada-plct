@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { includeClazzOrderless } from "../include"
+import { includeClazzOrdered } from "../include"
 import { Mod } from "../mod"
 import * as Values from "../value"
 
@@ -9,5 +9,5 @@ export function includeClazz(
   clazz: Values.Clazz,
   subclazz: Values.Clazz,
 ): void {
-  return includeClazzOrderless(mod, ctx, clazz, subclazz)
+  return includeClazzOrdered(mod, ctx, clazz, subclazz)
 }
