@@ -1,5 +1,3 @@
-`equalMap` take function as the first argument
-
 `unifyClazzOrdered` -- require same order of properties
 
 - quit using `freshenNames` & `clazzExpel`

@@ -252,11 +252,11 @@ function join_is_idempotent(
   )
 
   check equalMap(
-    equalSwap(lattice.complementJoinForTop(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(lattice.join(x, x), z),
     ),
+    equalSwap(lattice.complementJoinForTop(x)),
   ): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, x), lattice.top),
@@ -276,11 +276,11 @@ function join_is_idempotent(
   )
 
   check equalMap(
-    lattice.complementMeetForBottom(x),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(x, z),
-    )
+    ),
+    lattice.complementMeetForBottom(x),
   ): Equal(
     lattice.Element,
     lattice.join(x, lattice.meet(x, lattice.complement(x))),
@@ -297,21 +297,21 @@ function join_is_idempotent(
     equalSwap(lattice.topIdMeet(lattice.join(x, x))),
     equalCompose(
       equalMap(
-        equalSwap(lattice.complementJoinForTop(x)),
         the(
           (lattice.Element) -> lattice.Element,
           (z) => lattice.meet(lattice.join(x, x), z),
         ),
+        equalSwap(lattice.complementJoinForTop(x)),
       ),
       equalCompose(
         equalSwap(lattice.joinDistributeMeet(x, x, lattice.complement(x))),
         equalCompose(
           equalMap(
-            lattice.complementMeetForBottom(x),
             the(
               (lattice.Element) -> lattice.Element,
               (z) => lattice.join(x, z),
-            )
+            ),
+            lattice.complementMeetForBottom(x),
           ),
           lattice.bottomIdJoin(x)
         )
@@ -398,11 +398,11 @@ function top_is_at_the_top(
   )
 
   check equalMap(
-    equalSwap(lattice.complementJoinForTop(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.meet(z, lattice.join(x, lattice.top)),
-    )
+    ),
+    equalSwap(lattice.complementJoinForTop(x)),
   ): Equal(
     lattice.Element,
     lattice.meet(lattice.top, lattice.join(x, lattice.top)),
@@ -418,11 +418,11 @@ function top_is_at_the_top(
   )
 
   check equalMap(
-    lattice.topIdMeet(lattice.complement(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(x, z),
     ),
+    lattice.topIdMeet(lattice.complement(x)),
   ): Equal(
     lattice.Element,
     lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
@@ -441,11 +441,11 @@ function top_is_at_the_top(
       lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top),
       equalCompose(
         equalMap(
-          equalSwap(lattice.complementJoinForTop(x)),
           the(
             (lattice.Element) -> lattice.Element,
             (z) => lattice.meet(z, lattice.join(x, lattice.top)),
-          )
+          ),
+          equalSwap(lattice.complementJoinForTop(x)),
         ),
         equalCompose(
           equalSwap(
@@ -453,11 +453,11 @@ function top_is_at_the_top(
           ),
           equalCompose(
             equalMap(
-              lattice.topIdMeet(lattice.complement(x)),
               the(
                 (lattice.Element) -> lattice.Element,
                 (z) => lattice.join(x, z),
               ),
+              lattice.topIdMeet(lattice.complement(x)),
             ),
             lattice.complementJoinForTop(x),
           )
@@ -500,11 +500,11 @@ function join_absorb_over_meet(
     lattice.join(x, lattice.meet(x, y)),
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
   ) = equalMap(
-    equalSwap(lattice.topIdMeet(x)),
     the(
       (lattice.Element) -> lattice.Element,
       (z) => lattice.join(z, lattice.meet(x, y)),
-    )
+    ),
+    equalSwap(lattice.topIdMeet(x)),
   )
 
   let eq2: Equal(
@@ -518,8 +518,8 @@ function join_absorb_over_meet(
     lattice.meet(x, lattice.join(lattice.top, y)),
     lattice.meet(x, lattice.join(y, lattice.top)),
   ) = equalMap(
-    lattice.joinCommutative(lattice.top, y),
     the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
+    lattice.joinCommutative(lattice.top, y),
   )
 
   let eq4: Equal(
@@ -527,8 +527,8 @@ function join_absorb_over_meet(
     lattice.meet(x, lattice.join(y, lattice.top)),
     lattice.meet(x, lattice.top),
   ) = equalMap(
-    top_is_at_the_top(lattice, y),
     the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
+    top_is_at_the_top(lattice, y),
   )
 
   let eq5: Equal(

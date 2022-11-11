@@ -3,8 +3,8 @@ function equalMap(
   implicit Y: Type,
   implicit from: X,
   implicit to: X,
-  target: Equal(X, from, to),
   f: (X) -> Y,
+  target: Equal(X, from, to),
 ): Equal(Y, f(from), f(to)) {
   return replace(
     target,

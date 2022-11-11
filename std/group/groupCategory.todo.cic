@@ -85,7 +85,7 @@ function composeGroupHomomorphism(
         H.mul(f.homo(x), f.homo(y)),
       )
 
-      check equalMap(f.homoPreserveMul(x, y), g.homo): Equal(
+      check equalMap(g.home, f.homoPreserveMul(x, y)): Equal(
         K.Element,
         g.homo(f.homo(G.mul(x, y))),
         g.homo(H.mul(f.homo(x), f.homo(y))),
@@ -98,7 +98,7 @@ function composeGroupHomomorphism(
       )
 
       return equalCompose(
-        equalMap(f.homoPreserveMul(x, y), g.homo),
+        equalMap(g.home, f.homoPreserveMul(x, y)),
         g.homoPreserveMul(f.homo(x), f.homo(y)),
       )
     }
