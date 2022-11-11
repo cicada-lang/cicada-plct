@@ -1,8 +1,8 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
-import * as Exps from "../exp"
-import { Exp, infer } from "../exp"
+import { Exp } from "../exp"
+import { infer, Inferred } from "../infer"
 import { Mod } from "../mod"
 import * as Values from "../value"
 
@@ -14,7 +14,7 @@ export function inferExtraProperties(
 ): { clazz: Values.Clazz; properties: Record<string, Core> } {
   const extraInferred = Object.entries(properties)
     .filter(([name, exp]) => !names.includes(name))
-    .map(([name, exp]): [string, Exps.Inferred] => [name, infer(mod, ctx, exp)])
+    .map(([name, exp]): [string, Inferred] => [name, infer(mod, ctx, exp)])
   const extraProperties = Object.fromEntries(
     extraInferred.map(([name, inferred]) => [name, inferred.core]),
   )

@@ -1,8 +1,9 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
-import { Exp, infer } from "../exp"
+import { Exp } from "../exp"
 import { include } from "../include"
+import { infer } from "../infer"
 import { Mod } from "../mod"
 import { Value } from "../value"
 

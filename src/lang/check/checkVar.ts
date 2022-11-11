@@ -4,22 +4,18 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { include } from "../include"
+import { infer, insertApImplicitStep } from "../infer"
 import { Mod } from "../mod"
 import { readbackType, Value } from "../value"
 
 export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
-  let inferred = Exps.infer(mod, ctx, exp)
+  let inferred = infer(mod, ctx, exp)
   while (inferred.type.kind === "PiImplicit") {
     try {
       include(mod, ctx, type, inferred.type)
       return inferred.core
     } catch (_error) {
-      inferred = Exps.insertApImplicitStep(
-        mod,
-        ctx,
-        inferred.type,
-        inferred.core,
-      )
+      inferred = insertApImplicitStep(mod, ctx, inferred.type, inferred.core)
     }
   }
 

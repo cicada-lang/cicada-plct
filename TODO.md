@@ -1,4 +1,3 @@
-top level `infer/`
 top level `readback/`
 
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail

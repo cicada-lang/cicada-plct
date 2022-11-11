@@ -6,7 +6,8 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
-import { Exp, Inferred } from "../exp"
+import { Exp } from "../exp"
+import { inferOrUndefined, Inferred, insertApImplicit } from "../infer"
 import { Mod } from "../mod"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
@@ -68,9 +69,9 @@ function inferApPi(
 ): Inferred {
   Values.assertTypeInCtx(mod, ctx, type, "Pi")
 
-  const argInferred = Exps.inferOrUndefined(mod, ctx, argExp)
+  const argInferred = inferOrUndefined(mod, ctx, argExp)
   if (argInferred !== undefined) {
-    const argInserted = Exps.insertApImplicit(mod, ctx, argInferred)
+    const argInserted = insertApImplicit(mod, ctx, argInferred)
     try {
       unifyType(mod, ctx, argInserted.type, type.argType)
     } catch (error) {

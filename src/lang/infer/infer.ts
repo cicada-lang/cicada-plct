@@ -13,6 +13,12 @@ import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import {
+  inferAp,
+  inferExtraProperties,
+  inferFulfillingType,
+  inferProperties,
+} from "../infer"
 import { Mod } from "../mod"
 import * as Values from "../value"
 import { readback, readbackType, Value } from "../value"
@@ -120,8 +126,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "Ap": {
       const inferred = infer(mod, ctx, exp.target)
       return (
-        Exps.inferFulfillingType(mod, ctx, inferred, exp.arg) ||
-        Exps.inferAp(mod, ctx, inferred.type, inferred.core, exp.arg)
+        inferFulfillingType(mod, ctx, inferred, exp.arg) ||
+        inferAp(mod, ctx, inferred.type, inferred.core, exp.arg)
       )
     }
 
@@ -234,9 +240,9 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       }
 
       Values.assertClazzInCtx(mod, ctx, clazz)
-      const inferred = Exps.inferProperties(mod, ctx, exp.properties, clazz)
+      const inferred = inferProperties(mod, ctx, exp.properties, clazz)
       const names = Object.keys(inferred.properties)
-      const extra = Exps.inferExtraProperties(mod, ctx, exp.properties, names)
+      const extra = inferExtraProperties(mod, ctx, exp.properties, names)
 
       /**
          We add the inferred `extra.clazz` to the return value,

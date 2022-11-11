@@ -1,5 +1,6 @@
 import { Ctx } from "../ctx"
-import { Exp, infer, Inferred } from "../exp"
+import { Exp } from "../exp"
+import { infer, Inferred } from "../infer"
 import { Mod } from "../mod"
 
 export function inferOrUndefined(
