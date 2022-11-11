@@ -1,5 +1,6 @@
+import { checkType } from "../../check"
 import { evaluate } from "../../evaluate"
-import { checkType, Exp } from "../../exp"
+import { Exp } from "../../exp"
 import { include } from "../../include"
 import { Mod } from "../../mod"
 import { Span } from "../../span"

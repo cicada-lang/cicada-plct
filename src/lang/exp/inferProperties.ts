@@ -1,10 +1,10 @@
+import { check } from "../check"
 import { applyClosure } from "../closure"
 import { Core } from "../core"
 import { Ctx, CtxFulfilled } from "../ctx"
 import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
-import * as Exps from "../exp"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
@@ -26,7 +26,7 @@ export function inferProperties(
         throw new Errors.ElaborationError(`missing property: ${clazz.name}`, {})
       }
 
-      const propertyCore = Exps.check(mod, ctx, propertyExp, clazz.propertyType)
+      const propertyCore = check(mod, ctx, propertyExp, clazz.propertyType)
       const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
@@ -48,12 +48,7 @@ export function inferProperties(
     case "ClazzFulfilled": {
       const propertyExp = properties[clazz.name]
       if (propertyExp !== undefined) {
-        const propertyCore = Exps.check(
-          mod,
-          ctx,
-          propertyExp,
-          clazz.propertyType,
-        )
+        const propertyCore = check(mod, ctx, propertyExp, clazz.propertyType)
         const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
         equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }

@@ -1,3 +1,4 @@
+import { check } from "../check"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
@@ -89,7 +90,7 @@ function inferApPi(
      check against the given type is necessary.
   **/
 
-  const argCore = Exps.check(mod, ctx, argExp, type.argType)
+  const argCore = check(mod, ctx, argExp, type.argType)
   const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
   return Inferred(
     applyClosure(type.retTypeClosure, argValue),

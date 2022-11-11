@@ -1,7 +1,7 @@
 import { Loader } from "../../loader"
+import { check, checkType } from "../check"
 import { CtxFulfilled } from "../ctx"
 import { evaluate } from "../evaluate"
-import * as Exps from "../exp"
 import { Mod } from "../mod"
 import { parseExp } from "../parse"
 import { Value } from "../value"
@@ -20,7 +20,7 @@ export class GlobalStore {
   claim(name: string, type: Value | string): void {
     if (typeof type === "string") {
       const exp = parseExp(type)
-      const core = Exps.checkType(this.mod, this.mod.ctx, exp)
+      const core = checkType(this.mod, this.mod.ctx, exp)
       this.claimed.set(name, evaluate(this.mod.env, core))
     } else {
       this.claimed.set(name, type)
@@ -35,7 +35,7 @@ export class GlobalStore {
 
     if (typeof value === "string") {
       const exp = parseExp(value)
-      const core = Exps.check(this.mod, this.mod.ctx, exp, type)
+      const core = check(this.mod, this.mod.ctx, exp, type)
       value = evaluate(this.mod.env, core)
     }
 

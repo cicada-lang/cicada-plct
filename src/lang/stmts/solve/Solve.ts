@@ -1,7 +1,7 @@
+import { checkType } from "../../check"
 import { CtxCons } from "../../ctx"
 import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
-import { checkType } from "../../exp"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
