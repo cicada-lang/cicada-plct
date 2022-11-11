@@ -6,11 +6,12 @@ import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { readbackType } from "../readback"
 import { advanceValue } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { readbackType, Value } from "../value"
+import { Value } from "../value"
 
 /**
 

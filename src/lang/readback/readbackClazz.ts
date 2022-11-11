@@ -3,9 +3,9 @@ import * as Cores from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { readback, readbackType } from "../readback"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { readback, readbackType } from "../value"
 
 export function readbackClazz(
   mod: Mod,

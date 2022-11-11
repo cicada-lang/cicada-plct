@@ -3,7 +3,8 @@ import { Ctx } from "../ctx"
 import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readback, Value } from "../value"
+import { readback } from "../readback"
+import { Value } from "../value"
 
 /**
 

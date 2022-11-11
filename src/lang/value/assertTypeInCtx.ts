@@ -2,7 +2,8 @@ import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { AlreadyType, readbackType, Value } from "../value"
+import { readbackType } from "../readback"
+import { AlreadyType, Value } from "../value"
 
 export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
   mod: Mod,

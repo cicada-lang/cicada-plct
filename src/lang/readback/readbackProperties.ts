@@ -3,8 +3,9 @@ import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
+import { readback } from "../readback"
 import * as Values from "../value"
-import { readback, Value } from "../value"
+import { Value } from "../value"
 
 export function readbackProperties(
   mod: Mod,

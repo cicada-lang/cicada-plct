@@ -5,9 +5,10 @@ import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { readback, readbackProperties, readbackType } from "../readback"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { readback, readbackProperties, readbackType, Value } from "../value"
+import { Value } from "../value"
 
 /**
 

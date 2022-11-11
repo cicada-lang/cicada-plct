@@ -5,10 +5,11 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { readback, readbackClazz, readbackNeutral } from "../readback"
 import { advanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { readback, readbackClazz, readbackNeutral, Value } from "../value"
+import { Value } from "../value"
 
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
   type = advanceValue(mod, type)

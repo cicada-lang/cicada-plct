@@ -4,6 +4,7 @@ import * as Exps from "../../exp"
 import { Exp } from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
+import { readbackClazz } from "../../readback"
 import { Span } from "../../span"
 import { Stmt } from "../../stmt"
 import * as Values from "../../value"
@@ -22,7 +23,7 @@ export class ClazzExtends extends Stmt {
     const inferredParent = infer(mod, mod.ctx, this.parent)
     const parentClazz = evaluate(mod.env, inferredParent.core)
     Values.assertClazzInCtx(mod, mod.ctx, parentClazz)
-    const parentClazzCore = Values.readbackClazz(mod, mod.ctx, parentClazz)
+    const parentClazzCore = readbackClazz(mod, mod.ctx, parentClazz)
     const ctx = Values.clazzExtendCtx(mod, mod.ctx, parentClazz)
     const superObjekt = Exps.ObjektUnfolded(
       Values.clazzPropertyNames(parentClazz).map((name) =>

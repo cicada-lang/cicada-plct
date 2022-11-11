@@ -6,8 +6,8 @@ import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Mod } from "../mod"
+import { readback } from "../readback"
 import * as Values from "../value"
-import { readback } from "../value"
 
 export function checkNewArgs(
   mod: Mod,

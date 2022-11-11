@@ -3,7 +3,8 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { readback, readbackNeutral, readbackType, Value } from "../value"
+import { readback, readbackNeutral, readbackType } from "../readback"
+import { Value } from "../value"
 
 export function readbackByValue(
   mod: Mod,

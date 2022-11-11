@@ -20,8 +20,9 @@ import {
   inferProperties,
 } from "../infer"
 import { Mod } from "../mod"
+import { readback, readbackType } from "../readback"
 import * as Values from "../value"
-import { readback, readbackType, Value } from "../value"
+import { Value } from "../value"
 
 export type Inferred = {
   type: Value

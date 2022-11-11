@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { readback } from "../value"
+import { readback } from "../readback"
 
 export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
   switch (neutral.kind) {

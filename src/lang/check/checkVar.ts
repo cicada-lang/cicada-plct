@@ -6,7 +6,8 @@ import * as Exps from "../exp"
 import { include } from "../include"
 import { infer, insertApImplicitStep } from "../infer"
 import { Mod } from "../mod"
-import { readbackType, Value } from "../value"
+import { readbackType } from "../readback"
+import { Value } from "../value"
 
 export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
   let inferred = infer(mod, ctx, exp)

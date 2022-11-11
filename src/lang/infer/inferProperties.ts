@@ -7,6 +7,7 @@ import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
+import { readback } from "../readback"
 import * as Values from "../value"
 
 export function inferProperties(
@@ -53,7 +54,7 @@ export function inferProperties(
         equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       }
 
-      const propertyCore = Values.readback(
+      const propertyCore = readback(
         mod,
         ctx,
         clazz.propertyType,

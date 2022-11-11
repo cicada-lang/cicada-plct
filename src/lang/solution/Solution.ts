@@ -4,8 +4,9 @@ import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
 import { Env, EnvCons } from "../env"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { readback, readbackType } from "../readback"
 import { PatternVar } from "../solution"
-import { readback, readbackType, Value } from "../value"
+import { Value } from "../value"
 
 export class Solution {
   patternVars: Array<PatternVar> = []
