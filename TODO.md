@@ -1,10 +1,8 @@
-`safeFormatNeutral` & `safeFormatType` & `safeFormat` -- safe for real
+pass `groupCategory.todo.cic`
 
 `unifyClazzOrdered` -- require same order of properties
 
 - quit using `freshenNames` & `clazzExpel`
-
-pass `groupCategory.todo.cic`
 
 [syntax] we need a syntax -- `equal` macro -- for reasoning about equality
 

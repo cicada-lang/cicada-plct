@@ -1,13 +1,12 @@
 import { indent } from "../../utils/indent"
-import { Core, formatCore } from "../core"
+import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { include } from "../include"
 import { infer, insertApImplicitStep } from "../infer"
 import { Mod } from "../mod"
-import { readbackType } from "../readback"
-import { Value } from "../value"
+import { safeFormatType, Value } from "../value"
 
 export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
   let inferred = infer(mod, ctx, exp)
@@ -32,12 +31,8 @@ export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
         [
           `checkVar fail`,
           indent(`var name: ${exp.name}`),
-          indent(
-            `inferred type: ${formatCore(
-              readbackType(mod, ctx, inferred.type),
-            )}`,
-          ),
-          indent(`given type: ${formatCore(readbackType(mod, ctx, type))}`),
+          indent(`inferred type: ${safeFormatType(mod, ctx, inferred.type)}`),
+          indent(`given type: ${safeFormatType(mod, ctx, type)}`),
           ...error.trace,
           error.message,
         ].join("\n"),

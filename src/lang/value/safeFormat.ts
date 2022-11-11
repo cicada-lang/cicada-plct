@@ -10,5 +10,9 @@ export function safeFormat(
   type: Value,
   value: Value,
 ): string {
-  return formatCore(readback(mod, ctx, type, value))
+  try {
+    return formatCore(readback(mod, ctx, type, value))
+  } catch (error) {
+    return `[fail to readback] ${value.kind}`
+  }
 }

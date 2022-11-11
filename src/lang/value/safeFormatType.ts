@@ -5,5 +5,9 @@ import { readbackType } from "../readback"
 import { Value } from "../value"
 
 export function safeFormatType(mod: Mod, ctx: Ctx, type: Value): string {
-  return formatCore(readbackType(mod, ctx, type))
+  try {
+    return formatCore(readbackType(mod, ctx, type))
+  } catch (error) {
+    return `[fail to readbackType] ${type.kind}`
+  }
 }

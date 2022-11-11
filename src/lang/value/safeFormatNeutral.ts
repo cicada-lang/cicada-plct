@@ -9,5 +9,9 @@ export function safeFormatNeutral(
   ctx: Ctx,
   neutral: Neutral,
 ): string {
-  return formatCore(readbackNeutral(mod, ctx, neutral))
+  try {
+    return formatCore(readbackNeutral(mod, ctx, neutral))
+  } catch (error) {
+    return `[fail to readbackNeutral] ${neutral.kind}`
+  }
 }
