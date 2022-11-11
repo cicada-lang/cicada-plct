@@ -28,7 +28,7 @@ export function prepareProperties(
   return record
 }
 
-export function prepareProperty(
+function prepareProperty(
   mod: Mod,
   ctx: Ctx,
   property: Exps.Property,
