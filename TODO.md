@@ -1,30 +1,36 @@
+solve implicit pattern variables in place,
+readback solved value, insert readbacked core.
+
+quit using global side-effect on `mod.solution`
+
+- passing `solution`
+- still passing `mod` -- for future usage
+
 improve error report for `groupCategory.todo.cic`
 
+pass `groupCategory.todo.cic`
+
+# order or orderless?
+
+refactor `includeClazzOrdered` -- step left and right
+refactor `unifyClazzOrdered` -- step left and right
+rename `includeClazzOrdered` to `includeClazz`
+rename `unifyClazzOrdered` to `unifyClazz`
+remove `includeClazzOrderless` & `unifyClazzOrderless`
 remove `freshenNames` & `clazzExpel`
 
-refactor `includeClazzOrdered`
+[note] `alphaEquivalentClazz` current handles equivalent out of order
 
-refactor `unifyClazzOrdered`
+- [maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
+  because "equivalent thing can not be unified" is a bad semantic.
 
-rename `includeClazzOrdered` to `includeClazz`
-
-rename `unifyClazzOrdered` to `unifyClazz`
+# syntax for equivalent
 
 [syntax] we need a syntax -- `equivalent <type> {}` macro -- for reasoning about equality
 
 - capture the use of `equalCompose` only
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
-
-pass `groupCategory.todo.cic`
-
-quit using global side-effect on `mod.solution`
-
-[note] `alphaEquivalentClazz` current handles equivalent out of order
-
-- [maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
-
-  because "equivalent thing can not be unified" is a bad semantic.
 
 # std
 
