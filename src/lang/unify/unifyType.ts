@@ -30,6 +30,17 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       )
     }
 
+    if (error instanceof Errors.EvaluationError) {
+      throw new Errors.UnificationError(
+        [
+          `[unifyType] EvaluationError during unification`,
+          error.message,
+          indent(`left: ${safeFormatType(mod, ctx, left)}`),
+          indent(`right: ${safeFormatType(mod, ctx, right)}`),
+        ].join("\n"),
+      )
+    }
+
     throw error
   }
 }

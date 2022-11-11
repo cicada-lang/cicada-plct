@@ -53,7 +53,11 @@ function composeGroupHomomorphism(
         H.id,
       )
 
-      // check equalMap(f.homoPreserveId, ):
+      check equalMap(g.homo, f.homoPreserveId): Equal(
+        K.Element,
+        g.homo(f.homo(G.id)),
+        g.homo(H.id),
+      )
 
       check g.homoPreserveId: Equal(
         K.Element,
@@ -61,7 +65,10 @@ function composeGroupHomomorphism(
         K.id,
       )
 
-      return the(motive, refl)
+      return equalCompose(
+        equalMap(g.homo, f.homoPreserveId),
+        g.homoPreserveId,
+      )
     },
 
     // homoPreserveMul: (x, y) => equal K.Element {
@@ -85,7 +92,7 @@ function composeGroupHomomorphism(
         H.mul(f.homo(x), f.homo(y)),
       )
 
-      check equalMap(g.home, f.homoPreserveMul(x, y)): Equal(
+      check equalMap(g.homo, f.homoPreserveMul(x, y)): Equal(
         K.Element,
         g.homo(f.homo(G.mul(x, y))),
         g.homo(H.mul(f.homo(x), f.homo(y))),
@@ -98,7 +105,7 @@ function composeGroupHomomorphism(
       )
 
       return equalCompose(
-        equalMap(g.home, f.homoPreserveMul(x, y)),
+        equalMap(g.homo, f.homoPreserveMul(x, y)),
         g.homoPreserveMul(f.homo(x), f.homo(y)),
       )
     }
@@ -109,28 +116,10 @@ let groupCategory = new Category {
   Object: Group,
   Morphism: (G, H) => GroupHomomorphism(G, H),
   id: idGroupHomomorphism,
-  // TODO Can not be just `composeGroupHomomorphism`
-  compose: (implicit G, implicit H, implicit K, f, g) => composeGroupHomomorphism(implicit G, implicit H, implicit K, f, g),
-
-  idLeft: (implicit G, implicit H, f) => {
-    let G = f.dom
-    let H = f.cod
-
-    check G: Group
-    check H: Group
-
-    check f: GroupHomomorphism(G, H)
-
-    let motive = Equal(
-      GroupHomomorphism(G, H),
-      composeGroupHomomorphism(implicit G, implicit G, implicit H, idGroupHomomorphism(G), f),
-      // composeGroupHomomorphism(idGroupHomomorphism(G), f),
-      f,
-    )
-
-    return the(motive, refl)
+  compose: composeGroupHomomorphism,
+  idLeft: (implicit G: Group, implicit H: Group, f: GroupHomomorphism(G, H)) => {
+    return refl
   },
-
   // // given G: Group, H: Group
   // idRight: (f: GroupHomomorphism(G, H)) => same(f)
 

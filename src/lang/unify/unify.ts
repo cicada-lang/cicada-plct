@@ -45,6 +45,18 @@ export function unify(
       )
     }
 
+    if (error instanceof Errors.EvaluationError) {
+      throw new Errors.UnificationError(
+        [
+          `[unify] EvaluationError during unification`,
+          error.message,
+          indent(`type: ${safeFormatType(mod, ctx, type)}`),
+          indent(`left: ${safeFormat(mod, ctx, type, left)}`),
+          indent(`right: ${safeFormat(mod, ctx, type, right)}`),
+        ].join("\n"),
+      )
+    }
+
     throw error
   }
 }

@@ -1,4 +1,5 @@
 import { applyClosure } from "../closure"
+import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
@@ -13,7 +14,15 @@ export function doAp(target: Value, arg: Value): Value {
   }
 
   Values.assertValue(target, "TypedNeutral")
-  Values.assertValue(target.type, "Pi")
+
+  if (target.type.kind !== "Pi") {
+    throw new Errors.EvaluationError(
+      [
+        `[doAp] When target is a TypedNeutral, expect target.type to be Pi`,
+        `  target.type.kind: ${target.type.kind}`,
+      ].join("\n"),
+    )
+  }
 
   return Values.TypedNeutral(
     applyClosure(target.type.retTypeClosure, arg),
