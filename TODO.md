@@ -1,6 +1,6 @@
-remove `freshenNames` & `clazzExpel`
-
 improve error report for `groupCategory.todo.cic`
+
+remove `freshenNames` & `clazzExpel`
 
 refactor `includeClazzOrdered`
 
