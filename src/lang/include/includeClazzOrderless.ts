@@ -42,14 +42,14 @@ export function includeClazzOrderless(
     const subclazzProperty = subclazzPropertyMap.get(name)
     if (subclazzProperty === undefined) {
       throw new Errors.InclusionError(
-        `includeClazz expect subclass to have property: ${name}`,
+        `[includeClazzOrderless] expect subclass to have property: ${name}`,
       )
     }
 
     const freshName = freshNameMap.get(name)
     if (freshName === undefined) {
       throw new Errors.InternalError(
-        `unifyClazz expect ${name} to be found in freshNameMap`,
+        `[includeClazzOrderless] expect ${name} to be found in freshNameMap`,
       )
     }
 
@@ -64,7 +64,9 @@ export function includeClazzOrderless(
       )
     } catch (error) {
       if (error instanceof Errors.InclusionError) {
-        error.trace.unshift([`[include property] ${name}`].join("\n"))
+        error.trace.unshift(
+          [`[includeClazzOrderless] property: ${name}`].join("\n"),
+        )
       }
 
       throw error
@@ -86,7 +88,7 @@ function includeClazzProperty(
   ) {
     throw new Errors.InclusionError(
       [
-        `includeClazz expect subclass to have fulfilled property value`,
+        `[includeClazzOrderless includeClazzProperty] expect subclass to have fulfilled property value`,
         `  property name: ${name}`,
       ].join("\n"),
     )

@@ -24,7 +24,7 @@ export function unifyPatternVar(
     if (occur(mod, ctx, left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
         [
-          `unifyPatternVar find the left name occurs in the right value`,
+          `[unifyPatternVar] find the left name occurs in the right value`,
           indent(`type: ${safeFormatType(mod, ctx, type)}`),
           indent(`left name: ${left.neutral.name}`),
           indent(`right value: ${safeFormat(mod, ctx, type, right)}`),
@@ -40,7 +40,7 @@ export function unifyPatternVar(
     if (occur(mod, ctx, right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
         [
-          `unifyPatternVar find the right name occurs in the left value`,
+          `[unifyPatternVar] find the right name occurs in the left value`,
           indent(`type: ${safeFormatType(mod, ctx, type)}`),
           indent(`left value: ${safeFormat(mod, ctx, type, left)}`),
           indent(`right name: ${right.neutral.name}`),

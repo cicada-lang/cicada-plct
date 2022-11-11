@@ -29,11 +29,11 @@ export function checkVar(mod: Mod, ctx: Ctx, exp: Exps.Var, type: Value): Core {
     ) {
       throw new Errors.ElaborationError(
         [
+          ...error.trace,
           `checkVar fail`,
           indent(`var name: ${exp.name}`),
           indent(`inferred type: ${safeFormatType(mod, ctx, inferred.type)}`),
           indent(`given type: ${safeFormatType(mod, ctx, type)}`),
-          ...error.trace,
           error.message,
         ].join("\n"),
         { span: exp.span },

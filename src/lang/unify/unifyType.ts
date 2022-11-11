@@ -120,7 +120,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 
   throw new Errors.UnificationError(
     [
-      `unifyType is not implemented for the pair of type values`,
+      `[unifyType] is not implemented for the pair of type values`,
       indent(`left: ${safeFormatType(mod, ctx, left)}`),
       indent(`right: ${safeFormatType(mod, ctx, right)}`),
     ].join("\n"),

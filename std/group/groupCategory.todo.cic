@@ -90,7 +90,9 @@ let groupCategory = new Category {
   //   }
   // },
 
-  idLeft: (f) => refl,
+  idLeft: (f) => {
+    return refl
+  },
 
   // // given G: Group, H: Group
   // idRight: (f: GroupHomomorphism(G, H)) => same(f)

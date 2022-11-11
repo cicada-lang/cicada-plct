@@ -22,7 +22,7 @@ export function includeClazzOrdered(
   if (missingNames.length > 0) {
     throw new Errors.InclusionError(
       [
-        `includeClazz found property names of class not included in the subclass`,
+        `[includeClazzOrdered] found property names of class not included in the subclass`,
         `  missing names: ${missingNames.join(", ")}`,
       ].join("\n"),
     )
@@ -78,7 +78,7 @@ function nextSubclazz(
   switch (subclazz.kind) {
     case "ClazzNull": {
       throw new Errors.InclusionError(
-        `includeClazz fail to find next subclass of name: ${name}`,
+        `[includeClazzOrdered nextSubclazz] fail to find next subclass of name: ${name}`,
       )
     }
 

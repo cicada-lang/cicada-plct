@@ -32,7 +32,7 @@ export function unifyByValue(
 
     throw new Errors.UnificationError(
       [
-        `unifyByValue expect strings to be the same`,
+        `[unifyByValue] expect strings to be the same`,
         `  left: ${left.data}`,
         `  right: ${right.data}`,
       ].join("\n"),
@@ -47,7 +47,7 @@ export function unifyByValue(
 
   throw new Errors.UnificationError(
     [
-      `unifyByValue is not implemented for the pair of values`,
+      `[unifyByValue] is not implemented for the pair of values`,
       indent(`type: ${safeFormatType(mod, ctx, type)}`),
       indent(`left: ${safeFormat(mod, ctx, type, left)}`),
       indent(`right: ${safeFormat(mod, ctx, type, right)}`),

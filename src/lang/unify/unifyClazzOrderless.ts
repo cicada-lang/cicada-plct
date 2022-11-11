@@ -26,7 +26,7 @@ export function unifyClazzOrderless(
     const freshName = freshNameMap.get(name)
     if (freshName === undefined) {
       throw new Errors.InternalError(
-        `unifyClazz expect ${name} to be found in freshNameMap`,
+        `[unifyClazzOrderless] expect ${name} to be found in freshNameMap`,
       )
     }
 

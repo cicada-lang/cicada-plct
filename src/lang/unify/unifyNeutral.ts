@@ -26,7 +26,7 @@ export function unifyNeutral(
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
         [
-          `unifyNeutral expect variable names to be equal`,
+          `[unifyNeutral] expect variable names to be equal`,
           `  left: ${left.name}`,
           `  right: ${right.name}`,
         ].join("\n"),
@@ -62,7 +62,7 @@ export function unifyNeutral(
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
         [
-          `unifyNeutral expect dot neutrals to have the same property name`,
+          `[unifyNeutral] expect dot neutrals to have the same property name`,
           `  left: ${left.name}`,
           `  right: ${right.name}`,
         ].join("\n"),
@@ -82,7 +82,7 @@ export function unifyNeutral(
 
   throw new Errors.UnificationError(
     [
-      `unifyNeutral is not implemented for the pair of neutrals`,
+      `[unifyNeutral] is not implemented for the pair of neutrals`,
       indent(`left: ${safeFormatNeutral(mod, ctx, left)}`),
       indent(`right: ${safeFormatNeutral(mod, ctx, right)}`),
     ].join("\n"),

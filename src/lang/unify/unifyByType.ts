@@ -92,7 +92,7 @@ function assertNoExtraCommonProperties(
     if (extraCommonNames.length > 0) {
       throw new Errors.UnificationError(
         [
-          `unifyByType on Clazz, expect no extra common names`,
+          `[unifyByType] on Clazz, expect no extra common names`,
           `  found: ${extraCommonNames.join(" ")}`,
         ].join("\n"),
       )
