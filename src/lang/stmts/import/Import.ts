@@ -1,5 +1,5 @@
-import { lookupTypeInCtx } from "../../ctx"
-import { lookupValueInEnv } from "../../env"
+import { ctxLookupType } from "../../ctx"
+import { envLookupValue } from "../../env"
 import * as Errors from "../../errors"
 import { Mod } from "../../mod"
 import { Span } from "../../span"
@@ -29,8 +29,8 @@ export class Import extends Stmt {
     const importedMod = await mod.options.loader.load(url)
 
     for (const binding of this.bindings) {
-      const type = lookupTypeInCtx(importedMod.ctx, binding.name)
-      const value = lookupValueInEnv(importedMod.env, binding.name)
+      const type = ctxLookupType(importedMod.ctx, binding.name)
+      const value = envLookupValue(importedMod.env, binding.name)
       if (type === undefined || value === undefined) {
         throw new Errors.ElaborationError(
           `I meet undefined name: ${binding.name}, when importing module: ${this.path}`,

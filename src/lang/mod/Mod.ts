@@ -1,5 +1,5 @@
 import { Loader } from "../../loader"
-import { Ctx, CtxFulfilled, CtxNull, deleteFirstFromCtx } from "../ctx"
+import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull } from "../ctx"
 import { Env } from "../env"
 import { useGlobals } from "../globals"
 import { Solution } from "../solution"
@@ -62,6 +62,6 @@ export class Mod {
   }
 
   delete(name: string): void {
-    this.ctx = deleteFirstFromCtx(this.ctx, name)
+    this.ctx = ctxDeleteFirst(this.ctx, name)
   }
 }

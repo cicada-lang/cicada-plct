@@ -1,3 +1,8 @@
+rename lookup to find
+
+ambr lookup find
+ambr Lookup Find
+
 `Values.safeFormatType` & `Values.safeFormat` -- for `readback` might fail
 
 `unifyClazzOrdered` -- require same order of properties

@@ -1,12 +1,12 @@
 import { Closure } from "../closure"
-import { extendEnv } from "../env"
+import { envExtend } from "../env"
 import { evaluate } from "../evaluate"
 import { Value } from "../value"
 
 export function applyClosure(closure: Closure, arg: Value): Value {
   switch (closure.kind) {
     case "ClosureSimple": {
-      return evaluate(extendEnv(closure.env, closure.name, arg), closure.body)
+      return evaluate(envExtend(closure.env, closure.name, arg), closure.body)
     }
 
     case "ClosureNative": {

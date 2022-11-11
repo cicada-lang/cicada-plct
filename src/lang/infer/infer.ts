@@ -6,8 +6,8 @@ import {
   Ctx,
   CtxCons,
   CtxFulfilled,
-  lookupTypeInCtx,
-  lookupValueInCtx,
+  ctxLookupType,
+  ctxLookupValue,
 } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
@@ -39,7 +39,7 @@ export function Inferred(type: Value, core: Core): Inferred {
 export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
   switch (exp.kind) {
     case "Var": {
-      const type = lookupTypeInCtx(ctx, exp.name)
+      const type = ctxLookupType(ctx, exp.name)
       if (type !== undefined) {
         return Inferred(type, Cores.Var(exp.name))
       }
@@ -233,7 +233,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "New": {
-      const clazz = lookupValueInCtx(ctx, exp.name)
+      const clazz = ctxLookupValue(ctx, exp.name)
       if (clazz === undefined) {
         throw new Errors.ElaborationError(`undefined class: ${exp.name}`, {
           span: exp.span,
@@ -258,7 +258,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "NewAp": {
-      const clazz = lookupValueInCtx(ctx, exp.name)
+      const clazz = ctxLookupValue(ctx, exp.name)
       if (clazz === undefined) {
         throw new Errors.ElaborationError(`undefined class: ${exp.name}`, {
           span: exp.span,

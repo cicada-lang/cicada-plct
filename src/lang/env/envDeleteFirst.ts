@@ -1,6 +1,6 @@
 import { Env } from "../env"
 
-export function deleteFirstFromEnv(env: Env, name: string): Env {
+export function envDeleteFirst(env: Env, name: string): Env {
   switch (env.kind) {
     case "EnvNull": {
       return env
@@ -10,7 +10,7 @@ export function deleteFirstFromEnv(env: Env, name: string): Env {
       if (env.name === name) {
         return env.rest
       } else {
-        return deleteFirstFromEnv(env.rest, name)
+        return envDeleteFirst(env.rest, name)
       }
     }
   }

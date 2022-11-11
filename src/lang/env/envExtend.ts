@@ -1,7 +1,7 @@
 import { Env, EnvCons } from "../env"
 import { Value } from "../value"
 
-export function extendEnv(env: Env, name: string, value: Value): Env {
+export function envExtend(env: Env, name: string, value: Value): Env {
   return EnvCons(name, value, substInEnv(env, name, value))
 }
 

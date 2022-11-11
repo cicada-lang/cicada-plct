@@ -1,6 +1,6 @@
 import { indent } from "../../utils/indent"
 import { formatCore } from "../core"
-import { Ctx, ctxToEnv, lookupTypeInCtx } from "../ctx"
+import { Ctx, ctxLookupType, ctxToEnv } from "../ctx"
 import { Env, EnvCons } from "../env"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
@@ -80,7 +80,7 @@ export class Solution {
   formatSolution(mod: Mod, ctx: Ctx, names: Array<string>): string {
     const properties: Array<string> = []
     for (const name of names) {
-      const type = lookupTypeInCtx(ctx, name)
+      const type = ctxLookupType(ctx, name)
       if (type === undefined) {
         throw new Error(`formatSolution find type of name: ${name}`)
       }

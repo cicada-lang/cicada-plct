@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
 
-export function deleteFirstFromCtx(ctx: Ctx, name: string): Ctx {
+export function ctxDeleteFirst(ctx: Ctx, name: string): Ctx {
   switch (ctx.kind) {
     case "CtxNull": {
       return ctx
@@ -10,7 +10,7 @@ export function deleteFirstFromCtx(ctx: Ctx, name: string): Ctx {
       if (ctx.name === name) {
         return ctx.rest
       } else {
-        return deleteFirstFromCtx(ctx.rest, name)
+        return ctxDeleteFirst(ctx.rest, name)
       }
     }
 
@@ -18,7 +18,7 @@ export function deleteFirstFromCtx(ctx: Ctx, name: string): Ctx {
       if (ctx.name === name) {
         return ctx.rest
       } else {
-        return deleteFirstFromCtx(ctx.rest, name)
+        return ctxDeleteFirst(ctx.rest, name)
       }
     }
   }
