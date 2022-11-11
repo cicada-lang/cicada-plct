@@ -1,5 +1,6 @@
-import { Category } from "../category/index.cic"
 import { Group } from "Group.cic"
+import { Category } from "../category/index.cic"
+import { equalSwap, equalMap, equalCompose } from "../equality/index.cic"
 
 // Example of a big category.
 
@@ -8,7 +9,7 @@ class GroupHomomorphism {
   cod: Group
 
   homo(dom.Element): cod.Element
-
+  homoPreserveId: Equal(cod.Element, homo(dom.id), cod.id)
   homoPreserveMul(x: dom.Element, y: dom.Element): Equal(
     cod.Element,
     homo(dom.mul(x, y)),
@@ -16,13 +17,12 @@ class GroupHomomorphism {
   )
 }
 
-import { equalSwap, equalMap, equalCompose } from "../equality/index.cic"
-
 function idGroupHomomorphism(G: Group): GroupHomomorphism(G, G) {
   return {
     dom: G,
     cod: G,
     homo: (x) => x,
+    homoPreserveId: refl,
     homoPreserveMul: (x, y) => refl,
   }
 }
@@ -37,7 +37,32 @@ function composeGroupHomomorphism(
   return {
     dom: G,
     cod: K,
+
     homo: (x: G.Element) => g.homo(f.homo(x)),
+
+    homoPreserveId: {
+      let motive = Equal(
+        K.Element,
+        g.homo(f.homo(G.id)),
+        K.id,
+      )
+
+      check f.homoPreserveId: Equal(
+        H.Element,
+        f.homo(G.id),
+        H.id,
+      )
+
+      // check equalMap(f.homoPreserveId, ):
+
+      check g.homoPreserveId: Equal(
+        K.Element,
+        g.homo(H.id),
+        K.id,
+      )
+
+      return the(motive, refl)
+    },
 
     // homoPreserveMul: (x, y) => equal K.Element {
     //   g.homo(f.homo(G.mul(x, y)))

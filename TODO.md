@@ -1,3 +1,5 @@
+`equalMap` take function as the first argument
+
 `unifyClazzOrdered` -- require same order of properties
 
 - quit using `freshenNames` & `clazzExpel`
@@ -8,8 +10,6 @@ pass `groupCategory.todo.cic`
 
 - maybe use `equivalent` as keyword
 - capture the use of `equalCompose` only
-
-[maybe] `equalMap` take function as the first argument
 
 # std
 
