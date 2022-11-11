@@ -1,4 +1,4 @@
-`Values.safeFormatType` & `Values.safeFormat` -- safe for real
+`safeFormatNeutral` & `safeFormatType` & `safeFormat` -- safe for real
 
 `unifyClazzOrdered` -- require same order of properties
 

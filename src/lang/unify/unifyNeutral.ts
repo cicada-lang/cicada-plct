@@ -1,12 +1,10 @@
 import { indent } from "../../utils/indent"
-import { formatCore } from "../core"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { readbackNeutral } from "../readback"
 import { unify, unifyType } from "../unify"
-import { TypedValue } from "../value"
+import { safeFormatNeutral, TypedValue } from "../value"
 
 function unifyTypedValue(
   mod: Mod,
@@ -85,8 +83,8 @@ export function unifyNeutral(
   throw new Errors.UnificationError(
     [
       `unifyNeutral is not implemented for the pair of neutrals`,
-      indent(`left: ${formatCore(readbackNeutral(mod, ctx, left))}`),
-      indent(`right: ${formatCore(readbackNeutral(mod, ctx, right))}`),
+      indent(`left: ${safeFormatNeutral(mod, ctx, left)}`),
+      indent(`right: ${safeFormatNeutral(mod, ctx, right)}`),
     ].join("\n"),
   )
 }
