@@ -1,13 +1,30 @@
-`unifyClazzOrdered` -- require same order of properties
+remove `freshenNames` & `clazzExpel`
 
-- quit using `freshenNames` & `clazzExpel`
+improve error report for `groupCategory.todo.cic`
+
+refactor `includeClazzOrdered`
+
+refactor `unifyClazzOrdered`
+
+rename `includeClazzOrdered` to `includeClazz`
+
+rename `unifyClazzOrdered` to `unifyClazz`
+
+[syntax] we need a syntax -- `equivalent <type> {}` macro -- for reasoning about equality
+
+- capture the use of `equalCompose` only
+
+[syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
 pass `groupCategory.todo.cic`
 
-[syntax] we need a syntax -- `equal` macro -- for reasoning about equality
+quit using global side-effect on `mod.solution`
 
-- maybe use `equivalent` as keyword
-- capture the use of `equalCompose` only
+[note] `alphaEquivalentClazz` current handles equivalent out of order
+
+- [maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
+
+  because "equivalent thing can not be unified" is a bad semantic.
 
 # std
 
