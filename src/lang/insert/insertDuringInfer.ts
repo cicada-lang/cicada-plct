@@ -1,6 +1,5 @@
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
-import { freeNames } from "../exp"
 import { Inferred } from "../infer"
 import { applyInsertion, solveByArgs } from "../insert"
 import { Mod } from "../mod"
@@ -11,10 +10,6 @@ export function insertDuringInfer(
   inferred: Inferred,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const argsFreeNames = new Set(
-    args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
-  )
-
   const solved = solveByArgs(mod, ctx, inferred.type, args)
 
   let core = inferred.core

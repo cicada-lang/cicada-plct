@@ -2,6 +2,8 @@ import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
+import * as Exps from "../exp"
+import { freeNames } from "../exp"
 import { Mod } from "../mod"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
@@ -12,10 +14,14 @@ import { Insertion } from "./Insertion"
 export function solveByRetType(
   mod: Mod,
   ctx: Ctx,
-  argsFreeNames: Set<string>,
   type: Value,
+  args: Array<Exps.Arg>,
   retType: Value,
 ): Array<Insertion> {
+  const argsFreeNames = new Set(
+    args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
+  )
+
   const insertions: Array<Insertion> = []
   while (type.kind === "PiImplicit") {
     try {

@@ -1,4 +1,3 @@
-`solveByRetType` should not take `argsFreeNames` -- should take `args`
 `solveByRetType` should not catch `UnificationError`
 
 `Clazz` has optional name for debug

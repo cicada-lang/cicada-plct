@@ -1,7 +1,6 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
-import { freeNames } from "../exp"
 import { Inferred } from "../infer"
 import { applyInsertion, solveByArgs, solveByRetType } from "../insert"
 import { Mod } from "../mod"
@@ -14,18 +13,8 @@ export function insertDuringCheck(
   args: Array<Exps.Arg>,
   retType: Value,
 ): Core {
-  const argsFreeNames = new Set(
-    args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
-  )
-
   const solved = solveByArgs(mod, ctx, inferred.type, args)
-  const insertions = solveByRetType(
-    mod,
-    ctx,
-    argsFreeNames,
-    solved.type,
-    retType,
-  )
+  const insertions = solveByRetType(mod, ctx, solved.type, args, retType)
 
   let core: Core = inferred.core
 
