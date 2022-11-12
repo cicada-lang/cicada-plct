@@ -1,5 +1,3 @@
-remove `checkVar`
-remove `inferAp`
 remove `envExtend`
 
 `include` quit using `unify`
