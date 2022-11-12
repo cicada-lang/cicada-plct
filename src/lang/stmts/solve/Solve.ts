@@ -33,7 +33,11 @@ export class Solve extends Stmt {
       } catch (error) {
         if (error instanceof Errors.UnificationError) {
           throw new Errors.ElaborationError(
-            ["solve fail", ...error.trace, error.message].join("\n"),
+            [
+              "[Solve.execute] meet UnificationError when unifying equation",
+              ...error.trace,
+              error.message,
+            ].join("\n"),
             { span: equation.span },
           )
         }
