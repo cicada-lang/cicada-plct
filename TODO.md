@@ -1,6 +1,3 @@
-rename `includeClazzOrdered` to `includeClazz`
-rename `unifyClazzOrdered` to `unifyClazz`
-
 `include` quit using `unify` -- use `equivalent` instead
 
 refactor `implicit/insertApImplicit` & `implicit/checkWithApImplicitInsertion`
@@ -44,8 +41,8 @@ pass `groupCategory.todo.cic`
 
 # order or orderless?
 
-refactor `includeClazzOrdered` -- step left and right
-refactor `unifyClazzOrdered` -- step left and right
+refactor `includeClazz` -- step left and right
+refactor `unifyClazz` -- step left and right
 
 [note] `alphaEquivalentClazz` current handles equivalent out of order
 
