@@ -1,7 +1,16 @@
-solve implicit pattern variables in place,
-readback solved value, insert readbacked core.
+remove `checkVar`
+remove `inferAp`
+remove `envExtend`
 
-quit using `envExtend` -- just use `EnvCons`
+`include` quit using `unify`
+
+refactor `implicit/insertApImplicit` & `implicit/checkWithApImplicitInsertion`
+
+- be careful about scope bug
+
+extract `implicit/insertFnImplicit`
+
+- be careful about scope bug
 
 rename `safeFormat` to `formatValue`
 

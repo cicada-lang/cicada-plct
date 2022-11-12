@@ -13,8 +13,8 @@ import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { insertApImplicit } from "../implicit"
 import {
-  inferAp,
   inferExtraProperties,
   inferFulfillingType,
   inferProperties,
@@ -125,10 +125,46 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
+      {
+        const { target, args } = Exps.unfoldAp(exp)
+        const inferred = infer(mod, ctx, target)
+        if (
+          inferred.type.kind === "PiImplicit" &&
+          args[0]?.kind === "ArgPlain"
+        ) {
+          // console.log("inferred target:", formatCore(inferred.core))
+          // console.log(
+          //   "inferred target type:",
+          //   formatCore(readbackType(mod, ctx, inferred.type)),
+          // )
+          // console.log()
+          const inserted = insertApImplicit(
+            mod,
+            ctx,
+            inferred.type,
+            inferred.core,
+            args,
+          )
+          // console.log("inserted core:", formatCore(inserted.core))
+          // console.log(
+          //   "inserted type:",
+          //   formatCore(readbackType(mod, ctx, inserted.type)),
+          // )
+          // console.log()
+          return inserted
+        }
+      }
+
       const inferred = infer(mod, ctx, exp.target)
-      return (
-        inferFulfillingType(mod, ctx, inferred, exp.arg) ||
-        inferAp(mod, ctx, inferred.type, inferred.core, exp.arg)
+      const fulfilled = inferFulfillingType(mod, ctx, inferred, exp.arg)
+      if (fulfilled !== undefined) return fulfilled
+
+      Values.assertTypeInCtx(mod, ctx, inferred.type, "Pi")
+      const argCore = check(mod, ctx, exp.arg, inferred.type.argType)
+      const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
+      return Inferred(
+        applyClosure(inferred.type.retTypeClosure, argValue),
+        Cores.Ap(inferred.core, argCore),
       )
     }
 

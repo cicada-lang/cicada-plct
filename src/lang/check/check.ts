@@ -1,4 +1,4 @@
-import { checkByInfer, checkProperties, checkVar } from "../check"
+import { checkByInfer, checkProperties } from "../check"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
@@ -6,6 +6,8 @@ import { Ctx, CtxCons } from "../ctx"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
+import { checkWithApImplicitInsertion } from "../implicit"
+import { infer } from "../infer"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -14,7 +16,22 @@ import { Value } from "../value"
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
-      return checkVar(mod, ctx, exp, type)
+      {
+        const { target, args } = Exps.unfoldAp(exp)
+        const inferred = infer(mod, ctx, target)
+        if (inferred.type.kind === "PiImplicit") {
+          return checkWithApImplicitInsertion(
+            mod,
+            ctx,
+            inferred.type,
+            inferred.core,
+            args,
+            type,
+          )
+        }
+      }
+
+      return checkByInfer(mod, ctx, exp, type)
     }
 
     case "Pi":
@@ -73,7 +90,25 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       )
     }
 
-    case "Ap":
+    case "Ap": {
+      {
+        const { target, args } = Exps.unfoldAp(exp)
+        const inferred = infer(mod, ctx, target)
+        if (inferred.type.kind === "PiImplicit") {
+          return checkWithApImplicitInsertion(
+            mod,
+            ctx,
+            inferred.type,
+            inferred.core,
+            args,
+            type,
+          )
+        }
+      }
+
+      return checkByInfer(mod, ctx, exp, type)
+    }
+
     case "ApImplicit": {
       return checkByInfer(mod, ctx, exp, type)
     }
