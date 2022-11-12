@@ -13,12 +13,13 @@ export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   try {
     include(mod, ctx, type, inferred.type)
   } catch (error) {
-    if (
-      error instanceof Errors.UnificationError ||
-      error instanceof Errors.InclusionError
-    ) {
+    if (error instanceof Errors.InclusionError) {
       throw new Errors.ElaborationError(
-        ["checkByInfer fail", ...error.trace, error.message].join("\n"),
+        [
+          "[checkByInfer] meet InclusionError",
+          ...error.trace,
+          error.message,
+        ].join("\n"),
         { span: exp.span },
       )
     }

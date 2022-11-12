@@ -1,8 +1,10 @@
+import { indent } from "../../utils/indent"
 import { checkByInfer, checkProperties } from "../check"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
+import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp, freeNames } from "../exp"
@@ -12,17 +14,32 @@ import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { Value } from "../value"
+import { formatType, Value } from "../value"
 
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
     case "Var": {
-      {
+      try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
           return insertDuringCheck(mod, ctx, inferred, args, type)
         }
+      } catch (error) {
+        if (error instanceof Errors.UnificationError) {
+          throw new Errors.ElaborationError(
+            [
+              `[check] meet UnificationError when checking Var`,
+              indent(`variable name: ${exp.name}`),
+              indent(`given type: ${formatType(mod, ctx, type)}`),
+              ...error.trace,
+              error.message,
+            ].join("\n"),
+            { span: exp.span },
+          )
+        }
+
+        throw error
       }
 
       return checkByInfer(mod, ctx, exp, type)
@@ -92,12 +109,26 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Ap": {
-      {
+      try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
           return insertDuringCheck(mod, ctx, inferred, args, type)
         }
+      } catch (error) {
+        if (error instanceof Errors.UnificationError) {
+          throw new Errors.ElaborationError(
+            [
+              `[check] meet UnificationError when checking Ap`,
+              indent(`given type: ${formatType(mod, ctx, type)}`),
+              ...error.trace,
+              error.message,
+            ].join("\n"),
+            { span: exp.span },
+          )
+        }
+
+        throw error
       }
 
       return checkByInfer(mod, ctx, exp, type)

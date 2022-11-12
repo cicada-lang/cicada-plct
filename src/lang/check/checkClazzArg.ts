@@ -14,9 +14,10 @@ export function checkClazzArg(
 ): Core {
   switch (clazz.kind) {
     case "ClazzNull": {
-      throw new Errors.ElaborationError("cannot apply argument to ClazzNull", {
-        span: arg.span,
-      })
+      throw new Errors.ElaborationError(
+        "[checkClazzArg] cannot apply argument to ClazzNull",
+        { span: arg.span },
+      )
     }
 
     case "ClazzCons": {

@@ -118,12 +118,25 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "Ap": {
-      {
+      try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
           return insertDuringInfer(mod, ctx, inferred, args)
         }
+      } catch (error) {
+        if (error instanceof Errors.UnificationError) {
+          throw new Errors.ElaborationError(
+            [
+              `[infer] meet UnificationError when inferring Ap`,
+              ...error.trace,
+              error.message,
+            ].join("\n"),
+            { span: exp.span },
+          )
+        }
+
+        throw error
       }
 
       const inferred = infer(mod, ctx, exp.target)

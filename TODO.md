@@ -1,8 +1,6 @@
-`solveByRetType` should not catch `UnificationError`
-
 `Clazz` has optional name for debug
 
-caller of insertDuringInfer and insertDuringCheck should catch error
+`applyInsertion` can use `span` -- from `InsertionPatternVar`
 
 quit using global side-effect on `mod.solution`
 

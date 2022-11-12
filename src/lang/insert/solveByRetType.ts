@@ -1,13 +1,11 @@
-import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
-import * as Errors from "../errors"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
-import { formatType, Value } from "../value"
+import { Value } from "../value"
 import * as Insertions from "./Insertion"
 import { Insertion } from "./Insertion"
 
@@ -43,23 +41,6 @@ export function solveByRetType(
     }
   }
 
-  try {
-    unifyType(mod, ctx, type, retType)
-    return insertions
-  } catch (error) {
-    if (error instanceof Errors.UnificationError) {
-      throw new Errors.ElaborationError(
-        [
-          `[solveByRetType] meet UnificationError`,
-          indent(`inferred type: ${formatType(mod, ctx, type)}`),
-          indent(`given type: ${formatType(mod, ctx, retType)}`),
-          ...error.trace,
-          error.message,
-        ].join("\n"),
-        { span: undefined },
-      )
-    }
-
-    throw error
-  }
+  unifyType(mod, ctx, type, retType)
+  return insertions
 }

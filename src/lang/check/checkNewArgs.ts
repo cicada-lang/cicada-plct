@@ -19,7 +19,7 @@ export function checkNewArgs(
     case "ClazzNull": {
       if (args.length !== 0) {
         throw new Errors.ElaborationError(
-          `checkNewArgs too many arguments when calling new`,
+          `[checkNewArgs] too many arguments when calling new`,
           {},
         )
       }
@@ -30,7 +30,7 @@ export function checkNewArgs(
     case "ClazzCons": {
       if (args.length === 0) {
         throw new Errors.ElaborationError(
-          `checkNewArgs not enough arguments when calling new, require property: ${clazz.name}`,
+          `[checkNewArgs] not enough arguments when calling new, require property: ${clazz.name}`,
           {},
         )
       }
