@@ -21,14 +21,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
-          return insertDuringCheck(
-            mod,
-            ctx,
-            inferred.type,
-            inferred.core,
-            args,
-            type,
-          )
+          return insertDuringCheck(mod, ctx, inferred, args, type)
         }
       }
 
@@ -103,14 +96,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
-          return insertDuringCheck(
-            mod,
-            ctx,
-            inferred.type,
-            inferred.core,
-            args,
-            type,
-          )
+          return insertDuringCheck(mod, ctx, inferred, args, type)
         }
       }
 

@@ -1,6 +1,4 @@
-refactor `insertDuringInfer`
-
-refactor `insertDuringCheck`
+refactor `insertDuringCheck` & `insertDuringInfer`
 
 quit using global side-effect on `mod.solution`
 

@@ -44,14 +44,7 @@ export function solveByArgs(
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (argInferred !== undefined) {
         if (argInferred.type.kind === "PiImplicit") {
-          insertDuringCheck(
-            mod,
-            ctx,
-            argInferred.type,
-            argInferred.core,
-            [],
-            type.argType,
-          )
+          insertDuringCheck(mod, ctx, argInferred, [], type.argType)
         } else {
           unifyType(mod, ctx, argInferred.type, type.argType)
         }
@@ -76,7 +69,7 @@ export function solveByArgs(
     } else if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
       throw new Errors.ElaborationError(
         [`[insertDuringInfer] extra Implicit argument`].join("\n"),
-        { span: undefined },
+        { span: arg.exp.span },
       )
     } else {
       throw new Errors.ElaborationError(
@@ -84,7 +77,7 @@ export function solveByArgs(
           `[insertDuringInfer] expect type to be Pi or PiImplicit`,
           `  given type kind: ${type.kind}`,
         ].join("\n"),
-        { span: undefined },
+        { span: arg.exp.span },
       )
     }
   }
