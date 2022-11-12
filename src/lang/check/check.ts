@@ -2,14 +2,15 @@ import { checkByInfer, checkProperties } from "../check"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
-import { Ctx, CtxCons } from "../ctx"
+import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
+import { Exp, freeNames } from "../exp"
 import { infer } from "../infer"
 import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -45,11 +46,26 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Fn": {
       if (type.kind === "PiImplicit") {
+        /**
+           NOTE insert `FnImplicit`
+        **/
+
+        /**
+           NOTE Be careful about scope BUG,
+           the `freshName` might occurs in `exp`.
+        **/
+
         const name = type.retTypeClosure.name
-        const arg = Values.TypedNeutral(type.argType, Neutrals.Var(name))
+        const usedNames = [
+          ...ctxNames(ctx),
+          ...mod.solution.names,
+          ...freeNames(new Set(), exp),
+        ]
+        const freshName = freshen(usedNames, name)
+        const arg = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
         const retType = applyClosure(type.retTypeClosure, arg)
         const core = check(mod, ctx, exp, retType)
-        return Cores.FnImplicit(name, core)
+        return Cores.FnImplicit(freshName, core)
       }
 
       Values.assertTypeInCtx(mod, ctx, type, "Pi")
