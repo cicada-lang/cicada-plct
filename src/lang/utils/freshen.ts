@@ -14,17 +14,3 @@ export function freshen(
     }
   }
 }
-
-export function freshenNames(
-  usedNames: Array<string> | Set<string>,
-  names: Array<string> | Set<string>,
-): Map<string, string> {
-  usedNames = new Set([...usedNames])
-  const freshNameMap = new Map()
-  for (const name of names) {
-    const freshName = freshen(usedNames, name)
-    freshNameMap.set(name, freshName)
-  }
-
-  return freshNameMap
-}
