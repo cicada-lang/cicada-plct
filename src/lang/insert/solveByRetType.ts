@@ -22,11 +22,7 @@ export function solveByRetType(
       unifyType(mod, ctx, type, retType)
       return insertions
     } catch (_error) {
-      /**
-         NOTE Be careful about scope bug,
-         `freshName` might occurs in `args`.
-      **/
-
+      // NOTE Be careful about scope bug, `freshName` might occurs in `args`.
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),

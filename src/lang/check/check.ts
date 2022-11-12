@@ -46,15 +46,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
 
     case "Fn": {
       if (type.kind === "PiImplicit") {
-        /**
-           NOTE insert `FnImplicit`
-        **/
-
-        /**
-           NOTE Be careful about scope BUG,
-           the `freshName` might occurs in `exp`.
-        **/
-
+        // NOTE Be careful about scope bug, the `freshName` might occurs in `exp`.
         const name = type.retTypeClosure.name
         const usedNames = [
           ...ctxNames(ctx),

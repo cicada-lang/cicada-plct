@@ -27,11 +27,7 @@ export function solveByArgs(
     const [arg, ...restArgs] = args
 
     if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
-      /**
-         NOTE Be careful about scope bug,
-         `freshName` might occurs in `args`.
-      **/
-
+      // NOTE Be careful about scope bug, `freshName` might occurs in `args`.
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
