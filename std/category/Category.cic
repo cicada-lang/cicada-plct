@@ -17,12 +17,6 @@ class Category {
     g: Morphism(y, z),
   ): Morphism(x, z)
 
-  // idLeft(
-  //   implicit x: Object,
-  //   implicit y: Object,
-  //   f: Morphism(x, y)
-  // ): Equal(Morphism(x, y), compose(implicit x, implicit x, implicit y, id(x), f), f)
-
   idLeft(
     implicit x: Object,
     implicit y: Object,

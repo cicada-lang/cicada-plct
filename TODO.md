@@ -1,9 +1,9 @@
-refactor `insertDuringCheck` & `insertDuringInfer`
-
 quit using global side-effect on `mod.solution`
 
 - passing `solution`
 - still passing `mod` -- for future usage
+
+refactor `insertDuringCheck` & `insertDuringInfer`
 
 improve error report for `groupCategory.todo.cic`
 

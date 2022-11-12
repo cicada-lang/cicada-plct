@@ -3,4 +3,3 @@ import { Functor } from "Functor.cic"
 import { NaturalTransformation } from "NaturalTransformation.cic"
 import { Isomorphism } from "Isomorphism.cic"
 import { trivialCategory } from "trivialCategory.cic"
-

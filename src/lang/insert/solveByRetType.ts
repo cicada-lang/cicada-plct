@@ -41,15 +41,12 @@ export function solveByRetType(
     unifyType(mod, ctx, type, retType)
     return insertions
   } catch (error) {
-    if (
-      error instanceof Errors.UnificationError ||
-      error instanceof Errors.InclusionError
-    ) {
+    if (error instanceof Errors.UnificationError) {
       throw new Errors.ElaborationError(
         [
-          `[solveByRetType] fail`,
-          indent(`inferred target type: ${formatType(mod, ctx, type)}`),
-          indent(`return type: ${formatType(mod, ctx, retType)}`),
+          `[solveByRetType] meet UnificationError`,
+          indent(`inferred type: ${formatType(mod, ctx, type)}`),
+          indent(`given type: ${formatType(mod, ctx, retType)}`),
           ...error.trace,
           error.message,
         ].join("\n"),
