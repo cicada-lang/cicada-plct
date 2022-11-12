@@ -26,6 +26,7 @@ export function equivalent(
 ): void {
   const leftCore = readback(mod, ctx, type, left)
   const rightCore = readback(mod, ctx, type, right)
+
   try {
     alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
   } catch (error) {

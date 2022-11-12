@@ -2,8 +2,6 @@ import { Group } from "Group.cic"
 import { Category } from "../category/index.cic"
 import { equalSwap, equalMap, equalCompose } from "../equality/index.cic"
 
-// Example of a big category.
-
 class GroupHomomorphism {
   dom: Group
   cod: Group
@@ -117,10 +115,13 @@ let groupCategory = new Category {
   Morphism: (G, H) => GroupHomomorphism(G, H),
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
-  idLeft: (f) => refl,
+  // idLeft: (f) => refl,
   // idLeft: (implicit G: Group, implicit H: Group, f: GroupHomomorphism(G, H)) => {
   //   return refl
   // },
+  idLeft: (f) => {
+    return refl
+  },
   // // given G: Group, H: Group
   // idRight: (f: GroupHomomorphism(G, H)) => same(f)
 

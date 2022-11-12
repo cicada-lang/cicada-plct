@@ -13,6 +13,6 @@ export function formatValue(
   try {
     return formatCore(readback(mod, ctx, type, value))
   } catch (error) {
-    return `[fail to readback] ${value.kind}`
+    return `[formatValue] fail to readback: ${value.kind}`
   }
 }

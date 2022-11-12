@@ -8,6 +8,6 @@ export function formatType(mod: Mod, ctx: Ctx, type: Value): string {
   try {
     return formatCore(readbackType(mod, ctx, type))
   } catch (error) {
-    return `[fail to readbackType] ${type.kind}`
+    return `[formatType] fail to readbackType: ${type.kind}`
   }
 }

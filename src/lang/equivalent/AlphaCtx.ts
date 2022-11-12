@@ -15,7 +15,7 @@ export class AlphaCtx {
       if (leftName === rightName) return
 
       throw new Errors.EquivalentError(
-        `AlphaCtx.assertEqualNames expect the left name: ${leftName} to be equal to the right name: ${rightName}`,
+        `[AlphaCtx.assertEqualNames] expect the left name: ${leftName} to be equal to the right name: ${rightName}`,
       )
     }
 
@@ -23,12 +23,12 @@ export class AlphaCtx {
       if (leftDepth === rightDepth) return
 
       throw new Errors.EquivalentError(
-        `AlphaCtx.assertEqualNames expect the left depth: ${leftDepth} (${leftName}) to be equal to the right depth: ${rightDepth} (${rightName})`,
+        `[AlphaCtx.assertEqualNames] expect the left depth: ${leftDepth} (${leftName}) to be equal to the right depth: ${rightDepth} (${rightName})`,
       )
     }
 
     throw new Errors.EquivalentError(
-      `AlphaCtx.assertEqualNames expect the left and right to be both bound variables or both free variables, left depth: ${leftDepth} (${leftName}), right depth: ${rightDepth} (${rightName})`,
+      `[AlphaCtx.assertEqualNames] expect the left and right to be both bound variables or both free variables, left depth: ${leftDepth} (${leftName}), right depth: ${rightDepth} (${rightName})`,
     )
   }
 

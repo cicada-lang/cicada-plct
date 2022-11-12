@@ -1,6 +1,5 @@
 import { indent } from "../../utils/indent"
-import { Ctx, ctxLookupType, ctxToEnv } from "../ctx"
-import { Env, EnvCons } from "../env"
+import { Ctx, ctxLookupType } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { PatternVar } from "../solution"
@@ -14,20 +13,6 @@ export class Solution {
   cleanup(): void {
     this.patternVars = []
     this.bindings = new Map()
-  }
-
-  enrichCtx(mod: Mod, ctx: Ctx): Env {
-    let env = ctxToEnv(ctx)
-
-    for (const patternVar of this.patternVars) {
-      env = EnvCons(patternVar.neutral.name, patternVar, env)
-    }
-
-    for (const [name, value] of this.bindings.entries()) {
-      env = EnvCons(name, value, env)
-    }
-
-    return env
   }
 
   get names(): Array<string> {

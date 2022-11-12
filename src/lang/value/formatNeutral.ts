@@ -8,6 +8,6 @@ export function formatNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): string {
   try {
     return formatCore(readbackNeutral(mod, ctx, neutral))
   } catch (error) {
-    return `[fail to readbackNeutral] ${neutral.kind}`
+    return `[formatNeutral]: fail to readbackNeutral ${neutral.kind}`
   }
 }

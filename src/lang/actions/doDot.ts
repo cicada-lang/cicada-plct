@@ -18,6 +18,8 @@ export function doDot(target: Value, name: string): Value {
   Values.assertValue(target, "TypedNeutral")
 
   if (!Values.isClazz(target.type)) {
+    // console.log("target:", target)
+    // console.log("target.type:", target.type)
     throw new Errors.EvaluationError(
       [
         `[doDot] When target is a TypedNeutral, expect target.type to be Clazz`,

@@ -1,5 +1,5 @@
 import { Loader } from "../../loader"
-import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull } from "../ctx"
+import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
 import { Env } from "../env"
 import { useGlobals } from "../globals"
 import { Solution } from "../solution"
@@ -21,12 +21,8 @@ export class Mod {
 
   constructor(public options: ModOptions) {}
 
-  ctxToEnv(ctx: Ctx): Env {
-    return this.solution.enrichCtx(this, ctx)
-  }
-
   get env(): Env {
-    return this.ctxToEnv(this.ctx)
+    return ctxToEnv(this.ctx)
   }
 
   resolve(href: string): URL {
