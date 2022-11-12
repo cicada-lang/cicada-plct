@@ -1,12 +1,12 @@
 import { indent } from "../../utils/indent"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { equivalent, equivalentType } from "../equivalent"
 import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { advanceValue } from "../solution"
-import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -109,10 +109,10 @@ export function includeAux(
 
   if (subtype.kind === "Equal" && type.kind === "Equal") {
     include(mod, ctx, type.type, subtype.type)
-    unify(mod, ctx, type.type, type.from, subtype.from)
-    unify(mod, ctx, type.type, type.to, subtype.to)
+    equivalent(mod, ctx, type.type, type.from, subtype.from)
+    equivalent(mod, ctx, type.type, type.to, subtype.to)
     return
   }
 
-  unifyType(mod, ctx, type, subtype)
+  equivalentType(mod, ctx, type, subtype)
 }

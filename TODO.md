@@ -1,5 +1,3 @@
-`include` quit using `unify` -- use `equivalent` instead
-
 refactor `implicit/insertApImplicit` & `implicit/checkWithApImplicitInsertion`
 
 - be careful about scope bug

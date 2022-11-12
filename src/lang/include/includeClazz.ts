@@ -1,11 +1,11 @@
 import _ from "lodash"
 import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
+import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { include } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { unify } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
@@ -55,7 +55,7 @@ export function includeClazz(
       if (commonNames.has(clazz.name)) {
         const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
         include(mod, ctx, clazz.propertyType, next.propertyType)
-        unify(mod, ctx, next.propertyType, clazz.property, next.property)
+        equivalent(mod, ctx, next.propertyType, clazz.property, next.property)
         clazz = clazz.rest
         subclazz = next.subclazz
       } else {

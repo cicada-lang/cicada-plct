@@ -117,7 +117,7 @@ let groupCategory = new Category {
   Morphism: (G, H) => GroupHomomorphism(G, H),
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
-  idLeft: "TODO",
+  idLeft: (f) => refl,
   // idLeft: (implicit G: Group, implicit H: Group, f: GroupHomomorphism(G, H)) => {
   //   return refl
   // },

@@ -2,10 +2,9 @@ import _ from "lodash"
 import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
-import { include } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { unify } from "../unify"
+import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
@@ -24,7 +23,7 @@ export function unifyClazz(
     if (left.kind === "ClazzCons") {
       if (commonNames.has(left.name)) {
         const next = nextRight(mod, ctx, left.name, right)
-        include(mod, ctx, left.propertyType, next.propertyType)
+        unifyType(mod, ctx, left.propertyType, next.propertyType)
         const rest = applyClosure(left.restClosure, next.property)
         assertClazz(rest)
         left = rest
@@ -45,7 +44,7 @@ export function unifyClazz(
     if (left.kind === "ClazzFulfilled") {
       if (commonNames.has(left.name)) {
         const next = nextRight(mod, ctx, left.name, right, left.property)
-        include(mod, ctx, left.propertyType, next.propertyType)
+        unifyType(mod, ctx, left.propertyType, next.propertyType)
 
         // NOTE Should avoid unify `left.property` to `next.property`,
         //   when we know `next.property` is `left.property`.
