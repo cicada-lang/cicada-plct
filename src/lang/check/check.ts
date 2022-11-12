@@ -6,8 +6,8 @@ import { Ctx, CtxCons } from "../ctx"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { checkWithApImplicitInsertion } from "../implicit"
 import { infer } from "../infer"
+import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -20,7 +20,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
-          return checkWithApImplicitInsertion(
+          return insertDuringCheck(
             mod,
             ctx,
             inferred.type,
@@ -95,7 +95,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
-          return checkWithApImplicitInsertion(
+          return insertDuringCheck(
             mod,
             ctx,
             inferred.type,

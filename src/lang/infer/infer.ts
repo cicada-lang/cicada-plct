@@ -13,12 +13,12 @@ import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp } from "../exp"
-import { insertApImplicit } from "../implicit"
 import {
   inferExtraProperties,
   inferFulfillingType,
   inferProperties,
 } from "../infer"
+import { insertDuringInfer } from "../insert"
 import { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
 import * as Values from "../value"
@@ -129,7 +129,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
         if (inferred.type.kind === "PiImplicit") {
-          return insertApImplicit(mod, ctx, inferred.type, inferred.core, args)
+          return insertDuringInfer(mod, ctx, inferred.type, inferred.core, args)
         }
       }
 

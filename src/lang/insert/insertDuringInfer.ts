@@ -15,7 +15,7 @@ import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { formatType, Value } from "../value"
 
-export function checkWithApImplicitInsertion(
+export function insertDuringCheck(
   mod: Mod,
   ctx: Ctx,
   type: Value,
@@ -23,8 +23,8 @@ export function checkWithApImplicitInsertion(
   args: Array<Exps.Arg>,
   retType: Value,
 ): Core {
-  const solved = solveArgs(mod, ctx, type, args)
-  const insertions = tryToSolveByRetType(mod, ctx, solved.type, retType)
+  const solved = solveByArgs(mod, ctx, type, args)
+  const insertions = solveByRetType(mod, ctx, solved.type, retType)
 
   for (const insertion of solved.insertions) {
     target = applyInsertion(mod, ctx, insertion, target)
@@ -37,7 +37,7 @@ export function checkWithApImplicitInsertion(
   return target
 }
 
-function tryToSolveByRetType(
+function solveByRetType(
   mod: Mod,
   ctx: Ctx,
   type: Value,
@@ -70,7 +70,7 @@ function tryToSolveByRetType(
     ) {
       throw new Errors.ElaborationError(
         [
-          `[tryToSolveByRetType] fail`,
+          `[solveByRetType] fail`,
           // indent(`var name: ${exp.name}`),
           indent(`inferred target type: ${formatType(mod, ctx, type)}`),
           indent(`return type: ${formatType(mod, ctx, retType)}`),
@@ -85,14 +85,14 @@ function tryToSolveByRetType(
   }
 }
 
-export function insertApImplicit(
+export function insertDuringInfer(
   mod: Mod,
   ctx: Ctx,
   type: Value,
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const solved = solveArgs(mod, ctx, type, args)
+  const solved = solveByArgs(mod, ctx, type, args)
   for (const insertion of solved.insertions) {
     target = applyInsertion(mod, ctx, insertion, target)
   }
@@ -100,7 +100,7 @@ export function insertApImplicit(
   return Inferred(solved.type, target)
 }
 
-function solveArgs(
+function solveByArgs(
   mod: Mod,
   ctx: Ctx,
   type: Value,
@@ -122,7 +122,7 @@ function solveArgs(
     const usedNames = [...ctxNames(ctx), ...mod.solution.names]
     const freshName = freshen(usedNames, name)
     const patternVar = mod.solution.createPatternVar(freshName, type.argType)
-    return solveArgs(
+    return solveByArgs(
       mod,
       // TODO Why we need to extend `ctx` here?
       CtxCons(freshName, type.argType, ctx),
@@ -136,7 +136,7 @@ function solveArgs(
     const argInferred = inferOrUndefined(mod, ctx, arg.exp)
     if (argInferred !== undefined) {
       if (argInferred.type.kind === "PiImplicit") {
-        checkWithApImplicitInsertion(
+        insertDuringCheck(
           mod,
           ctx,
           argInferred.type,
@@ -156,7 +156,7 @@ function solveArgs(
 
     const argCore = check(mod, ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
+    return solveByArgs(
       mod,
       ctx,
       applyClosure(type.retTypeClosure, argValue),
@@ -168,7 +168,7 @@ function solveArgs(
   if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
     const argCore = check(mod, ctx, arg.exp, type.argType)
     const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveArgs(
+    return solveByArgs(
       mod,
       ctx,
       applyClosure(type.retTypeClosure, argValue),
@@ -179,14 +179,14 @@ function solveArgs(
 
   if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
     throw new Errors.ElaborationError(
-      [`[insertApImplicit] extra Implicit argument`].join("\n"),
+      [`[insertDuringInfer] extra Implicit argument`].join("\n"),
       { span: undefined },
     )
   }
 
   throw new Errors.ElaborationError(
     [
-      `[insertApImplicit] expect type to be Pi or PiImplicit`,
+      `[insertDuringInfer] expect type to be Pi or PiImplicit`,
       `  given type kind: ${type.kind}`,
     ].join("\n"),
     { span: undefined },
@@ -245,7 +245,7 @@ function applyInsertion(
       if (argValue === undefined) {
         throw new Errors.ElaborationError(
           [
-            `[insertApImplicit applyInsertion] unsolved pattern variable`,
+            `[insertDuringInfer applyInsertion] unsolved pattern variable`,
             `  variable name: ${insertion.patternVar.neutral.name}`,
           ].join("\n"),
           // TODO Span

@@ -1,8 +1,6 @@
-refactor `implicit/insertApImplicit` -- be careful about scope bug
-
-refactor `implicit/checkWithApImplicitInsertion` -- be careful about scope bug
-
-extract `implicit/insertFnImplicit` -- be careful about scope bug
+refactor `insertDuringCheck` -- be careful about scope bug
+refactor `insertDuringInfer` -- be careful about scope bug
+extract `insertFnImplicit` -- be careful about scope bug
 
 ```
 export function insertImplicitFn(
