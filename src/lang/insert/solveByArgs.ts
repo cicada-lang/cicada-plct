@@ -43,7 +43,7 @@ export function solveByArgs(
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
       type = applyClosure(type.retTypeClosure, patternVar)
-      insertions.push(Insertions.InsertionPatternVar(patternVar))
+      insertions.push(Insertions.InsertionPatternVar(patternVar, arg.exp))
     } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (argInferred !== undefined) {

@@ -1,4 +1,5 @@
 import { Core } from "../core"
+import { Exp } from "../exp"
 import { PatternVar } from "../solution"
 
 export type Insertion =
@@ -9,14 +10,17 @@ export type Insertion =
 export type InsertionPatternVar = {
   kind: "InsertionPatternVar"
   patternVar: PatternVar
+  argExp?: Exp
 }
 
 export function InsertionPatternVar(
   patternVar: PatternVar,
+  argExp?: Exp,
 ): InsertionPatternVar {
   return {
     kind: "InsertionPatternVar",
     patternVar,
+    argExp,
   }
 }
 

@@ -17,15 +17,26 @@ export function applyInsertion(
       const argValue = mod.solution.lookupValue(
         insertion.patternVar.neutral.name,
       )
+
       if (argValue === undefined) {
-        throw new Errors.ElaborationError(
-          [
-            `[insertDuringInfer applyInsertion] unsolved pattern variable`,
-            `  variable name: ${insertion.patternVar.neutral.name}`,
-          ].join("\n"),
-          // TODO Span
-          { span: undefined },
-        )
+        if (insertion.argExp !== undefined) {
+          throw new Errors.ElaborationError(
+            [
+              `[applyInsertion] meet unsolved pattern variable during infer`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
+              `  kind of next arg exp: ${insertion.argExp.kind}`,
+            ].join("\n"),
+            { span: insertion.argExp.span },
+          )
+        } else {
+          throw new Errors.ElaborationError(
+            [
+              `[applyInsertion] meet unsolved pattern variable during check`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
+            ].join("\n"),
+            {},
+          )
+        }
       }
 
       const argCore = readback(mod, ctx, insertion.patternVar.type, argValue)

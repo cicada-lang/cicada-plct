@@ -1,7 +1,5 @@
 `Clazz` has optional name for debug
 
-`applyInsertion` can use `span` -- from `InsertionPatternVar`
-
 quit using global side-effect on `mod.solution`
 
 - passing `solution`
