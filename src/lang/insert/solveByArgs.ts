@@ -36,7 +36,6 @@ export function solveByArgs(
     const patternVar = mod.solution.createPatternVar(freshName, type.argType)
     return solveByArgs(
       mod,
-      // TODO Why we need to extend `ctx` here?
       CtxCons(freshName, type.argType, ctx),
       applyClosure(type.retTypeClosure, patternVar),
       args, // NOTE Do not consume arg here.

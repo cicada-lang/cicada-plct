@@ -14,6 +14,7 @@ export function insertDuringInfer(
   args: Array<Exps.Arg>,
 ): Inferred {
   const solved = solveByArgs(mod, ctx, type, args)
+
   for (const insertion of solved.insertions) {
     target = applyInsertion(mod, ctx, insertion, target)
   }

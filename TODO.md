@@ -1,5 +1,6 @@
 refactor `insertDuringCheck` -- be careful about scope bug
 refactor `insertDuringInfer` -- be careful about scope bug
+
 extract `insertFnImplicit` -- be careful about scope bug
 
 ```

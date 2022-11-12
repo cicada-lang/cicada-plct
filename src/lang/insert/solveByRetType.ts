@@ -43,7 +43,6 @@ export function solveByRetType(
       throw new Errors.ElaborationError(
         [
           `[solveByRetType] fail`,
-          // indent(`var name: ${exp.name}`),
           indent(`inferred target type: ${formatType(mod, ctx, type)}`),
           indent(`return type: ${formatType(mod, ctx, retType)}`),
           ...error.trace,
