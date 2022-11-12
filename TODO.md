@@ -1,11 +1,14 @@
+`solveByArgs` should not take `argsFreeNames` -- already have `args`
+`solveByRetType` should not take `argsFreeNames` -- should take `args`
+
 quit using global side-effect on `mod.solution`
 
 - passing `solution`
 - still passing `mod` -- for future usage
 
-refactor `insertDuringCheck` & `insertDuringInfer`
-
 improve error report for `groupCategory.todo.cic`
+
+refactor `insertDuringCheck` & `insertDuringInfer`
 
 pass `groupCategory.todo.cic`
 
