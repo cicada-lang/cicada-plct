@@ -15,6 +15,7 @@ import * as Insertions from "./Insertion"
 export function solveByArgs(
   mod: Mod,
   ctx: Ctx,
+  argsFreeNames: Set<string>,
   type: Value,
   args: Array<Exps.Arg>,
   insertions: Array<Insertion> = [],
@@ -29,14 +30,23 @@ export function solveByArgs(
   }
 
   if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
+    /**
+       NOTE Be careful about scope bug,
+       `freshName` might occurs in `args`.
+    **/
+
     const name = type.retTypeClosure.name
-    // TODO Scope BUG, `freshName` might occurs in `args`.
-    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const usedNames = [
+      ...ctxNames(ctx),
+      ...mod.solution.names,
+      ...argsFreeNames,
+    ]
     const freshName = freshen(usedNames, name)
     const patternVar = mod.solution.createPatternVar(freshName, type.argType)
     return solveByArgs(
       mod,
       CtxCons(freshName, type.argType, ctx),
+      argsFreeNames,
       applyClosure(type.retTypeClosure, patternVar),
       args, // NOTE Do not consume arg here.
       [...insertions, Insertions.InsertionPatternVar(patternVar)],
@@ -70,6 +80,7 @@ export function solveByArgs(
     return solveByArgs(
       mod,
       ctx,
+      argsFreeNames,
       applyClosure(type.retTypeClosure, argValue),
       restArgs,
       [...insertions, Insertions.InsertionUsedArg(argCore)],
@@ -82,6 +93,7 @@ export function solveByArgs(
     return solveByArgs(
       mod,
       ctx,
+      argsFreeNames,
       applyClosure(type.retTypeClosure, argValue),
       restArgs,
       [...insertions, Insertions.InsertionImplicitArg(argCore)],

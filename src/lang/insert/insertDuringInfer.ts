@@ -1,6 +1,7 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
+import { freeNames } from "../exp"
 import { Inferred } from "../infer"
 import { applyInsertion, solveByArgs } from "../insert"
 import { Mod } from "../mod"
@@ -13,7 +14,11 @@ export function insertDuringInfer(
   target: Core,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const solved = solveByArgs(mod, ctx, type, args)
+  const argsFreeNames = new Set(
+    args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
+  )
+
+  const solved = solveByArgs(mod, ctx, argsFreeNames, type, args)
 
   for (const insertion of solved.insertions) {
     target = applyInsertion(mod, ctx, insertion, target)

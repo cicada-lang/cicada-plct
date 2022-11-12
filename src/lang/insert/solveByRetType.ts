@@ -12,6 +12,7 @@ import { Insertion } from "./Insertion"
 export function solveByRetType(
   mod: Mod,
   ctx: Ctx,
+  argsFreeNames: Set<string>,
   type: Value,
   retType: Value,
 ): Array<Insertion> {
@@ -21,9 +22,17 @@ export function solveByRetType(
       unifyType(mod, ctx, type, retType)
       return insertions
     } catch (_error) {
+      /**
+         NOTE Be careful about scope bug,
+         `freshName` might occurs in `args`.
+      **/
+
       const name = type.retTypeClosure.name
-      // TODO Scope BUG, `freshName` might occurs in `args`.
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [
+        ...ctxNames(ctx),
+        ...mod.solution.names,
+        ...argsFreeNames,
+      ]
       const freshName = freshen(usedNames, name)
       const patternVar = mod.solution.createPatternVar(freshName, type.argType)
       ctx = CtxCons(freshName, type.argType, ctx)

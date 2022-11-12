@@ -1,5 +1,6 @@
-refactor `insertDuringCheck` -- be careful about scope bug
-refactor `insertDuringInfer` -- be careful about scope bug
+refactor `insertDuringInfer`
+
+refactor `insertDuringCheck`
 
 quit using global side-effect on `mod.solution`
 
@@ -13,6 +14,7 @@ pass `groupCategory.todo.cic`
 # order or orderless?
 
 refactor `includeClazz` -- step left and right
+
 refactor `unifyClazz` -- step left and right
 
 [note] `alphaEquivalentClazz` current handles equivalent out of order
