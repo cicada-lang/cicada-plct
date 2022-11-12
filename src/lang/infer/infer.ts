@@ -128,18 +128,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
-        if (
-          inferred.type.kind === "PiImplicit" &&
-          args[0]?.kind === "ArgPlain"
-        ) {
-          const inserted = insertApImplicit(
-            mod,
-            ctx,
-            inferred.type,
-            inferred.core,
-            args,
-          )
-          return inserted
+        if (inferred.type.kind === "PiImplicit") {
+          return insertApImplicit(mod, ctx, inferred.type, inferred.core, args)
         }
       }
 
