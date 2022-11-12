@@ -70,10 +70,10 @@ function tryToSolveByRetType(
     ) {
       throw new Errors.ElaborationError(
         [
-          `[checkVar] fail`,
+          `[tryToSolveByRetType] fail`,
           // indent(`var name: ${exp.name}`),
-          indent(`inferred type: ${formatType(mod, ctx, type)}`),
-          indent(`given type: ${formatType(mod, ctx, retType)}`),
+          indent(`inferred target type: ${formatType(mod, ctx, type)}`),
+          indent(`return type: ${formatType(mod, ctx, retType)}`),
           ...error.trace,
           error.message,
         ].join("\n"),
@@ -147,8 +147,6 @@ function solveArgs(
       } else {
         unifyType(mod, ctx, argInferred.type, type.argType)
       }
-
-      // unifyType(mod, ctx, argInferred.type, type.argType)
     }
 
     /**
@@ -256,27 +254,14 @@ function applyInsertion(
       }
 
       const argCore = readback(mod, ctx, insertion.patternVar.type, argValue)
-      // console.log(
-      //   "[applyInsertion] solved pattern variable:",
-      //   formatCore(argCore),
-      //   formatCore(Cores.ApImplicit(core, argCore)),
-      // )
       return Cores.ApImplicit(core, argCore)
     }
 
     case "InsertionUsedArg": {
-      // console.log(
-      //   "[applyInsertion] used arg:",
-      //   formatCore(Cores.Ap(core, insertion.argCore)),
-      // )
       return Cores.Ap(core, insertion.argCore)
     }
 
     case "InsertionImplicitArg": {
-      // console.log(
-      //   "[applyInsertion] InsertionImplicitArg:",
-      //   Cores.ApImplicit(core, insertion.argCore),
-      // )
       return Cores.ApImplicit(core, insertion.argCore)
     }
   }

@@ -132,12 +132,6 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
           inferred.type.kind === "PiImplicit" &&
           args[0]?.kind === "ArgPlain"
         ) {
-          // console.log("inferred target:", formatCore(inferred.core))
-          // console.log(
-          //   "inferred target type:",
-          //   formatCore(readbackType(mod, ctx, inferred.type)),
-          // )
-          // console.log()
           const inserted = insertApImplicit(
             mod,
             ctx,
@@ -145,12 +139,6 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
             inferred.core,
             args,
           )
-          // console.log("inserted core:", formatCore(inserted.core))
-          // console.log(
-          //   "inserted type:",
-          //   formatCore(readbackType(mod, ctx, inserted.type)),
-          // )
-          // console.log()
           return inserted
         }
       }
