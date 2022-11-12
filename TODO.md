@@ -1,5 +1,9 @@
-`solveByArgs` should not take `argsFreeNames` -- already have `args`
 `solveByRetType` should not take `argsFreeNames` -- should take `args`
+`solveByRetType` should not catch `UnificationError`
+
+`Clazz` has optional name for debug
+
+caller of insertDuringInfer and insertDuringCheck should catch error
 
 quit using global side-effect on `mod.solution`
 

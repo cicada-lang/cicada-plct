@@ -18,7 +18,7 @@ export function insertDuringCheck(
     args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
   )
 
-  const solved = solveByArgs(mod, ctx, argsFreeNames, inferred.type, args)
+  const solved = solveByArgs(mod, ctx, inferred.type, args)
   const insertions = solveByRetType(
     mod,
     ctx,

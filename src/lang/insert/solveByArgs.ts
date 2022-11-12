@@ -4,6 +4,7 @@ import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
+import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
 import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
@@ -15,13 +16,16 @@ import * as Insertions from "./Insertion"
 export function solveByArgs(
   mod: Mod,
   ctx: Ctx,
-  argsFreeNames: Set<string>,
   type: Value,
   args: Array<Exps.Arg>,
 ): {
   type: Value
   insertions: Array<Insertion>
 } {
+  const argsFreeNames = new Set(
+    args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
+  )
+
   const insertions: Array<Insertion> = []
   while (args.length > 0) {
     const [arg, ...restArgs] = args

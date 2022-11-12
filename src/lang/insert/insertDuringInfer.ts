@@ -11,11 +11,11 @@ export function insertDuringInfer(
   inferred: Inferred,
   args: Array<Exps.Arg>,
 ): Inferred {
-  const argFreeNames = new Set(
+  const argsFreeNames = new Set(
     args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
   )
 
-  const solved = solveByArgs(mod, ctx, argFreeNames, inferred.type, args)
+  const solved = solveByArgs(mod, ctx, inferred.type, args)
 
   let core = inferred.core
 
