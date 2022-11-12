@@ -1,5 +1,3 @@
-remove `envExtend`
-
 `include` quit using `unify`
 
 refactor `implicit/insertApImplicit` & `implicit/checkWithApImplicitInsertion`

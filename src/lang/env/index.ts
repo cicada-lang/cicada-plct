@@ -1,5 +1,4 @@
 export * from "./Env"
 export * from "./envDeleteFirst"
-export * from "./envExtend"
 export * from "./envLookupValue"
 export * from "./envNames"
