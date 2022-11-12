@@ -12,6 +12,24 @@ extract `implicit/insertFnImplicit`
 
 - be careful about scope bug
 
+```
+export function insertImplicitFn(
+  ctx: Ctx,
+  exp: Exp,
+  type: Values.ImplicitPi,
+): Core {
+  const name = type.retTypeClosure.name
+  const freshName = freshen(ctxNames(ctx), name)
+  const variable = Neutrals.Var(freshName)
+  const arg = Values.TypedNeutral(type.argType, variable)
+  const retType = applyClosure(type.retTypeClosure, arg)
+  /**
+     TODO Scope BUG, the `freshName` might occurs in `exp`.
+  **/
+  return Cores.ImplicitFn(freshName, check(ctx, exp, retType))
+}
+```
+
 rename `safeFormat` to `formatValue`
 
 - readback value should always be safe
