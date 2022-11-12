@@ -18,100 +18,80 @@ export function solveByArgs(
   argsFreeNames: Set<string>,
   type: Value,
   args: Array<Exps.Arg>,
-  insertions: Array<Insertion> = [],
 ): {
   type: Value
   insertions: Array<Insertion>
 } {
-  const [arg, ...restArgs] = args
+  const insertions: Array<Insertion> = []
+  while (args.length > 0) {
+    const [arg, ...restArgs] = args
 
-  if (arg === undefined) {
-    return { type, insertions }
-  }
+    if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
+      /**
+         NOTE Be careful about scope bug,
+         `freshName` might occurs in `args`.
+      **/
 
-  if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
-    /**
-       NOTE Be careful about scope bug,
-       `freshName` might occurs in `args`.
-    **/
-
-    const name = type.retTypeClosure.name
-    const usedNames = [
-      ...ctxNames(ctx),
-      ...mod.solution.names,
-      ...argsFreeNames,
-    ]
-    const freshName = freshen(usedNames, name)
-    const patternVar = mod.solution.createPatternVar(freshName, type.argType)
-    return solveByArgs(
-      mod,
-      CtxCons(freshName, type.argType, ctx),
-      argsFreeNames,
-      applyClosure(type.retTypeClosure, patternVar),
-      args, // NOTE Do not consume arg here.
-      [...insertions, Insertions.InsertionPatternVar(patternVar)],
-    )
-  }
-
-  if (type.kind === "Pi" && arg.kind === "ArgPlain") {
-    const argInferred = inferOrUndefined(mod, ctx, arg.exp)
-    if (argInferred !== undefined) {
-      if (argInferred.type.kind === "PiImplicit") {
-        insertDuringCheck(
-          mod,
-          ctx,
-          argInferred.type,
-          argInferred.core,
-          [],
-          type.argType,
-        )
-      } else {
-        unifyType(mod, ctx, argInferred.type, type.argType)
+      const name = type.retTypeClosure.name
+      const usedNames = [
+        ...ctxNames(ctx),
+        ...mod.solution.names,
+        ...argsFreeNames,
+      ]
+      const freshName = freshen(usedNames, name)
+      const patternVar = mod.solution.createPatternVar(freshName, type.argType)
+      ctx = CtxCons(freshName, type.argType, ctx)
+      // NOTE Do not consume args here.
+      type = applyClosure(type.retTypeClosure, patternVar)
+      insertions.push(Insertions.InsertionPatternVar(patternVar))
+    } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
+      const argInferred = inferOrUndefined(mod, ctx, arg.exp)
+      if (argInferred !== undefined) {
+        if (argInferred.type.kind === "PiImplicit") {
+          insertDuringCheck(
+            mod,
+            ctx,
+            argInferred.type,
+            argInferred.core,
+            [],
+            type.argType,
+          )
+        } else {
+          unifyType(mod, ctx, argInferred.type, type.argType)
+        }
       }
+
+      /**
+         NOTE We can not use `argInserted.core` here,
+         check against the given type is necessary.
+      **/
+
+      const argCore = check(mod, ctx, arg.exp, type.argType)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      type = applyClosure(type.retTypeClosure, argValue)
+      args = restArgs
+      insertions.push(Insertions.InsertionUsedArg(argCore))
+    } else if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
+      const argCore = check(mod, ctx, arg.exp, type.argType)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
+      type = applyClosure(type.retTypeClosure, argValue)
+      args = restArgs
+      insertions.push(Insertions.InsertionImplicitArg(argCore))
+    } else if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
+      throw new Errors.ElaborationError(
+        [`[insertDuringInfer] extra Implicit argument`].join("\n"),
+        { span: undefined },
+      )
+    } else {
+      throw new Errors.ElaborationError(
+        [
+          `[insertDuringInfer] expect type to be Pi or PiImplicit`,
+          `  given type kind: ${type.kind}`,
+        ].join("\n"),
+        { span: undefined },
+      )
     }
-
-    /**
-       NOTE We can not use `argInserted.core` here,
-       check against the given type is necessary.
-    **/
-
-    const argCore = check(mod, ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveByArgs(
-      mod,
-      ctx,
-      argsFreeNames,
-      applyClosure(type.retTypeClosure, argValue),
-      restArgs,
-      [...insertions, Insertions.InsertionUsedArg(argCore)],
-    )
   }
 
-  if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
-    const argCore = check(mod, ctx, arg.exp, type.argType)
-    const argValue = evaluate(ctxToEnv(ctx), argCore)
-    return solveByArgs(
-      mod,
-      ctx,
-      argsFreeNames,
-      applyClosure(type.retTypeClosure, argValue),
-      restArgs,
-      [...insertions, Insertions.InsertionImplicitArg(argCore)],
-    )
-  }
-
-  if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
-    throw new Errors.ElaborationError(
-      [`[insertDuringInfer] extra Implicit argument`].join("\n"),
-      { span: undefined },
-    )
-  }
-
-  throw new Errors.ElaborationError(
-    [
-      `[insertDuringInfer] expect type to be Pi or PiImplicit`,
-      `  given type kind: ${type.kind}`,
-    ].join("\n"),
-    { span: undefined },
-  )
+  return { type, insertions }
 }
