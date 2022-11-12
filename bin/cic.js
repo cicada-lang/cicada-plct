@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node
+#!/usr/bin/env -S node --no-warnings
 
 const process = require("process")
 
