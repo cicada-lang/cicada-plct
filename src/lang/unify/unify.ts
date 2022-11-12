@@ -2,7 +2,7 @@ import { indent } from "../../utils/indent"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { advanceValue } from "../solution"
+import { solutionAdvanceValue } from "../solution"
 import { unifyByType, unifyByValue, unifyPatternVar } from "../unify"
 import { formatType, formatValue, Value } from "../value"
 
@@ -25,9 +25,9 @@ export function unify(
   left: Value,
   right: Value,
 ): void {
-  type = advanceValue(mod, type)
-  left = advanceValue(mod, left)
-  right = advanceValue(mod, right)
+  type = solutionAdvanceValue(mod, type)
+  left = solutionAdvanceValue(mod, left)
+  right = solutionAdvanceValue(mod, right)
 
   try {
     if (unifyPatternVar(mod, ctx, type, left, right)) return

@@ -4,15 +4,15 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { advanceValue } from "../solution"
+import { solutionAdvanceValue } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, isClazz, Value } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
-  left = advanceValue(mod, left)
-  right = advanceValue(mod, right)
+  left = solutionAdvanceValue(mod, left)
+  right = solutionAdvanceValue(mod, right)
 
   const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
   if (success) return

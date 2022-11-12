@@ -6,13 +6,13 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackClazz, readbackNeutral } from "../readback"
-import { advanceValue } from "../solution"
+import { solutionAdvanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
 
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
-  type = advanceValue(mod, type)
+  type = solutionAdvanceValue(mod, type)
 
   switch (type.kind) {
     case "TypedNeutral": {

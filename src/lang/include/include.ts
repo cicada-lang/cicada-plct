@@ -6,7 +6,7 @@ import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { advanceValue } from "../solution"
+import { solutionAdvanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -35,8 +35,8 @@ import { Value } from "../value"
 **/
 
 export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
-  subtype = advanceValue(mod, subtype)
-  type = advanceValue(mod, type)
+  subtype = solutionAdvanceValue(mod, subtype)
+  type = solutionAdvanceValue(mod, type)
 
   try {
     includeAux(mod, ctx, type, subtype)

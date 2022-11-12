@@ -4,7 +4,7 @@ import { Neutral } from "../neutral"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function advanceValue(mod: Mod, value: Value): Value {
+export function solutionAdvanceValue(mod: Mod, value: Value): Value {
   if (value.kind === "TypedNeutral") {
     return advanceNeutral(mod, value.type, value.neutral)
   }

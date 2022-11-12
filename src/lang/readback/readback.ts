@@ -2,7 +2,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { readbackByType, readbackByValue } from "../readback"
-import { advanceValue } from "../solution"
+import { solutionAdvanceValue } from "../solution"
 import { Value } from "../value"
 
 /**
@@ -20,8 +20,8 @@ import { Value } from "../value"
 **/
 
 export function readback(mod: Mod, ctx: Ctx, type: Value, value: Value): Core {
-  type = advanceValue(mod, type)
-  value = advanceValue(mod, value)
+  type = solutionAdvanceValue(mod, type)
+  value = solutionAdvanceValue(mod, value)
 
   return (
     readbackByType(mod, ctx, type, value) ||

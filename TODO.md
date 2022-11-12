@@ -1,6 +1,9 @@
 quit using global side-effect on `mod.solution`
 
-- passing `solution`
+- `solutionAdvanceValue` takes `solution`
+- `unify` takes `solution`
+- `include` takes `solution`
+- `readback` takes `solution` -- for `solutionAdvanceValue`
 - still passing `mod` -- for future usage
 
 refactor `includeClazz` -- step left and right
