@@ -1,26 +1,17 @@
-`Clazz` has optional name for debug
-
 quit using global side-effect on `mod.solution`
 
 - passing `solution`
 - still passing `mod` -- for future usage
 
-improve error report for `groupCategory.todo.cic`
-
-refactor `insertDuringCheck` & `insertDuringInfer`
-
-pass `groupCategory.todo.cic`
-
-# order or orderless?
-
 refactor `includeClazz` -- step left and right
 
 refactor `unifyClazz` -- step left and right
 
-[note] `alphaEquivalentClazz` current handles equivalent out of order
+# DX
 
-- [maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
-  because "equivalent thing can not be unified" is a bad semantic.
+`Clazz` has optional name for debug
+
+improve error report -- using `groupCategory.todo.cic` as test
 
 # syntax for equivalent
 
@@ -29,6 +20,12 @@ refactor `unifyClazz` -- step left and right
 - capture the use of `equalCompose` only
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
+
+update `std/lattice/BooleanLattice.md`
+
+# std
+
+pass `groupCategory.todo.cic`
 
 # std
 
@@ -45,3 +42,7 @@ refactor `unifyClazz` -- step left and right
 - should be just like `Sigma`
 - check dependency and evaluate to a version of `ClazzCons` without closure
   - not only syntax dependency but real dependency -- need `readback` for partial evaluation
+
+[maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
+
+- because "equivalent thing can not be unified" is a bad semantic.
