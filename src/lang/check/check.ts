@@ -2,7 +2,7 @@ import { checkByInfer, checkProperties } from "../check"
 import { applyClosure } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
-import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Exp, freeNames } from "../exp"
@@ -123,7 +123,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       Values.assertTypeInCtx(mod, ctx, type, "Sigma")
       const { carType, cdrTypeClosure } = type
       const carCore = check(mod, ctx, exp.car, carType)
-      const carValue = evaluate(mod.ctxToEnv(ctx), carCore)
+      const carValue = evaluate(ctxToEnv(ctx), carCore)
       const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
       const cdrCore = check(mod, ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)

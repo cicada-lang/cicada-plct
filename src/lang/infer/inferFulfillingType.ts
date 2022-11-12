@@ -1,6 +1,6 @@
 import { checkClazzArg } from "../check"
 import * as Cores from "../core"
-import { Ctx } from "../ctx"
+import { Ctx, ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
 import { Exp } from "../exp"
 import { Inferred } from "../infer"
@@ -13,7 +13,7 @@ export function inferFulfillingType(
   inferred: Inferred,
   argExp: Exp,
 ): Inferred | undefined {
-  const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
+  const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
   if (!Values.isClazz(targetValue)) return undefined
 
   const argCore = checkClazzArg(mod, ctx, targetValue, argExp)

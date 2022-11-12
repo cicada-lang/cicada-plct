@@ -1,7 +1,7 @@
 import { check } from "../check"
 import { applyClosure } from "../closure"
 import { Core } from "../core"
-import { Ctx, CtxFulfilled } from "../ctx"
+import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
@@ -27,7 +27,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
@@ -44,7 +44,7 @@ export function checkProperties(
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
-      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
       ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
       return {

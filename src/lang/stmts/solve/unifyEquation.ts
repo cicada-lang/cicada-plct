@@ -1,6 +1,6 @@
 import { Mod } from "src/lang/mod"
 import { check, checkType } from "../../check"
-import { Ctx } from "../../ctx"
+import { Ctx, ctxToEnv } from "../../ctx"
 import { evaluate } from "../../evaluate"
 import { infer, inferOrUndefined } from "../../infer"
 import { unify, unifyType } from "../../unify"
@@ -9,7 +9,7 @@ import { Equation } from "../solve"
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
     case "EquationUnifyTyped": {
-      const env = mod.ctxToEnv(ctx)
+      const env = ctxToEnv(ctx)
       const typeValue = evaluate(env, checkType(mod, ctx, equation.type))
       const leftValue = evaluate(env, check(mod, ctx, equation.left, typeValue))
       const rightValue = evaluate(
@@ -29,7 +29,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         const rightType = rightInferred.type
         unifyType(mod, ctx, leftType, rightType)
         const typeValue = leftType
-        const env = mod.ctxToEnv(ctx)
+        const env = ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)
         const rightValue = evaluate(env, rightInferred.core)
         unify(mod, ctx, typeValue, leftValue, rightValue)
@@ -38,7 +38,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
 
       if (leftInferred !== undefined) {
         const typeValue = leftInferred.type
-        const env = mod.ctxToEnv(ctx)
+        const env = ctxToEnv(ctx)
         const leftValue = evaluate(env, leftInferred.core)
         const rightCore = check(mod, ctx, equation.right, typeValue)
         const rightValue = evaluate(env, rightCore)
@@ -48,7 +48,7 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
 
       if (rightInferred !== undefined) {
         const typeValue = rightInferred.type
-        const env = mod.ctxToEnv(ctx)
+        const env = ctxToEnv(ctx)
         const leftCore = check(mod, ctx, equation.left, typeValue)
         const leftValue = evaluate(env, leftCore)
         const rightValue = evaluate(env, rightInferred.core)

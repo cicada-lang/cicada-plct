@@ -8,6 +8,7 @@ import {
   CtxFulfilled,
   ctxLookupType,
   ctxLookupValue,
+  ctxToEnv,
 } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
@@ -54,7 +55,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Pi": {
       const argTypeCore = checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = checkType(mod, ctx, exp.retType)
       return Inferred(
@@ -65,7 +66,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "PiImplicit": {
       const argTypeCore = checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retTypeCore = checkType(mod, ctx, exp.retType)
       return Inferred(
@@ -80,15 +81,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "FnAnnotated": {
       const argTypeCore = checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = ClosureSimple(
-        mod.ctxToEnv(ctx),
-        exp.name,
-        retTypeCore,
-      )
+      const retTypeClosure = ClosureSimple(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
         Cores.Fn(exp.name, retInferred.core),
@@ -97,15 +94,11 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "FnImplicitAnnotated": {
       const argTypeCore = checkType(mod, ctx, exp.argType)
-      const argTypeValue = evaluate(mod.ctxToEnv(ctx), argTypeCore)
+      const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       const retTypeCore = readbackType(mod, ctx, retInferred.type)
-      const retTypeClosure = ClosureSimple(
-        mod.ctxToEnv(ctx),
-        exp.name,
-        retTypeCore,
-      )
+      const retTypeClosure = ClosureSimple(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
         Cores.FnImplicit(exp.name, retInferred.core),
@@ -139,7 +132,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
       Values.assertTypeInCtx(mod, ctx, inferred.type, "Pi")
       const argCore = check(mod, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.Ap(inferred.core, argCore),
@@ -150,7 +143,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       Values.assertTypeInCtx(mod, ctx, inferred.type, "PiImplicit")
       const argCore = check(mod, ctx, exp.arg, inferred.type.argType)
-      const argValue = evaluate(mod.ctxToEnv(ctx), argCore)
+      const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
         applyClosure(inferred.type.retTypeClosure, argValue),
         Cores.ApImplicit(inferred.core, argCore),
@@ -163,7 +156,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Sigma": {
       const carTypeCore = checkType(mod, ctx, exp.carType)
-      const carTypeValue = evaluate(mod.ctxToEnv(ctx), carTypeCore)
+      const carTypeValue = evaluate(ctxToEnv(ctx), carTypeCore)
       ctx = CtxCons(exp.name, carTypeValue, ctx)
       const cdrTypeCore = checkType(mod, ctx, exp.cdrType)
       return Inferred(
@@ -205,7 +198,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       let properties: Record<string, Core> = {}
       for (let [name, property] of Object.entries(exp.properties).reverse()) {
         const inferred = infer(mod, ctx, property)
-        const value = evaluate(mod.ctxToEnv(ctx), inferred.core)
+        const value = evaluate(ctxToEnv(ctx), inferred.core)
         clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
         properties[name] = inferred.core
       }
@@ -223,7 +216,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Dot": {
       const inferred = infer(mod, ctx, exp.target)
-      const targetValue = evaluate(mod.ctxToEnv(ctx), inferred.core)
+      const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(mod, ctx, inferred.type)
       const propertyType = Values.lookupPropertyTypeOrFail(
         inferred.type,
@@ -290,7 +283,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLet": {
       const inferred = infer(mod, ctx, exp.exp)
-      const value = evaluate(mod.ctxToEnv(ctx), inferred.core)
+      const value = evaluate(ctxToEnv(ctx), inferred.core)
       ctx = CtxFulfilled(exp.name, inferred.type, value, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
@@ -301,9 +294,9 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceLetThe": {
       const typeCore = checkType(mod, ctx, exp.type)
-      const type = evaluate(mod.ctxToEnv(ctx), typeCore)
+      const type = evaluate(ctxToEnv(ctx), typeCore)
       const core = check(mod, ctx, exp.exp, type)
-      const value = evaluate(mod.ctxToEnv(ctx), core)
+      const value = evaluate(ctxToEnv(ctx), core)
       ctx = CtxFulfilled(exp.name, type, value, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
       return Inferred(
@@ -314,7 +307,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "SequenceCheck": {
       const typeCore = checkType(mod, ctx, exp.type)
-      const type = evaluate(mod.ctxToEnv(ctx), typeCore)
+      const type = evaluate(ctxToEnv(ctx), typeCore)
       check(mod, ctx, exp.exp, type)
       return infer(mod, ctx, exp.ret)
     }

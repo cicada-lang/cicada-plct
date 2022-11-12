@@ -1,7 +1,7 @@
 import { check } from "../check"
 import { applyClosure } from "../closure"
 import { Core } from "../core"
-import { Ctx, CtxCons } from "../ctx"
+import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
@@ -37,7 +37,7 @@ export function checkNewArgs(
 
       const [arg, ...restArgs] = args
       const propertyCore = check(mod, ctx, arg.exp, clazz.propertyType)
-      const propertyValue = evaluate(mod.ctxToEnv(ctx), propertyCore)
+      const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       ctx = CtxCons(clazz.name, clazz.propertyType, ctx)

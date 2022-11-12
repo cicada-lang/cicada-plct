@@ -1,5 +1,5 @@
 import { checkType } from "../../check"
-import { CtxCons } from "../../ctx"
+import { CtxCons, ctxToEnv } from "../../ctx"
 import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
@@ -21,7 +21,7 @@ export class Solve extends Stmt {
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
       const typeCore = checkType(mod, ctx, type)
-      const typeValue = evaluate(mod.ctxToEnv(ctx), typeCore)
+      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
       mod.solution.createPatternVar(name, typeValue)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
