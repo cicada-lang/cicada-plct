@@ -45,8 +45,8 @@ export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
       error.trace.unshift(
         [
           `[include]`,
-          indent(`subtype: ${Values.safeFormatType(mod, ctx, subtype)}`),
-          indent(`type: ${Values.safeFormatType(mod, ctx, type)}`),
+          indent(`subtype: ${Values.formatType(mod, ctx, subtype)}`),
+          indent(`type: ${Values.formatType(mod, ctx, type)}`),
         ].join("\n"),
       )
     }

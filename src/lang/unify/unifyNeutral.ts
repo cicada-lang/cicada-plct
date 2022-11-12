@@ -4,7 +4,7 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
 import { unify, unifyType } from "../unify"
-import { safeFormatNeutral, TypedValue } from "../value"
+import { formatNeutral, TypedValue } from "../value"
 
 function unifyTypedValue(
   mod: Mod,
@@ -83,8 +83,8 @@ export function unifyNeutral(
   throw new Errors.UnificationError(
     [
       `[unifyNeutral] is not implemented for the pair of neutrals`,
-      indent(`left: ${safeFormatNeutral(mod, ctx, left)}`),
-      indent(`right: ${safeFormatNeutral(mod, ctx, right)}`),
+      indent(`left: ${formatNeutral(mod, ctx, left)}`),
+      indent(`right: ${formatNeutral(mod, ctx, right)}`),
     ].join("\n"),
   )
 }

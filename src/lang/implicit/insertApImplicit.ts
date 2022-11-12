@@ -13,7 +13,7 @@ import { readback } from "../readback"
 import { PatternVar } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
-import { safeFormatType, Value } from "../value"
+import { formatType, Value } from "../value"
 
 export function checkWithApImplicitInsertion(
   mod: Mod,
@@ -72,8 +72,8 @@ function tryToSolveByRetType(
         [
           `[checkVar] fail`,
           // indent(`var name: ${exp.name}`),
-          indent(`inferred type: ${safeFormatType(mod, ctx, type)}`),
-          indent(`given type: ${safeFormatType(mod, ctx, retType)}`),
+          indent(`inferred type: ${formatType(mod, ctx, type)}`),
+          indent(`given type: ${formatType(mod, ctx, retType)}`),
           ...error.trace,
           error.message,
         ].join("\n"),

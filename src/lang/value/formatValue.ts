@@ -4,7 +4,7 @@ import { Mod } from "../mod"
 import { readback } from "../readback"
 import { Value } from "../value"
 
-export function safeFormat(
+export function formatValue(
   mod: Mod,
   ctx: Ctx,
   type: Value,

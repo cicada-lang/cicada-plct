@@ -26,10 +26,6 @@ export function insertImplicitFn(
 }
 ```
 
-rename `safeFormat` to `formatValue`
-
-- readback value should always be safe
-
 quit using global side-effect on `mod.solution`
 
 - passing `solution`

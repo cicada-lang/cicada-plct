@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { AlreadyType, safeFormatType, Value } from "../value"
+import { AlreadyType, formatType, Value } from "../value"
 
 type ElementExtractTypeUnion<Kinds extends Array<AlreadyType["kind"]>> =
   Kinds extends (infer Kind extends AlreadyType["kind"])[]
@@ -19,7 +19,7 @@ export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
       [
         `assertTypesInCtx fail`,
         `  expect value kinds: ${kinds.join(", ")}`,
-        `  found type: ${safeFormatType(mod, ctx, type)}`,
+        `  found type: ${formatType(mod, ctx, type)}`,
       ].join("\n"),
     )
   }

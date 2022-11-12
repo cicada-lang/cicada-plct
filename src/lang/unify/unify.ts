@@ -4,7 +4,7 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { advanceValue } from "../solution"
 import { unifyByType, unifyByValue, unifyPatternVar } from "../unify"
-import { safeFormat, safeFormatType, Value } from "../value"
+import { formatType, formatValue, Value } from "../value"
 
 /**
 
@@ -38,9 +38,9 @@ export function unify(
       error.trace.unshift(
         [
           `[unify]`,
-          indent(`type: ${safeFormatType(mod, ctx, type)}`),
-          indent(`left: ${safeFormat(mod, ctx, type, left)}`),
-          indent(`right: ${safeFormat(mod, ctx, type, right)}`),
+          indent(`type: ${formatType(mod, ctx, type)}`),
+          indent(`left: ${formatValue(mod, ctx, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, type, right)}`),
         ].join("\n"),
       )
     }
@@ -50,9 +50,9 @@ export function unify(
         [
           `[unify] EvaluationError during unification`,
           error.message,
-          indent(`type: ${safeFormatType(mod, ctx, type)}`),
-          indent(`left: ${safeFormat(mod, ctx, type, left)}`),
-          indent(`right: ${safeFormat(mod, ctx, type, right)}`),
+          indent(`type: ${formatType(mod, ctx, type)}`),
+          indent(`left: ${formatValue(mod, ctx, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, type, right)}`),
         ].join("\n"),
       )
     }

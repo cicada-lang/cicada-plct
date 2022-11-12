@@ -8,7 +8,7 @@ import { advanceValue } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { isClazz, safeFormatType, Value } from "../value"
+import { formatType, isClazz, Value } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = advanceValue(mod, left)
@@ -24,8 +24,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       error.trace.unshift(
         [
           `[unifyType]`,
-          indent(`left: ${safeFormatType(mod, ctx, left)}`),
-          indent(`right: ${safeFormatType(mod, ctx, right)}`),
+          indent(`left: ${formatType(mod, ctx, left)}`),
+          indent(`right: ${formatType(mod, ctx, right)}`),
         ].join("\n"),
       )
     }
@@ -35,8 +35,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
         [
           `[unifyType] EvaluationError during unification`,
           error.message,
-          indent(`left: ${safeFormatType(mod, ctx, left)}`),
-          indent(`right: ${safeFormatType(mod, ctx, right)}`),
+          indent(`left: ${formatType(mod, ctx, left)}`),
+          indent(`right: ${formatType(mod, ctx, right)}`),
         ].join("\n"),
       )
     }
@@ -132,8 +132,8 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   throw new Errors.UnificationError(
     [
       `[unifyType] is not implemented for the pair of type values`,
-      indent(`left: ${safeFormatType(mod, ctx, left)}`),
-      indent(`right: ${safeFormatType(mod, ctx, right)}`),
+      indent(`left: ${formatType(mod, ctx, left)}`),
+      indent(`right: ${formatType(mod, ctx, right)}`),
     ].join("\n"),
   )
 }

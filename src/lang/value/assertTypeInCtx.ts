@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { AlreadyType, safeFormatType, Value } from "../value"
+import { AlreadyType, formatType, Value } from "../value"
 
 export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
   mod: Mod,
@@ -14,7 +14,7 @@ export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
       [
         `assertTypeInCtx fail`,
         `  expect type kind: ${kind}`,
-        `  found type: ${safeFormatType(mod, ctx, type)}`,
+        `  found type: ${formatType(mod, ctx, type)}`,
       ].join("\n"),
     )
   }

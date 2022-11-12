@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { unify, unifyNeutral, unifyType } from "../unify"
-import { safeFormat, safeFormatType, Value } from "../value"
+import { formatType, formatValue, Value } from "../value"
 
 export function unifyByValue(
   mod: Mod,
@@ -48,9 +48,9 @@ export function unifyByValue(
   throw new Errors.UnificationError(
     [
       `[unifyByValue] is not implemented for the pair of values`,
-      indent(`type: ${safeFormatType(mod, ctx, type)}`),
-      indent(`left: ${safeFormat(mod, ctx, type, left)}`),
-      indent(`right: ${safeFormat(mod, ctx, type, right)}`),
+      indent(`type: ${formatType(mod, ctx, type)}`),
+      indent(`left: ${formatValue(mod, ctx, type, left)}`),
+      indent(`right: ${formatValue(mod, ctx, type, right)}`),
     ].join("\n"),
   )
 }
