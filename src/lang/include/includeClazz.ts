@@ -39,7 +39,7 @@ export function includeClazz(
         clazz = rest
         subclazz = next.subclazz
       } else {
-        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const usedNames = ctxNames(ctx)
         const freshName = freshen(usedNames, clazz.name)
         const v = Values.TypedNeutral(
           clazz.propertyType,
@@ -84,7 +84,7 @@ function nextSubclazz(
 
     case "ClazzCons": {
       if (subclazz.name === name) {
-        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const usedNames = ctxNames(ctx)
         const freshName = freshen(usedNames, subclazz.name)
         const v = Values.TypedNeutral(
           subclazz.propertyType,
@@ -98,7 +98,7 @@ function nextSubclazz(
           subclazz: rest,
         }
       } else {
-        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const usedNames = ctxNames(ctx)
         const freshName = freshen(usedNames, subclazz.name)
         const v = Values.TypedNeutral(
           subclazz.propertyType,

@@ -6,7 +6,6 @@ import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { solutionAdvanceValue } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -35,9 +34,6 @@ import { Value } from "../value"
 **/
 
 export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
-  subtype = solutionAdvanceValue(mod, subtype)
-  type = solutionAdvanceValue(mod, type)
-
   try {
     includeAux(mod, ctx, type, subtype)
   } catch (error) {
@@ -72,7 +68,7 @@ export function includeAux(
     include(mod, ctx, subtype.argType, type.argType)
     const name = subtype.retTypeClosure.name
     const argType = subtype.argType
-    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const usedNames = ctxNames(ctx)
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
     ctx = CtxCons(freshName, argType, ctx)
@@ -89,7 +85,7 @@ export function includeAux(
     include(mod, ctx, type.carType, subtype.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
-    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const usedNames = ctxNames(ctx)
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
     ctx = CtxCons(freshName, carType, ctx)
