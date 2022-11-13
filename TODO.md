@@ -17,7 +17,11 @@
 
 [maybe] back to side-effect on `mod.solution`
 
-- if we can not remove the use of `mod.solution` from:
+- Why we can not remove the use of `mod.solution` from `Compute.execute` now?
+
+  - Is it because of inserted `core` is solved but the type is not?
+
+- If we can not remove the use of `mod.solution` from:
 
   - `equivalent`
   - `insertDuringInfer`
