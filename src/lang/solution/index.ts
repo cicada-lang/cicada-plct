@@ -1,5 +1,4 @@
 export * from "./formatSolution"
-export * from "./PatternVar"
 export * from "./Solution"
 export * from "./solutionAdvanceValue"
 export * from "./solutionCleanup"
