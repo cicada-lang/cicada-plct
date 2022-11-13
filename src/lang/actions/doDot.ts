@@ -26,9 +26,6 @@ export function doDot(target: Value, name: string): Value {
     )
   }
 
-  const found = Values.clazzLookupProperty(target, target.type, name)
-  if (found) return found
-
   return Values.TypedNeutral(
     Values.objektLookupPropertyTypeOrFail(target, target.type, name),
     Neutrals.Dot(target.neutral, target.type, name),

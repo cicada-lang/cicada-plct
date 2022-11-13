@@ -60,6 +60,22 @@ function solutionAdvanceNeutral(
     }
 
     case "Dot": {
+      // NOTE Dot value fulfilled class `targetType`,
+      //   do this in `Actions.doDot` would be too slow.
+      if (Values.isClazz(neutral.targetType)) {
+        const target = solutionAdvanceNeutral(
+          mod,
+          neutral.targetType,
+          neutral.target,
+        )
+        const found = Values.clazzLookupProperty(
+          target,
+          neutral.targetType,
+          neutral.name,
+        )
+        if (found) return solutionAdvanceValue(mod, found)
+      }
+
       return Actions.doDot(
         solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.name,
