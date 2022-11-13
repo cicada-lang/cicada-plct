@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Solution, solutionAdvanceValue } from "../solution"
-import { unifyByType, unifyByValue, unifyPatternVar } from "../unify"
+import { unifyByType, unifyByValue, unifyMetaVar } from "../unify"
 import { formatType, formatValue, Value } from "../value"
 
 /**
@@ -32,7 +32,7 @@ export function unify(
 
   try {
     return (
-      unifyPatternVar(mod, ctx, solution, type, left, right) ||
+      unifyMetaVar(mod, ctx, solution, type, left, right) ||
       unifyByType(mod, ctx, solution, type, left, right) ||
       unifyByValue(mod, ctx, solution, type, left, right)
     )

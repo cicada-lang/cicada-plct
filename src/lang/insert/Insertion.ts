@@ -1,25 +1,25 @@
 import { Core } from "../core"
 import { Exp } from "../exp"
-import { PatternVar } from "../solution"
+import { MetaVar } from "../solution"
 
 export type Insertion =
-  | InsertionPatternVar
+  | InsertionMetaVar
   | InsertionUsedArg
   | InsertionImplicitArg
 
-export type InsertionPatternVar = {
-  kind: "InsertionPatternVar"
-  patternVar: PatternVar
+export type InsertionMetaVar = {
+  kind: "InsertionMetaVar"
+  metaVar: MetaVar
   argExp?: Exp
 }
 
-export function InsertionPatternVar(
-  patternVar: PatternVar,
+export function InsertionMetaVar(
+  metaVar: MetaVar,
   argExp?: Exp,
-): InsertionPatternVar {
+): InsertionMetaVar {
   return {
-    kind: "InsertionPatternVar",
-    patternVar,
+    kind: "InsertionMetaVar",
+    metaVar,
     argExp,
   }
 }

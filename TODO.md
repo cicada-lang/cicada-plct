@@ -1,10 +1,17 @@
-should not pass args to `insertDuringCheck` and `insertDuringInfer`
+should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
+
+- because `solveByArgs` should not call `check` and `infer`
+
+[note] solve implicit application insertion in place
+
+- `solveByArgs` calls `check` and `inferOrUndefined`
+  during this calls the `argType` might contain meta variables
 
 `mod` should not has `solution`
 
 `Solution` should not have side-effect
 
-- should not use `patternVars`, use placeholder entry to represent `PatternVar`
+- should not use `metaVars`, use placeholder entry to represent `MetaVar`
 
 refactor `includeClazz` -- step left and right
 
