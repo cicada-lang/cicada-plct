@@ -2,7 +2,7 @@ import { indent } from "../../utils/indent"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { isPatternVar } from "../solution"
+import { isPatternVar, solutionBind } from "../solution"
 import { occur } from "../unify"
 import { formatType, formatValue, Value } from "../value"
 
@@ -33,7 +33,7 @@ export function unifyPatternVar(
       )
     }
 
-    mod.solution.bindings.set(left.neutral.name, right)
+    solutionBind(mod.solution, left.neutral.name, right)
     return "ok"
   }
 
@@ -49,7 +49,7 @@ export function unifyPatternVar(
       )
     }
 
-    mod.solution.bindings.set(right.neutral.name, left)
+    solutionBind(mod.solution, right.neutral.name, left)
     return "ok"
   }
 }
