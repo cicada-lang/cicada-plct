@@ -7,7 +7,7 @@ import { Value } from "../value"
 
 export function solutionAdvanceValue(mod: Mod, value: Value): Value {
   if (value.kind === "TypedNeutral") {
-    return advanceNeutral(mod, value.type, value.neutral)
+    return solutionAdvanceNeutral(mod, value.type, value.neutral)
   }
 
   return value
@@ -23,7 +23,11 @@ export function solutionAdvanceValue(mod: Mod, value: Value): Value {
 
 **/
 
-function advanceNeutral(mod: Mod, type: Value, neutral: Neutral): Value {
+function solutionAdvanceNeutral(
+  mod: Mod,
+  type: Value,
+  neutral: Neutral,
+): Value {
   switch (neutral.kind) {
     case "Var": {
       return solutionWalk(mod.solution, Values.TypedNeutral(type, neutral))
@@ -31,40 +35,40 @@ function advanceNeutral(mod: Mod, type: Value, neutral: Neutral): Value {
 
     case "Ap": {
       return Actions.doAp(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "ApImplicit": {
       return Actions.doApImplicit(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.arg.value,
       )
     }
 
     case "Car": {
       return Actions.doCar(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
       )
     }
 
     case "Cdr": {
       return Actions.doCdr(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
       )
     }
 
     case "Dot": {
       return Actions.doDot(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.name,
       )
     }
 
     case "Replace": {
       return Actions.doReplace(
-        advanceNeutral(mod, neutral.targetType, neutral.target),
+        solutionAdvanceNeutral(mod, neutral.targetType, neutral.target),
         neutral.motive.value,
         neutral.base.value,
       )

@@ -17,7 +17,7 @@ export function unifyByValue(
        The `type` in `TypedNeutral` are not used.
     **/
 
-    unifyNeutral(mod, ctx, left.neutral, right.neutral)
+    unifyNeutral(mod, ctx, left.type, left.neutral, right.neutral)
     return
   }
 

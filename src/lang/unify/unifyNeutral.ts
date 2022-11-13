@@ -3,8 +3,9 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { unify, unifyType } from "../unify"
-import { formatNeutral, TypedValue } from "../value"
+import { unify, unifyMetaVar, unifyType } from "../unify"
+import * as Values from "../value"
+import { formatNeutral, TypedValue, Value } from "../value"
 
 function unifyTypedValue(
   mod: Mod,
@@ -19,9 +20,19 @@ function unifyTypedValue(
 export function unifyNeutral(
   mod: Mod,
   ctx: Ctx,
+  type: Value,
   left: Neutral,
   right: Neutral,
 ): void {
+  const success = unifyMetaVar(
+    mod,
+    ctx,
+    type,
+    Values.TypedNeutral(type, left),
+    Values.TypedNeutral(type, right),
+  )
+  if (success) return
+
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
@@ -37,24 +48,28 @@ export function unifyNeutral(
   }
 
   if (left.kind === "Ap" && right.kind === "Ap") {
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
   if (left.kind === "ApImplicit" && right.kind === "ApImplicit") {
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
   if (left.kind === "Car" && right.kind === "Car") {
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     return
   }
 
   if (left.kind === "Cdr" && right.kind === "Cdr") {
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     return
   }
 
@@ -69,12 +84,14 @@ export function unifyNeutral(
       )
     }
 
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     return
   }
 
   if (left.kind === "Replace" && right.kind === "Replace") {
-    unifyNeutral(mod, ctx, left.target, right.target)
+    // unifyType(mod, ctx, left.targetType, right.targetType)
+    unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.motive, right.motive)
     unifyTypedValue(mod, ctx, left.base, right.base)
     return

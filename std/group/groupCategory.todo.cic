@@ -116,14 +116,14 @@ let groupCategory = new Category {
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
 
-  idLeft: (implicit G, implicit H, f) => {
+  idLeft: (implicit Gxxx, implicit H, f) => {
     let motive = Equal(
-      GroupHomomorphism(G, H),
-      composeGroupHomomorphism(idGroupHomomorphism(G), f),
+      GroupHomomorphism(Gxxx, H),
+      composeGroupHomomorphism(idGroupHomomorphism(Gxxx), f),
       f,
     )
 
-    return refl
+    return the(motive, refl)
   },
 
   // idLeft: (f) => {

@@ -30,17 +30,6 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       )
     }
 
-    if (error instanceof Errors.EvaluationError) {
-      throw new Errors.UnificationError(
-        [
-          `[unifyType] EvaluationError during unification`,
-          error.message,
-          indent(`left: ${formatType(mod, ctx, left)}`),
-          indent(`right: ${formatType(mod, ctx, right)}`),
-        ].join("\n"),
-      )
-    }
-
     throw error
   }
 }
@@ -51,7 +40,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
        The `type` in `TypedNeutral` are not used.
     **/
 
-    unifyNeutral(mod, ctx, left.neutral, right.neutral)
+    unifyNeutral(mod, ctx, left.type, left.neutral, right.neutral)
     return
   }
 
