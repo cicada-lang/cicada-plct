@@ -4,7 +4,12 @@ import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { PatternVar, solutionNames, solutionPatternVar } from "../solution"
+import {
+  PatternVar,
+  Solution,
+  solutionNames,
+  solutionPatternVar,
+} from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -14,10 +19,11 @@ import { Insertion } from "./Insertion"
 export function solveByRetType(
   mod: Mod,
   ctx: Ctx,
+  solution: Solution,
   type: Value,
   args: Array<Exps.Arg>,
   retType: Value,
-): Array<Insertion> {
+): { solution: Solution; insertions: Array<Insertion> } {
   const argsFreeNames = new Set(
     args.flatMap((arg) => Array.from(freeNames(new Set(), arg.exp))),
   )
@@ -25,25 +31,26 @@ export function solveByRetType(
   const insertions: Array<Insertion> = []
   while (type.kind === "PiImplicit") {
     try {
-      unifyType(mod, ctx, type, retType)
-      return insertions
+      solution = unifyType(mod, ctx, solution, type, retType)
+      return { solution, insertions }
     } catch (_error) {
       // NOTE Be careful about scope bug, `freshName` might occurs in `args`.
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
-        ...solutionNames(mod.solution),
+        ...solutionNames(solution),
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
       const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
-      solutionPatternVar(mod.solution, patternVar)
+      solution = solutionPatternVar(solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       type = applyClosure(type.retTypeClosure, patternVar)
       insertions.push(Insertions.InsertionPatternVar(patternVar))
     }
   }
 
-  unifyType(mod, ctx, type, retType)
-  return insertions
+  solution = unifyType(mod, ctx, solution, type, retType)
+
+  return { solution, insertions }
 }

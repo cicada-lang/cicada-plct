@@ -1,8 +1,11 @@
-quit using global side-effect on `mod.solution`
+`equivalent` takes `solution` -- to call `readback`
 
-- `unify` takes `solution` and return `solution`
+`mod` should not has `solution`
 
-- `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
+`Solution` should not have side-effect
+
+- `Solution` should not have `patternVars`,
+  but a placeholder entry to represent `PatternVar`
 
 refactor `includeClazz` -- step left and right
 

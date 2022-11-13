@@ -9,7 +9,12 @@ import { inferOrUndefined } from "../infer"
 import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { PatternVar, solutionNames, solutionPatternVar } from "../solution"
+import {
+  PatternVar,
+  Solution,
+  solutionNames,
+  solutionPatternVar,
+} from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -18,9 +23,11 @@ import * as Insertions from "./Insertion"
 export function solveByArgs(
   mod: Mod,
   ctx: Ctx,
+  solution: Solution,
   type: Value,
   args: Array<Exps.Arg>,
 ): {
+  solution: Solution
   type: Value
   insertions: Array<Insertion>
 } {
@@ -37,12 +44,12 @@ export function solveByArgs(
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
-        ...solutionNames(mod.solution),
+        ...solutionNames(solution),
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
       const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
-      solutionPatternVar(mod.solution, patternVar)
+      solution = solutionPatternVar(solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
       type = applyClosure(type.retTypeClosure, patternVar)
@@ -53,7 +60,13 @@ export function solveByArgs(
         if (argInferred.type.kind === "PiImplicit") {
           insertDuringCheck(mod, ctx, argInferred, [], type.argType)
         } else {
-          unifyType(mod, ctx, argInferred.type, type.argType)
+          solution = unifyType(
+            mod,
+            ctx,
+            solution,
+            argInferred.type,
+            type.argType,
+          )
         }
       }
 
@@ -89,5 +102,5 @@ export function solveByArgs(
     }
   }
 
-  return { type, insertions }
+  return { type, insertions, solution }
 }

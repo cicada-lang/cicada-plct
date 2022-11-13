@@ -13,17 +13,26 @@ export function insertDuringCheck(
   args: Array<Exps.Arg>,
   retType: Value,
 ): Core {
-  const solved = solveByArgs(mod, ctx, inferred.type, args)
-  const insertions = solveByRetType(mod, ctx, solved.type, args, retType)
+  // let solution = createSolution()
+  let solution = mod.solution
+  const solvedByArgs = solveByArgs(mod, ctx, solution, inferred.type, args)
+  solution = solvedByArgs.solution
+  const solvedByRetType = solveByRetType(
+    mod,
+    ctx,
+    solution,
+    solvedByArgs.type,
+    args,
+    retType,
+  )
+  solution = solvedByRetType.solution
 
-  let core: Core = inferred.core
-
-  for (const insertion of solved.insertions) {
-    core = applyInsertion(mod, ctx, insertion, core)
+  let core = inferred.core
+  for (const insertion of solvedByArgs.insertions) {
+    core = applyInsertion(mod, ctx, solution, insertion, core)
   }
-
-  for (const insertion of insertions) {
-    core = applyInsertion(mod, ctx, insertion, core)
+  for (const insertion of solvedByRetType.insertions) {
+    core = applyInsertion(mod, ctx, solution, insertion, core)
   }
 
   return core

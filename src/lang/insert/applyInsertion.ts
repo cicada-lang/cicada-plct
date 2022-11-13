@@ -5,18 +5,19 @@ import * as Errors from "../errors"
 import { Insertion } from "../insert"
 import { Mod } from "../mod"
 import { readback } from "../readback"
-import { solutionLookupValue } from "../solution"
+import { Solution, solutionLookupValue } from "../solution"
 
 export function applyInsertion(
   mod: Mod,
   ctx: Ctx,
+  solution: Solution,
   insertion: Insertion,
   core: Core,
 ): Core {
   switch (insertion.kind) {
     case "InsertionPatternVar": {
       const argValue = solutionLookupValue(
-        mod.solution,
+        solution,
         insertion.patternVar.neutral.name,
       )
 
@@ -44,7 +45,7 @@ export function applyInsertion(
       const argCore = readback(
         mod,
         ctx,
-        mod.solution,
+        solution,
         insertion.patternVar.type,
         argValue,
       )

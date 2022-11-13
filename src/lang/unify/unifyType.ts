@@ -4,28 +4,41 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { solutionAdvanceValue, solutionNames } from "../solution"
+import { Solution, solutionAdvanceValue, solutionNames } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, isClazz, Value } from "../value"
 
-export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
-  left = solutionAdvanceValue(mod, mod.solution, left)
-  right = solutionAdvanceValue(mod, mod.solution, right)
+export function unifyType(
+  mod: Mod,
+  ctx: Ctx,
+  solution: Solution,
+  left: Value,
+  right: Value,
+): Solution {
+  left = solutionAdvanceValue(mod, solution, left)
+  right = solutionAdvanceValue(mod, solution, right)
 
-  const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
-  if (success) return
+  const success = unifyPatternVar(
+    mod,
+    ctx,
+    solution,
+    Values.Type(),
+    left,
+    right,
+  )
+  if (success) return success
 
   try {
-    unifyTypeAux(mod, ctx, left, right)
+    return unifyTypeAux(mod, ctx, solution, left, right)
   } catch (error) {
     if (error instanceof Errors.UnificationError) {
       error.trace.unshift(
         [
           `[unifyType]`,
-          indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
-          indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
+          indent(`left: ${formatType(mod, ctx, solution, left)}`),
+          indent(`right: ${formatType(mod, ctx, solution, right)}`),
         ].join("\n"),
       )
     }
@@ -35,8 +48,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
         [
           `[unifyType] EvaluationError during unification`,
           error.message,
-          indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
-          indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
+          indent(`left: ${formatType(mod, ctx, solution, left)}`),
+          indent(`right: ${formatType(mod, ctx, solution, right)}`),
         ].join("\n"),
       )
     }
@@ -45,95 +58,95 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   }
 }
 
-function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
+function unifyTypeAux(
+  mod: Mod,
+  ctx: Ctx,
+  solution: Solution,
+  left: Value,
+  right: Value,
+): Solution {
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
 
-    unifyNeutral(mod, ctx, left.neutral, right.neutral)
-    return
+    solution = unifyNeutral(mod, ctx, solution, left.neutral, right.neutral)
+    return solution
   }
 
   if (left.kind === "Type" && right.kind === "Type") {
-    return
+    return solution
   }
 
   if (left.kind === "String" && right.kind === "String") {
-    return
+    return solution
   }
 
   if (left.kind === "Trivial" && right.kind === "Trivial") {
-    return
+    return solution
   }
 
   if (
     (left.kind === "Pi" && right.kind === "Pi") ||
     (left.kind === "PiImplicit" && right.kind === "PiImplicit")
   ) {
-    unifyType(mod, ctx, left.argType, right.argType)
+    solution = unifyType(mod, ctx, solution, left.argType, right.argType)
     const name = right.retTypeClosure.name
     const argType = right.argType
-
-    const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
-
     ctx = CtxCons(freshName, argType, ctx)
-
-    unifyClosure(
+    solution = unifyClosure(
       mod,
       ctx,
+      solution,
       right.retTypeClosure,
       left.retTypeClosure,
       v,
       freshName,
     )
-
-    return
+    return solution
   }
 
   if (left.kind === "Sigma" && right.kind === "Sigma") {
-    unifyType(mod, ctx, left.carType, right.carType)
+    solution = unifyType(mod, ctx, solution, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
-
-    const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+    const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
-
     ctx = CtxCons(freshName, carType, ctx)
-
-    unifyClosure(
+    solution = unifyClosure(
       mod,
       ctx,
+      solution,
       right.cdrTypeClosure,
       left.cdrTypeClosure,
       v,
       freshName,
     )
-
-    return
+    return solution
   }
 
   if (isClazz(left) && isClazz(right)) {
-    unifyClazz(mod, ctx, left, right)
-    return
+    solution = unifyClazz(mod, ctx, solution, left, right)
+    return solution
   }
 
   if (left.kind === "Equal" && right.kind === "Equal") {
-    unifyType(mod, ctx, left.type, right.type)
+    solution = unifyType(mod, ctx, solution, left.type, right.type)
     const equalType = left.type
-    unify(mod, ctx, equalType, left.from, right.from)
-    unify(mod, ctx, equalType, left.to, right.to)
-    return
+    solution = unify(mod, ctx, solution, equalType, left.from, right.from)
+    solution = unify(mod, ctx, solution, equalType, left.to, right.to)
+    return solution
   }
 
   throw new Errors.UnificationError(
     [
       `[unifyType] is not implemented for the pair of type values`,
-      indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
-      indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
+      indent(`left: ${formatType(mod, ctx, solution, left)}`),
+      indent(`right: ${formatType(mod, ctx, solution, right)}`),
     ].join("\n"),
   )
 }
@@ -164,27 +177,43 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 function unifyClosure(
   mod: Mod,
   ctx: Ctx,
+  solution: Solution,
   left: Closure,
   right: Closure,
   typedNeutral: Values.TypedNeutral,
   name: string,
-): void {
+): Solution {
   const leftRet = applyClosure(left, typedNeutral)
   const rightRet = applyClosure(right, typedNeutral)
 
   const leftApTarget = extractApTarget(leftRet, name)
   if (leftApTarget) {
-    unify(mod, ctx, leftApTarget.type, leftApTarget, Values.Fn(right))
-    return
+    solution = unify(
+      mod,
+      ctx,
+      solution,
+      leftApTarget.type,
+      leftApTarget,
+      Values.Fn(right),
+    )
+    return solution
   }
 
   const rightApTarget = extractApTarget(rightRet, name)
   if (rightApTarget) {
-    unify(mod, ctx, rightApTarget.type, rightApTarget, Values.Fn(left))
-    return
+    solution = unify(
+      mod,
+      ctx,
+      solution,
+      rightApTarget.type,
+      rightApTarget,
+      Values.Fn(left),
+    )
+    return solution
   }
 
-  unifyType(mod, ctx, leftRet, rightRet)
+  solution = unifyType(mod, ctx, solution, leftRet, rightRet)
+  return solution
 }
 
 function extractApTarget(
