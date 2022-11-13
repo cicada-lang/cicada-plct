@@ -1,5 +1,3 @@
-`Solution.isPatternVar` as a function
-
 `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
 
 quit using global side-effect on `mod.solution`

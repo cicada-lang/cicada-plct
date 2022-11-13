@@ -2,6 +2,7 @@ import { indent } from "../../utils/indent"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
+import { isPatternVar } from "../solution"
 import { occur } from "../unify"
 import { formatType, formatValue, Value } from "../value"
 
@@ -13,14 +14,14 @@ export function unifyPatternVar(
   right: Value,
 ): "ok" | undefined {
   if (
-    mod.solution.isPatternVar(left) &&
-    mod.solution.isPatternVar(right) &&
+    isPatternVar(mod.solution, left) &&
+    isPatternVar(mod.solution, right) &&
     left.neutral.name === right.neutral.name
   ) {
     return "ok"
   }
 
-  if (mod.solution.isPatternVar(left)) {
+  if (isPatternVar(mod.solution, left)) {
     if (occur(mod, ctx, left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
         [
@@ -36,7 +37,7 @@ export function unifyPatternVar(
     return "ok"
   }
 
-  if (mod.solution.isPatternVar(right)) {
+  if (isPatternVar(mod.solution, right)) {
     if (occur(mod, ctx, right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
         [

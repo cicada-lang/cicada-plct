@@ -24,6 +24,18 @@ function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
   }
 }
 
+export function isPatternVar(
+  solution: Solution,
+  value: Value,
+): value is PatternVar {
+  if (value.kind !== "TypedNeutral") return false
+  if (value.neutral.kind !== "Var") return false
+  const name = value.neutral.name
+  return Boolean(
+    solution.patternVars.find((patternVar) => patternVar.neutral.name === name),
+  )
+}
+
 export function solutionCreatePatternVar(
   solution: Solution,
   name: string,
