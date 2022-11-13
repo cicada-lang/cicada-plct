@@ -4,14 +4,14 @@ import * as Errors from "../errors"
 import * as Values from "../value"
 import { assertClazz, Value } from "../value"
 
-export function objektLookupProperty(
+export function clazzLookupProperty(
   target: Value,
   clazz: Values.Clazz,
   name: string,
 ): Value | undefined {
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      if (clazz.name === name) return Actions.doDot(target, clazz.name)
+      if (clazz.name === name) return undefined
 
       const rest = applyClosure(
         clazz.restClosure,
@@ -32,15 +32,15 @@ export function objektLookupProperty(
   return undefined
 }
 
-export function objektLookupPropertyOrFail(
+export function clazzLookupPropertyOrFail(
   target: Value,
   clazz: Values.Clazz,
   name: string,
 ): Value {
-  const property = objektLookupProperty(target, clazz, name)
+  const property = clazzLookupProperty(target, clazz, name)
   if (property === undefined) {
     throw new Errors.EvaluationError(
-      `[objektLookupPropertyOrFail] undefined property name: ${name}`,
+      `[clazzLookupPropertyOrFail] undefined property name: ${name}`,
     )
   }
 

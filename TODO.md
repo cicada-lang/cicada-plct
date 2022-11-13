@@ -1,5 +1,3 @@
-`doDot` -- get value from target fulfilled class
-
 [maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
 
 - This is NOT possible `solveByArgs` also calls `check`.

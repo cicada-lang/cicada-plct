@@ -116,31 +116,36 @@ let groupCategory = new Category {
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
 
+  // TODO Fail to readbeck
+  // - left: [formatType] fail to readbackType: Equal
+  // - left: [formatValue] fail to readback: TypedNeutral
+
+  // idLeft: (f) => refl,
+
   idLeft: (implicit Gxxx, implicit H, f) => {
     let motive = Equal(
       GroupHomomorphism(Gxxx, H),
       composeGroupHomomorphism(idGroupHomomorphism(Gxxx), f),
       f,
     )
-
     return the(motive, refl)
   },
+
+  // TODO Wrong error:
+  // - EvaluationError: [evaluate] undefined variable name: x
 
   // idLeft: (f) => {
   //   let G = f.dom
   //   let H = f.cod
-
   //   let motive = Equal(
   //     GroupHomomorphism(G, H),
   //     composeGroupHomomorphism(idGroupHomomorphism(G), f),
   //     f,
   //   )
-
-  //   return refl
+  //   return the(motive, refl)
   // },
 
-  // TODO left: [formatType] fail to readbackType: Equal
-  // idLeft: (f) => refl,
+  // TODO Later
 
   // // given G: Group, H: Group
   // idRight: (f: GroupHomomorphism(G, H)) => same(f)

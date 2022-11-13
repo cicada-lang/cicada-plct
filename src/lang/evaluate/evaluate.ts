@@ -12,7 +12,7 @@ export function evaluate(env: Env, core: Core): Value {
       const value = envLookupValue(env, core.name)
       if (value === undefined) {
         throw new Errors.EvaluationError(
-          `Undefined name during evaluate: ${core.name}`,
+          `[evaluate] undefined variable name: ${core.name}`,
         )
       }
 
@@ -117,11 +117,5 @@ export function evaluate(env: Env, core: Core): Value {
         evaluate(env, core.base),
       )
     }
-
-    // default: {
-    //   throw new Errors.EvaluationError(
-    //     `evaluate is not implemented for core: ${core.kind}`,
-    //   )
-    // }
   }
 }

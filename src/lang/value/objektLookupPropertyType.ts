@@ -40,7 +40,9 @@ export function objektLookupPropertyTypeOrFail(
 ): Value {
   const propertyType = objektLookupPropertyType(target, clazz, name)
   if (propertyType === undefined) {
-    throw new Errors.EvaluationError(`Undefined property type name: ${name}`)
+    throw new Errors.EvaluationError(
+      `[objektLookupPropertyTypeOrFail] undefined property type name: ${name}`,
+    )
   }
 
   return propertyType
