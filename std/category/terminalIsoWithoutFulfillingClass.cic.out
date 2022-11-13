@@ -65,7 +65,7 @@
   morphism: (x27: cat.Object) -> cat.Morphism(x27, object)
   morphismUnique: (implicit x27: cat.Object, f: cat.Morphism(x27, object)) -> Equal(cat.Morphism(x27, object), f, morphism(x27))
 }) -> class {
-  cat [cat1]: class {
+  cat [rename: cat1]: class {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)

@@ -15,7 +15,7 @@ export function unfoldFormatClazz(clazz: Cores.Clazz): {
       const key =
         clazz.name === clazz.localName
           ? formatName(clazz.name)
-          : `${formatName(clazz.name)} [${formatName(clazz.localName)}]`
+          : `${formatName(clazz.name)} [rename: ${formatName(clazz.localName)}]`
       const binding = `${key}: ${propertyType}`
       const { bindings } = unfoldFormatClazz(clazz.rest)
       return { bindings: [binding, ...bindings] }

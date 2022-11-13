@@ -12,8 +12,6 @@ refactor `unifyClazz` -- step left and right
 
 # DX
 
-`formatCore` -- print `[rename <name>]` instead of `[rename]`
-
 [maybe] print error message in XML for re-parsing them on the web
 
 `Clazz` has optional name for debug
