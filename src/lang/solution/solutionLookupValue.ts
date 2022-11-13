@@ -1,4 +1,4 @@
-import { isPatternVar, Solution } from "../solution"
+import { isMetaVar, Solution } from "../solution"
 import { Value } from "../value"
 
 export function solutionLookupValue(
@@ -7,7 +7,7 @@ export function solutionLookupValue(
 ): Value | undefined {
   const value = solution.bindings.get(name)
   if (value === undefined) return undefined
-  if (isPatternVar(solution, value) && value.neutral.name === name)
+  if (isMetaVar(solution, value) && value.neutral.name === name)
     return undefined
   return value
 }

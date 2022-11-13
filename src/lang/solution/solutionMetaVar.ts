@@ -8,14 +8,14 @@ import { Value } from "../value"
 
 **/
 
-export type PatternVar = {
+export type MetaVar = {
   family: "Value"
   kind: "TypedNeutral"
   type: Value
   neutral: Neutrals.Var
 }
 
-export function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
+export function MetaVar(type: Value, neutral: Neutrals.Var): MetaVar {
   return {
     family: "Value",
     kind: "TypedNeutral",
@@ -24,10 +24,7 @@ export function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
   }
 }
 
-export function isPatternVar(
-  solution: Solution,
-  value: Value,
-): value is PatternVar {
+export function isMetaVar(solution: Solution, value: Value): value is MetaVar {
   if (value.kind !== "TypedNeutral") return false
   if (value.neutral.kind !== "Var") return false
   const name = value.neutral.name
@@ -36,9 +33,9 @@ export function isPatternVar(
   )
 }
 
-export function solutionPatternVar(
+export function solutionMetaVar(
   solution: Solution,
-  patternVar: PatternVar,
+  patternVar: MetaVar,
 ): Solution {
   solution.patternVars.push(patternVar)
   return solution

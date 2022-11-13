@@ -4,7 +4,7 @@ import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { PatternVar, solutionNames, solutionPatternVar } from "../solution"
+import { MetaVar, solutionMetaVar, solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -36,11 +36,11 @@ export function solveByRetType(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
-      solutionPatternVar(mod.solution, patternVar)
+      const patternVar = MetaVar(type.argType, Neutrals.Var(freshName))
+      solutionMetaVar(mod.solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       type = applyClosure(type.retTypeClosure, patternVar)
-      insertions.push(Insertions.InsertionPatternVar(patternVar))
+      insertions.push(Insertions.InsertionMetaVar(patternVar))
     }
   }
 

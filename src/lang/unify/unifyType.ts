@@ -5,7 +5,7 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { solutionAdvanceValue, solutionNames } from "../solution"
-import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
+import { unify, unifyClazz, unifyMetaVar, unifyNeutral } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, isClazz, Value } from "../value"
@@ -14,7 +14,7 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = solutionAdvanceValue(mod, left)
   right = solutionAdvanceValue(mod, right)
 
-  const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
+  const success = unifyMetaVar(mod, ctx, Values.Type(), left, right)
   if (success) return
 
   try {

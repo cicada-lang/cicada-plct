@@ -14,7 +14,7 @@ export function applyInsertion(
   core: Core,
 ): Core {
   switch (insertion.kind) {
-    case "InsertionPatternVar": {
+    case "InsertionMetaVar": {
       const argValue = solutionLookupValue(
         mod.solution,
         insertion.patternVar.neutral.name,

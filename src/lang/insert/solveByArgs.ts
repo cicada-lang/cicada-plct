@@ -9,7 +9,7 @@ import { inferOrUndefined } from "../infer"
 import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { PatternVar, solutionNames, solutionPatternVar } from "../solution"
+import { MetaVar, solutionMetaVar, solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -41,12 +41,12 @@ export function solveByArgs(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
-      solutionPatternVar(mod.solution, patternVar)
+      const patternVar = MetaVar(type.argType, Neutrals.Var(freshName))
+      solutionMetaVar(mod.solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
       type = applyClosure(type.retTypeClosure, patternVar)
-      insertions.push(Insertions.InsertionPatternVar(patternVar, arg.exp))
+      insertions.push(Insertions.InsertionMetaVar(patternVar, arg.exp))
     } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (argInferred !== undefined) {

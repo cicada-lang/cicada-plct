@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve Ap -- same PatternVar", async () => {
+test("solve Ap -- same MetaVar", async () => {
   const output = await runCode(`
 
 solve (f: (String) -> String, x: String) {
@@ -20,7 +20,7 @@ solve (f: (String) -> String, x: String) {
   )
 })
 
-test("solve Ap -- PatternVar v.s. String", async () => {
+test("solve Ap -- MetaVar v.s. String", async () => {
   const output = await runCode(`
 
 solve (f: (String) -> String, x: String) {
