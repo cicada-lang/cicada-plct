@@ -4,7 +4,7 @@ import { Value } from "../value"
 
 /**
 
-   We use neutral variable as pattern variable (or say logic variable).
+   We use neutral variable as meta variable (or say logic variable).
 
 **/
 
@@ -29,14 +29,14 @@ export function isMetaVar(solution: Solution, value: Value): value is MetaVar {
   if (value.neutral.kind !== "Var") return false
   const name = value.neutral.name
   return Boolean(
-    solution.patternVars.find((patternVar) => patternVar.neutral.name === name),
+    solution.metaVars.find((metaVar) => metaVar.neutral.name === name),
   )
 }
 
 export function solutionMetaVar(
   solution: Solution,
-  patternVar: MetaVar,
+  metaVar: MetaVar,
 ): Solution {
-  solution.patternVars.push(patternVar)
+  solution.metaVars.push(metaVar)
   return solution
 }

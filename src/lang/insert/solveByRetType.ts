@@ -36,11 +36,11 @@ export function solveByRetType(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const patternVar = MetaVar(type.argType, Neutrals.Var(freshName))
-      solutionMetaVar(mod.solution, patternVar)
+      const metaVar = MetaVar(type.argType, Neutrals.Var(freshName))
+      solutionMetaVar(mod.solution, metaVar)
       ctx = CtxCons(freshName, type.argType, ctx)
-      type = applyClosure(type.retTypeClosure, patternVar)
-      insertions.push(Insertions.InsertionMetaVar(patternVar))
+      type = applyClosure(type.retTypeClosure, metaVar)
+      insertions.push(Insertions.InsertionMetaVar(metaVar))
     }
   }
 

@@ -15,7 +15,7 @@ export function solutionAdvanceValue(mod: Mod, value: Value): Value {
 
 /**
 
-   To prepare for unify is `walk` the pattern variable,
+   To prepare for unify is `walk` the meta variable,
    and possibly to further evaluate neutral value.
 
    For both `walk` and further evaluation,

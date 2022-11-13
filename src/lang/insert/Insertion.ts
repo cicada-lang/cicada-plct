@@ -9,17 +9,17 @@ export type Insertion =
 
 export type InsertionMetaVar = {
   kind: "InsertionMetaVar"
-  patternVar: MetaVar
+  metaVar: MetaVar
   argExp?: Exp
 }
 
 export function InsertionMetaVar(
-  patternVar: MetaVar,
+  metaVar: MetaVar,
   argExp?: Exp,
 ): InsertionMetaVar {
   return {
     kind: "InsertionMetaVar",
-    patternVar,
+    metaVar,
     argExp,
   }
 }
