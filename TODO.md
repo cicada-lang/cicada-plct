@@ -1,11 +1,10 @@
-`equivalent` takes `solution` -- to call `readback`
+should not pass args to `insertDuringCheck` and `insertDuringInfer`
 
 `mod` should not has `solution`
 
 `Solution` should not have side-effect
 
-- `Solution` should not have `patternVars`,
-  but a placeholder entry to represent `PatternVar`
+- should not use `patternVars`, use placeholder entry to represent `PatternVar`
 
 refactor `includeClazz` -- step left and right
 

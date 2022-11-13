@@ -24,8 +24,11 @@ export function equivalent(
   left: Value,
   right: Value,
 ): void {
-  const leftCore = readback(mod, ctx, mod.solution, type, left)
-  const rightCore = readback(mod, ctx, mod.solution, type, right)
+  const solution = mod.solution
+  // const solution = createSolution()
+
+  const leftCore = readback(mod, ctx, solution, type, left)
+  const rightCore = readback(mod, ctx, solution, type, right)
 
   try {
     alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
