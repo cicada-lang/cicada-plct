@@ -6,11 +6,6 @@ export class Solution {
   patternVars: Array<PatternVar> = []
   bindings: Map<string, Value> = new Map()
 
-  cleanup(): void {
-    this.patternVars = []
-    this.bindings = new Map()
-  }
-
   get names(): Array<string> {
     return Array.from(this.bindings.keys())
   }

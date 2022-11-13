@@ -2,7 +2,7 @@ import { Loader } from "../../loader"
 import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
 import { Env } from "../env"
 import { useGlobals } from "../globals"
-import { Solution } from "../solution"
+import { Solution, solutionCleanup } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
 
@@ -43,7 +43,7 @@ export class Mod {
     for (const [index, stmt] of stmts.entries()) {
       const output = await stmt.execute(this)
       this.stmts.push(stmt)
-      this.solution.cleanup()
+      solutionCleanup(this.solution)
       if (output) {
         this.outputs.set(offset + index, output)
         outputs.push(output)

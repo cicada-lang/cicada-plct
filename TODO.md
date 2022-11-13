@@ -1,7 +1,6 @@
-`Solution.cleanup` as function
-`Solution.lookupValue` as function
-`Solution.walk` as function
-`Solution.names` as function
+`Solution.lookupValue` as `solutionLookupValue`
+`Solution.walk` as `solutionWalk`
+`Solution.names` as `solutionNames`
 
 quit using global side-effect on `mod.solution`
 
