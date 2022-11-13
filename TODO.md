@@ -37,6 +37,10 @@ refactor `includeClazz` -- step left and right
 
 refactor `unifyClazz` -- step left and right
 
+[maybe] should not allow literal fulfilled class
+
+- all classes must be purely abstract
+
 # DX
 
 [maybe] print error message in XML for re-parsing them on the web

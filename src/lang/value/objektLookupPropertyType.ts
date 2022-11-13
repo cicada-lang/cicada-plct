@@ -5,8 +5,8 @@ import * as Values from "../value"
 import { assertClazz, Value } from "../value"
 
 export function objektLookupPropertyType(
-  clazz: Values.Clazz,
   target: Value,
+  clazz: Values.Clazz,
   name: string,
 ): Value | undefined {
   while (clazz.kind !== "ClazzNull") {
@@ -34,11 +34,11 @@ export function objektLookupPropertyType(
 }
 
 export function objektLookupPropertyTypeOrFail(
-  clazz: Values.Clazz,
   target: Value,
+  clazz: Values.Clazz,
   name: string,
 ): Value {
-  const propertyType = objektLookupPropertyType(clazz, target, name)
+  const propertyType = objektLookupPropertyType(target, clazz, name)
   if (propertyType === undefined) {
     throw new Errors.EvaluationError(`Undefined property type name: ${name}`)
   }
