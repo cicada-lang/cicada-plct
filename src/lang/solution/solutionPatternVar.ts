@@ -36,7 +36,7 @@ export function isPatternVar(
   )
 }
 
-export function solutionAddPatternVar(
+export function solutionPatternVar(
   solution: Solution,
   patternVar: PatternVar,
 ): void {

@@ -4,11 +4,7 @@ import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
 import * as Neutrals from "../../neutral"
-import {
-  formatSolution,
-  PatternVar,
-  solutionAddPatternVar,
-} from "../../solution"
+import { formatSolution, PatternVar, solutionPatternVar } from "../../solution"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
 
@@ -30,7 +26,7 @@ export class Solve extends Stmt {
       const typeCore = checkType(mod, ctx, type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
       const patternVar = PatternVar(typeValue, Neutrals.Var(name))
-      solutionAddPatternVar(mod.solution, patternVar)
+      solutionPatternVar(mod.solution, patternVar)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
     }
