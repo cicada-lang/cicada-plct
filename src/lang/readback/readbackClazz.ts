@@ -4,6 +4,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackType } from "../readback"
+import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
@@ -18,7 +19,7 @@ export function readbackClazz(
     }
 
     case "ClazzCons": {
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, clazz.name)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const restValue = applyClosure(clazz.restClosure, v)

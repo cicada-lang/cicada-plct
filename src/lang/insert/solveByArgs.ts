@@ -8,6 +8,7 @@ import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
 import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
+import { solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -35,7 +36,7 @@ export function solveByArgs(
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
-        ...mod.solution.names,
+        ...solutionNames(mod.solution),
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)

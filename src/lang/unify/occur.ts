@@ -4,6 +4,7 @@ import { Ctx, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { Neutral } from "../neutral"
+import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
@@ -32,7 +33,7 @@ export function occur(
       if (occurType(mod, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
       const retType = applyClosure(value.retTypeClosure, v)
@@ -43,7 +44,7 @@ export function occur(
       if (occurType(mod, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
       const retType = applyClosure(value.retTypeClosure, v)
@@ -54,7 +55,7 @@ export function occur(
       Values.assertTypeInCtx(mod, ctx, type, "Pi")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
@@ -66,7 +67,7 @@ export function occur(
       Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
@@ -78,7 +79,7 @@ export function occur(
       if (occurType(mod, ctx, name, value.carType)) return true
 
       const boundName = value.cdrTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.carType, Neutrals.Var(freshName))
       const cdrType = applyClosure(value.cdrTypeClosure, v)
@@ -118,7 +119,7 @@ export function occur(
       if (occurType(mod, ctx, name, value.propertyType)) return true
 
       const boundName = value.restClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names, name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.propertyType, Neutrals.Var(freshName))
       const rest = applyClosure(value.restClosure, v)

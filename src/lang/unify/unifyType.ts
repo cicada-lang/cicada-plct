@@ -4,7 +4,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { solutionAdvanceValue } from "../solution"
+import { solutionAdvanceValue, solutionNames } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -75,7 +75,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
     const name = right.retTypeClosure.name
     const argType = right.argType
 
-    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(argType, Neutrals.Var(freshName))
 
@@ -98,7 +98,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
     const name = right.cdrTypeClosure.name
     const carType = right.carType
 
-    const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+    const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
     const freshName = freshen(usedNames, name)
     const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
 

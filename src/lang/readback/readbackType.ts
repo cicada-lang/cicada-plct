@@ -6,7 +6,7 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackClazz, readbackNeutral } from "../readback"
-import { solutionAdvanceValue } from "../solution"
+import { solutionAdvanceValue, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -36,7 +36,7 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const argTypeCore = readbackType(mod, ctx, type.argType)
@@ -48,7 +48,7 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const argTypeCore = readbackType(mod, ctx, type.argType)
@@ -60,7 +60,7 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
 
     case "Sigma": {
       const name = type.cdrTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.carType, Neutrals.Var(freshName))
       const carTypeCore = readbackType(mod, ctx, type.carType)

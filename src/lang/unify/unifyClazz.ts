@@ -4,6 +4,7 @@ import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { solutionNames } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -29,7 +30,7 @@ export function unifyClazz(
         left = rest
         right = next.right
       } else {
-        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
         const freshName = freshen(usedNames, left.name)
         const v = Values.TypedNeutral(
           left.propertyType,
@@ -92,7 +93,7 @@ function nextRight(
             right: rest,
           }
         } else {
-          const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+          const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
           const freshName = freshen(usedNames, right.name)
           const v = Values.TypedNeutral(
             right.propertyType,
@@ -107,7 +108,7 @@ function nextRight(
           }
         }
       } else {
-        const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+        const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
         const freshName = freshen(usedNames, right.name)
         const v = Values.TypedNeutral(
           right.propertyType,

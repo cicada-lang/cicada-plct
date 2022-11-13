@@ -6,10 +6,6 @@ export class Solution {
   patternVars: Array<PatternVar> = []
   bindings: Map<string, Value> = new Map()
 
-  get names(): Array<string> {
-    return Array.from(this.bindings.keys())
-  }
-
   createPatternVar(name: string, type: Value): PatternVar {
     const patternVar = PatternVar(type, Neutrals.Var(name))
     this.patternVars.push(patternVar)

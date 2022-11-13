@@ -5,6 +5,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { solutionNames } from "../solution"
 import { unify, unifyProperties, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -29,7 +30,7 @@ export function unifyByType(
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
@@ -42,7 +43,7 @@ export function unifyByType(
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...mod.solution.names]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)

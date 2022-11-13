@@ -3,6 +3,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
+import { solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -30,7 +31,7 @@ export function solveByRetType(
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
-        ...mod.solution.names,
+        ...solutionNames(mod.solution),
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)

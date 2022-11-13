@@ -12,6 +12,7 @@ import { infer } from "../infer"
 import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
+import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, Value } from "../value"
@@ -60,7 +61,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const name = type.retTypeClosure.name
         const usedNames = [
           ...ctxNames(ctx),
-          ...mod.solution.names,
+          ...solutionNames(mod.solution),
           ...freeNames(new Set(), exp),
         ]
         const freshName = freshen(usedNames, name)
