@@ -1,9 +1,5 @@
-import { indent } from "../../utils/indent"
-import { Ctx, ctxLookupType } from "../ctx"
-import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { PatternVar } from "../solution"
-import * as Values from "../value"
 import { Value } from "../value"
 
 export class Solution {
@@ -42,15 +38,6 @@ export class Solution {
     return value
   }
 
-  needWalk(value: Value): boolean {
-    if (this.isPatternVar(value)) {
-      const found = this.lookupValue(value.neutral.name)
-      if (found !== undefined) return true
-    }
-
-    return false
-  }
-
   walk(value: Value): Value {
     while (this.isPatternVar(value)) {
       const found = this.lookupValue(value.neutral.name)
@@ -59,26 +46,5 @@ export class Solution {
     }
 
     return value
-  }
-
-  formatSolution(mod: Mod, ctx: Ctx, names: Array<string>): string {
-    const properties: Array<string> = []
-    for (const name of names) {
-      const type = ctxLookupType(ctx, name)
-      if (type === undefined) {
-        throw new Error(`formatSolution find type of name: ${name}`)
-      }
-
-      let value = this.lookupValue(name)
-      if (value === undefined) {
-        properties.push(`${name}: TODO(${Values.formatType(mod, ctx, type)})`)
-      } else {
-        properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
-      }
-    }
-
-    return properties.length === 0
-      ? "{}"
-      : `{\n${indent(properties.join(",\n"))}\n}`
   }
 }

@@ -1,6 +1,11 @@
+`Solution.cleanup` as function
+`Solution.lookupValue` as function
+`Solution.walk` as function
+`Solution.names` as function
+
 quit using global side-effect on `mod.solution`
 
-- still passing `mod` -- for future usage
+> still passing `mod` -- for future usage
 
 - `unify` takes `solution` and return `solution`
 

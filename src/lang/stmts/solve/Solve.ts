@@ -3,8 +3,10 @@ import { CtxCons, ctxToEnv } from "../../ctx"
 import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
+import { formatSolution } from "../../solution"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
+
 import { Equation, SolveBinding, unifyEquation } from "../solve"
 
 export class Solve extends Stmt {
@@ -46,6 +48,6 @@ export class Solve extends Stmt {
       }
     }
 
-    return mod.solution.formatSolution(mod, ctx, names)
+    return formatSolution(mod, ctx, mod.solution, names)
   }
 }
