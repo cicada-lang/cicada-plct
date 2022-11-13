@@ -24,8 +24,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       error.trace.unshift(
         [
           `[unifyType]`,
-          indent(`left: ${formatType(mod, ctx, left)}`),
-          indent(`right: ${formatType(mod, ctx, right)}`),
+          indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
+          indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
         ].join("\n"),
       )
     }
@@ -35,8 +35,8 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
         [
           `[unifyType] EvaluationError during unification`,
           error.message,
-          indent(`left: ${formatType(mod, ctx, left)}`),
-          indent(`right: ${formatType(mod, ctx, right)}`),
+          indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
+          indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
         ].join("\n"),
       )
     }
@@ -132,8 +132,8 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   throw new Errors.UnificationError(
     [
       `[unifyType] is not implemented for the pair of type values`,
-      indent(`left: ${formatType(mod, ctx, left)}`),
-      indent(`right: ${formatType(mod, ctx, right)}`),
+      indent(`left: ${formatType(mod, ctx, mod.solution, left)}`),
+      indent(`right: ${formatType(mod, ctx, mod.solution, right)}`),
     ].join("\n"),
   )
 }

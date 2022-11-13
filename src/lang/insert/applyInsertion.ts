@@ -41,7 +41,13 @@ export function applyInsertion(
         }
       }
 
-      const argCore = readback(mod, ctx, insertion.patternVar.type, argValue)
+      const argCore = readback(
+        mod,
+        ctx,
+        mod.solution,
+        insertion.patternVar.type,
+        argValue,
+      )
       return Cores.ApImplicit(core, argCore)
     }
 

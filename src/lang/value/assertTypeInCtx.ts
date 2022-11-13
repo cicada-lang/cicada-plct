@@ -14,7 +14,7 @@ export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
       [
         `assertTypeInCtx fail`,
         `  expect type kind: ${kind}`,
-        `  found type: ${formatType(mod, ctx, type)}`,
+        `  found type: ${formatType(mod, ctx, mod.solution, type)}`,
       ].join("\n"),
     )
   }

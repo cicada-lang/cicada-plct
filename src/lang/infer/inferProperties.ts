@@ -8,6 +8,7 @@ import { evaluate } from "../evaluate"
 import { Exp } from "../exp"
 import { Mod } from "../mod"
 import { readback } from "../readback"
+import { createSolution } from "../solution"
 import * as Values from "../value"
 
 export function inferProperties(
@@ -57,6 +58,7 @@ export function inferProperties(
       const propertyCore = readback(
         mod,
         ctx,
+        createSolution(),
         clazz.propertyType,
         clazz.property,
       )

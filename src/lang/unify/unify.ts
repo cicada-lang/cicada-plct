@@ -38,9 +38,9 @@ export function unify(
       error.trace.unshift(
         [
           `[unify]`,
-          indent(`type: ${formatType(mod, ctx, type)}`),
-          indent(`left: ${formatValue(mod, ctx, type, left)}`),
-          indent(`right: ${formatValue(mod, ctx, type, right)}`),
+          indent(`type: ${formatType(mod, ctx, mod.solution, type)}`),
+          indent(`left: ${formatValue(mod, ctx, mod.solution, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, mod.solution, type, right)}`),
         ].join("\n"),
       )
     }
@@ -50,9 +50,9 @@ export function unify(
         [
           `[unify] EvaluationError during unification`,
           error.message,
-          indent(`type: ${formatType(mod, ctx, type)}`),
-          indent(`left: ${formatValue(mod, ctx, type, left)}`),
-          indent(`right: ${formatValue(mod, ctx, type, right)}`),
+          indent(`type: ${formatType(mod, ctx, mod.solution, type)}`),
+          indent(`left: ${formatValue(mod, ctx, mod.solution, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, mod.solution, type, right)}`),
         ].join("\n"),
       )
     }

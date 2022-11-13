@@ -83,8 +83,8 @@ export function unifyNeutral(
   throw new Errors.UnificationError(
     [
       `[unifyNeutral] is not implemented for the pair of neutrals`,
-      indent(`left: ${formatNeutral(mod, ctx, left)}`),
-      indent(`right: ${formatNeutral(mod, ctx, right)}`),
+      indent(`left: ${formatNeutral(mod, ctx, mod.solution, left)}`),
+      indent(`right: ${formatNeutral(mod, ctx, mod.solution, right)}`),
     ].join("\n"),
   )
 }

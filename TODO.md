@@ -1,11 +1,8 @@
-`readback` takes `solution` -- for `solutionAdvanceValue`
-`unify` takes `solution` and return `solution`
+quit using global side-effect on `mod.solution`
 
-side-effect on `mod.solution` -- instead of on `mod.solution` itself
+- `unify` takes `solution` and return `solution`
 
 - `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
-
-quit using global side-effect on `mod.solution`
 
 refactor `includeClazz` -- step left and right
 

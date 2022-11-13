@@ -6,7 +6,7 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackProperties, readbackType } from "../readback"
-import { solutionNames } from "../solution"
+import { Solution, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -24,12 +24,13 @@ import { Value } from "../value"
 export function readbackByType(
   mod: Mod,
   ctx: Ctx,
+  solution: Solution,
   type: Value,
   value: Value,
 ): Core | undefined {
   switch (type.kind) {
     case "Type": {
-      return readbackType(mod, ctx, value)
+      return readbackType(mod, ctx, solution, value)
     }
 
     case "Trivial": {
@@ -52,24 +53,27 @@ export function readbackByType(
       **/
 
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, v)
-      return Cores.Fn(freshName, readback(mod, ctx, retType, ret))
+      return Cores.Fn(freshName, readback(mod, ctx, solution, retType, ret))
     }
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doApImplicit(value, v)
-      return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
+      return Cores.FnImplicit(
+        freshName,
+        readback(mod, ctx, solution, retType, ret),
+      )
     }
 
     case "Sigma": {
@@ -85,15 +89,15 @@ export function readbackByType(
       const cdrType = applyClosure(type.cdrTypeClosure, car)
 
       return Cores.Cons(
-        readback(mod, ctx, type.carType, car),
-        readback(mod, ctx, cdrType, cdr),
+        readback(mod, ctx, solution, type.carType, car),
+        readback(mod, ctx, solution, cdrType, cdr),
       )
     }
 
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
-      return Cores.Objekt(readbackProperties(mod, ctx, type, value))
+      return Cores.Objekt(readbackProperties(mod, ctx, solution, type, value))
     }
 
     default: {

@@ -6,20 +6,25 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackClazz, readbackNeutral } from "../readback"
-import { solutionAdvanceValue, solutionNames } from "../solution"
+import { Solution, solutionAdvanceValue, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
 
-export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
-  type = solutionAdvanceValue(mod, mod.solution, type)
+export function readbackType(
+  mod: Mod,
+  ctx: Ctx,
+  solution: Solution,
+  type: Value,
+): Core {
+  type = solutionAdvanceValue(mod, solution, type)
 
   switch (type.kind) {
     case "TypedNeutral": {
       /**
          The `type` in `TypedNeutral` are not used.
       **/
-      return readbackNeutral(mod, ctx, type.neutral)
+      return readbackNeutral(mod, ctx, solution, type.neutral)
     }
 
     case "Type": {
@@ -36,53 +41,56 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
 
     case "Pi": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const argTypeCore = readbackType(mod, ctx, type.argType)
+      const argTypeCore = readbackType(mod, ctx, solution, type.argType)
       const retTypeValue = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const retTypeCore = readbackType(mod, ctx, retTypeValue)
+      const retTypeCore = readbackType(mod, ctx, solution, retTypeValue)
       return Cores.Pi(freshName, argTypeCore, retTypeCore)
     }
 
     case "PiImplicit": {
       const name = type.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const argTypeCore = readbackType(mod, ctx, type.argType)
+      const argTypeCore = readbackType(mod, ctx, solution, type.argType)
       const retTypeValue = applyClosure(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
-      const retTypeCore = readbackType(mod, ctx, retTypeValue)
+      const retTypeCore = readbackType(mod, ctx, solution, retTypeValue)
       return Cores.PiImplicit(freshName, argTypeCore, retTypeCore)
     }
 
     case "Sigma": {
       const name = type.cdrTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.carType, Neutrals.Var(freshName))
-      const carTypeCore = readbackType(mod, ctx, type.carType)
+      const carTypeCore = readbackType(mod, ctx, solution, type.carType)
       const cdrTypeValue = applyClosure(type.cdrTypeClosure, v)
       ctx = CtxCons(freshName, type.carType, ctx)
-      const cdrTypeCore = readbackType(mod, ctx, cdrTypeValue)
+      const cdrTypeCore = readbackType(mod, ctx, solution, cdrTypeValue)
       return Cores.Sigma(freshName, carTypeCore, cdrTypeCore)
     }
 
     case "ClazzNull":
     case "ClazzCons":
     case "ClazzFulfilled": {
-      return readbackClazz(mod, ctx, type)
+      return readbackClazz(mod, ctx, solution, type)
     }
 
     case "Equal": {
       return Cores.Ap(
         Cores.Ap(
-          Cores.Ap(Cores.Var("Equal"), readbackType(mod, ctx, type.type)),
-          readback(mod, ctx, type.type, type.from),
+          Cores.Ap(
+            Cores.Var("Equal"),
+            readbackType(mod, ctx, solution, type.type),
+          ),
+          readback(mod, ctx, solution, type.type, type.from),
         ),
-        readback(mod, ctx, type.type, type.to),
+        readback(mod, ctx, solution, type.type, type.to),
       )
     }
 

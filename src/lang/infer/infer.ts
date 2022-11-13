@@ -22,6 +22,7 @@ import {
 import { insertDuringInfer } from "../insert"
 import { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
+import { createSolution } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -84,7 +85,12 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
-      const retTypeCore = readbackType(mod, ctx, retInferred.type)
+      const retTypeCore = readbackType(
+        mod,
+        ctx,
+        createSolution(),
+        retInferred.type,
+      )
       const retTypeClosure = ClosureSimple(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.Pi(argTypeValue, retTypeClosure),
@@ -97,7 +103,12 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argTypeValue = evaluate(ctxToEnv(ctx), argTypeCore)
       ctx = CtxCons(exp.name, argTypeValue, ctx)
       const retInferred = infer(mod, ctx, exp.ret)
-      const retTypeCore = readbackType(mod, ctx, retInferred.type)
+      const retTypeCore = readbackType(
+        mod,
+        ctx,
+        createSolution(),
+        retInferred.type,
+      )
       const retTypeClosure = ClosureSimple(ctxToEnv(ctx), exp.name, retTypeCore)
       return Inferred(
         Values.PiImplicit(argTypeValue, retTypeClosure),
@@ -241,7 +252,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         targetValue,
         exp.name,
       )
-      return Inferred(propertyType, readback(mod, ctx, propertyType, property))
+      return Inferred(
+        propertyType,
+        readback(mod, ctx, createSolution(), propertyType, property),
+      )
     }
 
     case "NewUnfolded": {

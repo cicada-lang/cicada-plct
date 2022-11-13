@@ -12,7 +12,7 @@ import { infer } from "../infer"
 import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { solutionNames } from "../solution"
+import { createSolution, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, Value } from "../value"
@@ -32,7 +32,9 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
             [
               `[check] meet UnificationError when checking Var`,
               indent(`variable name: ${exp.name}`),
-              indent(`given type: ${formatType(mod, ctx, type)}`),
+              indent(
+                `given type: ${formatType(mod, ctx, createSolution(), type)}`,
+              ),
               ...error.trace,
               error.message,
             ].join("\n"),
@@ -121,7 +123,9 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
           throw new Errors.ElaborationError(
             [
               `[check] meet UnificationError when checking Ap`,
-              indent(`given type: ${formatType(mod, ctx, type)}`),
+              indent(
+                `given type: ${formatType(mod, ctx, createSolution(), type)}`,
+              ),
               ...error.trace,
               error.message,
             ].join("\n"),
