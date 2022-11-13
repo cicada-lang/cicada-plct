@@ -1,16 +1,9 @@
-import * as Neutrals from "../neutral"
 import { PatternVar } from "../solution"
 import { Value } from "../value"
 
 export class Solution {
   patternVars: Array<PatternVar> = []
   bindings: Map<string, Value> = new Map()
-
-  createPatternVar(name: string, type: Value): PatternVar {
-    const patternVar = PatternVar(type, Neutrals.Var(name))
-    this.patternVars.push(patternVar)
-    return patternVar
-  }
 
   isPatternVar(value: Value): value is PatternVar {
     if (value.kind !== "TypedNeutral") return false

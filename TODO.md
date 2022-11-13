@@ -1,3 +1,9 @@
+`Solution.isPatternVar` as a function
+
+move `PatternVar` to `solutionCreatePatternVar`
+
+`Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
+
 quit using global side-effect on `mod.solution`
 
 > still passing `mod` -- for future usage
