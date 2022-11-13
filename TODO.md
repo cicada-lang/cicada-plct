@@ -1,5 +1,14 @@
 `Clazz` has optional name for debug
 
+refactor `includeClazz` -- step left and right
+
+refactor `unifyClazz` -- step left and right
+
+[maybe] should not allow literal fulfilled class
+
+- all classes must be purely abstract
+- for the semantic of fulfilling class
+
 [maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
 
 - This is NOT possible `solveByArgs` also calls `check`.
@@ -32,14 +41,6 @@
 `mod` should not has `solution`
 
 `Solution` should not have side-effect
-
-refactor `includeClazz` -- step left and right
-
-refactor `unifyClazz` -- step left and right
-
-[maybe] should not allow literal fulfilled class
-
-- all classes must be purely abstract
 
 # DX
 
