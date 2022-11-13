@@ -1,0 +1,158 @@
+{
+  dom: {
+    Element: Trivial,
+    mul: (x2, y) => sole,
+    mulAssociative: (x2, y, z) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y) => sole
+  },
+  cod: {
+    Element: Trivial,
+    mul: (x2, y) => sole,
+    mulAssociative: (x2, y, z) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y) => sole
+  },
+  homo: (_) => sole,
+  homoPreserveId: refl(implicit Trivial, implicit sole),
+  homoPreserveMul: (x2, y) => refl(implicit Trivial, implicit sole)
+}: class {
+  dom: class {
+    Element: Type
+    mul: (Element, Element) -> Element
+    mulAssociative: (x2: Element, y: Element, z: Element) -> Equal(Element, mul(x2, mul(y, z)), mul(mul(x2, y), z))
+    id: Element
+    idLeft: (x2: Element) -> Equal(Element, mul(id, x2), x2)
+    idRight: (x2: Element) -> Equal(Element, mul(x2, id), x2)
+    inverse: (Element) -> Element
+    inverseLeft: (x2: Element) -> Equal(Element, mul(inverse(x2), x2), id)
+    inverseRight: (x2: Element) -> Equal(Element, mul(x2, inverse(x2)), id)
+    div: (Element, Element) -> Element = (x2, y) => mul(x2, inverse(y))
+  } = {
+    Element: Trivial,
+    mul: (x2, y) => sole,
+    mulAssociative: (x2, y, z) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y) => sole
+  }
+  cod: class {
+    Element: Type
+    mul: (Element, Element) -> Element
+    mulAssociative: (x2: Element, y: Element, z: Element) -> Equal(Element, mul(x2, mul(y, z)), mul(mul(x2, y), z))
+    id: Element
+    idLeft: (x2: Element) -> Equal(Element, mul(id, x2), x2)
+    idRight: (x2: Element) -> Equal(Element, mul(x2, id), x2)
+    inverse: (Element) -> Element
+    inverseLeft: (x2: Element) -> Equal(Element, mul(inverse(x2), x2), id)
+    inverseRight: (x2: Element) -> Equal(Element, mul(x2, inverse(x2)), id)
+    div: (Element, Element) -> Element = (x2, y) => mul(x2, inverse(y))
+  } = {
+    Element: Trivial,
+    mul: (x2, y) => sole,
+    mulAssociative: (x2, y, z) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y) => sole
+  }
+  homo: (Trivial) -> Trivial
+  homoPreserveId: Equal(Trivial, sole, sole)
+  homoPreserveMul: (Trivial, Trivial) -> Equal(Trivial, sole, sole)
+}
+{
+  dom: {
+    Element: Trivial,
+    mul: (x2, y2) => sole,
+    mulAssociative: (x2, y2, z2) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y2) => sole
+  },
+  cod: {
+    Element: Trivial,
+    mul: (x2, y2) => sole,
+    mulAssociative: (x2, y2, z2) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y2) => sole
+  },
+  homo: (_) => sole,
+  homoPreserveId: refl(implicit Trivial, implicit sole),
+  homoPreserveMul: (x2, y2) => refl(implicit Trivial, implicit sole)
+}: class {
+  dom: class {
+    Element: Type
+    mul: (Element, Element) -> Element
+    mulAssociative: (x2: Element, y2: Element, z2: Element) -> Equal(Element, mul(x2, mul(y2, z2)), mul(mul(x2, y2), z2))
+    id: Element
+    idLeft: (x2: Element) -> Equal(Element, mul(id, x2), x2)
+    idRight: (x2: Element) -> Equal(Element, mul(x2, id), x2)
+    inverse: (Element) -> Element
+    inverseLeft: (x2: Element) -> Equal(Element, mul(inverse(x2), x2), id)
+    inverseRight: (x2: Element) -> Equal(Element, mul(x2, inverse(x2)), id)
+    div: (Element, Element) -> Element = (x2, y2) => mul(x2, inverse(y2))
+  } = {
+    Element: Trivial,
+    mul: (x2, y2) => sole,
+    mulAssociative: (x2, y2, z2) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y2) => sole
+  }
+  cod: class {
+    Element: Type
+    mul: (Element, Element) -> Element
+    mulAssociative: (x2: Element, y2: Element, z2: Element) -> Equal(Element, mul(x2, mul(y2, z2)), mul(mul(x2, y2), z2))
+    id: Element
+    idLeft: (x2: Element) -> Equal(Element, mul(id, x2), x2)
+    idRight: (x2: Element) -> Equal(Element, mul(x2, id), x2)
+    inverse: (Element) -> Element
+    inverseLeft: (x2: Element) -> Equal(Element, mul(inverse(x2), x2), id)
+    inverseRight: (x2: Element) -> Equal(Element, mul(x2, inverse(x2)), id)
+    div: (Element, Element) -> Element = (x2, y2) => mul(x2, inverse(y2))
+  } = {
+    Element: Trivial,
+    mul: (x2, y2) => sole,
+    mulAssociative: (x2, y2, z2) => refl(implicit Trivial, implicit sole),
+    id: sole,
+    idLeft: (x2) => refl(implicit Trivial, implicit sole),
+    idRight: (x2) => refl(implicit Trivial, implicit sole),
+    inverse: (x2) => sole,
+    inverseLeft: (x2) => refl(implicit Trivial, implicit sole),
+    inverseRight: (x2) => refl(implicit Trivial, implicit sole),
+    div: (x2, y2) => sole
+  }
+  homo: (Trivial) -> Trivial
+  homoPreserveId: Equal(Trivial, sole, sole)
+  homoPreserveMul: (Trivial, Trivial) -> Equal(Trivial, sole, sole)
+}

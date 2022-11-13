@@ -1,3 +1,5 @@
+`Clazz` has optional name for debug
+
 [maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
 
 - This is NOT possible `solveByArgs` also calls `check`.
@@ -42,8 +44,6 @@ refactor `unifyClazz` -- step left and right
 # DX
 
 [maybe] print error message in XML for re-parsing them on the web
-
-`Clazz` has optional name for debug
 
 improve error report -- using `groupCategory.todo.cic` as test
 
