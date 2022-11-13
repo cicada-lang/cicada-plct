@@ -20,22 +20,4 @@ export class Solution {
       this.patternVars.find((patternVar) => patternVar.neutral.name === name),
     )
   }
-
-  lookupValue(name: string): Value | undefined {
-    const value = this.bindings.get(name)
-    if (value === undefined) return undefined
-    if (this.isPatternVar(value) && value.neutral.name === name)
-      return undefined
-    return value
-  }
-
-  walk(value: Value): Value {
-    while (this.isPatternVar(value)) {
-      const found = this.lookupValue(value.neutral.name)
-      if (found === undefined) return value
-      value = found
-    }
-
-    return value
-  }
 }

@@ -1,7 +1,7 @@
 import { indent } from "../../utils/indent"
 import { Ctx, ctxLookupType } from "../ctx"
 import { Mod } from "../mod"
-import { Solution } from "../solution"
+import { Solution, solutionLookupValue } from "../solution"
 import * as Values from "../value"
 
 export function formatSolution(
@@ -17,7 +17,7 @@ export function formatSolution(
       throw new Error(`formatSolution find type of name: ${name}`)
     }
 
-    let value = solution.lookupValue(name)
+    let value = solutionLookupValue(solution, name)
     if (value === undefined) {
       properties.push(`${name}: TODO(${Values.formatType(mod, ctx, type)})`)
     } else {

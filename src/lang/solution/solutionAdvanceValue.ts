@@ -1,6 +1,7 @@
 import * as Actions from "../actions"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
+import { solutionWalk } from "../solution"
 import * as Values from "../value"
 import { Value } from "../value"
 
@@ -25,7 +26,7 @@ export function solutionAdvanceValue(mod: Mod, value: Value): Value {
 function advanceNeutral(mod: Mod, type: Value, neutral: Neutral): Value {
   switch (neutral.kind) {
     case "Var": {
-      return mod.solution.walk(Values.TypedNeutral(type, neutral))
+      return solutionWalk(mod.solution, Values.TypedNeutral(type, neutral))
     }
 
     case "Ap": {

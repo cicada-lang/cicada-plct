@@ -1,6 +1,3 @@
-`Solution.lookupValue` as `solutionLookupValue`
-`Solution.walk` as `solutionWalk`
-
 quit using global side-effect on `mod.solution`
 
 > still passing `mod` -- for future usage
