@@ -1,8 +1,6 @@
-rename `solutionCreatePatternVar` to `solutionAddPatternVar`
-
 side-effect on `mod` instead of `mod.solution`
 
-- `solutionCreatePatternVar` return `Solution`
+- `solutionAddPatternVar` return `Solution`
 - `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
 
 quit using global side-effect on `mod.solution`

@@ -7,7 +7,7 @@ import * as Neutrals from "../../neutral"
 import {
   formatSolution,
   PatternVar,
-  solutionCreatePatternVar,
+  solutionAddPatternVar,
 } from "../../solution"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
@@ -30,7 +30,7 @@ export class Solve extends Stmt {
       const typeCore = checkType(mod, ctx, type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
       const patternVar = PatternVar(typeValue, Neutrals.Var(name))
-      solutionCreatePatternVar(mod.solution, patternVar)
+      solutionAddPatternVar(mod.solution, patternVar)
       ctx = CtxCons(name, typeValue, ctx)
       names.push(name)
     }
