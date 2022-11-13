@@ -25,9 +25,9 @@ export function unify(
   left: Value,
   right: Value,
 ): void {
-  type = solutionAdvanceValue(mod, type)
-  left = solutionAdvanceValue(mod, left)
-  right = solutionAdvanceValue(mod, right)
+  type = solutionAdvanceValue(mod, mod.solution, type)
+  left = solutionAdvanceValue(mod, mod.solution, left)
+  right = solutionAdvanceValue(mod, mod.solution, right)
 
   try {
     if (unifyPatternVar(mod, ctx, type, left, right)) return

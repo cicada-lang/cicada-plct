@@ -11,8 +11,8 @@ import * as Values from "../value"
 import { formatType, isClazz, Value } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
-  left = solutionAdvanceValue(mod, left)
-  right = solutionAdvanceValue(mod, right)
+  left = solutionAdvanceValue(mod, mod.solution, left)
+  right = solutionAdvanceValue(mod, mod.solution, right)
 
   const success = unifyPatternVar(mod, ctx, Values.Type(), left, right)
   if (success) return

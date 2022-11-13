@@ -12,7 +12,7 @@ import * as Values from "../value"
 import { Value } from "../value"
 
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
-  type = solutionAdvanceValue(mod, type)
+  type = solutionAdvanceValue(mod, mod.solution, type)
 
   switch (type.kind) {
     case "TypedNeutral": {
