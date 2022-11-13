@@ -1,0 +1,29 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+import { equalMap, equalSwap, equalCompose } from "../equality/index.cic"
+
+function joinAssociative(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+  z: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.join(x, lattice.join(y, z)),
+  lattice.join(lattice.join(x, y), z),
+) {
+  return TODO
+}
+
+function meetAssociative(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+  z: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.meet(y, z)),
+  lattice.meet(lattice.meet(x, y), z),
+) {
+  return TODO
+}

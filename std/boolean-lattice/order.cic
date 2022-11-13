@@ -1,0 +1,28 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+
+// We can define order relation by lattice operations.
+
+function Under(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Type {
+  return Equal(
+    lattice.Element,
+    lattice.join(x, y),
+    y,
+  )
+}
+
+function Above(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Type {
+  return Under(dual(lattice), x, y)
+}
+
+// TODO `Above` is the swap of `Under`
+
+// TODO `Under` is the swap of `Above`

@@ -1,0 +1,57 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+import { equalSwap, equalCompose } from "../equality/index.cic"
+
+function joinUniqueId(
+  lattice: BooleanLattice,
+  o: lattice.Element,
+  o_is_identity_of_join: (x: lattice.Element) -> Equal(
+    lattice.Element,
+    lattice.join(x, o),
+    x,
+  ),
+): Equal(lattice.Element, o, lattice.bottom) {
+  check equalSwap(o_is_identity_of_join(lattice.bottom)): Equal(
+    lattice.Element,
+    lattice.bottom,
+    lattice.join(lattice.bottom, o),
+  )
+
+  check lattice.joinCommutative(lattice.bottom, o): Equal(
+    lattice.Element,
+    lattice.join(lattice.bottom, o),
+    lattice.join(o, lattice.bottom),
+  )
+
+  check lattice.bottomIdJoin(o): Equal(
+    lattice.Element,
+    lattice.join(o, lattice.bottom),
+    o,
+  )
+
+  return equalSwap(
+    equalCompose(
+      equalSwap(o_is_identity_of_join(lattice.bottom)),
+      equalCompose(
+        lattice.joinCommutative(lattice.bottom, o),
+        lattice.bottomIdJoin(o)),
+    )
+  )
+}
+
+
+function meetUniqueId(
+  lattice: BooleanLattice,
+  i: lattice.Element,
+  i_is_identity_of_meet: (x: lattice.Element) -> Equal(
+    lattice.Element,
+    lattice.meet(x, i),
+    x,
+  ),
+): Equal(lattice.Element, i, lattice.top) {
+  return joinUniqueId(
+    dual(lattice),
+    i,
+    i_is_identity_of_meet,
+  )
+}

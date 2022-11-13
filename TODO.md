@@ -1,7 +1,3 @@
-break `BooleanLattice.md` into cic modules
-
-[maybe] `readbackProperties` use loop -- with profile
-
 [maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
 
 - This is NOT possible `solveByArgs` also calls `check`.

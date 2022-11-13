@@ -1,0 +1,105 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+import { equalMap, equalSwap, equalCompose } from "../equality/index.cic"
+
+// - https://en.wikipedia.org/wiki/Idempotence
+
+function joinIdempotent(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.join(x, x),
+  x,
+) {
+  check equalSwap(lattice.topIdMeet(lattice.join(x, x))): Equal(
+    lattice.Element,
+    lattice.join(x, x),
+    lattice.meet(lattice.join(x, x), lattice.top),
+  )
+
+  check equalSwap(lattice.complementJoinForTop(x)): Equal(
+    lattice.Element,
+    lattice.top,
+    lattice.join(x, lattice.complement(x)),
+  )
+
+  check equalMap(
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.meet(lattice.join(x, x), z),
+    ),
+    equalSwap(lattice.complementJoinForTop(x)),
+  ): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, x), lattice.top),
+    lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
+  )
+
+  check equalSwap(lattice.joinDistributeMeet(x, x, lattice.complement(x))): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
+    lattice.join(x, lattice.meet(x, lattice.complement(x))),
+  )
+
+  check lattice.complementMeetForBottom(x): Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.complement(x)),
+    lattice.bottom,
+  )
+
+  check equalMap(
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(x, z),
+    ),
+    lattice.complementMeetForBottom(x),
+  ): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(x, lattice.complement(x))),
+    lattice.join(x, lattice.bottom),
+  )
+
+  check lattice.bottomIdJoin(x): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.bottom),
+    x,
+  )
+
+  return equalCompose(
+    equalSwap(lattice.topIdMeet(lattice.join(x, x))),
+    equalCompose(
+      equalMap(
+        the(
+          (lattice.Element) -> lattice.Element,
+          (z) => lattice.meet(lattice.join(x, x), z),
+        ),
+        equalSwap(lattice.complementJoinForTop(x)),
+      ),
+      equalCompose(
+        equalSwap(lattice.joinDistributeMeet(x, x, lattice.complement(x))),
+        equalCompose(
+          equalMap(
+            the(
+              (lattice.Element) -> lattice.Element,
+              (z) => lattice.join(x, z),
+            ),
+            lattice.complementMeetForBottom(x),
+          ),
+          lattice.bottomIdJoin(x)
+        )
+      )
+    )
+  )
+}
+
+function meetIdempotent(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, x),
+  x,
+) {
+  return joinIdempotent(dual(lattice), x)
+}

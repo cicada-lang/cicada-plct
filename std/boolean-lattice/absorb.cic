@@ -1,0 +1,90 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+import { topBound, bottomBound } from "bound.cic"
+import { equalMap, equalSwap, equalCompose } from "../equality/index.cic"
+
+// Absorption law
+
+// - https://en.wikipedia.org/wiki/Absorption_law
+// - https://en.wikipedia.org/wiki/Absorption_(logic)
+
+// The terminology, which might be introduced
+// by Russell and Whitehead, is very confusing.
+
+function joinAbsorbMeet(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.join(x, lattice.meet(x, y)),
+  x,
+) {
+  let eq1: Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(x, y)),
+    lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
+  ) = equalMap(
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(z, lattice.meet(x, y)),
+    ),
+    equalSwap(lattice.topIdMeet(x)),
+  )
+
+  let eq2: Equal(
+    lattice.Element,
+    lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
+    lattice.meet(x, lattice.join(lattice.top, y)),
+  ) = equalSwap(lattice.meetDistributeJoin(x, lattice.top, y))
+
+  let eq3: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.join(lattice.top, y)),
+    lattice.meet(x, lattice.join(y, lattice.top)),
+  ) = equalMap(
+    the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
+    lattice.joinCommutative(lattice.top, y),
+  )
+
+  let eq4: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.join(y, lattice.top)),
+    lattice.meet(x, lattice.top),
+  ) = equalMap(
+    the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
+    topBound(lattice, y),
+  )
+
+  let eq5: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.top),
+    x,
+  ) = lattice.topIdMeet(x)
+
+  return equalCompose(
+    eq1,
+    equalCompose(
+      eq2,
+      equalCompose(
+        eq3,
+        equalCompose(
+          eq4,
+          eq5,
+        )
+      )
+    )
+  )
+}
+
+function meetAbsorbJoin(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.join(x, y)),
+  x,
+) {
+  return joinAbsorbMeet(dual(lattice), x, y)
+}

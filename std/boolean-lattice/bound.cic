@@ -1,0 +1,109 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+import { Under, Above } from "order.cic"
+import { equalMap, equalSwap, equalCompose } from "../equality/index.cic"
+
+// - https://en.wikipedia.org/wiki/Bounded_lattice>
+
+function topBound(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Under(lattice, x, lattice.top) {
+  check refl: Equal(
+    Type,
+    Under(lattice, x, lattice.top),
+    Equal(
+      lattice.Element,
+      lattice.join(x, lattice.top),
+      lattice.top,
+    )
+  )
+
+  check equalSwap(lattice.topIdMeet(lattice.join(x, lattice.top))): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.top),
+    lattice.meet(lattice.join(x, lattice.top), lattice.top),
+  )
+
+  check lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, lattice.top), lattice.top),
+    lattice.meet(lattice.top, lattice.join(x, lattice.top)),
+  )
+
+  check equalMap(
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.meet(z, lattice.join(x, lattice.top)),
+    ),
+    equalSwap(lattice.complementJoinForTop(x)),
+  ): Equal(
+    lattice.Element,
+    lattice.meet(lattice.top, lattice.join(x, lattice.top)),
+    lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
+  )
+
+  check equalSwap(
+    lattice.joinDistributeMeet(x, lattice.complement(x), lattice.top)
+  ): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
+    lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
+  )
+
+  check equalMap(
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(x, z),
+    ),
+    lattice.topIdMeet(lattice.complement(x)),
+  ): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
+    lattice.join(x, lattice.complement(x)),
+  )
+
+  check lattice.complementJoinForTop(x): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.complement(x)),
+    lattice.top,
+  )
+
+  return equalCompose(
+    equalSwap(lattice.topIdMeet(lattice.join(x, lattice.top))),
+    equalCompose(
+      lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top),
+      equalCompose(
+        equalMap(
+          the(
+            (lattice.Element) -> lattice.Element,
+            (z) => lattice.meet(z, lattice.join(x, lattice.top)),
+          ),
+          equalSwap(lattice.complementJoinForTop(x)),
+        ),
+        equalCompose(
+          equalSwap(
+            lattice.joinDistributeMeet(x, lattice.complement(x), lattice.top)
+          ),
+          equalCompose(
+            equalMap(
+              the(
+                (lattice.Element) -> lattice.Element,
+                (z) => lattice.join(x, z),
+              ),
+              lattice.topIdMeet(lattice.complement(x)),
+            ),
+            lattice.complementJoinForTop(x),
+          )
+        )
+      )
+    )
+  )
+}
+
+function bottomBound(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Above(lattice, x, lattice.bottom) {
+  return topBound(dual(lattice), x)
+}
