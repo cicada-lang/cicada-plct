@@ -6,7 +6,7 @@ import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
-import { insertDuringCheck, Insertion } from "../insert"
+import { Insertion } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { MetaVar, Solution, solutionMetaVar, solutionNames } from "../solution"
@@ -53,7 +53,8 @@ export function solveByArgs(
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (argInferred !== undefined) {
         if (argInferred.type.kind === "PiImplicit") {
-          insertDuringCheck(mod, ctx, argInferred, [], type.argType)
+          // NOTE Let the following call to `check` handles the unification.
+          // TODO This edge case means our code is not well structured.
         } else {
           solution = unifyType(
             mod,
@@ -66,7 +67,7 @@ export function solveByArgs(
       }
 
       /**
-         NOTE We can not use `argInserted.core` here,
+         NOTE We can not use `argInferred.core` here,
          check against the given type is necessary.
       **/
 

@@ -3,6 +3,7 @@ import * as Exps from "../exp"
 import { Inferred } from "../infer"
 import { applyInsertion, solveByArgs } from "../insert"
 import { Mod } from "../mod"
+import { createSolution } from "../solution"
 
 export function insertDuringInfer(
   mod: Mod,
@@ -10,8 +11,11 @@ export function insertDuringInfer(
   inferred: Inferred,
   args: Array<Exps.Arg>,
 ): Inferred {
+  createSolution
   // let solution = createSolution()
+
   let solution = mod.solution
+
   const solvedByArgs = solveByArgs(mod, ctx, solution, inferred.type, args)
   solution = solvedByArgs.solution
 

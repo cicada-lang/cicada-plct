@@ -1,17 +1,31 @@
-should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
+[maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
 
-- because `solveByArgs` should not call `check` and `infer`
+- This is NOT possible `solveByArgs` also calls `check`.
 
-[note] solve implicit application insertion in place
+- During `solveByArgs`'s call to `check`,
+  the `argType` might contain meta variables.
 
-- `solveByArgs` calls `check` and `inferOrUndefined`
-  during this calls the `argType` might contain meta variables
+  If `check` does not take `solution` as a argument,
+  it can not recognize this neutral variables as meta variables.
+
+  - Thus `Solution` should not has `metaVars`.
+
+    `MetaVar` should be `Values.MetaVar`,
+    instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
+
+    We can identify a `MetaVar` by itself (without the help of `solution`)
+
+[maybe] back to side-effect on `mod.solution`
+
+- if we can not remove the use of `mod.solution` from:
+
+  - `equivalent`
+  - `insertDuringInfer`
+  - `insertDuringCheck`
 
 `mod` should not has `solution`
 
 `Solution` should not have side-effect
-
-- should not use `metaVars`, use placeholder entry to represent `MetaVar`
 
 refactor `includeClazz` -- step left and right
 
