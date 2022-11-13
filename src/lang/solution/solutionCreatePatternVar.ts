@@ -15,7 +15,7 @@ export type PatternVar = {
   neutral: Neutrals.Var
 }
 
-function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
+export function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
   return {
     family: "Value",
     kind: "TypedNeutral",
@@ -38,10 +38,7 @@ export function isPatternVar(
 
 export function solutionCreatePatternVar(
   solution: Solution,
-  name: string,
-  type: Value,
-): PatternVar {
-  const patternVar = PatternVar(type, Neutrals.Var(name))
+  patternVar: PatternVar,
+): void {
   solution.patternVars.push(patternVar)
-  return patternVar
 }

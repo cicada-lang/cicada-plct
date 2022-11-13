@@ -3,7 +3,12 @@ import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
-import { solutionCreatePatternVar, solutionNames } from "../solution"
+import * as Neutrals from "../neutral"
+import {
+  PatternVar,
+  solutionCreatePatternVar,
+  solutionNames,
+} from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -35,11 +40,8 @@ export function solveByRetType(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const patternVar = solutionCreatePatternVar(
-        mod.solution,
-        freshName,
-        type.argType,
-      )
+      const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
+      solutionCreatePatternVar(mod.solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       type = applyClosure(type.retTypeClosure, patternVar)
       insertions.push(Insertions.InsertionPatternVar(patternVar))

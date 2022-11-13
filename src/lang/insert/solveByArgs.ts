@@ -8,7 +8,12 @@ import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
 import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
-import { solutionCreatePatternVar, solutionNames } from "../solution"
+import * as Neutrals from "../neutral"
+import {
+  PatternVar,
+  solutionCreatePatternVar,
+  solutionNames,
+} from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -40,11 +45,8 @@ export function solveByArgs(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const patternVar = solutionCreatePatternVar(
-        mod.solution,
-        freshName,
-        type.argType,
-      )
+      const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
+      solutionCreatePatternVar(mod.solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
       type = applyClosure(type.retTypeClosure, patternVar)
