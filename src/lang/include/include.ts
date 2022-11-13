@@ -6,7 +6,6 @@ import * as Errors from "../errors"
 import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { createSolution } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -42,17 +41,8 @@ export function include(mod: Mod, ctx: Ctx, type: Value, subtype: Value): void {
       error.trace.unshift(
         [
           `[include]`,
-          indent(
-            `subtype: ${Values.formatType(
-              mod,
-              ctx,
-              createSolution(),
-              subtype,
-            )}`,
-          ),
-          indent(
-            `type: ${Values.formatType(mod, ctx, createSolution(), type)}`,
-          ),
+          indent(`subtype: ${Values.formatType(mod, ctx, subtype)}`),
+          indent(`type: ${Values.formatType(mod, ctx, type)}`),
         ].join("\n"),
       )
     }

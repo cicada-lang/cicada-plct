@@ -4,7 +4,7 @@ import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { Solution, solutionNames } from "../solution"
+import { solutionNames } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
@@ -13,10 +13,9 @@ import { assertClazz, Value } from "../value"
 export function unifyClazz(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   left: Values.Clazz,
   right: Values.Clazz,
-): Solution {
+): void {
   const leftNames = Values.clazzPropertyNames(left)
   const rightNames = Values.clazzPropertyNames(right)
 
@@ -24,20 +23,14 @@ export function unifyClazz(
   while (left.kind !== "ClazzNull") {
     if (left.kind === "ClazzCons") {
       if (commonNames.has(left.name)) {
-        const next = nextRight(mod, ctx, solution, left.name, right)
-        solution = unifyType(
-          mod,
-          ctx,
-          solution,
-          left.propertyType,
-          next.propertyType,
-        )
+        const next = nextRight(mod, ctx, left.name, right)
+        unifyType(mod, ctx, left.propertyType, next.propertyType)
         const rest = applyClosure(left.restClosure, next.property)
         assertClazz(rest)
         left = rest
         right = next.right
       } else {
-        const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+        const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
         const freshName = freshen(usedNames, left.name)
         const v = Values.TypedNeutral(
           left.propertyType,
@@ -51,35 +44,15 @@ export function unifyClazz(
 
     if (left.kind === "ClazzFulfilled") {
       if (commonNames.has(left.name)) {
-        const next = nextRight(
-          mod,
-          ctx,
-          solution,
-          left.name,
-          right,
-          left.property,
-        )
-        solution = unifyType(
-          mod,
-          ctx,
-          solution,
-          left.propertyType,
-          next.propertyType,
-        )
+        const next = nextRight(mod, ctx, left.name, right, left.property)
+        unifyType(mod, ctx, left.propertyType, next.propertyType)
 
         // NOTE Should avoid unify `left.property` to `next.property`,
         //   when we know `next.property` is `left.property`.
         if (left.property !== next.property) {
           // TODO If `next.property` is a neutral variable,
           //   should we unify them at all?
-          solution = unify(
-            mod,
-            ctx,
-            solution,
-            next.propertyType,
-            left.property,
-            next.property,
-          )
+          unify(mod, ctx, next.propertyType, left.property, next.property)
         }
 
         left = left.rest
@@ -89,14 +62,11 @@ export function unifyClazz(
       }
     }
   }
-
-  return solution
 }
 
 function nextRight(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   name: string,
   right: Values.Clazz,
   leftProperty?: Value,
@@ -123,7 +93,7 @@ function nextRight(
             right: rest,
           }
         } else {
-          const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+          const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
           const freshName = freshen(usedNames, right.name)
           const v = Values.TypedNeutral(
             right.propertyType,
@@ -138,7 +108,7 @@ function nextRight(
           }
         }
       } else {
-        const usedNames = [...ctxNames(ctx), ...solutionNames(solution)]
+        const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
         const freshName = freshen(usedNames, right.name)
         const v = Values.TypedNeutral(
           right.propertyType,
@@ -146,7 +116,7 @@ function nextRight(
         )
         const rest = applyClosure(right.restClosure, v)
         assertClazz(rest)
-        return nextRight(mod, ctx, solution, name, rest, leftProperty)
+        return nextRight(mod, ctx, name, rest, leftProperty)
       }
     }
 
@@ -158,7 +128,7 @@ function nextRight(
           right: right.rest,
         }
       } else {
-        return nextRight(mod, ctx, solution, name, right.rest, leftProperty)
+        return nextRight(mod, ctx, name, right.rest, leftProperty)
       }
     }
   }

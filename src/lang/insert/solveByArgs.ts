@@ -6,10 +6,10 @@ import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
-import { Insertion } from "../insert"
+import { insertDuringCheck, Insertion } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { MetaVar, Solution, solutionMetaVar, solutionNames } from "../solution"
+import { PatternVar, solutionNames, solutionPatternVar } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import { Value } from "../value"
@@ -18,11 +18,9 @@ import * as Insertions from "./Insertion"
 export function solveByArgs(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   type: Value,
   args: Array<Exps.Arg>,
 ): {
-  solution: Solution
   type: Value
   insertions: Array<Insertion>
 } {
@@ -39,35 +37,28 @@ export function solveByArgs(
       const name = type.retTypeClosure.name
       const usedNames = [
         ...ctxNames(ctx),
-        ...solutionNames(solution),
+        ...solutionNames(mod.solution),
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const metaVar = MetaVar(type.argType, Neutrals.Var(freshName))
-      solution = solutionMetaVar(solution, metaVar)
+      const patternVar = PatternVar(type.argType, Neutrals.Var(freshName))
+      solutionPatternVar(mod.solution, patternVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
-      type = applyClosure(type.retTypeClosure, metaVar)
-      insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))
+      type = applyClosure(type.retTypeClosure, patternVar)
+      insertions.push(Insertions.InsertionPatternVar(patternVar, arg.exp))
     } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (argInferred !== undefined) {
         if (argInferred.type.kind === "PiImplicit") {
-          // NOTE Let the following call to `check` handles the unification.
-          // TODO This edge case means our code is not well structured.
+          insertDuringCheck(mod, ctx, argInferred, [], type.argType)
         } else {
-          solution = unifyType(
-            mod,
-            ctx,
-            solution,
-            argInferred.type,
-            type.argType,
-          )
+          unifyType(mod, ctx, argInferred.type, type.argType)
         }
       }
 
       /**
-         NOTE We can not use `argInferred.core` here,
+         NOTE We can not use `argInserted.core` here,
          check against the given type is necessary.
       **/
 
@@ -98,5 +89,5 @@ export function solveByArgs(
     }
   }
 
-  return { type, insertions, solution }
+  return { type, insertions }
 }

@@ -5,28 +5,27 @@ import * as Errors from "../errors"
 import { Insertion } from "../insert"
 import { Mod } from "../mod"
 import { readback } from "../readback"
-import { Solution, solutionLookupValue } from "../solution"
+import { solutionLookupValue } from "../solution"
 
 export function applyInsertion(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   insertion: Insertion,
   core: Core,
 ): Core {
   switch (insertion.kind) {
-    case "InsertionMetaVar": {
+    case "InsertionPatternVar": {
       const argValue = solutionLookupValue(
-        solution,
-        insertion.metaVar.neutral.name,
+        mod.solution,
+        insertion.patternVar.neutral.name,
       )
 
       if (argValue === undefined) {
         if (insertion.argExp !== undefined) {
           throw new Errors.ElaborationError(
             [
-              `[applyInsertion] meet unsolved meta variable during infer`,
-              `  variable name: ${insertion.metaVar.neutral.name}`,
+              `[applyInsertion] meet unsolved pattern variable during infer`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
               `  kind of next arg exp: ${insertion.argExp.kind}`,
             ].join("\n"),
             { span: insertion.argExp.span },
@@ -34,21 +33,15 @@ export function applyInsertion(
         } else {
           throw new Errors.ElaborationError(
             [
-              `[applyInsertion] meet unsolved meta variable during check`,
-              `  variable name: ${insertion.metaVar.neutral.name}`,
+              `[applyInsertion] meet unsolved pattern variable during check`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
             ].join("\n"),
             {},
           )
         }
       }
 
-      const argCore = readback(
-        mod,
-        ctx,
-        solution,
-        insertion.metaVar.type,
-        argValue,
-      )
+      const argCore = readback(mod, ctx, insertion.patternVar.type, argValue)
       return Cores.ApImplicit(core, argCore)
     }
 

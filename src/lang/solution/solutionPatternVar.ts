@@ -4,18 +4,18 @@ import { Value } from "../value"
 
 /**
 
-   We use neutral variable as meta variable (or say logic variable).
+   We use neutral variable as pattern variable (or say logic variable).
 
 **/
 
-export type MetaVar = {
+export type PatternVar = {
   family: "Value"
   kind: "TypedNeutral"
   type: Value
   neutral: Neutrals.Var
 }
 
-export function MetaVar(type: Value, neutral: Neutrals.Var): MetaVar {
+export function PatternVar(type: Value, neutral: Neutrals.Var): PatternVar {
   return {
     family: "Value",
     kind: "TypedNeutral",
@@ -24,19 +24,22 @@ export function MetaVar(type: Value, neutral: Neutrals.Var): MetaVar {
   }
 }
 
-export function isMetaVar(solution: Solution, value: Value): value is MetaVar {
+export function isPatternVar(
+  solution: Solution,
+  value: Value,
+): value is PatternVar {
   if (value.kind !== "TypedNeutral") return false
   if (value.neutral.kind !== "Var") return false
   const name = value.neutral.name
   return Boolean(
-    solution.metaVars.find((metaVar) => metaVar.neutral.name === name),
+    solution.patternVars.find((patternVar) => patternVar.neutral.name === name),
   )
 }
 
-export function solutionMetaVar(
+export function solutionPatternVar(
   solution: Solution,
-  metaVar: MetaVar,
+  patternVar: PatternVar,
 ): Solution {
-  solution.metaVars.push(metaVar)
+  solution.patternVars.push(patternVar)
   return solution
 }

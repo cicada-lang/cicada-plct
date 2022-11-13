@@ -19,7 +19,7 @@ export function assertTypesInCtx<Kinds extends Array<AlreadyType["kind"]>>(
       [
         `assertTypesInCtx fail`,
         `  expect value kinds: ${kinds.join(", ")}`,
-        `  found type: ${formatType(mod, ctx, mod.solution, type)}`,
+        `  found type: ${formatType(mod, ctx, type)}`,
       ].join("\n"),
     )
   }

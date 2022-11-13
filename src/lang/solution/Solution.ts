@@ -1,7 +1,7 @@
-import { MetaVar } from "../solution"
+import { PatternVar } from "../solution"
 import { Value } from "../value"
 
 export class Solution {
-  metaVars: Array<MetaVar> = []
+  patternVars: Array<PatternVar> = []
   bindings: Map<string, Value> = new Map()
 }

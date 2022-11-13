@@ -4,32 +4,25 @@ import { Ctx, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { Neutral } from "../neutral"
-import { Solution, solutionNames } from "../solution"
+import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { TypedValue, Value } from "../value"
 
-function occurType(
-  mod: Mod,
-  ctx: Ctx,
-  solution: Solution,
-  name: string,
-  value: Value,
-): boolean {
-  return occur(mod, ctx, solution, name, Values.Type(), value)
+function occurType(mod: Mod, ctx: Ctx, name: string, value: Value): boolean {
+  return occur(mod, ctx, name, Values.Type(), value)
 }
 
 export function occur(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   name: string,
   type: Value,
   value: Value,
 ): boolean {
   switch (value.kind) {
     case "TypedNeutral": {
-      return occurNeutral(mod, ctx, solution, name, value.neutral)
+      return occurNeutral(mod, ctx, name, value.neutral)
     }
 
     case "Type": {
@@ -37,69 +30,69 @@ export function occur(
     }
 
     case "Pi": {
-      if (occurType(mod, ctx, solution, name, value.argType)) return true
+      if (occurType(mod, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
       const retType = applyClosure(value.retTypeClosure, v)
-      return occurType(mod, ctx, solution, name, retType)
+      return occurType(mod, ctx, name, retType)
     }
 
     case "PiImplicit": {
-      if (occurType(mod, ctx, solution, name, value.argType)) return true
+      if (occurType(mod, ctx, name, value.argType)) return true
 
       const boundName = value.retTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
       const retType = applyClosure(value.retTypeClosure, v)
-      return occurType(mod, ctx, solution, name, retType)
+      return occurType(mod, ctx, name, retType)
     }
 
     case "Fn": {
       Values.assertTypeInCtx(mod, ctx, type, "Pi")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
       const ret = applyClosure(value.retClosure, v)
-      return occur(mod, ctx, solution, name, retType, ret)
+      return occur(mod, ctx, name, retType, ret)
     }
 
     case "FnImplicit": {
       Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
 
       const boundName = value.retClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
       const retType = applyClosure(type.retTypeClosure, v)
       const ret = applyClosure(value.retClosure, v)
-      return occur(mod, ctx, solution, name, retType, ret)
+      return occur(mod, ctx, name, retType, ret)
     }
 
     case "Sigma": {
-      if (occurType(mod, ctx, solution, name, value.carType)) return true
+      if (occurType(mod, ctx, name, value.carType)) return true
 
       const boundName = value.cdrTypeClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.carType, Neutrals.Var(freshName))
       const cdrType = applyClosure(value.cdrTypeClosure, v)
-      return occurType(mod, ctx, solution, name, cdrType)
+      return occurType(mod, ctx, name, cdrType)
     }
 
     case "Cons": {
       Values.assertTypeInCtx(mod, ctx, type, "Sigma")
 
-      if (occur(mod, ctx, solution, name, type.carType, value.car)) return true
+      if (occur(mod, ctx, name, type.carType, value.car)) return true
 
       const cdrType = applyClosure(type.cdrTypeClosure, value.car)
-      return occur(mod, ctx, solution, name, cdrType, value.cdr)
+      return occur(mod, ctx, name, cdrType, value.cdr)
     }
 
     case "String": {
@@ -123,42 +116,42 @@ export function occur(
     }
 
     case "ClazzCons": {
-      if (occurType(mod, ctx, solution, name, value.propertyType)) return true
+      if (occurType(mod, ctx, name, value.propertyType)) return true
 
       const boundName = value.restClosure.name
-      const usedNames = [...ctxNames(ctx), ...solutionNames(solution), name]
+      const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.propertyType, Neutrals.Var(freshName))
       const rest = applyClosure(value.restClosure, v)
-      return occurType(mod, ctx, solution, name, rest)
+      return occurType(mod, ctx, name, rest)
     }
 
     case "ClazzFulfilled": {
       return (
-        occurType(mod, ctx, solution, name, value.propertyType) ||
-        occur(mod, ctx, solution, name, value.propertyType, value.property) ||
-        occurType(mod, ctx, solution, name, value.rest)
+        occurType(mod, ctx, name, value.propertyType) ||
+        occur(mod, ctx, name, value.propertyType, value.property) ||
+        occurType(mod, ctx, name, value.rest)
       )
     }
 
     case "Objekt": {
       Values.assertClazzInCtx(mod, ctx, type)
 
-      return occurProperties(mod, ctx, solution, name, type, value)
+      return occurProperties(mod, ctx, name, type, value)
     }
 
     case "Equal": {
       return (
-        occurType(mod, ctx, solution, name, value.type) ||
-        occur(mod, ctx, solution, name, value.type, value.from) ||
-        occur(mod, ctx, solution, name, value.type, value.to)
+        occurType(mod, ctx, name, value.type) ||
+        occur(mod, ctx, name, value.type, value.from) ||
+        occur(mod, ctx, name, value.type, value.to)
       )
     }
 
     case "Refl": {
       return (
-        occurType(mod, ctx, solution, name, value.type) ||
-        occur(mod, ctx, solution, name, value.type, value.value)
+        occurType(mod, ctx, name, value.type) ||
+        occur(mod, ctx, name, value.type, value.value)
       )
     }
   }
@@ -167,7 +160,6 @@ export function occur(
 function occurProperties(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   name: string,
   clazz: Values.Clazz,
   value: Value,
@@ -182,16 +174,16 @@ function occurProperties(
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       return (
-        occur(mod, ctx, solution, name, clazz.propertyType, propertyValue) ||
-        occurProperties(mod, ctx, solution, name, rest, value)
+        occur(mod, ctx, name, clazz.propertyType, propertyValue) ||
+        occurProperties(mod, ctx, name, rest, value)
       )
     }
 
     case "ClazzFulfilled": {
       const propertyValue = Actions.doDot(value, clazz.name)
       return (
-        occur(mod, ctx, solution, name, clazz.propertyType, propertyValue) ||
-        occurProperties(mod, ctx, solution, name, clazz.rest, value)
+        occur(mod, ctx, name, clazz.propertyType, propertyValue) ||
+        occurProperties(mod, ctx, name, clazz.rest, value)
       )
     }
   }
@@ -200,20 +192,18 @@ function occurProperties(
 function occurTypedValue(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   name: string,
   typedValue: TypedValue,
 ): boolean {
   return (
-    occurType(mod, ctx, solution, name, typedValue.type) ||
-    occur(mod, ctx, solution, name, typedValue.type, typedValue.value)
+    occurType(mod, ctx, name, typedValue.type) ||
+    occur(mod, ctx, name, typedValue.type, typedValue.value)
   )
 }
 
 function occurNeutral(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   name: string,
   neutral: Neutral,
 ): boolean {
@@ -224,32 +214,32 @@ function occurNeutral(
 
     case "Ap": {
       return (
-        occurNeutral(mod, ctx, solution, name, neutral.target) ||
-        occurTypedValue(mod, ctx, solution, name, neutral.arg)
+        occurNeutral(mod, ctx, name, neutral.target) ||
+        occurTypedValue(mod, ctx, name, neutral.arg)
       )
     }
 
     case "ApImplicit": {
       return (
-        occurNeutral(mod, ctx, solution, name, neutral.target) ||
-        occurTypedValue(mod, ctx, solution, name, neutral.arg)
+        occurNeutral(mod, ctx, name, neutral.target) ||
+        occurTypedValue(mod, ctx, name, neutral.arg)
       )
     }
 
     case "Car":
     case "Cdr": {
-      return occurNeutral(mod, ctx, solution, name, neutral.target)
+      return occurNeutral(mod, ctx, name, neutral.target)
     }
 
     case "Dot": {
-      return occurNeutral(mod, ctx, solution, name, neutral.target)
+      return occurNeutral(mod, ctx, name, neutral.target)
     }
 
     case "Replace": {
       return (
-        occurNeutral(mod, ctx, solution, name, neutral.target) ||
-        occurTypedValue(mod, ctx, solution, name, neutral.motive) ||
-        occurTypedValue(mod, ctx, solution, name, neutral.base)
+        occurNeutral(mod, ctx, name, neutral.target) ||
+        occurTypedValue(mod, ctx, name, neutral.motive) ||
+        occurTypedValue(mod, ctx, name, neutral.base)
       )
     }
   }

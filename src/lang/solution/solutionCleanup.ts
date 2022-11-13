@@ -1,6 +1,6 @@
 import { Solution } from "../solution"
 
 export function solutionCleanup(solution: Solution): void {
-  solution.metaVars = []
+  solution.patternVars = []
   solution.bindings = new Map()
 }

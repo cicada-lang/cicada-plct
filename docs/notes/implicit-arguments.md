@@ -33,7 +33,7 @@ compute id(implicit String, "abc")
 ```
 
 1. Infer `(implicit A: Type, A) -> A` for `id`
-2. The implicit `A` will be viewed as a meta variable
+2. The implicit `A` will be viewed as a pattern variable
 3. Under the implicit pi, is the pi type `(A) -> A`
 4. Infer `String` for `"abc"`
 5. Unify `String` with `A` (the pi type's argument type)

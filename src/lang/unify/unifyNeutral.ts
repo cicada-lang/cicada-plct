@@ -3,29 +3,25 @@ import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { Neutral } from "../neutral"
-import { Solution } from "../solution"
 import { unify, unifyType } from "../unify"
 import { formatNeutral, TypedValue } from "../value"
 
 function unifyTypedValue(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   left: TypedValue,
   right: TypedValue,
-): Solution {
-  solution = unifyType(mod, ctx, solution, left.type, right.type)
-  solution = unify(mod, ctx, solution, left.type, left.value, right.value)
-  return solution
+): void {
+  unifyType(mod, ctx, left.type, right.type)
+  unify(mod, ctx, left.type, left.value, right.value)
 }
 
 export function unifyNeutral(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   left: Neutral,
   right: Neutral,
-): Solution {
+): void {
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
@@ -37,29 +33,29 @@ export function unifyNeutral(
       )
     }
 
-    return solution
+    return
   }
 
   if (left.kind === "Ap" && right.kind === "Ap") {
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    solution = unifyTypedValue(mod, ctx, solution, left.arg, right.arg)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.arg, right.arg)
+    return
   }
 
   if (left.kind === "ApImplicit" && right.kind === "ApImplicit") {
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    solution = unifyTypedValue(mod, ctx, solution, left.arg, right.arg)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.arg, right.arg)
+    return
   }
 
   if (left.kind === "Car" && right.kind === "Car") {
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    return
   }
 
   if (left.kind === "Cdr" && right.kind === "Cdr") {
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    return
   }
 
   if (left.kind === "Dot" && right.kind === "Dot") {
@@ -73,22 +69,22 @@ export function unifyNeutral(
       )
     }
 
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    return
   }
 
   if (left.kind === "Replace" && right.kind === "Replace") {
-    solution = unifyNeutral(mod, ctx, solution, left.target, right.target)
-    solution = unifyTypedValue(mod, ctx, solution, left.motive, right.motive)
-    solution = unifyTypedValue(mod, ctx, solution, left.base, right.base)
-    return solution
+    unifyNeutral(mod, ctx, left.target, right.target)
+    unifyTypedValue(mod, ctx, left.motive, right.motive)
+    unifyTypedValue(mod, ctx, left.base, right.base)
+    return
   }
 
   throw new Errors.UnificationError(
     [
       `[unifyNeutral] is not implemented for the pair of neutrals`,
-      indent(`left: ${formatNeutral(mod, ctx, solution, left)}`),
-      indent(`right: ${formatNeutral(mod, ctx, solution, right)}`),
+      indent(`left: ${formatNeutral(mod, ctx, left)}`),
+      indent(`right: ${formatNeutral(mod, ctx, right)}`),
     ].join("\n"),
   )
 }

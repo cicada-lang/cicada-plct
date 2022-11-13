@@ -2,34 +2,32 @@ import { indent } from "../../utils/indent"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { Solution } from "../solution"
 import { unify, unifyNeutral, unifyType } from "../unify"
 import { formatType, formatValue, Value } from "../value"
 
 export function unifyByValue(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   type: Value,
   left: Value,
   right: Value,
-): Solution {
+): void {
   if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
 
-    solution = unifyNeutral(mod, ctx, solution, left.neutral, right.neutral)
-    return solution
+    unifyNeutral(mod, ctx, left.neutral, right.neutral)
+    return
   }
 
   if (left.kind === "Sole" && right.kind === "Sole") {
-    return solution
+    return
   }
 
   if (left.kind === "Quote" && right.kind === "Quote") {
     if (left.data === right.data) {
-      return solution
+      return
     }
 
     throw new Errors.UnificationError(
@@ -42,17 +40,17 @@ export function unifyByValue(
   }
 
   if (left.kind === "Refl" && right.kind === "Refl") {
-    solution = unifyType(mod, ctx, solution, left.type, right.type)
-    solution = unify(mod, ctx, solution, left.type, left.value, right.value)
-    return solution
+    unifyType(mod, ctx, left.type, right.type)
+    unify(mod, ctx, left.type, left.value, right.value)
+    return
   }
 
   throw new Errors.UnificationError(
     [
       `[unifyByValue] is not implemented for the pair of values`,
-      indent(`type: ${formatType(mod, ctx, solution, type)}`),
-      indent(`left: ${formatValue(mod, ctx, solution, type, left)}`),
-      indent(`right: ${formatValue(mod, ctx, solution, type, right)}`),
+      indent(`type: ${formatType(mod, ctx, type)}`),
+      indent(`left: ${formatValue(mod, ctx, type, left)}`),
+      indent(`right: ${formatValue(mod, ctx, type, right)}`),
     ].join("\n"),
   )
 }

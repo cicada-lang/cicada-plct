@@ -2,7 +2,6 @@ import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
-import { Solution } from "../solution"
 import { unify } from "../unify"
 import * as Values from "../value"
 import { Value } from "../value"
@@ -10,42 +9,25 @@ import { Value } from "../value"
 export function unifyProperties(
   mod: Mod,
   ctx: Ctx,
-  solution: Solution,
   clazz: Values.Clazz,
   left: Value,
   right: Value,
-): Solution {
+): void {
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      const leftProperty = Actions.doDot(left, clazz.name)
-      const rightProperty = Actions.doDot(right, clazz.name)
-      solution = unify(
-        mod,
-        ctx,
-        solution,
-        clazz.propertyType,
-        leftProperty,
-        rightProperty,
-      )
-      const rest = applyClosure(clazz.restClosure, leftProperty)
+      const leftPropertyValue = Actions.doDot(left, clazz.name)
+      const rightPropertyValue = Actions.doDot(right, clazz.name)
+      unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
+      const rest = applyClosure(clazz.restClosure, leftPropertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       clazz = rest
     }
 
     if (clazz.kind === "ClazzFulfilled") {
-      const leftProperty = Actions.doDot(left, clazz.name)
-      const rightProperty = Actions.doDot(right, clazz.name)
-      solution = unify(
-        mod,
-        ctx,
-        solution,
-        clazz.propertyType,
-        leftProperty,
-        rightProperty,
-      )
+      const leftPropertyValue = Actions.doDot(left, clazz.name)
+      const rightPropertyValue = Actions.doDot(right, clazz.name)
+      unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
       clazz = clazz.rest
     }
   }
-
-  return solution
 }

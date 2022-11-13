@@ -12,7 +12,7 @@ import { infer } from "../infer"
 import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
-import { createSolution } from "../solution"
+import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 import { formatType, Value } from "../value"
@@ -32,9 +32,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
             [
               `[check] meet UnificationError when checking Var`,
               indent(`variable name: ${exp.name}`),
-              indent(
-                `given type: ${formatType(mod, ctx, createSolution(), type)}`,
-              ),
+              indent(`given type: ${formatType(mod, ctx, type)}`),
               ...error.trace,
               error.message,
             ].join("\n"),
@@ -61,7 +59,11 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       if (type.kind === "PiImplicit") {
         // NOTE Be careful about scope bug, the `freshName` might occurs in `exp`.
         const name = type.retTypeClosure.name
-        const usedNames = [...ctxNames(ctx), ...freeNames(new Set(), exp)]
+        const usedNames = [
+          ...ctxNames(ctx),
+          ...solutionNames(mod.solution),
+          ...freeNames(new Set(), exp),
+        ]
         const freshName = freshen(usedNames, name)
         const arg = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
         const retType = applyClosure(type.retTypeClosure, arg)
@@ -119,9 +121,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
           throw new Errors.ElaborationError(
             [
               `[check] meet UnificationError when checking Ap`,
-              indent(
-                `given type: ${formatType(mod, ctx, createSolution(), type)}`,
-              ),
+              indent(`given type: ${formatType(mod, ctx, type)}`),
               ...error.trace,
               error.message,
             ].join("\n"),

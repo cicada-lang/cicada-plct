@@ -1,35 +1,16 @@
-[maybe] should not pass `args` to `insertDuringCheck` and `insertDuringInfer`
+side-effect on `mod.solution` -- instead of on `mod.solution` itself
 
-- This is NOT possible `solveByArgs` also calls `check`.
+- `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
 
-- During `solveByArgs`'s call to `check`,
-  the `argType` might contain meta variables.
+quit using global side-effect on `mod.solution`
 
-  If `check` does not take `solution` as a argument,
-  it can not recognize this neutral variables as meta variables.
+> still passing `mod` -- for future usage
 
-  - Thus `Solution` should not has `metaVars`.
+- `unify` takes `solution` and return `solution`
 
-    `MetaVar` should be `Values.MetaVar`,
-    instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
+- `solutionAdvanceValue` takes `solution`
 
-    We can identify a `MetaVar` by itself (without the help of `solution`)
-
-[maybe] back to side-effect on `mod.solution`
-
-- Why we can not remove the use of `mod.solution` from `Compute.execute` now?
-
-  - Is it because of inserted `core` is solved but the type is not?
-
-- If we can not remove the use of `mod.solution` from:
-
-  - `equivalent`
-  - `insertDuringInfer`
-  - `insertDuringCheck`
-
-`mod` should not has `solution`
-
-`Solution` should not have side-effect
+- `readback` takes `solution` -- for `solutionAdvanceValue`
 
 refactor `includeClazz` -- step left and right
 

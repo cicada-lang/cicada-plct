@@ -19,13 +19,9 @@ export function formatSolution(
 
     let value = solutionLookupValue(solution, name)
     if (value === undefined) {
-      properties.push(
-        `${name}: TODO(${Values.formatType(mod, ctx, solution, type)})`,
-      )
+      properties.push(`${name}: TODO(${Values.formatType(mod, ctx, type)})`)
     } else {
-      properties.push(
-        `${name}: ${Values.formatValue(mod, ctx, solution, type, value)}`,
-      )
+      properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
     }
   }
 
