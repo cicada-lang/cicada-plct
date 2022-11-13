@@ -14,6 +14,15 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = solutionAdvanceValue(mod, left)
   right = solutionAdvanceValue(mod, right)
 
+  for (const [cachedLeft, cachedRifht] of mod.unifyTypeCache) {
+    if (left === cachedLeft && right === cachedRifht) {
+      // console.log("unifyTypeCache")
+      return
+    }
+  }
+
+  mod.unifyTypeCache.push([left, right])
+
   const success = unifyMetaVar(mod, ctx, Values.Type(), left, right)
   if (success) return
 

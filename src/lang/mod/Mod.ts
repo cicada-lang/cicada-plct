@@ -2,6 +2,7 @@ import { Loader } from "../../loader"
 import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
 import { Env } from "../env"
 import { useGlobals } from "../globals"
+import { Neutral } from "../neutral"
 import { Solution, solutionCleanup } from "../solution"
 import { Stmt, StmtOutput } from "../stmt"
 import { Value } from "../value"
@@ -18,6 +19,10 @@ export class Mod {
   stmts: Array<Stmt> = []
   initialized = false
   imported: Array<URL> = []
+
+  unifyCache: Array<[Value, Value]> = []
+  unifyTypeCache: Array<[Value, Value]> = []
+  unifyNeutralCache: Array<[Neutral, Neutral]> = []
 
   constructor(public options: ModOptions) {}
 
@@ -44,6 +49,11 @@ export class Mod {
       const output = await stmt.execute(this)
       this.stmts.push(stmt)
       solutionCleanup(this.solution)
+
+      this.unifyCache = []
+      this.unifyTypeCache = []
+      this.unifyNeutralCache = []
+
       if (output) {
         this.outputs.set(offset + index, output)
         outputs.push(output)

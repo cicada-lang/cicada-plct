@@ -33,6 +33,15 @@ export function unifyNeutral(
   )
   if (success) return
 
+  for (const [cachedLeft, cachedRifht] of mod.unifyNeutralCache) {
+    if (left === cachedLeft && right === cachedRifht) {
+      // console.log("unifyNeutralCache")
+      return
+    }
+  }
+
+  mod.unifyNeutralCache.push([left, right])
+
   if (left.kind === "Var" && right.kind === "Var") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
