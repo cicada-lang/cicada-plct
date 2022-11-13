@@ -115,12 +115,33 @@ let groupCategory = new Category {
   Morphism: (G, H) => GroupHomomorphism(G, H),
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
-  // idLeft: (implicit G: Group, implicit H: Group, f: GroupHomomorphism(G, H)) => {
-  //   return refl
-  // },
-  idLeft: (f) => {
+
+  idLeft: (implicit G, implicit H, f) => {
+    let motive = Equal(
+      GroupHomomorphism(G, H),
+      composeGroupHomomorphism(idGroupHomomorphism(G), f),
+      f,
+    )
+
     return refl
   },
+
+  // idLeft: (f) => {
+  //   let G = f.dom
+  //   let H = f.cod
+
+  //   let motive = Equal(
+  //     GroupHomomorphism(G, H),
+  //     composeGroupHomomorphism(idGroupHomomorphism(G), f),
+  //     f,
+  //   )
+
+  //   return refl
+  // },
+
+  // TODO left: [formatType] fail to readbackType: Equal
+  // idLeft: (f) => refl,
+
   // // given G: Group, H: Group
   // idRight: (f: GroupHomomorphism(G, H)) => same(f)
 
