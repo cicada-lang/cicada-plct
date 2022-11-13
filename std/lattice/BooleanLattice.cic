@@ -1,0 +1,90 @@
+// A BooleanLattice (or BooleanAlgebra)
+// is a _complemented distributive lattice_.
+//
+// This type of algebraic structure
+// captures essential properties of
+// both set operations and logic operations.
+//
+// - https://en.wikipedia.org/wiki/Boolean_algebra_(structure)
+
+class BooleanLattice {
+  Element: Type
+
+  join(x: Element, y: Element): Element
+  meet(x: Element, y: Element): Element
+
+  complement(x: Element): Element
+
+  bottom: Element
+  top: Element
+
+  joinCommutative(
+    x: Element,
+    y: Element,
+  ): Equal(
+    Element,
+    join(x, y),
+    join(y, x),
+  )
+
+  meetCommutative(
+    x: Element,
+    y: Element,
+  ): Equal(
+    Element,
+    meet(x, y),
+    meet(y, x),
+  )
+
+  bottomIdJoin(
+    x: Element
+  ): Equal(
+    Element,
+    join(x, bottom),
+    x,
+  )
+
+  topIdMeet(
+    x: Element
+  ): Equal(
+    Element,
+    meet(x, top),
+    x,
+  )
+
+  joinDistributeMeet(
+    x: Element,
+    y: Element,
+    z: Element
+  ): Equal(
+    Element,
+    join(x, meet(y, z)),
+    meet(join(x, y), join(x, z)),
+  )
+
+  meetDistributeJoin(
+    x: Element,
+    y: Element,
+    z: Element
+  ): Equal(
+    Element,
+    meet(x, join(y, z)),
+    join(meet(x, y), meet(x, z)),
+  )
+
+  complementJoinForTop(
+    x: Element
+  ): Equal(
+    Element,
+    join(x, complement(x)),
+    top,
+  )
+
+  complementMeetForBottom(
+    x: Element
+  ): Equal(
+    Element,
+    meet(x, complement(x)),
+    bottom,
+  )
+}

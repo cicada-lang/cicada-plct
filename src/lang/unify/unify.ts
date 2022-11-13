@@ -29,15 +29,6 @@ export function unify(
   left = solutionAdvanceValue(mod, left)
   right = solutionAdvanceValue(mod, right)
 
-  for (const [cachedLeft, cachedRifht] of mod.unifyCache) {
-    if (left === cachedLeft && right === cachedRifht) {
-      // console.log("unifyCache")
-      return
-    }
-  }
-
-  mod.unifyCache.push([left, right])
-
   try {
     if (unifyMetaVar(mod, ctx, type, left, right)) return
     if (unifyByType(mod, ctx, type, left, right)) return

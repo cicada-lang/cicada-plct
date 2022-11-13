@@ -1,0 +1,14 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+import { dual } from "dual.cic"
+
+// The `dual` of `BooleanLattice` is involutive
+//
+// - https://en.wikipedia.org/wiki/Involution_(mathematics)
+
+function dualInvolutive(lattice: BooleanLattice): Equal(
+  BooleanLattice,
+  lattice,
+  dual(dual(lattice)),
+) {
+  return refl
+}

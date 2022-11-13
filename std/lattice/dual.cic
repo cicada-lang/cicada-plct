@@ -1,0 +1,27 @@
+import { BooleanLattice } from "BooleanLattice.cic"
+
+function dual(lattice: BooleanLattice): BooleanLattice {
+  return {
+    Element: lattice.Element,
+
+    join: lattice.meet,
+    meet: lattice.join,
+
+    complement: lattice.complement,
+
+    bottom: lattice.top,
+    top: lattice.bottom,
+
+    joinCommutative: lattice.meetCommutative,
+    meetCommutative: lattice.joinCommutative,
+
+    bottomIdJoin: lattice.topIdMeet,
+    topIdMeet: lattice.bottomIdJoin,
+
+    joinDistributeMeet: lattice.meetDistributeJoin,
+    meetDistributeJoin: lattice.joinDistributeMeet,
+
+    complementJoinForTop: lattice.complementMeetForBottom,
+    complementMeetForBottom: lattice.complementJoinForTop,
+  }
+}
