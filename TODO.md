@@ -1,8 +1,10 @@
 `solutionBind` -- instead of `solution.bindings.set`
 
+`solutionBind` return `Solution`
+`solutionPatternVar` return `Solution`
+
 side-effect on `mod.solution` -- instead of on `mod.solution` itself
 
-- `solutionPatternVar` return `Solution`
 - `Solution` should not have `patternVars`, but a placeholder entry to represent `PatternVar`
 
 quit using global side-effect on `mod.solution`

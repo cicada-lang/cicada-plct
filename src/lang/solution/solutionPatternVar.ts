@@ -39,6 +39,7 @@ export function isPatternVar(
 export function solutionPatternVar(
   solution: Solution,
   patternVar: PatternVar,
-): void {
+): Solution {
   solution.patternVars.push(patternVar)
+  return solution
 }
