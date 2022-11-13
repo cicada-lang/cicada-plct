@@ -55,7 +55,7 @@ improve error report -- using `groupCategory.todo.cic` as test
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
-update `std/lattice/BooleanLattice.md`
+update `std/boolean-lattice/BooleanLattice.md`
 
 # std
 
