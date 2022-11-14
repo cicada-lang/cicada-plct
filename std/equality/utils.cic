@@ -17,10 +17,10 @@ function equalSwap(
   implicit A: Type,
   implicit x: A,
   implicit y: A,
-  xy_equal: Equal(A, x, y),
+  xyEqual: Equal(A, x, y),
 ): Equal(A, y, x) {
   return replace(
-    xy_equal,
+    xyEqual,
     (w) => Equal(A, w, x),
     refl,
   )
@@ -31,12 +31,12 @@ function equalCompose(
   implicit x: A,
   implicit y: A,
   implicit z: A,
-  xy_equal: Equal(A, x, y),
-  yz_equal: Equal(A, y, z),
+  xyEqual: Equal(A, x, y),
+  yzEqual: Equal(A, y, z),
 ): Equal(A, x, z) {
   return replace(
-    yz_equal,
+    yzEqual,
     (w) => Equal(A, x, w),
-    xy_equal,
+    xyEqual,
   )
 }
