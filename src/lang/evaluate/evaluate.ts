@@ -76,7 +76,7 @@ export function evaluate(env: Env, core: Core): Value {
     }
 
     case "ClazzNull": {
-      return Values.ClazzNull()
+      return Values.ClazzNull(core.name)
     }
 
     case "ClazzCons": {
@@ -84,6 +84,7 @@ export function evaluate(env: Env, core: Core): Value {
         core.propertyName,
         evaluate(env, core.propertyType),
         ClosureSimple(env, core.localName, core.rest),
+        core.name,
       )
     }
 
@@ -100,6 +101,7 @@ export function evaluate(env: Env, core: Core): Value {
         propertyType,
         property,
         rest,
+        core.name,
       )
     }
 

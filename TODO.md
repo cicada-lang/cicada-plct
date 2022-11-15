@@ -1,4 +1,4 @@
-`formatCore` -- print Clazz name if exists
+fix the passing of `Clazz` name
 
 refactor `includeClazz` -- step left and right
 

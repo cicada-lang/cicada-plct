@@ -15,6 +15,7 @@ export function clazzAppend(
         left.localName,
         left.propertyType,
         clazzAppend(left.rest, right),
+        left.name,
       )
     }
 
@@ -24,6 +25,7 @@ export function clazzAppend(
         left.propertyType,
         left.property,
         clazzAppend(left.rest, right),
+        left.name,
       )
     }
   }

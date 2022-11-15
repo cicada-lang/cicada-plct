@@ -15,7 +15,7 @@ export function readbackClazz(
 ): Cores.Clazz {
   switch (clazz.kind) {
     case "ClazzNull": {
-      return Cores.ClazzNull()
+      return Cores.ClazzNull(clazz.name)
     }
 
     case "ClazzCons": {
@@ -31,6 +31,7 @@ export function readbackClazz(
         freshName,
         readbackType(mod, ctx, clazz.propertyType),
         restCore,
+        clazz.name,
       )
     }
 
@@ -40,6 +41,7 @@ export function readbackClazz(
         readbackType(mod, ctx, clazz.propertyType),
         readback(mod, ctx, clazz.propertyType, clazz.property),
         readbackClazz(mod, ctx, clazz.rest),
+        clazz.name,
       )
     }
   }

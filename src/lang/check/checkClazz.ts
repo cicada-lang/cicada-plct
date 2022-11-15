@@ -8,7 +8,7 @@ import { Mod } from "../mod"
 export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
   switch (exp.kind) {
     case "ClazzNull": {
-      return Cores.ClazzNull()
+      return Cores.ClazzNull(exp.name)
     }
 
     case "ClazzCons": {
@@ -21,6 +21,7 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
         exp.localName,
         propertyTypeCore,
         restCore,
+        exp.name,
       )
     }
 
@@ -36,6 +37,7 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
         propertyTypeCore,
         propertyCore,
         restCore,
+        exp.name,
       )
     }
   }

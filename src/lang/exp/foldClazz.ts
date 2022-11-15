@@ -15,7 +15,8 @@ export function foldClazz(
         binding.name,
         binding.name,
         binding.propertyType,
-        foldClazz(restBindings),
+        // NOTE Only the top has the `name`.
+        foldClazz(restBindings, undefined),
         name,
         binding.propertyType.span,
       )
@@ -27,7 +28,8 @@ export function foldClazz(
         binding.name,
         binding.propertyType,
         binding.property,
-        foldClazz(restBindings),
+        // NOTE Only the top has the `name`.
+        foldClazz(restBindings, undefined),
         name,
         spanUnion(binding.propertyType.span, binding.property.span),
       )
