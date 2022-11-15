@@ -239,6 +239,7 @@ export type ClazzCons = {
   localName: string
   propertyType: Core
   rest: Clazz
+  name?: string
 }
 
 export function ClazzCons(
@@ -246,6 +247,7 @@ export function ClazzCons(
   localName: string,
   propertyType: Core,
   rest: Clazz,
+  name?: string,
 ): ClazzCons {
   return {
     family: "Core",
@@ -254,6 +256,7 @@ export function ClazzCons(
     localName,
     propertyType,
     rest,
+    name,
   }
 }
 
@@ -264,6 +267,7 @@ export type ClazzFulfilled = {
   propertyType: Core
   property: Core
   rest: Clazz
+  name?: string
 }
 
 export function ClazzFulfilled(
@@ -271,6 +275,7 @@ export function ClazzFulfilled(
   propertyType: Core,
   property: Core,
   rest: Clazz,
+  name?: string,
 ): ClazzFulfilled {
   return {
     family: "Core",
@@ -279,6 +284,7 @@ export function ClazzFulfilled(
     propertyType,
     property,
     rest,
+    name,
   }
 }
 

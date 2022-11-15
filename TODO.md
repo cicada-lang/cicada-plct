@@ -1,4 +1,3 @@
-`Cores.Clazz` has optional `name`
 `Exps.Clazz` has optional `name`
 
 refactor `includeClazz` -- step left and right
