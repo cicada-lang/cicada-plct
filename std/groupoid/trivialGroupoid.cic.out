@@ -15,7 +15,7 @@
   inverseLeft: refl(implicit Trivial, implicit sole),
   inverseRight: refl(implicit Trivial, implicit sole)
 }: class {
-  cat: class {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x: Object) -> Morphism(x, x)
@@ -75,7 +75,7 @@
   composeAssociative: (implicit x: Trivial, implicit y: Trivial, implicit z: Trivial, implicit w: Trivial, Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (implicit x, implicit y, implicit z, implicit w, f, g, h) => refl(implicit Trivial, implicit sole)
   inverse: (implicit x: Trivial, implicit y: Trivial, Trivial) -> Trivial = (implicit x, implicit y, f) => sole
   inverseIso: (implicit x: Trivial, implicit y: Trivial, Trivial) -> class {
-    cat: class {
+    cat: class Category {
       Object: Type
       Morphism: (Object, Object) -> Type
       id: (x1: Object) -> Morphism(x1, x1)

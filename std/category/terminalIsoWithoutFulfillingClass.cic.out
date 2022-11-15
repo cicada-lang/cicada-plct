@@ -14,7 +14,7 @@
   inverse: x.morphism(y.object),
   inverseLeft: replace(replace(x.morphismUnique(implicit x.object, cat.id(x.object)), (target) => Equal(cat.Morphism(x.object, x.object), target, cat.id(x.object)), refl(implicit cat.Morphism(x.object, x.object), implicit cat.id(x.object))), (target) => Equal(cat.Morphism(x.object, x.object), cat.compose(implicit x.object, implicit y.object, implicit x.object, y.morphism(x.object), x.morphism(y.object)), target), x.morphismUnique(implicit x.object, cat.compose(implicit x.object, implicit y.object, implicit x.object, y.morphism(x.object), x.morphism(y.object)))),
   inverseRight: replace(replace(y.morphismUnique(implicit y.object, cat.id(y.object)), (target) => Equal(cat.Morphism(y.object, y.object), target, cat.id(y.object)), refl(implicit cat.Morphism(y.object, y.object), implicit cat.id(y.object))), (target) => Equal(cat.Morphism(y.object, y.object), cat.compose(implicit y.object, implicit x.object, implicit y.object, x.morphism(y.object), y.morphism(x.object)), target), y.morphismUnique(implicit y.object, cat.compose(implicit y.object, implicit x.object, implicit y.object, x.morphism(y.object), y.morphism(x.object))))
-}: (cat: class {
+}: (cat: class Category {
   Object: Type
   Morphism: (Object, Object) -> Type
   id: (x: Object) -> Morphism(x, x)
@@ -23,7 +23,7 @@
   idRight: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(implicit x, implicit y, implicit y, f, id(y)), f)
   composeAssociative: (implicit x: Object, implicit y: Object, implicit z: Object, implicit w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(implicit x, implicit y, implicit w, f, compose(implicit y, implicit y, implicit w, g, h)), compose(implicit x, implicit y, implicit w, compose(implicit x, implicit y, implicit y, f, g), h))
 }, class {
-  cat: class {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x: Object) -> Morphism(x, x)
@@ -44,7 +44,7 @@
   morphism: (x: cat.Object) -> cat.Morphism(x, object)
   morphismUnique: (implicit x: cat.Object, f: cat.Morphism(x, object)) -> Equal(cat.Morphism(x, object), f, morphism(x))
 }, class {
-  cat: class {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)
@@ -64,8 +64,8 @@
   object: cat.Object
   morphism: (x27: cat.Object) -> cat.Morphism(x27, object)
   morphismUnique: (implicit x27: cat.Object, f: cat.Morphism(x27, object)) -> Equal(cat.Morphism(x27, object), f, morphism(x27))
-}) -> class {
-  cat [rename: cat1]: class {
+}) -> class Isomorphism {
+  cat [rename: cat1]: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)
@@ -98,7 +98,7 @@
   inverseLeft: replace(replace(x.morphismUnique(implicit sole, sole), (target) => Equal(Trivial, sole, sole), refl(implicit Trivial, implicit sole)), (target) => Equal(Trivial, sole, sole), x.morphismUnique(implicit sole, sole)),
   inverseRight: replace(replace(y.morphismUnique(implicit sole, sole), (target) => Equal(Trivial, sole, sole), refl(implicit Trivial, implicit sole)), (target) => Equal(Trivial, sole, sole), y.morphismUnique(implicit sole, sole))
 }: (class {
-  cat: class {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x: Object) -> Morphism(x, x)
@@ -119,7 +119,7 @@
   morphism: (Trivial) -> Trivial
   morphismUnique: (implicit x: Trivial, Trivial) -> Equal(Trivial, sole, sole)
 }, class {
-  cat: class {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)
@@ -139,8 +139,8 @@
   object: Trivial
   morphism: (Trivial) -> Trivial
   morphismUnique: (implicit x27: Trivial, Trivial) -> Equal(Trivial, sole, sole)
-}) -> class {
-  cat: class {
+}) -> class Isomorphism {
+  cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
     id: (x27: Object) -> Morphism(x27, x27)

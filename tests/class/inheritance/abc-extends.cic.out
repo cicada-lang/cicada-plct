@@ -5,7 +5,7 @@
   e: Trivial,
   f: sole,
   g: "g"
-}: class {
+}: class ABCEFG {
   a: Type
   b: a
   c: String

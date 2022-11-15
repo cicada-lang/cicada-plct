@@ -1,5 +1,3 @@
-fix the passing of `Clazz` name
-
 refactor `includeClazz` -- step left and right
 
 refactor `unifyClazz` -- step left and right

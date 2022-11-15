@@ -27,7 +27,7 @@
   homoPreserveId: refl(implicit Trivial, implicit sole),
   homoPreserveMul: (x2, y) => refl(implicit Trivial, implicit sole)
 }: class {
-  dom: class {
+  dom: class Group {
     Element: Type
     mul: (Element, Element) -> Element
     mulAssociative: (x2: Element, y: Element, z: Element) -> Equal(Element, mul(x2, mul(y, z)), mul(mul(x2, y), z))
@@ -50,7 +50,7 @@
     inverseRight: (x2) => refl(implicit Trivial, implicit sole),
     div: (x2, y) => sole
   }
-  cod: class {
+  cod: class Group {
     Element: Type
     mul: (Element, Element) -> Element
     mulAssociative: (x2: Element, y: Element, z: Element) -> Equal(Element, mul(x2, mul(y, z)), mul(mul(x2, y), z))
@@ -106,7 +106,7 @@
   homoPreserveId: refl(implicit Trivial, implicit sole),
   homoPreserveMul: (x2, y2) => refl(implicit Trivial, implicit sole)
 }: class {
-  dom: class {
+  dom: class Group {
     Element: Type
     mul: (Element, Element) -> Element
     mulAssociative: (x2: Element, y2: Element, z2: Element) -> Equal(Element, mul(x2, mul(y2, z2)), mul(mul(x2, y2), z2))
@@ -129,7 +129,7 @@
     inverseRight: (x2) => refl(implicit Trivial, implicit sole),
     div: (x2, y2) => sole
   }
-  cod: class {
+  cod: class Group {
     Element: Type
     mul: (Element, Element) -> Element
     mulAssociative: (x2: Element, y2: Element, z2: Element) -> Equal(Element, mul(x2, mul(y2, z2)), mul(mul(x2, y2), z2))

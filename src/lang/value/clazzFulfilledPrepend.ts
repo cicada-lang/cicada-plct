@@ -22,6 +22,7 @@ export function clazzFulfilledPrepend(
         left.propertyType,
         left.property,
         clazzFulfilledPrepend(left.rest, right),
+        left.name,
       )
     }
   }

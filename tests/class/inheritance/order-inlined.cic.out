@@ -1,16 +1,16 @@
-refl(implicit Type, implicit class {
+refl(implicit Type, implicit class Order {
   Element: Type
   Under: (Element, Element) -> Type
   reflexive: (x1: Element) -> Under(x1, x1)
   transitive: (implicit x1: Element, implicit y: Element, Under(x1, y), implicit z: Element, Under(y, z)) -> Under(x1, z)
   antisymmetric: (implicit x1: Element, implicit y: Element, Under(x1, y), Under(y, x1)) -> Equal(Element, x1, y)
-}): Equal(Type, class {
+}): Equal(Type, class Order {
   Element: Type
   Under: (Element, Element) -> Type
   reflexive: (x1: Element) -> Under(x1, x1)
   transitive: (implicit x1: Element, implicit y: Element, Under(x1, y), implicit z: Element, Under(y, z)) -> Under(x1, z)
   antisymmetric: (implicit x1: Element, implicit y: Element, Under(x1, y), Under(y, x1)) -> Equal(Element, x1, y)
-}, class {
+}, class OrderInlined {
   Element: Type
   Under: (Element, Element) -> Type
   reflexive: (x1: Element) -> Under(x1, x1)

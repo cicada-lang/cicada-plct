@@ -35,6 +35,7 @@ export class ClazzExtends extends Stmt {
     const inferred = infer(mod, ctx, clazz)
     Cores.assertClazz(inferred.core)
     const core = Cores.clazzAppend(parentClazzCore, inferred.core)
+    core.name = this.name
     const value = evaluate(mod.env, core)
     mod.define(this.name, inferred.type, value)
   }
