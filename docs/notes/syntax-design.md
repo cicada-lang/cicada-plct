@@ -11,9 +11,29 @@ title: Syntax Design
 # No postfix semicolon, but prefix keyword
 
 If we do not want to write semicolons in `{ ... }`,
-we need to add keyword in front of to every stmts (statements).
+we need to add keyword in front of to every statements.
 
-Take the `equivalent` stmt as an example.
+A classical design is (learned from Scala):
+
+```
+match <exp> {
+  case (<pattern>, ...) => ...
+  case (<pattern>, ...) => ...
+  ...
+}
+```
+
+v.s.
+
+```
+match <exp> {
+  (<pattern>, ...) => ...;
+  (<pattern>, ...) => ...;
+  ...;
+}
+```
+
+Take the `equivalent` statement as another example.
 
 We design the grammar to be:
 
