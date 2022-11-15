@@ -18,7 +18,7 @@ export function clazzFulfilledPrepend(
 
     case "ClazzFulfilled": {
       return Values.ClazzFulfilled(
-        left.name,
+        left.propertyName,
         left.propertyType,
         left.property,
         clazzFulfilledPrepend(left.rest, right),

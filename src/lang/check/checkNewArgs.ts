@@ -30,7 +30,7 @@ export function checkNewArgs(
     case "ClazzCons": {
       if (args.length === 0) {
         throw new Errors.ElaborationError(
-          `[checkNewArgs] not enough arguments when calling new, require property: ${clazz.name}`,
+          `[checkNewArgs] not enough arguments when calling new, require property: ${clazz.propertyName}`,
           {},
         )
       }
@@ -40,9 +40,9 @@ export function checkNewArgs(
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
-      ctx = CtxCons(clazz.name, clazz.propertyType, ctx)
+      ctx = CtxCons(clazz.propertyName, clazz.propertyType, ctx)
       return {
-        [clazz.name]: propertyCore,
+        [clazz.propertyName]: propertyCore,
         ...checkNewArgs(mod, ctx, restArgs, rest),
       }
     }
@@ -56,7 +56,7 @@ export function checkNewArgs(
       )
 
       return {
-        [clazz.name]: propertyCore,
+        [clazz.propertyName]: propertyCore,
         ...checkNewArgs(mod, ctx, args, clazz.rest),
       }
     }

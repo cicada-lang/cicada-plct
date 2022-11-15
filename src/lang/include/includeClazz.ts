@@ -31,8 +31,8 @@ export function includeClazz(
   const commonNames = new Set(_.intersection(subclazzNames, clazzNames))
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      if (commonNames.has(clazz.name)) {
-        const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
+      if (commonNames.has(clazz.propertyName)) {
+        const next = nextSubclazz(mod, ctx, clazz.propertyName, subclazz)
         include(mod, ctx, clazz.propertyType, next.propertyType)
         const rest = applyClosure(clazz.restClosure, next.property)
         assertClazz(rest)
@@ -40,7 +40,7 @@ export function includeClazz(
         subclazz = next.subclazz
       } else {
         const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, clazz.name)
+        const freshName = freshen(usedNames, clazz.propertyName)
         const v = Values.TypedNeutral(
           clazz.propertyType,
           Neutrals.Var(freshName),
@@ -52,8 +52,8 @@ export function includeClazz(
     }
 
     if (clazz.kind === "ClazzFulfilled") {
-      if (commonNames.has(clazz.name)) {
-        const next = nextSubclazz(mod, ctx, clazz.name, subclazz)
+      if (commonNames.has(clazz.propertyName)) {
+        const next = nextSubclazz(mod, ctx, clazz.propertyName, subclazz)
         include(mod, ctx, clazz.propertyType, next.propertyType)
         equivalent(mod, ctx, next.propertyType, clazz.property, next.property)
         clazz = clazz.rest
@@ -83,9 +83,9 @@ function nextSubclazz(
     }
 
     case "ClazzCons": {
-      if (subclazz.name === name) {
+      if (subclazz.propertyName === name) {
         const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, subclazz.name)
+        const freshName = freshen(usedNames, subclazz.propertyName)
         const v = Values.TypedNeutral(
           subclazz.propertyType,
           Neutrals.Var(freshName),
@@ -99,7 +99,7 @@ function nextSubclazz(
         }
       } else {
         const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, subclazz.name)
+        const freshName = freshen(usedNames, subclazz.propertyName)
         const v = Values.TypedNeutral(
           subclazz.propertyType,
           Neutrals.Var(freshName),
@@ -111,7 +111,7 @@ function nextSubclazz(
     }
 
     case "ClazzFulfilled": {
-      if (subclazz.name === name) {
+      if (subclazz.propertyName === name) {
         return {
           propertyType: subclazz.propertyType,
           property: subclazz.property,

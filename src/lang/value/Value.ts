@@ -221,14 +221,14 @@ export function ClazzNull(name?: string): ClazzNull {
 export type ClazzCons = {
   family: "Value"
   kind: "ClazzCons"
-  name: string
+  propertyName: string
   propertyType: Value
   restClosure: Closure
   name?: string
 }
 
 export function ClazzCons(
-  name: string,
+  propertyName: string,
   propertyType: Value,
   restClosure: Closure,
   name?: string,
@@ -236,7 +236,7 @@ export function ClazzCons(
   return {
     family: "Value",
     kind: "ClazzCons",
-    name,
+    propertyName,
     propertyType,
     restClosure,
     name,
@@ -246,7 +246,7 @@ export function ClazzCons(
 export type ClazzFulfilled = {
   family: "Value"
   kind: "ClazzFulfilled"
-  name: string
+  propertyName: string
   propertyType: Value
   property: Value
   rest: Clazz
@@ -254,7 +254,7 @@ export type ClazzFulfilled = {
 }
 
 export function ClazzFulfilled(
-  name: string,
+  propertyName: string,
   propertyType: Value,
   property: Value,
   rest: Clazz,
@@ -263,7 +263,7 @@ export function ClazzFulfilled(
   return {
     family: "Value",
     kind: "ClazzFulfilled",
-    name,
+    propertyName,
     propertyType,
     property,
     rest,

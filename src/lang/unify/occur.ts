@@ -170,7 +170,7 @@ function occurProperties(
     }
 
     case "ClazzCons": {
-      const propertyValue = Actions.doDot(value, clazz.name)
+      const propertyValue = Actions.doDot(value, clazz.propertyName)
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       return (
@@ -180,7 +180,7 @@ function occurProperties(
     }
 
     case "ClazzFulfilled": {
-      const propertyValue = Actions.doDot(value, clazz.name)
+      const propertyValue = Actions.doDot(value, clazz.propertyName)
       return (
         occur(mod, ctx, name, clazz.propertyType, propertyValue) ||
         occurProperties(mod, ctx, name, clazz.rest, value)

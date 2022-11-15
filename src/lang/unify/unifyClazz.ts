@@ -22,8 +22,8 @@ export function unifyClazz(
   const commonNames = new Set(_.intersection(leftNames, rightNames))
   while (left.kind !== "ClazzNull") {
     if (left.kind === "ClazzCons") {
-      if (commonNames.has(left.name)) {
-        const next = nextRight(mod, ctx, left.name, right)
+      if (commonNames.has(left.propertyName)) {
+        const next = nextRight(mod, ctx, left.propertyName, right)
         unifyType(mod, ctx, left.propertyType, next.propertyType)
         const rest = applyClosure(left.restClosure, next.property)
         assertClazz(rest)
@@ -31,7 +31,7 @@ export function unifyClazz(
         right = next.right
       } else {
         const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
-        const freshName = freshen(usedNames, left.name)
+        const freshName = freshen(usedNames, left.propertyName)
         const v = Values.TypedNeutral(
           left.propertyType,
           Neutrals.Var(freshName),
@@ -43,8 +43,14 @@ export function unifyClazz(
     }
 
     if (left.kind === "ClazzFulfilled") {
-      if (commonNames.has(left.name)) {
-        const next = nextRight(mod, ctx, left.name, right, left.property)
+      if (commonNames.has(left.propertyName)) {
+        const next = nextRight(
+          mod,
+          ctx,
+          left.propertyName,
+          right,
+          left.property,
+        )
         unifyType(mod, ctx, left.propertyType, next.propertyType)
 
         // NOTE Should avoid unify `left.property` to `next.property`,
@@ -83,7 +89,7 @@ function nextRight(
     }
 
     case "ClazzCons": {
-      if (right.name === name) {
+      if (right.propertyName === name) {
         if (leftProperty !== undefined) {
           const rest = applyClosure(right.restClosure, leftProperty)
           assertClazz(rest)
@@ -94,7 +100,7 @@ function nextRight(
           }
         } else {
           const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
-          const freshName = freshen(usedNames, right.name)
+          const freshName = freshen(usedNames, right.propertyName)
           const v = Values.TypedNeutral(
             right.propertyType,
             Neutrals.Var(freshName),
@@ -109,7 +115,7 @@ function nextRight(
         }
       } else {
         const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
-        const freshName = freshen(usedNames, right.name)
+        const freshName = freshen(usedNames, right.propertyName)
         const v = Values.TypedNeutral(
           right.propertyType,
           Neutrals.Var(freshName),
@@ -121,7 +127,7 @@ function nextRight(
     }
 
     case "ClazzFulfilled": {
-      if (right.name === name) {
+      if (right.propertyName === name) {
         return {
           propertyType: right.propertyType,
           property: right.property,

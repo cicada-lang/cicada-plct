@@ -20,14 +20,14 @@ export function readbackClazz(
 
     case "ClazzCons": {
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
-      const freshName = freshen(usedNames, clazz.name)
+      const freshName = freshen(usedNames, clazz.propertyName)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
       const restValue = applyClosure(clazz.restClosure, v)
       Values.assertClazzInCtx(mod, ctx, restValue)
       ctx = CtxCons(freshName, clazz.propertyType, ctx)
       const restCore = readbackClazz(mod, ctx, restValue)
       return Cores.ClazzCons(
-        clazz.name,
+        clazz.propertyName,
         freshName,
         readbackType(mod, ctx, clazz.propertyType),
         restCore,
@@ -36,7 +36,7 @@ export function readbackClazz(
 
     case "ClazzFulfilled": {
       return Cores.ClazzFulfilled(
-        clazz.name,
+        clazz.propertyName,
         readbackType(mod, ctx, clazz.propertyType),
         readback(mod, ctx, clazz.propertyType, clazz.property),
         readbackClazz(mod, ctx, clazz.rest),

@@ -21,30 +21,35 @@ export function checkProperties(
     }
 
     case "ClazzCons": {
-      const property = properties[clazz.name]
+      const property = properties[clazz.propertyName]
       if (property === undefined) {
         throw new Errors.ElaborationError(
-          `[checkProperties] missing property: ${clazz.name}`,
+          `[checkProperties] missing property: ${clazz.propertyName}`,
           {},
         )
       }
 
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
-      ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
+      ctx = CtxFulfilled(
+        clazz.propertyName,
+        clazz.propertyType,
+        propertyValue,
+        ctx,
+      )
       const rest = applyClosure(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       return {
-        [clazz.name]: propertyCore,
+        [clazz.propertyName]: propertyCore,
         ...checkProperties(mod, ctx, properties, rest),
       }
     }
 
     case "ClazzFulfilled": {
-      const property = properties[clazz.name]
+      const property = properties[clazz.propertyName]
       if (property === undefined) {
         throw new Errors.ElaborationError(
-          `[checkProperties] missing property: ${clazz.name}`,
+          `[checkProperties] missing property: ${clazz.propertyName}`,
           {},
         )
       }
@@ -52,9 +57,14 @@ export function checkProperties(
       const propertyCore = check(mod, ctx, property, clazz.propertyType)
       const propertyValue = evaluate(ctxToEnv(ctx), propertyCore)
       equivalent(mod, ctx, clazz.propertyType, propertyValue, clazz.property)
-      ctx = CtxFulfilled(clazz.name, clazz.propertyType, propertyValue, ctx)
+      ctx = CtxFulfilled(
+        clazz.propertyName,
+        clazz.propertyType,
+        propertyValue,
+        ctx,
+      )
       return {
-        [clazz.name]: propertyCore,
+        [clazz.propertyName]: propertyCore,
         ...checkProperties(mod, ctx, properties, clazz.rest),
       }
     }

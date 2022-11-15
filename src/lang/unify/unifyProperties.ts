@@ -15,8 +15,8 @@ export function unifyProperties(
 ): void {
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      const leftPropertyValue = Actions.doDot(left, clazz.name)
-      const rightPropertyValue = Actions.doDot(right, clazz.name)
+      const leftPropertyValue = Actions.doDot(left, clazz.propertyName)
+      const rightPropertyValue = Actions.doDot(right, clazz.propertyName)
       unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
       const rest = applyClosure(clazz.restClosure, leftPropertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
@@ -24,8 +24,8 @@ export function unifyProperties(
     }
 
     if (clazz.kind === "ClazzFulfilled") {
-      const leftPropertyValue = Actions.doDot(left, clazz.name)
-      const rightPropertyValue = Actions.doDot(right, clazz.name)
+      const leftPropertyValue = Actions.doDot(left, clazz.propertyName)
+      const rightPropertyValue = Actions.doDot(right, clazz.propertyName)
       unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
       clazz = clazz.rest
     }

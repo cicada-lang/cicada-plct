@@ -11,15 +11,15 @@ export function clazzLookupProperty(
 ): Value | undefined {
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      if (clazz.name === name) return undefined
-      const property = Actions.doDot(target, clazz.name)
+      if (clazz.propertyName === name) return undefined
+      const property = Actions.doDot(target, clazz.propertyName)
       const rest = applyClosure(clazz.restClosure, property)
       assertClazz(rest)
       clazz = rest
     }
 
     if (clazz.kind === "ClazzFulfilled") {
-      if (clazz.name === name) return clazz.property
+      if (clazz.propertyName === name) return clazz.property
       clazz = clazz.rest
     }
   }

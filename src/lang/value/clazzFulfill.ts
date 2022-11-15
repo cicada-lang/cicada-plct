@@ -12,12 +12,17 @@ export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
     case "ClazzCons": {
       const rest = applyClosure(clazz.restClosure, arg)
       assertClazz(rest)
-      return Values.ClazzFulfilled(clazz.name, clazz.propertyType, arg, rest)
+      return Values.ClazzFulfilled(
+        clazz.propertyName,
+        clazz.propertyType,
+        arg,
+        rest,
+      )
     }
 
     case "ClazzFulfilled": {
       return Values.ClazzFulfilled(
-        clazz.name,
+        clazz.propertyName,
         clazz.propertyType,
         clazz.property,
         clazzFulfill(clazz.rest, arg),

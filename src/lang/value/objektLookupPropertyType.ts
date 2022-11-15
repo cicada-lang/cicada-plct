@@ -11,15 +11,15 @@ export function objektLookupPropertyType(
 ): Value | undefined {
   while (clazz.kind !== "ClazzNull") {
     if (clazz.kind === "ClazzCons") {
-      if (clazz.name === name) return clazz.propertyType
-      const property = Actions.doDot(target, clazz.name)
+      if (clazz.propertyName === name) return clazz.propertyType
+      const property = Actions.doDot(target, clazz.propertyName)
       const rest = applyClosure(clazz.restClosure, property)
       assertClazz(rest)
       clazz = rest
     }
 
     if (clazz.kind === "ClazzFulfilled") {
-      if (clazz.name === name) return clazz.propertyType
+      if (clazz.propertyName === name) return clazz.propertyType
       clazz = clazz.rest
     }
   }
