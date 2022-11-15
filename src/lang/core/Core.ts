@@ -223,12 +223,14 @@ export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
 export type ClazzNull = {
   family: "Core"
   kind: "ClazzNull"
+  name?: string
 }
 
-export function ClazzNull(): ClazzNull {
+export function ClazzNull(name?: string): ClazzNull {
   return {
     family: "Core",
     kind: "ClazzNull",
+    name,
   }
 }
 

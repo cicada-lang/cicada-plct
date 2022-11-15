@@ -577,12 +577,14 @@ export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
 export type ClazzNull = {
   family: "Exp"
   kind: "ClazzNull"
+  name?: string
 } & ExpMeta
 
-export function ClazzNull(span?: Span): ClazzNull {
+export function ClazzNull(name?: string, span?: Span): ClazzNull {
   return {
     family: "Exp",
     kind: "ClazzNull",
+    name,
     span,
   }
 }
@@ -594,6 +596,7 @@ export type ClazzCons = {
   localName: string
   propertyType: Exp
   rest: Clazz
+  name?: string
 } & ExpMeta
 
 export function ClazzCons(
@@ -601,6 +604,7 @@ export function ClazzCons(
   localName: string,
   propertyType: Exp,
   rest: Clazz,
+  name?: string,
   span?: Span,
 ): ClazzCons {
   return {
@@ -610,6 +614,7 @@ export function ClazzCons(
     localName,
     propertyType,
     rest,
+    name,
     span,
   }
 }
@@ -622,6 +627,7 @@ export type ClazzFulfilled = {
   propertyType: Exp
   property: Exp
   rest: Clazz
+  name?: string
 } & ExpMeta
 
 export function ClazzFulfilled(
@@ -630,6 +636,7 @@ export function ClazzFulfilled(
   propertyType: Exp,
   property: Exp,
   rest: Clazz,
+  name?: string,
   span?: Span,
 ): ClazzFulfilled {
   return {
@@ -640,6 +647,7 @@ export function ClazzFulfilled(
     propertyType,
     property,
     rest,
+    name,
     span,
   }
 }
@@ -648,16 +656,19 @@ export type ClazzUnfolded = {
   family: "Exp"
   kind: "ClazzUnfolded"
   bindings: Array<ClazzBinding>
+  name?: string
 } & ExpMeta
 
 export function ClazzUnfolded(
   bindings: Array<ClazzBinding>,
+  name?: string,
   span?: Span,
 ): ClazzUnfolded {
   return {
     family: "Exp",
     kind: "ClazzUnfolded",
     bindings,
+    name,
     span,
   }
 }

@@ -122,7 +122,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "ClazzUnfolded": {
-      return freeNames(boundNames, Exps.foldClazz(exp.bindings))
+      return freeNames(boundNames, Exps.foldClazz(exp.bindings, exp.name))
     }
 
     case "Objekt": {

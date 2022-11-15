@@ -1,4 +1,4 @@
-`Exps.Clazz` has optional `name`
+`formatCore` -- print Clazz name if exists
 
 refactor `includeClazz` -- step left and right
 

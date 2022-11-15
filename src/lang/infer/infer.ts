@@ -203,7 +203,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     }
 
     case "ClazzUnfolded": {
-      return infer(mod, ctx, Exps.foldClazz(exp.bindings))
+      return infer(mod, ctx, Exps.foldClazz(exp.bindings, exp.name))
     }
 
     case "Objekt": {

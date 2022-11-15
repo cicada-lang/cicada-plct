@@ -1,7 +1,10 @@
 import * as Exps from "../exp"
 import { spanUnion } from "../span"
 
-export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
+export function foldClazz(
+  bindings: Array<Exps.ClazzBinding>,
+  name?: string,
+): Exps.Clazz {
   if (bindings.length === 0) return Exps.ClazzNull()
 
   const [binding, ...restBindings] = bindings
@@ -13,6 +16,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.name,
         binding.propertyType,
         foldClazz(restBindings),
+        name,
         binding.propertyType.span,
       )
     }
@@ -24,6 +28,7 @@ export function foldClazz(bindings: Array<Exps.ClazzBinding>): Exps.Clazz {
         binding.propertyType,
         binding.property,
         foldClazz(restBindings),
+        name,
         spanUnion(binding.propertyType.span, binding.property.span),
       )
     }

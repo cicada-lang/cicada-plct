@@ -223,6 +223,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
           body.localName,
           substitute(body.propertyType, name, exp),
           body.rest,
+          body.name,
           body.span,
         )
       } else {
@@ -237,6 +238,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
           freshName,
           substitute(body.propertyType, name, exp),
           substitute(rest, name, exp) as Exps.Clazz,
+          body.name,
           body.span,
         )
       }
@@ -250,6 +252,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
           substitute(body.propertyType, name, exp),
           substitute(body.property, name, exp),
           body.rest,
+          body.name,
           body.span,
         )
       } else {
@@ -265,13 +268,14 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
           substitute(body.propertyType, name, exp),
           substitute(body.property, name, exp),
           substitute(rest, name, exp) as Exps.Clazz,
+          body.name,
           body.span,
         )
       }
     }
 
     case "ClazzUnfolded": {
-      return substitute(Exps.foldClazz(body.bindings), name, exp)
+      return substitute(Exps.foldClazz(body.bindings, body.name), name, exp)
     }
 
     case "Objekt": {

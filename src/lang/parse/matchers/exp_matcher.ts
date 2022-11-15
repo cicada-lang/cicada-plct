@@ -109,6 +109,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         pt.matchers
           .zero_or_more_matcher(bindings)
           .map(matchers.clazz_binding_matcher),
+        undefined,
         span,
       ),
     "operand:objekt": ({ properties, last_property }, { span }) =>

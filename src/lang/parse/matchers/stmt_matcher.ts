@@ -46,6 +46,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers
             .zero_or_more_matcher(bindings)
             .map(matchers.clazz_binding_matcher),
+          pt.str(name),
           span,
         ),
         span,
@@ -58,6 +59,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers
             .zero_or_more_matcher(bindings)
             .map(matchers.clazz_binding_matcher),
+          pt.str(name),
           span,
         ),
         span,

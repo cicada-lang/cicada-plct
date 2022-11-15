@@ -172,7 +172,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "ClazzUnfolded": {
-      return check(mod, ctx, Exps.foldClazz(exp.bindings), type)
+      return check(mod, ctx, Exps.foldClazz(exp.bindings, exp.name), type)
     }
 
     case "Objekt": {
