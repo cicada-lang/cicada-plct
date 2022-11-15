@@ -17,6 +17,7 @@ export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
         clazz.propertyType,
         arg,
         rest,
+        clazz.name,
       )
     }
 
@@ -26,6 +27,7 @@ export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
         clazz.propertyType,
         clazz.property,
         clazzFulfill(clazz.rest, arg),
+        clazz.name,
       )
     }
   }

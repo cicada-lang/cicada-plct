@@ -18,7 +18,7 @@ export function inferProperties(
 ): { properties: Record<string, Core>; clazz: Values.Clazz } {
   switch (clazz.kind) {
     case "ClazzNull": {
-      return { properties: {}, clazz: Values.ClazzNull() }
+      return { properties: {}, clazz: Values.ClazzNull(clazz.name) }
     }
 
     case "ClazzCons": {
@@ -53,6 +53,7 @@ export function inferProperties(
           clazz.propertyType,
           propertyValue,
           inferred.clazz,
+          clazz.name,
         ),
       }
     }
@@ -90,6 +91,7 @@ export function inferProperties(
           clazz.propertyType,
           clazz.property,
           inferred.clazz,
+          clazz.name,
         ),
       }
     }
