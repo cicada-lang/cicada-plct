@@ -109,7 +109,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     case "ClazzCons": {
       return new Set([
         ...freeNames(boundNames, exp.propertyType),
-        ...freeNames(new Set([...boundNames, exp.propertyName]), exp.rest),
+        ...freeNames(new Set([...boundNames, exp.localName]), exp.rest),
       ])
     }
 
@@ -117,7 +117,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return new Set([
         ...freeNames(boundNames, exp.propertyType),
         ...freeNames(boundNames, exp.property),
-        ...freeNames(new Set([...boundNames, exp.propertyName]), exp.rest),
+        ...freeNames(new Set([...boundNames, exp.localName]), exp.rest),
       ])
     }
 
