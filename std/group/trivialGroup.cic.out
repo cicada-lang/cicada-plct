@@ -9,7 +9,7 @@
   inverseLeft: (x) => refl(implicit Trivial, implicit sole),
   inverseRight: (x) => refl(implicit Trivial, implicit sole),
   div: (x, y) => sole
-}: class {
+}: class Group {
   Element: Type = Trivial
   mul: (Trivial, Trivial) -> Trivial = (x, y) => sole
   mulAssociative: (Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (x, y, z) => refl(implicit Trivial, implicit sole)

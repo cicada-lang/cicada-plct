@@ -22,7 +22,7 @@
   idLeft: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(implicit x, implicit x, implicit y, id(x), f), f)
   idRight: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(implicit x, implicit y, implicit y, f, id(y)), f)
   composeAssociative: (implicit x: Object, implicit y: Object, implicit z: Object, implicit w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(implicit x, implicit y, implicit w, f, compose(implicit y, implicit y, implicit w, g, h)), compose(implicit x, implicit y, implicit w, compose(implicit x, implicit y, implicit y, f, g), h))
-}, class {
+}, class Terminal {
   cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
@@ -43,7 +43,7 @@
   object: cat.Object
   morphism: (x: cat.Object) -> cat.Morphism(x, object)
   morphismUnique: (implicit x: cat.Object, f: cat.Morphism(x, object)) -> Equal(cat.Morphism(x, object), f, morphism(x))
-}, class {
+}, class Terminal {
   cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
@@ -97,7 +97,7 @@
   inverse: sole,
   inverseLeft: replace(replace(x.morphismUnique(implicit sole, sole), (target) => Equal(Trivial, sole, sole), refl(implicit Trivial, implicit sole)), (target) => Equal(Trivial, sole, sole), x.morphismUnique(implicit sole, sole)),
   inverseRight: replace(replace(y.morphismUnique(implicit sole, sole), (target) => Equal(Trivial, sole, sole), refl(implicit Trivial, implicit sole)), (target) => Equal(Trivial, sole, sole), y.morphismUnique(implicit sole, sole))
-}: (class {
+}: (class Terminal {
   cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
@@ -118,7 +118,7 @@
   object: Trivial
   morphism: (Trivial) -> Trivial
   morphismUnique: (implicit x: Trivial, Trivial) -> Equal(Trivial, sole, sole)
-}, class {
+}, class Terminal {
   cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type

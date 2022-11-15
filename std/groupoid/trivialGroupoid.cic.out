@@ -14,7 +14,7 @@
   inverse: sole,
   inverseLeft: refl(implicit Trivial, implicit sole),
   inverseRight: refl(implicit Trivial, implicit sole)
-}: class {
+}: class Isomorphism {
   cat: class Category {
     Object: Type
     Morphism: (Object, Object) -> Type
@@ -65,7 +65,7 @@
     inverseLeft: refl(implicit Trivial, implicit sole),
     inverseRight: refl(implicit Trivial, implicit sole)
   }
-}: class {
+}: class Groupoid {
   Object: Type = Trivial
   Morphism: (Trivial, Trivial) -> Type = (dom, cod) => Trivial
   id: (Trivial) -> Trivial = (x) => sole
@@ -74,7 +74,7 @@
   idRight: (implicit x: Trivial, implicit y: Trivial, Trivial) -> Equal(Trivial, sole, sole) = (implicit x, implicit y, f) => refl(implicit Trivial, implicit sole)
   composeAssociative: (implicit x: Trivial, implicit y: Trivial, implicit z: Trivial, implicit w: Trivial, Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (implicit x, implicit y, implicit z, implicit w, f, g, h) => refl(implicit Trivial, implicit sole)
   inverse: (implicit x: Trivial, implicit y: Trivial, Trivial) -> Trivial = (implicit x, implicit y, f) => sole
-  inverseIso: (implicit x: Trivial, implicit y: Trivial, Trivial) -> class {
+  inverseIso: (implicit x: Trivial, implicit y: Trivial, Trivial) -> class Isomorphism {
     cat: class Category {
       Object: Type
       Morphism: (Object, Object) -> Type

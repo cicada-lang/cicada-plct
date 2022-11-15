@@ -2,7 +2,7 @@
   Element: Trivial,
   mul: (x, y) => sole,
   mulAssociative: (x, y, z) => refl(implicit Trivial, implicit sole)
-}: class {
+}: class Semigroup {
   Element: Type = Trivial
   mul: (Trivial, Trivial) -> Trivial = (x, y) => sole
   mulAssociative: (Trivial, Trivial, Trivial) -> Equal(Trivial, sole, sole) = (x, y, z) => refl(implicit Trivial, implicit sole)
