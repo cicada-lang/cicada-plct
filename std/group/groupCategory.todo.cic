@@ -17,26 +17,26 @@ let groupCategory = new Category {
   // - left: [formatType] fail to readbackType: Equal
   // - left: [formatValue] fail to readback: TypedNeutral
 
-  // idLeft: (f) => refl,
+  idLeft: (f) => refl,
 
-  idLeft: (implicit G, implicit H, f) => {
-    let motive = Equal(
-      GroupHomomorphism(G, H),
-      composeGroupHomomorphism(idGroupHomomorphism(G), f),
-      f,
-    )
+  // idLeft: (implicit G, implicit H, f) => {
+  //   let motive = Equal(
+  //     GroupHomomorphism(G, H),
+  //     composeGroupHomomorphism(idGroupHomomorphism(G), f),
+  //     f,
+  //   )
 
-    // NOTE To prove Equal between objects,
-    //   is to prove Equal between each property.
-    //   How should we express this in our formal language?
-    //   - Take Equal between elements of Pair as a simpler example.
+  //   // NOTE To prove Equal between objects,
+  //   //   is to prove Equal between each property.
+  //   //   How should we express this in our formal language?
+  //   //   - Take Equal between elements of Pair as a simpler example.
 
-    // TODO Should we use the following?
-    check G.idLeft: (x: G.Element) -> Equal(G.Element, G.mul(G.id, x), x)
-    check f.homoPreserveId: Equal(H.Element, f.homo(G.id), H.id)
+  //   // TODO Should we use the following?
+  //   check G.idLeft: (x: G.Element) -> Equal(G.Element, G.mul(G.id, x), x)
+  //   check f.homoPreserveId: Equal(H.Element, f.homo(G.id), H.id)
 
-    return the(motive, refl)
-  },
+  //   return the(motive, refl)
+  // },
 
   // TODO Wrong error:
   // - EvaluationError: [evaluate] undefined variable name: x

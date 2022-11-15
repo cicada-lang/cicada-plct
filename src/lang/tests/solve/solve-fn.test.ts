@@ -2,19 +2,24 @@ import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("solve Fn", async () => {
-  const output = await runCode(`
+  await expectCodeToFail(`
 
 solve (x: String) {
   (_: Trivial) => x = (_: Trivial) => "abc"
 }
 
 `)
+})
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      x: \\"abc\\"
-    }"
-  `)
+test("solve Fn -- unintended", async () => {
+  await expectCodeToFail(`
+
+solve (x: String) {
+  (_: String) => x = (y: String) => y
+  (_: String) => x = (z: String) => z
+}
+
+`)
 })
 
 test("solve Fn -- alpha equivalence", async () => {
@@ -49,7 +54,7 @@ solve (T: Type, f: (Trivial) -> Type) {
 
 test("solve Fn -- occur in fn", async () => {
   await expectCodeToFail(`
-  
+
 solve (x: (Type) -> Type) {
   x = (y: Type) => x(y)
 }
@@ -59,11 +64,11 @@ solve (x: (Type) -> Type) {
 
 test("solve Fn -- occur shadowed by Fn", async () => {
   const output = await runCode(`
-  
+
 solve (x: (Type) -> Type) {
   x = (x: Type) => x
 }
-  
+
 `)
 
   expect(output).toMatchInlineSnapshot(`

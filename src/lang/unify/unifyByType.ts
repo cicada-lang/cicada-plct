@@ -2,6 +2,7 @@ import _ from "lodash"
 import * as Actions from "../actions"
 import { applyClosure } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
@@ -37,7 +38,9 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, v)
       const rightRet = Actions.doAp(right, v)
-      unify(mod, ctx, retType, leftRet, rightRet)
+      // NOTE Should not capture bound variable and make them out of scope.
+      // unify(mod, ctx, retType, leftRet, rightRet)
+      equivalent(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }
 
@@ -50,7 +53,9 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doApImplicit(left, v)
       const rightRet = Actions.doApImplicit(right, v)
-      unify(mod, ctx, retType, leftRet, rightRet)
+      // NOTE Should not capture bound variable and make them out of scope.
+      // unify(mod, ctx, retType, leftRet, rightRet)
+      equivalent(mod, ctx, retType, leftRet, rightRet)
       return "ok"
     }
 
@@ -63,6 +68,7 @@ export function unifyByType(
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
       unify(mod, ctx, cdrType, leftCdr, rightCdr)
+      // equivalent(mod, ctx, cdrType, leftCdr, rightCdr)
       return "ok"
     }
 

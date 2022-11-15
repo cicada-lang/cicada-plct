@@ -1,5 +1,3 @@
-[bug] demo some unintended semantics of `unifyClosure`
-
 `Clazz` has optional name for debug
 
 refactor `includeClazz` -- step left and right

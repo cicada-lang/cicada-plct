@@ -3,7 +3,7 @@ import * as Errors from "../../errors"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("solve FnImplicit", async () => {
-  const output = await runCode(`
+  await expectCodeToFail(`
 
 solve (x: String) {
   (implicit A: Type, a: A) => x =
@@ -11,16 +11,10 @@ solve (x: String) {
 }
 
 `)
-
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      x: \\"abc\\"
-    }"
-  `)
 })
 
 test("solve FnImplicit -- 2", async () => {
-  const output = await runCode(`
+  await expectCodeToFail(`
 
 solve (x: String) {
   (implicit A: Type, implicit B: Type, a: A, b: B) => x =
@@ -28,12 +22,6 @@ solve (x: String) {
 }
 
 `)
-
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      x: \\"abc\\"
-    }"
-  `)
 })
 
 test("solve FnImplicit -- alpha equivalence", async () => {
