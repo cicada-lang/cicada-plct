@@ -235,14 +235,14 @@ export function ClazzNull(): ClazzNull {
 export type ClazzCons = {
   family: "Core"
   kind: "ClazzCons"
-  name: string
+  propertyName: string
   localName: string
   propertyType: Core
   rest: Clazz
 }
 
 export function ClazzCons(
-  name: string,
+  propertyName: string,
   localName: string,
   propertyType: Core,
   rest: Clazz,
@@ -250,7 +250,7 @@ export function ClazzCons(
   return {
     family: "Core",
     kind: "ClazzCons",
-    name,
+    propertyName,
     localName,
     propertyType,
     rest,
@@ -260,14 +260,14 @@ export function ClazzCons(
 export type ClazzFulfilled = {
   family: "Core"
   kind: "ClazzFulfilled"
-  name: string
+  propertyName: string
   propertyType: Core
   property: Core
   rest: Clazz
 }
 
 export function ClazzFulfilled(
-  name: string,
+  propertyName: string,
   propertyType: Core,
   property: Core,
   rest: Clazz,
@@ -275,7 +275,7 @@ export function ClazzFulfilled(
   return {
     family: "Core",
     kind: "ClazzFulfilled",
-    name,
+    propertyName,
     propertyType,
     property,
     rest,

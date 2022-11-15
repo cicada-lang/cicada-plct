@@ -71,10 +71,10 @@ function reorderTheRightByTheLeft(
     case "ClazzCons": {
       return reorderTheRightByTheLeft(
         left.rest,
-        deleteProperty(left.name, right),
+        deleteProperty(left.propertyName, right),
         Cores.clazzAppend(
           reordered,
-          findPropertyAndCreateClazz(left.name, right),
+          findPropertyAndCreateClazz(left.propertyName, right),
         ),
       )
     }
@@ -82,10 +82,10 @@ function reorderTheRightByTheLeft(
     case "ClazzFulfilled": {
       return reorderTheRightByTheLeft(
         left.rest,
-        deleteProperty(left.name, right),
+        deleteProperty(left.propertyName, right),
         Cores.clazzAppend(
           reordered,
-          findPropertyAndCreateClazz(left.name, right),
+          findPropertyAndCreateClazz(left.propertyName, right),
         ),
       )
     }
@@ -99,12 +99,12 @@ function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
     }
 
     case "ClazzCons": {
-      if (clazz.name === name) {
+      if (clazz.propertyName === name) {
         return clazz.rest
       }
 
       return Cores.ClazzCons(
-        clazz.name,
+        clazz.propertyName,
         clazz.localName,
         clazz.propertyType,
         deleteProperty(name, clazz.rest),
@@ -112,12 +112,12 @@ function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
     }
 
     case "ClazzFulfilled": {
-      if (clazz.name === name) {
+      if (clazz.propertyName === name) {
         return clazz.rest
       }
 
       return Cores.ClazzFulfilled(
-        clazz.name,
+        clazz.propertyName,
         clazz.propertyType,
         clazz.property,
         deleteProperty(name, clazz.rest),
@@ -138,9 +138,9 @@ function findPropertyAndCreateClazz(
     }
 
     case "ClazzCons": {
-      if (clazz.name === name) {
+      if (clazz.propertyName === name) {
         return Cores.ClazzCons(
-          clazz.name,
+          clazz.propertyName,
           clazz.localName,
           clazz.propertyType,
           Cores.ClazzNull(),
@@ -151,9 +151,9 @@ function findPropertyAndCreateClazz(
     }
 
     case "ClazzFulfilled": {
-      if (clazz.name === name) {
+      if (clazz.propertyName === name) {
         return Cores.ClazzFulfilled(
-          clazz.name,
+          clazz.propertyName,
           clazz.propertyType,
           clazz.property,
           Cores.ClazzNull(),

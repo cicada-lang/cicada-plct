@@ -11,7 +11,7 @@ export function clazzAppend(
 
     case "ClazzCons": {
       return Cores.ClazzCons(
-        left.name,
+        left.propertyName,
         left.localName,
         left.propertyType,
         clazzAppend(left.rest, right),
@@ -20,7 +20,7 @@ export function clazzAppend(
 
     case "ClazzFulfilled": {
       return Cores.ClazzFulfilled(
-        left.name,
+        left.propertyName,
         left.propertyType,
         left.property,
         clazzAppend(left.rest, right),

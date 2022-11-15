@@ -1,7 +1,6 @@
 `Cores.Clazz` rename `name` to `propertyName`
-`Cores.Clazz` has optional `name`
-
 `Exps.Clazz` rename `name` to `propertyName`
+`Cores.Clazz` has optional `name`
 `Exps.Clazz` has optional `name`
 
 refactor `includeClazz` -- step left and right

@@ -81,7 +81,7 @@ export function evaluate(env: Env, core: Core): Value {
 
     case "ClazzCons": {
       return Values.ClazzCons(
-        core.name,
+        core.propertyName,
         evaluate(env, core.propertyType),
         ClosureSimple(env, core.localName, core.rest),
       )
@@ -90,9 +90,17 @@ export function evaluate(env: Env, core: Core): Value {
     case "ClazzFulfilled": {
       const propertyType = evaluate(env, core.propertyType)
       const property = evaluate(env, core.property)
-      const rest = evaluate(EnvCons(core.name, property, env), core.rest)
+      const rest = evaluate(
+        EnvCons(core.propertyName, property, env),
+        core.rest,
+      )
       Values.assertClazz(rest)
-      return Values.ClazzFulfilled(core.name, propertyType, property, rest)
+      return Values.ClazzFulfilled(
+        core.propertyName,
+        propertyType,
+        property,
+        rest,
+      )
     }
 
     case "Objekt": {
