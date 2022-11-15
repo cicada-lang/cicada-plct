@@ -1,5 +1,3 @@
-`Cores.Clazz` rename `name` to `propertyName`
-`Exps.Clazz` rename `name` to `propertyName`
 `Cores.Clazz` has optional `name`
 `Exps.Clazz` has optional `name`
 

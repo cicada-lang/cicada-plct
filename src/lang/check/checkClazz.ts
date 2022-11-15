@@ -17,7 +17,7 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
       ctx = CtxCons(exp.localName, propertyType, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzCons(
-        exp.name,
+        exp.propertyName,
         exp.localName,
         propertyTypeCore,
         restCore,
@@ -32,7 +32,7 @@ export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
       ctx = CtxFulfilled(exp.localName, propertyType, property, ctx)
       const restCore = checkClazz(mod, ctx, exp.rest)
       return Cores.ClazzFulfilled(
-        exp.name,
+        exp.propertyName,
         propertyTypeCore,
         propertyCore,
         restCore,

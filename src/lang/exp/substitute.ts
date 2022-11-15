@@ -219,7 +219,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
     case "ClazzCons": {
       if (body.localName === name) {
         return Exps.ClazzCons(
-          body.name,
+          body.propertyName,
           body.localName,
           substitute(body.propertyType, name, exp),
           body.rest,
@@ -233,7 +233,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
         const freshName = freshen(freeNames, body.localName)
         const rest = substitute(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzCons(
-          body.name,
+          body.propertyName,
           freshName,
           substitute(body.propertyType, name, exp),
           substitute(rest, name, exp) as Exps.Clazz,
@@ -245,7 +245,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
     case "ClazzFulfilled": {
       if (body.localName === name) {
         return Exps.ClazzFulfilled(
-          body.name,
+          body.propertyName,
           body.localName,
           substitute(body.propertyType, name, exp),
           substitute(body.property, name, exp),
@@ -260,7 +260,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
         const freshName = freshen(freeNames, body.localName)
         const rest = substitute(body.rest, body.localName, Exps.Var(freshName))
         return Exps.ClazzFulfilled(
-          body.name,
+          body.propertyName,
           freshName,
           substitute(body.propertyType, name, exp),
           substitute(body.property, name, exp),

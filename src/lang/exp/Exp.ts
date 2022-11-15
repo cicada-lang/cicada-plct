@@ -590,14 +590,14 @@ export function ClazzNull(span?: Span): ClazzNull {
 export type ClazzCons = {
   family: "Exp"
   kind: "ClazzCons"
-  name: string
+  propertyName: string
   localName: string
   propertyType: Exp
   rest: Clazz
 } & ExpMeta
 
 export function ClazzCons(
-  name: string,
+  propertyName: string,
   localName: string,
   propertyType: Exp,
   rest: Clazz,
@@ -606,7 +606,7 @@ export function ClazzCons(
   return {
     family: "Exp",
     kind: "ClazzCons",
-    name,
+    propertyName,
     localName,
     propertyType,
     rest,
@@ -617,7 +617,7 @@ export function ClazzCons(
 export type ClazzFulfilled = {
   family: "Exp"
   kind: "ClazzFulfilled"
-  name: string
+  propertyName: string
   localName: string
   propertyType: Exp
   property: Exp
@@ -625,7 +625,7 @@ export type ClazzFulfilled = {
 } & ExpMeta
 
 export function ClazzFulfilled(
-  name: string,
+  propertyName: string,
   localName: string,
   propertyType: Exp,
   property: Exp,
@@ -635,7 +635,7 @@ export function ClazzFulfilled(
   return {
     family: "Exp",
     kind: "ClazzFulfilled",
-    name,
+    propertyName,
     localName,
     propertyType,
     property,
