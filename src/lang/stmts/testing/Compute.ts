@@ -2,7 +2,7 @@ import { evaluate } from "../../evaluate"
 import type { Exp } from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
 import { formatTypedValue, TypedValue } from "../../value"
 

@@ -1,5 +1,5 @@
 import * as pt from "@cicada-lang/partech"
-import { Span } from "../span"
+import type { Span } from "../span"
 import { LangError } from "./LangError"
 
 export class ElaborationError extends LangError {

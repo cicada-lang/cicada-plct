@@ -3,7 +3,7 @@ import { evaluate } from "../../evaluate"
 import type { Exp } from "../../exp"
 import { include } from "../../include"
 import { Mod } from "../../mod"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Include extends Stmt {

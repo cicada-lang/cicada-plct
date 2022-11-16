@@ -4,7 +4,7 @@ import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
 import { formatSolution } from "../../solution"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
 import * as Values from "../../value"
 

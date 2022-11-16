@@ -1,5 +1,5 @@
 import { Mod } from "../mod"
-import { Span } from "../span"
+import type { Span } from "../span"
 
 /**
 

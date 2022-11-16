@@ -8,8 +8,8 @@ import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import type { Value } from "../value"
 import * as Values from "../value"
+import type { Insertion } from "./Insertion"
 import * as Insertions from "./Insertion"
-import { Insertion } from "./Insertion"
 
 export function solveByRetType(
   mod: Mod,

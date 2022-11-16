@@ -1,6 +1,6 @@
-export { Span } from "@cicada-lang/partech"
+export type { Span } from "@cicada-lang/partech"
 
-import { Span } from "@cicada-lang/partech"
+import type { Span } from "@cicada-lang/partech"
 
 export function spanUnion(left?: Span, right?: Span): Span | undefined {
   if (left === undefined) return right

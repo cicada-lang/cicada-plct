@@ -2,7 +2,7 @@ import { evaluate } from "../../evaluate"
 import * as Exps from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Clazz extends Stmt {

@@ -3,7 +3,7 @@ import { equivalent } from "../../equivalent"
 import { evaluate } from "../../evaluate"
 import type { Exp } from "../../exp"
 import { Mod } from "../../mod"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Equivalent extends Stmt {

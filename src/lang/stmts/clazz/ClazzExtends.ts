@@ -5,7 +5,7 @@ import * as Exps from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
 import { readbackClazz } from "../../readback"
-import { Span } from "../../span"
+import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 import * as Values from "../../value"
 
