@@ -20,6 +20,7 @@ update `std/boolean-lattice/*`
 
 - All classes must be purely abstract.
   - This will be a important limitation if imposed.
+  - This influences community coding style (naming convention).
 - For the semantic of fulfilling class.
   - How are the fulfilled values different from provided values?
 
