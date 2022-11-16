@@ -20,7 +20,13 @@ compute car
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"',
+    `
+    "(implicit A, implicit B, target) => car(target): (
+      implicit A: Type,
+      implicit B: (A) -> Type,
+      exists ((A)) B(x),
+    ) -> A"
+  `,
   )
 })
 

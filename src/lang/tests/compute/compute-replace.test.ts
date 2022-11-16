@@ -9,7 +9,23 @@ compute replace
 `)
 
   expect(output).toMatchInlineSnapshot(
-    '"(implicit T, implicit from, implicit to, target, motive, base) => replace(target, (target1) => motive(target1), base): (implicit T: Type, implicit from: T, implicit to: T, Equal(T, from, to), motive: (T) -> Type, motive(from)) -> motive(to)"',
+    `
+    "(
+      implicit T,
+      implicit from,
+      implicit to,
+      target,
+      motive,
+      base,
+    ) => replace(target, (target1) => motive(target1), base): (
+      implicit T: Type,
+      implicit from: T,
+      implicit to: T,
+      Equal(T, from, to),
+      motive: (T) -> Type,
+      motive(from),
+    ) -> motive(to)"
+  `,
   )
 })
 
