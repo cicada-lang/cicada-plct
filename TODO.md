@@ -1,13 +1,14 @@
-`Solution` should not has `metaVars`.
+`MetaVar` should be `Values.MetaVar`
 
-- `MetaVar` should be `Values.MetaVar`,
-  instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
+- instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
+
+- `Solution` should not has `metaVars`.
 
 - We can identify a `MetaVar` by itself (without the help of `solution`)
 
-refactor `includeClazz` -- step left and right
+[refactor] `includeClazz` -- step left and right together
 
-refactor `unifyClazz` -- step left and right
+[refactor] `unifyClazz` -- step left and right together
 
 [bug] readback fail during formating
 
