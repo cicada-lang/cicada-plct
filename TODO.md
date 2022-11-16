@@ -1,3 +1,5 @@
+`formatCore` -- indent arguments if one argument has multiple lines or too long
+
 `Solution` should not has `metaVars`.
 
 - `MetaVar` should be `Values.MetaVar`,
@@ -8,6 +10,8 @@
 refactor `includeClazz` -- step left and right
 
 refactor `unifyClazz` -- step left and right
+
+[bug] readback
 
 [maybe] should not allow literal fulfilled class
 
