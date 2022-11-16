@@ -1,4 +1,4 @@
-import { Solution } from "../solution"
+import type { Solution } from "../solution"
 
 export function solutionCleanup(solution: Solution): void {
   solution.bindings = new Map()

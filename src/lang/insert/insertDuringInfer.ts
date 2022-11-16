@@ -1,8 +1,8 @@
 import type { Ctx } from "../ctx"
-import * as Exps from "../exp"
+import type * as Exps from "../exp"
 import { Inferred } from "../infer"
 import { insertionApply, solveByArgs } from "../insert"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 
 export function insertDuringInfer(
   mod: Mod,

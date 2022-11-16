@@ -6,7 +6,7 @@ import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import type { Exp } from "../exp"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import * as Values from "../value"
 
 export function checkProperties(

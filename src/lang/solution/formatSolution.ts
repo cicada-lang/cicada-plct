@@ -1,8 +1,8 @@
 import { indent } from "../../utils/indent"
 import type { Ctx } from "../ctx"
 import { ctxLookupType } from "../ctx"
-import { Mod } from "../mod"
-import { Solution } from "../solution"
+import type { Mod } from "../mod"
+import type { Solution } from "../solution"
 import * as Values from "../value"
 
 export function formatSolution(

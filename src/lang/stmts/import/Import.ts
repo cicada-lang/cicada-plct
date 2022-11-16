@@ -1,7 +1,7 @@
 import { ctxLookupType } from "../../ctx"
 import { envLookupValue } from "../../env"
 import * as Errors from "../../errors"
-import { Mod } from "../../mod"
+import type { Mod } from "../../mod"
 import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 import type { ImportBinding } from "../import"

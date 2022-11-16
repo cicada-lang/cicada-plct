@@ -2,8 +2,8 @@ import type { Core } from "../core"
 import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import type { Exp } from "../exp"
-import { Mod } from "../mod"
-import * as Values from "../value"
+import type { Mod } from "../mod"
+import type * as Values from "../value"
 import { check } from "./check"
 
 export function checkClazzArg(

@@ -1,6 +1,6 @@
 import type { Ctx } from "../ctx"
 import { CtxCons, CtxFulfilled, ctxNames } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"

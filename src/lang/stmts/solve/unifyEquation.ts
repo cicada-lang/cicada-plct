@@ -1,4 +1,4 @@
-import { Mod } from "src/lang/mod"
+import type { Mod } from "src/lang/mod"
 import { check, checkType } from "../../check"
 import type { Ctx } from "../../ctx"
 import { ctxToEnv } from "../../ctx"

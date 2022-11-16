@@ -1,6 +1,6 @@
 import * as commonmark from "commonmark"
 import * as Errors from "../lang/errors"
-import { Mod } from "../lang/mod"
+import type { Mod } from "../lang/mod"
 import { parseStmts } from "../lang/parse"
 import { Script } from "../script"
 

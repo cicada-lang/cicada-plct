@@ -1,4 +1,4 @@
-import { Mod } from "../lang/mod"
+import type { Mod } from "../lang/mod"
 
 export abstract class Script {
   abstract mod: Mod

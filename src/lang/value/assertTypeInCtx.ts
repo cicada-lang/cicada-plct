@@ -1,6 +1,6 @@
 import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { AlreadyType, formatType, Value } from "../value"
 
 export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(

@@ -3,8 +3,8 @@ import * as Cores from "../core"
 import type { Ctx } from "../ctx"
 import { CtxCons, CtxFulfilled, ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
-import * as Exps from "../exp"
-import { Mod } from "../mod"
+import type * as Exps from "../exp"
+import type { Mod } from "../mod"
 
 export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
   switch (exp.kind) {

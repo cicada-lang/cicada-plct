@@ -1,6 +1,6 @@
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
-import * as Values from "../value"
+import type { Mod } from "../mod"
+import type * as Values from "../value"
 import { assertTypesInCtx, Value } from "../value"
 
 export function assertClazzInCtx(

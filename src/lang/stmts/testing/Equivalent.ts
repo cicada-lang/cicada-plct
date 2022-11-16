@@ -2,7 +2,7 @@ import { check, checkType } from "../../check"
 import { equivalent } from "../../equivalent"
 import { evaluate } from "../../evaluate"
 import type { Exp } from "../../exp"
-import { Mod } from "../../mod"
+import type { Mod } from "../../mod"
 import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 

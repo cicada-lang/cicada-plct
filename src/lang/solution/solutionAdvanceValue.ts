@@ -1,5 +1,5 @@
 import * as Actions from "../actions"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import { solutionWalk } from "../solution"
 import type { Value } from "../value"

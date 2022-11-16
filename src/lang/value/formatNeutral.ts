@@ -1,6 +1,6 @@
 import { formatCore } from "../core"
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import { readbackNeutral } from "../readback"
 

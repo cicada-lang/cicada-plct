@@ -4,7 +4,7 @@ import { ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
 import type { Exp } from "../exp"
 import { infer, Inferred } from "../infer"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import * as Values from "../value"
 
 export function inferExtraProperties(

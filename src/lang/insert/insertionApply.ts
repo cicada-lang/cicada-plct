@@ -3,7 +3,7 @@ import * as Cores from "../core"
 import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import type { Insertion } from "../insert"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readback } from "../readback"
 import { solutionLookupValue } from "../solution"
 

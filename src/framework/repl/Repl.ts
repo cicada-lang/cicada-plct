@@ -1,5 +1,5 @@
 import { CommonParensChecker } from "./CommonParensChecker"
-import { ParensChecker } from "./ParensChecker"
+import type { ParensChecker } from "./ParensChecker"
 
 export type ReplEvent = {
   text: string

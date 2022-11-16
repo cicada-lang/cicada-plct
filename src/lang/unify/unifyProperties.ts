@@ -1,6 +1,6 @@
 import * as Actions from "../actions"
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { unify } from "../unify"
 import type { Value } from "../value"
 import * as Values from "../value"

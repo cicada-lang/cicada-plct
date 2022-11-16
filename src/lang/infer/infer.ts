@@ -20,7 +20,7 @@ import {
   inferProperties,
 } from "../infer"
 import { insertDuringInfer } from "../insert"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
 import type { Value } from "../value"
 import * as Values from "../value"

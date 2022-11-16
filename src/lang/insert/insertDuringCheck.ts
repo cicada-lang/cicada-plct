@@ -1,9 +1,9 @@
 import type { Core } from "../core"
 import type { Ctx } from "../ctx"
-import * as Exps from "../exp"
-import { Inferred } from "../infer"
+import type * as Exps from "../exp"
+import type { Inferred } from "../infer"
 import { insertionApply, solveByArgs, solveByRetType } from "../insert"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import type { Value } from "../value"
 
 export function insertDuringCheck(

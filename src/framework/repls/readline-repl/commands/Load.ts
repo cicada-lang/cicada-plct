@@ -1,5 +1,5 @@
 import fs from "fs"
-import { ReadlineRepl } from "../../readline-repl"
+import type { ReadlineRepl } from "../../readline-repl"
 import { Command } from "../Command"
 
 export class Load extends Command {

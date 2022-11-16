@@ -3,7 +3,7 @@ import * as Errors from "../errors"
 import type { Exp } from "../exp"
 import * as Exps from "../exp"
 import { infer } from "../infer"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import * as Values from "../value"
 
 export function prepareProperties(

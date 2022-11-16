@@ -1,5 +1,5 @@
+import type { TypedValue } from "../value"
 import * as Values from "../value"
-import { TypedValue } from "../value"
 
 export function clazzFromTypedValues(
   typedValues: Record<string, TypedValue>,

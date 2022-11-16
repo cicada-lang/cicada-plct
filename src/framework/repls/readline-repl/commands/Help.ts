@@ -1,5 +1,5 @@
 import { rightPad } from "../../../../utils/rightPad"
-import { ReadlineRepl } from "../../readline-repl"
+import type { ReadlineRepl } from "../../readline-repl"
 import { Command } from "../Command"
 
 export class Help extends Command {

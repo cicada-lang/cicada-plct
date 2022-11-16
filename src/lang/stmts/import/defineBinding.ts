@@ -1,4 +1,4 @@
-import { Mod } from "../../mod"
+import type { Mod } from "../../mod"
 import type { Value } from "../../value"
 import type { ImportBinding } from "../import"
 

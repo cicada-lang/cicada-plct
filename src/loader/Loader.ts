@@ -1,6 +1,6 @@
 import { Fetcher } from "../framework/fetcher"
 import { Mod } from "../lang/mod"
-import { Script } from "../script"
+import type { Script } from "../script"
 import * as Scripts from "../scripts"
 
 export class Loader {

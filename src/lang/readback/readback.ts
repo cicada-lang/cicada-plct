@@ -1,6 +1,6 @@
 import type { Core } from "../core"
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readbackByType, readbackByValue } from "../readback"
 import { solutionAdvanceValue } from "../solution"
 import type { Value } from "../value"

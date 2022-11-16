@@ -1,4 +1,4 @@
-import * as Cores from "../core"
+import type * as Cores from "../core"
 import { formatCore } from "../core"
 import { isIdentifier } from "../utils/isIdentifier"
 

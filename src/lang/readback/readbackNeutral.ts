@@ -1,7 +1,7 @@
 import type { Core } from "../core"
 import * as Cores from "../core"
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import { readback } from "../readback"
 

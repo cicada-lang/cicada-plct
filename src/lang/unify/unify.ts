@@ -1,7 +1,7 @@
 import { indent } from "../../utils/indent"
 import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { solutionAdvanceValue } from "../solution"
 import { unifyByType, unifyByValue, unifyMetaVar } from "../unify"
 import type { Value } from "../value"

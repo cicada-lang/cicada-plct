@@ -1,7 +1,7 @@
 import * as Cores from "../core"
 import type { Ctx } from "../ctx"
 import { CtxCons, ctxNames } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackType } from "../readback"
 import { solutionNames } from "../solution"

@@ -1,8 +1,8 @@
 import { formatCore } from "../core"
 import type { Ctx } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
-import { TypedValue } from "../value"
+import type { TypedValue } from "../value"
 
 export function formatTypedValue(
   mod: Mod,

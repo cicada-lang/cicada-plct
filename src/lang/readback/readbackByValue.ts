@@ -2,7 +2,7 @@ import type { Core } from "../core"
 import * as Cores from "../core"
 import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readback, readbackNeutral, readbackType } from "../readback"
 import type { Value } from "../value"
 

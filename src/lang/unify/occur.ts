@@ -2,14 +2,13 @@ import * as Actions from "../actions"
 import { closureApply } from "../closure"
 import type { Ctx } from "../ctx"
 import { ctxNames } from "../ctx"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
-import type { Value } from "../value"
+import type { TypedValue, Value } from "../value"
 import * as Values from "../value"
-import { TypedValue } from "../value"
 
 function occurType(mod: Mod, ctx: Ctx, name: string, value: Value): boolean {
   return occur(mod, ctx, name, Values.Type(), value)

@@ -2,7 +2,7 @@ import { formatCore } from "../core"
 import type { Ctx } from "../ctx"
 import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
-import { Mod } from "../mod"
+import type { Mod } from "../mod"
 import { readback } from "../readback"
 import type { Value } from "../value"
 

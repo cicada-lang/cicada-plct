@@ -1,5 +1,5 @@
-import { Mod } from "../lang/mod"
-import { Script } from "../script"
+import type { Mod } from "../lang/mod"
+import type { Script } from "../script"
 import * as Scripts from "../scripts"
 
 export function createScript(mod: Mod, text: string): Script {

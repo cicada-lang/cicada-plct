@@ -1,4 +1,4 @@
-import { Mod } from "../../mod"
+import type { Mod } from "../../mod"
 import type { ImportBinding } from "../import"
 
 export function undoBinding(mod: Mod, binding: ImportBinding): void {
