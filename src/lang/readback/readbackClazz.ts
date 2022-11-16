@@ -1,4 +1,3 @@
-import { closureApply } from "../closure"
 import * as Cores from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
@@ -22,10 +21,9 @@ export function readbackClazz(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, clazz.propertyName)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
-      const restValue = closureApply(clazz.restClosure, v)
-      Values.assertClazzInCtx(mod, ctx, restValue)
+      const rest = Values.clazzClosureApply(clazz.restClosure, v)
       ctx = CtxCons(freshName, clazz.propertyType, ctx)
-      const restCore = readbackClazz(mod, ctx, restValue)
+      const restCore = readbackClazz(mod, ctx, rest)
       return Cores.ClazzCons(
         clazz.propertyName,
         freshName,

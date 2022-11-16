@@ -136,7 +136,6 @@ export function occur(
 
     case "Objekt": {
       Values.assertClazzInCtx(mod, ctx, type)
-
       return occurProperties(mod, ctx, name, type, value)
     }
 
@@ -171,8 +170,7 @@ function occurProperties(
 
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, clazz.propertyName)
-      const rest = closureApply(clazz.restClosure, propertyValue)
-      Values.assertClazzInCtx(mod, ctx, rest)
+      const rest = Values.clazzClosureApply(clazz.restClosure, propertyValue)
       return (
         occur(mod, ctx, name, clazz.propertyType, propertyValue) ||
         occurProperties(mod, ctx, name, rest, value)

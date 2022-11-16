@@ -1,4 +1,3 @@
-import { closureApply } from "../closure"
 import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
@@ -16,8 +15,7 @@ export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, clazz.propertyName)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
-      const rest = closureApply(clazz.restClosure, v)
-      Values.assertClazzInCtx(mod, ctx, rest)
+      const rest = Values.clazzClosureApply(clazz.restClosure, v)
       ctx = CtxCons(clazz.propertyName, clazz.propertyType, ctx)
       return clazzExtendCtx(mod, ctx, rest)
     }

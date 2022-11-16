@@ -1,9 +1,3 @@
-extract `clazzEvaluate`
-
-quit using `assertClazzInCtx`
-
-maybe quit using `assertValues`
-
 `MetaVar` should be `Values.MetaVar`
 
 - instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
