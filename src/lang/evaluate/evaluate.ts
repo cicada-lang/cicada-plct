@@ -1,10 +1,10 @@
 import * as Actions from "../actions"
 import { ClosureSimple } from "../closure"
-import { Core } from "../core"
+import type { Core } from "../core"
 import { Env, EnvCons, envLookupValue } from "../env"
 import * as Errors from "../errors"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core.kind) {

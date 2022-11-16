@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import type { Exp } from "../../exp"
 import { Span } from "../../span"
 
 export type Equation = EquationUnifyTyped | EquationUnify

@@ -1,6 +1,6 @@
-import { Core } from "../core"
-import { Env } from "../env"
-import { Value } from "../value"
+import type { Core } from "../core"
+import type { Env } from "../env"
+import type { Value } from "../value"
 
 export type Closure = ClosureSimple | ClosureNative
 

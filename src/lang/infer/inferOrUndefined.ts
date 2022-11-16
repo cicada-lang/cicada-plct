@@ -1,5 +1,5 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
+import type { Ctx } from "../ctx"
+import type { Exp } from "../exp"
 import { infer, Inferred } from "../infer"
 import { Mod } from "../mod"
 

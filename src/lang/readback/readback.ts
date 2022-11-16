@@ -1,9 +1,9 @@
-import { Core } from "../core"
-import { Ctx } from "../ctx"
+import type { Core } from "../core"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { readbackByType, readbackByValue } from "../readback"
 import { solutionAdvanceValue } from "../solution"
-import { Value } from "../value"
+import type { Value } from "../value"
 
 /**
 

@@ -1,7 +1,7 @@
 import * as Cores from "../../core"
 import { evaluate } from "../../evaluate"
+import type { Exp } from "../../exp"
 import * as Exps from "../../exp"
-import { Exp } from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
 import { readbackClazz } from "../../readback"

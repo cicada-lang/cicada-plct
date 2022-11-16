@@ -1,6 +1,6 @@
 import { closureApply } from "../closure"
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -8,8 +8,8 @@ import * as Neutrals from "../neutral"
 import { readback, readbackClazz, readbackNeutral } from "../readback"
 import { solutionAdvanceValue, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
   type = solutionAdvanceValue(mod, type)

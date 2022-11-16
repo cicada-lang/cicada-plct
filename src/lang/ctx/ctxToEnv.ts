@@ -1,4 +1,4 @@
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Env, EnvCons, EnvNull } from "../env"
 import { Var } from "../neutral"
 import { TypedNeutral } from "../value"

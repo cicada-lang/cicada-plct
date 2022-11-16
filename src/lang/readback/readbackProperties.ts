@@ -1,10 +1,10 @@
 import * as Actions from "../actions"
 import * as Cores from "../core"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { readback } from "../readback"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function readbackProperties(
   mod: Mod,

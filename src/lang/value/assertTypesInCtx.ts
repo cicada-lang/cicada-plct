@@ -1,4 +1,4 @@
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { AlreadyType, formatType, Value } from "../value"

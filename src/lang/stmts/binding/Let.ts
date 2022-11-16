@@ -1,5 +1,5 @@
 import { evaluate } from "../../evaluate"
-import { Exp } from "../../exp"
+import type { Exp } from "../../exp"
 import { infer } from "../../infer"
 import { Mod } from "../../mod"
 import { Span } from "../../span"

@@ -7,8 +7,8 @@ import { includeClazz } from "../include"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 /**
 

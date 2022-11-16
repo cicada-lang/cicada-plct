@@ -1,7 +1,7 @@
 import { check } from "../check"
-import { Core } from "../core"
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
+import type { Core } from "../core"
+import type { Ctx } from "../ctx"
+import type { Exp } from "../exp"
 import { Mod } from "../mod"
 import * as Values from "../value"
 

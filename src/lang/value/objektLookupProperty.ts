@@ -1,7 +1,7 @@
 import * as Actions from "../actions"
 import * as Errors from "../errors"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function objektLookupProperty(
   target: Value,

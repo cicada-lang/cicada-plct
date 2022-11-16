@@ -1,6 +1,6 @@
-import { Closure } from "../closure"
+import type { Closure } from "../closure"
+import type { Neutral } from "../neutral"
 import * as Neutrals from "../neutral"
-import { Neutral } from "../neutral"
 
 export type Value =
   | TypedNeutral

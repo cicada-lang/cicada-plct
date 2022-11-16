@@ -1,6 +1,6 @@
 import { indent } from "../../utils/indent"
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
 import { isIdentifier } from "../utils/isIdentifier"
 
 export function formatCore(core: Core): string {

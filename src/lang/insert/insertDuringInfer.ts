@@ -1,4 +1,4 @@
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import * as Exps from "../exp"
 import { Inferred } from "../infer"
 import { insertionApply, solveByArgs } from "../insert"

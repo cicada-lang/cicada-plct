@@ -1,8 +1,8 @@
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
-import { Neutral } from "../neutral"
+import type { Neutral } from "../neutral"
 import { readback } from "../readback"
 
 export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {

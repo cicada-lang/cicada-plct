@@ -1,5 +1,5 @@
 import { check } from "../check"
-import { Core } from "../core"
+import type { Core } from "../core"
 import { Ctx, CtxCons, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"

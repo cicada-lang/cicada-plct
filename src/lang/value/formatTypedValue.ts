@@ -1,5 +1,5 @@
 import { formatCore } from "../core"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
 import { TypedValue } from "../value"

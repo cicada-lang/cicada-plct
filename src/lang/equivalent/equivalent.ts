@@ -1,10 +1,10 @@
 import { formatCore } from "../core"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { readback } from "../readback"
-import { Value } from "../value"
+import type { Value } from "../value"
 
 /**
 

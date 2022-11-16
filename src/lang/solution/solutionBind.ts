@@ -1,5 +1,5 @@
 import { Solution } from "../solution"
-import { Value } from "../value"
+import type { Value } from "../value"
 
 export function solutionBind(
   solution: Solution,

@@ -1,5 +1,5 @@
-import { Core } from "../core"
-import { Exp } from "../exp"
+import type { Core } from "../core"
+import type { Exp } from "../exp"
 import * as Values from "../value"
 
 export type Insertion =

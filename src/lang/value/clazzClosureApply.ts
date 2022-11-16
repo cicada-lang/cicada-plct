@@ -1,7 +1,7 @@
 import { Closure, closureApply } from "../closure"
 import * as Errors from "../errors"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function clazzClosureApply(closure: Closure, arg: Value): Values.Clazz {
   const value = closureApply(closure, arg)

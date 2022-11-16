@@ -1,8 +1,8 @@
 import { closureApply } from "../closure"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 import { doCar } from "./doCar"
 
 export function doCdr(target: Value): Value {

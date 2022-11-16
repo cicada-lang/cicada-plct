@@ -1,7 +1,7 @@
 import { check, checkClazz, checkNewArgs, checkType } from "../check"
 import { closureApply, ClosureNative, ClosureSimple } from "../closure"
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
 import {
   Ctx,
   CtxCons,
@@ -12,8 +12,8 @@ import {
 } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
+import type { Exp } from "../exp"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
 import {
   inferExtraProperties,
   inferFulfillingType,
@@ -22,8 +22,8 @@ import {
 import { insertDuringInfer } from "../insert"
 import { Mod } from "../mod"
 import { readback, readbackType } from "../readback"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export type Inferred = {
   type: Value

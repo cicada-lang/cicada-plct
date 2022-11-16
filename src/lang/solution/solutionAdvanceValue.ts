@@ -1,9 +1,9 @@
 import * as Actions from "../actions"
 import { Mod } from "../mod"
-import { Neutral } from "../neutral"
+import type { Neutral } from "../neutral"
 import { solutionWalk } from "../solution"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function solutionAdvanceValue(mod: Mod, value: Value): Value {
   if (value.kind === "TypedNeutral") {

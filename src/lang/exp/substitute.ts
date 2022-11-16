@@ -1,5 +1,5 @@
+import type { Exp } from "../exp"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
 import { freshen } from "../utils/freshen"
 
 export function substitute(body: Exp, name: string, exp: Exp): Exp {

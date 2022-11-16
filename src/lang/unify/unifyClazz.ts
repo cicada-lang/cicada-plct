@@ -6,8 +6,8 @@ import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function unifyClazz(
   mod: Mod,

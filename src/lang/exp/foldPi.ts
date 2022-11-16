@@ -1,5 +1,5 @@
+import type { Exp } from "../exp"
 import * as Exps from "../exp"
-import { Exp } from "../exp"
 import { spanUnion } from "../span"
 
 export function foldPi(bindings: Array<Exps.PiBinding>, retType: Exp): Exp {

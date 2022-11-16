@@ -1,4 +1,4 @@
-import { Env } from "../env"
+import type { Env } from "../env"
 
 export function envNames(env: Env, names: Array<string> = []): Array<string> {
   while (env.kind !== "EnvNull") {

@@ -4,7 +4,7 @@ import { CtxFulfilled } from "../ctx"
 import { evaluate } from "../evaluate"
 import { Mod } from "../mod"
 import { parseExp } from "../parse"
-import { Value } from "../value"
+import type { Value } from "../value"
 
 export class GlobalStore {
   claimed: Map<string, Value> = new Map()

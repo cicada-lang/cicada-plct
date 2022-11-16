@@ -1,4 +1,4 @@
-import { Core } from "../core"
+import type { Core } from "../core"
 import { AlphaCtx, alphaEquivalent } from "../equivalent"
 import * as Errors from "../errors"
 

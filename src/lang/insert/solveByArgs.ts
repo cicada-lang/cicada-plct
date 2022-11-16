@@ -11,8 +11,8 @@ import { Mod } from "../mod"
 import { solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 import * as Insertions from "./Insertion"
 
 export function solveByArgs(

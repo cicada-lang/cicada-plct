@@ -1,6 +1,6 @@
 import { Solution, solutionLookupValue } from "../solution"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function solutionWalk(solution: Solution, value: Value): Value {
   while (Values.isMetaVar(value)) {

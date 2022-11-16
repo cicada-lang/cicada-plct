@@ -1,5 +1,5 @@
-import { Ctx } from "../ctx"
-import { Value } from "../value"
+import type { Ctx } from "../ctx"
+import type { Value } from "../value"
 
 export function ctxLookupType(ctx: Ctx, name: string): Value | undefined {
   while (ctx.kind !== "CtxNull") {

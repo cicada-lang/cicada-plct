@@ -1,8 +1,8 @@
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { equivalent } from "../equivalent"
 import { Mod } from "../mod"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function equivalentType(
   mod: Mod,

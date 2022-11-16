@@ -1,4 +1,4 @@
-import { Value } from "../value"
+import type { Value } from "../value"
 
 export type TypedValue = {
   type: Value

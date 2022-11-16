@@ -1,5 +1,5 @@
 import { indent } from "../../utils/indent"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { solutionAdvanceValue } from "../solution"

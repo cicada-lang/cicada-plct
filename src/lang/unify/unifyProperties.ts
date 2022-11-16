@@ -1,9 +1,9 @@
 import * as Actions from "../actions"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { unify } from "../unify"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function unifyProperties(
   mod: Mod,

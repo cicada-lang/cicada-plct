@@ -1,10 +1,10 @@
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { readback, readbackNeutral, readbackType } from "../readback"
-import { Value } from "../value"
+import type { Value } from "../value"
 
 export function readbackByValue(
   mod: Mod,

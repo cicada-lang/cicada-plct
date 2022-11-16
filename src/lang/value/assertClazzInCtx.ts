@@ -1,4 +1,4 @@
-import { Ctx } from "../ctx"
+import type { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import * as Values from "../value"
 import { assertTypesInCtx, Value } from "../value"

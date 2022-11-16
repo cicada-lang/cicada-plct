@@ -1,15 +1,15 @@
 import * as Actions from "../actions"
 import { closureApply } from "../closure"
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackProperties, readbackType } from "../readback"
 import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 /**
 

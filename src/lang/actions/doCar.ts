@@ -1,7 +1,7 @@
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function doCar(target: Value): Value {
   if (target.kind === "Cons") {

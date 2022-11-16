@@ -1,5 +1,5 @@
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core } from "../core"
 import * as Errors from "../errors"
 
 export function assertClazz(core: Core): asserts core is Cores.Clazz {

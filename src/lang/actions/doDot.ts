@@ -1,7 +1,7 @@
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { Value } from "../value"
 
 export function doDot(target: Value, name: string): Value {
   if (target.kind === "Objekt") {
