@@ -12,40 +12,47 @@ export function formatCore(core: Core): string {
     case "Pi":
     case "PiImplicit": {
       const { bindings, retType } = Cores.unfoldFormatPi(core)
-      return `(${bindings.join(", ")}) -> ${retType}`
+      return `${formatArgs(bindings)} -> ${retType}`
     }
 
     case "Fn":
     case "FnImplicit": {
       const { bindings, ret } = Cores.unfoldFormatFn(core)
-      return `(${bindings.join(", ")}) => ${ret}`
+      return `${formatArgs(bindings)} => ${ret}`
     }
 
     case "Ap":
     case "ApImplicit": {
       const { target, args } = Cores.unfoldFormatAp(core)
-      return `${target}(${args.join(", ")})`
+      return `${target}${formatArgs(args)}`
     }
 
     case "Sigma": {
       if (Cores.freeOccurred(core.name, core.cdrType)) {
         const { bindings, cdrType } = Cores.unfoldFormatSigma(core)
-        return `exists (${bindings.join(", ")}) ${cdrType}`
+        return `exists (${formatArgs(bindings)}) ${cdrType}`
       } else {
-        return `Pair(${formatCore(core.carType)}, ${formatCore(core.cdrType)})`
+        const args = formatArgs([
+          formatCore(core.carType),
+          formatCore(core.cdrType),
+        ])
+        return `Pair${args}`
       }
     }
 
     case "Cons": {
-      return `cons(${formatCore(core.car)}, ${formatCore(core.cdr)})`
+      const args = formatArgs([formatCore(core.car), formatCore(core.cdr)])
+      return `cons${args}`
     }
 
     case "Car": {
-      return `car(${formatCore(core.target)})`
+      const args = formatArgs([formatCore(core.target)])
+      return `car${args}`
     }
 
     case "Cdr": {
-      return `cdr(${formatCore(core.target)})`
+      const args = formatArgs([formatCore(core.target)])
+      return `cdr${args}`
     }
 
     case "Quote": {
@@ -80,7 +87,20 @@ export function formatCore(core: Core): string {
       const target = formatCore(core.target)
       const motive = formatCore(core.motive)
       const base = formatCore(core.base)
-      return `replace(${target}, ${motive}, ${base})`
+      const args = formatArgs([target, motive, base])
+      return `replace${args}`
     }
+  }
+}
+
+function isLargeArgs(args: Array<string>): boolean {
+  return args.some((arg) => arg.includes("\n")) || args.join(", ").length >= 60
+}
+
+function formatArgs(args: Array<string>): string {
+  if (isLargeArgs(args)) {
+    return `(\n${args.map((arg) => indent(arg) + ",").join("\n")}\n)`
+  } else {
+    return `(${args.join(", ")})`
   }
 }

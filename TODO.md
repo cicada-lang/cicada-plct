@@ -1,5 +1,3 @@
-`formatCore` -- indent arguments if one argument has multiple lines or too long
-
 `Solution` should not has `metaVars`.
 
 - `MetaVar` should be `Values.MetaVar`,
