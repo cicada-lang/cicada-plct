@@ -29,12 +29,6 @@
 - all classes must be purely abstract
 - for the semantic of fulfilling class
 
-# DX
-
-[maybe] print error message in XML for re-parsing them on the web
-
-improve error report -- using `groupCategory.todo.cic` as test
-
 # syntax for equivalent
 
 [syntax] we need a syntax -- `equivalent <type> {}` macro -- for reasoning about equality
@@ -55,6 +49,8 @@ pass `groupCategory.todo.cic`
 
 # maybe
 
+[maybe] quit using `assertValues` for better error message
+
 [maybe] [optimize] implement `equivalent` directly instead of using `readback` and `alphaEquivalent`
 
 - maybe not, because according to the flamegraph, `readback` is not the bottleneck for now
@@ -68,3 +64,5 @@ pass `groupCategory.todo.cic`
 [maybe] `alphaEquivalentClazz` should not handle equivalent out of order.
 
 - because "equivalent thing can not be unified" is a bad semantic.
+
+[maybe] print error message in XML for re-parsing them on the web
