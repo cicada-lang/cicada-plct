@@ -1,5 +1,3 @@
-inline the only use of `assertClazz`
-
 extract `clazzEvaluate`
 
 remove the use of `assertValue`

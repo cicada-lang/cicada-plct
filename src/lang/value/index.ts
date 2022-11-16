@@ -1,4 +1,3 @@
-export * from "./assertClazz"
 export * from "./assertClazzInCtx"
 export * from "./assertTypeInCtx"
 export * from "./assertTypesInCtx"

@@ -95,7 +95,7 @@ export function evaluate(env: Env, core: Core): Value {
         EnvCons(core.propertyName, property, env),
         core.rest,
       )
-      Values.assertClazz(rest)
+      Values.assertValues(rest, ["ClazzNull", "ClazzCons", "ClazzFulfilled"])
       return Values.ClazzFulfilled(
         core.propertyName,
         propertyType,
