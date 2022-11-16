@@ -37,10 +37,7 @@ export function solveByRetType(
       ]
       const freshName = freshen(usedNames, name)
       const metaVar = Values.MetaVar(type.argType, freshName)
-      mod.solution.bindings.set(freshName, metaVar)
-      // ctx = CtxCons(freshName, type.argType, ctx)
       ctx = CtxFulfilled(freshName, type.argType, metaVar, ctx)
-
       type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar))
     }

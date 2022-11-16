@@ -1,4 +1,4 @@
-[question] do we need to use `CtxFulfilled` in `solveByArgs` and `solveByRetType`?
+rename `applyInsertion` to `insertionApply`
 
 [note] about the use of `extractApTarget` during `unifyClosure`
 
