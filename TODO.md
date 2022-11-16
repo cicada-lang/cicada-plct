@@ -4,25 +4,6 @@
 
 [refactor] `unifyClazz` -- step left and right together
 
-[bug] readback fail during formating
-
-- test with:
-
-  ```
-  cic run std/group/groupCategory.todo.cic --watch
-  ```
-
-  where
-
-  ```
-  idLeft: (f) => refl,
-  ```
-
-[maybe] should not allow literal fulfilled class
-
-- all classes must be purely abstract
-- for the semantic of fulfilling class
-
 # syntax for equivalent
 
 [syntax] we need a syntax -- `equivalent <type> {}` macro -- for reasoning about equality
@@ -32,6 +13,13 @@
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
 update `std/boolean-lattice/BooleanLattice.md`
+
+# later
+
+[maybe] should not allow literal fulfilled class
+
+- all classes must be purely abstract
+- for the semantic of fulfilling class
 
 # std
 

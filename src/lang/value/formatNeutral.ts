@@ -5,9 +5,5 @@ import { Neutral } from "../neutral"
 import { readbackNeutral } from "../readback"
 
 export function formatNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): string {
-  try {
-    return formatCore(readbackNeutral(mod, ctx, neutral))
-  } catch (error) {
-    return `[formatNeutral]: fail to readbackNeutral ${neutral.kind}`
-  }
+  return formatCore(readbackNeutral(mod, ctx, neutral))
 }

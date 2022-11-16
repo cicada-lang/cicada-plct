@@ -10,9 +10,5 @@ export function formatValue(
   type: Value,
   value: Value,
 ): string {
-  try {
-    return formatCore(readback(mod, ctx, type, value))
-  } catch (error) {
-    return `[formatValue] fail to readback: ${value.kind}`
-  }
+  return formatCore(readback(mod, ctx, type, value))
 }
