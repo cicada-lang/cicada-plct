@@ -1,4 +1,5 @@
-import { Ctx, CtxCons, CtxFulfilled, ctxNames } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxCons, CtxFulfilled, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"

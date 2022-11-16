@@ -2,8 +2,8 @@ import { check, checkClazz, checkNewArgs, checkType } from "../check"
 import { closureApply, ClosureNative, ClosureSimple } from "../closure"
 import type { Core } from "../core"
 import * as Cores from "../core"
+import type { Ctx } from "../ctx"
 import {
-  Ctx,
   CtxCons,
   CtxFulfilled,
   ctxLookupType,

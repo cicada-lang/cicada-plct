@@ -4,7 +4,8 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { solutionAdvanceValue } from "../solution"
 import { unifyByType, unifyByValue, unifyMetaVar } from "../unify"
-import { formatType, formatValue, Value } from "../value"
+import type { Value } from "../value"
+import { formatType, formatValue } from "../value"
 
 /**
 

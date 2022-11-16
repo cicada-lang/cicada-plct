@@ -4,7 +4,8 @@ import * as Errors from "../../errors"
 import { Mod } from "../../mod"
 import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
-import { defineBinding, ImportBinding, undoBinding } from "../import"
+import type { ImportBinding } from "../import"
+import { defineBinding, undoBinding } from "../import"
 
 export class Import extends Stmt {
   constructor(

@@ -1,5 +1,6 @@
 import { Loader } from "../../loader"
-import { Ctx, ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
+import type { Ctx } from "../ctx"
+import { ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
 import type { Env } from "../env"
 import { useGlobals } from "../globals"
 import { Solution, solutionCleanup } from "../solution"

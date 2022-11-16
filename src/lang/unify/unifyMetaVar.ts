@@ -4,8 +4,9 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { solutionBind } from "../solution"
 import { occur } from "../unify"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { formatType, formatValue, Value } from "../value"
+import { formatType, formatValue } from "../value"
 
 export function unifyMetaVar(
   mod: Mod,

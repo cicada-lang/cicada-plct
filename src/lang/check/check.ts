@@ -3,19 +3,21 @@ import { checkByInfer, checkProperties } from "../check"
 import { closureApply } from "../closure"
 import type { Core } from "../core"
 import * as Cores from "../core"
-import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
+import type { Exp } from "../exp"
 import * as Exps from "../exp"
-import { Exp, freeNames } from "../exp"
 import { infer } from "../infer"
 import { insertDuringCheck } from "../insert"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { formatType, Value } from "../value"
+import { formatType } from "../value"
 
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   switch (exp.kind) {
@@ -62,7 +64,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const usedNames = [
           ...ctxNames(ctx),
           ...solutionNames(mod.solution),
-          ...freeNames(new Set(), exp),
+          ...Exps.freeNames(new Set(), exp),
         ]
         const freshName = freshen(usedNames, name)
         const arg = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))

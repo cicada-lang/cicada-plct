@@ -1,6 +1,6 @@
 import { Mod } from "../../mod"
 import type { Value } from "../../value"
-import { ImportBinding } from "../import"
+import type { ImportBinding } from "../import"
 
 export function defineBinding(
   mod: Mod,

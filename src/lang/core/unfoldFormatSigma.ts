@@ -1,4 +1,5 @@
-import { Core, formatCore } from "../core"
+import type { Core } from "../core"
+import { formatCore } from "../core"
 
 export function unfoldFormatSigma(core: Core): {
   bindings: Array<string>

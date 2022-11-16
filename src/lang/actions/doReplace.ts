@@ -2,8 +2,9 @@ import * as Actions from "../actions"
 import { ClosureNative } from "../closure"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { TypedValue, Value } from "../value"
+import { TypedValue } from "../value"
 
 export function doReplace(target: Value, motive: Value, base: Value): Value {
   if (target.kind === "Refl") {

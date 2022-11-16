@@ -1,4 +1,4 @@
-import { Closure } from "../closure"
+import type { Closure } from "../closure"
 import { EnvCons } from "../env"
 import { evaluate } from "../evaluate"
 import type { Value } from "../value"

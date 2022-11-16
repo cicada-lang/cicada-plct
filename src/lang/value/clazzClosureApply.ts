@@ -1,4 +1,5 @@
-import { Closure, closureApply } from "../closure"
+import type { Closure } from "../closure"
+import { closureApply } from "../closure"
 import * as Errors from "../errors"
 import type { Value } from "../value"
 import * as Values from "../value"

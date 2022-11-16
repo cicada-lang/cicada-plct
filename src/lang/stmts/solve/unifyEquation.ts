@@ -1,10 +1,11 @@
 import { Mod } from "src/lang/mod"
 import { check, checkType } from "../../check"
-import { Ctx, ctxToEnv } from "../../ctx"
+import type { Ctx } from "../../ctx"
+import { ctxToEnv } from "../../ctx"
 import { evaluate } from "../../evaluate"
 import { infer, inferOrUndefined } from "../../infer"
 import { unify, unifyType } from "../../unify"
-import { Equation } from "../solve"
+import type { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {

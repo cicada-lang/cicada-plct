@@ -1,4 +1,4 @@
-import { TypedValue, Value } from "../value"
+import type { TypedValue, Value } from "../value"
 
 export type Neutral =
   | Var

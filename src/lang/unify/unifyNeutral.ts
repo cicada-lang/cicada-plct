@@ -4,8 +4,9 @@ import * as Errors from "../errors"
 import { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import { unify, unifyMetaVar, unifyType } from "../unify"
+import type { Value } from "../value"
 import * as Values from "../value"
-import { formatNeutral, TypedValue, Value } from "../value"
+import { formatNeutral, TypedValue } from "../value"
 
 function unifyTypedValue(
   mod: Mod,

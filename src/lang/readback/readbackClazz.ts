@@ -1,5 +1,6 @@
 import * as Cores from "../core"
-import { Ctx, CtxCons, ctxNames } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxCons, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { readback, readbackType } from "../readback"

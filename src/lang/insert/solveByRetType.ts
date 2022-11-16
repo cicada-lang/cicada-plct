@@ -1,5 +1,6 @@
 import { closureApply } from "../closure"
-import { Ctx, CtxFulfilled, ctxNames } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxFulfilled, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"

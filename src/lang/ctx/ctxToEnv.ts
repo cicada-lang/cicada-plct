@@ -1,6 +1,7 @@
 import type { Ctx } from "../ctx"
-import { Env, EnvCons, EnvNull } from "../env"
-import { Var } from "../neutral"
+import type { Env } from "../env"
+import { EnvCons, EnvNull } from "../env"
+import * as Neutrals from "../neutral"
 import { TypedNeutral } from "../value"
 
 export function ctxToEnv(ctx: Ctx): Env {
@@ -12,7 +13,7 @@ export function ctxToEnv(ctx: Ctx): Env {
     case "CtxCons": {
       return EnvCons(
         ctx.name,
-        TypedNeutral(ctx.type, Var(ctx.name)),
+        TypedNeutral(ctx.type, Neutrals.Var(ctx.name)),
         ctxToEnv(ctx.rest),
       )
     }

@@ -1,5 +1,6 @@
 import _ from "lodash"
-import { Ctx, ctxNames } from "../ctx"
+import type { Ctx } from "../ctx"
+import { ctxNames } from "../ctx"
 import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
 import { include } from "../include"

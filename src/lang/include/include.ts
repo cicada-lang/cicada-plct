@@ -1,6 +1,7 @@
 import { indent } from "../../utils/indent"
 import { closureApply } from "../closure"
-import { Ctx, CtxCons, ctxNames } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxCons, ctxNames } from "../ctx"
 import { equivalent, equivalentType } from "../equivalent"
 import * as Errors from "../errors"
 import { includeClazz } from "../include"

@@ -1,6 +1,7 @@
 import { check } from "../check"
 import { closureApply } from "../closure"
-import { Ctx, CtxFulfilled, ctxNames, ctxToEnv } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxFulfilled, ctxNames, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"

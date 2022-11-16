@@ -1,5 +1,6 @@
+import type { Core } from "../core"
 import * as Cores from "../core"
-import { Core, formatCore } from "../core"
+import { formatCore } from "../core"
 
 export function unfoldFormatPi(core: Core): {
   bindings: Array<string>

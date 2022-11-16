@@ -1,6 +1,7 @@
 import { checkClazzArg } from "../check"
 import * as Cores from "../core"
-import { Ctx, ctxToEnv } from "../ctx"
+import type { Ctx } from "../ctx"
+import { ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
 import type { Exp } from "../exp"
 import { Inferred } from "../infer"

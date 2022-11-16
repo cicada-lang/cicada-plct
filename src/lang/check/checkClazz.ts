@@ -1,6 +1,7 @@
 import { check, checkType } from "../check"
 import * as Cores from "../core"
-import { Ctx, CtxCons, CtxFulfilled, ctxToEnv } from "../ctx"
+import type { Ctx } from "../ctx"
+import { CtxCons, CtxFulfilled, ctxToEnv } from "../ctx"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
 import { Mod } from "../mod"

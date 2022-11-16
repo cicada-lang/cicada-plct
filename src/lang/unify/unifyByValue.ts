@@ -3,7 +3,8 @@ import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
 import { unify, unifyNeutral, unifyType } from "../unify"
-import { formatType, formatValue, Value } from "../value"
+import type { Value } from "../value"
+import { formatType, formatValue } from "../value"
 
 export function unifyByValue(
   mod: Mod,

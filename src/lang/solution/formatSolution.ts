@@ -1,5 +1,6 @@
 import { indent } from "../../utils/indent"
-import { Ctx, ctxLookupType } from "../ctx"
+import type { Ctx } from "../ctx"
+import { ctxLookupType } from "../ctx"
 import { Mod } from "../mod"
 import { Solution } from "../solution"
 import * as Values from "../value"
