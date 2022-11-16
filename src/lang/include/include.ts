@@ -1,5 +1,5 @@
 import { indent } from "../../utils/indent"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { equivalent, equivalentType } from "../equivalent"
 import * as Errors from "../errors"
@@ -75,8 +75,8 @@ export function includeAux(
     include(
       mod,
       ctx,
-      applyClosure(type.retTypeClosure, v),
-      applyClosure(subtype.retTypeClosure, v),
+      closureApply(type.retTypeClosure, v),
+      closureApply(subtype.retTypeClosure, v),
     )
     return
   }
@@ -92,8 +92,8 @@ export function includeAux(
     include(
       mod,
       ctx,
-      applyClosure(type.cdrTypeClosure, v),
-      applyClosure(subtype.cdrTypeClosure, v),
+      closureApply(type.cdrTypeClosure, v),
+      closureApply(subtype.cdrTypeClosure, v),
     )
     return
   }

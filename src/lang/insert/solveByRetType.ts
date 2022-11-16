@@ -1,4 +1,4 @@
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
@@ -39,7 +39,7 @@ export function solveByRetType(
       const metaVar = MetaVar(type.argType, Neutrals.Var(freshName))
       solutionMetaVar(mod.solution, metaVar)
       ctx = CtxCons(freshName, type.argType, ctx)
-      type = applyClosure(type.retTypeClosure, metaVar)
+      type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar))
     }
   }

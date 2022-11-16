@@ -1,5 +1,5 @@
 import { check } from "../check"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Core } from "../core"
 import { Ctx, CtxFulfilled, ctxToEnv } from "../ctx"
 import { equivalent } from "../equivalent"
@@ -37,7 +37,7 @@ export function checkProperties(
         propertyValue,
         ctx,
       )
-      const rest = applyClosure(clazz.restClosure, propertyValue)
+      const rest = closureApply(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       return {
         [clazz.propertyName]: propertyCore,

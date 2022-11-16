@@ -1,5 +1,5 @@
 import { check } from "../check"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
@@ -45,7 +45,7 @@ export function solveByArgs(
       solutionMetaVar(mod.solution, metaVar)
       ctx = CtxCons(freshName, type.argType, ctx)
       // NOTE Do not consume args here.
-      type = applyClosure(type.retTypeClosure, metaVar)
+      type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))
     } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
@@ -64,13 +64,13 @@ export function solveByArgs(
 
       const argCore = check(mod, ctx, arg.exp, type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
-      type = applyClosure(type.retTypeClosure, argValue)
+      type = closureApply(type.retTypeClosure, argValue)
       args = restArgs
       insertions.push(Insertions.InsertionUsedArg(argCore))
     } else if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
       const argCore = check(mod, ctx, arg.exp, type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
-      type = applyClosure(type.retTypeClosure, argValue)
+      type = closureApply(type.retTypeClosure, argValue)
       args = restArgs
       insertions.push(Insertions.InsertionImplicitArg(argCore))
     } else if (type.kind === "Pi" && arg.kind === "ArgImplicit") {

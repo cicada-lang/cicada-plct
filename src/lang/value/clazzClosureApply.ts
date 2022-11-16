@@ -1,10 +1,10 @@
-import { applyClosure, Closure } from "../closure"
+import { Closure, closureApply } from "../closure"
 import * as Errors from "../errors"
 import * as Values from "../value"
 import { Value } from "../value"
 
 export function clazzClosureApply(closure: Closure, arg: Value): Values.Clazz {
-  const value = applyClosure(closure, arg)
+  const value = closureApply(closure, arg)
   if (!Values.isClazz(value)) {
     throw new Errors.EvaluationError(
       [

@@ -1,5 +1,5 @@
 import * as Actions from "../actions"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
@@ -36,7 +36,7 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(value.retTypeClosure, v)
+      const retType = closureApply(value.retTypeClosure, v)
       return occurType(mod, ctx, name, retType)
     }
 
@@ -47,7 +47,7 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(value.retTypeClosure, v)
+      const retType = closureApply(value.retTypeClosure, v)
       return occurType(mod, ctx, name, retType)
     }
 
@@ -58,8 +58,8 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
-      const ret = applyClosure(value.retClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
+      const ret = closureApply(value.retClosure, v)
       return occur(mod, ctx, name, retType, ret)
     }
 
@@ -70,8 +70,8 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
-      const ret = applyClosure(value.retClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
+      const ret = closureApply(value.retClosure, v)
       return occur(mod, ctx, name, retType, ret)
     }
 
@@ -82,7 +82,7 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.carType, Neutrals.Var(freshName))
-      const cdrType = applyClosure(value.cdrTypeClosure, v)
+      const cdrType = closureApply(value.cdrTypeClosure, v)
       return occurType(mod, ctx, name, cdrType)
     }
 
@@ -91,7 +91,7 @@ export function occur(
 
       if (occur(mod, ctx, name, type.carType, value.car)) return true
 
-      const cdrType = applyClosure(type.cdrTypeClosure, value.car)
+      const cdrType = closureApply(type.cdrTypeClosure, value.car)
       return occur(mod, ctx, name, cdrType, value.cdr)
     }
 
@@ -122,7 +122,7 @@ export function occur(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution), name]
       const freshName = freshen(usedNames, boundName)
       const v = Values.TypedNeutral(value.propertyType, Neutrals.Var(freshName))
-      const rest = applyClosure(value.restClosure, v)
+      const rest = closureApply(value.restClosure, v)
       return occurType(mod, ctx, name, rest)
     }
 
@@ -171,7 +171,7 @@ function occurProperties(
 
     case "ClazzCons": {
       const propertyValue = Actions.doDot(value, clazz.propertyName)
-      const rest = applyClosure(clazz.restClosure, propertyValue)
+      const rest = closureApply(clazz.restClosure, propertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       return (
         occur(mod, ctx, name, clazz.propertyType, propertyValue) ||

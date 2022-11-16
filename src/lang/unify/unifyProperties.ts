@@ -1,5 +1,5 @@
 import * as Actions from "../actions"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx } from "../ctx"
 import { Mod } from "../mod"
 import { unify } from "../unify"
@@ -18,7 +18,7 @@ export function unifyProperties(
       const leftPropertyValue = Actions.doDot(left, clazz.propertyName)
       const rightPropertyValue = Actions.doDot(right, clazz.propertyName)
       unify(mod, ctx, clazz.propertyType, leftPropertyValue, rightPropertyValue)
-      const rest = applyClosure(clazz.restClosure, leftPropertyValue)
+      const rest = closureApply(clazz.restClosure, leftPropertyValue)
       Values.assertClazzInCtx(mod, ctx, rest)
       clazz = rest
     }

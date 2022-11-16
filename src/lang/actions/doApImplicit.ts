@@ -1,4 +1,4 @@
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import * as Errors from "../errors"
 import * as Neutrals from "../neutral"
 import * as Values from "../value"
@@ -6,7 +6,7 @@ import { TypedValue, Value } from "../value"
 
 export function doApImplicit(target: Value, arg: Value): Value {
   if (target.kind === "FnImplicit") {
-    return applyClosure(target.retClosure, arg)
+    return closureApply(target.retClosure, arg)
   }
 
   Values.assertValue(target, "TypedNeutral")
@@ -21,7 +21,7 @@ export function doApImplicit(target: Value, arg: Value): Value {
   }
 
   return Values.TypedNeutral(
-    applyClosure(target.type.retTypeClosure, arg),
+    closureApply(target.type.retTypeClosure, arg),
     Neutrals.ApImplicit(
       target.neutral,
       target.type,

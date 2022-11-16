@@ -1,7 +1,3 @@
-rename `applyClosure` to `closureApply`
-
-- ambr applyClosure closureApply
-
 inline the only use of `assertClazz`
 
 extract `clazzEvaluate`

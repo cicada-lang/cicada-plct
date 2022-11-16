@@ -1,6 +1,6 @@
 import _ from "lodash"
 import * as Actions from "../actions"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
@@ -34,7 +34,7 @@ export function unifyByType(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, v)
       const rightRet = Actions.doAp(right, v)
@@ -49,7 +49,7 @@ export function unifyByType(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doApImplicit(left, v)
       const rightRet = Actions.doApImplicit(right, v)
@@ -64,7 +64,7 @@ export function unifyByType(
       const rightCar = Actions.doCar(right)
       unify(mod, ctx, type.carType, leftCar, rightCar)
       const car = Actions.doCar(left)
-      const cdrType = applyClosure(type.cdrTypeClosure, car)
+      const cdrType = closureApply(type.cdrTypeClosure, car)
       const leftCdr = Actions.doCdr(left)
       const rightCdr = Actions.doCdr(right)
       unify(mod, ctx, cdrType, leftCdr, rightCdr)

@@ -1,5 +1,5 @@
 import { check, checkClazz, checkNewArgs, checkType } from "../check"
-import { applyClosure, ClosureNative, ClosureSimple } from "../closure"
+import { closureApply, ClosureNative, ClosureSimple } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import {
@@ -147,7 +147,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argCore = check(mod, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
-        applyClosure(inferred.type.retTypeClosure, argValue),
+        closureApply(inferred.type.retTypeClosure, argValue),
         Cores.Ap(inferred.core, argCore),
       )
     }
@@ -158,7 +158,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const argCore = check(mod, ctx, exp.arg, inferred.type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       return Inferred(
-        applyClosure(inferred.type.retTypeClosure, argValue),
+        closureApply(inferred.type.retTypeClosure, argValue),
         Cores.ApImplicit(inferred.core, argCore),
       )
     }

@@ -1,5 +1,5 @@
 import * as Actions from "../actions"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
@@ -55,7 +55,7 @@ export function readbackByType(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doAp(value, v)
       return Cores.Fn(freshName, readback(mod, ctx, retType, ret))
@@ -66,7 +66,7 @@ export function readbackByType(
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, name)
       const v = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-      const retType = applyClosure(type.retTypeClosure, v)
+      const retType = closureApply(type.retTypeClosure, v)
       ctx = CtxCons(freshName, type.argType, ctx)
       const ret = Actions.doApImplicit(value, v)
       return Cores.FnImplicit(freshName, readback(mod, ctx, retType, ret))
@@ -82,7 +82,7 @@ export function readbackByType(
 
       const car = Actions.doCar(value)
       const cdr = Actions.doCdr(value)
-      const cdrType = applyClosure(type.cdrTypeClosure, car)
+      const cdrType = closureApply(type.cdrTypeClosure, car)
 
       return Cores.Cons(
         readback(mod, ctx, type.carType, car),

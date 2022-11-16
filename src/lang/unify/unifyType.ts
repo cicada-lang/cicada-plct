@@ -1,5 +1,5 @@
 import { indent } from "../../utils/indent"
-import { applyClosure, Closure } from "../closure"
+import { Closure, closureApply } from "../closure"
 import { Ctx, CtxCons, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -158,8 +158,8 @@ function unifyClosure(
   typedNeutral: Values.TypedNeutral,
   name: string,
 ): void {
-  const leftRet = applyClosure(left, typedNeutral)
-  const rightRet = applyClosure(right, typedNeutral)
+  const leftRet = closureApply(left, typedNeutral)
+  const rightRet = closureApply(right, typedNeutral)
 
   const leftApTarget = extractApTarget(leftRet, name)
   if (leftApTarget) {

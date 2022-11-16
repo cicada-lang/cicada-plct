@@ -1,6 +1,6 @@
 import { indent } from "../../utils/indent"
 import { checkByInfer, checkProperties } from "../check"
-import { applyClosure } from "../closure"
+import { closureApply } from "../closure"
 import * as Cores from "../core"
 import { Core } from "../core"
 import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
@@ -66,14 +66,14 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         ]
         const freshName = freshen(usedNames, name)
         const arg = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
-        const retType = applyClosure(type.retTypeClosure, arg)
+        const retType = closureApply(type.retTypeClosure, arg)
         const core = check(mod, ctx, exp, retType)
         return Cores.FnImplicit(freshName, core)
       }
 
       Values.assertTypeInCtx(mod, ctx, type, "Pi")
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
-      const retType = applyClosure(type.retTypeClosure, arg)
+      const retType = closureApply(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(mod, ctx, exp.ret, retType)
       return Cores.Fn(exp.name, retCore)
@@ -82,7 +82,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     case "FnImplicit": {
       Values.assertTypeInCtx(mod, ctx, type, "PiImplicit")
       const arg = Values.TypedNeutral(type.argType, Neutrals.Var(exp.name))
-      const retType = applyClosure(type.retTypeClosure, arg)
+      const retType = closureApply(type.retTypeClosure, arg)
       ctx = CtxCons(exp.name, type.argType, ctx)
       const retCore = check(mod, ctx, exp.ret, retType)
       return Cores.FnImplicit(exp.name, retCore)
@@ -156,7 +156,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       const { carType, cdrTypeClosure } = type
       const carCore = check(mod, ctx, exp.car, carType)
       const carValue = evaluate(ctxToEnv(ctx), carCore)
-      const cdrTypeValue = applyClosure(cdrTypeClosure, carValue)
+      const cdrTypeValue = closureApply(cdrTypeClosure, carValue)
       const cdrCore = check(mod, ctx, exp.cdr, cdrTypeValue)
       return Cores.Cons(carCore, cdrCore)
     }
