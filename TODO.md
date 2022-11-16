@@ -9,7 +9,19 @@ refactor `includeClazz` -- step left and right
 
 refactor `unifyClazz` -- step left and right
 
-[bug] readback
+[bug] readback fail during formating
+
+- test with:
+
+  ```
+  cic run std/group/groupCategory.todo.cic --watch
+  ```
+
+  where
+
+  ```
+  idLeft: (f) => refl,
+  ```
 
 [maybe] should not allow literal fulfilled class
 
