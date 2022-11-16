@@ -4,7 +4,7 @@ import { ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
 import type { Env } from "../env"
 import { useGlobals } from "../globals"
 import { Solution, solutionCleanup } from "../solution"
-import { Stmt, StmtOutput } from "../stmt"
+import { Stmt } from "../stmt"
 import type { Value } from "../value"
 
 export interface ModOptions {
@@ -15,7 +15,7 @@ export interface ModOptions {
 export class Mod {
   solution = new Solution()
   ctx: Ctx = CtxNull()
-  outputs: Map<number, StmtOutput> = new Map()
+  outputs: Map<number, string> = new Map()
   stmts: Array<Stmt> = []
   initialized = false
   imported: Array<URL> = []
@@ -37,7 +37,7 @@ export class Mod {
     this.initialized = true
   }
 
-  async executeStmts(stmts: Array<Stmt>): Promise<Array<StmtOutput>> {
+  async executeStmts(stmts: Array<Stmt>): Promise<Array<string>> {
     await this.initialize()
     const outputs = []
     const offset = this.stmts.length

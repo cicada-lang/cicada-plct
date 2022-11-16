@@ -17,10 +17,8 @@ import type { Span } from "../span"
 
 **/
 
-export type StmtOutput = string
-
 export abstract class Stmt {
   abstract span?: Span
-  abstract execute(mod: Mod): Promise<StmtOutput | void>
+  abstract execute(mod: Mod): Promise<string | void>
   undo(mod: Mod): void {}
 }

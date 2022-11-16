@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
 import { formatSolution } from "../../solution"
 import type { Span } from "../../span"
-import { Stmt, StmtOutput } from "../../stmt"
+import { Stmt } from "../../stmt"
 import * as Values from "../../value"
 
 import { Equation, SolveBinding, unifyEquation } from "../solve"
@@ -19,7 +19,7 @@ export class Solve extends Stmt {
     super()
   }
 
-  async execute(mod: Mod): Promise<StmtOutput> {
+  async execute(mod: Mod): Promise<string> {
     let ctx = mod.ctx
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
