@@ -1,10 +1,6 @@
-`MetaVar` should be `Values.MetaVar`
+[question] do we need to use `CtxFulfilled` in `solveByArgs` and `solveByRetType`?
 
-- instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`
-
-- `Solution` should not has `metaVars`.
-
-- We can identify a `MetaVar` by itself (without the help of `solution`)
+[note] about the use of `extractApTarget` during `unifyClosure`
 
 [refactor] `includeClazz` -- step left and right together
 

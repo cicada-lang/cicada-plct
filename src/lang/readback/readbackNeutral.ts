@@ -11,6 +11,11 @@ export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
       return Cores.Var(neutral.name)
     }
 
+    case "MetaVar": {
+      // TODO Should not meet MetaVar
+      return Cores.MetaVar(neutral.name)
+    }
+
     case "Ap": {
       return Cores.Ap(
         readbackNeutral(mod, ctx, neutral.target),

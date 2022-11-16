@@ -45,6 +45,8 @@ export function unifyByValue(
     return
   }
 
+  console.log(left, right)
+
   throw new Errors.UnificationError(
     [
       `[unifyByValue] is not implemented for the pair of values`,

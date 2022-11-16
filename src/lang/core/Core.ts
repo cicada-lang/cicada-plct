@@ -1,5 +1,6 @@
 export type Core =
   | Var
+  | MetaVar
   | Pi
   | PiImplicit
   | Fn
@@ -26,6 +27,20 @@ export function Var(name: string): Var {
   return {
     family: "Core",
     kind: "Var",
+    name,
+  }
+}
+
+export type MetaVar = {
+  family: "Core"
+  kind: "MetaVar"
+  name: string
+}
+
+export function MetaVar(name: string): MetaVar {
+  return {
+    family: "Core",
+    kind: "MetaVar",
     name,
   }
 }

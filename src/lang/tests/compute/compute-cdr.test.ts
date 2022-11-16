@@ -24,7 +24,7 @@ compute cdr
     "(implicit A, implicit B, target) => cdr(target): (
       implicit A: Type,
       implicit B: (A) -> Type,
-      target: exists ((A)) B(x),
+      target: exists (A) B(x),
     ) -> B(car(target))"
   `,
   )

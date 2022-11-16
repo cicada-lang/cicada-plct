@@ -1,6 +1,14 @@
 import { TypedValue, Value } from "../value"
 
-export type Neutral = Var | Ap | ApImplicit | Car | Cdr | Dot | Replace
+export type Neutral =
+  | Var
+  | MetaVar
+  | Ap
+  | ApImplicit
+  | Car
+  | Cdr
+  | Dot
+  | Replace
 
 export type Var = {
   family: "Neutral"
@@ -12,6 +20,20 @@ export function Var(name: string): Var {
   return {
     family: "Neutral",
     kind: "Var",
+    name,
+  }
+}
+
+export type MetaVar = {
+  family: "Neutral"
+  kind: "MetaVar"
+  name: string
+}
+
+export function MetaVar(name: string): MetaVar {
+  return {
+    family: "Neutral",
+    kind: "MetaVar",
     name,
   }
 }

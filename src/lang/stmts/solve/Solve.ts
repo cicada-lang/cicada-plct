@@ -1,12 +1,12 @@
 import { checkType } from "../../check"
-import { CtxCons, ctxToEnv } from "../../ctx"
+import { CtxFulfilled, ctxToEnv } from "../../ctx"
 import * as Errors from "../../errors"
 import { evaluate } from "../../evaluate"
 import { Mod } from "../../mod"
-import * as Neutrals from "../../neutral"
-import { formatSolution, MetaVar, solutionMetaVar } from "../../solution"
+import { formatSolution } from "../../solution"
 import { Span } from "../../span"
 import { Stmt, StmtOutput } from "../../stmt"
+import * as Values from "../../value"
 
 import { Equation, SolveBinding, unifyEquation } from "../solve"
 
@@ -25,9 +25,10 @@ export class Solve extends Stmt {
     for (const { name, type } of this.bindings) {
       const typeCore = checkType(mod, ctx, type)
       const typeValue = evaluate(ctxToEnv(ctx), typeCore)
-      const metaVar = MetaVar(typeValue, Neutrals.Var(name))
-      solutionMetaVar(mod.solution, metaVar)
-      ctx = CtxCons(name, typeValue, ctx)
+      const metaVar = Values.MetaVar(typeValue, name)
+      mod.solution.bindings.set(name, metaVar)
+      // ctx = CtxCons(name, typeValue, ctx)
+      ctx = CtxFulfilled(name, typeValue, metaVar, ctx)
       names.push(name)
     }
 

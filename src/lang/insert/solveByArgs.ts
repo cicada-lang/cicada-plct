@@ -1,6 +1,6 @@
 import { check } from "../check"
 import { closureApply } from "../closure"
-import { Ctx, CtxCons, ctxNames, ctxToEnv } from "../ctx"
+import { Ctx, CtxFulfilled, ctxNames, ctxToEnv } from "../ctx"
 import * as Errors from "../errors"
 import { evaluate } from "../evaluate"
 import * as Exps from "../exp"
@@ -8,10 +8,10 @@ import { freeNames } from "../exp"
 import { inferOrUndefined } from "../infer"
 import { Insertion } from "../insert"
 import { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { MetaVar, solutionMetaVar, solutionNames } from "../solution"
+import { solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
+import * as Values from "../value"
 import { Value } from "../value"
 import * as Insertions from "./Insertion"
 
@@ -41,9 +41,10 @@ export function solveByArgs(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const metaVar = MetaVar(type.argType, Neutrals.Var(freshName))
-      solutionMetaVar(mod.solution, metaVar)
-      ctx = CtxCons(freshName, type.argType, ctx)
+      const metaVar = Values.MetaVar(type.argType, freshName)
+      mod.solution.bindings.set(freshName, metaVar)
+      // ctx = CtxCons(freshName, type.argType, ctx)
+      ctx = CtxFulfilled(freshName, type.argType, metaVar, ctx)
       // NOTE Do not consume args here.
       type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))

@@ -6,6 +6,10 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
       return boundNames.has(core.name) ? new Set() : new Set([core.name])
     }
 
+    case "MetaVar": {
+      return boundNames.has(core.name) ? new Set() : new Set([core.name])
+    }
+
     case "Pi": {
       return new Set([
         ...freeNames(boundNames, core.argType),

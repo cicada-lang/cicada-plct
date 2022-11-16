@@ -9,6 +9,10 @@ export function formatCore(core: Core): string {
       return core.name
     }
 
+    case "MetaVar": {
+      return "?" + core.name
+    }
+
     case "Pi":
     case "PiImplicit": {
       const { bindings, retType } = Cores.unfoldFormatPi(core)
@@ -30,7 +34,7 @@ export function formatCore(core: Core): string {
     case "Sigma": {
       if (Cores.freeOccurred(core.name, core.cdrType)) {
         const { bindings, cdrType } = Cores.unfoldFormatSigma(core)
-        return `exists (${formatArgs(bindings)}) ${cdrType}`
+        return `exists ${formatArgs(bindings)} ${cdrType}`
       } else {
         const args = formatArgs([
           formatCore(core.carType),

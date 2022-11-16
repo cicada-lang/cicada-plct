@@ -15,7 +15,7 @@ solve () {
   expect(output).toMatchInlineSnapshot('"{}"')
 })
 
-test("solve Sole", async () => {
+test("solve Sole -- abc", async () => {
   const output = await runCode(`
 
 solve (a: Trivial, b: Trivial, c: Trivial) {

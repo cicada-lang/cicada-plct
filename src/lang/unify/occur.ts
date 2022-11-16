@@ -207,6 +207,11 @@ function occurNeutral(
 ): boolean {
   switch (neutral.kind) {
     case "Var": {
+      // return name === neutral.name
+      return false
+    }
+
+    case "MetaVar": {
       return name === neutral.name
     }
 

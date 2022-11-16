@@ -30,7 +30,24 @@ function solutionAdvanceNeutral(
 ): Value {
   switch (neutral.kind) {
     case "Var": {
-      return solutionWalk(mod.solution, Values.TypedNeutral(type, neutral))
+      return Values.TypedNeutral(type, neutral)
+    }
+
+    case "MetaVar": {
+      const result = solutionWalk(
+        mod.solution,
+        Values.TypedNeutral(type, neutral),
+      )
+
+      if (
+        result.kind === "TypedNeutral" &&
+        result.neutral.kind === "MetaVar" &&
+        result.neutral.name === neutral.name
+      ) {
+        return result
+      } else {
+        return solutionAdvanceValue(mod, result)
+      }
     }
 
     case "Ap": {

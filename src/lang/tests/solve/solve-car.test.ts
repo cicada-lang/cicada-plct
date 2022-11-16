@@ -38,10 +38,10 @@ solve (ab: Pair(String, String), ba: Pair(String, String), a: String, b: String,
     `
     "{
       ab: cons(\\"a\\", \\"b\\"),
-      ba: cons(cdr(ab), car(ab)),
+      ba: cons(\\"b\\", \\"a\\"),
       a: \\"a\\",
       b: \\"b\\",
-      b2: b
+      b2: ?b
     }"
   `,
   )
@@ -58,7 +58,7 @@ solve(a: String) {
 
   expect(output).toMatchInlineSnapshot(`
     "{
-      a: TODO(String)
+      a: ?a
     }"
   `)
 })

@@ -51,13 +51,13 @@
         implicit y,
         implicit w,
         f,
-        compose(implicit y, implicit y, implicit w, g, h),
+        compose(implicit y, implicit z, implicit w, g, h),
       ),
       compose(
         implicit x,
-        implicit y,
+        implicit z,
         implicit w,
-        compose(implicit x, implicit y, implicit y, f, g),
+        compose(implicit x, implicit y, implicit z, f, g),
         h,
       ),
     )
@@ -171,13 +171,13 @@
           implicit y1,
           implicit w,
           f1,
-          compose(implicit y1, implicit y1, implicit w, g, h),
+          compose(implicit y1, implicit z, implicit w, g, h),
         ),
         compose(
           implicit x1,
-          implicit y1,
+          implicit z,
           implicit w,
-          compose(implicit x1, implicit y1, implicit y1, f1, g),
+          compose(implicit x1, implicit y1, implicit z, f1, g),
           h,
         ),
       )

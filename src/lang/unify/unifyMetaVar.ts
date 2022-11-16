@@ -2,8 +2,9 @@ import { indent } from "../../utils/indent"
 import { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { isMetaVar, solutionBind } from "../solution"
+import { solutionBind } from "../solution"
 import { occur } from "../unify"
+import * as Values from "../value"
 import { formatType, formatValue, Value } from "../value"
 
 export function unifyMetaVar(
@@ -14,14 +15,14 @@ export function unifyMetaVar(
   right: Value,
 ): "ok" | undefined {
   if (
-    isMetaVar(mod.solution, left) &&
-    isMetaVar(mod.solution, right) &&
+    Values.isMetaVar(left) &&
+    Values.isMetaVar(right) &&
     left.neutral.name === right.neutral.name
   ) {
     return "ok"
   }
 
-  if (isMetaVar(mod.solution, left)) {
+  if (Values.isMetaVar(left)) {
     if (occur(mod, ctx, left.neutral.name, type, right)) {
       throw new Errors.UnificationError(
         [
@@ -37,7 +38,7 @@ export function unifyMetaVar(
     return "ok"
   }
 
-  if (isMetaVar(mod.solution, right)) {
+  if (Values.isMetaVar(right)) {
     if (occur(mod, ctx, right.neutral.name, type, left)) {
       throw new Errors.UnificationError(
         [

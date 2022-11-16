@@ -1,4 +1,5 @@
 import { Closure } from "../closure"
+import * as Neutrals from "../neutral"
 import { Neutral } from "../neutral"
 
 export type Value =
@@ -28,6 +29,18 @@ export type AlreadyType =
   | Trivial
   | Clazz
   | Equal
+
+export type MetaVar = TypedNeutral & {
+  neutral: Neutrals.MetaVar
+}
+
+export function MetaVar(type: Value, name: string): MetaVar {
+  return TypedNeutral(type, Neutrals.MetaVar(name)) as MetaVar
+}
+
+export function isMetaVar(value: Value): value is MetaVar {
+  return value.kind === "TypedNeutral" && value.neutral.kind === "MetaVar"
+}
 
 export type TypedNeutral = {
   family: "Value"

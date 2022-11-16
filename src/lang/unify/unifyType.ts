@@ -89,7 +89,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 
     const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
     const freshName = freshen(usedNames, name)
-    const v = Values.TypedNeutral(carType, Neutrals.Var(freshName))
+    const metaVar = Values.MetaVar(carType, freshName)
 
     ctx = CtxCons(freshName, carType, ctx)
 
@@ -98,7 +98,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
       ctx,
       right.cdrTypeClosure,
       left.cdrTypeClosure,
-      v,
+      metaVar,
       freshName,
     )
 
@@ -135,7 +135,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 
    ```
    solve (A: Type, B: (x: A) -> Type) {
-     unify exists (x: A) B(x) = exists (_: String) String
+     exists (x: A) B(x) = exists (_: String) String
    }
    ```
 
@@ -158,8 +158,8 @@ function unifyClosure(
   typedNeutral: Values.TypedNeutral,
   name: string,
 ): void {
-  const leftRet = closureApply(left, typedNeutral)
-  const rightRet = closureApply(right, typedNeutral)
+  let leftRet = closureApply(left, typedNeutral)
+  let rightRet = closureApply(right, typedNeutral)
 
   const leftApTarget = extractApTarget(leftRet, name)
   if (leftApTarget) {
@@ -183,9 +183,9 @@ function extractApTarget(
   if (
     value.kind === "TypedNeutral" &&
     value.neutral.kind === "Ap" &&
-    value.neutral.target.kind === "Var" &&
+    value.neutral.target.kind === "MetaVar" &&
     value.neutral.arg.value.kind === "TypedNeutral" &&
-    value.neutral.arg.value.neutral.kind === "Var" &&
+    value.neutral.arg.value.neutral.kind === "MetaVar" &&
     value.neutral.arg.value.neutral.name === name
   ) {
     return Values.TypedNeutral(value.neutral.targetType, value.neutral.target)

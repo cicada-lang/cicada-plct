@@ -19,6 +19,17 @@ export function evaluate(env: Env, core: Core): Value {
       return value
     }
 
+    case "MetaVar": {
+      const value = envLookupValue(env, core.name)
+      if (value === undefined) {
+        throw new Errors.EvaluationError(
+          `[evaluate] undefined meta variable name: ${core.name}`,
+        )
+      }
+
+      return value
+    }
+
     case "Pi": {
       return Values.Pi(
         evaluate(env, core.argType),

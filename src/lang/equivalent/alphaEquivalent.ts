@@ -14,6 +14,11 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
+  if (left.kind === "MetaVar" && right.kind === "MetaVar") {
+    ctx.assertEqualNames(left.name, right.name)
+    return
+  }
+
   if (
     (left.kind === "Pi" && right.kind === "Pi") ||
     (left.kind === "PiImplicit" && right.kind === "PiImplicit")

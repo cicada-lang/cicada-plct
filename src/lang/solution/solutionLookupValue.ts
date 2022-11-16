@@ -1,4 +1,5 @@
-import { isMetaVar, Solution } from "../solution"
+import { Solution } from "../solution"
+import * as Values from "../value"
 import { Value } from "../value"
 
 export function solutionLookupValue(
@@ -7,7 +8,6 @@ export function solutionLookupValue(
 ): Value | undefined {
   const value = solution.bindings.get(name)
   if (value === undefined) return undefined
-  if (isMetaVar(solution, value) && value.neutral.name === name)
-    return undefined
+  if (Values.isMetaVar(value) && value.neutral.name === name) return undefined
   return value
 }

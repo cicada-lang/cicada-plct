@@ -1,12 +1,12 @@
 import { closureApply } from "../closure"
-import { Ctx, CtxCons, ctxNames } from "../ctx"
+import { Ctx, CtxFulfilled, ctxNames } from "../ctx"
 import * as Exps from "../exp"
 import { freeNames } from "../exp"
 import { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { MetaVar, solutionMetaVar, solutionNames } from "../solution"
+import { solutionNames } from "../solution"
 import { unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
+import * as Values from "../value"
 import { Value } from "../value"
 import * as Insertions from "./Insertion"
 import { Insertion } from "./Insertion"
@@ -36,9 +36,11 @@ export function solveByRetType(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const metaVar = MetaVar(type.argType, Neutrals.Var(freshName))
-      solutionMetaVar(mod.solution, metaVar)
-      ctx = CtxCons(freshName, type.argType, ctx)
+      const metaVar = Values.MetaVar(type.argType, freshName)
+      mod.solution.bindings.set(freshName, metaVar)
+      // ctx = CtxCons(freshName, type.argType, ctx)
+      ctx = CtxFulfilled(freshName, type.argType, metaVar, ctx)
+
       type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar))
     }

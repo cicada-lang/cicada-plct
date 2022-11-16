@@ -1,6 +1,6 @@
 import { Core } from "../core"
 import { Exp } from "../exp"
-import { MetaVar } from "../solution"
+import * as Values from "../value"
 
 export type Insertion =
   | InsertionMetaVar
@@ -9,12 +9,12 @@ export type Insertion =
 
 export type InsertionMetaVar = {
   kind: "InsertionMetaVar"
-  metaVar: MetaVar
+  metaVar: Values.MetaVar
   argExp?: Exp
 }
 
 export function InsertionMetaVar(
-  metaVar: MetaVar,
+  metaVar: Values.MetaVar,
   argExp?: Exp,
 ): InsertionMetaVar {
   return {

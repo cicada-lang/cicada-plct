@@ -1,7 +1,7 @@
 import { indent } from "../../utils/indent"
 import { Ctx, ctxLookupType } from "../ctx"
 import { Mod } from "../mod"
-import { Solution, solutionLookupValue } from "../solution"
+import { Solution } from "../solution"
 import * as Values from "../value"
 
 export function formatSolution(
@@ -14,15 +14,20 @@ export function formatSolution(
   for (const name of names) {
     const type = ctxLookupType(ctx, name)
     if (type === undefined) {
-      throw new Error(`formatSolution find type of name: ${name}`)
+      throw new Error(
+        `[formatSolution] can not find the type of meta variable: ${name}`,
+      )
     }
 
-    let value = solutionLookupValue(solution, name)
-    if (value === undefined) {
-      properties.push(`${name}: TODO(${Values.formatType(mod, ctx, type)})`)
-    } else {
-      properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
-    }
+    const value = Values.MetaVar(type, name)
+    properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
+
+    // let value = solutionLookupValue(solution, name)
+    // if (value === undefined) {
+    //   properties.push(`${name}: TODO(${Values.formatType(mod, ctx, type)})`)
+    // } else {
+    //   properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
+    // }
   }
 
   return properties.length === 0
