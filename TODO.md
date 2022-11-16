@@ -12,14 +12,16 @@
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
-update `std/boolean-lattice/BooleanLattice.md`
+update `std/boolean-lattice/*`
 
 # later
 
 [maybe] should not allow literal fulfilled class
 
-- all classes must be purely abstract
-- for the semantic of fulfilling class
+- All classes must be purely abstract.
+  - This will be a important limitation if imposed.
+- For the semantic of fulfilling class.
+  - How are the fulfilled values different from provided values?
 
 # std
 
