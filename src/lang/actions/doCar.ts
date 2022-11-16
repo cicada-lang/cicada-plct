@@ -8,7 +8,7 @@ export function doCar(target: Value): Value {
     return target.car
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (target.type.kind !== "Sigma") {
     throw new Errors.EvaluationError(

@@ -10,7 +10,7 @@ export function doReplace(target: Value, motive: Value, base: Value): Value {
     return base
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (target.type.kind !== "Equal") {
     throw new Errors.EvaluationError(

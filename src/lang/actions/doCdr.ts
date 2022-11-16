@@ -10,7 +10,7 @@ export function doCdr(target: Value): Value {
     return target.cdr
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (target.type.kind !== "Sigma") {
     throw new Errors.EvaluationError(

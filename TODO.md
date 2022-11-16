@@ -1,12 +1,8 @@
 extract `clazzEvaluate`
 
-remove the use of `assertValue`
-
-use `clazzClosureApply` instead of `assertClazz`
-
 quit using `assertClazzInCtx`
 
-maybe quit using `assertValues` and `assertValue`
+maybe quit using `assertValues`
 
 `MetaVar` should be `Values.MetaVar`
 

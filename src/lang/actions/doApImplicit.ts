@@ -9,7 +9,7 @@ export function doApImplicit(target: Value, arg: Value): Value {
     return closureApply(target.retClosure, arg)
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (target.type.kind !== "PiImplicit") {
     throw new Errors.EvaluationError(

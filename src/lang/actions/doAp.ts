@@ -13,7 +13,7 @@ export function doAp(target: Value, arg: Value): Value {
     return Values.clazzFulfill(target, arg)
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (target.type.kind !== "Pi") {
     throw new Errors.EvaluationError(

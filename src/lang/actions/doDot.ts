@@ -15,7 +15,7 @@ export function doDot(target: Value, name: string): Value {
     return property
   }
 
-  Values.assertValue(target, "TypedNeutral")
+  Values.assertValues(target, ["TypedNeutral"])
 
   if (!Values.isClazz(target.type)) {
     throw new Errors.EvaluationError(
