@@ -1,5 +1,3 @@
-rename `applyInsertion` to `insertionApply`
-
 [note] about the use of `extractApTarget` during `unifyClosure`
 
 [refactor] `includeClazz` -- step left and right together

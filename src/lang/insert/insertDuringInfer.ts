@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
 import { Inferred } from "../infer"
-import { applyInsertion, solveByArgs } from "../insert"
+import { insertionApply, solveByArgs } from "../insert"
 import { Mod } from "../mod"
 
 export function insertDuringInfer(
@@ -15,7 +15,7 @@ export function insertDuringInfer(
   let core = inferred.core
 
   for (const insertion of solved.insertions) {
-    core = applyInsertion(mod, ctx, insertion, core)
+    core = insertionApply(mod, ctx, insertion, core)
   }
 
   return Inferred(solved.type, core)

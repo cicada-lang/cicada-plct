@@ -7,7 +7,7 @@ import { Mod } from "../mod"
 import { readback } from "../readback"
 import { solutionLookupValue } from "../solution"
 
-export function applyInsertion(
+export function insertionApply(
   mod: Mod,
   ctx: Ctx,
   insertion: Insertion,
@@ -24,7 +24,7 @@ export function applyInsertion(
         if (insertion.argExp !== undefined) {
           throw new Errors.ElaborationError(
             [
-              `[applyInsertion] meet unsolved meta variable during infer`,
+              `[insertionApply] meet unsolved meta variable during infer`,
               `  variable name: ${insertion.metaVar.neutral.name}`,
               `  kind of next arg exp: ${insertion.argExp.kind}`,
             ].join("\n"),
@@ -33,7 +33,7 @@ export function applyInsertion(
         } else {
           throw new Errors.ElaborationError(
             [
-              `[applyInsertion] meet unsolved meta variable during check`,
+              `[insertionApply] meet unsolved meta variable during check`,
               `  variable name: ${insertion.metaVar.neutral.name}`,
             ].join("\n"),
             {},

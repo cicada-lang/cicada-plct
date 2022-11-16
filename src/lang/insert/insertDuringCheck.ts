@@ -2,7 +2,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import * as Exps from "../exp"
 import { Inferred } from "../infer"
-import { applyInsertion, solveByArgs, solveByRetType } from "../insert"
+import { insertionApply, solveByArgs, solveByRetType } from "../insert"
 import { Mod } from "../mod"
 import { Value } from "../value"
 
@@ -19,11 +19,11 @@ export function insertDuringCheck(
   let core: Core = inferred.core
 
   for (const insertion of solved.insertions) {
-    core = applyInsertion(mod, ctx, insertion, core)
+    core = insertionApply(mod, ctx, insertion, core)
   }
 
   for (const insertion of insertions) {
-    core = applyInsertion(mod, ctx, insertion, core)
+    core = insertionApply(mod, ctx, insertion, core)
   }
 
   return core
