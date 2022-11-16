@@ -1,5 +1,4 @@
 import _ from "lodash"
-import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
@@ -8,7 +7,7 @@ import { solutionNames } from "../solution"
 import { unify, unifyType } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { Value } from "../value"
 
 export function unifyClazz(
   mod: Mod,
@@ -25,9 +24,7 @@ export function unifyClazz(
       if (commonNames.has(left.propertyName)) {
         const next = nextRight(mod, ctx, left.propertyName, right)
         unifyType(mod, ctx, left.propertyType, next.propertyType)
-        const rest = applyClosure(left.restClosure, next.property)
-        assertClazz(rest)
-        left = rest
+        left = Values.clazzClosureApply(left.restClosure, next.property)
         right = next.right
       } else {
         const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
@@ -36,9 +33,7 @@ export function unifyClazz(
           left.propertyType,
           Neutrals.Var(freshName),
         )
-        const rest = applyClosure(left.restClosure, v)
-        assertClazz(rest)
-        left = rest
+        left = Values.clazzClosureApply(left.restClosure, v)
       }
     }
 
@@ -91,12 +86,10 @@ function nextRight(
     case "ClazzCons": {
       if (right.propertyName === name) {
         if (leftProperty !== undefined) {
-          const rest = applyClosure(right.restClosure, leftProperty)
-          assertClazz(rest)
           return {
             propertyType: right.propertyType,
             property: leftProperty,
-            right: rest,
+            right: Values.clazzClosureApply(right.restClosure, leftProperty),
           }
         } else {
           const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
@@ -105,12 +98,10 @@ function nextRight(
             right.propertyType,
             Neutrals.Var(freshName),
           )
-          const rest = applyClosure(right.restClosure, v)
-          assertClazz(rest)
           return {
             propertyType: right.propertyType,
             property: v,
-            right: rest,
+            right: Values.clazzClosureApply(right.restClosure, v),
           }
         }
       } else {
@@ -120,9 +111,13 @@ function nextRight(
           right.propertyType,
           Neutrals.Var(freshName),
         )
-        const rest = applyClosure(right.restClosure, v)
-        assertClazz(rest)
-        return nextRight(mod, ctx, name, rest, leftProperty)
+        return nextRight(
+          mod,
+          ctx,
+          name,
+          Values.clazzClosureApply(right.restClosure, v),
+          leftProperty,
+        )
       }
     }
 

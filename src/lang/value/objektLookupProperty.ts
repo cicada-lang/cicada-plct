@@ -1,8 +1,7 @@
 import * as Actions from "../actions"
-import { applyClosure } from "../closure"
 import * as Errors from "../errors"
 import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { Value } from "../value"
 
 export function objektLookupProperty(
   target: Value,
@@ -14,9 +13,7 @@ export function objektLookupProperty(
       if (clazz.propertyName === name)
         return Actions.doDot(target, clazz.propertyName)
       const property = Actions.doDot(target, clazz.propertyName)
-      const rest = applyClosure(clazz.restClosure, property)
-      assertClazz(rest)
-      clazz = rest
+      clazz = Values.clazzClosureApply(clazz.restClosure, property)
     }
 
     if (clazz.kind === "ClazzFulfilled") {

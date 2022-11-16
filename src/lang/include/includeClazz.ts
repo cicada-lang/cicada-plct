@@ -1,5 +1,4 @@
 import _ from "lodash"
-import { applyClosure } from "../closure"
 import { Ctx, ctxNames } from "../ctx"
 import { equivalent } from "../equivalent"
 import * as Errors from "../errors"
@@ -8,7 +7,7 @@ import { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { Value } from "../value"
 
 export function includeClazz(
   mod: Mod,
@@ -34,9 +33,7 @@ export function includeClazz(
       if (commonNames.has(clazz.propertyName)) {
         const next = nextSubclazz(mod, ctx, clazz.propertyName, subclazz)
         include(mod, ctx, clazz.propertyType, next.propertyType)
-        const rest = applyClosure(clazz.restClosure, next.property)
-        assertClazz(rest)
-        clazz = rest
+        clazz = Values.clazzClosureApply(clazz.restClosure, next.property)
         subclazz = next.subclazz
       } else {
         const usedNames = ctxNames(ctx)
@@ -45,9 +42,7 @@ export function includeClazz(
           clazz.propertyType,
           Neutrals.Var(freshName),
         )
-        const rest = applyClosure(clazz.restClosure, v)
-        assertClazz(rest)
-        clazz = rest
+        clazz = Values.clazzClosureApply(clazz.restClosure, v)
       }
     }
 
@@ -90,12 +85,10 @@ function nextSubclazz(
           subclazz.propertyType,
           Neutrals.Var(freshName),
         )
-        const rest = applyClosure(subclazz.restClosure, v)
-        assertClazz(rest)
         return {
           propertyType: subclazz.propertyType,
           property: v,
-          subclazz: rest,
+          subclazz: Values.clazzClosureApply(subclazz.restClosure, v),
         }
       } else {
         const usedNames = ctxNames(ctx)
@@ -104,9 +97,12 @@ function nextSubclazz(
           subclazz.propertyType,
           Neutrals.Var(freshName),
         )
-        const rest = applyClosure(subclazz.restClosure, v)
-        assertClazz(rest)
-        return nextSubclazz(mod, ctx, name, rest)
+        return nextSubclazz(
+          mod,
+          ctx,
+          name,
+          Values.clazzClosureApply(subclazz.restClosure, v),
+        )
       }
     }
 

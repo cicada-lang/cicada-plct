@@ -1,3 +1,19 @@
+rename `applyClosure` to `closureApply`
+
+- ambr applyClosure closureApply
+
+inline the only use of `assertClazz`
+
+extract `clazzEvaluate`
+
+remove the use of `assertValue`
+
+use `clazzClosureApply` instead of `assertClazz`
+
+quit using `assertClazzInCtx`
+
+maybe quit using `assertValues` and `assertValue`
+
 `MetaVar` should be `Values.MetaVar`
 
 - instead of using `TypedNeutral` over `Neutrals.Var` as `MetaVar`

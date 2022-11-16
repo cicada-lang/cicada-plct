@@ -1,7 +1,6 @@
-import { applyClosure } from "../closure"
 import * as Errors from "../errors"
 import * as Values from "../value"
-import { assertClazz, Value } from "../value"
+import { Value } from "../value"
 
 export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
   switch (clazz.kind) {
@@ -10,13 +9,11 @@ export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
     }
 
     case "ClazzCons": {
-      const rest = applyClosure(clazz.restClosure, arg)
-      assertClazz(rest)
       return Values.ClazzFulfilled(
         clazz.propertyName,
         clazz.propertyType,
         arg,
-        rest,
+        Values.clazzClosureApply(clazz.restClosure, arg),
         clazz.name,
       )
     }
