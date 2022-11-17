@@ -198,10 +198,11 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return new Set([
         ...freeNames(boundNames, exp.type),
         ...freeNames(boundNames, exp.from),
-        ...exp.rest.flatMap(({ via, to }) => [
-          ...freeNames(boundNames, via),
-          ...freeNames(boundNames, to),
-        ]),
+        ...exp.rest.flatMap(({ via, to }) =>
+          via !== undefined
+            ? [...freeNames(boundNames, via), ...freeNames(boundNames, to)]
+            : [...freeNames(boundNames, to)],
+        ),
       ])
     }
   }

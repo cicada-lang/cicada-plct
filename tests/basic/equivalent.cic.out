@@ -1,3 +1,6 @@
 refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
 refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
 refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)

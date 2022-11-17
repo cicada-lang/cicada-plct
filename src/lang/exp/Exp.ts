@@ -1013,6 +1013,11 @@ export function SequenceBindingCheck(
   }
 }
 
+export type EquivalentEntry = {
+  via?: Exp
+  to: Exp
+}
+
 export type Equivalent = {
   family: "Exp"
   kind: "Equivalent"
@@ -1036,31 +1041,3 @@ export function Equivalent(
     span,
   }
 }
-
-export type EquivalentEntry = EquivalentEntryVia // | EquivalentEntryViaRefl
-
-export type EquivalentEntryVia = {
-  kind: "EquivalentEntryVia"
-  via: Exp
-  to: Exp
-}
-
-export function EquivalentEntryVia(via: Exp, to: Exp): EquivalentEntryVia {
-  return {
-    kind: "EquivalentEntryVia",
-    via,
-    to,
-  }
-}
-
-// export type EquivalentEntryViaRefl = {
-//   kind: "EquivalentEntryViaRefl"
-//   to: Exp
-// }
-
-// export function EquivalentEntryViaRefl(to: Exp): EquivalentEntryViaRefl {
-//   return {
-//     kind: "EquivalentEntryViaRefl",
-//     to,
-//   }
-// }

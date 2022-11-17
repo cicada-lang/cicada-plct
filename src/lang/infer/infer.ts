@@ -356,7 +356,9 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
            => the(Equal(type, from, to), via)
         **/
 
-        const { via, to } = rest[0]
+        const via = rest[0].via || Exps.Var("refl")
+        const to = rest[0].to
+
         return infer(
           mod,
           ctx,
@@ -383,8 +385,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         Exps.ArgImplicit(from),
         Exps.ArgImplicit(rest[0].to),
         Exps.ArgImplicit(rest[1].to),
-        Exps.ArgPlain(rest[0].via),
-        Exps.ArgPlain(rest[1].via),
+        Exps.ArgPlain(rest[0].via || Exps.Var("refl")),
+        Exps.ArgPlain(rest[1].via || Exps.Var("refl")),
       ])
 
       /**
@@ -393,16 +395,16 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       **/
 
       let lastTo = rest[1].to
-      for (const { via, to } of rest.slice(2)) {
+      for (const next of rest.slice(2)) {
         result = Exps.ApUnfolded(Exps.Var("equalCompose"), [
           Exps.ArgImplicit(type),
           Exps.ArgImplicit(from),
           Exps.ArgImplicit(lastTo),
-          Exps.ArgImplicit(to),
+          Exps.ArgImplicit(next.to),
           Exps.ArgPlain(result),
-          Exps.ArgPlain(via),
+          Exps.ArgPlain(next.via || Exps.Var("refl")),
         ])
-        lastTo = to
+        lastTo = next.to
       }
 
       return infer(mod, ctx, result)

@@ -1,10 +1,8 @@
-[syntax] overload the `equivalent <type> {}` syntax to have optional `via`
-
-- remove `Stmts.Equivalent` -- use `compute equivalent` instead
-
-`Exps.Equivalent` -- `infer` -- add `span`
+remove `Stmts.Equivalent` -- use `compute equivalent` instead
 
 extract the step of expending the macros
+
+`Exps.Equivalent` -- `infer` -- add `span`
 
 [note] about the use of `extractApTarget` during `unifyClosure`
 

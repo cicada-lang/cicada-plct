@@ -15,3 +15,20 @@ compute equivalent Trivial {
   | refl
   = sole
 }
+
+// NOTE via `refl` by default
+
+compute equivalent Trivial {
+  sole
+}
+
+compute equivalent Trivial {
+  sole
+  = sole
+}
+
+compute equivalent Trivial {
+  sole
+  = sole
+  = sole
+}
