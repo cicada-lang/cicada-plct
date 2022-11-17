@@ -1018,13 +1018,13 @@ export type Equivalent = {
   kind: "Equivalent"
   type: Exp
   from: Exp
-  rest: Array<{ via: Exp; to: Exp }>
+  rest: Array<EquivalentEntry>
 } & ExpMeta
 
 export function Equivalent(
   type: Exp,
   from: Exp,
-  rest: Array<{ via: Exp; to: Exp }>,
+  rest: Array<EquivalentEntry>,
   span?: Span,
 ): Equivalent {
   return {
@@ -1036,3 +1036,31 @@ export function Equivalent(
     span,
   }
 }
+
+export type EquivalentEntry = EquivalentEntryVia // | EquivalentEntryViaRefl
+
+export type EquivalentEntryVia = {
+  kind: "EquivalentEntryVia"
+  via: Exp
+  to: Exp
+}
+
+export function EquivalentEntryVia(via: Exp, to: Exp): EquivalentEntryVia {
+  return {
+    kind: "EquivalentEntryVia",
+    via,
+    to,
+  }
+}
+
+// export type EquivalentEntryViaRefl = {
+//   kind: "EquivalentEntryViaRefl"
+//   to: Exp
+// }
+
+// export function EquivalentEntryViaRefl(to: Exp): EquivalentEntryViaRefl {
+//   return {
+//     kind: "EquivalentEntryViaRefl",
+//     to,
+//   }
+// }
