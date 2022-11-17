@@ -197,7 +197,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     case "Equivalent": {
       return new Set([
         ...freeNames(boundNames, exp.type),
-        ...freeNames(boundNames, exp.head),
+        ...freeNames(boundNames, exp.from),
         ...exp.tail.flatMap(({ via, to }) => [
           ...freeNames(boundNames, via),
           ...freeNames(boundNames, to),

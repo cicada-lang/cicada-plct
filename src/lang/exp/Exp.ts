@@ -1017,13 +1017,13 @@ export type Equivalent = {
   family: "Exp"
   kind: "Equivalent"
   type: Exp
-  head: Exp
+  from: Exp
   tail: Array<{ via: Exp; to: Exp }>
 } & ExpMeta
 
 export function Equivalent(
   type: Exp,
-  head: Exp,
+  from: Exp,
   tail: Array<{ via: Exp; to: Exp }>,
   span?: Span,
 ): Equivalent {
@@ -1031,7 +1031,7 @@ export function Equivalent(
     family: "Exp",
     kind: "Equivalent",
     type,
-    head,
+    from,
     tail,
     span,
   }

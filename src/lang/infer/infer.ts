@@ -325,6 +325,25 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return infer(mod, ctx, exp.ret)
     }
 
+    case "Equivalent": {
+      /**
+         equivalent type { from }
+         => the(Equal(type, from, from), refl)
+
+         equivalent type { from | via = to }
+         => the(Equal(type, from, to), via)
+
+         equivalent type { from | via1 = to1 | via2 = to2 }
+         => {
+         check via1: Equal(type, from, to1)
+         check via2: Equal(type, to1, to2)
+         return equalCompose()
+         }
+       **/
+
+      throw new Error()
+    }
+
     default: {
       throw new Errors.ElaborationError(
         `infer is not implemented for: ${exp.kind}`,

@@ -396,7 +396,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
     case "Equivalent": {
       return Exps.Equivalent(
         substitute(body.type, name, exp),
-        substitute(body.head, name, exp),
+        substitute(body.from, name, exp),
         body.tail.map(({ via, to }) => ({
           via: substitute(via, name, exp),
           to: substitute(to, name, exp),

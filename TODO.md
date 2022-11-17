@@ -1,6 +1,6 @@
-`Exps.Equivalent` -- `infer`
-
+`Exps.Equivalent` -- `infer` -- expend the macro
 `Exps.Equivalent` -- syntax
+extract the step of expending the macros
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
