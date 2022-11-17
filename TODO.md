@@ -1,5 +1,7 @@
-`Exps.Equivalent` -- `infer` -- expend the macro
 `Exps.Equivalent` -- syntax
+`std/equality` -- should be builtin globals
+`Exps.Equivalent` -- `infer` -- add `span`
+
 extract the step of expending the macros
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
