@@ -1,4 +1,3 @@
-`Exps.Equivalent` -- `substitute`
 `Exps.Equivalent` -- `infer`
 
 `Exps.Equivalent` -- syntax
