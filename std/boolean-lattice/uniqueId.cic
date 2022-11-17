@@ -11,32 +11,15 @@ function joinUniqueId(
     x,
   ),
 ): Equal(lattice.Element, o, lattice.bottom) {
-  check equalSwap(o_is_identity_of_join(lattice.bottom)): Equal(
-    lattice.Element,
-    lattice.bottom,
-    lattice.join(lattice.bottom, o),
-  )
-
-  check lattice.joinCommutative(lattice.bottom, o): Equal(
-    lattice.Element,
-    lattice.join(lattice.bottom, o),
-    lattice.join(o, lattice.bottom),
-  )
-
-  check lattice.bottomIdJoin(o): Equal(
-    lattice.Element,
-    lattice.join(o, lattice.bottom),
-    o,
-  )
-
-  return equalSwap(
-    equalCompose(
-      equalSwap(o_is_identity_of_join(lattice.bottom)),
-      equalCompose(
-        lattice.joinCommutative(lattice.bottom, o),
-        lattice.bottomIdJoin(o)),
-    )
-  )
+  return equivalent lattice.Element {
+    o
+    | equalSwap(lattice.bottomIdJoin(o))
+    = lattice.join(o, lattice.bottom)
+    | equalSwap(lattice.joinCommutative(lattice.bottom, o))
+    = lattice.join(lattice.bottom, o)
+    | o_is_identity_of_join(lattice.bottom)
+    = lattice.bottom
+  }
 }
 
 

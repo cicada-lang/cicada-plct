@@ -1,5 +1,3 @@
-update `std/boolean-lattice/*`
-
 `Exps.Equivalent` -- `infer` -- add `span`
 
 extract the step of expending the macros
