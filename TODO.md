@@ -33,6 +33,8 @@ extract the step of expending the macros
 
 [bug fix] `GroupHomomorphism.test.cic`
 
+- debug by log `solveByArgs`
+
 - During the following `infer`
 
   ```
