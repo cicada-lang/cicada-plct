@@ -1018,13 +1018,13 @@ export type Equivalent = {
   kind: "Equivalent"
   type: Exp
   from: Exp
-  tail: Array<{ via: Exp; to: Exp }>
+  rest: Array<{ via: Exp; to: Exp }>
 } & ExpMeta
 
 export function Equivalent(
   type: Exp,
   from: Exp,
-  tail: Array<{ via: Exp; to: Exp }>,
+  rest: Array<{ via: Exp; to: Exp }>,
   span?: Span,
 ): Equivalent {
   return {
@@ -1032,7 +1032,7 @@ export function Equivalent(
     kind: "Equivalent",
     type,
     from,
-    tail,
+    rest,
     span,
   }
 }

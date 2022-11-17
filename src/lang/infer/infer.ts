@@ -330,16 +330,86 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
          equivalent type { from }
          => the(Equal(type, from, from), refl)
 
-         equivalent type { from | via = to }
+         equivalent type {
+         from
+         | via
+         = to
+         }
          => the(Equal(type, from, to), via)
 
-         equivalent type { from | via1 = to1 | via2 = to2 }
+         equivalent type {
+         from
+         | via1
+         = to1
+         | via2
+         = to2
+         }
          => {
          check via1: Equal(type, from, to1)
          check via2: Equal(type, to1, to2)
-         return equalCompose()
+         return equalCompose(
+         implicit type,
+         implicit from,
+         implicit to1,
+         implicit to2,
+         via1,
+         via2,
+         )
          }
-       **/
+
+         equivalent type {
+         from
+         | via1
+         = to1
+         | via2
+         = to2
+         | via3
+         = to3
+         }
+         => {
+         check via1: Equal(type, from, to1)
+         check via2: Equal(type, to1, to2)
+         check via3: Equal(type, to2, to3)
+         return equalCompose(
+         implicit type,
+         implicit from,
+         implicit to2,
+         implicit to3,
+         equalCompose(
+         implicit type,
+         implicit from,
+         implicit to1,
+         implicit to2,
+         via1,
+         via2,
+         ),
+         via3,
+         )
+         }
+      **/
+
+      const { type, from, rest } = exp
+
+      if (rest.length === 0) {
+        return infer(
+          mod,
+          ctx,
+          Exps.ApUnfolded(Exps.Var("the"), [
+            Exps.ArgPlain(
+              Exps.ApUnfolded(Exps.Var("Equal"), [
+                Exps.ArgPlain(type),
+                Exps.ArgPlain(from),
+                Exps.ArgPlain(from),
+              ]),
+            ),
+            Exps.ArgPlain(Exps.Var("refl")),
+          ]),
+        )
+      }
+
+      if (rest.length === 1) {
+        const { via, to } = rest[0]
+      }
 
       throw new Error()
     }
