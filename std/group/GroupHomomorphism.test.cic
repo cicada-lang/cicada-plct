@@ -1,0 +1,29 @@
+import {
+  GroupHomomorphism,
+  idGroupHomomorphism,
+  composeGroupHomomorphism,
+} from "GroupHomomorphism.cic"
+import { trivialGroup } from "trivialGroup.cic"
+
+compute idGroupHomomorphism(trivialGroup)
+
+compute composeGroupHomomorphism(
+  implicit trivialGroup,
+  implicit trivialGroup,
+  implicit trivialGroup,
+  idGroupHomomorphism(trivialGroup),
+  idGroupHomomorphism(trivialGroup),
+)
+
+// TODO Fail to compute the following:
+// [unifyType]
+//   left: Trivial
+//   right: ?G.Element
+// [unifyType] is not implemented for the pair of type values
+//   left: Trivial
+//   right: ?G.Element
+
+// compute composeGroupHomomorphism(
+//   idGroupHomomorphism(trivialGroup),
+//   idGroupHomomorphism(trivialGroup),
+// )

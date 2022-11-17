@@ -31,13 +31,32 @@ extract the step of expending the macros
 
   - to call `Actions.try*` in `solutionAdvanceValue`
 
-- `GroupHomomorphism.cic` can compute with out implicit arguments:
+[bug fix] `GroupHomomorphism.test.cic`
+
+- During the following `infer`
 
   ```
   compute composeGroupHomomorphism(
     idGroupHomomorphism(trivialGroup),
     idGroupHomomorphism(trivialGroup),
   )
+  ```
+
+  Why `?G: Group` is expended to:
+
+  ```
+  {
+    Element: ?G.Element,
+    mul: (x, y) => ?G.mul(x, y),
+    mulAssociative: (x, y, z) => ?G.mulAssociative(x, y, z),
+    id: ?G.id,
+    idLeft: (x) => ?G.idLeft(x),
+    idRight: (x) => ?G.idRight(x),
+    inverse: (x) => ?G.inverse(x),
+    inverseLeft: (x) => ?G.inverseLeft(x),
+    inverseRight: (x) => ?G.inverseRight(x),
+    div: (x, y) => ?G.mul(x, ?G.inverse(y))
+  }
   ```
 
 # later

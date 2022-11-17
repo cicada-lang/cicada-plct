@@ -1,7 +1,6 @@
 import { Group } from "Group.cic"
 import { Category } from "../category/index.cic"
 import { equalSwap, equalMap, equalCompose } from "../equality/index.cic"
-import { trivialGroup } from "trivialGroup.cic"
 
 class GroupHomomorphism {
   dom: Group
@@ -25,8 +24,6 @@ function idGroupHomomorphism(G: Group): GroupHomomorphism(G, G) {
     homoPreserveMul: (x, y) => refl,
   }
 }
-
-compute idGroupHomomorphism(trivialGroup)
 
 function composeGroupHomomorphism(
   implicit G: Group,
@@ -58,24 +55,3 @@ function composeGroupHomomorphism(
     },
   }
 }
-
-compute composeGroupHomomorphism(
-  implicit trivialGroup,
-  implicit trivialGroup,
-  implicit trivialGroup,
-  idGroupHomomorphism(trivialGroup),
-  idGroupHomomorphism(trivialGroup),
-)
-
-// TODO Fail to compute the following:
-// [unifyType]
-//   left: Trivial
-//   right: ?G.Element
-// [unifyType] is not implemented for the pair of type values
-//   left: Trivial
-//   right: ?G.Element
-
-// compute composeGroupHomomorphism(
-//   idGroupHomomorphism(trivialGroup),
-//   idGroupHomomorphism(trivialGroup),
-// )
