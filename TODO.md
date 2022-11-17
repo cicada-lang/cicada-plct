@@ -25,7 +25,7 @@ extract the step of expending the macros
 
 [bug fix] fix the use of `solutionAdvanceValue`
 
-- `Var` should not be special
+- `MetaVar` should not be special
 
 - [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
 
