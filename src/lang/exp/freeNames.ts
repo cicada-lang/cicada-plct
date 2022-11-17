@@ -193,5 +193,10 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     case "SequenceUnfolded": {
       return freeNames(boundNames, Exps.foldSequence(exp.bindings, exp.ret))
     }
+
+    case "Equivalent": {
+      // TODO
+      return new Set()
+    }
   }
 }

@@ -393,7 +393,8 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
       return substitute(Exps.foldSequence(body.bindings, body.ret), name, exp)
     }
 
-    default: {
+    case "Equivalent": {
+      // TODO
       return body
     }
   }

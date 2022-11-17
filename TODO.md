@@ -1,18 +1,23 @@
+`Exps.Equivalent` -- `freeNames`
+`Exps.Equivalent` -- `substitute`
+`Exps.Equivalent` -- `infer`
+
+`Exps.Equivalent` -- syntax
+
+[syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
+
+update `std/boolean-lattice/*`
+
 [note] about the use of `extractApTarget` during `unifyClosure`
 
 [refactor] `includeClazz` -- step left and right together
 
 [refactor] `unifyClazz` -- step left and right together
 
-# syntax for equivalent
+[question] the use of `solutionAdvanceValue` might be not right.
 
-[syntax] we need a syntax -- `equivalent <type> {}` macro -- for reasoning about equality
-
-- capture the use of `equalCompose` only
-
-[syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
-
-update `std/boolean-lattice/*`
+- Why `Var` case is special?
+- pass `GroupHomomorphism.cic`
 
 # later
 

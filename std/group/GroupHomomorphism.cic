@@ -124,10 +124,10 @@ compute composeGroupHomomorphism(
 // TODO Fail to compute the following:
 // [unifyType]
 //   left: Trivial
-//   right: G.Element
+//   right: ?G.Element
 // [unifyType] is not implemented for the pair of type values
 //   left: Trivial
-//   right: G.Element
+//   right: ?G.Element
 
 // compute composeGroupHomomorphism(
 //   idGroupHomomorphism(trivialGroup),

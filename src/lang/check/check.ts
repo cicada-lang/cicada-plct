@@ -219,5 +219,9 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     case "SequenceUnfolded": {
       return check(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret), type)
     }
+
+    case "Equivalent": {
+      return checkByInfer(mod, ctx, exp, type)
+    }
   }
 }

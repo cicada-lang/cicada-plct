@@ -44,6 +44,7 @@ export type Exp =
   | Dot
   | Sequence
   | SequenceUnfolded
+  | Equivalent
 
 export type Var = {
   family: "Exp"
@@ -1008,6 +1009,30 @@ export function SequenceBindingCheck(
     kind: "SequenceBindingCheck",
     exp,
     type,
+    span,
+  }
+}
+
+export type Equivalent = {
+  family: "Exp"
+  kind: "Equivalent"
+  type: Exp
+  head: Exp
+  tail: Array<{ via: Exp; to: Exp }>
+} & ExpMeta
+
+export function Equivalent(
+  type: Exp,
+  head: Exp,
+  tail: Array<{ via: Exp; to: Exp }>,
+  span?: Span,
+): Equivalent {
+  return {
+    family: "Exp",
+    kind: "Equivalent",
+    type,
+    head,
+    tail,
     span,
   }
 }

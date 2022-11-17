@@ -12,17 +12,15 @@ export class Equivalent extends Stmt {
   }
 
   async execute(mod: Mod): Promise<void> {
-    const typeCore = checkType(mod, mod.ctx, this.type)
-    const typeValue = evaluate(mod.env, typeCore)
-
-    const cores = this.exps.map((exp) => check(mod, mod.ctx, exp, typeValue))
+    const type = evaluate(mod.env, checkType(mod, mod.ctx, this.type))
+    const cores = this.exps.map((exp) => check(mod, mod.ctx, exp, type))
     const values = cores.map((core) => evaluate(mod.env, core))
 
     if (values.length === 0) return
 
     let left = values[0]
     for (const right of values.slice(1)) {
-      equivalent(mod, mod.ctx, typeValue, left, right)
+      equivalent(mod, mod.ctx, type, left, right)
       left = right
     }
   }
