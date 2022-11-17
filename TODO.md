@@ -1,47 +1,11 @@
-[bug fix] the following test should fail:
+[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
-- equivalent-sigma.test.ts
-
-  "equivalent Sigma -- fail"
-
-  - Should not introduce `MetaVar` during `unifyType` of `Sigma`
-
-  - [note] about the use of `extractApTarget` during `unifyClosure`
-
-  ```
-  compute equivalent Type {
-      exists (A: Type, B: Type) Pair(A, B)
-    = exists (A: Type, B: Type) Pair(B, A)
-  }
-
-  compute the(
-    Equal(
-      Type,
-      exists (A: Type, B: Type) Pair(A, B),
-      exists (A: Type, B: Type) Pair(B, A),
-    ),
-    refl,
-  )
-
-  check refl: Equal(
-    Type,
-    exists (A: Type, B: Type) Pair(A, B),
-    exists (A: Type, B: Type) Pair(B, A),
-  )
-  ```
-
-[bug fix] the following test should fail:
-
-- equivalent-clazz.test
-
-  "equivalent Clazz -- fail -- missing fulfilled property value"
-
-  ```
-  compute equivalent Type {
-      class { A: String = "abc" }
-    = class { A: String }
-  }
-  ```
+```
+compute equivalent Type {
+    class { A: String = "abc" }
+  = class { A: String }
+}
+```
 
 extract the step of expending the macros
 

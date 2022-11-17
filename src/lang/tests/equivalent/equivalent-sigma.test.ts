@@ -42,7 +42,7 @@ compute equivalent Type {
   )
 })
 
-test.todo("equivalent Sigma -- fail", async () => {
+test("equivalent Sigma -- fail", async () => {
   await expectCodeToFail(`
 
 compute equivalent Type {
