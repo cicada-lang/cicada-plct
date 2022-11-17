@@ -1,4 +1,5 @@
 import fs from "fs"
+import process from "process"
 import { ReplEvent, ReplEventHandler } from "../framework/repl"
 import * as Errors from "../lang/errors"
 import { parseStmts } from "../lang/syntax"
@@ -7,15 +8,18 @@ import { colors } from "../utils/colors"
 
 export class AppReplEventHandler extends ReplEventHandler {
   loader = new Loader()
+  pathname = process.cwd() + "/repl"
 
   constructor() {
     super()
     this.loader.fetcher.register("file", (url) =>
       fs.promises.readFile(url.pathname, "utf8"),
     )
-    this.loader.fetcher.register("repl", (url) =>
-      url.pathname ? fs.promises.readFile("./" + url.pathname, "utf8") : "",
-    )
+    this.loader.fetcher.register("repl", (url) => {
+      return url.pathname === this.pathname
+        ? ""
+        : fs.promises.readFile(url.pathname, "utf8")
+    })
   }
 
   greeting(): void {
@@ -28,8 +32,8 @@ export class AppReplEventHandler extends ReplEventHandler {
 
     text = text.trim()
 
-    const url = new URL("repl://")
-    const mod = await this.loader.load(url)
+    const url = new URL(`repl://${this.pathname}`)
+    const mod = await this.loader.load(url, { text: "" })
 
     try {
       const stmts = parseStmts(text)
