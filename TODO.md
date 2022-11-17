@@ -1,5 +1,3 @@
-update `std/group/GroupHomomorphism.cic`
-
 update `std/boolean-lattice/*`
 
 `Exps.Equivalent` -- `infer` -- add `span`
