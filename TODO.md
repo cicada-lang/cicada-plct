@@ -1,17 +1,36 @@
-[bug] the following test should fail:
+[bug fix] the following test should fail:
 
 - equivalent-sigma.test.ts
 
   "equivalent Sigma -- fail"
+
+  - Should not introduce `MetaVar` during `unifyType` of `Sigma`
+
+  - [note] about the use of `extractApTarget` during `unifyClosure`
 
   ```
   compute equivalent Type {
       exists (A: Type, B: Type) Pair(A, B)
     = exists (A: Type, B: Type) Pair(B, A)
   }
+
+  compute the(
+    Equal(
+      Type,
+      exists (A: Type, B: Type) Pair(A, B),
+      exists (A: Type, B: Type) Pair(B, A),
+    ),
+    refl,
+  )
+
+  check refl: Equal(
+    Type,
+    exists (A: Type, B: Type) Pair(A, B),
+    exists (A: Type, B: Type) Pair(B, A),
+  )
   ```
 
-[bug] the following test should fail:
+[bug fix] the following test should fail:
 
 - equivalent-clazz.test
 
@@ -28,8 +47,6 @@ extract the step of expending the macros
 
 `Exps.Equivalent` -- `infer` -- add `span`
 
-[note] about the use of `extractApTarget` during `unifyClosure`
-
 [refactor] `includeClazz` -- step left and right together
 
 [refactor] `unifyClazz` -- step left and right together
@@ -41,7 +58,15 @@ extract the step of expending the macros
 [question] the use of `solutionAdvanceValue` might be not right.
 
 - Why `Var` case is special?
-- pass `GroupHomomorphism.cic`
+
+- `GroupHomomorphism.cic` can not compute with out implicit arguments:
+
+  ```
+  compute composeGroupHomomorphism(
+    idGroupHomomorphism(trivialGroup),
+    idGroupHomomorphism(trivialGroup),
+  )
+  ```
 
 # later
 
