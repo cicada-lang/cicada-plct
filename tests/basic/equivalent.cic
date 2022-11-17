@@ -1,0 +1,17 @@
+compute equivalent Trivial {
+  sole
+}
+
+compute equivalent Trivial {
+  sole
+  | refl
+  = sole
+}
+
+compute equivalent Trivial {
+  sole
+  | refl
+  = sole
+  | refl
+  = sole
+}

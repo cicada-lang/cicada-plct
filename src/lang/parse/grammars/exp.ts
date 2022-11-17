@@ -131,5 +131,13 @@ export const operand = {
       { args: "args" },
       '")"',
     ],
+    "operand:equivalent": [
+      '"equivalent"',
+      { type: "exp" },
+      '"{"',
+      { from: "exp" },
+      { rest: { $ap: ["zero_or_more", "equivalent_rest_entry"] } },
+      '"}"',
+    ],
   },
 }

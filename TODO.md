@@ -1,12 +1,12 @@
-`Exps.Equivalent` -- syntax
-`std/equality` -- should be builtin globals
+update `std/group/GroupHomomorphism.cic`
+
+update `std/boolean-lattice/*`
+
 `Exps.Equivalent` -- `infer` -- add `span`
 
 extract the step of expending the macros
 
 [syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
-
-update `std/boolean-lattice/*`
 
 [note] about the use of `extractApTarget` during `unifyClosure`
 

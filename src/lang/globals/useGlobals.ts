@@ -153,5 +153,94 @@ export function useGlobals(): GlobalStore {
     ),
   )
 
+  globals.claim(
+    "equalMap",
+    `(
+  implicit X: Type,
+  implicit Y: Type,
+  implicit from: X,
+  implicit to: X,
+  f: (X) -> Y,
+  target: Equal(X, from, to),
+) -> Equal(Y, f(from), f(to))
+`,
+  )
+  globals.define(
+    "equalMap",
+    `(
+  implicit X,
+  implicit Y,
+  implicit from,
+  implicit to,
+  f,
+  target,
+) => {
+  return replace(
+    target,
+    (x) => Equal(Y, f(from), f(x)),
+    refl,
+  )
+}
+`,
+  )
+
+  globals.claim(
+    "equalSwap",
+    `(
+    implicit A: Type,
+    implicit x: A,
+    implicit y: A,
+    xyEqual: Equal(A, x, y),
+  ) -> Equal(A, y, x)
+`,
+  )
+  globals.define(
+    "equalSwap",
+    `(
+  implicit A,
+  implicit x,
+  implicit y,
+  xyEqual,
+) => {
+  return replace(
+    xyEqual,
+    (w) => Equal(A, w, x),
+    refl,
+  )
+}
+`,
+  )
+
+  globals.claim(
+    "equalCompose",
+    `(
+    implicit A: Type,
+    implicit x: A,
+    implicit y: A,
+    implicit z: A,
+    xyEqual: Equal(A, x, y),
+    yzEqual: Equal(A, y, z),
+  ) -> Equal(A, x, z)
+`,
+  )
+  globals.define(
+    "equalCompose",
+    `(
+  implicit A,
+  implicit x,
+  implicit y,
+  implicit z,
+  xyEqual,
+  yzEqual,
+) => {
+  return replace(
+    yzEqual,
+    (w) => Equal(A, x, w),
+    xyEqual,
+  )
+}
+`,
+  )
+
   return globals
 }
