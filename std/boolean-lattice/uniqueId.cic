@@ -12,7 +12,7 @@ function joinUniqueId(
   ),
 ): Equal(lattice.Element, o, lattice.bottom) {
   return equivalent lattice.Element {
-    o
+      o
     | equalSwap(lattice.bottomIdJoin(o))
     = lattice.join(o, lattice.bottom)
     | equalSwap(lattice.joinCommutative(lattice.bottom, o))

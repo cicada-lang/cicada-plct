@@ -21,7 +21,7 @@ function joinAbsorbMeet(
   x,
 ) {
   return equivalent lattice.Element {
-    lattice.join(x, lattice.meet(x, y))
+      lattice.join(x, lattice.meet(x, y))
     | equalMap(
         (z: lattice.Element) => lattice.join(z, lattice.meet(x, y)),
         equalSwap(lattice.topIdMeet(x)),

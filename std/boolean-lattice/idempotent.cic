@@ -13,7 +13,7 @@ function joinIdempotent(
   x,
 ) {
   return equivalent lattice.Element {
-    lattice.join(x, x)
+      lattice.join(x, x)
     | equalSwap(lattice.topIdMeet(lattice.join(x, x)))
     = lattice.meet(lattice.join(x, x), lattice.top)
     | equalMap(

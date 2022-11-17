@@ -42,7 +42,7 @@ function composeGroupHomomorphism(
     homo: (x: G.Element) => g.homo(f.homo(x)),
 
     homoPreserveId: equivalent K.Element {
-      g.homo(f.homo(G.id))
+        g.homo(f.homo(G.id))
       | equalMap(g.homo, f.homoPreserveId)
       = g.homo(H.id)
       | g.homoPreserveId
@@ -50,7 +50,7 @@ function composeGroupHomomorphism(
     },
 
     homoPreserveMul: (x, y) => equivalent K.Element {
-      g.homo(f.homo(G.mul(x, y)))
+        g.homo(f.homo(G.mul(x, y)))
       | equalMap(g.homo, f.homoPreserveMul(x, y))
       = g.homo(H.mul(f.homo(x), f.homo(y)))
       | g.homoPreserveMul(f.homo(x), f.homo(y))

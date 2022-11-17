@@ -20,7 +20,7 @@ function topBound(
   )
 
   return equivalent lattice.Element {
-    lattice.join(x, lattice.top)
+      lattice.join(x, lattice.top)
     | equalSwap(lattice.topIdMeet(lattice.join(x, lattice.top)))
     = lattice.meet(lattice.join(x, lattice.top), lattice.top)
     | lattice.meetCommutative(lattice.join(x, lattice.top), lattice.top)
