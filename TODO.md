@@ -1,29 +1,37 @@
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
-```
-compute equivalent Type {
-    class { A: String = "abc" }
-  = class { A: String }
-}
-```
+- [note] about `unifyClazz`
+
+- [refactor] `unifyClazz` -- step left and right together
+
+  ```
+  compute equivalent Type {
+      class { A: String = "abc" }
+    = class { A: String }
+  }
+
+  check refl: Equal(
+    Type,
+    class { A: String = "abc" },
+    class { A: String },
+  )
+  ```
+
+[refactor] `includeClazz` -- step left and right together
 
 extract the step of expending the macros
 
 `Exps.Equivalent` -- `infer` -- add `span`
 
-[refactor] `includeClazz` -- step left and right together
+[bug fix] fix the use of `solutionAdvanceValue`
 
-[refactor] `unifyClazz` -- step left and right together
+- `Var` should not be special
 
-[refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
+- [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
 
-- to call `Actions.try*` in `solutionAdvanceValue`
+  - to call `Actions.try*` in `solutionAdvanceValue`
 
-[question] the use of `solutionAdvanceValue` might be not right.
-
-- Why `Var` case is special?
-
-- `GroupHomomorphism.cic` can not compute with out implicit arguments:
+- `GroupHomomorphism.cic` can compute with out implicit arguments:
 
   ```
   compute composeGroupHomomorphism(
