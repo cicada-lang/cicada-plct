@@ -64,15 +64,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         ),
         span,
       ),
-    "stmt:equivalent": ({ type, exps, last_exp }, { span }) =>
-      new Stmts.Equivalent(
-        matchers.exp_matcher(type),
-        [
-          ...pt.matchers.zero_or_more_matcher(exps).map(matchers.exp_matcher),
-          matchers.exp_matcher(last_exp),
-        ],
-        span,
-      ),
     "stmt:include": ({ types, last_type }, { span }) =>
       new Stmts.Include(
         [

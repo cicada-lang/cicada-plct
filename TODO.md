@@ -1,5 +1,3 @@
-remove `Stmts.Equivalent` -- use `compute equivalent` instead
-
 [bug] the following test should fail:
 
 - equivalent-sigma.test.ts

@@ -45,15 +45,6 @@ export const stmt = {
       { bindings: { $ap: ["zero_or_more", "clazz_binding"] } },
       '"}"',
     ],
-    "stmt:equivalent": [
-      '"equivalent"',
-      { type: "exp" },
-      '"["',
-      { exps: { $ap: ["zero_or_more", "exp", '","'] } },
-      { last_exp: "exp" },
-      { $ap: ["optional", '","'] },
-      '"]"',
-    ],
     "stmt:include": [
       '"include"',
       '"["',
