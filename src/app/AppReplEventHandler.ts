@@ -1,7 +1,7 @@
 import fs from "fs"
 import { ReplEvent, ReplEventHandler } from "../framework/repl"
 import * as Errors from "../lang/errors"
-import { parseStmts } from "../lang/parse"
+import { parseStmts } from "../lang/syntax"
 import { Loader } from "../loader"
 import { colors } from "../utils/colors"
 

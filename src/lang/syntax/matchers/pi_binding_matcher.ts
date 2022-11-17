@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
+import * as matchers from "."
 import * as Exps from "../../exp"
-import * as matchers from "../matchers"
 
 export function pi_binding_matcher(tree: pt.Tree): Exps.PiBinding {
   return pt.matcher<Exps.PiBinding>({

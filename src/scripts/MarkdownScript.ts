@@ -1,7 +1,7 @@
 import * as commonmark from "commonmark"
 import * as Errors from "../lang/errors"
 import type { Mod } from "../lang/mod"
-import { parseStmts } from "../lang/parse"
+import { parseStmts } from "../lang/syntax"
 import { Script } from "../script"
 
 export class MarkdownScript extends Script {

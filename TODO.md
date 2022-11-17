@@ -1,14 +1,20 @@
+[syntax] overload the `equivalent <type> {}` syntax to have optional `via`
+
+- remove `Stmts.Equivalent` -- use `compute equivalent` instead
+
 `Exps.Equivalent` -- `infer` -- add `span`
 
 extract the step of expending the macros
-
-[syntax] redesign the `equivalent <type> []` syntax -- use `equivalent <type> {}` instead
 
 [note] about the use of `extractApTarget` during `unifyClosure`
 
 [refactor] `includeClazz` -- step left and right together
 
 [refactor] `unifyClazz` -- step left and right together
+
+[refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
+
+- to call `Actions.try*` in `solutionAdvanceValue`
 
 [question] the use of `solutionAdvanceValue` might be not right.
 

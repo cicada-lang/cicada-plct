@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
+import * as matchers from "."
 import * as Exps from "../../exp"
-import * as matchers from "../matchers"
 
 export function sequence_matcher(tree: pt.Tree): Exps.SequenceUnfolded {
   return pt.matcher({

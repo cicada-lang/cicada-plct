@@ -2,7 +2,7 @@ import { expect } from "vitest"
 import { Loader } from "../../loader"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
-import { parseStmts } from "../parse"
+import { parseStmts } from "../syntax"
 
 export async function runCode(code: string): Promise<string> {
   const loader = new Loader()

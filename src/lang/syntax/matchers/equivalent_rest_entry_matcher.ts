@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
+import * as matchers from "."
 import type { Exp } from "../../exp"
-import * as matchers from "../matchers"
 
 export function equivalent_rest_entry_matcher(tree: pt.Tree): {
   via: Exp

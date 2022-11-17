@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
+import * as matchers from "."
 import * as Stmts from "../../stmts"
-import * as matchers from "../matchers"
 
 export function equation_matcher(tree: pt.Tree): Stmts.Equation {
   return pt.matcher<Stmts.Equation>({

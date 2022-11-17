@@ -3,7 +3,7 @@ import { check, checkType } from "../check"
 import { CtxFulfilled } from "../ctx"
 import { evaluate } from "../evaluate"
 import { Mod } from "../mod"
-import { parseExp } from "../parse"
+import { parseExp } from "../syntax"
 import type { Value } from "../value"
 
 export class GlobalStore {
