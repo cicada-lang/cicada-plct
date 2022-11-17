@@ -1,4 +1,3 @@
-`Exps.Equivalent` -- `freeNames`
 `Exps.Equivalent` -- `substitute`
 `Exps.Equivalent` -- `infer`
 
