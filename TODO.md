@@ -1,6 +1,30 @@
-`lang/tests/equivalent` -- use `compute equivalent` -- snapshot the output
-
 remove `Stmts.Equivalent` -- use `compute equivalent` instead
+
+[bug] the following test should fail:
+
+- equivalent-sigma.test.ts
+
+  "equivalent Sigma -- fail"
+
+  ```
+  compute equivalent Type {
+      exists (A: Type, B: Type) Pair(A, B)
+    = exists (A: Type, B: Type) Pair(B, A)
+  }
+  ```
+
+[bug] the following test should fail:
+
+- equivalent-clazz.test
+
+  "equivalent Clazz -- fail -- missing fulfilled property value"
+
+  ```
+  compute equivalent Type {
+      class { A: String = "abc" }
+    = class { A: String }
+  }
+  ```
 
 extract the step of expending the macros
 

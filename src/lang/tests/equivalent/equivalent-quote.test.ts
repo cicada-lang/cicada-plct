@@ -1,38 +1,46 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("equivalent Quote", async () => {
-  await runCode(`
+  const output = await runCode(`
 
-equivalent String [
-  "abc",
-  "abc",
-  "abc",
-]
+compute equivalent String {
+    "abc"
+  = "abc"
+  = "abc"
+}
 
 `)
+
+  expect(output).toMatchInlineSnapshot(
+    '"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"',
+  )
 })
 
 test("equivalent Quote -- empty string", async () => {
-  await runCode(`
+  const output = await runCode(`
 
-equivalent String [
-  "",
-  "",
-  "",
-]
+compute equivalent String {
+    ""
+  = ""
+  = ""
+}
 
 `)
+
+  expect(output).toMatchInlineSnapshot(
+    '"refl(implicit String, implicit \\"\\"): Equal(String, \\"\\", \\"\\")"',
+  )
 })
 
 test("equivalent Quote -- fail", async () => {
   await expectCodeToFail(`
 
-equivalent String [
-  "abc",
-  "abc",
-  "xyz",
-]
+compute equivalent String {
+    "abc"
+  = "abc"
+  = "xyz"
+}
 
 `)
 })

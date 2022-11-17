@@ -1,26 +1,30 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("equivalent String", async () => {
-  await runCode(`
+  const output = await runCode(`
 
-equivalent Type [
-  String,
-  String,
-  String,
-]
+compute equivalent Type {
+    String
+  = String
+  = String
+}
 
 `)
+
+  expect(output).toMatchInlineSnapshot(
+    '"refl(implicit Type, implicit String): Equal(Type, String, String)"',
+  )
 })
 
 test("equivalent String -- fail", async () => {
   await expectCodeToFail(`
 
-equivalent Type [
-  String,
-  String,
-  Type,
-]
+compute equivalent Type {
+    String
+  = String
+  = Type
+}
 
 `)
 })

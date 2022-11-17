@@ -1,13 +1,17 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
 test("equivalent Type", async () => {
-  await runCode(`
+  const output = await runCode(`
 
-equivalent Type [
-  Type,
-  Type,
-]
+compute equivalent Type {
+    Type
+  = Type
+}
 
 `)
+
+  expect(output).toMatchInlineSnapshot(
+    '"refl(implicit Type, implicit Type): Equal(Type, Type, Type)"',
+  )
 })

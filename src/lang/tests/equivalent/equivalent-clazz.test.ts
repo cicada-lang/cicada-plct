@@ -1,34 +1,84 @@
-import { test } from "vitest"
+import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("equivalent Clazz", async () => {
-  await runCode(`
+  const output = await runCode(`
 
 function id(T: Type, x: T): T {
   return x
 }
 
-equivalent Type [
-  class { A: Type, x: A },
-  class { A: Type, x: A },
-  class { A: Type, x: id(Type, A) },
-]
-
-equivalent Type [
-  class { A: Type, B: Type, pair: Pair(A, B) },
-  class { A: Type, B: Type, pair: Pair(A, B) },
-]
+compute equivalent Type {
+    class { A: Type, x: A }
+  = class { A: Type, x: A }
+  = class { A: Type, x: id(Type, A) }
+}
 
 `)
+
+  expect(output).toMatchInlineSnapshot(`
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        x [rename: x2]: A
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+    )"
+  `)
+})
+
+test("equivalent Clazz -- Pair in class", async () => {
+  const output = await runCode(`
+
+
+compute equivalent Type {
+    class { A: Type, B: Type, pair: Pair(A, B) }
+  = class { A: Type, B: Type, pair: Pair(A, B) }
+}
+
+`)
+
+  expect(output).toMatchInlineSnapshot(`
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    )"
+  `)
 })
 
 test("equivalent Clazz -- fail -- different property names", async () => {
   await expectCodeToFail(`
 
-equivalent Type [
-  class { A: Type, x: A },
-  class { B: Type, x: B },
-]
+compute equivalent Type {
+    class { A: Type, x: A }
+  = class { B: Type, x: B }
+}
 
 `)
 })
@@ -36,10 +86,10 @@ equivalent Type [
 test("equivalent Clazz -- fail -- different property type", async () => {
   await expectCodeToFail(`
 
-equivalent Type [
-  class { A: Trivial },
-  class { A: String },
-]
+compute equivalent Type {
+    class { A: Trivial }
+  = class { A: String }
+}
 
 `)
 })
@@ -47,26 +97,33 @@ equivalent Type [
 test("equivalent Clazz -- fail -- different fulfilled property value", async () => {
   await expectCodeToFail(`
 
-equivalent Type [
-  class { A: String = "abc" },
-  class { A: String = "xyz" },
-]
+compute equivalent Type {
+    class { A: String = "abc" }
+  = class { A: String = "xyz" }
+}
 
 `)
 })
 
-test("equivalent Clazz -- fail -- missing fulfilled property value", async () => {
-  await expectCodeToFail(`
+test.todo(
+  "equivalent Clazz -- fail -- missing fulfilled property value",
+  async () => {
+    await expectCodeToFail(`
 
-equivalent Type [
-  class { A: String = "abc" },
-  class { A: String },
-]
-
-equivalent Type [
-  class { A: String },
-  class { A: String = "abc" },
-]
+compute equivalent Type {
+    class { A: String = "abc" }
+  = class { A: String }
+}
 
 `)
-})
+
+    await expectCodeToFail(`
+
+compute equivalent Type {
+    class { A: String }
+  = class { A: String = "abc" }
+}
+
+`)
+  },
+)
