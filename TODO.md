@@ -1,3 +1,5 @@
+`lang/tests/equivalent` -- use `compute equivalent` -- snapshot the output
+
 remove `Stmts.Equivalent` -- use `compute equivalent` instead
 
 extract the step of expending the macros

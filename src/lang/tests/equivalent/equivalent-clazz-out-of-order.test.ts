@@ -8,12 +8,12 @@ function id(T: Type, x: T): T {
   return x
 }
 
-equivalent Type [
-  class { A: Type, B: Type, pair: Pair(A, B) },
-  class { B: Type, A: Type, pair: Pair(A, B) },
-  class { B: Type, A: id(Type, Type), pair: Pair(A, B) },
-  class { B: Type, A: id(Type, Type), pair: Pair(id(Type, A), id(Type, B)) },
-]
+compute equivalent Type {
+  class { A: Type, B: Type, pair: Pair(A, B) }
+  = class { A: Type, B: Type, pair: Pair(A, B) }
+  = class { A: id(Type, Type), B: Type, pair: Pair(A, B) }
+  = class { A: id(Type, Type), B: Type, pair: Pair(id(Type, A), id(Type, B)) }
+}
 
 `)
 })
