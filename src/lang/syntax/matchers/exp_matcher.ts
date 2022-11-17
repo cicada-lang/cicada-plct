@@ -141,7 +141,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         matchers.exp_matcher(from),
         pt.matchers
           .zero_or_more_matcher(rest)
-          .map(matchers.equivalent_rest_entry_matcher),
+          .map(matchers.equivalent_entry_matcher),
         span,
       ),
   })(tree)

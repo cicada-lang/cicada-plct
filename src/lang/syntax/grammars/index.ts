@@ -7,7 +7,7 @@ export const optional = pt.grammars.optional
 export * from "./arg"
 export * from "./clazz_binding"
 export * from "./equation"
-export * from "./equivalent_rest_entry"
+export * from "./equivalent_entry"
 export * from "./exp"
 export * from "./fn_binding"
 export * from "./import_binding"

@@ -1,5 +1,3 @@
-rename `equivalent_rest_entry` to `equivalent_entry`
-
 [syntax] overload the `equivalent <type> {}` syntax to have optional `via`
 
 - remove `Stmts.Equivalent` -- use `compute equivalent` instead

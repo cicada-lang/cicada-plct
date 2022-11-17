@@ -136,7 +136,7 @@ export const operand = {
       { type: "exp" },
       '"{"',
       { from: "exp" },
-      { rest: { $ap: ["zero_or_more", "equivalent_rest_entry"] } },
+      { rest: { $ap: ["zero_or_more", "equivalent_entry"] } },
       '"}"',
     ],
   },
