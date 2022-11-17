@@ -23,7 +23,7 @@ compute composeGroupHomomorphism(
 //   left: Trivial
 //   right: ?G.Element
 
-// compute composeGroupHomomorphism(
-//   idGroupHomomorphism(trivialGroup),
-//   idGroupHomomorphism(trivialGroup),
-// )
+compute composeGroupHomomorphism(
+  idGroupHomomorphism(trivialGroup),
+  idGroupHomomorphism(trivialGroup),
+)
