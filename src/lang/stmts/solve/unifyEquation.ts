@@ -11,13 +11,10 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation.kind) {
     case "EquationUnifyTyped": {
       const env = ctxToEnv(ctx)
-      const typeValue = evaluate(env, checkType(mod, ctx, equation.type))
-      const leftValue = evaluate(env, check(mod, ctx, equation.left, typeValue))
-      const rightValue = evaluate(
-        env,
-        check(mod, ctx, equation.right, typeValue),
-      )
-      unify(mod, ctx, typeValue, leftValue, rightValue)
+      const type = evaluate(env, checkType(mod, ctx, equation.type))
+      const left = evaluate(env, check(mod, ctx, equation.left, type))
+      const right = evaluate(env, check(mod, ctx, equation.right, type))
+      unify(mod, ctx, type, left, right)
       return
     }
 
@@ -29,31 +26,31 @@ export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
         const leftType = leftInferred.type
         const rightType = rightInferred.type
         unifyType(mod, ctx, leftType, rightType)
-        const typeValue = leftType
+        const type = leftType
         const env = ctxToEnv(ctx)
-        const leftValue = evaluate(env, leftInferred.core)
-        const rightValue = evaluate(env, rightInferred.core)
-        unify(mod, ctx, typeValue, leftValue, rightValue)
+        const left = evaluate(env, leftInferred.core)
+        const right = evaluate(env, rightInferred.core)
+        unify(mod, ctx, type, left, right)
         return
       }
 
       if (leftInferred !== undefined) {
-        const typeValue = leftInferred.type
+        const type = leftInferred.type
         const env = ctxToEnv(ctx)
-        const leftValue = evaluate(env, leftInferred.core)
-        const rightCore = check(mod, ctx, equation.right, typeValue)
-        const rightValue = evaluate(env, rightCore)
-        unify(mod, ctx, typeValue, leftValue, rightValue)
+        const left = evaluate(env, leftInferred.core)
+        const rightCore = check(mod, ctx, equation.right, type)
+        const right = evaluate(env, rightCore)
+        unify(mod, ctx, type, left, right)
         return
       }
 
       if (rightInferred !== undefined) {
-        const typeValue = rightInferred.type
+        const type = rightInferred.type
         const env = ctxToEnv(ctx)
-        const leftCore = check(mod, ctx, equation.left, typeValue)
-        const leftValue = evaluate(env, leftCore)
-        const rightValue = evaluate(env, rightInferred.core)
-        unify(mod, ctx, typeValue, leftValue, rightValue)
+        const leftCore = check(mod, ctx, equation.left, type)
+        const left = evaluate(env, leftCore)
+        const right = evaluate(env, rightInferred.core)
+        unify(mod, ctx, type, left, right)
         return
       }
 
