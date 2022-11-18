@@ -81,13 +81,24 @@ Take `FnAnnotated` as an example, we need `readback` here, because:
 
 # Solution
 
-TODO
+Constraints:
+
+- we can not avoid using `readback` during elaboration,
+  because implicit insertion will always use `readback`
+  to return solved meta variable.
+
+Currently `readback` has two roles:
+
+- for partial evaluation,
+- for eta-expansion.
+
+The role of eta-expansion is needed only because
+we use `readback` + `alphaEquivalent` to implement `equivalent`.
+
+Thus we should implement `equivalent` directly,
+and do not do eta-expansion in `readback`.
 
 # Ohter use of readback during elaboration
-
-Note that, we can not avoid using `readback` during elaboration,
-because of implicit insertion will always use `readback`
-to return solved meta variable.
 
 TODO We should review all uses of `readback` during `infer` and `check`:
 

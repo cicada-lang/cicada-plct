@@ -1,5 +1,3 @@
-note about solution in 2022-11-19-using-readback-during-elaboration
-
 look back -- 2022-11-19-using-readback-during-elaboration
 
 [bug fix] `GroupHomomorphism.test.cic`
