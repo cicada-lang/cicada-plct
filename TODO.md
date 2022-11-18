@@ -1,3 +1,7 @@
+note about Why FnAnnotated and FnImplicitAnnotated need readback
+
+look back -- 2022-11-19-using-readback-during-elaboration
+
 [bug fix] `GroupHomomorphism.test.cic`
 
 - The problem is due to use of `readbackType` during `infer`
@@ -17,7 +21,7 @@
   )
   ```
 
-  Why `?G: Group` is expended to:
+  Why `?G: Group` is expanded to:
 
   ```
   {
@@ -55,7 +59,7 @@
 
 [refactor] `includeClazz` -- step left and right together
 
-extract the step of expending the macros
+extract the step of expanding the macros
 
 `Exps.Equivalent` -- `infer` -- add `span`
 
@@ -66,6 +70,8 @@ extract the step of expending the macros
 - [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
 
   - to call `Actions.try*` in `solutionAdvanceValue`
+
+[maybe] use unified JSON ADT
 
 # later
 

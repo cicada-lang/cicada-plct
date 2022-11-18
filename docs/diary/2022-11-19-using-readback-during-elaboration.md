@@ -3,12 +3,7 @@ title: Using readback during elaboration
 date: 2022-11-19
 ---
 
-We have the feature of `FnAnnotated` and `FnImplicitAnnotated`,
-which uses `readback` during `infer`.
-
-TODO Note about why this require uses `readback`.
-
-# A bug
+# A bug about unification during implicit argument insertion
 
 We can infer:
 
@@ -40,7 +35,7 @@ compute composeGroupHomomorphism(
 //   right: ?G.Element
 ```
 
-Because `?G: Group` is eta-expended during `readback`:
+Because `?G: Group` is eta-expanded during `readback`:
 
 ```cicada
 {
@@ -58,14 +53,28 @@ Because `?G: Group` is eta-expended during `readback`:
 ```
 
 And we can unify `?G` with `trivialGroup`,
-but can not unify eta-expended object with `trivialGroup`
+but can not unify eta-expanded object with `trivialGroup`
 (unless we implement constraint-based unification).
 
-# solution
+The `readback` happened during `infer` of `FnAnnotated` and `FnImplicitAnnotated`.
+
+We find this cause by using nodejs inspect:
+
+```
+node --inspect-brk bin/cic.js run std/group/GroupHomomorphism.test.todo.cic --watch
+```
+
+And see the eta-expansion happened before the implicit argument insertion.
+
+## Why FnAnnotated and FnImplicitAnnotated need readback
 
 TODO
 
-# look back
+# Solution
+
+TODO
+
+# Look back
 
 TODO We should review all uses of `readback` during `infer` and `check`.
 
