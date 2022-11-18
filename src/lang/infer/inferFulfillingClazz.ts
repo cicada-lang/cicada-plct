@@ -10,7 +10,7 @@ import { Inferred } from "../infer"
 import type { Mod } from "../mod"
 import * as Values from "../value"
 
-export function inferFulfillingType(
+export function inferFulfillingClazz(
   mod: Mod,
   ctx: Ctx,
   inferred: Inferred,

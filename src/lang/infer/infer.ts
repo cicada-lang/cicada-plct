@@ -16,7 +16,7 @@ import type { Exp } from "../exp"
 import * as Exps from "../exp"
 import {
   inferExtraProperties,
-  inferFulfillingType,
+  inferFulfillingClazz,
   inferNewArgs,
   inferProperties,
 } from "../infer"
@@ -139,7 +139,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       }
 
       const inferred = infer(mod, ctx, exp.target)
-      const fulfilled = inferFulfillingType(mod, ctx, inferred, exp.arg)
+      const fulfilled = inferFulfillingClazz(mod, ctx, inferred, exp.arg)
       if (fulfilled !== undefined) return fulfilled
 
       Values.assertTypeInCtx(mod, ctx, inferred.type, "Pi")
