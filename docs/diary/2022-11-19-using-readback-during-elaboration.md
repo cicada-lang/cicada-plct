@@ -4,7 +4,11 @@ date: 2022-11-19
 ---
 
 We have the feature of `FnAnnotated` and `FnImplicitAnnotated`,
-which require uses `readback` during `infer`.
+which uses `readback` during `infer`.
+
+TODO Note about why this require uses `readback`.
+
+# A bug
 
 We can infer:
 
@@ -57,7 +61,13 @@ And we can unify `?G` with `trivialGroup`,
 but can not unify eta-expended object with `trivialGroup`
 (unless we implement constraint-based unification).
 
-We should review all uses of `readback` during `infer` and `check`.
+# solution
+
+TODO
+
+# look back
+
+TODO We should review all uses of `readback` during `infer` and `check`.
 
 But, maybe we can not avoid using `readback` during elaboration,
 because of implicit insertion will always use `readback`
