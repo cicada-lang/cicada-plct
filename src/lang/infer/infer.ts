@@ -21,7 +21,7 @@ import {
 } from "../infer"
 import { insertDuringInfer } from "../insert"
 import type { Mod } from "../mod"
-import { readback, readbackType } from "../readback"
+import { readbackType } from "../readback"
 import type { Value } from "../value"
 import * as Values from "../value"
 
@@ -236,12 +236,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         inferred.type,
         exp.name,
       )
-      const property = Values.objektLookupPropertyOrFail(
-        targetValue,
-        inferred.type,
-        exp.name,
-      )
-      return Inferred(propertyType, readback(mod, ctx, propertyType, property))
+      return Inferred(propertyType, Cores.Dot(inferred.core, exp.name))
     }
 
     case "NewUnfolded": {

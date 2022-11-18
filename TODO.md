@@ -1,3 +1,9 @@
+rename `objektLookupPropertyType` to `clazzLookupPropertyType`
+
+remove the use of `readback` during `infer` of `NewAp`
+
+- `New` do not need `readback`, why `NewAp` need?
+
 note about Why FnAnnotated and FnImplicitAnnotated need readback
 
 look back -- 2022-11-19-using-readback-during-elaboration
