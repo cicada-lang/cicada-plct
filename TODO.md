@@ -1,36 +1,3 @@
-[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
-
-- [note] about `unifyClazz`
-
-- [refactor] `unifyClazz` -- step left and right together
-
-  ```
-  compute equivalent Type {
-      class { A: String = "abc" }
-    = class { A: String }
-  }
-
-  check refl: Equal(
-    Type,
-    class { A: String = "abc" },
-    class { A: String },
-  )
-  ```
-
-[refactor] `includeClazz` -- step left and right together
-
-extract the step of expending the macros
-
-`Exps.Equivalent` -- `infer` -- add `span`
-
-[bug fix] fix the use of `solutionAdvanceValue`
-
-- `MetaVar` should not be special
-
-- [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
-
-  - to call `Actions.try*` in `solutionAdvanceValue`
-
 [bug fix] `GroupHomomorphism.test.cic`
 
 - The problem is due to use of `readbackType` during `infer`
@@ -66,6 +33,39 @@ extract the step of expending the macros
     div: (x, y) => ?G.mul(x, ?G.inverse(y))
   }
   ```
+
+[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
+
+- [note] about `unifyClazz`
+
+- [refactor] `unifyClazz` -- step left and right together
+
+  ```
+  compute equivalent Type {
+      class { A: String = "abc" }
+    = class { A: String }
+  }
+
+  check refl: Equal(
+    Type,
+    class { A: String = "abc" },
+    class { A: String },
+  )
+  ```
+
+[refactor] `includeClazz` -- step left and right together
+
+extract the step of expending the macros
+
+`Exps.Equivalent` -- `infer` -- add `span`
+
+[bug fix] fix the use of `solutionAdvanceValue`
+
+- `MetaVar` should not be special
+
+- [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
+
+  - to call `Actions.try*` in `solutionAdvanceValue`
 
 # later
 
