@@ -28,11 +28,7 @@ export function doDot(target: Value, name: string): Value {
 
   const propertyType = Values.clazzLookupPropertyType(target, target.type, name)
   if (propertyType === undefined) {
-    throw new Errors.EvaluationError(
-      [`[doDot] fail to lookup property type`, `  property name: ${name}`].join(
-        "\n",
-      ),
-    )
+    throw new Errors.EvaluationError(`[doDot] undefined property: ${name}`)
   }
 
   return Values.TypedNeutral(

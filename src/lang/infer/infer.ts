@@ -46,10 +46,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       }
 
       throw new Errors.ElaborationError(
-        `Undefined name during infer: ${exp.name}`,
-        {
-          span: exp.span,
-        },
+        `[infer] undefined name: ${exp.name}, when inferred Var`,
+        { span: exp.span },
       )
     }
 
@@ -128,7 +126,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
         if (error instanceof Errors.UnificationError) {
           throw new Errors.ElaborationError(
             [
-              `[infer] meet UnificationError when inferring Ap`,
+              `[infer] meet UnificationError, when inferring Ap`,
               ...error.trace,
               error.message,
             ].join("\n"),
@@ -238,10 +236,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       )
       if (propertyType === undefined) {
         throw new Errors.ElaborationError(
-          [
-            `[infer] fail to lookup property type`,
-            `  property name: ${name}`,
-          ].join("\n"),
+          `[infer] undefined property: ${name}, when inferring Dot`,
           { span: exp.span },
         )
       }
@@ -260,9 +255,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "New": {
       const clazz = ctxLookupValue(ctx, exp.name)
       if (clazz === undefined) {
-        throw new Errors.ElaborationError(`undefined class: ${exp.name}`, {
-          span: exp.span,
-        })
+        throw new Errors.ElaborationError(
+          `[infer] undefined class: ${exp.name}, when inferring New`,
+          { span: exp.span },
+        )
       }
 
       Values.assertClazzInCtx(mod, ctx, clazz)
@@ -285,9 +281,10 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
     case "NewAp": {
       const clazz = ctxLookupValue(ctx, exp.name)
       if (clazz === undefined) {
-        throw new Errors.ElaborationError(`undefined class: ${exp.name}`, {
-          span: exp.span,
-        })
+        throw new Errors.ElaborationError(
+          `[infer] undefined class: ${exp.name}, when inferring NewAp`,
+          { span: exp.span },
+        )
       }
 
       Values.assertClazzInCtx(mod, ctx, clazz)
@@ -417,10 +414,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     default: {
       throw new Errors.ElaborationError(
-        `infer is not implemented for: ${exp.kind}`,
-        {
-          span: exp.span,
-        },
+        `[infer] is not implemented for: ${exp.kind}`,
+        { span: exp.span },
       )
     }
   }
