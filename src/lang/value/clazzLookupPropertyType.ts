@@ -3,7 +3,7 @@ import * as Errors from "../errors"
 import type { Value } from "../value"
 import * as Values from "../value"
 
-export function objektLookupPropertyType(
+export function clazzLookupPropertyType(
   target: Value,
   clazz: Values.Clazz,
   name: string,
@@ -24,15 +24,15 @@ export function objektLookupPropertyType(
   return undefined
 }
 
-export function objektLookupPropertyTypeOrFail(
+export function clazzLookupPropertyTypeOrFail(
   target: Value,
   clazz: Values.Clazz,
   name: string,
 ): Value {
-  const propertyType = objektLookupPropertyType(target, clazz, name)
+  const propertyType = clazzLookupPropertyType(target, clazz, name)
   if (propertyType === undefined) {
     throw new Errors.EvaluationError(
-      `[objektLookupPropertyTypeOrFail] undefined property type name: ${name}`,
+      `[clazzLookupPropertyTypeOrFail] undefined property type name: ${name}`,
     )
   }
 

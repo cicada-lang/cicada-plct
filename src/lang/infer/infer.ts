@@ -231,7 +231,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(mod, ctx, inferred.type)
-      const propertyType = Values.objektLookupPropertyTypeOrFail(
+      const propertyType = Values.clazzLookupPropertyTypeOrFail(
         targetValue,
         inferred.type,
         exp.name,
