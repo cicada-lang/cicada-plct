@@ -33,7 +33,13 @@ extract the step of expending the macros
 
 [bug fix] `GroupHomomorphism.test.cic`
 
-- debug by log `solveByArgs`
+- The problem is due to use of `readbackType` during `infer`
+  for "FnAnnotated" and "FnImplicitAnnotated"
+
+  - We should review all uses of `readback` during `infer` and `check`,
+    but I think we can not avoid using `readback` during elaboration,
+    because of implicit insertion will always use `readback`
+    to return solved meta variable.
 
 - During the following `infer`
 
