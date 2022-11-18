@@ -22,12 +22,12 @@ export class Solve extends Stmt {
   async execute(mod: Mod): Promise<string> {
     let ctx = mod.ctx
     const names: Array<string> = []
-    for (const { name, type } of this.bindings) {
-      const typeCore = checkType(mod, ctx, type)
+    for (const binding of this.bindings) {
+      const typeCore = checkType(mod, ctx, binding.type)
       const type = evaluate(ctxToEnv(ctx), typeCore)
-      const metaVar = Values.MetaVar(type, name)
-      ctx = CtxFulfilled(name, type, metaVar, ctx)
-      names.push(name)
+      const metaVar = Values.MetaVar(type, binding.name)
+      ctx = CtxFulfilled(binding.name, type, metaVar, ctx)
+      names.push(binding.name)
     }
 
     for (const equation of this.equations) {
