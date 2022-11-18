@@ -68,7 +68,16 @@ And see the eta-expansion happened before the implicit argument insertion.
 
 # Why FnAnnotated and FnImplicitAnnotated need readback
 
-TODO
+Take `FnAnnotated` as an example, we need `readback` here, because:
+
+- the return value has `Values.Pi` as type,
+- and `Values.Pi` need a closure,
+- and closure need a `Core`,
+- but the inferred return type is a `Value`,
+- and the inferred return type is not the finial return type,
+  because we get this value when context is extended by a type (no value).
+- thus we need to `readback` the partially evaluated return type,
+  to be evaluated in new (more concrete) context again.
 
 # Solution
 
@@ -76,8 +85,11 @@ TODO
 
 # Ohter use of readback during elaboration
 
-TODO We should review all uses of `readback` during `infer` and `check`.
-
-But, maybe we can not avoid using `readback` during elaboration,
+Note that, we can not avoid using `readback` during elaboration,
 because of implicit insertion will always use `readback`
 to return solved meta variable.
+
+TODO We should review all uses of `readback` during `infer` and `check`:
+
+- `inferProperties`
+- `inferNewArgs`

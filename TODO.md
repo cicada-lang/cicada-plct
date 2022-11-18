@@ -1,8 +1,4 @@
-remove the use of `readback` during `infer` of `NewAp`
-
-- `New` do not need `readback`, why `NewAp` need?
-
-note about Why FnAnnotated and FnImplicitAnnotated need readback
+note about solution in 2022-11-19-using-readback-during-elaboration
 
 look back -- 2022-11-19-using-readback-during-elaboration
 
