@@ -66,7 +66,7 @@ node --inspect-brk bin/cic.js run std/group/GroupHomomorphism.test.todo.cic --wa
 
 And see the eta-expansion happened before the implicit argument insertion.
 
-## Why FnAnnotated and FnImplicitAnnotated need readback
+# Why FnAnnotated and FnImplicitAnnotated need readback
 
 TODO
 
@@ -74,7 +74,7 @@ TODO
 
 TODO
 
-# Look back
+# Ohter use of readback during elaboration
 
 TODO We should review all uses of `readback` during `infer` and `check`.
 
