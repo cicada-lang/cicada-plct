@@ -231,11 +231,21 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       const inferred = infer(mod, ctx, exp.target)
       const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
       Values.assertClazzInCtx(mod, ctx, inferred.type)
-      const propertyType = Values.clazzLookupPropertyTypeOrFail(
+      const propertyType = Values.clazzLookupPropertyType(
         targetValue,
         inferred.type,
         exp.name,
       )
+      if (propertyType === undefined) {
+        throw new Errors.ElaborationError(
+          [
+            `[infer] fail to lookup property type`,
+            `  property name: ${name}`,
+          ].join("\n"),
+          { span: exp.span },
+        )
+      }
+
       return Inferred(propertyType, Cores.Dot(inferred.core, exp.name))
     }
 

@@ -1,5 +1,3 @@
-quit using `clazzLookupPropertyTypeOrFail` for better error message
-
 remove the use of `readback` during `infer` of `NewAp`
 
 - `New` do not need `readback`, why `NewAp` need?
