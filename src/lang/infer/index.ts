@@ -1,5 +1,6 @@
 export * from "./infer"
 export * from "./inferExtraProperties"
 export * from "./inferFulfillingType"
+export * from "./inferNewArgs"
 export * from "./inferOrUndefined"
 export * from "./inferProperties"

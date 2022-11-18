@@ -1,4 +1,4 @@
-import { check, checkClazz, checkNewArgs, checkType } from "../check"
+import { check, checkClazz, checkType } from "../check"
 import { closureApply, ClosureNative, ClosureSimple } from "../closure"
 import type { Core } from "../core"
 import * as Cores from "../core"
@@ -17,6 +17,7 @@ import * as Exps from "../exp"
 import {
   inferExtraProperties,
   inferFulfillingType,
+  inferNewArgs,
   inferProperties,
 } from "../infer"
 import { insertDuringInfer } from "../insert"
@@ -288,7 +289,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       }
 
       Values.assertClazzInCtx(mod, ctx, clazz)
-      const properties = checkNewArgs(mod, ctx, exp.args, clazz)
+      const properties = inferNewArgs(mod, ctx, exp.args, clazz)
       return Inferred(clazz, Cores.Objekt(properties))
     }
 

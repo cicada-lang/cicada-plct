@@ -9,7 +9,7 @@ import type { Mod } from "../mod"
 import { readback } from "../readback"
 import * as Values from "../value"
 
-export function checkNewArgs(
+export function inferNewArgs(
   mod: Mod,
   ctx: Ctx,
   args: Array<Exps.Arg>,
@@ -19,7 +19,7 @@ export function checkNewArgs(
     case "ClazzNull": {
       if (args.length !== 0) {
         throw new Errors.ElaborationError(
-          `[checkNewArgs] too many arguments when calling new`,
+          `[inferNewArgs] too many arguments when calling new`,
           {},
         )
       }
@@ -30,7 +30,7 @@ export function checkNewArgs(
     case "ClazzCons": {
       if (args.length === 0) {
         throw new Errors.ElaborationError(
-          `[checkNewArgs] not enough arguments when calling new, require property: ${clazz.propertyName}`,
+          `[inferNewArgs] not enough arguments when calling new, require property: ${clazz.propertyName}`,
           {},
         )
       }
@@ -42,7 +42,7 @@ export function checkNewArgs(
       ctx = CtxCons(clazz.propertyName, clazz.propertyType, ctx)
       return {
         [clazz.propertyName]: propertyCore,
-        ...checkNewArgs(mod, ctx, restArgs, rest),
+        ...inferNewArgs(mod, ctx, restArgs, rest),
       }
     }
 
@@ -56,7 +56,7 @@ export function checkNewArgs(
 
       return {
         [clazz.propertyName]: propertyCore,
-        ...checkNewArgs(mod, ctx, args, clazz.rest),
+        ...inferNewArgs(mod, ctx, args, clazz.rest),
       }
     }
   }
