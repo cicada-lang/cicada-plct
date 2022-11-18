@@ -1,5 +1,6 @@
 ---
 title: Solved problems
+date: 2022-11-03
 ---
 
 # How to implementing lexical scope?

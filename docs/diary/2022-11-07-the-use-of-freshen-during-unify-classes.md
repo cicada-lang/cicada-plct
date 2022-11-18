@@ -1,5 +1,6 @@
 ---
 title: The use of freshen during unify classes
+date: 2022-11-07
 ---
 
 Why we need `freshenNames`?

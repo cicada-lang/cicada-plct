@@ -1,5 +1,6 @@
 ---
 title: Class and self type
+date: 2022-11-07
 ---
 
 # Class is orderless

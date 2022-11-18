@@ -1,5 +1,6 @@
 ---
 title: Would programming by rewriting easier?
+date: 2022-11-19
 ---
 
 For example, in some case, we need a version of `readback`

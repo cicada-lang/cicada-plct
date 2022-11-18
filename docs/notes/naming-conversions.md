@@ -2,7 +2,7 @@
 title: Naming conventions
 ---
 
-# name of variable and function
+# Naming conventions in old notes of "The Little Typer"
 
 In some case, we use type as postfix to name variable of this type.
 

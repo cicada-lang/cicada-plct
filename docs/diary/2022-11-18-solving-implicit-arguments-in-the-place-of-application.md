@@ -1,5 +1,6 @@
 ---
 title: Solving implicit arguments in the place of application
+date: 2022-11-18
 ---
 
 Currently we are solving implicit arguments in the place of application.

@@ -1,5 +1,6 @@
 ---
 title: Error message design
+date: 2022-11-02
 ---
 
 "The Little Typer" can be used as a guide for error message design.
