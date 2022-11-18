@@ -1,5 +1,4 @@
 import * as Actions from "../actions"
-import * as Errors from "../errors"
 import type { Value } from "../value"
 import * as Values from "../value"
 
@@ -22,19 +21,4 @@ export function clazzLookupProperty(
   }
 
   return undefined
-}
-
-export function clazzLookupPropertyOrFail(
-  target: Value,
-  clazz: Values.Clazz,
-  name: string,
-): Value {
-  const property = clazzLookupProperty(target, clazz, name)
-  if (property === undefined) {
-    throw new Errors.EvaluationError(
-      `[clazzLookupPropertyOrFail] undefined property name: ${name}`,
-    )
-  }
-
-  return property
 }
