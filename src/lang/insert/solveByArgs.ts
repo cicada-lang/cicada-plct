@@ -49,12 +49,8 @@ export function solveByArgs(
       insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))
     } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
-      if (argInferred !== undefined) {
-        if (argInferred.type.kind === "PiImplicit") {
-          // insertDuringCheck(mod, ctx, argInferred, [], type.argType)
-        } else {
-          unifyType(mod, ctx, argInferred.type, type.argType)
-        }
+      if (argInferred !== undefined && argInferred.type.kind !== "PiImplicit") {
+        unifyType(mod, ctx, argInferred.type, type.argType)
       }
 
       /**

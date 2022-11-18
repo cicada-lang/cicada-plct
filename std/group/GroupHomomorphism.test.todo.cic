@@ -37,7 +37,3 @@ solve (G: Group, H: Group, K: Group) {
   GroupHomomorphism(G, H) = typeof(idGroupHomomorphism(trivialGroup))
   GroupHomomorphism(H, K) = typeof(idGroupHomomorphism(trivialGroup))
 }
-
-solve (G: Group) {
-
-}
