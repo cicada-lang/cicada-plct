@@ -24,9 +24,9 @@ export class Solve extends Stmt {
     const names: Array<string> = []
     for (const { name, type } of this.bindings) {
       const typeCore = checkType(mod, ctx, type)
-      const typeValue = evaluate(ctxToEnv(ctx), typeCore)
-      const metaVar = Values.MetaVar(typeValue, name)
-      ctx = CtxFulfilled(name, typeValue, metaVar, ctx)
+      const type = evaluate(ctxToEnv(ctx), typeCore)
+      const metaVar = Values.MetaVar(type, name)
+      ctx = CtxFulfilled(name, type, metaVar, ctx)
       names.push(name)
     }
 
