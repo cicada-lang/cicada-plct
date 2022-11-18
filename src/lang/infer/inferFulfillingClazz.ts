@@ -19,11 +19,11 @@ export function inferFulfillingClazz(
   const targetValue = evaluate(ctxToEnv(ctx), inferred.core)
   if (!Values.isClazz(targetValue)) return undefined
 
-  const argCore = checkClazzArg(mod, ctx, targetValue, argExp)
+  const argCore = checkFulfilledArg(mod, ctx, targetValue, argExp)
   return Inferred(Values.Type(), Cores.Ap(inferred.core, argCore))
 }
 
-function checkClazzArg(
+function checkFulfilledArg(
   mod: Mod,
   ctx: Ctx,
   clazz: Values.Clazz,
@@ -32,7 +32,7 @@ function checkClazzArg(
   switch (clazz.kind) {
     case "ClazzNull": {
       throw new Errors.ElaborationError(
-        "[checkClazzArg] cannot apply argument to ClazzNull",
+        "[checkFulfilledArg] cannot apply argument to ClazzNull",
         { span: arg.span },
       )
     }
@@ -42,7 +42,7 @@ function checkClazzArg(
     }
 
     case "ClazzFulfilled": {
-      return checkClazzArg(mod, ctx, clazz.rest, arg)
+      return checkFulfilledArg(mod, ctx, clazz.rest, arg)
     }
   }
 }
