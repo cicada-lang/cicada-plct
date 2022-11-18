@@ -1,6 +1,5 @@
 export * from "./check"
 export * from "./checkByInfer"
 export * from "./checkClazz"
-export * from "./checkClazzArg"
 export * from "./checkProperties"
 export * from "./checkType"
