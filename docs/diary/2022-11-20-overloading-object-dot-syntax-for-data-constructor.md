@@ -43,6 +43,5 @@ but use something like:
 List::cons("a", List::cons("b", List::cons("c", List::null)))
 ```
 
-If we do so, `::` will be a syntax for namespace,
-which can be used with module system
--- importing a module as a namespace.
+If we do so, `::` will also be the syntax for namespace,
+which can be used with module system -- for importing a module as a namespace.
