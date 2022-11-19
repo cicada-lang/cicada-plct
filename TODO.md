@@ -1,12 +1,14 @@
+Macros.Equivalent -- expand
+
+Exps.Macro
+
+`Exps.Equivalent` -- `infer` -- add `span`
+
 [refactor] `unifyClazz` -- step left and right together
 
 - [note] about `unifyClazz` compare with `Sigma`
 
 [refactor] `includeClazz` -- step left and right together
-
-extract the step of expanding the macros
-
-`Exps.Equivalent` -- `infer` -- add `span`
 
 [diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
