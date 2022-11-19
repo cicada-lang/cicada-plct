@@ -14,7 +14,14 @@ export function doAp(target: Value, arg: Value): Value {
     return Values.clazzFulfill(target, arg)
   }
 
-  Values.assertValues(target, ["TypedNeutral"])
+  if (target.kind !== "TypedNeutral") {
+    throw new Errors.EvaluationError(
+      [
+        `[doAp] expect target to be TypedNeutral`,
+        `  target.kind: ${target.kind}`,
+      ].join("\n"),
+    )
+  }
 
   if (target.type.kind !== "Pi") {
     throw new Errors.EvaluationError(

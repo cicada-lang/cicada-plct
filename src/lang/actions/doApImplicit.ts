@@ -10,7 +10,14 @@ export function doApImplicit(target: Value, arg: Value): Value {
     return closureApply(target.retClosure, arg)
   }
 
-  Values.assertValues(target, ["TypedNeutral"])
+  if (target.kind !== "TypedNeutral") {
+    throw new Errors.EvaluationError(
+      [
+        `[doApImplicit] expect target to be TypedNeutral`,
+        `  target.kind: ${target.kind}`,
+      ].join("\n"),
+    )
+  }
 
   if (target.type.kind !== "PiImplicit") {
     throw new Errors.EvaluationError(

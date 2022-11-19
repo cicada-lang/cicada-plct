@@ -11,7 +11,14 @@ export function doReplace(target: Value, motive: Value, base: Value): Value {
     return base
   }
 
-  Values.assertValues(target, ["TypedNeutral"])
+  if (target.kind !== "TypedNeutral") {
+    throw new Errors.EvaluationError(
+      [
+        `[doReplace] expect target to be TypedNeutral`,
+        `  target.kind: ${target.kind}`,
+      ].join("\n"),
+    )
+  }
 
   if (target.type.kind !== "Equal") {
     throw new Errors.EvaluationError(

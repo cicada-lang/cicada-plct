@@ -1,7 +1,6 @@
 export * from "./assertClazzInCtx"
 export * from "./assertTypeInCtx"
 export * from "./assertTypesInCtx"
-export * from "./assertValues"
 export * from "./clazzClosureApply"
 export * from "./clazzExtendCtx"
 export * from "./clazzFromTypedValues"

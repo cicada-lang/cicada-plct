@@ -15,7 +15,14 @@ export function doDot(target: Value, name: string): Value {
     return property
   }
 
-  Values.assertValues(target, ["TypedNeutral"])
+  if (target.kind !== "TypedNeutral") {
+    throw new Errors.EvaluationError(
+      [
+        `[doDot] expect target to be TypedNeutral`,
+        `  target.kind: ${target.kind}`,
+      ].join("\n"),
+    )
+  }
 
   if (!Values.isClazz(target.type)) {
     throw new Errors.EvaluationError(

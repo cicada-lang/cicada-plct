@@ -1,5 +1,3 @@
-[later] quit using `assertValues` for better error message
-
 [refactor] `unifyClazz` -- step left and right together
 
 - [note] about `unifyClazz` compare with `Sigma`

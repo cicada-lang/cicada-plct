@@ -10,7 +10,14 @@ export function doCdr(target: Value): Value {
     return target.cdr
   }
 
-  Values.assertValues(target, ["TypedNeutral"])
+  if (target.kind !== "TypedNeutral") {
+    throw new Errors.EvaluationError(
+      [
+        `[doCdr] expect target to be TypedNeutral`,
+        `  target.kind: ${target.kind}`,
+      ].join("\n"),
+    )
+  }
 
   if (target.type.kind !== "Sigma") {
     throw new Errors.EvaluationError(

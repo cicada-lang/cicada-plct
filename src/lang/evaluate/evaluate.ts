@@ -103,11 +103,17 @@ export function evaluate(env: Env, core: Core): Value {
     case "ClazzFulfilled": {
       const propertyType = evaluate(env, core.propertyType)
       const property = evaluate(env, core.property)
-      const rest = evaluate(
-        EnvCons(core.propertyName, property, env),
-        core.rest,
-      )
-      Values.assertValues(rest, ["ClazzNull", "ClazzCons", "ClazzFulfilled"])
+      env = EnvCons(core.propertyName, property, env)
+      const rest = evaluate(env, core.rest)
+      if (!Values.isClazz(rest)) {
+        throw new Errors.EvaluationError(
+          [
+            `[evaluate] during ClazzFulfilled, expect the rest to be Clazz`,
+            `  rest.kind: ${rest.kind}`,
+          ].join("\n"),
+        )
+      }
+
       return Values.ClazzFulfilled(
         core.propertyName,
         propertyType,
