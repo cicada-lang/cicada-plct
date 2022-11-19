@@ -137,13 +137,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:new_ap": ({ name, args }, { span }) =>
       Exps.NewAp(pt.str(name), matchers.args_matcher(args), span),
     "operand:equivalent": ({ type, from, rest }, { span }) =>
-      Exps.MacroExp(
+      Exps.MacroEmbedded(
         new Macros.Equivalent(
           matchers.exp_matcher(type),
           matchers.exp_matcher(from),
           pt.matchers
             .zero_or_more_matcher(rest)
             .map(matchers.equivalent_entry_matcher),
+          span,
         ),
         span,
       ),

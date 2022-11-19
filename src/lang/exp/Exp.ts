@@ -45,7 +45,7 @@ export type Exp =
   | Dot
   | Sequence
   | SequenceUnfolded
-  | MacroExp
+  | MacroEmbedded
 
 export type Var = {
   family: "Exp"
@@ -1014,16 +1014,16 @@ export function SequenceBindingCheck(
   }
 }
 
-export type MacroExp = {
+export type MacroEmbedded = {
   family: "Exp"
-  kind: "MacroExp"
+  kind: "MacroEmbedded"
   macro: Macro
 } & ExpMeta
 
-export function MacroExp(macro: Macro, span?: Span): MacroExp {
+export function MacroEmbedded(macro: Macro, span?: Span): MacroEmbedded {
   return {
     family: "Exp",
-    kind: "MacroExp",
+    kind: "MacroEmbedded",
     macro,
     span,
   }

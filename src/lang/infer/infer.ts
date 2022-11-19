@@ -328,7 +328,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       return infer(mod, ctx, exp.ret)
     }
 
-    case "MacroExp": {
+    case "MacroEmbedded": {
       return infer(mod, ctx, exp.macro.expand())
     }
 

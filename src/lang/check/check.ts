@@ -220,7 +220,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return check(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret), type)
     }
 
-    case "MacroExp": {
+    case "MacroEmbedded": {
       return check(mod, ctx, exp.macro.expand(), type)
     }
   }

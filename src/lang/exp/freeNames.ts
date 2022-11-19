@@ -194,7 +194,7 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return freeNames(boundNames, Exps.foldSequence(exp.bindings, exp.ret))
     }
 
-    case "MacroExp": {
+    case "MacroEmbedded": {
       return freeNames(boundNames, exp.macro.expand())
     }
   }

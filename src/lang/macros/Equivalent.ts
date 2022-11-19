@@ -1,6 +1,7 @@
 import type { Exp } from "../exp"
 import * as Exps from "../exp"
 import { Macro } from "../macro"
+import type { Span } from "../span"
 
 export type EquivalentEntry = {
   via?: Exp
@@ -12,6 +13,7 @@ export class Equivalent extends Macro {
     public type: Exp,
     public from: Exp,
     public rest: Array<EquivalentEntry>,
+    public span: Span,
   ) {
     super()
   }

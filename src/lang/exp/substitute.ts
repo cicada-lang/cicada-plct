@@ -393,7 +393,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
       return substitute(Exps.foldSequence(body.bindings, body.ret), name, exp)
     }
 
-    case "MacroExp": {
+    case "MacroEmbedded": {
       return substitute(body.macro.expand(), name, exp)
     }
   }
