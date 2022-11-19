@@ -2,6 +2,7 @@ import type { Exp } from "../exp"
 import * as Exps from "../exp"
 import { Macro } from "../macro"
 import type { Span } from "../span"
+import { spanUnion } from "../span"
 
 export type EquivalentEntry = {
   via?: Exp
@@ -26,16 +27,24 @@ export class Equivalent extends Macro {
          => the(Equal(type, from, from), refl)
       **/
 
-      return Exps.ApUnfolded(Exps.Var("the"), [
-        Exps.ArgPlain(
-          Exps.ApUnfolded(Exps.Var("Equal"), [
-            Exps.ArgPlain(this.type),
-            Exps.ArgPlain(this.from),
-            Exps.ArgPlain(this.from),
-          ]),
-        ),
-        Exps.ArgPlain(Exps.Var("refl")),
-      ])
+      return Exps.ApUnfolded(
+        Exps.Var("the"),
+        [
+          Exps.ArgPlain(
+            Exps.ApUnfolded(
+              Exps.Var("Equal"),
+              [
+                Exps.ArgPlain(this.type),
+                Exps.ArgPlain(this.from),
+                Exps.ArgPlain(this.from),
+              ],
+              this.span,
+            ),
+          ),
+          Exps.ArgPlain(Exps.Var("refl")),
+        ],
+        this.span,
+      )
     }
 
     if (this.rest.length === 1) {
@@ -47,16 +56,24 @@ export class Equivalent extends Macro {
       const via = this.rest[0].via || Exps.Var("refl")
       const to = this.rest[0].to
 
-      return Exps.ApUnfolded(Exps.Var("the"), [
-        Exps.ArgPlain(
-          Exps.ApUnfolded(Exps.Var("Equal"), [
-            Exps.ArgPlain(this.type),
-            Exps.ArgPlain(this.from),
-            Exps.ArgPlain(to),
-          ]),
-        ),
-        Exps.ArgPlain(via),
-      ])
+      return Exps.ApUnfolded(
+        Exps.Var("the"),
+        [
+          Exps.ArgPlain(
+            Exps.ApUnfolded(
+              Exps.Var("Equal"),
+              [
+                Exps.ArgPlain(this.type),
+                Exps.ArgPlain(this.from),
+                Exps.ArgPlain(to),
+              ],
+              this.span,
+            ),
+          ),
+          Exps.ArgPlain(via),
+        ],
+        this.span,
+      )
     }
 
     /**
@@ -64,14 +81,18 @@ export class Equivalent extends Macro {
        => equalCompose(implicit type, implicit from, implicit to1, implicit to2, via1, via2)
     **/
 
-    let result = Exps.ApUnfolded(Exps.Var("equalCompose"), [
-      Exps.ArgImplicit(this.type),
-      Exps.ArgImplicit(this.from),
-      Exps.ArgImplicit(this.rest[0].to),
-      Exps.ArgImplicit(this.rest[1].to),
-      Exps.ArgPlain(this.rest[0].via || Exps.Var("refl")),
-      Exps.ArgPlain(this.rest[1].via || Exps.Var("refl")),
-    ])
+    let result = Exps.ApUnfolded(
+      Exps.Var("equalCompose"),
+      [
+        Exps.ArgImplicit(this.type),
+        Exps.ArgImplicit(this.from),
+        Exps.ArgImplicit(this.rest[0].to),
+        Exps.ArgImplicit(this.rest[1].to),
+        Exps.ArgPlain(this.rest[0].via || Exps.Var("refl")),
+        Exps.ArgPlain(this.rest[1].via || Exps.Var("refl")),
+      ],
+      spanUnion(this.from.span, this.rest[1].to.span),
+    )
 
     /**
        equivalent type { from | ... | ... = lastTo | via = to }
@@ -80,14 +101,18 @@ export class Equivalent extends Macro {
 
     let lastTo = this.rest[1].to
     for (const next of this.rest.slice(2)) {
-      result = Exps.ApUnfolded(Exps.Var("equalCompose"), [
-        Exps.ArgImplicit(this.type),
-        Exps.ArgImplicit(this.from),
-        Exps.ArgImplicit(lastTo),
-        Exps.ArgImplicit(next.to),
-        Exps.ArgPlain(result),
-        Exps.ArgPlain(next.via || Exps.Var("refl")),
-      ])
+      result = Exps.ApUnfolded(
+        Exps.Var("equalCompose"),
+        [
+          Exps.ArgImplicit(this.type),
+          Exps.ArgImplicit(this.from),
+          Exps.ArgImplicit(lastTo),
+          Exps.ArgImplicit(next.to),
+          Exps.ArgPlain(result),
+          Exps.ArgPlain(next.via || Exps.Var("refl")),
+        ],
+        spanUnion(lastTo.span, next.to.span),
+      )
       lastTo = next.to
     }
 
