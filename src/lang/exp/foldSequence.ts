@@ -1,6 +1,5 @@
 import type { Exp } from "../exp"
 import * as Exps from "../exp"
-import { spanUnion } from "../span"
 
 export function foldSequence(
   bindings: Array<Exps.SequenceBinding>,
@@ -16,7 +15,8 @@ export function foldSequence(
         binding.name,
         binding.exp,
         foldSequence(restBindings, ret),
-        spanUnion(binding.span, ret.span),
+        // spanUnion(binding.span, ret.span),
+        ret.span,
       )
     }
 
@@ -26,7 +26,8 @@ export function foldSequence(
         binding.type,
         binding.exp,
         foldSequence(restBindings, ret),
-        spanUnion(binding.span, ret.span),
+        // spanUnion(binding.span, ret.span),
+        ret.span,
       )
     }
 
@@ -35,7 +36,8 @@ export function foldSequence(
         binding.exp,
         binding.type,
         foldSequence(restBindings, ret),
-        spanUnion(binding.span, ret.span),
+        // spanUnion(binding.span, ret.span),
+        ret.span,
       )
     }
   }
