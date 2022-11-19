@@ -220,8 +220,8 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       return check(mod, ctx, Exps.foldSequence(exp.bindings, exp.ret), type)
     }
 
-    case "Equivalent": {
-      return checkByInfer(mod, ctx, exp, type)
+    case "MacroExp": {
+      return check(mod, ctx, exp.macro.expand(), type)
     }
   }
 }

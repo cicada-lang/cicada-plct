@@ -194,16 +194,8 @@ export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return freeNames(boundNames, Exps.foldSequence(exp.bindings, exp.ret))
     }
 
-    case "Equivalent": {
-      return new Set([
-        ...freeNames(boundNames, exp.type),
-        ...freeNames(boundNames, exp.from),
-        ...exp.rest.flatMap(({ via, to }) =>
-          via !== undefined
-            ? [...freeNames(boundNames, via), ...freeNames(boundNames, to)]
-            : [...freeNames(boundNames, to)],
-        ),
-      ])
+    case "MacroExp": {
+      return freeNames(boundNames, exp.macro.expand())
     }
   }
 }

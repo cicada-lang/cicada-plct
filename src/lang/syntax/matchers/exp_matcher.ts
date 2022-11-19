@@ -2,6 +2,7 @@ import * as pt from "@cicada-lang/partech"
 import * as matchers from "."
 import type { Exp } from "../../exp"
 import * as Exps from "../../exp"
+import * as Macros from "../../macros"
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
@@ -136,12 +137,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:new_ap": ({ name, args }, { span }) =>
       Exps.NewAp(pt.str(name), matchers.args_matcher(args), span),
     "operand:equivalent": ({ type, from, rest }, { span }) =>
-      Exps.Equivalent(
-        matchers.exp_matcher(type),
-        matchers.exp_matcher(from),
-        pt.matchers
-          .zero_or_more_matcher(rest)
-          .map(matchers.equivalent_entry_matcher),
+      Exps.MacroExp(
+        new Macros.Equivalent(
+          matchers.exp_matcher(type),
+          matchers.exp_matcher(from),
+          pt.matchers
+            .zero_or_more_matcher(rest)
+            .map(matchers.equivalent_entry_matcher),
+        ),
         span,
       ),
   })(tree)

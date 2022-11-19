@@ -393,16 +393,8 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
       return substitute(Exps.foldSequence(body.bindings, body.ret), name, exp)
     }
 
-    case "Equivalent": {
-      return Exps.Equivalent(
-        substitute(body.type, name, exp),
-        substitute(body.from, name, exp),
-        body.rest.map(({ via, to }) => ({
-          via: via ? substitute(via, name, exp) : undefined,
-          to: substitute(to, name, exp),
-        })),
-        body.span,
-      )
+    case "MacroExp": {
+      return substitute(body.macro.expand(), name, exp)
     }
   }
 }

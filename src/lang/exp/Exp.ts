@@ -1,3 +1,4 @@
+import type { Macro } from "../macro"
 import type { Span } from "../span"
 
 type ExpMeta = { span?: Span }
@@ -44,7 +45,7 @@ export type Exp =
   | Dot
   | Sequence
   | SequenceUnfolded
-  | Equivalent
+  | MacroExp
 
 export type Var = {
   family: "Exp"
@@ -1013,31 +1014,17 @@ export function SequenceBindingCheck(
   }
 }
 
-export type EquivalentEntry = {
-  via?: Exp
-  to: Exp
-}
-
-export type Equivalent = {
+export type MacroExp = {
   family: "Exp"
-  kind: "Equivalent"
-  type: Exp
-  from: Exp
-  rest: Array<EquivalentEntry>
+  kind: "MacroExp"
+  macro: Macro
 } & ExpMeta
 
-export function Equivalent(
-  type: Exp,
-  from: Exp,
-  rest: Array<EquivalentEntry>,
-  span?: Span,
-): Equivalent {
+export function MacroExp(macro: Macro, span?: Span): MacroExp {
   return {
     family: "Exp",
-    kind: "Equivalent",
-    type,
-    from,
-    rest,
+    kind: "MacroExp",
+    macro,
     span,
   }
 }
