@@ -1,12 +1,10 @@
-`Macros.Equivalent` -- expand with `span`
+[later] quit using `assertValues` for better error message
 
 [refactor] `unifyClazz` -- step left and right together
 
 - [note] about `unifyClazz` compare with `Sigma`
 
 [refactor] `includeClazz` -- step left and right together
-
-[diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
 [bug fix] `GroupHomomorphism.test.cic`
 
@@ -21,39 +19,7 @@
 
   - `readback` do not do eta-expansion.
 
-- The problem is due to use of `readbackType` during `infer`
-  for "FnAnnotated" and "FnImplicitAnnotated"
-
-  - We should review all uses of `readback` during `infer` and `check`,
-    but I think we can not avoid using `readback` during elaboration,
-    because of implicit insertion will always use `readback`
-    to return solved meta variable.
-
-- During the following `infer`
-
-  ```
-  compute composeGroupHomomorphism(
-    idGroupHomomorphism(trivialGroup),
-    idGroupHomomorphism(trivialGroup),
-  )
-  ```
-
-  Why `?G: Group` is expanded to:
-
-  ```
-  {
-    Element: ?G.Element,
-    mul: (x, y) => ?G.mul(x, y),
-    mulAssociative: (x, y, z) => ?G.mulAssociative(x, y, z),
-    id: ?G.id,
-    idLeft: (x) => ?G.idLeft(x),
-    idRight: (x) => ?G.idRight(x),
-    inverse: (x) => ?G.inverse(x),
-    inverseLeft: (x) => ?G.inverseLeft(x),
-    inverseRight: (x) => ?G.inverseRight(x),
-    div: (x, y) => ?G.mul(x, ?G.inverse(y))
-  }
-  ```
+[diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
@@ -87,8 +53,6 @@
 # later
 
 [later] use unified JSON ADT
-
-[later] quit using `assertValues` for better error message
 
 [diary] literal fulfilled class
 
