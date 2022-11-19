@@ -1,45 +1,10 @@
 ---
-title: Inconsistency of fulfilling class type
+title: Overloading object dot syntax for data constructor
 author: Xie Yuheng
-date: 2021-11-11
+date: 2022-11-20
 ---
 
-We can apply a class like it is a function.
-
-Take `C` as an example:
-
-```cicada
-class C { T: Type, x: String }
-```
-
-`C` is `Type`:
-
-```cicada
-check C: Type
-```
-
-But we can also use `C` as a `(Type) -> Type`:
-
-```cicada
-check C(String): Type
-```
-
-And we can also use `C` as a `(Type, String) -> Type`:
-
-```cicada
-check C(String, "a"): Type
-```
-
-This is an inconsistency of current design of fulfilling type.
-
-The function application syntax is overloaded,
-leading a reader to think that `C` has type
-`(Type) -> Type` and `(Type, String) -> Type`.
-
-Maybe we can solve this by "every thing is object",
-and view `apply` as a special property.
-
-# The same for datatype if we use the dot syntax
+Currently, the object dot syntax is overloaded for referencing data constructor.
 
 Take `List` as an example:
 

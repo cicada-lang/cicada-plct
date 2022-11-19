@@ -1,5 +1,6 @@
 ---
 title: Class and self type
+author: Xie Yuheng
 date: 2022-11-07
 ---
 

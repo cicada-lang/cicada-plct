@@ -1,5 +1,6 @@
 ---
 title: Solving implicit arguments in the place of application
+author: Xie Yuheng
 date: 2022-11-16
 ---
 

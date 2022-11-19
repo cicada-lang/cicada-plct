@@ -1,5 +1,6 @@
 ---
 title: Would programming by rewriting easier?
+author: Xie Yuheng
 date: 2022-11-18
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Solved problems
+author: Xie Yuheng
 date: 2022-11-03
 ---
 
