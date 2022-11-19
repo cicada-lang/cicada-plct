@@ -50,27 +50,22 @@
 
 - to call `Actions.try*` in `solutionAdvanceValue`
 
-# later
-
-[later] use unified JSON ADT
-
-[diary] literal fulfilled class
-
-- Maybe should not allow literal fulfilled class
-
-- All classes must be purely abstract.
-
-  - This will be a important limitation if imposed.
-  - This influences community coding style (naming convention).
-
-- For the semantic of fulfilling class.
-  - How are the fulfilled values different from provided values?
-
 # bug
 
 [bug] macros like `equivalent` uses globals variables which might be shadowed
 
+- Maybe we should be able to reference globals by `Exp`.
+
 # maybe
+
+[maybe] use unified JSON ADT
+
+- change `CamelCase` to `camelCase`
+
+- change the names of meta properties:
+
+  - `family` -> `@type`
+  - `kind` -> `@kind`
 
 [maybe] `unifyClazz` & `includeClazz` support reordering of properties
 
