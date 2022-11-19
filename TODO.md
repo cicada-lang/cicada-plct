@@ -1,8 +1,6 @@
-Macros.Equivalent -- expand
+`Exps.Macro`
 
-Exps.Macro
-
-`Exps.Equivalent` -- `infer` -- add `span`
+`Macros.Equivalent` -- more `span`
 
 [refactor] `unifyClazz` -- step left and right together
 
@@ -60,6 +58,8 @@ Exps.Macro
   ```
 
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
+
+- `refl` will do an unification but what it should do is `equivalent`.
 
 - example:
 
