@@ -45,7 +45,6 @@ Telegram:
 
 - English chat group: [CicadaLanguage](https://t.me/CicadaLanguage)
 - Chinese chat group: [CicadaLanguageCN](https://t.me/CicadaLanguageCN)
-- News group: [CicadaRhapsody](https://t.me/CicadaRhapsody)
 
 ## Contributions
 
