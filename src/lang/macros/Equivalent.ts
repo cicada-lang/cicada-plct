@@ -6,6 +6,7 @@ import type { Span } from "../span"
 export type EquivalentEntry = {
   via?: Exp
   to: Exp
+  span: Span
 }
 
 export class Equivalent extends Macro {

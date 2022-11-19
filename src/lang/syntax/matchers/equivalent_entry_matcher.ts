@@ -9,9 +9,11 @@ export function equivalent_entry_matcher(
     "equivalent_entry:via": ({ via, to }, { span }) => ({
       via: matchers.exp_matcher(via),
       to: matchers.exp_matcher(to),
+      span,
     }),
     "equivalent_entry:via_refl": ({ to }, { span }) => ({
       to: matchers.exp_matcher(to),
+      span,
     }),
   })(tree)
 }

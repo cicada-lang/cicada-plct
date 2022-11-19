@@ -1,4 +1,4 @@
-`Macros.Equivalent` -- more `span`
+`Macros.Equivalent` -- expand with `span`
 
 [refactor] `unifyClazz` -- step left and right together
 
