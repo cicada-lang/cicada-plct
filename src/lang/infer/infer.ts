@@ -207,8 +207,8 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     case "Objekt": {
       let clazz: Values.Clazz = Values.ClazzNull()
-      let properties: Record<string, Core> = {}
-      for (let [name, property] of Object.entries(exp.properties).reverse()) {
+      const properties: Record<string, Core> = {}
+      for (const [name, property] of Object.entries(exp.properties).reverse()) {
         const inferred = infer(mod, ctx, property)
         const value = evaluate(ctxToEnv(ctx), inferred.core)
         clazz = Values.ClazzFulfilled(name, inferred.type, value, clazz)
