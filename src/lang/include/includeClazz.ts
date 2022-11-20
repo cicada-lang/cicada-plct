@@ -7,7 +7,6 @@ import { include } from "../include"
 import type { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { freshen } from "../utils/freshen"
-import type { Value } from "../value"
 import * as Values from "../value"
 
 export function includeClazz(
@@ -29,94 +28,140 @@ export function includeClazz(
   }
 
   const commonNames = new Set(_.intersection(subclazzNames, clazzNames))
-  while (clazz.kind !== "ClazzNull") {
-    if (clazz.kind === "ClazzCons") {
-      if (commonNames.has(clazz.propertyName)) {
-        const next = nextSubclazz(mod, ctx, clazz.propertyName, subclazz)
-        include(mod, ctx, clazz.propertyType, next.propertyType)
-        clazz = Values.clazzClosureApply(clazz.restClosure, next.property)
-        subclazz = next.subclazz
-      } else {
-        const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, clazz.propertyName)
-        const v = Values.TypedNeutral(
-          clazz.propertyType,
-          Neutrals.Var(freshName),
+
+  while (clazz.kind !== "ClazzNull" || subclazz.kind !== "ClazzNull") {
+    if (clazz.kind === "ClazzCons" && !commonNames.has(clazz.propertyName)) {
+      const usedNames = ctxNames(ctx)
+      const freshName = freshen(usedNames, clazz.propertyName)
+      const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
+      clazz = Values.clazzClosureApply(clazz.restClosure, v)
+    }
+
+    if (
+      subclazz.kind === "ClazzCons" &&
+      !commonNames.has(subclazz.propertyName)
+    ) {
+      const usedNames = ctxNames(ctx)
+      const freshName = freshen(usedNames, subclazz.propertyName)
+      const v = Values.TypedNeutral(
+        subclazz.propertyType,
+        Neutrals.Var(freshName),
+      )
+      subclazz = Values.clazzClosureApply(subclazz.restClosure, v)
+    }
+
+    if (
+      clazz.kind === "ClazzFulfilled" &&
+      !commonNames.has(clazz.propertyName)
+    ) {
+      clazz = clazz.rest
+    }
+
+    if (
+      subclazz.kind === "ClazzFulfilled" &&
+      !commonNames.has(subclazz.propertyName)
+    ) {
+      subclazz = subclazz.rest
+    }
+
+    if (
+      clazz.kind === "ClazzCons" &&
+      commonNames.has(clazz.propertyName) &&
+      subclazz.kind === "ClazzFulfilled" &&
+      commonNames.has(subclazz.propertyName)
+    ) {
+      if (clazz.propertyName !== subclazz.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[includeClazz] property out of order`,
+            `  class: ${clazz.propertyName}`,
+            `  subclass: ${subclazz.propertyName}`,
+          ].join("\n"),
         )
-        clazz = Values.clazzClosureApply(clazz.restClosure, v)
       }
+
+      include(mod, ctx, clazz.propertyType, subclazz.propertyType)
+      clazz = Values.clazzClosureApply(clazz.restClosure, subclazz.property)
+      subclazz = subclazz.rest
     }
 
-    if (clazz.kind === "ClazzFulfilled") {
-      if (commonNames.has(clazz.propertyName)) {
-        const next = nextSubclazz(mod, ctx, clazz.propertyName, subclazz)
-        include(mod, ctx, clazz.propertyType, next.propertyType)
-        equivalent(mod, ctx, next.propertyType, clazz.property, next.property)
-        clazz = clazz.rest
-        subclazz = next.subclazz
-      } else {
-        clazz = clazz.rest
+    if (
+      clazz.kind === "ClazzFulfilled" &&
+      commonNames.has(clazz.propertyName) &&
+      subclazz.kind === "ClazzCons" &&
+      commonNames.has(subclazz.propertyName)
+    ) {
+      if (clazz.propertyName !== subclazz.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[includeClazz] property out of order`,
+            `  class: ${clazz.propertyName}`,
+            `  subclass: ${subclazz.propertyName}`,
+          ].join("\n"),
+        )
       }
-    }
-  }
-}
 
-function nextSubclazz(
-  mod: Mod,
-  ctx: Ctx,
-  name: string,
-  subclazz: Values.Clazz,
-): {
-  propertyType: Value
-  property: Value
-  subclazz: Values.Clazz
-} {
-  switch (subclazz.kind) {
-    case "ClazzNull": {
-      throw new Errors.InclusionError(
-        `[includeClazz nextSubclazz] fail to find next subclass of name: ${name}`,
+      throw new Errors.UnificationError(
+        [
+          `[includeClazz] class is fulfilled, but subclass is not`,
+          `  property: ${clazz.propertyName}`,
+        ].join("\n"),
       )
     }
 
-    case "ClazzCons": {
-      if (subclazz.propertyName === name) {
-        const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, subclazz.propertyName)
-        const v = Values.TypedNeutral(
-          subclazz.propertyType,
-          Neutrals.Var(freshName),
-        )
-        return {
-          propertyType: subclazz.propertyType,
-          property: v,
-          subclazz: Values.clazzClosureApply(subclazz.restClosure, v),
-        }
-      } else {
-        const usedNames = ctxNames(ctx)
-        const freshName = freshen(usedNames, subclazz.propertyName)
-        const v = Values.TypedNeutral(
-          subclazz.propertyType,
-          Neutrals.Var(freshName),
-        )
-        return nextSubclazz(
-          mod,
-          ctx,
-          name,
-          Values.clazzClosureApply(subclazz.restClosure, v),
+    if (
+      clazz.kind === "ClazzCons" &&
+      commonNames.has(clazz.propertyName) &&
+      subclazz.kind === "ClazzCons" &&
+      commonNames.has(subclazz.propertyName)
+    ) {
+      if (clazz.propertyName !== subclazz.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[includeClazz] property out of order`,
+            `  class: ${clazz.propertyName}`,
+            `  subclass: ${subclazz.propertyName}`,
+          ].join("\n"),
         )
       }
+
+      include(mod, ctx, clazz.propertyType, subclazz.propertyType)
+      const usedNames = ctxNames(ctx)
+      const freshName = freshen(usedNames, subclazz.propertyName)
+      const v = Values.TypedNeutral(
+        subclazz.propertyType,
+        Neutrals.Var(freshName),
+      )
+      clazz = Values.clazzClosureApply(clazz.restClosure, v)
+      subclazz = Values.clazzClosureApply(subclazz.restClosure, v)
     }
 
-    case "ClazzFulfilled": {
-      if (subclazz.propertyName === name) {
-        return {
-          propertyType: subclazz.propertyType,
-          property: subclazz.property,
-          subclazz: subclazz.rest,
-        }
-      } else {
-        return nextSubclazz(mod, ctx, name, subclazz.rest)
+    if (
+      clazz.kind === "ClazzFulfilled" &&
+      commonNames.has(clazz.propertyName) &&
+      subclazz.kind === "ClazzFulfilled" &&
+      commonNames.has(subclazz.propertyName)
+    ) {
+      if (clazz.propertyName !== subclazz.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[includeClazz] property out of order`,
+            `  class: ${clazz.propertyName}`,
+            `  subclass: ${subclazz.propertyName}`,
+          ].join("\n"),
+        )
       }
+
+      include(mod, ctx, clazz.propertyType, subclazz.propertyType)
+      equivalent(
+        mod,
+        ctx,
+        subclazz.propertyType,
+        clazz.property,
+        subclazz.property,
+      )
+      clazz = clazz.rest
+      subclazz = subclazz.rest
     }
   }
 }

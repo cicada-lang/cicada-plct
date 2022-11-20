@@ -1,5 +1,3 @@
-[refactor] `includeClazz` -- step left and right together
-
 [refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
 
 - to call `Actions.try*` in `solutionAdvanceValue`
