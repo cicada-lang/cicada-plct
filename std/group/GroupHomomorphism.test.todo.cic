@@ -16,19 +16,6 @@ compute composeGroupHomomorphism(
   idGroupHomomorphism(trivialGroup),
 )
 
-// TODO Fail to compute the following:
-// [unifyType]
-//   left: Trivial
-//   right: ?G.Element
-// [unifyType] is not implemented for the pair of type values
-//   left: Trivial
-//   right: ?G.Element
-
-// compute composeGroupHomomorphism(
-//   idGroupHomomorphism(trivialGroup),
-//   idGroupHomomorphism(trivialGroup),
-// )
-
 function typeof(implicit T: Type, x: T): Type {
   return T
 }
@@ -37,3 +24,16 @@ solve (G: Group, H: Group, K: Group) {
   GroupHomomorphism(G, H) = typeof(idGroupHomomorphism(trivialGroup))
   GroupHomomorphism(H, K) = typeof(idGroupHomomorphism(trivialGroup))
 }
+
+// TODO Fail to compute the following:
+// [unifyType]
+//   left: Trivial
+//   right: ?G.Element
+// [unifyType] is not implemented for the pair of type values
+//   left: Trivial
+//   right: ?G.Element
+
+compute composeGroupHomomorphism(
+  idGroupHomomorphism(trivialGroup),
+  idGroupHomomorphism(trivialGroup),
+)

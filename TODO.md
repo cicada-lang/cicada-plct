@@ -1,15 +1,13 @@
 [bug fix] `GroupHomomorphism.test.cic`
 
-- see solution section in `2022-11-19-using-readback-during-elaboration.md`
+- implement `equivalent` directly -- instead of using `readback` and `alphaEquivalent`.
 
-  - implement `equivalent` directly instead of using `readback` and `alphaEquivalent`.
+- `readback` do not do eta-expansion.
 
-  - remove `alphaEquivalentClazz`
+- remove `alphaEquivalentClazz`
 
-    - `alphaEquivalentClazz` should not handle equivalent out of order,
-      because "equivalent thing can not be unified" is a bad semantic.
-
-  - `readback` do not do eta-expansion.
+  - `alphaEquivalentClazz` should not handle equivalent out of order,
+    because "equivalent thing can not be unified" is a bad semantic.
 
 [diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
@@ -19,7 +17,7 @@
 
 - example:
 
-  ```
+  ```cicada
   compute equivalent Type {
       class { A: String = "abc" }
     = class { A: String }
