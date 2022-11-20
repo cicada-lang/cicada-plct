@@ -1,7 +1,3 @@
-[refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
-
-- to call `Actions.try*` in `solutionAdvanceValue`
-
 [bug fix] `GroupHomomorphism.test.cic`
 
 - see solution section in `2022-11-19-using-readback-during-elaboration.md`

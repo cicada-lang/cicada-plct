@@ -6,14 +6,20 @@ import * as Values from "../value"
 import { doCar } from "./doCar"
 
 export function doCdr(target: Value): Value {
+  return tryCdr(target) || neutralizeCdr(target)
+}
+
+export function tryCdr(target: Value): Value | undefined {
   if (target.kind === "Cons") {
     return target.cdr
   }
+}
 
+export function neutralizeCdr(target: Value): Value {
   if (target.kind !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
-        `[doCdr] expect target to be TypedNeutral`,
+        `[neutralizeCdr] expect target to be TypedNeutral`,
         `  target.kind: ${target.kind}`,
       ].join("\n"),
     )
@@ -22,7 +28,7 @@ export function doCdr(target: Value): Value {
   if (target.type.kind !== "Sigma") {
     throw new Errors.EvaluationError(
       [
-        `[doCdr] When target is a TypedNeutral, expect target.type to be Sigma`,
+        `[neutralizeCdr] When target is a TypedNeutral, expect target.type to be Sigma`,
         `  target.type.kind: ${target.type.kind}`,
       ].join("\n"),
     )

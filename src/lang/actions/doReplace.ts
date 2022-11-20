@@ -7,14 +7,30 @@ import * as Values from "../value"
 import { TypedValue } from "../value"
 
 export function doReplace(target: Value, motive: Value, base: Value): Value {
+  return (
+    tryReplace(target, motive, base) || neutralizeReplace(target, motive, base)
+  )
+}
+
+export function tryReplace(
+  target: Value,
+  motive: Value,
+  base: Value,
+): Value | undefined {
   if (target.kind === "Refl") {
     return base
   }
+}
 
+export function neutralizeReplace(
+  target: Value,
+  motive: Value,
+  base: Value,
+): Value {
   if (target.kind !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
-        `[doReplace] expect target to be TypedNeutral`,
+        `[neutralizeReplace] expect target to be TypedNeutral`,
         `  target.kind: ${target.kind}`,
       ].join("\n"),
     )
@@ -23,7 +39,7 @@ export function doReplace(target: Value, motive: Value, base: Value): Value {
   if (target.type.kind !== "Equal") {
     throw new Errors.EvaluationError(
       [
-        `[doReplace] When target is a TypedNeutral, expect target.type to be Equal`,
+        `[neutralizeReplace] When target is a TypedNeutral, expect target.type to be Equal`,
         `  target.type.kind: ${target.type.kind}`,
       ].join("\n"),
     )

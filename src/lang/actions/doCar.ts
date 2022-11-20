@@ -4,14 +4,20 @@ import type { Value } from "../value"
 import * as Values from "../value"
 
 export function doCar(target: Value): Value {
+  return tryCar(target) || neutralizeCar(target)
+}
+
+export function tryCar(target: Value): Value | undefined {
   if (target.kind === "Cons") {
     return target.car
   }
+}
 
+export function neutralizeCar(target: Value): Value {
   if (target.kind !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
-        `[doCar] expect target to be TypedNeutral`,
+        `[neutralizeCar] expect target to be TypedNeutral`,
         `  target.kind: ${target.kind}`,
       ].join("\n"),
     )
@@ -20,7 +26,7 @@ export function doCar(target: Value): Value {
   if (target.type.kind !== "Sigma") {
     throw new Errors.EvaluationError(
       [
-        `[doCar] When target is a TypedNeutral, expect target.type to be Sigma`,
+        `[neutralizeCar] When target is a TypedNeutral, expect target.type to be Sigma`,
         `  target.type.kind: ${target.type.kind}`,
       ].join("\n"),
     )
