@@ -1,6 +1,7 @@
 import _ from "lodash"
 import type { Ctx } from "../ctx"
 import { ctxNames } from "../ctx"
+import * as Errors from "../errors"
 import type { Mod } from "../mod"
 import * as Neutrals from "../neutral"
 import { solutionNames } from "../solution"
@@ -50,6 +51,16 @@ export function unifyClazz(
       right.kind === "ClazzFulfilled" &&
       commonNames.has(right.propertyName)
     ) {
+      if (left.propertyName !== right.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[unifyClazz] property out of order`,
+            `  left: ${left.propertyName}`,
+            `  right: ${right.propertyName}`,
+          ].join("\n"),
+        )
+      }
+
       unifyType(mod, ctx, left.propertyType, right.propertyType)
       left = Values.clazzClosureApply(left.restClosure, right.property)
       right = right.rest
@@ -61,6 +72,16 @@ export function unifyClazz(
       right.kind === "ClazzCons" &&
       commonNames.has(right.propertyName)
     ) {
+      if (left.propertyName !== right.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[unifyClazz] property out of order`,
+            `  left: ${left.propertyName}`,
+            `  right: ${right.propertyName}`,
+          ].join("\n"),
+        )
+      }
+
       unifyType(mod, ctx, left.propertyType, right.propertyType)
       right = Values.clazzClosureApply(right.restClosure, left.property)
       left = left.rest
@@ -72,6 +93,16 @@ export function unifyClazz(
       right.kind === "ClazzCons" &&
       commonNames.has(right.propertyName)
     ) {
+      if (left.propertyName !== right.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[unifyClazz] property out of order`,
+            `  left: ${left.propertyName}`,
+            `  right: ${right.propertyName}`,
+          ].join("\n"),
+        )
+      }
+
       unifyType(mod, ctx, left.propertyType, right.propertyType)
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, right.propertyName)
@@ -86,6 +117,16 @@ export function unifyClazz(
       right.kind === "ClazzFulfilled" &&
       commonNames.has(right.propertyName)
     ) {
+      if (left.propertyName !== right.propertyName) {
+        throw new Errors.UnificationError(
+          [
+            `[unifyClazz] property out of order`,
+            `  left: ${left.propertyName}`,
+            `  right: ${right.propertyName}`,
+          ].join("\n"),
+        )
+      }
+
       unifyType(mod, ctx, left.propertyType, right.propertyType)
       unify(mod, ctx, right.propertyType, left.property, right.property)
       left = left.rest
