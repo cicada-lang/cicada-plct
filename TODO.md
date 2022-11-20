@@ -1,8 +1,8 @@
-[refactor] `unifyClazz` -- step left and right together
-
-- [note] about `unifyClazz` compare with `Sigma`
-
 [refactor] `includeClazz` -- step left and right together
+
+[refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
+
+- to call `Actions.try*` in `solutionAdvanceValue`
 
 [bug fix] `GroupHomomorphism.test.cic`
 
@@ -44,9 +44,25 @@
 
 - We should write test to show full `solutionAdvanceNeutral` is needed.
 
-[refactor] split `Actions.do*` into `Actions.try*` `Actions.neutralize*`
+[bug fix] `groupCategory.todo.cic`
 
-- to call `Actions.try*` in `solutionAdvanceValue`
+```cicada
+// TODO Wrong error:
+// - EvaluationError: [evaluate] undefined variable name: x
+
+idLeft: (f) => {
+  let G = f.dom
+  let H = f.cod
+
+  let motive = Equal(
+    GroupHomomorphism(G, H),
+    composeGroupHomomorphism(idGroupHomomorphism(G), f),
+    f,
+  )
+
+  return the(motive, refl)
+},
+```
 
 # bug
 
