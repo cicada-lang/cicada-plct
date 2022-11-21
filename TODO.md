@@ -70,8 +70,6 @@ remove `function` keyword
 
 # maybe
 
-[maybe] use unified JSON ADT -- change `CamelCase` to `camelCase`
-
 [maybe] `unifyClazz` & `includeClazz` support reordering of properties
 
 - check dependency and evaluate to a version of `ClazzCons` without closure
