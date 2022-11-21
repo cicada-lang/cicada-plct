@@ -5,7 +5,7 @@ export function unfoldFormatAp(core: Core): {
   target: string
   args: Array<string>
 } {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Ap": {
       const arg = formatCore(core.arg)
       const { target, args } = unfoldFormatAp(core.target)

@@ -17,7 +17,7 @@ export function tryReplace(
   motive: Value,
   base: Value,
 ): Value | undefined {
-  if (target.kind === "Refl") {
+  if (target["@kind"] === "Refl") {
     return base
   }
 }
@@ -27,20 +27,20 @@ export function neutralizeReplace(
   motive: Value,
   base: Value,
 ): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeReplace] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
 
-  if (target.type.kind !== "Equal") {
+  if (target.type["@kind"] !== "Equal") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeReplace] When target is a TypedNeutral, expect target.type to be Equal`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

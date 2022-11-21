@@ -1,7 +1,7 @@
 import type { Ctx } from "../ctx"
 
 export function ctxNames(ctx: Ctx, names: Array<string> = []): Array<string> {
-  while (ctx.kind !== "CtxNull") {
+  while (ctx["@kind"] !== "CtxNull") {
     names.unshift(ctx.name)
     ctx = ctx.rest
   }

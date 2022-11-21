@@ -13,7 +13,7 @@ export function readbackClazz(
   ctx: Ctx,
   clazz: Values.Clazz,
 ): Cores.Clazz {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return Cores.ClazzNull(clazz.name)
     }

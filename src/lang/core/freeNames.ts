@@ -1,7 +1,7 @@
 import type { Core } from "../core"
 
 export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Var": {
       return boundNames.has(core.name) ? new Set() : new Set([core.name])
     }

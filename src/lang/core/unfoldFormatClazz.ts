@@ -5,7 +5,7 @@ import { isIdentifier } from "../utils/isIdentifier"
 export function unfoldFormatClazz(clazz: Cores.Clazz): {
   bindings: Array<string>
 } {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return { bindings: [] }
     }

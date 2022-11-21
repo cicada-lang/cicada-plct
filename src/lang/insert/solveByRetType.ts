@@ -24,7 +24,7 @@ export function solveByRetType(
   )
 
   const insertions: Array<Insertion> = []
-  while (type.kind === "PiImplicit") {
+  while (type["@kind"] === "PiImplicit") {
     try {
       unifyType(mod, ctx, type, retType)
       return insertions

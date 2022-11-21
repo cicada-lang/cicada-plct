@@ -9,7 +9,7 @@ export function foldSequence(
 
   const [binding, ...restBindings] = bindings
 
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "SequenceBindingLet": {
       return Exps.SequenceLet(
         binding.name,

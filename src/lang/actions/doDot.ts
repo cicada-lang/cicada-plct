@@ -8,7 +8,7 @@ export function doDot(target: Value, name: string): Value {
 }
 
 export function tryDot(target: Value, name: string): Value | undefined {
-  if (target.kind === "Objekt") {
+  if (target["@kind"] === "Objekt") {
     const property = target.properties[name]
     if (property === undefined) {
       throw new Errors.EvaluationError(
@@ -21,11 +21,11 @@ export function tryDot(target: Value, name: string): Value | undefined {
 }
 
 export function neutralizeDot(target: Value, name: string): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeDot] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
@@ -34,7 +34,7 @@ export function neutralizeDot(target: Value, name: string): Value {
     throw new Errors.EvaluationError(
       [
         `[neutralizeDot] When target is a TypedNeutral, expect target.type to be Clazz`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

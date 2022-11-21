@@ -7,7 +7,7 @@ import type * as Exps from "../exp"
 import type { Mod } from "../mod"
 
 export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
-  switch (exp.kind) {
+  switch (exp["@kind"]) {
     case "ClazzNull": {
       return Cores.ClazzNull(exp.name)
     }

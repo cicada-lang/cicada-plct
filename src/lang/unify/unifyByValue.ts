@@ -13,7 +13,7 @@ export function unifyByValue(
   left: Value,
   right: Value,
 ): void {
-  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+  if (left["@kind"] === "TypedNeutral" && right["@kind"] === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
@@ -22,11 +22,11 @@ export function unifyByValue(
     return
   }
 
-  if (left.kind === "Sole" && right.kind === "Sole") {
+  if (left["@kind"] === "Sole" && right["@kind"] === "Sole") {
     return
   }
 
-  if (left.kind === "Quote" && right.kind === "Quote") {
+  if (left["@kind"] === "Quote" && right["@kind"] === "Quote") {
     if (left.data === right.data) {
       return
     }
@@ -40,7 +40,7 @@ export function unifyByValue(
     )
   }
 
-  if (left.kind === "Refl" && right.kind === "Refl") {
+  if (left["@kind"] === "Refl" && right["@kind"] === "Refl") {
     unifyType(mod, ctx, left.type, right.type)
     unify(mod, ctx, left.type, left.value, right.value)
     return

@@ -3,17 +3,17 @@ import type { Value } from "../value"
 export type Env = EnvNull | EnvCons
 
 export type EnvNull = {
-  kind: "EnvNull"
+  "@kind": "EnvNull"
 }
 
 export function EnvNull(): EnvNull {
   return {
-    kind: "EnvNull",
+    "@kind": "EnvNull",
   }
 }
 
 export type EnvCons = {
-  kind: "EnvCons"
+  "@kind": "EnvCons"
   name: string
   value: Value
   rest: Env
@@ -21,7 +21,7 @@ export type EnvCons = {
 
 export function EnvCons(name: string, value: Value, rest: Env): EnvCons {
   return {
-    kind: "EnvCons",
+    "@kind": "EnvCons",
     name,
     value,
     rest,

@@ -3,17 +3,17 @@ import type { Value } from "../value"
 export type Ctx = CtxNull | CtxCons | CtxFulfilled
 
 export type CtxNull = {
-  kind: "CtxNull"
+  "@kind": "CtxNull"
 }
 
 export function CtxNull(): CtxNull {
   return {
-    kind: "CtxNull",
+    "@kind": "CtxNull",
   }
 }
 
 export type CtxCons = {
-  kind: "CtxCons"
+  "@kind": "CtxCons"
   name: string
   type: Value
   rest: Ctx
@@ -21,7 +21,7 @@ export type CtxCons = {
 
 export function CtxCons(name: string, type: Value, rest: Ctx): CtxCons {
   return {
-    kind: "CtxCons",
+    "@kind": "CtxCons",
     name,
     type,
     rest,
@@ -29,7 +29,7 @@ export function CtxCons(name: string, type: Value, rest: Ctx): CtxCons {
 }
 
 export type CtxFulfilled = {
-  kind: "CtxFulfilled"
+  "@kind": "CtxFulfilled"
   name: string
   type: Value
   value: Value
@@ -43,7 +43,7 @@ export function CtxFulfilled(
   rest: Ctx,
 ): CtxFulfilled {
   return {
-    kind: "CtxFulfilled",
+    "@kind": "CtxFulfilled",
     name,
     type,
     value,

@@ -2,7 +2,7 @@ import type { Exp } from "../exp"
 import * as Exps from "../exp"
 
 export function freeNames(boundNames: Set<string>, exp: Exp): Set<string> {
-  switch (exp.kind) {
+  switch (exp["@kind"]) {
     case "Var": {
       return boundNames.has(exp.name) ? new Set() : new Set([exp.name])
     }

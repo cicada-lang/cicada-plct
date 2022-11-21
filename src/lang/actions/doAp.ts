@@ -10,7 +10,7 @@ export function doAp(target: Value, arg: Value): Value {
 }
 
 export function tryAp(target: Value, arg: Value): Value | undefined {
-  if (target.kind === "Fn") {
+  if (target["@kind"] === "Fn") {
     return closureApply(target.retClosure, arg)
   }
 
@@ -20,20 +20,20 @@ export function tryAp(target: Value, arg: Value): Value | undefined {
 }
 
 export function neutralizeAp(target: Value, arg: Value): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeAp] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
 
-  if (target.type.kind !== "Pi") {
+  if (target.type["@kind"] !== "Pi") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeAp] When target is a TypedNeutral, expect target.type to be Pi`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

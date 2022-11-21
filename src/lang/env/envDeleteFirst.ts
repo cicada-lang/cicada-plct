@@ -1,7 +1,7 @@
 import type { Env } from "../env"
 
 export function envDeleteFirst(env: Env, name: string): Env {
-  switch (env.kind) {
+  switch (env["@kind"]) {
     case "EnvNull": {
       return env
     }

@@ -33,7 +33,7 @@ function prepareProperty(
   ctx: Ctx,
   property: Exps.Property,
 ): Array<[string, Exp]> {
-  switch (property.kind) {
+  switch (property["@kind"]) {
     case "PropertyPlain": {
       return [[property.name, property.exp]]
     }

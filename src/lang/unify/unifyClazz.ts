@@ -19,36 +19,42 @@ export function unifyClazz(
   const rightNames = Values.clazzPropertyNames(right)
   const commonNames = new Set(_.intersection(leftNames, rightNames))
 
-  while (left.kind !== "ClazzNull" || right.kind !== "ClazzNull") {
-    if (left.kind === "ClazzCons" && !commonNames.has(left.propertyName)) {
+  while (left["@kind"] !== "ClazzNull" || right["@kind"] !== "ClazzNull") {
+    if (left["@kind"] === "ClazzCons" && !commonNames.has(left.propertyName)) {
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, left.propertyName)
       const v = Values.TypedNeutral(left.propertyType, Neutrals.Var(freshName))
       left = Values.clazzClosureApply(left.restClosure, v)
     }
 
-    if (right.kind === "ClazzCons" && !commonNames.has(right.propertyName)) {
+    if (
+      right["@kind"] === "ClazzCons" &&
+      !commonNames.has(right.propertyName)
+    ) {
       const usedNames = [...ctxNames(ctx), ...solutionNames(mod.solution)]
       const freshName = freshen(usedNames, right.propertyName)
       const v = Values.TypedNeutral(right.propertyType, Neutrals.Var(freshName))
       right = Values.clazzClosureApply(right.restClosure, v)
     }
 
-    if (left.kind === "ClazzFulfilled" && !commonNames.has(left.propertyName)) {
+    if (
+      left["@kind"] === "ClazzFulfilled" &&
+      !commonNames.has(left.propertyName)
+    ) {
       left = left.rest
     }
 
     if (
-      right.kind === "ClazzFulfilled" &&
+      right["@kind"] === "ClazzFulfilled" &&
       !commonNames.has(right.propertyName)
     ) {
       right = right.rest
     }
 
     if (
-      left.kind === "ClazzCons" &&
+      left["@kind"] === "ClazzCons" &&
       commonNames.has(left.propertyName) &&
-      right.kind === "ClazzFulfilled" &&
+      right["@kind"] === "ClazzFulfilled" &&
       commonNames.has(right.propertyName)
     ) {
       if (left.propertyName !== right.propertyName) {
@@ -67,9 +73,9 @@ export function unifyClazz(
     }
 
     if (
-      left.kind === "ClazzFulfilled" &&
+      left["@kind"] === "ClazzFulfilled" &&
       commonNames.has(left.propertyName) &&
-      right.kind === "ClazzCons" &&
+      right["@kind"] === "ClazzCons" &&
       commonNames.has(right.propertyName)
     ) {
       if (left.propertyName !== right.propertyName) {
@@ -88,9 +94,9 @@ export function unifyClazz(
     }
 
     if (
-      left.kind === "ClazzCons" &&
+      left["@kind"] === "ClazzCons" &&
       commonNames.has(left.propertyName) &&
-      right.kind === "ClazzCons" &&
+      right["@kind"] === "ClazzCons" &&
       commonNames.has(right.propertyName)
     ) {
       if (left.propertyName !== right.propertyName) {
@@ -112,9 +118,9 @@ export function unifyClazz(
     }
 
     if (
-      left.kind === "ClazzFulfilled" &&
+      left["@kind"] === "ClazzFulfilled" &&
       commonNames.has(left.propertyName) &&
-      right.kind === "ClazzFulfilled" &&
+      right["@kind"] === "ClazzFulfilled" &&
       commonNames.has(right.propertyName)
     ) {
       if (left.propertyName !== right.propertyName) {

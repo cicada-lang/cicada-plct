@@ -28,7 +28,7 @@ export function readbackByType(
   type: Value,
   value: Value,
 ): Core | undefined {
-  switch (type.kind) {
+  switch (type["@kind"]) {
     case "Type": {
       return readbackType(mod, ctx, value)
     }

@@ -3,7 +3,7 @@ import type { Value } from "../value"
 import * as Values from "../value"
 
 export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       throw new Errors.EvaluationError("cannot apply argument to ClazzNull")
     }

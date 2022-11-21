@@ -7,7 +7,7 @@ export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
 
   const [binding, ...restBindings] = bindings
 
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "FnBindingName": {
       return Exps.Fn(
         binding.name,

@@ -39,56 +39,58 @@ export function MetaVar(type: Value, name: string): MetaVar {
 }
 
 export function isMetaVar(value: Value): value is MetaVar {
-  return value.kind === "TypedNeutral" && value.neutral.kind === "MetaVar"
+  return (
+    value["@kind"] === "TypedNeutral" && value.neutral["@kind"] === "MetaVar"
+  )
 }
 
 export type TypedNeutral = {
-  family: "Value"
-  kind: "TypedNeutral"
+  "@type": "Value"
+  "@kind": "TypedNeutral"
   type: Value
   neutral: Neutral
 }
 
 export function TypedNeutral(type: Value, neutral: Neutral): TypedNeutral {
   return {
-    family: "Value",
-    kind: "TypedNeutral",
+    "@type": "Value",
+    "@kind": "TypedNeutral",
     type,
     neutral,
   }
 }
 
 export type Type = {
-  family: "Value"
-  kind: "Type"
+  "@type": "Value"
+  "@kind": "Type"
 }
 
 export function Type(): Type {
   return {
-    family: "Value",
-    kind: "Type",
+    "@type": "Value",
+    "@kind": "Type",
   }
 }
 
 export type Pi = {
-  family: "Value"
-  kind: "Pi"
+  "@type": "Value"
+  "@kind": "Pi"
   argType: Value
   retTypeClosure: Closure
 }
 
 export function Pi(argType: Value, retTypeClosure: Closure): Pi {
   return {
-    family: "Value",
-    kind: "Pi",
+    "@type": "Value",
+    "@kind": "Pi",
     argType,
     retTypeClosure,
   }
 }
 
 export type PiImplicit = {
-  family: "Value"
-  kind: "PiImplicit"
+  "@type": "Value"
+  "@kind": "PiImplicit"
   argType: Value
   retTypeClosure: Closure
 }
@@ -98,142 +100,142 @@ export function PiImplicit(
   retTypeClosure: Closure,
 ): PiImplicit {
   return {
-    family: "Value",
-    kind: "PiImplicit",
+    "@type": "Value",
+    "@kind": "PiImplicit",
     argType,
     retTypeClosure,
   }
 }
 
 export type Fn = {
-  family: "Value"
-  kind: "Fn"
+  "@type": "Value"
+  "@kind": "Fn"
   retClosure: Closure
 }
 
 export function Fn(retClosure: Closure): Fn {
   return {
-    family: "Value",
-    kind: "Fn",
+    "@type": "Value",
+    "@kind": "Fn",
     retClosure,
   }
 }
 
 export type FnImplicit = {
-  family: "Value"
-  kind: "FnImplicit"
+  "@type": "Value"
+  "@kind": "FnImplicit"
   retClosure: Closure
 }
 
 export function FnImplicit(retClosure: Closure): FnImplicit {
   return {
-    family: "Value",
-    kind: "FnImplicit",
+    "@type": "Value",
+    "@kind": "FnImplicit",
     retClosure,
   }
 }
 
 export type Sigma = {
-  family: "Value"
-  kind: "Sigma"
+  "@type": "Value"
+  "@kind": "Sigma"
   carType: Value
   cdrTypeClosure: Closure
 }
 
 export function Sigma(carType: Value, cdrTypeClosure: Closure): Sigma {
   return {
-    family: "Value",
-    kind: "Sigma",
+    "@type": "Value",
+    "@kind": "Sigma",
     carType,
     cdrTypeClosure,
   }
 }
 
 export type Cons = {
-  family: "Value"
-  kind: "Cons"
+  "@type": "Value"
+  "@kind": "Cons"
   car: Value
   cdr: Value
 }
 
 export function Cons(car: Value, cdr: Value): Cons {
   return {
-    family: "Value",
-    kind: "Cons",
+    "@type": "Value",
+    "@kind": "Cons",
     car,
     cdr,
   }
 }
 
 export type String = {
-  family: "Value"
-  kind: "String"
+  "@type": "Value"
+  "@kind": "String"
 }
 
 export function String(): String {
   return {
-    family: "Value",
-    kind: "String",
+    "@type": "Value",
+    "@kind": "String",
   }
 }
 
 export type Quote = {
-  family: "Value"
-  kind: "Quote"
+  "@type": "Value"
+  "@kind": "Quote"
   data: string
 }
 
 export function Quote(data: string): Quote {
   return {
-    family: "Value",
-    kind: "Quote",
+    "@type": "Value",
+    "@kind": "Quote",
     data,
   }
 }
 
 export type Trivial = {
-  family: "Value"
-  kind: "Trivial"
+  "@type": "Value"
+  "@kind": "Trivial"
 }
 
 export function Trivial(): Trivial {
   return {
-    family: "Value",
-    kind: "Trivial",
+    "@type": "Value",
+    "@kind": "Trivial",
   }
 }
 
 export type Sole = {
-  family: "Value"
-  kind: "Sole"
+  "@type": "Value"
+  "@kind": "Sole"
 }
 
 export function Sole(): Sole {
   return {
-    family: "Value",
-    kind: "Sole",
+    "@type": "Value",
+    "@kind": "Sole",
   }
 }
 
 export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
 
 export type ClazzNull = {
-  family: "Value"
-  kind: "ClazzNull"
+  "@type": "Value"
+  "@kind": "ClazzNull"
   name?: string
 }
 
 export function ClazzNull(name?: string): ClazzNull {
   return {
-    family: "Value",
-    kind: "ClazzNull",
+    "@type": "Value",
+    "@kind": "ClazzNull",
     name,
   }
 }
 
 export type ClazzCons = {
-  family: "Value"
-  kind: "ClazzCons"
+  "@type": "Value"
+  "@kind": "ClazzCons"
   propertyName: string
   propertyType: Value
   restClosure: Closure
@@ -247,8 +249,8 @@ export function ClazzCons(
   name?: string,
 ): ClazzCons {
   return {
-    family: "Value",
-    kind: "ClazzCons",
+    "@type": "Value",
+    "@kind": "ClazzCons",
     propertyName,
     propertyType,
     restClosure,
@@ -257,8 +259,8 @@ export function ClazzCons(
 }
 
 export type ClazzFulfilled = {
-  family: "Value"
-  kind: "ClazzFulfilled"
+  "@type": "Value"
+  "@kind": "ClazzFulfilled"
   propertyName: string
   propertyType: Value
   property: Value
@@ -274,8 +276,8 @@ export function ClazzFulfilled(
   name?: string,
 ): ClazzFulfilled {
   return {
-    family: "Value",
-    kind: "ClazzFulfilled",
+    "@type": "Value",
+    "@kind": "ClazzFulfilled",
     propertyName,
     propertyType,
     property,
@@ -285,22 +287,22 @@ export function ClazzFulfilled(
 }
 
 export type Objekt = {
-  family: "Value"
-  kind: "Objekt"
+  "@type": "Value"
+  "@kind": "Objekt"
   properties: Record<string, Value>
 }
 
 export function Objekt(properties: Record<string, Value>): Objekt {
   return {
-    family: "Value",
-    kind: "Objekt",
+    "@type": "Value",
+    "@kind": "Objekt",
     properties,
   }
 }
 
 export type Equal = {
-  family: "Value"
-  kind: "Equal"
+  "@type": "Value"
+  "@kind": "Equal"
   type: Value
   from: Value
   to: Value
@@ -308,8 +310,8 @@ export type Equal = {
 
 export function Equal(type: Value, from: Value, to: Value): Equal {
   return {
-    family: "Value",
-    kind: "Equal",
+    "@type": "Value",
+    "@kind": "Equal",
     type,
     from,
     to,
@@ -317,16 +319,16 @@ export function Equal(type: Value, from: Value, to: Value): Equal {
 }
 
 export type Refl = {
-  family: "Value"
-  kind: "Refl"
+  "@type": "Value"
+  "@kind": "Refl"
   type: Value
   value: Value
 }
 
 export function Refl(type: Value, value: Value): Refl {
   return {
-    family: "Value",
-    kind: "Refl",
+    "@type": "Value",
+    "@kind": "Refl",
     type,
     value,
   }

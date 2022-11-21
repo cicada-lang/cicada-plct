@@ -3,7 +3,7 @@ import * as Exps from "../exp"
 import { freshen } from "../utils/freshen"
 
 export function substitute(body: Exp, name: string, exp: Exp): Exp {
-  switch (body.kind) {
+  switch (body["@kind"]) {
     case "Var": {
       if (body.name === name) {
         return exp
@@ -400,7 +400,7 @@ export function substitute(body: Exp, name: string, exp: Exp): Exp {
 }
 
 function substArg(arg: Exps.Arg, name: string, exp: Exp): Exps.Arg {
-  switch (arg.kind) {
+  switch (arg["@kind"]) {
     case "ArgPlain": {
       return Exps.ArgPlain(substitute(arg.exp, name, exp))
     }
@@ -416,7 +416,7 @@ function substProperty(
   name: string,
   exp: Exp,
 ): Exps.Property {
-  switch (property.kind) {
+  switch (property["@kind"]) {
     case "PropertyPlain": {
       return Exps.PropertyPlain(
         property.name,

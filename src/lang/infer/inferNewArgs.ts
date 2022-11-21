@@ -15,7 +15,7 @@ export function inferNewArgs(
   args: Array<Exps.Arg>,
   clazz: Values.Clazz,
 ): Record<string, Core> {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       if (args.length !== 0) {
         throw new Errors.ElaborationError(

@@ -15,7 +15,7 @@ export function checkProperties(
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
 ): Record<string, Core> {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return {}
     }

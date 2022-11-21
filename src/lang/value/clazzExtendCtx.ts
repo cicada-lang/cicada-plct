@@ -7,7 +7,7 @@ import { freshen } from "../utils/freshen"
 import * as Values from "../value"
 
 export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return ctx
     }

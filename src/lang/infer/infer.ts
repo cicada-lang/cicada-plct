@@ -39,7 +39,7 @@ export function Inferred(type: Value, core: Core): Inferred {
 }
 
 export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
-  switch (exp.kind) {
+  switch (exp["@kind"]) {
     case "Var": {
       const type = ctxLookupType(ctx, exp.name)
       if (type !== undefined) {
@@ -120,7 +120,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
       try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
-        if (inferred.type.kind === "PiImplicit") {
+        if (inferred.type["@kind"] === "PiImplicit") {
           return insertDuringInfer(mod, ctx, inferred, args)
         }
       } catch (error) {
@@ -334,7 +334,7 @@ export function infer(mod: Mod, ctx: Ctx, exp: Exp): Inferred {
 
     default: {
       throw new Errors.ElaborationError(
-        `[infer] is not implemented for: ${exp.kind}`,
+        `[infer] is not implemented for: ${exp["@kind"]}`,
         { span: exp.span },
       )
     }

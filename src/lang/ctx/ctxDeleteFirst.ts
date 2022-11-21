@@ -1,7 +1,7 @@
 import type { Ctx } from "../ctx"
 
 export function ctxDeleteFirst(ctx: Ctx, name: string): Ctx {
-  switch (ctx.kind) {
+  switch (ctx["@kind"]) {
     case "CtxNull": {
       return ctx
     }

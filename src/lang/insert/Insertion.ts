@@ -8,7 +8,7 @@ export type Insertion =
   | InsertionImplicitArg
 
 export type InsertionMetaVar = {
-  kind: "InsertionMetaVar"
+  "@kind": "InsertionMetaVar"
   metaVar: Values.MetaVar
   argExp?: Exp
 }
@@ -18,32 +18,32 @@ export function InsertionMetaVar(
   argExp?: Exp,
 ): InsertionMetaVar {
   return {
-    kind: "InsertionMetaVar",
+    "@kind": "InsertionMetaVar",
     metaVar,
     argExp,
   }
 }
 
 export type InsertionUsedArg = {
-  kind: "InsertionUsedArg"
+  "@kind": "InsertionUsedArg"
   argCore: Core
 }
 
 export function InsertionUsedArg(argCore: Core): InsertionUsedArg {
   return {
-    kind: "InsertionUsedArg",
+    "@kind": "InsertionUsedArg",
     argCore,
   }
 }
 
 export type InsertionImplicitArg = {
-  kind: "InsertionImplicitArg"
+  "@kind": "InsertionImplicitArg"
   argCore: Core
 }
 
 export function InsertionImplicitArg(argCore: Core): InsertionImplicitArg {
   return {
-    kind: "InsertionImplicitArg",
+    "@kind": "InsertionImplicitArg",
     argCore,
   }
 }

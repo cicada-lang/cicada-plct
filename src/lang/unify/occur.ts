@@ -21,7 +21,7 @@ export function occur(
   type: Value,
   value: Value,
 ): boolean {
-  switch (value.kind) {
+  switch (value["@kind"]) {
     case "TypedNeutral": {
       return occurNeutral(mod, ctx, name, value.neutral)
     }
@@ -164,7 +164,7 @@ function occurProperties(
   clazz: Values.Clazz,
   value: Value,
 ): boolean {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return false
     }
@@ -206,7 +206,7 @@ function occurNeutral(
   name: string,
   neutral: Neutral,
 ): boolean {
-  switch (neutral.kind) {
+  switch (neutral["@kind"]) {
     case "Var": {
       // return name === neutral.name
       return false

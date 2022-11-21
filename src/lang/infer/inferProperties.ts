@@ -16,7 +16,7 @@ export function inferProperties(
   properties: Record<string, Exp>,
   clazz: Values.Clazz,
 ): { properties: Record<string, Core>; clazz: Values.Clazz } {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return { properties: {}, clazz: Values.ClazzNull(clazz.name) }
     }

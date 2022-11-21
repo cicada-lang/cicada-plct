@@ -10,26 +10,26 @@ export function doCdr(target: Value): Value {
 }
 
 export function tryCdr(target: Value): Value | undefined {
-  if (target.kind === "Cons") {
+  if (target["@kind"] === "Cons") {
     return target.cdr
   }
 }
 
 export function neutralizeCdr(target: Value): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeCdr] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
 
-  if (target.type.kind !== "Sigma") {
+  if (target.type["@kind"] !== "Sigma") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeCdr] When target is a TypedNeutral, expect target.type to be Sigma`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

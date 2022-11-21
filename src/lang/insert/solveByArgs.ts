@@ -33,7 +33,7 @@ export function solveByArgs(
   while (args.length > 0) {
     const [arg, ...restArgs] = args
 
-    if (type.kind === "PiImplicit" && arg.kind === "ArgPlain") {
+    if (type["@kind"] === "PiImplicit" && arg["@kind"] === "ArgPlain") {
       // NOTE Be careful about scope bug, `freshName` might occurs in `args`.
       const name = type.retTypeClosure.name
       const usedNames = [
@@ -47,9 +47,12 @@ export function solveByArgs(
       // NOTE Do not consume args here.
       type = closureApply(type.retTypeClosure, metaVar)
       insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))
-    } else if (type.kind === "Pi" && arg.kind === "ArgPlain") {
+    } else if (type["@kind"] === "Pi" && arg["@kind"] === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
-      if (argInferred !== undefined && argInferred.type.kind !== "PiImplicit") {
+      if (
+        argInferred !== undefined &&
+        argInferred.type["@kind"] !== "PiImplicit"
+      ) {
         unifyType(mod, ctx, argInferred.type, type.argType)
       }
 
@@ -63,13 +66,16 @@ export function solveByArgs(
       type = closureApply(type.retTypeClosure, argValue)
       args = restArgs
       insertions.push(Insertions.InsertionUsedArg(argCore))
-    } else if (type.kind === "PiImplicit" && arg.kind === "ArgImplicit") {
+    } else if (
+      type["@kind"] === "PiImplicit" &&
+      arg["@kind"] === "ArgImplicit"
+    ) {
       const argCore = check(mod, ctx, arg.exp, type.argType)
       const argValue = evaluate(ctxToEnv(ctx), argCore)
       type = closureApply(type.retTypeClosure, argValue)
       args = restArgs
       insertions.push(Insertions.InsertionImplicitArg(argCore))
-    } else if (type.kind === "Pi" && arg.kind === "ArgImplicit") {
+    } else if (type["@kind"] === "Pi" && arg["@kind"] === "ArgImplicit") {
       throw new Errors.ElaborationError(
         [`[insertDuringInfer] extra Implicit argument`].join("\n"),
         { span: arg.exp.span },
@@ -78,7 +84,7 @@ export function solveByArgs(
       throw new Errors.ElaborationError(
         [
           `[insertDuringInfer] expect type to be Pi or PiImplicit`,
-          `  given type kind: ${type.kind}`,
+          `  given type "@kind": ${type["@kind"]}`,
         ].join("\n"),
         { span: arg.exp.span },
       )

@@ -8,7 +8,7 @@ export function defineBinding(
   type: Value,
   value: Value,
 ): void {
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "ImportBindingName": {
       mod.define(binding.name, type, value)
       return

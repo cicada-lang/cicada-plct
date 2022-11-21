@@ -58,7 +58,7 @@ export function includeAux(
   type: Value,
   subtype: Value,
 ): void {
-  if (subtype.kind === "Pi" && type.kind === "Pi") {
+  if (subtype["@kind"] === "Pi" && type["@kind"] === "Pi") {
     /**
        Contravariant in argument position.
 
@@ -82,7 +82,7 @@ export function includeAux(
     return
   }
 
-  if (subtype.kind === "Sigma" && type.kind === "Sigma") {
+  if (subtype["@kind"] === "Sigma" && type["@kind"] === "Sigma") {
     include(mod, ctx, type.carType, subtype.carType)
     const name = subtype.cdrTypeClosure.name
     const carType = subtype.carType
@@ -104,7 +104,7 @@ export function includeAux(
     return
   }
 
-  if (subtype.kind === "Equal" && type.kind === "Equal") {
+  if (subtype["@kind"] === "Equal" && type["@kind"] === "Equal") {
     include(mod, ctx, type.type, subtype.type)
     equivalent(mod, ctx, type.type, type.from, subtype.from)
     equivalent(mod, ctx, type.type, type.to, subtype.to)

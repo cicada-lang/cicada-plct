@@ -20,7 +20,7 @@ export function unifyByType(
   left: Value,
   right: Value,
 ): "ok" | undefined {
-  switch (type.kind) {
+  switch (type["@kind"]) {
     case "Type": {
       unifyType(mod, ctx, left, right)
       return "ok"
@@ -88,7 +88,7 @@ function assertNoExtraCommonProperties(
   left: Value,
   right: Value,
 ): void {
-  if (left.kind === "Objekt" && right.kind === "Objekt") {
+  if (left["@kind"] === "Objekt" && right["@kind"] === "Objekt") {
     const clazzNames = Values.clazzPropertyNames(clazz)
     const leftNames = Object.keys(left.properties)
     const rightNames = Object.keys(right.properties)

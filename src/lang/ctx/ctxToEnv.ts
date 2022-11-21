@@ -5,7 +5,7 @@ import * as Neutrals from "../neutral"
 import { TypedNeutral } from "../value"
 
 export function ctxToEnv(ctx: Ctx): Env {
-  switch (ctx.kind) {
+  switch (ctx["@kind"]) {
     case "CtxNull": {
       return EnvNull()
     }

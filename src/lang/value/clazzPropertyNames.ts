@@ -2,7 +2,7 @@ import * as Neutrals from "../neutral"
 import * as Values from "../value"
 
 export function clazzPropertyNames(clazz: Values.Clazz): Array<string> {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return []
     }

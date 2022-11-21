@@ -9,7 +9,7 @@ export function foldClazz(
 
   const [binding, ...restBindings] = bindings
 
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "ClazzBindingAbstract": {
       return Exps.ClazzCons(
         binding.name,

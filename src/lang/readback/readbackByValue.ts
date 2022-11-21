@@ -12,7 +12,7 @@ export function readbackByValue(
   type: Value,
   value: Value,
 ): Core {
-  switch (value.kind) {
+  switch (value["@kind"]) {
     case "TypedNeutral": {
       /**
          The `type` in `TypedNeutral` are not used.
@@ -34,7 +34,7 @@ export function readbackByValue(
 
     default: {
       throw new Errors.ReadbackError(
-        `readbackByValue is not implemented for type: ${type.kind}, and value: ${value.kind}`,
+        `readbackByValue is not implemented for type: ${type["@kind"]}, and value: ${value["@kind"]}`,
       )
     }
   }

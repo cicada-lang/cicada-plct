@@ -10,7 +10,7 @@ export function foldSigma(
 
   const [binding, ...restBindings] = bindings
 
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "SigmaBindingNameless": {
       return Exps.Sigma(
         "_",

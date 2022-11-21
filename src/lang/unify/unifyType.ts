@@ -37,7 +37,7 @@ export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
 }
 
 function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
-  if (left.kind === "TypedNeutral" && right.kind === "TypedNeutral") {
+  if (left["@kind"] === "TypedNeutral" && right["@kind"] === "TypedNeutral") {
     /**
        The `type` in `TypedNeutral` are not used.
     **/
@@ -46,21 +46,21 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
     return
   }
 
-  if (left.kind === "Type" && right.kind === "Type") {
+  if (left["@kind"] === "Type" && right["@kind"] === "Type") {
     return
   }
 
-  if (left.kind === "String" && right.kind === "String") {
+  if (left["@kind"] === "String" && right["@kind"] === "String") {
     return
   }
 
-  if (left.kind === "Trivial" && right.kind === "Trivial") {
+  if (left["@kind"] === "Trivial" && right["@kind"] === "Trivial") {
     return
   }
 
   if (
-    (left.kind === "Pi" && right.kind === "Pi") ||
-    (left.kind === "PiImplicit" && right.kind === "PiImplicit")
+    (left["@kind"] === "Pi" && right["@kind"] === "Pi") ||
+    (left["@kind"] === "PiImplicit" && right["@kind"] === "PiImplicit")
   ) {
     unifyType(mod, ctx, left.argType, right.argType)
     const name = right.retTypeClosure.name
@@ -84,7 +84,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
     return
   }
 
-  if (left.kind === "Sigma" && right.kind === "Sigma") {
+  if (left["@kind"] === "Sigma" && right["@kind"] === "Sigma") {
     unifyType(mod, ctx, left.carType, right.carType)
     const name = right.cdrTypeClosure.name
     const carType = right.carType
@@ -112,7 +112,7 @@ function unifyTypeAux(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
     return
   }
 
-  if (left.kind === "Equal" && right.kind === "Equal") {
+  if (left["@kind"] === "Equal" && right["@kind"] === "Equal") {
     unifyType(mod, ctx, left.type, right.type)
     const equalType = left.type
     unify(mod, ctx, equalType, left.from, right.from)
@@ -189,11 +189,11 @@ function extractApTarget(
   name: string,
 ): Values.TypedNeutral | undefined {
   if (
-    value.kind === "TypedNeutral" &&
-    value.neutral.kind === "Ap" &&
-    value.neutral.target.kind === "MetaVar" &&
-    value.neutral.arg.value.kind === "TypedNeutral" &&
-    value.neutral.arg.value.neutral.kind === "Var" &&
+    value["@kind"] === "TypedNeutral" &&
+    value.neutral["@kind"] === "Ap" &&
+    value.neutral.target["@kind"] === "MetaVar" &&
+    value.neutral.arg.value["@kind"] === "TypedNeutral" &&
+    value.neutral.arg.value.neutral["@kind"] === "Var" &&
     value.neutral.arg.value.neutral.name === name
   ) {
     return Values.TypedNeutral(value.neutral.targetType, value.neutral.target)

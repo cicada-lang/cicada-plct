@@ -48,23 +48,23 @@ export type Exp =
   | MacroEmbedded
 
 export type Var = {
-  family: "Exp"
-  kind: "Var"
+  "@type": "Exp"
+  "@kind": "Var"
   name: string
 } & ExpMeta
 
 export function Var(name: string, span?: Span): Var {
   return {
-    family: "Exp",
-    kind: "Var",
+    "@type": "Exp",
+    "@kind": "Var",
     name,
     span,
   }
 }
 
 export type Pi = {
-  family: "Exp"
-  kind: "Pi"
+  "@type": "Exp"
+  "@kind": "Pi"
   name: string
   argType: Exp
   retType: Exp
@@ -72,8 +72,8 @@ export type Pi = {
 
 export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
   return {
-    family: "Exp",
-    kind: "Pi",
+    "@type": "Exp",
+    "@kind": "Pi",
     name,
     argType,
     retType,
@@ -82,8 +82,8 @@ export function Pi(name: string, argType: Exp, retType: Exp, span?: Span): Pi {
 }
 
 export type PiImplicit = {
-  family: "Exp"
-  kind: "PiImplicit"
+  "@type": "Exp"
+  "@kind": "PiImplicit"
   name: string
   argType: Exp
   retType: Exp
@@ -96,8 +96,8 @@ export function PiImplicit(
   span?: Span,
 ): PiImplicit {
   return {
-    family: "Exp",
-    kind: "PiImplicit",
+    "@type": "Exp",
+    "@kind": "PiImplicit",
     name,
     argType,
     retType,
@@ -106,8 +106,8 @@ export function PiImplicit(
 }
 
 export type PiUnfolded = {
-  family: "Exp"
-  kind: "PiUnfolded"
+  "@type": "Exp"
+  "@kind": "PiUnfolded"
   bindings: Array<PiBinding>
   retType: Exp
 } & ExpMeta
@@ -118,8 +118,8 @@ export function PiUnfolded(
   span?: Span,
 ): PiUnfolded {
   return {
-    family: "Exp",
-    kind: "PiUnfolded",
+    "@type": "Exp",
+    "@kind": "PiUnfolded",
     bindings,
     retType,
     span,
@@ -129,20 +129,20 @@ export function PiUnfolded(
 export type PiBinding = PiBindingNameless | PiBindingNamed | PiBindingImplicit
 
 export type PiBindingNameless = {
-  kind: "PiBindingNameless"
+  "@kind": "PiBindingNameless"
   type: Exp
 } & ExpMeta
 
 export function PiBindingNameless(type: Exp, span?: Span): PiBindingNameless {
   return {
-    kind: "PiBindingNameless",
+    "@kind": "PiBindingNameless",
     type,
     span,
   }
 }
 
 export type PiBindingNamed = {
-  kind: "PiBindingNamed"
+  "@kind": "PiBindingNamed"
   name: string
   type: Exp
 } & ExpMeta
@@ -153,7 +153,7 @@ export function PiBindingNamed(
   span?: Span,
 ): PiBindingNamed {
   return {
-    kind: "PiBindingNamed",
+    "@kind": "PiBindingNamed",
     name,
     type,
     span,
@@ -161,7 +161,7 @@ export function PiBindingNamed(
 }
 
 export type PiBindingImplicit = {
-  kind: "PiBindingImplicit"
+  "@kind": "PiBindingImplicit"
   name: string
   type: Exp
 } & ExpMeta
@@ -172,7 +172,7 @@ export function PiBindingImplicit(
   span?: Span,
 ): PiBindingImplicit {
   return {
-    kind: "PiBindingImplicit",
+    "@kind": "PiBindingImplicit",
     name,
     type,
     span,
@@ -180,16 +180,16 @@ export function PiBindingImplicit(
 }
 
 export type Fn = {
-  family: "Exp"
-  kind: "Fn"
+  "@type": "Exp"
+  "@kind": "Fn"
   name: string
   ret: Exp
 } & ExpMeta
 
 export function Fn(name: string, ret: Exp, span?: Span): Fn {
   return {
-    family: "Exp",
-    kind: "Fn",
+    "@type": "Exp",
+    "@kind": "Fn",
     name,
     ret,
     span,
@@ -197,8 +197,8 @@ export function Fn(name: string, ret: Exp, span?: Span): Fn {
 }
 
 export type FnAnnotated = {
-  family: "Exp"
-  kind: "FnAnnotated"
+  "@type": "Exp"
+  "@kind": "FnAnnotated"
   name: string
   argType: Exp
   ret: Exp
@@ -211,8 +211,8 @@ export function FnAnnotated(
   span?: Span,
 ): FnAnnotated {
   return {
-    family: "Exp",
-    kind: "FnAnnotated",
+    "@type": "Exp",
+    "@kind": "FnAnnotated",
     name,
     argType,
     ret,
@@ -221,16 +221,16 @@ export function FnAnnotated(
 }
 
 export type FnImplicit = {
-  family: "Exp"
-  kind: "FnImplicit"
+  "@type": "Exp"
+  "@kind": "FnImplicit"
   name: string
   ret: Exp
 } & ExpMeta
 
 export function FnImplicit(name: string, ret: Exp, span?: Span): FnImplicit {
   return {
-    family: "Exp",
-    kind: "FnImplicit",
+    "@type": "Exp",
+    "@kind": "FnImplicit",
     name,
     ret,
     span,
@@ -238,8 +238,8 @@ export function FnImplicit(name: string, ret: Exp, span?: Span): FnImplicit {
 }
 
 export type FnImplicitAnnotated = {
-  family: "Exp"
-  kind: "FnImplicitAnnotated"
+  "@type": "Exp"
+  "@kind": "FnImplicitAnnotated"
   name: string
   argType: Exp
   ret: Exp
@@ -252,8 +252,8 @@ export function FnImplicitAnnotated(
   span?: Span,
 ): FnImplicitAnnotated {
   return {
-    family: "Exp",
-    kind: "FnImplicitAnnotated",
+    "@type": "Exp",
+    "@kind": "FnImplicitAnnotated",
     name,
     argType,
     ret,
@@ -262,8 +262,8 @@ export function FnImplicitAnnotated(
 }
 
 export type FnUnfolded = {
-  family: "Exp"
-  kind: "FnUnfolded"
+  "@type": "Exp"
+  "@kind": "FnUnfolded"
   bindings: Array<FnBinding>
   ret: Exp
 } & ExpMeta
@@ -274,8 +274,8 @@ export function FnUnfolded(
   span?: Span,
 ): FnUnfolded {
   return {
-    family: "Exp",
-    kind: "FnUnfolded",
+    "@type": "Exp",
+    "@kind": "FnUnfolded",
     bindings,
     ret,
     span,
@@ -283,8 +283,8 @@ export function FnUnfolded(
 }
 
 export type FnUnfoldedWithRetType = {
-  family: "Exp"
-  kind: "FnUnfoldedWithRetType"
+  "@type": "Exp"
+  "@kind": "FnUnfoldedWithRetType"
   bindings: Array<FnBinding>
   retType: Exp
   ret: Exp
@@ -297,8 +297,8 @@ export function FnUnfoldedWithRetType(
   span?: Span,
 ): FnUnfoldedWithRetType {
   return {
-    family: "Exp",
-    kind: "FnUnfoldedWithRetType",
+    "@type": "Exp",
+    "@kind": "FnUnfoldedWithRetType",
     bindings,
     retType,
     ret,
@@ -313,20 +313,20 @@ export type FnBinding =
   | FnBindingAnnotatedImplicit
 
 export type FnBindingName = {
-  kind: "FnBindingName"
+  "@kind": "FnBindingName"
   name: string
 } & ExpMeta
 
 export function FnBindingName(name: string, span?: Span): FnBindingName {
   return {
-    kind: "FnBindingName",
+    "@kind": "FnBindingName",
     name,
     span,
   }
 }
 
 export type FnBindingAnnotated = {
-  kind: "FnBindingAnnotated"
+  "@kind": "FnBindingAnnotated"
   name: string
   type: Exp
 } & ExpMeta
@@ -337,7 +337,7 @@ export function FnBindingAnnotated(
   span?: Span,
 ): FnBindingAnnotated {
   return {
-    kind: "FnBindingAnnotated",
+    "@kind": "FnBindingAnnotated",
     name,
     type,
     span,
@@ -345,7 +345,7 @@ export function FnBindingAnnotated(
 }
 
 export type FnBindingImplicit = {
-  kind: "FnBindingImplicit"
+  "@kind": "FnBindingImplicit"
   name: string
 } & ExpMeta
 
@@ -354,14 +354,14 @@ export function FnBindingImplicit(
   span?: Span,
 ): FnBindingImplicit {
   return {
-    kind: "FnBindingImplicit",
+    "@kind": "FnBindingImplicit",
     name,
     span,
   }
 }
 
 export type FnBindingAnnotatedImplicit = {
-  kind: "FnBindingAnnotatedImplicit"
+  "@kind": "FnBindingAnnotatedImplicit"
   name: string
   type: Exp
 } & ExpMeta
@@ -372,7 +372,7 @@ export function FnBindingAnnotatedImplicit(
   span?: Span,
 ): FnBindingAnnotatedImplicit {
   return {
-    kind: "FnBindingAnnotatedImplicit",
+    "@kind": "FnBindingAnnotatedImplicit",
     name,
     type,
     span,
@@ -380,16 +380,16 @@ export function FnBindingAnnotatedImplicit(
 }
 
 export type Ap = {
-  family: "Exp"
-  kind: "Ap"
+  "@type": "Exp"
+  "@kind": "Ap"
   target: Exp
   arg: Exp
 } & ExpMeta
 
 export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
   return {
-    family: "Exp",
-    kind: "Ap",
+    "@type": "Exp",
+    "@kind": "Ap",
     target,
     arg,
     span,
@@ -397,16 +397,16 @@ export function Ap(target: Exp, arg: Exp, span?: Span): Ap {
 }
 
 export type ApImplicit = {
-  family: "Exp"
-  kind: "ApImplicit"
+  "@type": "Exp"
+  "@kind": "ApImplicit"
   target: Exp
   arg: Exp
 } & ExpMeta
 
 export function ApImplicit(target: Exp, arg: Exp, span?: Span): ApImplicit {
   return {
-    family: "Exp",
-    kind: "ApImplicit",
+    "@type": "Exp",
+    "@kind": "ApImplicit",
     target,
     arg,
     span,
@@ -414,8 +414,8 @@ export function ApImplicit(target: Exp, arg: Exp, span?: Span): ApImplicit {
 }
 
 export type ApUnfolded = {
-  family: "Exp"
-  kind: "ApUnfolded"
+  "@type": "Exp"
+  "@kind": "ApUnfolded"
   target: Exp
   args: Array<Arg>
 } & ExpMeta
@@ -426,8 +426,8 @@ export function ApUnfolded(
   span?: Span,
 ): ApUnfolded {
   return {
-    family: "Exp",
-    kind: "ApUnfolded",
+    "@type": "Exp",
+    "@kind": "ApUnfolded",
     target,
     args,
     span,
@@ -437,32 +437,32 @@ export function ApUnfolded(
 export type Arg = ArgPlain | ArgImplicit
 
 export type ArgPlain = {
-  kind: "ArgPlain"
+  "@kind": "ArgPlain"
   exp: Exp
 }
 
 export function ArgPlain(exp: Exp): ArgPlain {
   return {
-    kind: "ArgPlain",
+    "@kind": "ArgPlain",
     exp,
   }
 }
 
 export type ArgImplicit = {
-  kind: "ArgImplicit"
+  "@kind": "ArgImplicit"
   exp: Exp
 }
 
 export function ArgImplicit(exp: Exp): ArgImplicit {
   return {
-    kind: "ArgImplicit",
+    "@kind": "ArgImplicit",
     exp,
   }
 }
 
 export type Sigma = {
-  family: "Exp"
-  kind: "Sigma"
+  "@type": "Exp"
+  "@kind": "Sigma"
   name: string
   carType: Exp
   cdrType: Exp
@@ -475,8 +475,8 @@ export function Sigma(
   span?: Span,
 ): Sigma {
   return {
-    family: "Exp",
-    kind: "Sigma",
+    "@type": "Exp",
+    "@kind": "Sigma",
     name,
     carType,
     cdrType,
@@ -485,8 +485,8 @@ export function Sigma(
 }
 
 export type SigmaUnfolded = {
-  family: "Exp"
-  kind: "SigmaUnfolded"
+  "@type": "Exp"
+  "@kind": "SigmaUnfolded"
   bindings: Array<SigmaBinding>
   cdrType: Exp
 } & ExpMeta
@@ -497,8 +497,8 @@ export function SigmaUnfolded(
   span?: Span,
 ): SigmaUnfolded {
   return {
-    family: "Exp",
-    kind: "SigmaUnfolded",
+    "@type": "Exp",
+    "@kind": "SigmaUnfolded",
     bindings,
     cdrType,
     span,
@@ -508,7 +508,7 @@ export function SigmaUnfolded(
 export type SigmaBinding = SigmaBindingNameless | SigmaBindingNamed
 
 export type SigmaBindingNameless = {
-  kind: "SigmaBindingNameless"
+  "@kind": "SigmaBindingNameless"
   type: Exp
 } & ExpMeta
 
@@ -517,14 +517,14 @@ export function SigmaBindingNameless(
   span?: Span,
 ): SigmaBindingNameless {
   return {
-    kind: "SigmaBindingNameless",
+    "@kind": "SigmaBindingNameless",
     type,
     span,
   }
 }
 
 export type SigmaBindingNamed = {
-  kind: "SigmaBindingNamed"
+  "@kind": "SigmaBindingNamed"
   name: string
   type: Exp
 } & ExpMeta
@@ -535,7 +535,7 @@ export function SigmaBindingNamed(
   span?: Span,
 ): SigmaBindingNamed {
   return {
-    kind: "SigmaBindingNamed",
+    "@kind": "SigmaBindingNamed",
     name,
     type,
     span,
@@ -543,16 +543,16 @@ export function SigmaBindingNamed(
 }
 
 export type Cons = {
-  family: "Exp"
-  kind: "Cons"
+  "@type": "Exp"
+  "@kind": "Cons"
   car: Exp
   cdr: Exp
 } & ExpMeta
 
 export function Cons(car: Exp, cdr: Exp, span?: Span): Cons {
   return {
-    family: "Exp",
-    kind: "Cons",
+    "@type": "Exp",
+    "@kind": "Cons",
     car,
     cdr,
     span,
@@ -560,15 +560,15 @@ export function Cons(car: Exp, cdr: Exp, span?: Span): Cons {
 }
 
 export type Quote = {
-  family: "Exp"
-  kind: "Quote"
+  "@type": "Exp"
+  "@kind": "Quote"
   data: string
 } & ExpMeta
 
 export function Quote(data: string, span?: Span): Quote {
   return {
-    family: "Exp",
-    kind: "Quote",
+    "@type": "Exp",
+    "@kind": "Quote",
     data,
     span,
   }
@@ -577,23 +577,23 @@ export function Quote(data: string, span?: Span): Quote {
 export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
 
 export type ClazzNull = {
-  family: "Exp"
-  kind: "ClazzNull"
+  "@type": "Exp"
+  "@kind": "ClazzNull"
   name?: string
 } & ExpMeta
 
 export function ClazzNull(name?: string, span?: Span): ClazzNull {
   return {
-    family: "Exp",
-    kind: "ClazzNull",
+    "@type": "Exp",
+    "@kind": "ClazzNull",
     name,
     span,
   }
 }
 
 export type ClazzCons = {
-  family: "Exp"
-  kind: "ClazzCons"
+  "@type": "Exp"
+  "@kind": "ClazzCons"
   propertyName: string
   localName: string
   propertyType: Exp
@@ -610,8 +610,8 @@ export function ClazzCons(
   span?: Span,
 ): ClazzCons {
   return {
-    family: "Exp",
-    kind: "ClazzCons",
+    "@type": "Exp",
+    "@kind": "ClazzCons",
     propertyName,
     localName,
     propertyType,
@@ -622,8 +622,8 @@ export function ClazzCons(
 }
 
 export type ClazzFulfilled = {
-  family: "Exp"
-  kind: "ClazzFulfilled"
+  "@type": "Exp"
+  "@kind": "ClazzFulfilled"
   propertyName: string
   localName: string
   propertyType: Exp
@@ -642,8 +642,8 @@ export function ClazzFulfilled(
   span?: Span,
 ): ClazzFulfilled {
   return {
-    family: "Exp",
-    kind: "ClazzFulfilled",
+    "@type": "Exp",
+    "@kind": "ClazzFulfilled",
     propertyName,
     localName,
     propertyType,
@@ -655,8 +655,8 @@ export function ClazzFulfilled(
 }
 
 export type ClazzUnfolded = {
-  family: "Exp"
-  kind: "ClazzUnfolded"
+  "@type": "Exp"
+  "@kind": "ClazzUnfolded"
   bindings: Array<ClazzBinding>
   name?: string
 } & ExpMeta
@@ -667,8 +667,8 @@ export function ClazzUnfolded(
   span?: Span,
 ): ClazzUnfolded {
   return {
-    family: "Exp",
-    kind: "ClazzUnfolded",
+    "@type": "Exp",
+    "@kind": "ClazzUnfolded",
     bindings,
     name,
     span,
@@ -678,7 +678,7 @@ export function ClazzUnfolded(
 export type ClazzBinding = ClazzBindingAbstract | ClazzBindingFulfilled
 
 export type ClazzBindingAbstract = {
-  kind: "ClazzBindingAbstract"
+  "@kind": "ClazzBindingAbstract"
   name: string
   propertyType: Exp
 }
@@ -688,14 +688,14 @@ export function ClazzBindingAbstract(
   propertyType: Exp,
 ): ClazzBindingAbstract {
   return {
-    kind: "ClazzBindingAbstract",
+    "@kind": "ClazzBindingAbstract",
     name,
     propertyType,
   }
 }
 
 export type ClazzBindingFulfilled = {
-  kind: "ClazzBindingFulfilled"
+  "@kind": "ClazzBindingFulfilled"
   name: string
   propertyType: Exp
   property: Exp
@@ -707,7 +707,7 @@ export function ClazzBindingFulfilled(
   property: Exp,
 ): ClazzBindingFulfilled {
   return {
-    kind: "ClazzBindingFulfilled",
+    "@kind": "ClazzBindingFulfilled",
     name,
     propertyType,
     property,
@@ -715,23 +715,23 @@ export function ClazzBindingFulfilled(
 }
 
 export type Objekt = {
-  family: "Exp"
-  kind: "Objekt"
+  "@type": "Exp"
+  "@kind": "Objekt"
   properties: Record<string, Exp>
 } & ExpMeta
 
 export function Objekt(properties: Record<string, Exp>, span?: Span): Objekt {
   return {
-    family: "Exp",
-    kind: "Objekt",
+    "@type": "Exp",
+    "@kind": "Objekt",
     properties,
     span,
   }
 }
 
 export type ObjektUnfolded = {
-  family: "Exp"
-  kind: "ObjektUnfolded"
+  "@type": "Exp"
+  "@kind": "ObjektUnfolded"
   properties: Array<Property>
 } & ExpMeta
 
@@ -740,8 +740,8 @@ export function ObjektUnfolded(
   span?: Span,
 ): ObjektUnfolded {
   return {
-    family: "Exp",
-    kind: "ObjektUnfolded",
+    "@type": "Exp",
+    "@kind": "ObjektUnfolded",
     properties,
     span,
   }
@@ -750,34 +750,34 @@ export function ObjektUnfolded(
 export type Property = PropertyPlain | PropertySpread
 
 export type PropertyPlain = {
-  kind: "PropertyPlain"
+  "@kind": "PropertyPlain"
   name: string
   exp: Exp
 }
 
 export function PropertyPlain(name: string, exp: Exp): PropertyPlain {
   return {
-    kind: "PropertyPlain",
+    "@kind": "PropertyPlain",
     name,
     exp,
   }
 }
 
 export type PropertySpread = {
-  kind: "PropertySpread"
+  "@kind": "PropertySpread"
   exp: Exp
 }
 
 export function PropertySpread(exp: Exp): PropertySpread {
   return {
-    kind: "PropertySpread",
+    "@kind": "PropertySpread",
     exp,
   }
 }
 
 export type New = {
-  family: "Exp"
-  kind: "New"
+  "@type": "Exp"
+  "@kind": "New"
   name: string
   properties: Record<string, Exp>
 } & ExpMeta
@@ -788,8 +788,8 @@ export function New(
   span?: Span,
 ): New {
   return {
-    family: "Exp",
-    kind: "New",
+    "@type": "Exp",
+    "@kind": "New",
     name,
     properties,
     span,
@@ -797,8 +797,8 @@ export function New(
 }
 
 export type NewUnfolded = {
-  family: "Exp"
-  kind: "NewUnfolded"
+  "@type": "Exp"
+  "@kind": "NewUnfolded"
   name: string
   properties: Array<Property>
 } & ExpMeta
@@ -809,8 +809,8 @@ export function NewUnfolded(
   span?: Span,
 ): NewUnfolded {
   return {
-    family: "Exp",
-    kind: "NewUnfolded",
+    "@type": "Exp",
+    "@kind": "NewUnfolded",
     name,
     properties,
     span,
@@ -818,16 +818,16 @@ export function NewUnfolded(
 }
 
 export type NewAp = {
-  family: "Exp"
-  kind: "NewAp"
+  "@type": "Exp"
+  "@kind": "NewAp"
   name: string
   args: Array<Arg>
 } & ExpMeta
 
 export function NewAp(name: string, args: Array<Arg>, span?: Span): NewAp {
   return {
-    family: "Exp",
-    kind: "NewAp",
+    "@type": "Exp",
+    "@kind": "NewAp",
     name,
     args,
     span,
@@ -835,16 +835,16 @@ export function NewAp(name: string, args: Array<Arg>, span?: Span): NewAp {
 }
 
 export type Dot = {
-  family: "Exp"
-  kind: "Dot"
+  "@type": "Exp"
+  "@kind": "Dot"
   target: Exp
   name: string
 } & ExpMeta
 
 export function Dot(target: Exp, name: string, span?: Span): Dot {
   return {
-    family: "Exp",
-    kind: "Dot",
+    "@type": "Exp",
+    "@kind": "Dot",
     target,
     name,
     span,
@@ -854,8 +854,8 @@ export function Dot(target: Exp, name: string, span?: Span): Dot {
 export type Sequence = SequenceLet | SequenceLetThe | SequenceCheck
 
 export type SequenceLet = {
-  family: "Exp"
-  kind: "SequenceLet"
+  "@type": "Exp"
+  "@kind": "SequenceLet"
   name: string
   exp: Exp
   ret: Exp
@@ -868,8 +868,8 @@ export function SequenceLet(
   span?: Span,
 ): SequenceLet {
   return {
-    family: "Exp",
-    kind: "SequenceLet",
+    "@type": "Exp",
+    "@kind": "SequenceLet",
     name,
     exp,
     ret,
@@ -878,8 +878,8 @@ export function SequenceLet(
 }
 
 export type SequenceLetThe = {
-  family: "Exp"
-  kind: "SequenceLetThe"
+  "@type": "Exp"
+  "@kind": "SequenceLetThe"
   name: string
   type: Exp
   exp: Exp
@@ -894,8 +894,8 @@ export function SequenceLetThe(
   span?: Span,
 ): SequenceLetThe {
   return {
-    family: "Exp",
-    kind: "SequenceLetThe",
+    "@type": "Exp",
+    "@kind": "SequenceLetThe",
     name,
     type,
     exp,
@@ -905,8 +905,8 @@ export function SequenceLetThe(
 }
 
 export type SequenceCheck = {
-  family: "Exp"
-  kind: "SequenceCheck"
+  "@type": "Exp"
+  "@kind": "SequenceCheck"
   exp: Exp
   type: Exp
   ret: Exp
@@ -919,8 +919,8 @@ export function SequenceCheck(
   span?: Span,
 ): SequenceCheck {
   return {
-    family: "Exp",
-    kind: "SequenceCheck",
+    "@type": "Exp",
+    "@kind": "SequenceCheck",
     exp,
     type,
     ret,
@@ -929,8 +929,8 @@ export function SequenceCheck(
 }
 
 export type SequenceUnfolded = {
-  family: "Exp"
-  kind: "SequenceUnfolded"
+  "@type": "Exp"
+  "@kind": "SequenceUnfolded"
   bindings: Array<SequenceBinding>
   ret: Exp
 } & ExpMeta
@@ -941,8 +941,8 @@ export function SequenceUnfolded(
   span?: Span,
 ): SequenceUnfolded {
   return {
-    family: "Exp",
-    kind: "SequenceUnfolded",
+    "@type": "Exp",
+    "@kind": "SequenceUnfolded",
     bindings,
     ret,
     span,
@@ -955,7 +955,7 @@ export type SequenceBinding =
   | SequenceBindingCheck
 
 export type SequenceBindingLet = {
-  kind: "SequenceBindingLet"
+  "@kind": "SequenceBindingLet"
   name: string
   exp: Exp
 } & ExpMeta
@@ -966,7 +966,7 @@ export function SequenceBindingLet(
   span?: Span,
 ): SequenceBindingLet {
   return {
-    kind: "SequenceBindingLet",
+    "@kind": "SequenceBindingLet",
     name,
     exp,
     span,
@@ -974,7 +974,7 @@ export function SequenceBindingLet(
 }
 
 export type SequenceBindingLetThe = {
-  kind: "SequenceBindingLetThe"
+  "@kind": "SequenceBindingLetThe"
   name: string
   type: Exp
   exp: Exp
@@ -987,7 +987,7 @@ export function SequenceBindingLetThe(
   span?: Span,
 ): SequenceBindingLetThe {
   return {
-    kind: "SequenceBindingLetThe",
+    "@kind": "SequenceBindingLetThe",
     name,
     type,
     exp,
@@ -996,7 +996,7 @@ export function SequenceBindingLetThe(
 }
 
 export type SequenceBindingCheck = {
-  kind: "SequenceBindingCheck"
+  "@kind": "SequenceBindingCheck"
   exp: Exp
   type: Exp
 } & ExpMeta
@@ -1007,7 +1007,7 @@ export function SequenceBindingCheck(
   span?: Span,
 ): SequenceBindingCheck {
   return {
-    kind: "SequenceBindingCheck",
+    "@kind": "SequenceBindingCheck",
     exp,
     type,
     span,
@@ -1015,15 +1015,15 @@ export function SequenceBindingCheck(
 }
 
 export type MacroEmbedded = {
-  family: "Exp"
-  kind: "MacroEmbedded"
+  "@type": "Exp"
+  "@kind": "MacroEmbedded"
   macro: Macro
 } & ExpMeta
 
 export function MacroEmbedded(macro: Macro, span?: Span): MacroEmbedded {
   return {
-    family: "Exp",
-    kind: "MacroEmbedded",
+    "@type": "Exp",
+    "@kind": "MacroEmbedded",
     macro,
     span,
   }

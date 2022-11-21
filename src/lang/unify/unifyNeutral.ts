@@ -34,7 +34,7 @@ export function unifyNeutral(
   )
   if (success) return
 
-  if (left.kind === "Var" && right.kind === "Var") {
+  if (left["@kind"] === "Var" && right["@kind"] === "Var") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
         [
@@ -48,33 +48,33 @@ export function unifyNeutral(
     return
   }
 
-  if (left.kind === "Ap" && right.kind === "Ap") {
+  if (left["@kind"] === "Ap" && right["@kind"] === "Ap") {
     // unifyType(mod, ctx, left.targetType, right.targetType)
     unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
-  if (left.kind === "ApImplicit" && right.kind === "ApImplicit") {
+  if (left["@kind"] === "ApImplicit" && right["@kind"] === "ApImplicit") {
     // unifyType(mod, ctx, left.targetType, right.targetType)
     unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.arg, right.arg)
     return
   }
 
-  if (left.kind === "Car" && right.kind === "Car") {
+  if (left["@kind"] === "Car" && right["@kind"] === "Car") {
     // unifyType(mod, ctx, left.targetType, right.targetType)
     unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     return
   }
 
-  if (left.kind === "Cdr" && right.kind === "Cdr") {
+  if (left["@kind"] === "Cdr" && right["@kind"] === "Cdr") {
     // unifyType(mod, ctx, left.targetType, right.targetType)
     unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     return
   }
 
-  if (left.kind === "Dot" && right.kind === "Dot") {
+  if (left["@kind"] === "Dot" && right["@kind"] === "Dot") {
     if (left.name !== right.name) {
       throw new Errors.UnificationError(
         [
@@ -90,7 +90,7 @@ export function unifyNeutral(
     return
   }
 
-  if (left.kind === "Replace" && right.kind === "Replace") {
+  if (left["@kind"] === "Replace" && right["@kind"] === "Replace") {
     // unifyType(mod, ctx, left.targetType, right.targetType)
     unifyNeutral(mod, ctx, left.targetType, left.target, right.target)
     unifyTypedValue(mod, ctx, left.motive, right.motive)

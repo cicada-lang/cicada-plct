@@ -8,7 +8,7 @@ import { unify, unifyType } from "../../unify"
 import type { Equation } from "../solve"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
-  switch (equation.kind) {
+  switch (equation["@kind"]) {
     case "EquationUnifyTyped": {
       const env = ctxToEnv(ctx)
       const type = evaluate(env, checkType(mod, ctx, equation.type))

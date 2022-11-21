@@ -7,7 +7,7 @@ export function foldAp(target: Exp, args: Array<Exps.Arg>): Exp {
 
   const [arg, ...restArgs] = args
 
-  switch (arg.kind) {
+  switch (arg["@kind"]) {
     case "ArgPlain": {
       return foldAp(
         Exps.Ap(target, arg.exp, spanUnion(target.span, arg.exp.span)),

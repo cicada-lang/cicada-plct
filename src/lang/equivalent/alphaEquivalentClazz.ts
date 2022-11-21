@@ -31,18 +31,21 @@ function alphaEquivalentClazzAfterReorder(
      we should use the `localName` now.
   **/
 
-  if (left.kind === "ClazzNull" && right.kind === "ClazzNull") {
+  if (left["@kind"] === "ClazzNull" && right["@kind"] === "ClazzNull") {
     return
   }
 
-  if (left.kind === "ClazzCons" && right.kind === "ClazzCons") {
+  if (left["@kind"] === "ClazzCons" && right["@kind"] === "ClazzCons") {
     alphaEquivalent(ctx, left.propertyType, right.propertyType)
     ctx = ctx.cons(left.localName, right.localName)
     alphaEquivalentClazzAfterReorder(ctx, left.rest, right.rest)
     return
   }
 
-  if (left.kind === "ClazzFulfilled" && right.kind === "ClazzFulfilled") {
+  if (
+    left["@kind"] === "ClazzFulfilled" &&
+    right["@kind"] === "ClazzFulfilled"
+  ) {
     alphaEquivalent(ctx, left.propertyType, right.propertyType)
     alphaEquivalent(ctx, left.property, right.property)
     alphaEquivalentClazzAfterReorder(ctx, left.rest, right.rest)
@@ -57,9 +60,9 @@ function reorderTheRightByTheLeft(
   right: Cores.Clazz,
   reordered: Cores.Clazz = Cores.ClazzNull(),
 ): Cores.Clazz {
-  switch (left.kind) {
+  switch (left["@kind"]) {
     case "ClazzNull": {
-      if (right.kind === "ClazzNull") {
+      if (right["@kind"] === "ClazzNull") {
         return reordered
       }
 
@@ -93,7 +96,7 @@ function reorderTheRightByTheLeft(
 }
 
 function deleteProperty(name: string, clazz: Cores.Clazz): Cores.Clazz {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return clazz
     }
@@ -130,7 +133,7 @@ function findPropertyAndCreateClazz(
   name: string,
   clazz: Cores.Clazz,
 ): Cores.Clazz {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       throw new Errors.EquivalentError(
         `[findPropertyAndCreateClazz] expect to find ${name} in clazz`,

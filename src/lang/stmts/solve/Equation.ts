@@ -4,7 +4,7 @@ import type { Span } from "../../span"
 export type Equation = EquationUnifyTyped | EquationUnify
 
 export type EquationUnifyTyped = {
-  kind: "EquationUnifyTyped"
+  "@kind": "EquationUnifyTyped"
   left: Exp
   right: Exp
   type: Exp
@@ -18,7 +18,7 @@ export function EquationUnifyTyped(
   span?: Span,
 ): EquationUnifyTyped {
   return {
-    kind: "EquationUnifyTyped",
+    "@kind": "EquationUnifyTyped",
     left,
     right,
     type,
@@ -27,7 +27,7 @@ export function EquationUnifyTyped(
 }
 
 export type EquationUnify = {
-  kind: "EquationUnify"
+  "@kind": "EquationUnify"
   left: Exp
   right: Exp
   span?: Span
@@ -39,7 +39,7 @@ export function EquationUnify(
   span?: Span,
 ): EquationUnify {
   return {
-    kind: "EquationUnify",
+    "@kind": "EquationUnify",
     left,
     right,
     span,

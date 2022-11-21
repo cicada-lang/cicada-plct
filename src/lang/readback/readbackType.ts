@@ -15,7 +15,7 @@ import * as Values from "../value"
 export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
   type = solutionAdvanceValue(mod, type)
 
-  switch (type.kind) {
+  switch (type["@kind"]) {
     case "TypedNeutral": {
       /**
          The `type` in `TypedNeutral` are not used.
@@ -89,7 +89,7 @@ export function readbackType(mod: Mod, ctx: Ctx, type: Value): Core {
 
     default: {
       throw new Errors.ReadbackError(
-        `readbackType is not implemented for type: ${type.kind}`,
+        `readbackType is not implemented for type: ${type["@kind"]}`,
       )
     }
   }

@@ -4,7 +4,7 @@ export function clazzAppend(
   left: Cores.Clazz,
   right: Cores.Clazz,
 ): Cores.Clazz {
-  switch (left.kind) {
+  switch (left["@kind"]) {
     case "ClazzNull": {
       return right
     }

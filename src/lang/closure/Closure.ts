@@ -5,7 +5,7 @@ import type { Value } from "../value"
 export type Closure = ClosureSimple | ClosureNative
 
 export type ClosureSimple = {
-  kind: "ClosureSimple"
+  "@kind": "ClosureSimple"
   env: Env
   name: string
   body: Core
@@ -13,7 +13,7 @@ export type ClosureSimple = {
 
 export function ClosureSimple(env: Env, name: string, body: Core): Closure {
   return {
-    kind: "ClosureSimple",
+    "@kind": "ClosureSimple",
     env,
     name,
     body,
@@ -21,7 +21,7 @@ export function ClosureSimple(env: Env, name: string, body: Core): Closure {
 }
 
 export type ClosureNative = {
-  kind: "ClosureNative"
+  "@kind": "ClosureNative"
   name: string
   native: (arg: Value) => Value
 }
@@ -31,7 +31,7 @@ export function ClosureNative(
   native: (arg: Value) => Value,
 ): ClosureNative {
   return {
-    kind: "ClosureNative",
+    "@kind": "ClosureNative",
     name,
     native,
   }

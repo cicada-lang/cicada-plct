@@ -29,7 +29,7 @@ function checkFulfilledArg(
   clazz: Values.Clazz,
   arg: Exp,
 ): Core {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       throw new Errors.ElaborationError(
         "[checkFulfilledArg] cannot apply argument to ClazzNull",

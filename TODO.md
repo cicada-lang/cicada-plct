@@ -70,14 +70,7 @@ remove `function` keyword
 
 # maybe
 
-[maybe] use unified JSON ADT
-
-- change `CamelCase` to `camelCase`
-
-- change the names of meta properties:
-
-  - `family` -> `@type`
-  - `kind` -> `@kind`
+[maybe] use unified JSON ADT -- change `CamelCase` to `camelCase`
 
 [maybe] `unifyClazz` & `includeClazz` support reordering of properties
 

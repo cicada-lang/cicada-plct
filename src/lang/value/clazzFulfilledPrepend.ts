@@ -5,7 +5,7 @@ export function clazzFulfilledPrepend(
   left: Values.Clazz,
   right: Values.Clazz,
 ): Values.Clazz {
-  switch (left.kind) {
+  switch (left["@kind"]) {
     case "ClazzNull": {
       return right
     }

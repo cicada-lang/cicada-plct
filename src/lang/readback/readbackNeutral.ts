@@ -6,7 +6,7 @@ import type { Neutral } from "../neutral"
 import { readback } from "../readback"
 
 export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
-  switch (neutral.kind) {
+  switch (neutral["@kind"]) {
     case "Var": {
       return Cores.Var(neutral.name)
     }

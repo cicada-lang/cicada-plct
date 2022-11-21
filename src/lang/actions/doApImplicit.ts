@@ -10,26 +10,26 @@ export function doApImplicit(target: Value, arg: Value): Value {
 }
 
 export function tryApImplicit(target: Value, arg: Value): Value | undefined {
-  if (target.kind === "FnImplicit") {
+  if (target["@kind"] === "FnImplicit") {
     return closureApply(target.retClosure, arg)
   }
 }
 
 export function neutralizeApImplicit(target: Value, arg: Value): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeApImplicit] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
 
-  if (target.type.kind !== "PiImplicit") {
+  if (target.type["@kind"] !== "PiImplicit") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeApImplicit] When target is a TypedNeutral, expect target.type to be PiImplicit`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

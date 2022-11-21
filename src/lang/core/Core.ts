@@ -18,36 +18,36 @@ export type Core =
   | Replace
 
 export type Var = {
-  family: "Core"
-  kind: "Var"
+  "@type": "Core"
+  "@kind": "Var"
   name: string
 }
 
 export function Var(name: string): Var {
   return {
-    family: "Core",
-    kind: "Var",
+    "@type": "Core",
+    "@kind": "Var",
     name,
   }
 }
 
 export type MetaVar = {
-  family: "Core"
-  kind: "MetaVar"
+  "@type": "Core"
+  "@kind": "MetaVar"
   name: string
 }
 
 export function MetaVar(name: string): MetaVar {
   return {
-    family: "Core",
-    kind: "MetaVar",
+    "@type": "Core",
+    "@kind": "MetaVar",
     name,
   }
 }
 
 export type Pi = {
-  family: "Core"
-  kind: "Pi"
+  "@type": "Core"
+  "@kind": "Pi"
   name: string
   argType: Core
   retType: Core
@@ -55,8 +55,8 @@ export type Pi = {
 
 export function Pi(name: string, argType: Core, retType: Core): Pi {
   return {
-    family: "Core",
-    kind: "Pi",
+    "@type": "Core",
+    "@kind": "Pi",
     name,
     argType,
     retType,
@@ -64,8 +64,8 @@ export function Pi(name: string, argType: Core, retType: Core): Pi {
 }
 
 export type PiImplicit = {
-  family: "Core"
-  kind: "PiImplicit"
+  "@type": "Core"
+  "@kind": "PiImplicit"
   name: string
   argType: Core
   retType: Core
@@ -77,8 +77,8 @@ export function PiImplicit(
   retType: Core,
 ): PiImplicit {
   return {
-    family: "Core",
-    kind: "PiImplicit",
+    "@type": "Core",
+    "@kind": "PiImplicit",
     name,
     argType,
     retType,
@@ -86,71 +86,71 @@ export function PiImplicit(
 }
 
 export type Fn = {
-  family: "Core"
-  kind: "Fn"
+  "@type": "Core"
+  "@kind": "Fn"
   name: string
   ret: Core
 }
 
 export function Fn(name: string, ret: Core): Fn {
   return {
-    family: "Core",
-    kind: "Fn",
+    "@type": "Core",
+    "@kind": "Fn",
     name,
     ret,
   }
 }
 
 export type FnImplicit = {
-  family: "Core"
-  kind: "FnImplicit"
+  "@type": "Core"
+  "@kind": "FnImplicit"
   name: string
   ret: Core
 }
 
 export function FnImplicit(name: string, ret: Core): FnImplicit {
   return {
-    family: "Core",
-    kind: "FnImplicit",
+    "@type": "Core",
+    "@kind": "FnImplicit",
     name,
     ret,
   }
 }
 
 export type Ap = {
-  family: "Core"
-  kind: "Ap"
+  "@type": "Core"
+  "@kind": "Ap"
   target: Core
   arg: Core
 }
 
 export function Ap(target: Core, arg: Core): Ap {
   return {
-    family: "Core",
-    kind: "Ap",
+    "@type": "Core",
+    "@kind": "Ap",
     target,
     arg,
   }
 }
 export type ApImplicit = {
-  family: "Core"
-  kind: "ApImplicit"
+  "@type": "Core"
+  "@kind": "ApImplicit"
   target: Core
   arg: Core
 }
 
 export function ApImplicit(target: Core, arg: Core): ApImplicit {
   return {
-    family: "Core",
-    kind: "ApImplicit",
+    "@type": "Core",
+    "@kind": "ApImplicit",
     target,
     arg,
   }
 }
 
 export type Sigma = {
-  family: "Core"
-  kind: "Sigma"
+  "@type": "Core"
+  "@kind": "Sigma"
   name: string
   carType: Core
   cdrType: Core
@@ -158,8 +158,8 @@ export type Sigma = {
 
 export function Sigma(name: string, carType: Core, cdrType: Core): Sigma {
   return {
-    family: "Core",
-    kind: "Sigma",
+    "@type": "Core",
+    "@kind": "Sigma",
     name,
     carType,
     cdrType,
@@ -167,59 +167,59 @@ export function Sigma(name: string, carType: Core, cdrType: Core): Sigma {
 }
 
 export type Cons = {
-  family: "Core"
-  kind: "Cons"
+  "@type": "Core"
+  "@kind": "Cons"
   car: Core
   cdr: Core
 }
 
 export function Cons(car: Core, cdr: Core): Cons {
   return {
-    family: "Core",
-    kind: "Cons",
+    "@type": "Core",
+    "@kind": "Cons",
     car,
     cdr,
   }
 }
 
 export type Car = {
-  family: "Core"
-  kind: "Car"
+  "@type": "Core"
+  "@kind": "Car"
   target: Core
 }
 
 export function Car(target: Core): Car {
   return {
-    family: "Core",
-    kind: "Car",
+    "@type": "Core",
+    "@kind": "Car",
     target,
   }
 }
 
 export type Cdr = {
-  family: "Core"
-  kind: "Cdr"
+  "@type": "Core"
+  "@kind": "Cdr"
   target: Core
 }
 
 export function Cdr(target: Core): Cdr {
   return {
-    family: "Core",
-    kind: "Cdr",
+    "@type": "Core",
+    "@kind": "Cdr",
     target,
   }
 }
 
 export type Quote = {
-  family: "Core"
-  kind: "Quote"
+  "@type": "Core"
+  "@kind": "Quote"
   data: string
 }
 
 export function Quote(data: string): Quote {
   return {
-    family: "Core",
-    kind: "Quote",
+    "@type": "Core",
+    "@kind": "Quote",
     data,
   }
 }
@@ -236,22 +236,22 @@ export function Quote(data: string): Quote {
 export type Clazz = ClazzNull | ClazzCons | ClazzFulfilled
 
 export type ClazzNull = {
-  family: "Core"
-  kind: "ClazzNull"
+  "@type": "Core"
+  "@kind": "ClazzNull"
   name?: string
 }
 
 export function ClazzNull(name?: string): ClazzNull {
   return {
-    family: "Core",
-    kind: "ClazzNull",
+    "@type": "Core",
+    "@kind": "ClazzNull",
     name,
   }
 }
 
 export type ClazzCons = {
-  family: "Core"
-  kind: "ClazzCons"
+  "@type": "Core"
+  "@kind": "ClazzCons"
   propertyName: string
   localName: string
   propertyType: Core
@@ -267,8 +267,8 @@ export function ClazzCons(
   name?: string,
 ): ClazzCons {
   return {
-    family: "Core",
-    kind: "ClazzCons",
+    "@type": "Core",
+    "@kind": "ClazzCons",
     propertyName,
     localName,
     propertyType,
@@ -278,8 +278,8 @@ export function ClazzCons(
 }
 
 export type ClazzFulfilled = {
-  family: "Core"
-  kind: "ClazzFulfilled"
+  "@type": "Core"
+  "@kind": "ClazzFulfilled"
   propertyName: string
   propertyType: Core
   property: Core
@@ -295,8 +295,8 @@ export function ClazzFulfilled(
   name?: string,
 ): ClazzFulfilled {
   return {
-    family: "Core",
-    kind: "ClazzFulfilled",
+    "@type": "Core",
+    "@kind": "ClazzFulfilled",
     propertyName,
     propertyType,
     property,
@@ -306,38 +306,38 @@ export function ClazzFulfilled(
 }
 
 export type Objekt = {
-  family: "Core"
-  kind: "Objekt"
+  "@type": "Core"
+  "@kind": "Objekt"
   properties: Record<string, Core>
 }
 
 export function Objekt(properties: Record<string, Core>): Objekt {
   return {
-    family: "Core",
-    kind: "Objekt",
+    "@type": "Core",
+    "@kind": "Objekt",
     properties,
   }
 }
 
 export type Dot = {
-  family: "Core"
-  kind: "Dot"
+  "@type": "Core"
+  "@kind": "Dot"
   target: Core
   name: string
 }
 
 export function Dot(target: Core, name: string): Dot {
   return {
-    family: "Core",
-    kind: "Dot",
+    "@type": "Core",
+    "@kind": "Dot",
     target,
     name,
   }
 }
 
 export type Replace = {
-  family: "Core"
-  kind: "Replace"
+  "@type": "Core"
+  "@kind": "Replace"
   target: Core
   motive: Core
   base: Core
@@ -345,8 +345,8 @@ export type Replace = {
 
 export function Replace(target: Core, motive: Core, base: Core): Replace {
   return {
-    family: "Core",
-    kind: "Replace",
+    "@type": "Core",
+    "@kind": "Replace",
     target,
     motive,
     base,

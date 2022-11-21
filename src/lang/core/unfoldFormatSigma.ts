@@ -5,7 +5,7 @@ export function unfoldFormatSigma(core: Core): {
   bindings: Array<string>
   cdrType: string
 } {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Sigma": {
       const carType = formatCore(core.carType)
       const { bindings, cdrType } = unfoldFormatSigma(core.cdrType)

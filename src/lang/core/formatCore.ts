@@ -4,7 +4,7 @@ import * as Cores from "../core"
 import { isIdentifier } from "../utils/isIdentifier"
 
 export function formatCore(core: Core): string {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Var": {
       return core.name
     }

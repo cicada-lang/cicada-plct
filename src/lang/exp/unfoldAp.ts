@@ -11,7 +11,7 @@ export function unfoldAp(
   exp: Exp,
   args: Array<Exps.Arg> = [],
 ): { target: Exp; args: Array<Exps.Arg> } {
-  switch (exp.kind) {
+  switch (exp["@kind"]) {
     case "Ap": {
       return unfoldAp(exp.target, [Exps.ArgPlain(exp.arg), ...args])
     }

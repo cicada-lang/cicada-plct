@@ -23,7 +23,7 @@ export function foldFnWithRetType(
 
   const [binding, ...restBindings] = bindings
 
-  switch (binding.kind) {
+  switch (binding["@kind"]) {
     case "FnBindingName": {
       return Exps.Fn(
         binding.name,

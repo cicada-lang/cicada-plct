@@ -29,8 +29,11 @@ export function includeClazz(
 
   const commonNames = new Set(_.intersection(subclazzNames, clazzNames))
 
-  while (clazz.kind !== "ClazzNull" || subclazz.kind !== "ClazzNull") {
-    if (clazz.kind === "ClazzCons" && !commonNames.has(clazz.propertyName)) {
+  while (clazz["@kind"] !== "ClazzNull" || subclazz["@kind"] !== "ClazzNull") {
+    if (
+      clazz["@kind"] === "ClazzCons" &&
+      !commonNames.has(clazz.propertyName)
+    ) {
       const usedNames = ctxNames(ctx)
       const freshName = freshen(usedNames, clazz.propertyName)
       const v = Values.TypedNeutral(clazz.propertyType, Neutrals.Var(freshName))
@@ -38,7 +41,7 @@ export function includeClazz(
     }
 
     if (
-      subclazz.kind === "ClazzCons" &&
+      subclazz["@kind"] === "ClazzCons" &&
       !commonNames.has(subclazz.propertyName)
     ) {
       const usedNames = ctxNames(ctx)
@@ -51,23 +54,23 @@ export function includeClazz(
     }
 
     if (
-      clazz.kind === "ClazzFulfilled" &&
+      clazz["@kind"] === "ClazzFulfilled" &&
       !commonNames.has(clazz.propertyName)
     ) {
       clazz = clazz.rest
     }
 
     if (
-      subclazz.kind === "ClazzFulfilled" &&
+      subclazz["@kind"] === "ClazzFulfilled" &&
       !commonNames.has(subclazz.propertyName)
     ) {
       subclazz = subclazz.rest
     }
 
     if (
-      clazz.kind === "ClazzCons" &&
+      clazz["@kind"] === "ClazzCons" &&
       commonNames.has(clazz.propertyName) &&
-      subclazz.kind === "ClazzFulfilled" &&
+      subclazz["@kind"] === "ClazzFulfilled" &&
       commonNames.has(subclazz.propertyName)
     ) {
       if (clazz.propertyName !== subclazz.propertyName) {
@@ -86,9 +89,9 @@ export function includeClazz(
     }
 
     if (
-      clazz.kind === "ClazzFulfilled" &&
+      clazz["@kind"] === "ClazzFulfilled" &&
       commonNames.has(clazz.propertyName) &&
-      subclazz.kind === "ClazzCons" &&
+      subclazz["@kind"] === "ClazzCons" &&
       commonNames.has(subclazz.propertyName)
     ) {
       if (clazz.propertyName !== subclazz.propertyName) {
@@ -110,9 +113,9 @@ export function includeClazz(
     }
 
     if (
-      clazz.kind === "ClazzCons" &&
+      clazz["@kind"] === "ClazzCons" &&
       commonNames.has(clazz.propertyName) &&
-      subclazz.kind === "ClazzCons" &&
+      subclazz["@kind"] === "ClazzCons" &&
       commonNames.has(subclazz.propertyName)
     ) {
       if (clazz.propertyName !== subclazz.propertyName) {
@@ -137,9 +140,9 @@ export function includeClazz(
     }
 
     if (
-      clazz.kind === "ClazzFulfilled" &&
+      clazz["@kind"] === "ClazzFulfilled" &&
       commonNames.has(clazz.propertyName) &&
-      subclazz.kind === "ClazzFulfilled" &&
+      subclazz["@kind"] === "ClazzFulfilled" &&
       commonNames.has(subclazz.propertyName)
     ) {
       if (clazz.propertyName !== subclazz.propertyName) {

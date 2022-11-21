@@ -10,7 +10,7 @@ export function clazzClosureApply(closure: Closure, arg: Value): Values.Clazz {
     throw new Errors.EvaluationError(
       [
         `[clazzClosureApply] expect value to be a Clazz`,
-        `  value.kind: ${value.kind}`,
+        `  value["@kind"]: ${value["@kind"]}`,
       ].join("\n"),
     )
   }

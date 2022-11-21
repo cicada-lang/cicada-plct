@@ -6,7 +6,7 @@ import type { Value } from "../value"
 import * as Values from "../value"
 
 export function solutionAdvanceValue(mod: Mod, value: Value): Value {
-  if (value.kind === "TypedNeutral") {
+  if (value["@kind"] === "TypedNeutral") {
     return solutionAdvanceNeutral(mod, value.type, value.neutral)
   }
 
@@ -28,7 +28,7 @@ function solutionAdvanceNeutral(
   type: Value,
   neutral: Neutral,
 ): Value {
-  switch (neutral.kind) {
+  switch (neutral["@kind"]) {
     case "Var": {
       return Values.TypedNeutral(type, neutral)
     }
@@ -40,8 +40,8 @@ function solutionAdvanceNeutral(
       )
 
       if (
-        result.kind === "TypedNeutral" &&
-        result.neutral.kind === "MetaVar" &&
+        result["@kind"] === "TypedNeutral" &&
+        result.neutral["@kind"] === "MetaVar" &&
         result.neutral.name === neutral.name
       ) {
         return result

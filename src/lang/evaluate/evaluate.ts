@@ -8,7 +8,7 @@ import type { Value } from "../value"
 import * as Values from "../value"
 
 export function evaluate(env: Env, core: Core): Value {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Var": {
       const value = envLookupValue(env, core.name)
       if (value === undefined) {
@@ -109,7 +109,7 @@ export function evaluate(env: Env, core: Core): Value {
         throw new Errors.EvaluationError(
           [
             `[evaluate] during ClazzFulfilled, expect the rest to be Clazz`,
-            `  rest.kind: ${rest.kind}`,
+            `  rest["@kind"]: ${rest["@kind"]}`,
           ].join("\n"),
         )
       }

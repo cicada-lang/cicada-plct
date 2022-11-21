@@ -6,7 +6,7 @@ export function unfoldFormatPi(core: Core): {
   bindings: Array<string>
   retType: string
 } {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Pi": {
       const argType = formatCore(core.argType)
       const binding = Cores.freeOccurred(core.name, core.retType)

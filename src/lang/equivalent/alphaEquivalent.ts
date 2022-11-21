@@ -10,19 +10,19 @@ import {
 import * as Errors from "../errors"
 
 export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
-  if (left.kind === "Var" && right.kind === "Var") {
+  if (left["@kind"] === "Var" && right["@kind"] === "Var") {
     ctx.assertEqualNames(left.name, right.name)
     return
   }
 
-  if (left.kind === "MetaVar" && right.kind === "MetaVar") {
+  if (left["@kind"] === "MetaVar" && right["@kind"] === "MetaVar") {
     ctx.assertEqualNames(left.name, right.name)
     return
   }
 
   if (
-    (left.kind === "Pi" && right.kind === "Pi") ||
-    (left.kind === "PiImplicit" && right.kind === "PiImplicit")
+    (left["@kind"] === "Pi" && right["@kind"] === "Pi") ||
+    (left["@kind"] === "PiImplicit" && right["@kind"] === "PiImplicit")
   ) {
     alphaEquivalent(ctx, left.argType, right.argType)
     ctx = ctx.cons(left.name, right.name)
@@ -31,8 +31,8 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   }
 
   if (
-    (left.kind === "Fn" && right.kind === "Fn") ||
-    (left.kind === "FnImplicit" && right.kind === "FnImplicit")
+    (left["@kind"] === "Fn" && right["@kind"] === "Fn") ||
+    (left["@kind"] === "FnImplicit" && right["@kind"] === "FnImplicit")
   ) {
     ctx = ctx.cons(left.name, right.name)
     alphaEquivalent(ctx, left.ret, right.ret)
@@ -40,38 +40,38 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   }
 
   if (
-    (left.kind === "Ap" && right.kind === "Ap") ||
-    (left.kind === "ApImplicit" && right.kind === "ApImplicit")
+    (left["@kind"] === "Ap" && right["@kind"] === "Ap") ||
+    (left["@kind"] === "ApImplicit" && right["@kind"] === "ApImplicit")
   ) {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.arg, right.arg)
     return
   }
 
-  if (left.kind === "Sigma" && right.kind === "Sigma") {
+  if (left["@kind"] === "Sigma" && right["@kind"] === "Sigma") {
     alphaEquivalent(ctx, left.carType, right.carType)
     ctx = ctx.cons(left.name, right.name)
     alphaEquivalent(ctx, left.cdrType, right.cdrType)
     return
   }
 
-  if (left.kind === "Cons" && right.kind === "Cons") {
+  if (left["@kind"] === "Cons" && right["@kind"] === "Cons") {
     alphaEquivalent(ctx, left.car, right.car)
     alphaEquivalent(ctx, left.cdr, right.cdr)
     return
   }
 
-  if (left.kind === "Car" && right.kind === "Car") {
+  if (left["@kind"] === "Car" && right["@kind"] === "Car") {
     alphaEquivalent(ctx, left.target, right.target)
     return
   }
 
-  if (left.kind === "Cdr" && right.kind === "Cdr") {
+  if (left["@kind"] === "Cdr" && right["@kind"] === "Cdr") {
     alphaEquivalent(ctx, left.target, right.target)
     return
   }
 
-  if (left.kind === "Quote" && right.kind === "Quote") {
+  if (left["@kind"] === "Quote" && right["@kind"] === "Quote") {
     if (left.data !== right.data) {
       throw new Errors.EquivalentError(
         [
@@ -86,7 +86,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
   }
 
   function isClazz(core: Core): core is Cores.Clazz {
-    return ["ClazzNull", "ClazzCons", "ClazzFulfilled"].includes(core.kind)
+    return ["ClazzNull", "ClazzCons", "ClazzFulfilled"].includes(core["@kind"])
   }
 
   if (isClazz(left) && isClazz(right)) {
@@ -94,12 +94,12 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  if (left.kind === "Objekt" && right.kind === "Objekt") {
+  if (left["@kind"] === "Objekt" && right["@kind"] === "Objekt") {
     alphaEquivalentProperties(ctx, left.properties, right.properties)
     return
   }
 
-  if (left.kind === "Dot" && right.kind === "Dot") {
+  if (left["@kind"] === "Dot" && right["@kind"] === "Dot") {
     if (left.name !== right.name) {
       throw new Errors.EquivalentError(
         [
@@ -114,7 +114,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  if (left.kind === "Replace" && right.kind === "Replace") {
+  if (left["@kind"] === "Replace" && right["@kind"] === "Replace") {
     alphaEquivalent(ctx, left.target, right.target)
     alphaEquivalent(ctx, left.motive, right.motive)
     alphaEquivalent(ctx, left.base, right.base)

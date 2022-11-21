@@ -8,26 +8,26 @@ export function doCar(target: Value): Value {
 }
 
 export function tryCar(target: Value): Value | undefined {
-  if (target.kind === "Cons") {
+  if (target["@kind"] === "Cons") {
     return target.car
   }
 }
 
 export function neutralizeCar(target: Value): Value {
-  if (target.kind !== "TypedNeutral") {
+  if (target["@kind"] !== "TypedNeutral") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeCar] expect target to be TypedNeutral`,
-        `  target.kind: ${target.kind}`,
+        `  target["@kind"]: ${target["@kind"]}`,
       ].join("\n"),
     )
   }
 
-  if (target.type.kind !== "Sigma") {
+  if (target.type["@kind"] !== "Sigma") {
     throw new Errors.EvaluationError(
       [
         `[neutralizeCar] When target is a TypedNeutral, expect target.type to be Sigma`,
-        `  target.type.kind: ${target.type.kind}`,
+        `  target.type["@kind"]: ${target.type["@kind"]}`,
       ].join("\n"),
     )
   }

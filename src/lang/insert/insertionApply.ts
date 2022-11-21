@@ -13,7 +13,7 @@ export function insertionApply(
   insertion: Insertion,
   core: Core,
 ): Core {
-  switch (insertion.kind) {
+  switch (insertion["@kind"]) {
     case "InsertionMetaVar": {
       const argValue = solutionLookupValue(
         mod.solution,
@@ -26,7 +26,7 @@ export function insertionApply(
             [
               `[insertionApply] meet unsolved meta variable during infer`,
               `  variable name: ${insertion.metaVar.neutral.name}`,
-              `  kind of next arg exp: ${insertion.argExp.kind}`,
+              `  kind of next arg exp: ${insertion.argExp["@kind"]}`,
             ].join("\n"),
             { span: insertion.argExp.span },
           )

@@ -12,7 +12,7 @@ export function readbackProperties(
   clazz: Values.Clazz,
   value: Value,
 ): Record<string, Cores.Core> {
-  switch (clazz.kind) {
+  switch (clazz["@kind"]) {
     case "ClazzNull": {
       return {}
     }

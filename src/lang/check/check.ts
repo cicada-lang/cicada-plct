@@ -20,12 +20,12 @@ import * as Values from "../value"
 import { formatType } from "../value"
 
 export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
-  switch (exp.kind) {
+  switch (exp["@kind"]) {
     case "Var": {
       try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
-        if (inferred.type.kind === "PiImplicit") {
+        if (inferred.type["@kind"] === "PiImplicit") {
           return insertDuringCheck(mod, ctx, inferred, args, type)
         }
       } catch (error) {
@@ -58,7 +58,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
     }
 
     case "Fn": {
-      if (type.kind === "PiImplicit") {
+      if (type["@kind"] === "PiImplicit") {
         // NOTE Be careful about scope bug, the `freshName` might occurs in `exp`.
         const name = type.retTypeClosure.name
         const usedNames = [
@@ -115,7 +115,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
       try {
         const { target, args } = Exps.unfoldAp(exp)
         const inferred = infer(mod, ctx, target)
-        if (inferred.type.kind === "PiImplicit") {
+        if (inferred.type["@kind"] === "PiImplicit") {
           return insertDuringCheck(mod, ctx, inferred, args, type)
         }
       } catch (error) {

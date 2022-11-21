@@ -5,7 +5,7 @@ export function unfoldFormatFn(core: Core): {
   bindings: Array<string>
   ret: string
 } {
-  switch (core.kind) {
+  switch (core["@kind"]) {
     case "Fn": {
       const binding = `${core.name}`
       const { bindings, ret } = unfoldFormatFn(core.ret)

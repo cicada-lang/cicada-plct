@@ -3,13 +3,13 @@ import * as Errors from "../errors"
 import type { Mod } from "../mod"
 import { AlreadyType, formatType, Value } from "../value"
 
-export function assertTypeInCtx<Kind extends AlreadyType["kind"]>(
+export function assertTypeInCtx<Kind extends AlreadyType["@kind"]>(
   mod: Mod,
   ctx: Ctx,
   type: Value,
   kind: Kind,
-): asserts type is Extract<Value, { kind: Kind }> {
-  if (type.kind !== kind) {
+): asserts type is Extract<Value, { "@kind": Kind }> {
+  if (type["@kind"] !== kind) {
     throw new Errors.AssertionError(
       [
         `assertTypeInCtx fail`,
