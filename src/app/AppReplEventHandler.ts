@@ -7,8 +7,8 @@ import { Loader } from "../loader"
 import { colors } from "../utils/colors"
 
 export class AppReplEventHandler extends ReplEventHandler {
-  loader = new Loader()
   pathname = process.cwd() + "/repl"
+  loader = new Loader()
 
   constructor() {
     super()
