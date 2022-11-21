@@ -56,6 +56,12 @@ idLeft: (f) => {
 },
 ```
 
+# syntax
+
+remove `function` keyword
+[maybe] remove `let` keyword
+[maybe] remove `return` keyword
+
 # bug
 
 [bug] macros like `equivalent` uses globals variables which might be shadowed
