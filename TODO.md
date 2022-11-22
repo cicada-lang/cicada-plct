@@ -1,28 +1,3 @@
-[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
-
-- `refl` will do an unification but what it should do is `equivalent`.
-
-- example:
-
-  ```cicada
-  compute equivalent Type {
-      class { A: String = "abc" }
-    = class { A: String }
-  }
-
-  check refl: Equal(
-    Type,
-    class { A: String = "abc" },
-    class { A: String },
-  )
-  ```
-
-[bug fix] fix the use of `solutionAdvanceValue`
-
-- `MetaVar` should not be special
-
-- We should write test to show full `solutionAdvanceNeutral` is needed.
-
 [bug fix] `groupCategory.todo.cic`
 
 ```cicada
@@ -43,17 +18,40 @@ idLeft: (f) => {
 },
 ```
 
-# syntax
+[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
-remove `function` keyword
-[maybe] remove `let` keyword
-[maybe] remove `return` keyword
+- `refl` will do an unification but what it should do is `equivalent`.
 
-# bug
+- example:
+
+  ```cicada
+  compute equivalent Type {
+      class { A: String = "abc" }
+    = class { A: String }
+  }
+
+  check refl: Equal(
+    Type,
+    class { A: String = "abc" },
+    class { A: String },
+  )
+  ```
 
 [bug] macros like `equivalent` uses globals variables which might be shadowed
 
 - Maybe we should be able to reference globals by `Exp`.
+
+[bug fix] fix the use of `solutionAdvanceValue`
+
+- `MetaVar` should not be special
+
+- We should write test to show full `solutionAdvanceNeutral` is needed.
+
+# syntax
+
+[maybe] remove `function` keyword
+[maybe] remove `let` keyword
+[maybe] remove `return` keyword
 
 # maybe
 
