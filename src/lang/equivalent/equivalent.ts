@@ -1,19 +1,17 @@
-import { formatCore } from "../core"
+import { indent } from "../../utils/indent"
 import type { Ctx } from "../ctx"
-import { AlphaCtx, alphaEquivalent } from "../equivalent"
+import { equivalentByType, equivalentByValue } from "../equivalent"
 import * as Errors from "../errors"
 import type { Mod } from "../mod"
-import { readback } from "../readback"
+import { solutionAdvanceValue } from "../solution"
 import type { Value } from "../value"
+import { formatType, formatValue } from "../value"
 
 /**
 
    # equivalent
 
-   `equivalent` is implemented by `readback` and `alphaEquivalent`,
-   not implemented directly by recursion over two values.
-
-   Otherwise eta-rules will be tricky to handle.
+   `equivalent` needs to handle eta-rules.
 
 **/
 
@@ -24,18 +22,33 @@ export function equivalent(
   left: Value,
   right: Value,
 ): void {
-  const leftCore = readback(mod, ctx, type, left)
-  const rightCore = readback(mod, ctx, type, right)
+  type = solutionAdvanceValue(mod, type)
+  left = solutionAdvanceValue(mod, left)
+  right = solutionAdvanceValue(mod, right)
 
   try {
-    alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
+    if (equivalentByType(mod, ctx, type, left, right)) return
+    equivalentByValue(mod, ctx, type, left, right)
   } catch (error) {
     if (error instanceof Errors.EquivalenceError) {
-      throw new Errors.InclusionError(
+      error.trace.unshift(
         [
+          `[equivalent]`,
+          indent(`type: ${formatType(mod, ctx, type)}`),
+          indent(`left: ${formatValue(mod, ctx, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, type, right)}`),
+        ].join("\n"),
+      )
+    }
+
+    if (error instanceof Errors.EvaluationError) {
+      throw new Errors.EquivalenceError(
+        [
+          `[equivalent] EvaluationError during equivalent`,
           error.message,
-          ` left: ${formatCore(leftCore)}`,
-          ` right: ${formatCore(rightCore)}`,
+          indent(`type: ${formatType(mod, ctx, type)}`),
+          indent(`left: ${formatValue(mod, ctx, type, left)}`),
+          indent(`right: ${formatValue(mod, ctx, type, right)}`),
         ].join("\n"),
       )
     }

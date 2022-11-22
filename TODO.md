@@ -1,13 +1,6 @@
-[bug fix] `GroupHomomorphism.test.cic`
+`readback` do not do eta-expansion.
 
-- implement `equivalent` directly -- instead of using `readback` and `alphaEquivalent`.
-
-- `readback` do not do eta-expansion.
-
-- remove `alphaEquivalentClazz`
-
-  - `alphaEquivalentClazz` should not handle equivalent out of order,
-    because "equivalent thing can not be unified" is a bad semantic.
+- [bug fix] `GroupHomomorphism.test.cic`
 
 [diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
