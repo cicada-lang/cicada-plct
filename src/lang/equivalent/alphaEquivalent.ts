@@ -73,7 +73,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left["@kind"] === "Quote" && right["@kind"] === "Quote") {
     if (left.data !== right.data) {
-      throw new Errors.EquivalentError(
+      throw new Errors.EquivalenceError(
         [
           `[alphaEquivalent] fail on Quote`,
           `  left data: ${left.data}`,
@@ -101,7 +101,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
 
   if (left["@kind"] === "Dot" && right["@kind"] === "Dot") {
     if (left.name !== right.name) {
-      throw new Errors.EquivalentError(
+      throw new Errors.EquivalenceError(
         [
           `[alphaEquivalent] fail on Dot`,
           `  left name: ${left.name}`,
@@ -121,7 +121,7 @@ export function alphaEquivalent(ctx: AlphaCtx, left: Core, right: Core): void {
     return
   }
 
-  throw new Errors.EquivalentError(
+  throw new Errors.EquivalenceError(
     [
       `[alphaEquivalent] is not implemented for the pair of cores`,
       indent(`left: ${formatCore(left)}`),

@@ -11,7 +11,7 @@ export function alphaEquivalentProperties(
   const rightSize = Object.keys(rightProperties).length
 
   if (leftSize !== rightSize) {
-    throw new Errors.EquivalentError(
+    throw new Errors.EquivalenceError(
       `alphaEquivalentProperties expect the left size: ${leftSize} to be equal to the right size: ${rightSize}`,
     )
   }
@@ -19,7 +19,7 @@ export function alphaEquivalentProperties(
   for (const [name, left] of Object.entries(leftProperties)) {
     const right = rightProperties[name]
     if (right === undefined) {
-      throw new Errors.EquivalentError(
+      throw new Errors.EquivalenceError(
         `alphaEquivalentProperties missing property: ${name} on the right side`,
       )
     }

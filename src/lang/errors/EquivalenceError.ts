@@ -1,6 +1,6 @@
 import { LangError } from "./LangError"
 
-export class EquivalentError extends LangError {
+export class EquivalenceError extends LangError {
   constructor(public message: string) {
     super(message)
   }

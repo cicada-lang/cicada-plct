@@ -52,7 +52,7 @@ function alphaEquivalentClazzAfterReorder(
     return
   }
 
-  throw new Errors.EquivalentError(`[alphaEquivalentClazz] fail`)
+  throw new Errors.EquivalenceError(`[alphaEquivalentClazz] fail`)
 }
 
 function reorderTheRightByTheLeft(
@@ -66,7 +66,7 @@ function reorderTheRightByTheLeft(
         return reordered
       }
 
-      throw new Errors.EquivalentError(
+      throw new Errors.EquivalenceError(
         `[reorderTheRightByTheLeft] expect properties on the right clazz`,
       )
     }
@@ -135,7 +135,7 @@ function findPropertyAndCreateClazz(
 ): Cores.Clazz {
   switch (clazz["@kind"]) {
     case "ClazzNull": {
-      throw new Errors.EquivalentError(
+      throw new Errors.EquivalenceError(
         `[findPropertyAndCreateClazz] expect to find ${name} in clazz`,
       )
     }

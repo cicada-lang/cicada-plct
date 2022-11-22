@@ -30,7 +30,7 @@ export function equivalent(
   try {
     alphaEquivalent(new AlphaCtx(), leftCore, rightCore)
   } catch (error) {
-    if (error instanceof Errors.EquivalentError) {
+    if (error instanceof Errors.EquivalenceError) {
       throw new Errors.InclusionError(
         [
           error.message,
