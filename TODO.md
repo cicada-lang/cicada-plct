@@ -2,6 +2,8 @@
 
 - `refl` will do an unification but what it should do is `equivalent`.
 
+  - [question] What will happen to this check of `refl` if we use path type?
+
 - example:
 
   ```cicada
