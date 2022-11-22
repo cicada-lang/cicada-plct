@@ -13,7 +13,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      id: (implicit T2, x1) => ?id(implicit T2, x1),
+      id: ?id,
       x: ?x
     }"
   `,
@@ -32,7 +32,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      id: (implicit T, x1) => ?id(implicit T, x1),
+      id: ?id,
       x: \\"abc\\",
       A: String
     }"
@@ -52,7 +52,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      id: (implicit T2, x1) => ?id(implicit T2, x1),
+      id: ?id,
       x: \\"abc\\"
     }"
   `,
@@ -72,9 +72,9 @@ solve (id: (implicit T: Type, x: T) -> T, A: Type, idA: (x: A) -> A) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      id: (implicit T, x) => ?id(implicit T, x),
+      id: ?id,
       A: String,
-      idA: (x) => ?id(implicit String, x)
+      idA: ?id(implicit String)
     }"
   `,
   )
@@ -93,7 +93,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, c: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      id: (implicit T3, x1) => ?id(implicit T3, x1),
+      id: ?id,
       x: \\"abc\\",
       c: ?id(implicit String, \\"abc\\")
     }"

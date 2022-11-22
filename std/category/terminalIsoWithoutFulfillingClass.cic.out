@@ -1,29 +1,5 @@
 (cat, x, y) => {
-  cat: {
-    Object: cat.Object,
-    Morphism: (dom, cod) => cat.Morphism(dom, cod),
-    id: (x27) => cat.id(x27),
-    compose: (implicit x27, implicit y15, implicit z10, f, g) => cat.compose(implicit x27, implicit y15, implicit z10, f, g),
-    idLeft: (implicit x27, implicit y15, f) => cat.idLeft(implicit x27, implicit y15, f),
-    idRight: (implicit x27, implicit y15, f) => cat.idRight(implicit x27, implicit y15, f),
-    composeAssociative: (
-      implicit x27,
-      implicit y15,
-      implicit z10,
-      implicit w,
-      f,
-      g,
-      h,
-    ) => cat.composeAssociative(
-      implicit x27,
-      implicit y15,
-      implicit z10,
-      implicit w,
-      f,
-      g,
-      h,
-    )
-  },
+  cat: cat,
   dom: x.object,
   cod: y.object,
   morphism: y.morphism(x.object),
@@ -185,15 +161,7 @@
           h,
         ),
       )
-    } = {
-      Object: cat.Object,
-      Morphism: (dom, cod) => cat.Morphism(dom, cod),
-      id: (x) => cat.id(x),
-      compose: (implicit x, implicit y, implicit z10, f, g) => cat.compose(implicit x, implicit y, implicit z10, f, g),
-      idLeft: (implicit x, implicit y, f) => cat.idLeft(implicit x, implicit y, f),
-      idRight: (implicit x, implicit y, f) => cat.idRight(implicit x, implicit y, f),
-      composeAssociative: (implicit x, implicit y, implicit z10, implicit w, f, g, h) => cat.composeAssociative(implicit x, implicit y, implicit z10, implicit w, f, g, h)
-    }
+    } = cat
     object: cat.Object
     morphism: (x: cat.Object) -> cat.Morphism(x, object)
     morphismUnique: (implicit x: cat.Object, f: cat.Morphism(x, object)) -> Equal(cat.Morphism(x, object), f, morphism(x))
@@ -253,15 +221,7 @@
           h,
         ),
       )
-    } = {
-      Object: cat.Object,
-      Morphism: (dom, cod) => cat.Morphism(dom, cod),
-      id: (x27) => cat.id(x27),
-      compose: (implicit x27, implicit y, implicit z10, f, g) => cat.compose(implicit x27, implicit y, implicit z10, f, g),
-      idLeft: (implicit x27, implicit y, f) => cat.idLeft(implicit x27, implicit y, f),
-      idRight: (implicit x27, implicit y, f) => cat.idRight(implicit x27, implicit y, f),
-      composeAssociative: (implicit x27, implicit y, implicit z10, implicit w, f, g, h) => cat.composeAssociative(implicit x27, implicit y, implicit z10, implicit w, f, g, h)
-    }
+    } = cat
     object: cat.Object
     morphism: (x27: cat.Object) -> cat.Morphism(x27, object)
     morphismUnique: (implicit x27: cat.Object, f: cat.Morphism(x27, object)) -> Equal(cat.Morphism(x27, object), f, morphism(x27))

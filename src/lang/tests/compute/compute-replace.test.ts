@@ -17,7 +17,7 @@ compute replace
       target,
       motive,
       base,
-    ) => replace(target, (target1) => motive(target1), base): (
+    ) => replace(target, motive, base): (
       implicit T: Type,
       implicit from: T,
       implicit to: T,

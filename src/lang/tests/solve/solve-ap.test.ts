@@ -13,7 +13,7 @@ solve (f: (String) -> String, x: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      f: (_) => ?f(_),
+      f: ?f,
       x: ?x
     }"
   `,
@@ -32,7 +32,7 @@ solve (f: (String) -> String, x: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      f: (_) => ?f(_),
+      f: ?f,
       x: \\"abc\\"
     }"
   `,
@@ -52,7 +52,7 @@ solve (f: (String) -> String, x: String, c: String) {
   expect(output).toMatchInlineSnapshot(
     `
     "{
-      f: (_) => ?f(_),
+      f: ?f,
       x: \\"abc\\",
       c: ?f(\\"abc\\")
     }"

@@ -1,7 +1,3 @@
-`readback` do not do eta-expansion.
-
-- [bug fix] `GroupHomomorphism.test.cic`
-
 [diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
 
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
