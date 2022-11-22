@@ -101,7 +101,16 @@ and do not do eta-expansion in `readback`.
 
 # Ohter use of readback during elaboration
 
-TODO We should review all uses of `readback` during `infer` and `check`:
+We should review all uses of `readback` during elaboration (`infer` and `check`):
 
 - `inferProperties`
 - `inferNewArgs`
+
+# Look back
+
+Refactoring by observing the roles that a function plays,
+and separating the roles into different functions.
+
+OOP is all about role-playing objects,
+but even if we do not use objects,
+thinking in terms of role-playing functions can still help.

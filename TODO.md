@@ -1,5 +1,3 @@
-[diary] `2022-11-19-using-readback-during-elaboration.md` -- Look back
-
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
 - `refl` will do an unification but what it should do is `equivalent`.

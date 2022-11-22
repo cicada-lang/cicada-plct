@@ -9,9 +9,10 @@ import type { Value } from "../value"
 
    # readbackByType
 
-   The eta-rules are implemented here.
+   The eta-expansion can be implemented here.
 
-   a.k.a. η-rule and eta-expansion.
+   But due to the use of `readback` during elaboration,
+   performing eta-expansion is not a desired role of `readback`.
 
 **/
 
