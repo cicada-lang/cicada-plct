@@ -34,7 +34,11 @@ export function readbackByValue(
 
     default: {
       throw new Errors.ReadbackError(
-        `readbackByValue is not implemented for type: ${type["@kind"]}, and value: ${value["@kind"]}`,
+        [
+          `[readbackByValue] is not implemented for`,
+          `  type["@kind"]: ${type["@kind"]}`,
+          `  value["@kind"]: ${value["@kind"]}`,
+        ].join("\n"),
       )
     }
   }
