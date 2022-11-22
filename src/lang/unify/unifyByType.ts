@@ -39,7 +39,8 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doAp(left, v)
       const rightRet = Actions.doAp(right, v)
-      // NOTE Should not capture bound variable and make them out of scope.
+      // NOTE Should not use `unify`, which will
+      //   capture bound variables and make them out of scope.
       // unify(mod, ctx, retType, leftRet, rightRet)
       equivalent(mod, ctx, retType, leftRet, rightRet)
       return "ok"
@@ -54,7 +55,8 @@ export function unifyByType(
       ctx = CtxCons(freshName, type.argType, ctx)
       const leftRet = Actions.doApImplicit(left, v)
       const rightRet = Actions.doApImplicit(right, v)
-      // NOTE Should not capture bound variable and make them out of scope.
+      // NOTE Should not use `unify`, which will
+      //   capture bound variables and make them out of scope.
       // unify(mod, ctx, retType, leftRet, rightRet)
       equivalent(mod, ctx, retType, leftRet, rightRet)
       return "ok"
