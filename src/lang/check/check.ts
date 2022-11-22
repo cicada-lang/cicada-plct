@@ -69,6 +69,7 @@ export function check(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
         const freshName = freshen(usedNames, name)
         const arg = Values.TypedNeutral(type.argType, Neutrals.Var(freshName))
         const retType = closureApply(type.retTypeClosure, arg)
+        ctx = CtxCons(freshName, type.argType, ctx)
         const core = check(mod, ctx, exp, retType)
         return Cores.FnImplicit(freshName, core)
       }

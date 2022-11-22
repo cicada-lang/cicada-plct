@@ -1,23 +1,3 @@
-[bug fix] `groupCategory.todo.cic`
-
-```cicada
-// TODO Wrong error:
-// - EvaluationError: [evaluate] undefined variable name: x
-
-idLeft: (f) => {
-  let G = f.dom
-  let H = f.cod
-
-  let motive = Equal(
-    GroupHomomorphism(G, H),
-    composeGroupHomomorphism(idGroupHomomorphism(G), f),
-    f,
-  )
-
-  return the(motive, refl)
-},
-```
-
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
 - `refl` will do an unification but what it should do is `equivalent`.

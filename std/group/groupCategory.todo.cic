@@ -13,7 +13,7 @@ let groupCategory = new Category {
   id: idGroupHomomorphism,
   compose: composeGroupHomomorphism,
 
-  idLeft: (f) => refl,
+  // idLeft: (f) => refl,
 
   // idLeft: (implicit G, implicit H, f) => {
   //   let motive = Equal(
@@ -34,21 +34,18 @@ let groupCategory = new Category {
   //   return the(motive, refl)
   // },
 
-  // TODO Wrong error:
-  // - EvaluationError: [evaluate] undefined variable name: x
+  idLeft: (f) => {
+    let G = f.dom
+    let H = f.cod
 
-  // idLeft: (f) => {
-  //   let G = f.dom
-  //   let H = f.cod
+    let motive = Equal(
+      GroupHomomorphism(G, H),
+      composeGroupHomomorphism(idGroupHomomorphism(G), f),
+      f,
+    )
 
-  //   let motive = Equal(
-  //     GroupHomomorphism(G, H),
-  //     composeGroupHomomorphism(idGroupHomomorphism(G), f),
-  //     f,
-  //   )
-
-  //   return the(motive, refl)
-  // },
+    return the(motive, refl)
+  },
 
   // TODO Later
 
