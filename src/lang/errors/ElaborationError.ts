@@ -7,12 +7,11 @@ export class ElaborationError extends LangError {
     super(message)
   }
 
-  report(options?: { text?: string }): string {
-    if (this.options.span && options?.text) {
-      return [
-        this.message + "\n",
-        pt.report(this.options.span, options.text),
-      ].join("\n")
+  report(text?: string): string {
+    if (this.options.span && text) {
+      return [this.message + "\n", pt.report(this.options.span, text)].join(
+        "\n",
+      )
     }
 
     return this.message

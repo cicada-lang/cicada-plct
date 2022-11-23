@@ -37,7 +37,7 @@ export class MarkdownScript extends Script {
       await this.mod.executeStmts(stmts)
     } catch (error) {
       if (error instanceof Errors.ElaborationError) {
-        throw new Errors.ErrorReport(error.report({ text }))
+        throw new Errors.ErrorReport(error.report(text))
       }
 
       throw error

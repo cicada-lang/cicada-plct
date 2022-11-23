@@ -4,6 +4,8 @@
 
   - [question] What will happen to this check of `refl` if we use path type?
 
+    learn path type and cubical type.
+
 - example:
 
   ```cicada

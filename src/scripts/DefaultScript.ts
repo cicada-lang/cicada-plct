@@ -14,7 +14,7 @@ export class DefaultScript extends Script {
       await this.mod.executeStmts(stmts)
     } catch (error) {
       if (error instanceof Errors.ElaborationError) {
-        throw new Errors.ErrorReport(error.report({ text: this.text }))
+        throw new Errors.ErrorReport(error.report(this.text))
       }
 
       throw error
