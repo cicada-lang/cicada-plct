@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "importsNotUsedAsValues": "error",
     "declaration": true,
-    "sourceMap": true,
+    "inlineSourceMap": true,
     "strict": true,
     "outDir": "lib",
     "baseUrl": "."
