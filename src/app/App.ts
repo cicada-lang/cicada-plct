@@ -1,4 +1,4 @@
-import * as Loggers from "../framework/loggers"
+import * as Loggers from "@cicada-lang/framework/lib/loggers"
 import { AppConfig } from "./AppConfig"
 import { AppHome } from "./AppHome"
 import { AppReplEventHandler } from "./AppReplEventHandler"

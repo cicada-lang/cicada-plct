@@ -1,4 +1,4 @@
-import { Fetcher } from "../framework/fetcher"
+import { Fetcher } from "@cicada-lang/framework/lib/fetcher"
 import { Mod } from "../lang/mod"
 import type { Script } from "../script"
 import * as Scripts from "../scripts"

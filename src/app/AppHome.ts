@@ -1,7 +1,7 @@
+import { LocalFileStore } from "@cicada-lang/framework/lib/file-stores/LocalFileStore"
 import os from "os"
 import Path from "path"
 import process from "process"
-import { LocalFileStore } from "../framework/file-stores/LocalFileStore"
 
 export class AppHome extends LocalFileStore {
   constructor() {
