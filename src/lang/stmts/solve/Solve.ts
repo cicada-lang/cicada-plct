@@ -25,8 +25,8 @@ export class Solve extends Stmt {
     for (const binding of this.bindings) {
       const typeCore = checkType(mod, ctx, binding.type)
       const type = evaluate(ctxToEnv(ctx), typeCore)
-      const metaVar = Values.MetaVar(type, binding.name)
-      ctx = CtxFulfilled(binding.name, type, metaVar, ctx)
+      const patternVar = Values.PatternVar(type, binding.name)
+      ctx = CtxFulfilled(binding.name, type, patternVar, ctx)
       names.push(binding.name)
     }
 

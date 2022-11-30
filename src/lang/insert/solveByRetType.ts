@@ -37,10 +37,10 @@ export function solveByRetType(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const metaVar = Values.MetaVar(type.argType, freshName)
-      ctx = CtxFulfilled(freshName, type.argType, metaVar, ctx)
-      type = closureApply(type.retTypeClosure, metaVar)
-      insertions.push(Insertions.InsertionMetaVar(metaVar))
+      const patternVar = Values.PatternVar(type.argType, freshName)
+      ctx = CtxFulfilled(freshName, type.argType, patternVar, ctx)
+      type = closureApply(type.retTypeClosure, patternVar)
+      insertions.push(Insertions.InsertionPatternVar(patternVar))
     }
   }
 

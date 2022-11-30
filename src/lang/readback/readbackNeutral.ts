@@ -11,8 +11,8 @@ export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
       return Cores.Var(neutral.name)
     }
 
-    case "MetaVar": {
-      return Cores.MetaVar(neutral.name)
+    case "PatternVar": {
+      return Cores.PatternVar(neutral.name)
     }
 
     case "Ap": {

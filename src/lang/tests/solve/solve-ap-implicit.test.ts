@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
 import { runCode } from "../utils"
 
-test("solve ApImplicit -- same MetaVar", async () => {
+test("solve ApImplicit -- same PatternVar", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String) {
@@ -20,7 +20,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
   )
 })
 
-test("solve ApImplicit -- MetaVar v.s. String", async () => {
+test("solve ApImplicit -- PatternVar v.s. String", async () => {
   const output = await runCode(`
 
 solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {

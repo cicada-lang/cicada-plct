@@ -38,11 +38,11 @@ export function equivalentNeutral(
     return
   }
 
-  if (left["@kind"] === "MetaVar" && right["@kind"] === "MetaVar") {
+  if (left["@kind"] === "PatternVar" && right["@kind"] === "PatternVar") {
     if (left.name !== right.name) {
       throw new Errors.EquivalenceError(
         [
-          `[equivalentNeutral] expect meta variable names to be equal`,
+          `[equivalentNeutral] expect pattern variable names to be equal`,
           `  left: ${left.name}`,
           `  right: ${right.name}`,
         ].join("\n"),

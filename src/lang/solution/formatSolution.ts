@@ -16,11 +16,11 @@ export function formatSolution(
     const type = ctxLookupType(ctx, name)
     if (type === undefined) {
       throw new Error(
-        `[formatSolution] can not find the type of meta variable: ${name}`,
+        `[formatSolution] can not find the type of pattern variable: ${name}`,
       )
     }
 
-    const value = Values.MetaVar(type, name)
+    const value = Values.PatternVar(type, name)
     properties.push(`${name}: ${Values.formatValue(mod, ctx, type, value)}`)
 
     // let value = solutionLookupValue(solution, name)

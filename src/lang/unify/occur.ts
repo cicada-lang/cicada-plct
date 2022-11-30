@@ -212,7 +212,7 @@ function occurNeutral(
       return false
     }
 
-    case "MetaVar": {
+    case "PatternVar": {
       return name === neutral.name
     }
 

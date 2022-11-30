@@ -20,11 +20,11 @@ export function evaluate(env: Env, core: Core): Value {
       return value
     }
 
-    case "MetaVar": {
+    case "PatternVar": {
       const value = envLookupValue(env, core.name)
       if (value === undefined) {
         throw new Errors.EvaluationError(
-          `[evaluate] undefined meta variable name: ${core.name}`,
+          `[evaluate] undefined pattern variable name: ${core.name}`,
         )
       }
 

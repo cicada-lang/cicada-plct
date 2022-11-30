@@ -15,7 +15,7 @@ export function solutionAdvanceValue(mod: Mod, value: Value): Value {
 
 /**
 
-   To prepare for unify is `walk` the meta variable,
+   To prepare for unify is `walk` the pattern variable,
    and possibly to further evaluate neutral value.
 
    For both `walk` and further evaluation,
@@ -33,7 +33,7 @@ function solutionAdvanceNeutral(
       return Values.TypedNeutral(type, neutral)
     }
 
-    case "MetaVar": {
+    case "PatternVar": {
       const result = solutionWalk(
         mod.solution,
         Values.TypedNeutral(type, neutral),
@@ -41,7 +41,7 @@ function solutionAdvanceNeutral(
 
       if (
         result["@kind"] === "TypedNeutral" &&
-        result.neutral["@kind"] === "MetaVar" &&
+        result.neutral["@kind"] === "PatternVar" &&
         result.neutral.name === neutral.name
       ) {
         return result

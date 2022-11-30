@@ -3,23 +3,23 @@ import type { Exp } from "../exp"
 import type * as Values from "../value"
 
 export type Insertion =
-  | InsertionMetaVar
+  | InsertionPatternVar
   | InsertionUsedArg
   | InsertionImplicitArg
 
-export type InsertionMetaVar = {
-  "@kind": "InsertionMetaVar"
-  metaVar: Values.MetaVar
+export type InsertionPatternVar = {
+  "@kind": "InsertionPatternVar"
+  patternVar: Values.PatternVar
   argExp?: Exp
 }
 
-export function InsertionMetaVar(
-  metaVar: Values.MetaVar,
+export function InsertionPatternVar(
+  patternVar: Values.PatternVar,
   argExp?: Exp,
-): InsertionMetaVar {
+): InsertionPatternVar {
   return {
-    "@kind": "InsertionMetaVar",
-    metaVar,
+    "@kind": "InsertionPatternVar",
+    patternVar,
     argExp,
   }
 }

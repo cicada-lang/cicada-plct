@@ -3,7 +3,7 @@ import type { Ctx } from "../ctx"
 import * as Errors from "../errors"
 import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
-import { unify, unifyMetaVar, unifyType } from "../unify"
+import { unify, unifyPatternVar, unifyType } from "../unify"
 import type { Value } from "../value"
 import * as Values from "../value"
 import { formatNeutral, TypedValue } from "../value"
@@ -25,7 +25,7 @@ export function unifyNeutral(
   left: Neutral,
   right: Neutral,
 ): void {
-  const success = unifyMetaVar(
+  const success = unifyPatternVar(
     mod,
     ctx,
     type,

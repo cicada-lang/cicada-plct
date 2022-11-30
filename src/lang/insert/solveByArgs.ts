@@ -42,11 +42,11 @@ export function solveByArgs(
         ...argsFreeNames,
       ]
       const freshName = freshen(usedNames, name)
-      const metaVar = Values.MetaVar(type.argType, freshName)
-      ctx = CtxFulfilled(freshName, type.argType, metaVar, ctx)
+      const patternVar = Values.PatternVar(type.argType, freshName)
+      ctx = CtxFulfilled(freshName, type.argType, patternVar, ctx)
       // NOTE Do not consume args here.
-      type = closureApply(type.retTypeClosure, metaVar)
-      insertions.push(Insertions.InsertionMetaVar(metaVar, arg.exp))
+      type = closureApply(type.retTypeClosure, patternVar)
+      insertions.push(Insertions.InsertionPatternVar(patternVar, arg.exp))
     } else if (type["@kind"] === "Pi" && arg["@kind"] === "ArgPlain") {
       const argInferred = inferOrUndefined(mod, ctx, arg.exp)
       if (

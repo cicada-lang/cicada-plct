@@ -1,3 +1,7 @@
+`Stmts.Test` -- `test { ... }` and `test <description> { ... }`
+
+- move snapshot tests to `test:cic`
+
 [bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
 
 - `refl` will do an unification but what it should do is `equivalent`.

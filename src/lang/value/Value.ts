@@ -30,17 +30,17 @@ export type AlreadyType =
   | Clazz
   | Equal
 
-export type MetaVar = TypedNeutral & {
-  neutral: Neutrals.MetaVar
+export type PatternVar = TypedNeutral & {
+  neutral: Neutrals.PatternVar
 }
 
-export function MetaVar(type: Value, name: string): MetaVar {
-  return TypedNeutral(type, Neutrals.MetaVar(name)) as MetaVar
+export function PatternVar(type: Value, name: string): PatternVar {
+  return TypedNeutral(type, Neutrals.PatternVar(name)) as PatternVar
 }
 
-export function isMetaVar(value: Value): value is MetaVar {
+export function isPatternVar(value: Value): value is PatternVar {
   return (
-    value["@kind"] === "TypedNeutral" && value.neutral["@kind"] === "MetaVar"
+    value["@kind"] === "TypedNeutral" && value.neutral["@kind"] === "PatternVar"
   )
 }
 

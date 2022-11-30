@@ -9,7 +9,7 @@ export function formatCore(core: Core): string {
       return core.name
     }
 
-    case "MetaVar": {
+    case "PatternVar": {
       return "?" + core.name
     }
 

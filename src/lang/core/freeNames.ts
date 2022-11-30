@@ -6,7 +6,7 @@ export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
       return boundNames.has(core.name) ? new Set() : new Set([core.name])
     }
 
-    case "MetaVar": {
+    case "PatternVar": {
       return boundNames.has(core.name) ? new Set() : new Set([core.name])
     }
 

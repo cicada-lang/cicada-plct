@@ -14,18 +14,18 @@ export function insertionApply(
   core: Core,
 ): Core {
   switch (insertion["@kind"]) {
-    case "InsertionMetaVar": {
+    case "InsertionPatternVar": {
       const argValue = solutionLookupValue(
         mod.solution,
-        insertion.metaVar.neutral.name,
+        insertion.patternVar.neutral.name,
       )
 
       if (argValue === undefined) {
         if (insertion.argExp !== undefined) {
           throw new Errors.ElaborationError(
             [
-              `[insertionApply] meet unsolved meta variable during infer`,
-              `  variable name: ${insertion.metaVar.neutral.name}`,
+              `[insertionApply] meet unsolved pattern variable during infer`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
               `  kind of next arg exp: ${insertion.argExp["@kind"]}`,
             ].join("\n"),
             { span: insertion.argExp.span },
@@ -33,15 +33,15 @@ export function insertionApply(
         } else {
           throw new Errors.ElaborationError(
             [
-              `[insertionApply] meet unsolved meta variable during check`,
-              `  variable name: ${insertion.metaVar.neutral.name}`,
+              `[insertionApply] meet unsolved pattern variable during check`,
+              `  variable name: ${insertion.patternVar.neutral.name}`,
             ].join("\n"),
             {},
           )
         }
       }
 
-      const argCore = readback(mod, ctx, insertion.metaVar.type, argValue)
+      const argCore = readback(mod, ctx, insertion.patternVar.type, argValue)
       return Cores.ApImplicit(core, argCore)
     }
 

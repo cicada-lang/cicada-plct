@@ -1,6 +1,6 @@
 export type Core =
   | Var
-  | MetaVar
+  | PatternVar
   | Pi
   | PiImplicit
   | Fn
@@ -31,16 +31,16 @@ export function Var(name: string): Var {
   }
 }
 
-export type MetaVar = {
+export type PatternVar = {
   "@type": "Core"
-  "@kind": "MetaVar"
+  "@kind": "PatternVar"
   name: string
 }
 
-export function MetaVar(name: string): MetaVar {
+export function PatternVar(name: string): PatternVar {
   return {
     "@type": "Core",
-    "@kind": "MetaVar",
+    "@kind": "PatternVar",
     name,
   }
 }

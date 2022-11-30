@@ -2,7 +2,7 @@ import type { TypedValue, Value } from "../value"
 
 export type Neutral =
   | Var
-  | MetaVar
+  | PatternVar
   | Ap
   | ApImplicit
   | Car
@@ -24,16 +24,16 @@ export function Var(name: string): Var {
   }
 }
 
-export type MetaVar = {
+export type PatternVar = {
   "@type": "Neutral"
-  "@kind": "MetaVar"
+  "@kind": "PatternVar"
   name: string
 }
 
-export function MetaVar(name: string): MetaVar {
+export function PatternVar(name: string): PatternVar {
   return {
     "@type": "Neutral",
-    "@kind": "MetaVar",
+    "@kind": "PatternVar",
     name,
   }
 }
