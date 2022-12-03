@@ -1,3 +1,5 @@
+`wa run --watch` should not watch even first run meets error
+
 `Stmts.Test` -- `test { ... }` and `test <description> { ... }`
 
 - move snapshot tests to `test:cic`
