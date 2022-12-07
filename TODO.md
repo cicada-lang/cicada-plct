@@ -37,12 +37,6 @@
 
 - We should write test to show full `solutionAdvanceNeutral` is needed.
 
-# syntax
-
-[maybe] remove `function` keyword
-[maybe] remove `let` keyword
-[maybe] remove `return` keyword
-
 # maybe
 
 [maybe] `unifyClazz` & `includeClazz` support reordering of properties
