@@ -127,3 +127,23 @@ compute equivalent Type {
 `)
   },
 )
+
+test.todo("equivalent Clazz -- fail -- missing property type", async () => {
+  await expectCodeToFail(`
+
+compute equivalent Type {
+    class { A: String, B: String }
+  = class { A: String }
+}
+
+`)
+
+  await expectCodeToFail(`
+
+compute equivalent Type {
+    class { A: String }
+  = class { A: String, B: String }
+}
+
+`)
+})

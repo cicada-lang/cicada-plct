@@ -4,15 +4,11 @@
 
 - move snapshot tests to `test:cic`
 
-[bug fix] pass equivalent-clazz.test -- "equivalent Clazz -- fail -- missing fulfilled property value"
+[bug fix] pass equivalent-clazz.test
 
 - `refl` will do an unification but what it should do is `equivalent`.
 
-  - [question] What will happen to this check of `refl` if we use path type?
-
-    learn path type and cubical type.
-
-- example:
+- "equivalent Clazz -- fail -- missing fulfilled property value"
 
   ```cicada
   compute equivalent Type {
@@ -25,6 +21,15 @@
     class { A: String = "abc" },
     class { A: String },
   )
+  ```
+
+- "equivalent Clazz -- fail -- missing property type",
+
+  ```cicada
+  compute equivalent Type {
+      class { A: String, B: String }
+    = class { A: String }
+  }
   ```
 
 [bug] macros like `equivalent` uses globals variables which might be shadowed
