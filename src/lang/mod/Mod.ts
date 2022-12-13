@@ -13,11 +13,11 @@ export interface ModOptions {
 }
 
 export class Mod {
+  private initialized = false
   solution = new Solution()
   ctx: Ctx = CtxNull()
   outputs: Map<number, string> = new Map()
   stmts: Array<Stmt> = []
-  initialized = false
   imported: Array<URL> = []
 
   constructor(public options: ModOptions) {}
@@ -39,6 +39,7 @@ export class Mod {
 
   async executeStmts(stmts: Array<Stmt>): Promise<Array<string>> {
     await this.initialize()
+
     const outputs = []
     const offset = this.stmts.length
     for (const [index, stmt] of stmts.entries()) {
