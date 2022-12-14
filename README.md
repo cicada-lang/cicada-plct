@@ -39,7 +39,6 @@ Thank you, [David Christiansen](https://davidchristiansen.dk), for coauthoring [
 GitHub:
 
 - Organization: [github.com/cicada-lang](https://github.com/cicada-lang)
-- Main repo: [github.com/cicada-lang/cicada](https://github.com/cicada-lang/cicada)
 
 Telegram:
 
