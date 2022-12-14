@@ -28,11 +28,11 @@ npm run test:watch    # Watch the testing
 
 ## Thanks
 
-Thanks, [PLCT Lab](https://github.com/plctlab), for sponsoring our community at very early stage of our project.
+Thanks, [**PLCT Lab**](https://github.com/plctlab), for sponsoring our community at very early stage of our project.
 
-Thank you, [Dan Friedman](https://www.cs.indiana.edu/~dfried), for we learned most of our knowledge about programming language design from your little books.
+Thank you, [**Dan Friedman**](https://www.cs.indiana.edu/~dfried), for we learned most of our knowledge about programming language design from your little books.
 
-Thank you, [David Christiansen](https://davidchristiansen.dk), for coauthoring ["The Little Typer"](https://mitpress.mit.edu/9780262536431/the-little-typer) with Dan, and writing up great tutorials ([1](https://davidchristiansen.dk/tutorials/nbe), [2](https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf)) about dependent types.
+Thank you, [**David Christiansen**](https://davidchristiansen.dk), for coauthoring [**"The Little Typer"**](https://mitpress.mit.edu/9780262536431/the-little-typer) with Dan, and writing up great tutorials ([**1**](https://davidchristiansen.dk/tutorials/nbe), [**2**](https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf)) about dependent types.
 
 ## Community
 
