@@ -5,7 +5,6 @@ import { AppReplEventHandler } from "./AppReplEventHandler"
 
 export class App {
   logger = new Loggers.PrettyLogger()
-
   config = new AppConfig()
   home = new AppHome()
   replEventHandler = new AppReplEventHandler()

@@ -10,7 +10,7 @@ type Opts = { watch?: boolean }
 export class RunCommand extends Command<Args, Opts> {
   name = "run"
 
-  description = "Run through an file"
+  description = "Run a file"
 
   args = { file: ty.string() }
   opts = { watch: ty.optional(ty.boolean()) }

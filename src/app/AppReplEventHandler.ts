@@ -23,11 +23,10 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   greeting(): void {
-    console.log(`Welcome to Cicada ${app.config.pkg.version} *^-^*/`)
-    console.log(`Type ".help" for more information`)
+    console.log(`Welcome to cicada ${app.config.pkg.version}`)
   }
 
-  async handle(event: ReplEvent): Promise<boolean> {
+  async handle(event: ReplEvent): Promise<void> {
     let { text } = event
 
     text = text.trim()
@@ -41,7 +40,6 @@ export class AppReplEventHandler extends ReplEventHandler {
       for (const output of outputs) {
         console.log(colors.blue(output))
       }
-      return true
     } catch (error) {
       console.log(error)
       if (!(error instanceof Error)) {
@@ -51,8 +49,6 @@ export class AppReplEventHandler extends ReplEventHandler {
       } else {
         console.error(error.message)
       }
-
-      return false
     }
   }
 }
