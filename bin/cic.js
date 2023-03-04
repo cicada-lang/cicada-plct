@@ -9,6 +9,6 @@ process.on("unhandledRejection", (error) => {
 
 Error.stackTraceLimit = Infinity
 
-const { createCommandRunner } = require("../lib/console")
+const { createCommandRunner } = require("../lib/command-line")
 
 createCommandRunner().run()
