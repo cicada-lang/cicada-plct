@@ -1,4 +1,6 @@
-`wa run --watch` should not watch even first run meets error
+rename `console/` to `command-line/`
+
+`cic run --watch` should not watch even first run meets error
 
 `Stmts.Test` -- `test { ... }` and `test <description> { ... }`
 
