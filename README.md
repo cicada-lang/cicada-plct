@@ -18,12 +18,12 @@ Cicada language is a _dependently typed programming language_ and an _interactiv
 ## Development
 
 ```sh
-pnpm install           # Install dependencies
-pnpm run build         # Compile `src/` to `lib/`
-pnpm run build:watch   # Watch the compilation
-pnpm run format        # Format the code
-pnpm run test          # Run test
-pnpm run test:watch    # Watch the testing
+npm install           # Install dependencies
+npm run build         # Compile `src/` to `lib/`
+npm run build:watch   # Watch the compilation
+npm run format        # Format the code
+npm run test          # Run test
+npm run test:watch    # Watch the testing
 ```
 
 ## Thanks
