@@ -1,0 +1,11 @@
+{
+  "kind": "Author",
+  "name": "Cicada Language",
+  "tagline": "Let's build a bridge between writing software and doing mathematics.",
+  "homepage": "README.md",
+  "avatar": "assets/images/xia.jpg",
+  "activities": [
+    "activities/2023-03-22-cicada-lang-manual.md",
+    "activities/2023-03-21-cicada-monologues.md"
+  ]
+}
