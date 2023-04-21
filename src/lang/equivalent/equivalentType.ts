@@ -9,7 +9,7 @@ import * as Neutrals from "../neutral"
 import { solutionAdvanceValue, solutionNames } from "../solution"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { formatType, isClazz, Value } from "../value"
+import { Value, formatType, isClazz } from "../value"
 
 export function equivalentType(
   mod: Mod,

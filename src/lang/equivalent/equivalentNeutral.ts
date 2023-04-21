@@ -5,7 +5,7 @@ import * as Errors from "../errors"
 import type { Mod } from "../mod"
 import type { Neutral } from "../neutral"
 import type { Value } from "../value"
-import { formatNeutral, TypedValue } from "../value"
+import { TypedValue, formatNeutral } from "../value"
 
 function equivalentTypedValue(
   mod: Mod,

@@ -1,5 +1,5 @@
 import { check, checkClazz, checkType } from "../check"
-import { closureApply, ClosureNative, ClosureSimple } from "../closure"
+import { ClosureNative, ClosureSimple, closureApply } from "../closure"
 import type { Core } from "../core"
 import * as Cores from "../core"
 import type { Ctx } from "../ctx"

@@ -1,6 +1,6 @@
+export * from "./Insertion"
 export * from "./insertDuringCheck"
 export * from "./insertDuringInfer"
-export * from "./Insertion"
 export * from "./insertionApply"
 export * from "./solveByArgs"
 export * from "./solveByRetType"

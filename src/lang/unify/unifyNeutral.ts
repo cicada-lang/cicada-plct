@@ -6,7 +6,7 @@ import type { Neutral } from "../neutral"
 import { unify, unifyPatternVar, unifyType } from "../unify"
 import type { Value } from "../value"
 import * as Values from "../value"
-import { formatNeutral, TypedValue } from "../value"
+import { TypedValue, formatNeutral } from "../value"
 
 function unifyTypedValue(
   mod: Mod,

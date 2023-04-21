@@ -10,7 +10,7 @@ import { solutionAdvanceValue, solutionNames } from "../solution"
 import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
 import { freshen } from "../utils/freshen"
 import * as Values from "../value"
-import { formatType, isClazz, Value } from "../value"
+import { Value, formatType, isClazz } from "../value"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = solutionAdvanceValue(mod, left)

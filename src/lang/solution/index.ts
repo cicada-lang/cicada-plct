@@ -1,5 +1,5 @@
-export * from "./formatSolution"
 export * from "./Solution"
+export * from "./formatSolution"
 export * from "./solutionAdvanceValue"
 export * from "./solutionBind"
 export * from "./solutionCleanup"
