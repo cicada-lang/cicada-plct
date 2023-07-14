@@ -6,7 +6,11 @@ import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Let extends Stmt {
-  constructor(public name: string, public exp: Exp, public span?: Span) {
+  constructor(
+    public name: string,
+    public exp: Exp,
+    public span?: Span,
+  ) {
     super()
   }
 

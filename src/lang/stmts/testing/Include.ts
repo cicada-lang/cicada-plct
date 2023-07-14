@@ -7,7 +7,10 @@ import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Include extends Stmt {
-  constructor(public exps: Array<Exp>, public span?: Span) {
+  constructor(
+    public exps: Array<Exp>,
+    public span?: Span,
+  ) {
     super()
   }
 

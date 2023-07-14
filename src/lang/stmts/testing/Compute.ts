@@ -7,7 +7,10 @@ import { Stmt } from "../../stmt"
 import { formatTypedValue, TypedValue } from "../../value"
 
 export class Compute extends Stmt {
-  constructor(public exp: Exp, public span?: Span) {
+  constructor(
+    public exp: Exp,
+    public span?: Span,
+  ) {
     super()
   }
 

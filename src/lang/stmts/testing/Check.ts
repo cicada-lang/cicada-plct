@@ -6,7 +6,11 @@ import type { Span } from "../../span"
 import { Stmt } from "../../stmt"
 
 export class Check extends Stmt {
-  constructor(public exp: Exp, public type: Exp, public span?: Span) {
+  constructor(
+    public exp: Exp,
+    public type: Exp,
+    public span?: Span,
+  ) {
     super()
   }
 

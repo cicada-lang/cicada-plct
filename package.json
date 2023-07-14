@@ -10,7 +10,6 @@
     "cic": "bin/cic.js"
   },
   "scripts": {
-    "prepare": "husky install",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test:ts": "vitest --dir src --threads false --run",
@@ -40,18 +39,17 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.6",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^20.2.6",
-    "@vitest/coverage-c8": "^0.32.0",
-    "@vitest/coverage-istanbul": "^0.32.0",
-    "@vitest/ui": "^0.32.0",
+    "@types/node": "^20.4.2",
+    "@vitest/coverage-c8": "^0.33.0",
+    "@vitest/coverage-istanbul": "^0.33.0",
+    "@vitest/ui": "^0.33.0",
     "@xieyuheng/test-runner": "^0.2.7",
-    "husky": "^8.0.3",
-    "prettier": "^2.8.8",
-    "prettier-plugin-organize-imports": "^3.2.2",
+    "prettier": "^3.0.0",
+    "prettier-plugin-organize-imports": "^3.2.3",
     "pretty-quick": "^3.1.3",
-    "typescript": "^5.1.3",
-    "vite": "^4.3.9",
-    "vitest": "^0.32.0"
+    "typescript": "^5.1.6",
+    "vite": "^4.4.3",
+    "vitest": "^0.33.0"
   },
   "license": "GPL-3.0-or-later"
 }
