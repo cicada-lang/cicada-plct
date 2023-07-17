@@ -46,7 +46,6 @@
     "@xieyuheng/test-runner": "^0.2.7",
     "prettier": "^3.0.0",
     "prettier-plugin-organize-imports": "^3.2.3",
-    "pretty-quick": "^3.1.3",
     "typescript": "^5.1.6",
     "vite": "^4.4.3",
     "vitest": "^0.33.0"
