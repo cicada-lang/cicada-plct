@@ -1,3 +1,4 @@
+import process from "node:process"
 import fs from "fs"
 import watcher from "node-watch"
 import * as Errors from "../lang/errors"
@@ -7,9 +8,13 @@ export class Runner {
   loader = new Loader()
 
   constructor() {
-    this.loader.fetcher.register("file", (url) =>
-      fs.promises.readFile(url.pathname, "utf8"),
-    )
+    this.loader.fetcher.register("file", (url) => {
+      if (process.platform === "win32") {
+        return fs.readFileSync(url.pathname.slice(1), "utf8")
+      } else {
+        return fs.readFileSync(url.pathname, "utf8")
+      }
+    })
   }
 
   async run(

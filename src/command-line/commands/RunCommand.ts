@@ -62,7 +62,7 @@ function createURL(path: string): URL {
 
   if (fs.existsSync(path) && fs.lstatSync(path).isFile()) {
     const fullPath = Path.resolve(path)
-    return new URL(`file:${fullPath}`)
+    return new URL(`file://${fullPath}`)
   }
 
   throw new Error(`I can not create URL from path: ${path}`)
