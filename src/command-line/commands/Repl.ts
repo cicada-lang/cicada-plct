@@ -4,7 +4,7 @@ import Path from "path"
 
 type Args = {}
 
-export class ReplCommand extends Command<Args> {
+export class Repl extends Command<Args> {
   name = "repl"
 
   description = "Open an interactive REPL"

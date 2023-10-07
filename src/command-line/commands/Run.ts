@@ -1,5 +1,5 @@
 import { Command, CommandRunner } from "@xieyuheng/command-line"
-import ty from "@xieyuheng/ty"
+import { ty } from "@xieyuheng/ty"
 import fs from "fs"
 import Path from "path"
 import { Runner } from "../Runner"
@@ -7,7 +7,7 @@ import { Runner } from "../Runner"
 type Args = { file: string }
 type Opts = { watch?: boolean }
 
-export class RunCommand extends Command<Args, Opts> {
+export class Run extends Command<Args, Opts> {
   name = "run"
 
   description = "Run a file"
@@ -56,7 +56,7 @@ export class RunCommand extends Command<Args, Opts> {
 }
 
 function createURL(path: string): URL {
-  if (ty.uri().isValid(path)) {
+  if (ty.url().isValid(path)) {
     return new URL(path)
   }
 
