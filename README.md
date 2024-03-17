@@ -1,9 +1,7 @@
 # Cicada Language
 
 [ [HOMEPAGE](https://cicada-lang.org)
-| [MANUAL](https://readonly.link/manuals/cicada-lang/cicada)
-| [PLAY](https://cicada-lang.org/playground)
-| [ABOUT](https://cicada-lang.org/about) ]
+| [PLAY](https://cicada-lang.org/playground) ]
 
 Welcome **\*^-^\*/**
 
