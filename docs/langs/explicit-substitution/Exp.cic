@@ -1,0 +1,11 @@
+datatype Exp {
+  var(name: String): Exp
+  fn(name: String, ret: Arg): Exp
+  ap(target: Exp, arg: Arg): Exp
+  let(bindings: List(Binding), body: Exp): Exp
+}
+
+class Binding {
+  name: string
+  exp: Exp
+}
