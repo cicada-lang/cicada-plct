@@ -1,0 +1,31 @@
+import { Exp } from "../exp/index.cic"
+import { modFind, Mod } from "../mod/index.cic"
+import { doAp } from "./doAp.cic"
+import { substitute } from "./substitute.cic"
+
+// NOTE `reduce` might hit fixpoint on other kind of expressions,
+// but it will always remove `Let`.
+
+export function reduce(mod: Mod, exp: Exp): Exp {
+  match (exp) {
+    case Exp::var(name) => {
+      let defintion = modFind(mod, name)
+      if (defintion) {
+        return reduce(mod, defintion.exp)
+      } else {
+        return exp
+      }
+    }
+
+    case Exp::fn(name, ret) =>
+      Exp::fn(exp.name, reduce(mod, ret))
+
+    case Exp::ap(target, arg) =>
+      // NOTE Reduce both the `target` and the `arg` first,
+      // thus this strategy is call-by-value.
+      doAp(mod, reduce(mod, target), reduce(mod, arg))
+
+    case Exp::let(bindings, body) =>
+      reduce(mod, substitute(body, bindings))
+  }
+}

@@ -1,0 +1,4 @@
+export * from "./reduce.cic"
+export * from "./doAp.cic"
+export * from "./substitute.cic"
+export * from "./lookup.cic"
