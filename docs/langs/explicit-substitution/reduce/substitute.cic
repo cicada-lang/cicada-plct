@@ -1,0 +1,49 @@
+import { Binding, Exp } from ../exp/index.cic
+import { freshen } from "../utils/freshen.cic"
+import { lookup } from "./lookup.cic"
+
+export function substitute(
+  bindings: List(Binding),
+  body: Exp,
+): Exp {
+  match (body) {
+    case Exp::Var(name) => {
+      let found = lookup(name, bindings)
+      if (found) {
+        return found
+      } else {
+        return body
+      }
+    }
+
+    case Exp::fn(name, ret) => {
+      let freshName = freshen(name)
+      return Exp::fn(
+        freshName,
+        Exp::let(
+          listAppend(bindings, [new Binding(name, Exp::var(freshName))]),
+          ret,
+        ),
+      )
+    }
+
+    case Exp::ap(target, arg) =>
+      Exp::ap(
+        Exp::let(bindings, target),
+        Exp::let(bindings, arg),
+      )
+
+    case Exp::let(innerBindings, body) =>
+      substitute(
+        append(bindings, listMap(innerBindings, substituteBinding)),
+        body,
+      )
+  }
+}
+
+function substituteBinding(
+  bindings: List(Binding),
+  binding: Binding,
+): Binding {
+  return new Binding(binding.name, substitute(bindings, binding.exp))
+}
