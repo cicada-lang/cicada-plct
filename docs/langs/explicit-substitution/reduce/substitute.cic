@@ -9,11 +9,7 @@ export function substitute(
   match (body) {
     case Exp::Var(name) => {
       let found = lookup(name, bindings)
-      if (found) {
-        return found
-      } else {
-        return body
-      }
+      return if isNone(found) then body else found
     }
 
     case Exp::fn(name, ret) => {

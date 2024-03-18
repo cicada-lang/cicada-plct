@@ -10,11 +10,7 @@ export function reduce(mod: Mod, exp: Exp): Exp {
   match (exp) {
     case Exp::var(name) => {
       let defintion = modFind(mod, name)
-      if (defintion) {
-        return reduce(mod, defintion.exp)
-      } else {
-        return exp
-      }
+      return if isNone(defintion) then exp else reduce(mod, defintion.exp)
     }
 
     case Exp::fn(name, ret) =>
