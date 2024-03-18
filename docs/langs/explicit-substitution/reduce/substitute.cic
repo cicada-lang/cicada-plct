@@ -31,7 +31,7 @@ export function substitute(
 
     case Exp::let(innerBindings, body) =>
       substitute(
-        append(bindings, listMap(innerBindings, substituteBinding)),
+        listAppend(bindings, listMap(innerBindings, substituteBinding)),
         body,
       )
   }
