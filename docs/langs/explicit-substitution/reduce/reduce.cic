@@ -17,8 +17,6 @@ export function reduce(mod: Mod, exp: Exp): Exp {
       Exp::fn(exp.name, reduce(mod, ret))
 
     case Exp::ap(target, arg) =>
-      // NOTE Reduce both the `target` and the `arg` first,
-      // thus this strategy is call-by-value.
       doAp(mod, reduce(mod, target), reduce(mod, arg))
 
     case Exp::let(bindings, body) =>

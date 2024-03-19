@@ -1,0 +1,13 @@
+import { Binding, Exp } from "../exp/index.cic"
+
+export function lookup(
+  name: string,
+  bindings: List(Binding),
+): Optional(Exp) {
+  let found = listFind(
+    listReverse(bindings),
+    (binding) => stringEqual(binding.name, name)
+  )
+
+  return optionalMap(found, (binding) => binding.exp)
+}
