@@ -7,10 +7,10 @@ export function substitute(
   body: Exp,
 ): Exp {
   match (body) {
-    case Exp::Var(name) => {
-      let found = lookup(name, bindings)
-      return if isNone(found) then body else found
-    }
+    case Exp::Var(name) => match (lookup(name, bindings)) {
+       case Maybe::just(exp) => exp
+       case Maybe::nothing() => body
+     }
 
     case Exp::fn(name, ret) => {
       let freshName = freshen(name)
