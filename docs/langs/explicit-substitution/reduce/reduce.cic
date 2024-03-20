@@ -8,18 +8,18 @@ import { substitute } from "./substitute.cic"
 
 export function reduce(mod: Mod, exp: Exp): Exp {
   match (exp) {
-    case Exp::var(name) => match (modFind(mod, name)) {
-      case Maybe::just(defintion) => exp
-      case Maybe::nothing() => reduce(mod, defintion.exp)
+    case Exp::Var(name) => match (modFind(mod, name)) {
+      case Maybe::Just(defintion) => exp
+      case Maybe::Nothing() => reduce(mod, defintion.exp)
     }
 
-    case Exp::fn(name, ret) =>
-      Exp::fn(exp.name, reduce(mod, ret))
+    case Exp::Fn(name, ret) =>
+      Exp::Fn(exp.name, reduce(mod, ret))
 
-    case Exp::ap(target, arg) =>
+    case Exp::Ap(target, arg) =>
       doAp(mod, reduce(mod, target), reduce(mod, arg))
 
-    case Exp::let(bindings, body) =>
+    case Exp::Let(bindings, body) =>
       reduce(mod, substitute(body, bindings))
   }
 }

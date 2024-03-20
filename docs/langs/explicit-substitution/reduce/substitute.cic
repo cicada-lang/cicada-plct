@@ -8,28 +8,28 @@ export function substitute(
 ): Exp {
   match (body) {
     case Exp::Var(name) => match (lookup(name, bindings)) {
-       case Maybe::just(exp) => exp
-       case Maybe::nothing() => body
+       case Maybe::Just(exp) => exp
+       case Maybe::Nothing() => body
      }
 
-    case Exp::fn(name, ret) => {
+    case Exp::Fn(name, ret) => {
       let freshName = freshen(name)
-      return Exp::fn(
+      return Exp::Fn(
         freshName,
-        Exp::let(
-          listAppend(bindings, [new Binding(name, Exp::var(freshName))]),
+        Exp::Let(
+          listAppend(bindings, [new Binding(name, Exp::Var(freshName))]),
           ret,
         ),
       )
     }
 
-    case Exp::ap(target, arg) =>
-      Exp::ap(
-        Exp::let(bindings, target),
-        Exp::let(bindings, arg),
+    case Exp::Ap(target, arg) =>
+      Exp::Ap(
+        Exp::Let(bindings, target),
+        Exp::Let(bindings, arg),
       )
 
-    case Exp::let(innerBindings, body) =>
+    case Exp::Let(innerBindings, body) =>
       substitute(
         listAppend(bindings, listMap(innerBindings, substituteBinding)),
         body,
