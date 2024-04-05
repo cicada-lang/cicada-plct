@@ -8,9 +8,7 @@ compute the(Equal(String, "abc", "abc"), same("abc"))
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Same -- given implicit", async () => {
@@ -20,7 +18,5 @@ compute same(implicit String, "abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"',
-  )
+  expect(output).toMatchSnapshot()
 })

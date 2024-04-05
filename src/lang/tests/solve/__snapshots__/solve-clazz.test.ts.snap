@@ -1,0 +1,232 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve Clazz > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- nested > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- nested: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- occur twice > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- occur twice: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- subclazz > 
+    "{
+      A: String
+    }"
+   1`] = `
+"{
+  A: String
+}"
+`;
+
+exports[`solve Clazz -- subclazz: 
+    "{
+      A: String
+    }"
+   1`] = `
+"{
+  A: String
+}"
+`;
+
+exports[`solve Clazz: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve ClazzCons -- deepWalk > 
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String
+        b: String
+      }
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String
+    b: String
+  }
+}"
+`;
+
+exports[`solve ClazzCons -- deepWalk: 
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String
+        b: String
+      }
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String
+    b: String
+  }
+}"
+`;
+
+exports[`solve ClazzFulfilled -- deepWalk > 
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String = \\"a\\"
+        b: String = \\"b\\"
+      },
+      a: \\"a\\",
+      b: \\"b\\"
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String = \\"a\\"
+    b: String = \\"b\\"
+  },
+  a: \\"a\\",
+  b: \\"b\\"
+}"
+`;
+
+exports[`solve ClazzFulfilled -- deepWalk: 
+    "{
+      A: String,
+      B: String,
+      C: class {
+        a: String = "a"
+        b: String = "b"
+      },
+      a: "a",
+      b: "b"
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String = "a"
+    b: String = "b"
+  },
+  a: "a",
+  b: "b"
+}"
+`;
+
+exports[`solve Clazz 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- subclazz 1`] = `
+"{
+  A: String
+}"
+`;
+
+exports[`solve Clazz -- nested 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Clazz -- occur twice 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve ClazzCons -- deepWalk 1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String
+    b: String
+  }
+}"
+`;
+
+exports[`solve ClazzFulfilled -- deepWalk 1`] = `
+"{
+  A: String,
+  B: String,
+  C: class {
+    a: String = "a"
+    b: String = "b"
+  },
+  a: "a",
+  b: "b"
+}"
+`;

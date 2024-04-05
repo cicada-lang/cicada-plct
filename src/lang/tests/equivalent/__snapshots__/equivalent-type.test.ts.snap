@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Type > "refl(implicit Type, implicit Type): Equal(Type, Type, Type)" 1`] = `"refl(implicit Type, implicit Type): Equal(Type, Type, Type)"`;
+
+exports[`equivalent Type: "refl(implicit Type, implicit Type): Equal(Type, Type, Type)" 1`] = `"refl(implicit Type, implicit Type): Equal(Type, Type, Type)"`;
+
+exports[`equivalent Type 1`] = `"refl(implicit Type, implicit Type): Equal(Type, Type, Type)"`;

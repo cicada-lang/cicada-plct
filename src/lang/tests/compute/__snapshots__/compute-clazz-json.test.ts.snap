@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Clazz -- JSON > 
+    "class {
+      \\"Hello, World!\\": String
+    }: Type
+    class {
+      \\"Hello, World!\\": String = \\"Hi!\\"
+    }: Type"
+   1`] = `
+"class {
+  \\"Hello, World!\\": String
+}: Type
+class {
+  \\"Hello, World!\\": String = \\"Hi!\\"
+}: Type"
+`;
+
+exports[`compute Clazz -- JSON: 
+    "class {
+      "Hello, World!": String
+    }: Type
+    class {
+      "Hello, World!": String = "Hi!"
+    }: Type"
+   1`] = `
+"class {
+  "Hello, World!": String
+}: Type
+class {
+  "Hello, World!": String = "Hi!"
+}: Type"
+`;
+
+exports[`compute Clazz -- JSON 1`] = `
+"class {
+  "Hello, World!": String
+}: Type
+class {
+  "Hello, World!": String = "Hi!"
+}: Type"
+`;

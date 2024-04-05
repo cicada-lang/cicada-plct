@@ -19,18 +19,5 @@ solve (abc: ABC, a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      abc: {
-        a: \\"a\\",
-        b: \\"b\\",
-        c: \\"c\\"
-      },
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

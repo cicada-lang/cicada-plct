@@ -33,7 +33,7 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{}"')
+  expect(output).toMatchSnapshot()
 })
 
 test("solve FnImplicit -- deepWalk", async () => {
@@ -46,14 +46,7 @@ solve (T: Type, f: (implicit _: Trivial) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      T: String,
-      f: (implicit _) => String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve FnImplicit -- occur", async () => {

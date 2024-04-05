@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Pair > "Pair(Type, Type): Type" 1`] = `"Pair(Type, Type): Type"`;
+
+exports[`compute Pair: "Pair(Type, Type): Type" 1`] = `"Pair(Type, Type): Type"`;
+
+exports[`compute Pair 1`] = `"Pair(Type, Type): Type"`;

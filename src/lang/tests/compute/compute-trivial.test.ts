@@ -8,5 +8,5 @@ compute Trivial
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"Trivial: Type"')
+  expect(output).toMatchSnapshot()
 })

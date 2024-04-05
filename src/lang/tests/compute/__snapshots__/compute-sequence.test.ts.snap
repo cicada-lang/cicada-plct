@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Sequence -- Check > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- Check: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- Let > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- Let: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- LetThe > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- LetThe: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- single return > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- single return: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- single return 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- Let 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- LetThe 1`] = `"sole: Trivial"`;
+
+exports[`compute Sequence -- Check 1`] = `"sole: Trivial"`;

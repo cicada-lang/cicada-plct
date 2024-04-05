@@ -10,7 +10,7 @@ compute {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Sequence -- Let", async () => {
@@ -23,7 +23,7 @@ compute {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Sequence -- LetThe", async () => {
@@ -36,7 +36,7 @@ compute {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Sequence -- Check", async () => {
@@ -49,5 +49,5 @@ compute {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
+  expect(output).toMatchSnapshot()
 })

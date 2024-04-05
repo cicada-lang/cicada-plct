@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Fn return type -- stmts > "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute Fn return type -- stmts: "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute Fn with return type > 
+    "(T, x) => x: (T: Type, T) -> T
+    (x) => x: (Type) -> Type"
+   1`] = `
+"(T, x) => x: (T: Type, T) -> T
+(x) => x: (Type) -> Type"
+`;
+
+exports[`compute Fn with return type: 
+    "(T, x) => x: (T: Type, T) -> T
+    (x) => x: (Type) -> Type"
+   1`] = `
+"(T, x) => x: (T: Type, T) -> T
+(x) => x: (Type) -> Type"
+`;
+
+exports[`compute Fn with return type 1`] = `
+"(T, x) => x: (T: Type, T) -> T
+(x) => x: (Type) -> Type"
+`;
+
+exports[`compute Fn return type -- stmts 1`] = `"(T, x) => x: (T: Type, T) -> T"`;

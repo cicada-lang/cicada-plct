@@ -18,19 +18,7 @@ compute new ABC {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }: class ABC {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute New -- fulfilled", async () => {
@@ -47,17 +35,7 @@ compute new AB {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"Hello, World!\\",
-      b: \\"Hello, World!\\"
-    }: class AB {
-      a: String = \\"Hello, World!\\"
-      b: String = \\"Hello, World!\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute New -- dependent", async () => {
@@ -75,17 +53,7 @@ compute new The {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      T: String,
-      x: \\"x\\"
-    }: class The {
-      T: Type = String
-      x: String = \\"x\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute New -- extra properties", async () => {
@@ -106,19 +74,5 @@ compute new ABC {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\",
-      d: \\"d\\"
-    }: class ABC {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
-      d: String = \\"d\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

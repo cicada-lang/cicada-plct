@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute PiImplicit > "(implicit T: Type, T) -> Type: Type" 1`] = `"(implicit T: Type, T) -> Type: Type"`;
+
+exports[`compute PiImplicit: "(implicit T: Type, T) -> Type: Type" 1`] = `"(implicit T: Type, T) -> Type: Type"`;
+
+exports[`compute PiImplicit 1`] = `"(implicit T: Type, T) -> Type: Type"`;

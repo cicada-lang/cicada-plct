@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Equal > 
+    "(T, from, to) => Equal(T, from, to): (T: Type, T, T) -> Type
+    (from, to) => Equal(String, from, to): (String, String) -> Type
+    (to) => Equal(String, \\"abc\\", to): (String) -> Type
+    Equal(String, \\"abc\\", \\"123\\"): Type"
+   1`] = `
+"(T, from, to) => Equal(T, from, to): (T: Type, T, T) -> Type
+(from, to) => Equal(String, from, to): (String, String) -> Type
+(to) => Equal(String, \\"abc\\", to): (String) -> Type
+Equal(String, \\"abc\\", \\"123\\"): Type"
+`;
+
+exports[`compute Equal: 
+    "(T, from, to) => Equal(T, from, to): (T: Type, T, T) -> Type
+    (from, to) => Equal(String, from, to): (String, String) -> Type
+    (to) => Equal(String, "abc", to): (String) -> Type
+    Equal(String, "abc", "123"): Type"
+   1`] = `
+"(T, from, to) => Equal(T, from, to): (T: Type, T, T) -> Type
+(from, to) => Equal(String, from, to): (String, String) -> Type
+(to) => Equal(String, "abc", to): (String) -> Type
+Equal(String, "abc", "123"): Type"
+`;
+
+exports[`compute Equal 1`] = `
+"(T, from, to) => Equal(T, from, to): (T: Type, T, T) -> Type
+(from, to) => Equal(String, from, to): (String, String) -> Type
+(to) => Equal(String, "abc", to): (String) -> Type
+Equal(String, "abc", "123"): Type"
+`;

@@ -31,7 +31,7 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{}"')
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Fn -- deepWalk", async () => {
@@ -44,12 +44,7 @@ solve (T: Type, f: (Trivial) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      T: String,
-      f: (_) => String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Fn -- occur in fn", async () => {
@@ -71,9 +66,5 @@ solve (x: (Type) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      x: (_) => _
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })

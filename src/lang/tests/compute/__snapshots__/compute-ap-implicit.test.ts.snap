@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute ApImplicit > "Trivial: Type" 1`] = `"Trivial: Type"`;
+
+exports[`compute ApImplicit: "Trivial: Type" 1`] = `"Trivial: Type"`;
+
+exports[`compute ApImplicit 1`] = `"Trivial: Type"`;

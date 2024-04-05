@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve Dot > 
+    "{
+      abc: {
+        a: \\"a\\",
+        b: \\"b\\",
+        c: \\"c\\"
+      },
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }"
+   1`] = `
+"{
+  abc: {
+    a: \\"a\\",
+    b: \\"b\\",
+    c: \\"c\\"
+  },
+  a: \\"a\\",
+  b: \\"b\\",
+  c: \\"c\\"
+}"
+`;
+
+exports[`solve Dot: 
+    "{
+      abc: {
+        a: "a",
+        b: "b",
+        c: "c"
+      },
+      a: "a",
+      b: "b",
+      c: "c"
+    }"
+   1`] = `
+"{
+  abc: {
+    a: "a",
+    b: "b",
+    c: "c"
+  },
+  a: "a",
+  b: "b",
+  c: "c"
+}"
+`;
+
+exports[`solve Dot 1`] = `
+"{
+  abc: {
+    a: "a",
+    b: "b",
+    c: "c"
+  },
+  a: "a",
+  b: "b",
+  c: "c"
+}"
+`;

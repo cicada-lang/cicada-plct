@@ -8,5 +8,5 @@ compute sole
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"sole: Trivial"')
+  expect(output).toMatchSnapshot()
 })

@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Clazz -- out of order 1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+)"
+`;

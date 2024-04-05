@@ -17,26 +17,5 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit Type,
-      implicit class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-    ): Equal(
-      Type,
-      class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-      class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })

@@ -12,9 +12,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Trivial -- fail", async () => {

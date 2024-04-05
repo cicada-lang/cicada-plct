@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Sole > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sole: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute Sole 1`] = `"sole: Trivial"`;

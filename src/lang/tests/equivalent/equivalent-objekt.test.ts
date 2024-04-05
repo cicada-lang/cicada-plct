@@ -16,31 +16,7 @@ compute equivalent class { A: Type, x: A } {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit class {
-        A: Type
-        x [rename: x2]: A
-      },
-      implicit {
-        A: Trivial,
-        x: sole
-      },
-    ): Equal(
-      class {
-        A: Type
-        x [rename: x2]: A
-      },
-      {
-        A: Trivial,
-        x: sole
-      },
-      {
-        A: Trivial,
-        x: sole
-      },
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Objekt -- fail", async () => {

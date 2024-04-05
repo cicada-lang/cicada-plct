@@ -15,9 +15,7 @@ compute equivalent exists (T: Type) T {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Cons -- fail", async () => {

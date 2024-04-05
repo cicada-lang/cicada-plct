@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Cdr > "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Cdr -- just cdr > 
+    "(implicit A, implicit B, target) => cdr(target): (
+      implicit A: Type,
+      implicit B: (A) -> Type,
+      target: exists (A) B(x),
+    ) -> B(car(target))"
+   1`] = `
+"(implicit A, implicit B, target) => cdr(target): (
+  implicit A: Type,
+  implicit B: (A) -> Type,
+  target: exists (A) B(x),
+) -> B(car(target))"
+`;
+
+exports[`compute Cdr -- just cdr: 
+    "(implicit A, implicit B, target) => cdr(target): (
+      implicit A: Type,
+      implicit B: (A) -> Type,
+      target: exists (A) B(x),
+    ) -> B(car(target))"
+   1`] = `
+"(implicit A, implicit B, target) => cdr(target): (
+  implicit A: Type,
+  implicit B: (A) -> Type,
+  target: exists (A) B(x),
+) -> B(car(target))"
+`;
+
+exports[`compute Cdr -- my_cdr > "\\"b\\": String" 1`] = `"\\"b\\": String"`;
+
+exports[`compute Cdr -- my_cdr -- infer FnImplicitAnnotated > "\\"b\\": String" 1`] = `"\\"b\\": String"`;
+
+exports[`compute Cdr -- my_cdr -- infer FnImplicitAnnotated: ""b": String" 1`] = `""b": String"`;
+
+exports[`compute Cdr -- my_cdr: ""b": String" 1`] = `""b": String"`;
+
+exports[`compute Cdr: "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Cdr 1`] = `"Type: Type"`;
+
+exports[`compute Cdr -- just cdr 1`] = `
+"(implicit A, implicit B, target) => cdr(target): (
+  implicit A: Type,
+  implicit B: (A) -> Type,
+  target: exists (A) B(x),
+) -> B(car(target))"
+`;
+
+exports[`compute Cdr -- my_cdr 1`] = `""b": String"`;
+
+exports[`compute Cdr -- my_cdr -- infer FnImplicitAnnotated 1`] = `""b": String"`;

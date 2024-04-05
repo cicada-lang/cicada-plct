@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Cons > "cons(Type, Type): Pair(Type, Type)" 1`] = `"cons(Type, Type): Pair(Type, Type)"`;
+
+exports[`compute Cons -- inferred > "cons(Type, Type): Pair(Type, Type)" 1`] = `"cons(Type, Type): Pair(Type, Type)"`;
+
+exports[`compute Cons -- inferred: "cons(Type, Type): Pair(Type, Type)" 1`] = `"cons(Type, Type): Pair(Type, Type)"`;
+
+exports[`compute Cons: "cons(Type, Type): Pair(Type, Type)" 1`] = `"cons(Type, Type): Pair(Type, Type)"`;
+
+exports[`compute Cons 1`] = `"cons(Type, Type): Pair(Type, Type)"`;
+
+exports[`compute Cons -- inferred 1`] = `"cons(Type, Type): Pair(Type, Type)"`;

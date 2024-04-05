@@ -12,12 +12,7 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      A: String,
-      B: String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve PiImplicit -- deepWalk", async () => {
@@ -32,15 +27,7 @@ solve (A: Type, B: Type, C: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      A: String,
-      B: String,
-      C: (implicit _: String) -> String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve PiImplicit -- occur", async () => {

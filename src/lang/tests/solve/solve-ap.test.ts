@@ -10,14 +10,7 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      f: ?f,
-      x: ?x
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Ap -- PatternVar v.s. String", async () => {
@@ -29,14 +22,7 @@ solve (f: (String) -> String, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      f: ?f,
-      x: \\"abc\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Ap -- deepWalk", async () => {
@@ -49,13 +35,5 @@ solve (f: (String) -> String, x: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      f: ?f,
-      x: \\"abc\\",
-      c: ?f(\\"abc\\")
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

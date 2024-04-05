@@ -16,25 +16,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit Type,
-      implicit class {
-        A: Type
-        x [rename: x2]: A
-      },
-    ): Equal(
-      Type,
-      class {
-        A: Type
-        x [rename: x2]: A
-      },
-      class {
-        A: Type
-        x [rename: x2]: A
-      },
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Clazz -- Pair in class", async () => {
@@ -48,28 +30,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit Type,
-      implicit class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-    ): Equal(
-      Type,
-      class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-      class {
-        A: Type
-        B: Type
-        pair: Pair(A, B)
-      },
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Clazz -- fail -- different property names", async () => {

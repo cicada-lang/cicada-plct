@@ -1,0 +1,68 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve PiImplicit -- deepWalk > 
+    "{
+      A: String,
+      B: String,
+      C: (implicit _: String) -> String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: (implicit _: String) -> String
+}"
+`;
+
+exports[`solve PiImplicit -- deepWalk: 
+    "{
+      A: String,
+      B: String,
+      C: (implicit _: String) -> String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String,
+  C: (implicit _: String) -> String
+}"
+`;
+
+exports[`solve PiImplicit -- occur twice > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve PiImplicit -- occur twice: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve PiImplicit -- occur twice 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve PiImplicit -- deepWalk 1`] = `
+"{
+  A: String,
+  B: String,
+  C: (implicit _: String) -> String
+}"
+`;

@@ -10,14 +10,11 @@ compute id(Type)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn with return type -- conflict", async () => {
-  const output = await expectCodeToFail(`
+  await expectCodeToFail(`
 
 let id = function (x: String): Type { return x }
 
@@ -35,5 +32,5 @@ compute id
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(T, x) => x: (T: Type, T) -> T"')
+  expect(output).toMatchSnapshot()
 })

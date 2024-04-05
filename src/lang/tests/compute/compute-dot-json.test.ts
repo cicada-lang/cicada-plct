@@ -9,5 +9,5 @@ compute hello["Hello, World!"]
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"\\"Hi!\\": String"')
+  expect(output).toMatchSnapshot()
 })

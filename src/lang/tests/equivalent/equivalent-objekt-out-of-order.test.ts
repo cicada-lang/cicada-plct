@@ -17,34 +17,5 @@ compute equivalent class { A: Type, x: A, y: A } {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit class {
-        A: Type
-        x [rename: x5]: A
-        y: A
-      },
-      implicit {
-        A: String,
-        x: \\"abc\\",
-        y: \\"xyz\\"
-      },
-    ): Equal(
-      class {
-        A: Type
-        x [rename: x5]: A
-        y: A
-      },
-      {
-        A: String,
-        x: \\"abc\\",
-        y: \\"xyz\\"
-      },
-      {
-        A: String,
-        x: \\"abc\\",
-        y: \\"xyz\\"
-      },
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })

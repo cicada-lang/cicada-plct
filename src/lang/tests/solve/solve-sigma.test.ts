@@ -11,12 +11,7 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      A: String,
-      B: String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Sigma -- nested", async () => {
@@ -29,12 +24,7 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      A: String,
-      B: String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Sigma -- occur twice", async () => {
@@ -47,12 +37,7 @@ solve (A: Type, B: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      A: String,
-      B: String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Sigma -- occur in pair", async () => {
@@ -77,10 +62,5 @@ solve (A: Type, B: (x: A) -> Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      A: String,
-      B: (x) => String
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })

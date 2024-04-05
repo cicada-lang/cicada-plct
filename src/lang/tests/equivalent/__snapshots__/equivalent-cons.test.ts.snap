@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Cons > "refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))" 1`] = `"refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))"`;
+
+exports[`equivalent Cons: "refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))" 1`] = `"refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))"`;
+
+exports[`equivalent Cons 1`] = `"refl(implicit exists (Type) T1, implicit cons(Trivial, sole)): Equal(exists (Type) T1, cons(Trivial, sole), cons(Trivial, sole))"`;

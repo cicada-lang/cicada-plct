@@ -11,9 +11,7 @@ compute equivalent Trivial {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Sole -- fail", async () => {

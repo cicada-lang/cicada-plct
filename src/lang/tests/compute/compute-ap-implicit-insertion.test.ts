@@ -13,10 +13,7 @@ compute id("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "sole: Trivial
-    \\"abc\\": String"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- infer", async () => {
@@ -31,10 +28,7 @@ compute infer("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "Trivial: Type
-    String: Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- infer2", async () => {
@@ -51,12 +45,7 @@ compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- infer2 -- over", async () => {
@@ -73,12 +62,7 @@ compute infer2("abc")("abc")
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- inferReturnType", async () => {
@@ -102,10 +86,7 @@ compute inferReturnType(id(implicit String))
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "Trivial: Type
-    String: Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- deepWalk required", async () => {
@@ -124,12 +105,7 @@ compute cons("abc", sole)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "cons(\\"abc\\", sole): Pair(String, Trivial)
-    cons(\\"abc\\", sole): Pair(String, Trivial)"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- nested", async () => {
@@ -148,10 +124,7 @@ compute box(box(box("abc")))
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "cons(cons(\\"abc\\", sole), sole): Pair(Pair(String, Trivial), Trivial)
-    cons(cons(cons(\\"abc\\", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute ApImplicit -- insertion -- during check", async () => {
@@ -169,5 +142,5 @@ compute idString
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(_) => _: (String) -> String"')
+  expect(output).toMatchSnapshot()
 })

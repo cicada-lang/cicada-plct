@@ -8,25 +8,7 @@ compute replace
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "(
-      implicit T,
-      implicit from,
-      implicit to,
-      target,
-      motive,
-      base,
-    ) => replace(target, motive, base): (
-      implicit T: Type,
-      implicit from: T,
-      implicit to: T,
-      Equal(T, from, to),
-      motive: (T) -> Type,
-      motive(from),
-    ) -> motive(to)"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Replace", async () => {
@@ -54,10 +36,5 @@ compute equalCompose(equalCompose(sole_eq, sole_eq), equalCompose(sole_eq, sole_
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
-    refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

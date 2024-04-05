@@ -10,10 +10,7 @@ compute id(Type)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn -- freshen is necessary", async () => {
@@ -34,9 +31,7 @@ compute f
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"(x, _) => x(_): ((Type) -> Type, Type) -> Type"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn -- partial evaluation", async () => {
@@ -51,10 +46,7 @@ compute id2(Type)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn -- evaluation blocked by variable", async () => {
@@ -70,12 +62,7 @@ compute apply(Type, Type, (x) => x)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-    (x, f) => f(x): (Type, (Type) -> Type) -> Type
-    (f) => f(Type): ((Type) -> Type) -> Type
-    Type: Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn -- evaluation blocked by variable -- ApUnfolded", async () => {
@@ -92,13 +79,7 @@ compute apply2(Type, Type, Type, (x, y) => x)
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
-    (x, y, f) => f(x, y): (Type, Type, (Type, Type) -> Type) -> Type
-    (y, f) => f(Type, y): (Type, (Type, Type) -> Type) -> Type
-    (f) => f(Type, Type): ((Type, Type) -> Type) -> Type
-    Type: Type"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Fn -- stmts", async () => {
@@ -112,5 +93,5 @@ compute id
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"(T, x) => x: (T: Type, T) -> T"')
+  expect(output).toMatchSnapshot()
 })

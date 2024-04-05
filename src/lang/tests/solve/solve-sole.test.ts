@@ -12,7 +12,7 @@ solve () {
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"{}"')
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Sole -- abc", async () => {
@@ -26,11 +26,5 @@ solve (a: Trivial, b: Trivial, c: Trivial) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      a: sole,
-      b: sole,
-      c: sole
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })

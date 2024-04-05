@@ -17,9 +17,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit (T31: Type, T31) -> T31): Equal(Type, (T5: Type, T5) -> T5, (T5: Type, T5) -> T5)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Pi -- more nested", async () => {
@@ -37,13 +35,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(implicit Type, implicit (A: Type, A, B: Type, B) -> A): Equal(
-      Type,
-      (A: Type, A, B: Type, B) -> A,
-      (B: Type, B, A: Type, A) -> B,
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Pi -- fail", async () => {

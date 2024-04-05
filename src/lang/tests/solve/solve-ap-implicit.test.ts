@@ -10,14 +10,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      id: ?id,
-      x: ?x
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve ApImplicit -- PatternVar v.s. String", async () => {
@@ -29,15 +22,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, A: Type) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      id: ?id,
-      x: \\"abc\\",
-      A: String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve ApImplicit -- insertion", async () => {
@@ -49,14 +34,7 @@ solve (id: (implicit T: Type, x: T) -> T, x: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      id: ?id,
-      x: \\"abc\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve ApImplicit -- deepWalk", async () => {
@@ -69,15 +47,7 @@ solve (id: (implicit T: Type, x: T) -> T, A: Type, idA: (x: A) -> A) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      id: ?id,
-      A: String,
-      idA: ?id(implicit String)
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve ApImplicit -- deepWalk -- inserted", async () => {
@@ -90,13 +60,5 @@ solve (id: (implicit T: Type, x: T) -> T, x: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      id: ?id,
-      x: \\"abc\\",
-      c: ?id(implicit String, \\"abc\\")
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

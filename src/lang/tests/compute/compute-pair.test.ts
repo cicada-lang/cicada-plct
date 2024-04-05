@@ -8,5 +8,5 @@ compute Pair(Type, Type)
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"Pair(Type, Type): Type"')
+  expect(output).toMatchSnapshot()
 })

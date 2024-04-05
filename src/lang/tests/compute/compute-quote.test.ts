@@ -8,5 +8,5 @@ compute "abc"
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"\\"abc\\": String"')
+  expect(output).toMatchSnapshot()
 })

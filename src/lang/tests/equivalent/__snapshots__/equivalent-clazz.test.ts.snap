@@ -1,0 +1,208 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Clazz > 
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        x [rename: x2]: A
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+    )"
+   1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+)"
+`;
+
+exports[`equivalent Clazz -- Pair in class > 
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    )"
+   1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+)"
+`;
+
+exports[`equivalent Clazz -- Pair in class: 
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+      class {
+        A: Type
+        B: Type
+        pair: Pair(A, B)
+      },
+    )"
+   1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+)"
+`;
+
+exports[`equivalent Clazz: 
+    "refl(
+      implicit Type,
+      implicit class {
+        A: Type
+        x [rename: x2]: A
+      },
+    ): Equal(
+      Type,
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+    )"
+   1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+)"
+`;
+
+exports[`equivalent Clazz 1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+)"
+`;
+
+exports[`equivalent Clazz -- Pair in class 1`] = `
+"refl(
+  implicit Type,
+  implicit class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+): Equal(
+  Type,
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+  class {
+    A: Type
+    B: Type
+    pair: Pair(A, B)
+  },
+)"
+`;

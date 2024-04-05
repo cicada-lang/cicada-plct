@@ -11,7 +11,5 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit Type): Equal(Type, Type, Type)"',
-  )
+  expect(output).toMatchSnapshot()
 })

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute FnImplicit > "(implicit T, x) => T: (implicit T: Type, T) -> Type" 1`] = `"(implicit T, x) => T: (implicit T: Type, T) -> Type"`;
+
+exports[`compute FnImplicit: "(implicit T, x) => T: (implicit T: Type, T) -> Type" 1`] = `"(implicit T, x) => T: (implicit T: Type, T) -> Type"`;
+
+exports[`compute FnImplicit 1`] = `"(implicit T, x) => T: (implicit T: Type, T) -> Type"`;

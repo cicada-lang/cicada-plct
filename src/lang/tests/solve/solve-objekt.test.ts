@@ -16,15 +16,7 @@ solve (a: String, b: String, c: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Objekt -- occur twice", async () => {
@@ -42,12 +34,7 @@ solve (a: String, b: String) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "{
-      a: \\"c\\",
-      b: \\"c\\"
-    }"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("solve Objekt -- extra common properties", async () => {
@@ -81,18 +68,5 @@ solve (a: String, b: String, c: String, abc: ABC) {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\",
-      abc: {
-        a: \\"a\\",
-        b: \\"b\\",
-        c: \\"c\\"
-      }
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

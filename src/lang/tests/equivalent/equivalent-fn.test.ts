@@ -16,12 +16,7 @@ compute equivalent forall (T: Type, x: T) T {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit (T11: Type, T11) -> T11,
-      implicit (T11, x11) => x11,
-    ): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Fn -- alpha equivalent", async () => {
@@ -34,9 +29,7 @@ compute equivalent forall (A: Type, B: Type) Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent FnAnnotated", async () => {
@@ -56,16 +49,7 @@ compute equivalent forall (T: Type, x: T) T {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "refl(
-      implicit (T81: Type, T81) -> T81,
-      implicit (T81, x81) => x81,
-    ): Equal(
-      (T11: Type, T11) -> T11,
-      (T11, x11) => x11,
-      (T11, x11) => x11,
-    )"
-  `)
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Fn -- fail", async () => {

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute String > "String: Type" 1`] = `"String: Type"`;
+
+exports[`compute String: "String: Type" 1`] = `"String: Type"`;
+
+exports[`compute String 1`] = `"String: Type"`;

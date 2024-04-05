@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Quote > "\\"abc\\": String" 1`] = `"\\"abc\\": String"`;
+
+exports[`compute Quote: ""abc": String" 1`] = `""abc": String"`;
+
+exports[`compute Quote 1`] = `""abc": String"`;

@@ -1,0 +1,152 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Objekt -- out of order > 
+    "refl(
+      implicit class {
+        A: Type
+        x [rename: x5]: A
+        y: A
+      },
+      implicit {
+        A: String,
+        x: \\"abc\\",
+        y: \\"xyz\\"
+      },
+    ): Equal(
+      class {
+        A: Type
+        x [rename: x5]: A
+        y: A
+      },
+      {
+        A: String,
+        x: \\"abc\\",
+        y: \\"xyz\\"
+      },
+      {
+        A: String,
+        x: \\"abc\\",
+        y: \\"xyz\\"
+      },
+    )"
+   1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  implicit {
+    A: String,
+    x: \\"abc\\",
+    y: \\"xyz\\"
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  {
+    A: String,
+    x: \\"abc\\",
+    y: \\"xyz\\"
+  },
+  {
+    A: String,
+    x: \\"abc\\",
+    y: \\"xyz\\"
+  },
+)"
+`;
+
+exports[`equivalent Objekt -- out of order: 
+    "refl(
+      implicit class {
+        A: Type
+        x [rename: x5]: A
+        y: A
+      },
+      implicit {
+        A: String,
+        x: "abc",
+        y: "xyz"
+      },
+    ): Equal(
+      class {
+        A: Type
+        x [rename: x5]: A
+        y: A
+      },
+      {
+        A: String,
+        x: "abc",
+        y: "xyz"
+      },
+      {
+        A: String,
+        x: "abc",
+        y: "xyz"
+      },
+    )"
+   1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  implicit {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+  {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+)"
+`;
+
+exports[`equivalent Objekt -- out of order 1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  implicit {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x5]: A
+    y: A
+  },
+  {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+  {
+    A: String,
+    x: "abc",
+    y: "xyz"
+  },
+)"
+`;

@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Same -- given implicit > "refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")" 1`] = `"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"`;
+
+exports[`compute Same -- given implicit: "refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")" 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+
+exports[`compute Same -- under the > "refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")" 1`] = `"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"`;
+
+exports[`compute Same -- under the: "refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")" 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+
+exports[`compute Same -- under the 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+
+exports[`compute Same -- given implicit 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;

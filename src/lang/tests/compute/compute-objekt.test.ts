@@ -10,19 +10,7 @@ compute abc
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }: class {
-      a: String
-      b: String
-      c: String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Objekt -- prefilled", async () => {
@@ -34,19 +22,7 @@ compute abc
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }: class {
-      a: String
-      b: String = \\"b\\"
-      c: String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Objekt -- extra properties", async () => {
@@ -58,19 +34,7 @@ compute abcxyz
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }: class {
-      a: String
-      b: String
-      c: String
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Objket -- direct", async () => {
@@ -80,15 +44,5 @@ compute { a: "c", b: "d" }
 
   `)
 
-  expect(output).toMatchInlineSnapshot(
-    `
-    "{
-      a: \\"c\\",
-      b: \\"d\\"
-    }: class {
-      a: String = \\"c\\"
-      b: String = \\"d\\"
-    }"
-  `,
-  )
+  expect(output).toMatchSnapshot()
 })

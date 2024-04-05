@@ -1,0 +1,215 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Objekt > 
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }: class {
+      a: String
+      b: String
+      c: String
+    }"
+   1`] = `
+"{
+  a: \\"a\\",
+  b: \\"b\\",
+  c: \\"c\\"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- extra properties > 
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }: class {
+      a: String
+      b: String
+      c: String
+    }"
+   1`] = `
+"{
+  a: \\"a\\",
+  b: \\"b\\",
+  c: \\"c\\"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- extra properties: 
+    "{
+      a: "a",
+      b: "b",
+      c: "c"
+    }: class {
+      a: String
+      b: String
+      c: String
+    }"
+   1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- prefilled > 
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }: class {
+      a: String
+      b: String = \\"b\\"
+      c: String
+    }"
+   1`] = `
+"{
+  a: \\"a\\",
+  b: \\"b\\",
+  c: \\"c\\"
+}: class {
+  a: String
+  b: String = \\"b\\"
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- prefilled: 
+    "{
+      a: "a",
+      b: "b",
+      c: "c"
+    }: class {
+      a: String
+      b: String = "b"
+      c: String
+    }"
+   1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String = "b"
+  c: String
+}"
+`;
+
+exports[`compute Objekt: 
+    "{
+      a: "a",
+      b: "b",
+      c: "c"
+    }: class {
+      a: String
+      b: String
+      c: String
+    }"
+   1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objket -- direct > 
+    "{
+      a: \\"c\\",
+      b: \\"d\\"
+    }: class {
+      a: String = \\"c\\"
+      b: String = \\"d\\"
+    }"
+   1`] = `
+"{
+  a: \\"c\\",
+  b: \\"d\\"
+}: class {
+  a: String = \\"c\\"
+  b: String = \\"d\\"
+}"
+`;
+
+exports[`compute Objket -- direct: 
+    "{
+      a: "c",
+      b: "d"
+    }: class {
+      a: String = "c"
+      b: String = "d"
+    }"
+   1`] = `
+"{
+  a: "c",
+  b: "d"
+}: class {
+  a: String = "c"
+  b: String = "d"
+}"
+`;
+
+exports[`compute Objekt 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- prefilled 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String = "b"
+  c: String
+}"
+`;
+
+exports[`compute Objekt -- extra properties 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class {
+  a: String
+  b: String
+  c: String
+}"
+`;
+
+exports[`compute Objket -- direct 1`] = `
+"{
+  a: "c",
+  b: "d"
+}: class {
+  a: String = "c"
+  b: String = "d"
+}"
+`;

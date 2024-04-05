@@ -11,9 +11,5 @@ compute abc.c
 
 `)
 
-  expect(output).toMatchInlineSnapshot(`
-    "\\"a\\": String
-    \\"b\\": String
-    \\"c\\": String"
-  `)
+  expect(output).toMatchSnapshot()
 })

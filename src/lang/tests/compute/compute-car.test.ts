@@ -9,7 +9,7 @@ compute car(pair)
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"Type: Type"')
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Car -- just car", async () => {
@@ -19,9 +19,7 @@ compute car
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("compute Car -- my_car", async () => {
@@ -39,5 +37,5 @@ compute my_car(cons("a", "b"))
 
 `)
 
-  expect(output).toMatchInlineSnapshot('"\\"a\\": String"')
+  expect(output).toMatchSnapshot()
 })

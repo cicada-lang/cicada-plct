@@ -12,9 +12,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit String): Equal(Type, String, String)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent String -- fail", async () => {

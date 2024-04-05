@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Pi > "(T: Type, T) -> T: Type" 1`] = `"(T: Type, T) -> T: Type"`;
+
+exports[`compute Pi: "(T: Type, T) -> T: Type" 1`] = `"(T: Type, T) -> T: Type"`;
+
+exports[`compute Pi 1`] = `"(T: Type, T) -> T: Type"`;

@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Car > "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Car -- just car > "(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A" 1`] = `"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"`;
+
+exports[`compute Car -- just car: "(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A" 1`] = `"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"`;
+
+exports[`compute Car -- my_car > "\\"a\\": String" 1`] = `"\\"a\\": String"`;
+
+exports[`compute Car -- my_car: ""a": String" 1`] = `""a": String"`;
+
+exports[`compute Car: "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Car 1`] = `"Type: Type"`;
+
+exports[`compute Car -- just car 1`] = `"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"`;
+
+exports[`compute Car -- my_car 1`] = `""a": String"`;

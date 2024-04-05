@@ -16,9 +16,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Sigma -- nested", async () => {
@@ -37,9 +35,7 @@ compute equivalent Type {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Sigma -- fail", async () => {

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Type > "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Type: "Type: Type" 1`] = `"Type: Type"`;
+
+exports[`compute Type 1`] = `"Type: Type"`;

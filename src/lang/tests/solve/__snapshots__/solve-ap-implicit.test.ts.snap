@@ -1,0 +1,171 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve ApImplicit -- PatternVar v.s. String > 
+    "{
+      id: ?id,
+      x: \\"abc\\",
+      A: String
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: \\"abc\\",
+  A: String
+}"
+`;
+
+exports[`solve ApImplicit -- PatternVar v.s. String: 
+    "{
+      id: ?id,
+      x: "abc",
+      A: String
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: "abc",
+  A: String
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk > 
+    "{
+      id: ?id,
+      A: String,
+      idA: ?id(implicit String)
+    }"
+   1`] = `
+"{
+  id: ?id,
+  A: String,
+  idA: ?id(implicit String)
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk -- inserted > 
+    "{
+      id: ?id,
+      x: \\"abc\\",
+      c: ?id(implicit String, \\"abc\\")
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: \\"abc\\",
+  c: ?id(implicit String, \\"abc\\")
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk -- inserted: 
+    "{
+      id: ?id,
+      x: "abc",
+      c: ?id(implicit String, "abc")
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: "abc",
+  c: ?id(implicit String, "abc")
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk: 
+    "{
+      id: ?id,
+      A: String,
+      idA: ?id(implicit String)
+    }"
+   1`] = `
+"{
+  id: ?id,
+  A: String,
+  idA: ?id(implicit String)
+}"
+`;
+
+exports[`solve ApImplicit -- insertion > 
+    "{
+      id: ?id,
+      x: \\"abc\\"
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: \\"abc\\"
+}"
+`;
+
+exports[`solve ApImplicit -- insertion: 
+    "{
+      id: ?id,
+      x: "abc"
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: "abc"
+}"
+`;
+
+exports[`solve ApImplicit -- same PatternVar > 
+    "{
+      id: ?id,
+      x: ?x
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: ?x
+}"
+`;
+
+exports[`solve ApImplicit -- same PatternVar: 
+    "{
+      id: ?id,
+      x: ?x
+    }"
+   1`] = `
+"{
+  id: ?id,
+  x: ?x
+}"
+`;
+
+exports[`solve ApImplicit -- same PatternVar 1`] = `
+"{
+  id: ?id,
+  x: ?x
+}"
+`;
+
+exports[`solve ApImplicit -- PatternVar v.s. String 1`] = `
+"{
+  id: ?id,
+  x: "abc",
+  A: String
+}"
+`;
+
+exports[`solve ApImplicit -- insertion 1`] = `
+"{
+  id: ?id,
+  x: "abc"
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk 1`] = `
+"{
+  id: ?id,
+  A: String,
+  idA: ?id(implicit String)
+}"
+`;
+
+exports[`solve ApImplicit -- deepWalk -- inserted 1`] = `
+"{
+  id: ?id,
+  x: "abc",
+  c: ?id(implicit String, "abc")
+}"
+`;

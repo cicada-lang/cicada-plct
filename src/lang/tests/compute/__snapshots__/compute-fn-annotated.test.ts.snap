@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute FnAnnotated > "(x) => x: (Type) -> Type" 1`] = `"(x) => x: (Type) -> Type"`;
+
+exports[`compute FnAnnotated: "(x) => x: (Type) -> Type" 1`] = `"(x) => x: (Type) -> Type"`;
+
+exports[`compute FnAnnotated 1`] = `"(x) => x: (Type) -> Type"`;

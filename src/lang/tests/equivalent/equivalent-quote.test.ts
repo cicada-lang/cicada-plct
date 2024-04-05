@@ -12,9 +12,7 @@ compute equivalent String {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Quote -- empty string", async () => {
@@ -28,9 +26,7 @@ compute equivalent String {
 
 `)
 
-  expect(output).toMatchInlineSnapshot(
-    '"refl(implicit String, implicit \\"\\"): Equal(String, \\"\\", \\"\\")"',
-  )
+  expect(output).toMatchSnapshot()
 })
 
 test("equivalent Quote -- fail", async () => {

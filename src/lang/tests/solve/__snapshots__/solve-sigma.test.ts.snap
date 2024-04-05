@@ -1,0 +1,125 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve Sigma > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- generate const function > 
+    "{
+      A: String,
+      B: (x) => String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: (x) => String
+}"
+`;
+
+exports[`solve Sigma -- generate const function: 
+    "{
+      A: String,
+      B: (x) => String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: (x) => String
+}"
+`;
+
+exports[`solve Sigma -- nested > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- nested: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- occur twice > 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- occur twice: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma: 
+    "{
+      A: String,
+      B: String
+    }"
+   1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- nested 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- occur twice 1`] = `
+"{
+  A: String,
+  B: String
+}"
+`;
+
+exports[`solve Sigma -- generate const function 1`] = `
+"{
+  A: String,
+  B: (x) => String
+}"
+`;

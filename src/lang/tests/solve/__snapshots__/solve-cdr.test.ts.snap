@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve Cdr > 
+    "{
+      ab: cons(\\"a\\", \\"b\\"),
+      b: \\"b\\"
+    }"
+   1`] = `
+"{
+  ab: cons(\\"a\\", \\"b\\"),
+  b: \\"b\\"
+}"
+`;
+
+exports[`solve Cdr: 
+    "{
+      ab: cons("a", "b"),
+      b: "b"
+    }"
+   1`] = `
+"{
+  ab: cons("a", "b"),
+  b: "b"
+}"
+`;
+
+exports[`solve Cdr 1`] = `
+"{
+  ab: cons("a", "b"),
+  b: "b"
+}"
+`;

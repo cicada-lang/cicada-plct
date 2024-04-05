@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`solve Quote -- bindings > 
+    "{
+      a: \\"a\\",
+      b: \\"b\\",
+      c: \\"c\\"
+    }"
+   1`] = `
+"{
+  a: \\"a\\",
+  b: \\"b\\",
+  c: \\"c\\"
+}"
+`;
+
+exports[`solve Quote -- bindings: 
+    "{
+      a: "a",
+      b: "b",
+      c: "c"
+    }"
+   1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}"
+`;
+
+exports[`solve Quote -- data > "{}" 1`] = `"{}"`;
+
+exports[`solve Quote -- data: "{}" 1`] = `"{}"`;
+
+exports[`solve Quote -- walk > 
+    "{
+      a: \\"a\\",
+      b: \\"a\\",
+      c: \\"a\\"
+    }"
+   1`] = `
+"{
+  a: \\"a\\",
+  b: \\"a\\",
+  c: \\"a\\"
+}"
+`;
+
+exports[`solve Quote -- walk: 
+    "{
+      a: "a",
+      b: "a",
+      c: "a"
+    }"
+   1`] = `
+"{
+  a: "a",
+  b: "a",
+  c: "a"
+}"
+`;
+
+exports[`solve Quote -- data 1`] = `"{}"`;
+
+exports[`solve Quote -- bindings 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}"
+`;
+
+exports[`solve Quote -- walk 1`] = `
+"{
+  a: "a",
+  b: "a",
+  c: "a"
+}"
+`;

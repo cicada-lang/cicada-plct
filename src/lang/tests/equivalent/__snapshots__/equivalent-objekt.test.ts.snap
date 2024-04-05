@@ -1,0 +1,127 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Objekt > 
+    "refl(
+      implicit class {
+        A: Type
+        x [rename: x2]: A
+      },
+      implicit {
+        A: Trivial,
+        x: sole
+      },
+    ): Equal(
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+      {
+        A: Trivial,
+        x: sole
+      },
+      {
+        A: Trivial,
+        x: sole
+      },
+    )"
+   1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+  implicit {
+    A: Trivial,
+    x: sole
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+)"
+`;
+
+exports[`equivalent Objekt: 
+    "refl(
+      implicit class {
+        A: Type
+        x [rename: x2]: A
+      },
+      implicit {
+        A: Trivial,
+        x: sole
+      },
+    ): Equal(
+      class {
+        A: Type
+        x [rename: x2]: A
+      },
+      {
+        A: Trivial,
+        x: sole
+      },
+      {
+        A: Trivial,
+        x: sole
+      },
+    )"
+   1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+  implicit {
+    A: Trivial,
+    x: sole
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+)"
+`;
+
+exports[`equivalent Objekt 1`] = `
+"refl(
+  implicit class {
+    A: Type
+    x [rename: x2]: A
+  },
+  implicit {
+    A: Trivial,
+    x: sole
+  },
+): Equal(
+  class {
+    A: Type
+    x [rename: x2]: A
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+  {
+    A: Trivial,
+    x: sole
+  },
+)"
+`;

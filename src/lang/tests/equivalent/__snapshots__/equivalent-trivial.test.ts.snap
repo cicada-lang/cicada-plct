@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`equivalent Trivial > "refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)" 1`] = `"refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)"`;
+
+exports[`equivalent Trivial: "refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)" 1`] = `"refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)"`;
+
+exports[`equivalent Trivial 1`] = `"refl(implicit Type, implicit Trivial): Equal(Type, Trivial, Trivial)"`;

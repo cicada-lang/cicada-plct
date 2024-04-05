@@ -1,0 +1,108 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Replace > 
+    "refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+    refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
+   1`] = `
+"refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
+`;
+
+exports[`compute Replace -- just replace > 
+    "(
+      implicit T,
+      implicit from,
+      implicit to,
+      target,
+      motive,
+      base,
+    ) => replace(target, motive, base): (
+      implicit T: Type,
+      implicit from: T,
+      implicit to: T,
+      Equal(T, from, to),
+      motive: (T) -> Type,
+      motive(from),
+    ) -> motive(to)"
+   1`] = `
+"(
+  implicit T,
+  implicit from,
+  implicit to,
+  target,
+  motive,
+  base,
+) => replace(target, motive, base): (
+  implicit T: Type,
+  implicit from: T,
+  implicit to: T,
+  Equal(T, from, to),
+  motive: (T) -> Type,
+  motive(from),
+) -> motive(to)"
+`;
+
+exports[`compute Replace -- just replace: 
+    "(
+      implicit T,
+      implicit from,
+      implicit to,
+      target,
+      motive,
+      base,
+    ) => replace(target, motive, base): (
+      implicit T: Type,
+      implicit from: T,
+      implicit to: T,
+      Equal(T, from, to),
+      motive: (T) -> Type,
+      motive(from),
+    ) -> motive(to)"
+   1`] = `
+"(
+  implicit T,
+  implicit from,
+  implicit to,
+  target,
+  motive,
+  base,
+) => replace(target, motive, base): (
+  implicit T: Type,
+  implicit from: T,
+  implicit to: T,
+  Equal(T, from, to),
+  motive: (T) -> Type,
+  motive(from),
+) -> motive(to)"
+`;
+
+exports[`compute Replace: 
+    "refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+    refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
+   1`] = `
+"refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
+`;
+
+exports[`compute Replace -- just replace 1`] = `
+"(
+  implicit T,
+  implicit from,
+  implicit to,
+  target,
+  motive,
+  base,
+) => replace(target, motive, base): (
+  implicit T: Type,
+  implicit from: T,
+  implicit to: T,
+  Equal(T, from, to),
+  motive: (T) -> Type,
+  motive(from),
+) -> motive(to)"
+`;
+
+exports[`compute Replace 1`] = `
+"refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)
+refl(implicit Trivial, implicit sole): Equal(Trivial, sole, sole)"
+`;

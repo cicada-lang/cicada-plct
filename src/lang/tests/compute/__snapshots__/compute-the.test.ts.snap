@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute the > "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute the applied > "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute the applied: "sole: Trivial" 1`] = `"sole: Trivial"`;
+
+exports[`compute the: "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute the 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute the applied 1`] = `"sole: Trivial"`;

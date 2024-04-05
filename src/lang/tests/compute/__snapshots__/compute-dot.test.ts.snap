@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`compute Dot > 
+    "\\"a\\": String
+    \\"b\\": String
+    \\"c\\": String"
+   1`] = `
+"\\"a\\": String
+\\"b\\": String
+\\"c\\": String"
+`;
+
+exports[`compute Dot: 
+    ""a": String
+    "b": String
+    "c": String"
+   1`] = `
+""a": String
+"b": String
+"c": String"
+`;
+
+exports[`compute Dot 1`] = `
+""a": String
+"b": String
+"c": String"
+`;
