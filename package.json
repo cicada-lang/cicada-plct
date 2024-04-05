@@ -12,10 +12,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test:ts": "vitest --dir src --threads false --run",
-    "test:watch": "vitest --dir src --threads false",
-    "test:coverage": "vitest --dir src --threads false --run --coverage ",
-    "test:gui": "vitest --dir src --threads false --ui",
+    "test:ts": "bun test src",
+    "test:watch": "bun test src --watch",
     "test:cic:tests": "test-runner snapshot 'node ./bin/cic.js --no-color' 'tests/**/*.(cic|md)' --exclude 'tests/**/*.(error|todo).(cic|md)'",
     "test:cic:tests-error": "test-runner snapshot-error 'node ./bin/cic.js --no-color' 'tests/**/*.error.(cic|md)'",
     "test:cic:std": "test-runner snapshot 'node ./bin/cic.js --no-color' 'std/**/*.(cic|md)' --exclude 'std/**/*.(error|todo).(cic|md)'",
@@ -40,15 +38,11 @@
     "@types/commonmark": "^0.27.7",
     "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.3",
-    "@vitest/coverage-c8": "^0.33.0",
-    "@vitest/coverage-istanbul": "^0.34.6",
-    "@vitest/ui": "^0.34.6",
     "@xieyuheng/test-runner": "^0.2.10",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
     "typescript": "^5.2.2",
-    "vite": "^4.4.11",
-    "vitest": "^0.34.6"
+    "bun": "^1.1.1"
   },
   "license": "GPL-3.0-or-later"
 }
