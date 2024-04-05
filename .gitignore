@@ -1,7 +1,7 @@
 # typescript
 lib
 
-# vitest
+# bun:test
 coverage
 
 # npm

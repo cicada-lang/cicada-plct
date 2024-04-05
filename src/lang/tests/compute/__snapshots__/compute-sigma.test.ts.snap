@@ -1,7 +1,3 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Sigma > "Pair(Type, Type): Type" 1`] = `"Pair(Type, Type): Type"`;
-
-exports[`compute Sigma: "Pair(Type, Type): Type" 1`] = `"Pair(Type, Type): Type"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Sigma 1`] = `"Pair(Type, Type): Type"`;

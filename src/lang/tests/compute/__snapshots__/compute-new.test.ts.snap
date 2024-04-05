@@ -1,194 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute New > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }: class ABC {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\",
-  c: \\"c\\"
-}: class ABC {
-  a: String = \\"a\\"
-  b: String = \\"b\\"
-  c: String = \\"c\\"
-}"
-`;
-
-exports[`compute New -- dependent > 
-    "{
-      T: String,
-      x: \\"x\\"
-    }: class The {
-      T: Type = String
-      x: String = \\"x\\"
-    }"
-   1`] = `
-"{
-  T: String,
-  x: \\"x\\"
-}: class The {
-  T: Type = String
-  x: String = \\"x\\"
-}"
-`;
-
-exports[`compute New -- dependent: 
-    "{
-      T: String,
-      x: "x"
-    }: class The {
-      T: Type = String
-      x: String = "x"
-    }"
-   1`] = `
-"{
-  T: String,
-  x: "x"
-}: class The {
-  T: Type = String
-  x: String = "x"
-}"
-`;
-
-exports[`compute New -- extra properties > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\",
-      d: \\"d\\"
-    }: class ABC {
-      a: String = \\"a\\"
-      b: String = \\"b\\"
-      c: String = \\"c\\"
-      d: String = \\"d\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\",
-  c: \\"c\\",
-  d: \\"d\\"
-}: class ABC {
-  a: String = \\"a\\"
-  b: String = \\"b\\"
-  c: String = \\"c\\"
-  d: String = \\"d\\"
-}"
-`;
-
-exports[`compute New -- extra properties: 
-    "{
-      a: "a",
-      b: "b",
-      c: "c",
-      d: "d"
-    }: class ABC {
-      a: String = "a"
-      b: String = "b"
-      c: String = "c"
-      d: String = "d"
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c",
-  d: "d"
-}: class ABC {
-  a: String = "a"
-  b: String = "b"
-  c: String = "c"
-  d: String = "d"
-}"
-`;
-
-exports[`compute New -- fulfilled > 
-    "{
-      a: \\"Hello, World!\\",
-      b: \\"Hello, World!\\"
-    }: class AB {
-      a: String = \\"Hello, World!\\"
-      b: String = \\"Hello, World!\\"
-    }"
-   1`] = `
-"{
-  a: \\"Hello, World!\\",
-  b: \\"Hello, World!\\"
-}: class AB {
-  a: String = \\"Hello, World!\\"
-  b: String = \\"Hello, World!\\"
-}"
-`;
-
-exports[`compute New -- fulfilled: 
-    "{
-      a: "Hello, World!",
-      b: "Hello, World!"
-    }: class AB {
-      a: String = "Hello, World!"
-      b: String = "Hello, World!"
-    }"
-   1`] = `
-"{
-  a: "Hello, World!",
-  b: "Hello, World!"
-}: class AB {
-  a: String = "Hello, World!"
-  b: String = "Hello, World!"
-}"
-`;
-
-exports[`compute New: 
-    "{
-      a: "a",
-      b: "b",
-      c: "c"
-    }: class ABC {
-      a: String = "a"
-      b: String = "b"
-      c: String = "c"
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c"
-}: class ABC {
-  a: String = "a"
-  b: String = "b"
-  c: String = "c"
-}"
-`;
-
-exports[`compute New 1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c"
-}: class ABC {
-  a: String = "a"
-  b: String = "b"
-  c: String = "c"
-}"
-`;
-
-exports[`compute New -- fulfilled 1`] = `
-"{
-  a: "Hello, World!",
-  b: "Hello, World!"
-}: class AB {
-  a: String = "Hello, World!"
-  b: String = "Hello, World!"
-}"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute New -- dependent 1`] = `
 "{
@@ -211,5 +21,27 @@ exports[`compute New -- extra properties 1`] = `
   b: String = "b"
   c: String = "c"
   d: String = "d"
+}"
+`;
+
+exports[`compute New -- fulfilled 1`] = `
+"{
+  a: "Hello, World!",
+  b: "Hello, World!"
+}: class AB {
+  a: String = "Hello, World!"
+  b: String = "Hello, World!"
+}"
+`;
+
+exports[`compute New 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
+}: class ABC {
+  a: String = "a"
+  b: String = "b"
+  c: String = "c"
 }"
 `;

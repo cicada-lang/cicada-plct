@@ -1,7 +1,3 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Dot -- JSON > "\\"Hi!\\": String" 1`] = `"\\"Hi!\\": String"`;
-
-exports[`compute Dot -- JSON: ""Hi!": String" 1`] = `""Hi!": String"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Dot -- JSON 1`] = `""Hi!": String"`;

@@ -1,7 +1,3 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve String > "{}" 1`] = `"{}"`;
-
-exports[`solve String: "{}" 1`] = `"{}"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve String 1`] = `"{}"`;

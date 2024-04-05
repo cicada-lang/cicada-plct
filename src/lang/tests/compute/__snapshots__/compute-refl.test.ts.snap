@@ -1,13 +1,5 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Refl -- given implicit > "refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")" 1`] = `"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"`;
-
-exports[`compute Refl -- given implicit: "refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")" 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
-
-exports[`compute Refl -- under the > "refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")" 1`] = `"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"`;
-
-exports[`compute Refl -- under the: "refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")" 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
-
-exports[`compute Refl -- under the 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Refl -- given implicit 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+
+exports[`compute Refl -- under the 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;

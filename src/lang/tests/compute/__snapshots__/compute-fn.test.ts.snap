@@ -1,115 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Fn > 
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-   1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn -- evaluation blocked by variable > 
-    "(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-    (x, f) => f(x): (Type, (Type) -> Type) -> Type
-    (f) => f(Type): ((Type) -> Type) -> Type
-    Type: Type"
-   1`] = `
-"(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-(x, f) => f(x): (Type, (Type) -> Type) -> Type
-(f) => f(Type): ((Type) -> Type) -> Type
-Type: Type"
-`;
-
-exports[`compute Fn -- evaluation blocked by variable -- ApUnfolded > 
-    "(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
-    (x, y, f) => f(x, y): (Type, Type, (Type, Type) -> Type) -> Type
-    (y, f) => f(Type, y): (Type, (Type, Type) -> Type) -> Type
-    (f) => f(Type, Type): ((Type, Type) -> Type) -> Type
-    Type: Type"
-   1`] = `
-"(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
-(x, y, f) => f(x, y): (Type, Type, (Type, Type) -> Type) -> Type
-(y, f) => f(Type, y): (Type, (Type, Type) -> Type) -> Type
-(f) => f(Type, Type): ((Type, Type) -> Type) -> Type
-Type: Type"
-`;
-
-exports[`compute Fn -- evaluation blocked by variable -- ApUnfolded: 
-    "(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
-    (x, y, f) => f(x, y): (Type, Type, (Type, Type) -> Type) -> Type
-    (y, f) => f(Type, y): (Type, (Type, Type) -> Type) -> Type
-    (f) => f(Type, Type): ((Type, Type) -> Type) -> Type
-    Type: Type"
-   1`] = `
-"(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
-(x, y, f) => f(x, y): (Type, Type, (Type, Type) -> Type) -> Type
-(y, f) => f(Type, y): (Type, (Type, Type) -> Type) -> Type
-(f) => f(Type, Type): ((Type, Type) -> Type) -> Type
-Type: Type"
-`;
-
-exports[`compute Fn -- evaluation blocked by variable: 
-    "(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-    (x, f) => f(x): (Type, (Type) -> Type) -> Type
-    (f) => f(Type): ((Type) -> Type) -> Type
-    Type: Type"
-   1`] = `
-"(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-(x, f) => f(x): (Type, (Type) -> Type) -> Type
-(f) => f(Type): ((Type) -> Type) -> Type
-Type: Type"
-`;
-
-exports[`compute Fn -- freshen is necessary > "(x, _) => x(_): ((Type) -> Type, Type) -> Type" 1`] = `"(x, _) => x(_): ((Type) -> Type, Type) -> Type"`;
-
-exports[`compute Fn -- freshen is necessary: "(x, _) => x(_): ((Type) -> Type, Type) -> Type" 1`] = `"(x, _) => x(_): ((Type) -> Type, Type) -> Type"`;
-
-exports[`compute Fn -- partial evaluation > 
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-   1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn -- partial evaluation: 
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-   1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn -- stmts > "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
-
-exports[`compute Fn -- stmts: "(T, x) => x: (T: Type, T) -> T" 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
-
-exports[`compute Fn: 
-    "(T, x) => x: (T: Type, T) -> T
-    (x) => x: (Type) -> Type"
-   1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn 1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn -- freshen is necessary 1`] = `"(x, _) => x(_): ((Type) -> Type, Type) -> Type"`;
-
-exports[`compute Fn -- partial evaluation 1`] = `
-"(T, x) => x: (T: Type, T) -> T
-(x) => x: (Type) -> Type"
-`;
-
-exports[`compute Fn -- evaluation blocked by variable 1`] = `
-"(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
-(x, f) => f(x): (Type, (Type) -> Type) -> Type
-(f) => f(Type): ((Type) -> Type) -> Type
-Type: Type"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Fn -- evaluation blocked by variable -- ApUnfolded 1`] = `
 "(T, x, y, f) => f(x, y): (T: Type, T, T, (T, T) -> T) -> T
@@ -119,4 +8,23 @@ exports[`compute Fn -- evaluation blocked by variable -- ApUnfolded 1`] = `
 Type: Type"
 `;
 
+exports[`compute Fn -- evaluation blocked by variable 1`] = `
+"(T, x, f) => f(x): (T: Type, T, (T) -> T) -> T
+(x, f) => f(x): (Type, (Type) -> Type) -> Type
+(f) => f(Type): ((Type) -> Type) -> Type
+Type: Type"
+`;
+
+exports[`compute Fn -- freshen is necessary 1`] = `"(x, _) => x(_): ((Type) -> Type, Type) -> Type"`;
+
+exports[`compute Fn -- partial evaluation 1`] = `
+"(T, x) => x: (T: Type, T) -> T
+(x) => x: (Type) -> Type"
+`;
+
 exports[`compute Fn -- stmts 1`] = `"(T, x) => x: (T: Type, T) -> T"`;
+
+exports[`compute Fn 1`] = `
+"(T, x) => x: (T: Type, T) -> T
+(x) => x: (Type) -> Type"
+`;

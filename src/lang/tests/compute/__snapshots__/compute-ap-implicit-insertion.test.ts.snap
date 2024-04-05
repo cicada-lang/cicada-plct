@@ -1,136 +1,11 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
-exports[`compute ApImplicit -- insertion -- deepWalk required > 
-    "cons(\\"abc\\", sole): Pair(String, Trivial)
-    cons(\\"abc\\", sole): Pair(String, Trivial)"
-   1`] = `
-"cons(\\"abc\\", sole): Pair(String, Trivial)
-cons(\\"abc\\", sole): Pair(String, Trivial)"
-`;
-
-exports[`compute ApImplicit -- insertion -- deepWalk required: 
-    "cons("abc", sole): Pair(String, Trivial)
-    cons("abc", sole): Pair(String, Trivial)"
-   1`] = `
+exports[`compute ApImplicit -- insertion -- deepWalk required 1`] = `
 "cons("abc", sole): Pair(String, Trivial)
 cons("abc", sole): Pair(String, Trivial)"
 `;
 
-exports[`compute ApImplicit -- insertion -- during check > "(_) => _: (String) -> String" 1`] = `"(_) => _: (String) -> String"`;
-
-exports[`compute ApImplicit -- insertion -- during check: "(_) => _: (String) -> String" 1`] = `"(_) => _: (String) -> String"`;
-
-exports[`compute ApImplicit -- insertion -- id > 
-    "sole: Trivial
-    \\"abc\\": String"
-   1`] = `
-"sole: Trivial
-\\"abc\\": String"
-`;
-
-exports[`compute ApImplicit -- insertion -- id: 
-    "sole: Trivial
-    "abc": String"
-   1`] = `
-"sole: Trivial
-"abc": String"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer > 
-    "Trivial: Type
-    String: Type"
-   1`] = `
-"Trivial: Type
-String: Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer: 
-    "Trivial: Type
-    String: Type"
-   1`] = `
-"Trivial: Type
-String: Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer2 > 
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-   1`] = `
-"Pair(Trivial, String): Type
-Pair(Trivial, Trivial): Type
-Pair(String, Trivial): Type
-Pair(String, String): Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer2 -- over > 
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-   1`] = `
-"Pair(Trivial, String): Type
-Pair(Trivial, Trivial): Type
-Pair(String, Trivial): Type
-Pair(String, String): Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer2 -- over: 
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-   1`] = `
-"Pair(Trivial, String): Type
-Pair(Trivial, Trivial): Type
-Pair(String, Trivial): Type
-Pair(String, String): Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- infer2: 
-    "Pair(Trivial, String): Type
-    Pair(Trivial, Trivial): Type
-    Pair(String, Trivial): Type
-    Pair(String, String): Type"
-   1`] = `
-"Pair(Trivial, String): Type
-Pair(Trivial, Trivial): Type
-Pair(String, Trivial): Type
-Pair(String, String): Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- inferReturnType > 
-    "Trivial: Type
-    String: Type"
-   1`] = `
-"Trivial: Type
-String: Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- inferReturnType: 
-    "Trivial: Type
-    String: Type"
-   1`] = `
-"Trivial: Type
-String: Type"
-`;
-
-exports[`compute ApImplicit -- insertion -- nested > 
-    "cons(cons(\\"abc\\", sole), sole): Pair(Pair(String, Trivial), Trivial)
-    cons(cons(cons(\\"abc\\", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
-   1`] = `
-"cons(cons(\\"abc\\", sole), sole): Pair(Pair(String, Trivial), Trivial)
-cons(cons(cons(\\"abc\\", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
-`;
-
-exports[`compute ApImplicit -- insertion -- nested: 
-    "cons(cons("abc", sole), sole): Pair(Pair(String, Trivial), Trivial)
-    cons(cons(cons("abc", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
-   1`] = `
-"cons(cons("abc", sole), sole): Pair(Pair(String, Trivial), Trivial)
-cons(cons(cons("abc", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
-`;
+exports[`compute ApImplicit -- insertion -- during check 1`] = `"(_) => _: (String) -> String"`;
 
 exports[`compute ApImplicit -- insertion -- id 1`] = `
 "sole: Trivial
@@ -142,14 +17,14 @@ exports[`compute ApImplicit -- insertion -- infer 1`] = `
 String: Type"
 `;
 
-exports[`compute ApImplicit -- insertion -- infer2 1`] = `
+exports[`compute ApImplicit -- insertion -- infer2 -- over 1`] = `
 "Pair(Trivial, String): Type
 Pair(Trivial, Trivial): Type
 Pair(String, Trivial): Type
 Pair(String, String): Type"
 `;
 
-exports[`compute ApImplicit -- insertion -- infer2 -- over 1`] = `
+exports[`compute ApImplicit -- insertion -- infer2 1`] = `
 "Pair(Trivial, String): Type
 Pair(Trivial, Trivial): Type
 Pair(String, Trivial): Type
@@ -161,14 +36,7 @@ exports[`compute ApImplicit -- insertion -- inferReturnType 1`] = `
 String: Type"
 `;
 
-exports[`compute ApImplicit -- insertion -- deepWalk required 1`] = `
-"cons("abc", sole): Pair(String, Trivial)
-cons("abc", sole): Pair(String, Trivial)"
-`;
-
 exports[`compute ApImplicit -- insertion -- nested 1`] = `
 "cons(cons("abc", sole), sole): Pair(Pair(String, Trivial), Trivial)
 cons(cons(cons("abc", sole), sole), sole): Pair(Pair(Pair(String, Trivial), Trivial), Trivial)"
 `;
-
-exports[`compute ApImplicit -- insertion -- during check 1`] = `"(_) => _: (String) -> String"`;

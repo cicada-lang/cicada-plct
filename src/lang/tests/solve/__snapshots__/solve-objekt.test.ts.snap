@@ -1,119 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve Objekt > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\",
-  c: \\"c\\"
-}"
-`;
-
-exports[`solve Objekt -- deepWalk > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: \\"c\\",
-      abc: {
-        a: \\"a\\",
-        b: \\"b\\",
-        c: \\"c\\"
-      }
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\",
-  c: \\"c\\",
-  abc: {
-    a: \\"a\\",
-    b: \\"b\\",
-    c: \\"c\\"
-  }
-}"
-`;
-
-exports[`solve Objekt -- deepWalk: 
-    "{
-      a: "a",
-      b: "b",
-      c: "c",
-      abc: {
-        a: "a",
-        b: "b",
-        c: "c"
-      }
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c",
-  abc: {
-    a: "a",
-    b: "b",
-    c: "c"
-  }
-}"
-`;
-
-exports[`solve Objekt -- occur twice > 
-    "{
-      a: \\"c\\",
-      b: \\"c\\"
-    }"
-   1`] = `
-"{
-  a: \\"c\\",
-  b: \\"c\\"
-}"
-`;
-
-exports[`solve Objekt -- occur twice: 
-    "{
-      a: "c",
-      b: "c"
-    }"
-   1`] = `
-"{
-  a: "c",
-  b: "c"
-}"
-`;
-
-exports[`solve Objekt: 
-    "{
-      a: "a",
-      b: "b",
-      c: "c"
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c"
-}"
-`;
-
-exports[`solve Objekt 1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: "c"
-}"
-`;
-
-exports[`solve Objekt -- occur twice 1`] = `
-"{
-  a: "c",
-  b: "c"
-}"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve Objekt -- deepWalk 1`] = `
 "{
@@ -125,5 +10,20 @@ exports[`solve Objekt -- deepWalk 1`] = `
     b: "b",
     c: "c"
   }
+}"
+`;
+
+exports[`solve Objekt -- occur twice 1`] = `
+"{
+  a: "c",
+  b: "c"
+}"
+`;
+
+exports[`solve Objekt 1`] = `
+"{
+  a: "a",
+  b: "b",
+  c: "c"
 }"
 `;

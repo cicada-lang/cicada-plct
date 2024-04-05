@@ -1,7 +1,3 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Ap > "Type: Type" 1`] = `"Type: Type"`;
-
-exports[`compute Ap: "Type: Type" 1`] = `"Type: Type"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Ap 1`] = `"Type: Type"`;

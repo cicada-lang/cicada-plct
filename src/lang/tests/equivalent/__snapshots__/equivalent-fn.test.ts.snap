@@ -1,72 +1,6 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
-exports[`equivalent Fn > 
-    "refl(
-      implicit (T11: Type, T11) -> T11,
-      implicit (T11, x11) => x11,
-    ): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
-   1`] = `
-"refl(
-  implicit (T11: Type, T11) -> T11,
-  implicit (T11, x11) => x11,
-): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
-`;
-
-exports[`equivalent Fn -- alpha equivalent > "refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)" 1`] = `"refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)"`;
-
-exports[`equivalent Fn -- alpha equivalent: "refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)" 1`] = `"refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)"`;
-
-exports[`equivalent Fn: 
-    "refl(
-      implicit (T11: Type, T11) -> T11,
-      implicit (T11, x11) => x11,
-    ): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
-   1`] = `
-"refl(
-  implicit (T11: Type, T11) -> T11,
-  implicit (T11, x11) => x11,
-): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
-`;
-
-exports[`equivalent FnAnnotated > 
-    "refl(
-      implicit (T81: Type, T81) -> T81,
-      implicit (T81, x81) => x81,
-    ): Equal(
-      (T11: Type, T11) -> T11,
-      (T11, x11) => x11,
-      (T11, x11) => x11,
-    )"
-   1`] = `
-"refl(
-  implicit (T81: Type, T81) -> T81,
-  implicit (T81, x81) => x81,
-): Equal(
-  (T11: Type, T11) -> T11,
-  (T11, x11) => x11,
-  (T11, x11) => x11,
-)"
-`;
-
-exports[`equivalent FnAnnotated: 
-    "refl(
-      implicit (T81: Type, T81) -> T81,
-      implicit (T81, x81) => x81,
-    ): Equal(
-      (T11: Type, T11) -> T11,
-      (T11, x11) => x11,
-      (T11, x11) => x11,
-    )"
-   1`] = `
-"refl(
-  implicit (T81: Type, T81) -> T81,
-  implicit (T81, x81) => x81,
-): Equal(
-  (T11: Type, T11) -> T11,
-  (T11, x11) => x11,
-  (T11, x11) => x11,
-)"
-`;
+exports[`equivalent Fn -- alpha equivalent 1`] = `"refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)"`;
 
 exports[`equivalent Fn 1`] = `
 "refl(
@@ -74,8 +8,6 @@ exports[`equivalent Fn 1`] = `
   implicit (T11, x11) => x11,
 ): Equal((T2: Type, T2) -> T2, (T2, x2) => x2, (T2, x2) => x2)"
 `;
-
-exports[`equivalent Fn -- alpha equivalent 1`] = `"refl(implicit (Type, Type) -> Type, implicit (A, B) => A): Equal((Type, Type) -> Type, (A, B) => A, (A, B) => A)"`;
 
 exports[`equivalent FnAnnotated 1`] = `
 "refl(

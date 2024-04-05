@@ -1,7 +1,3 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`compute Trivial > "Trivial: Type" 1`] = `"Trivial: Type"`;
-
-exports[`compute Trivial: "Trivial: Type" 1`] = `"Trivial: Type"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`compute Trivial 1`] = `"Trivial: Type"`;

@@ -1,87 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve Ap -- PatternVar v.s. String > 
-    "{
-      f: ?f,
-      x: \\"abc\\"
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: \\"abc\\"
-}"
-`;
-
-exports[`solve Ap -- PatternVar v.s. String: 
-    "{
-      f: ?f,
-      x: "abc"
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: "abc"
-}"
-`;
-
-exports[`solve Ap -- deepWalk > 
-    "{
-      f: ?f,
-      x: \\"abc\\",
-      c: ?f(\\"abc\\")
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: \\"abc\\",
-  c: ?f(\\"abc\\")
-}"
-`;
-
-exports[`solve Ap -- deepWalk: 
-    "{
-      f: ?f,
-      x: "abc",
-      c: ?f("abc")
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: "abc",
-  c: ?f("abc")
-}"
-`;
-
-exports[`solve Ap -- same PatternVar > 
-    "{
-      f: ?f,
-      x: ?x
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: ?x
-}"
-`;
-
-exports[`solve Ap -- same PatternVar: 
-    "{
-      f: ?f,
-      x: ?x
-    }"
-   1`] = `
-"{
-  f: ?f,
-  x: ?x
-}"
-`;
-
-exports[`solve Ap -- same PatternVar 1`] = `
-"{
-  f: ?f,
-  x: ?x
-}"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve Ap -- PatternVar v.s. String 1`] = `
 "{
@@ -95,5 +12,12 @@ exports[`solve Ap -- deepWalk 1`] = `
   f: ?f,
   x: "abc",
   c: ?f("abc")
+}"
+`;
+
+exports[`solve Ap -- same PatternVar 1`] = `
+"{
+  f: ?f,
+  x: ?x
 }"
 `;

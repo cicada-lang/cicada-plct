@@ -1,129 +1,10 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
-exports[`solve Pi > 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi -- deepWalk > 
-    "{
-      A: String,
-      B: String,
-      C: (String) -> String
-    }"
-   1`] = `
+exports[`solve Pi -- deepWalk 1`] = `
 "{
   A: String,
   B: String,
   C: (String) -> String
-}"
-`;
-
-exports[`solve Pi -- deepWalk: 
-    "{
-      A: String,
-      B: String,
-      C: (String) -> String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String,
-  C: (String) -> String
-}"
-`;
-
-exports[`solve Pi -- nested > 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi -- nested: 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi -- occur shadowed by Pi > 
-    "{
-      X: (X1: Type) -> X1
-    }"
-   1`] = `
-"{
-  X: (X1: Type) -> X1
-}"
-`;
-
-exports[`solve Pi -- occur shadowed by Pi: 
-    "{
-      X: (X1: Type) -> X1
-    }"
-   1`] = `
-"{
-  X: (X1: Type) -> X1
-}"
-`;
-
-exports[`solve Pi -- occur twice > 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi -- occur twice: 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi: 
-    "{
-      A: String,
-      B: String
-    }"
-   1`] = `
-"{
-  A: String,
-  B: String
-}"
-`;
-
-exports[`solve Pi 1`] = `
-"{
-  A: String,
-  B: String
 }"
 `;
 
@@ -134,6 +15,12 @@ exports[`solve Pi -- nested 1`] = `
 }"
 `;
 
+exports[`solve Pi -- occur shadowed by Pi 1`] = `
+"{
+  X: (X1: Type) -> X1
+}"
+`;
+
 exports[`solve Pi -- occur twice 1`] = `
 "{
   A: String,
@@ -141,16 +28,9 @@ exports[`solve Pi -- occur twice 1`] = `
 }"
 `;
 
-exports[`solve Pi -- deepWalk 1`] = `
+exports[`solve Pi 1`] = `
 "{
   A: String,
-  B: String,
-  C: (String) -> String
-}"
-`;
-
-exports[`solve Pi -- occur shadowed by Pi 1`] = `
-"{
-  X: (X1: Type) -> X1
+  B: String
 }"
 `;

@@ -1,4 +1,4 @@
-import { test } from "vitest"
+import { test } from "bun:test"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("check NewAp", async () => {

@@ -1,13 +1,5 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`equivalent Quote > "refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")" 1`] = `"refl(implicit String, implicit \\"abc\\"): Equal(String, \\"abc\\", \\"abc\\")"`;
-
-exports[`equivalent Quote -- empty string > "refl(implicit String, implicit \\"\\"): Equal(String, \\"\\", \\"\\")" 1`] = `"refl(implicit String, implicit \\"\\"): Equal(String, \\"\\", \\"\\")"`;
-
-exports[`equivalent Quote -- empty string: "refl(implicit String, implicit ""): Equal(String, "", "")" 1`] = `"refl(implicit String, implicit ""): Equal(String, "", "")"`;
-
-exports[`equivalent Quote: "refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")" 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
-
-exports[`equivalent Quote 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`equivalent Quote -- empty string 1`] = `"refl(implicit String, implicit ""): Equal(String, "", "")"`;
+
+exports[`equivalent Quote 1`] = `"refl(implicit String, implicit "abc"): Equal(String, "abc", "abc")"`;

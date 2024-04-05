@@ -1,130 +1,8 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve Cons -- car > 
-    "{
-      a: \\"a\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\"
-}"
-`;
-
-exports[`solve Cons -- car and cdr > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\"
-}"
-`;
-
-exports[`solve Cons -- car and cdr: 
-    "{
-      a: "a",
-      b: "b"
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b"
-}"
-`;
-
-exports[`solve Cons -- car: 
-    "{
-      a: "a"
-    }"
-   1`] = `
-"{
-  a: "a"
-}"
-`;
-
-exports[`solve Cons -- cdr > 
-    "{
-      b: \\"b\\"
-    }"
-   1`] = `
-"{
-  b: \\"b\\"
-}"
-`;
-
-exports[`solve Cons -- cdr: 
-    "{
-      b: "b"
-    }"
-   1`] = `
-"{
-  b: "b"
-}"
-`;
-
-exports[`solve Cons -- deepWalk > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\",
-      c: cons(\\"a\\", \\"b\\")
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\",
-  c: cons(\\"a\\", \\"b\\")
-}"
-`;
-
-exports[`solve Cons -- deepWalk: 
-    "{
-      a: "a",
-      b: "b",
-      c: cons("a", "b")
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b",
-  c: cons("a", "b")
-}"
-`;
-
-exports[`solve Cons -- nested > 
-    "{
-      a: \\"a\\",
-      b: \\"b\\"
-    }"
-   1`] = `
-"{
-  a: \\"a\\",
-  b: \\"b\\"
-}"
-`;
-
-exports[`solve Cons -- nested: 
-    "{
-      a: "a",
-      b: "b"
-    }"
-   1`] = `
-"{
-  a: "a",
-  b: "b"
-}"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve Cons -- car 1`] = `
 "{
   a: "a"
-}"
-`;
-
-exports[`solve Cons -- cdr 1`] = `
-"{
-  b: "b"
 }"
 `;
 
@@ -135,9 +13,8 @@ exports[`solve Cons -- car and cdr 1`] = `
 }"
 `;
 
-exports[`solve Cons -- nested 1`] = `
+exports[`solve Cons -- cdr 1`] = `
 "{
-  a: "a",
   b: "b"
 }"
 `;
@@ -147,5 +24,12 @@ exports[`solve Cons -- deepWalk 1`] = `
   a: "a",
   b: "b",
   c: cons("a", "b")
+}"
+`;
+
+exports[`solve Cons -- nested 1`] = `
+"{
+  a: "a",
+  b: "b"
 }"
 `;

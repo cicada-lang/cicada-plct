@@ -1,4 +1,4 @@
-import { expect, test } from "vitest"
+import { expect, test } from "bun:test"
 
 test("equal -- set in array", () => {
   const x = [1, 2, new Set([1, 2, [1, 2, 3]])]

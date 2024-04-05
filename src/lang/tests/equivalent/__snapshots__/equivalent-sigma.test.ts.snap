@@ -1,13 +1,5 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`equivalent Sigma > "refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)" 1`] = `"refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)"`;
-
-exports[`equivalent Sigma -- nested > "refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)" 1`] = `"refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)"`;
-
-exports[`equivalent Sigma -- nested: "refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)" 1`] = `"refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)"`;
-
-exports[`equivalent Sigma: "refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)" 1`] = `"refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)"`;
-
-exports[`equivalent Sigma 1`] = `"refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`equivalent Sigma -- nested 1`] = `"refl(implicit Type, implicit exists (Type, Type, A) B): Equal(Type, exists (Type, Type, A) B, exists (Type, Type, B) A)"`;
+
+exports[`equivalent Sigma 1`] = `"refl(implicit Type, implicit exists (Type) A): Equal(Type, exists (Type) A, exists (Type) B)"`;

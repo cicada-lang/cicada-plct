@@ -1,89 +1,8 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
-exports[`solve Car > 
-    "{
-      ab: cons(\\"a\\", \\"b\\"),
-      a: \\"a\\"
-    }"
-   1`] = `
-"{
-  ab: cons(\\"a\\", \\"b\\"),
-  a: \\"a\\"
-}"
-`;
-
-exports[`solve Car -- car cons > 
-    "{
-      a: ?a
-    }"
-   1`] = `
+exports[`solve Car -- car cons 1`] = `
 "{
   a: ?a
-}"
-`;
-
-exports[`solve Car -- car cons: 
-    "{
-      a: ?a
-    }"
-   1`] = `
-"{
-  a: ?a
-}"
-`;
-
-exports[`solve Car -- nested > 
-    "{
-      ab: cons(\\"a\\", \\"b\\"),
-      ba: cons(\\"b\\", \\"a\\"),
-      a: \\"a\\",
-      b: \\"b\\",
-      b2: ?b
-    }"
-   1`] = `
-"{
-  ab: cons(\\"a\\", \\"b\\"),
-  ba: cons(\\"b\\", \\"a\\"),
-  a: \\"a\\",
-  b: \\"b\\",
-  b2: ?b
-}"
-`;
-
-exports[`solve Car -- nested: 
-    "{
-      ab: cons("a", "b"),
-      ba: cons("b", "a"),
-      a: "a",
-      b: "b",
-      b2: ?b
-    }"
-   1`] = `
-"{
-  ab: cons("a", "b"),
-  ba: cons("b", "a"),
-  a: "a",
-  b: "b",
-  b2: ?b
-}"
-`;
-
-exports[`solve Car: 
-    "{
-      ab: cons("a", "b"),
-      a: "a"
-    }"
-   1`] = `
-"{
-  ab: cons("a", "b"),
-  a: "a"
-}"
-`;
-
-exports[`solve Car 1`] = `
-"{
-  ab: cons("a", "b"),
-  a: "a"
 }"
 `;
 
@@ -97,8 +16,9 @@ exports[`solve Car -- nested 1`] = `
 }"
 `;
 
-exports[`solve Car -- car cons 1`] = `
+exports[`solve Car 1`] = `
 "{
-  a: ?a
+  ab: cons("a", "b"),
+  a: "a"
 }"
 `;

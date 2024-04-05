@@ -1,32 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve FnImplicit -- alpha equivalence > "{}" 1`] = `"{}"`;
-
-exports[`solve FnImplicit -- alpha equivalence: "{}" 1`] = `"{}"`;
-
-exports[`solve FnImplicit -- deepWalk > 
-    "{
-      T: String,
-      f: (implicit _) => String
-    }"
-   1`] = `
-"{
-  T: String,
-  f: (implicit _) => String
-}"
-`;
-
-exports[`solve FnImplicit -- deepWalk: 
-    "{
-      T: String,
-      f: (implicit _) => String
-    }"
-   1`] = `
-"{
-  T: String,
-  f: (implicit _) => String
-}"
-`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve FnImplicit -- alpha equivalence 1`] = `"{}"`;
 

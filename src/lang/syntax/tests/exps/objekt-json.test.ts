@@ -1,4 +1,4 @@
-import { expect, test } from "vitest"
+import { expect, test } from "bun:test"
 import * as Exps from "../../../exp"
 import { parseExp } from "../../index"
 import { deleteUndefined } from "../utils"

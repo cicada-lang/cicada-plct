@@ -1,38 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`solve Sole > "{}" 1`] = `"{}"`;
-
-exports[`solve Sole -- abc > 
-    "{
-      a: sole,
-      b: sole,
-      c: sole
-    }"
-   1`] = `
-"{
-  a: sole,
-  b: sole,
-  c: sole
-}"
-`;
-
-exports[`solve Sole -- abc: 
-    "{
-      a: sole,
-      b: sole,
-      c: sole
-    }"
-   1`] = `
-"{
-  a: sole,
-  b: sole,
-  c: sole
-}"
-`;
-
-exports[`solve Sole: "{}" 1`] = `"{}"`;
-
-exports[`solve Sole 1`] = `"{}"`;
+// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
 
 exports[`solve Sole -- abc 1`] = `
 "{
@@ -41,3 +7,5 @@ exports[`solve Sole -- abc 1`] = `
   c: sole
 }"
 `;
+
+exports[`solve Sole 1`] = `"{}"`;

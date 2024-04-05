@@ -1,4 +1,4 @@
-import { expect, test } from "vitest"
+import { expect, test } from "bun:test"
 import { runCode } from "../utils"
 
 test("equivalent Objekt -- out of order", async () => {

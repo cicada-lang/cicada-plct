@@ -1,4 +1,4 @@
-import { test } from "vitest"
+import { test } from "bun:test"
 import { runCode } from "../utils"
 
 test("check Sigma is a Type", async () => {
