@@ -7,8 +7,8 @@ import { substitute } from "./substitute.cic"
 // but it will always remove `Let`.
 
 export function reduce(mod: Mod, exp: Exp): Exp {
-  match (exp) {
-    case Exp::Var(name) => match (modFind(mod, name)) {
+  match exp {
+    case Exp::Var(name) => match modFind(mod, name) {
       case Maybe::Just(defintion) => exp
       case Maybe::Nothing() => reduce(mod, defintion.exp)
     }

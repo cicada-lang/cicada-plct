@@ -6,11 +6,11 @@ export function substitute(
   bindings: List(Binding),
   body: Exp,
 ): Exp {
-  match (body) {
-    case Exp::Var(name) => match (lookup(name, bindings)) {
-       case Maybe::Just(exp) => exp
-       case Maybe::Nothing() => body
-     }
+  match body {
+    case Exp::Var(name) => match lookup(name, bindings) {
+      case Maybe::Just(exp) => exp
+      case Maybe::Nothing() => body
+    }
 
     case Exp::Fn(name, ret) => {
       let freshName = freshen(name)
