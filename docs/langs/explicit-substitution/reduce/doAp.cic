@@ -3,7 +3,7 @@ import { Mod } from "../mod/Mod.cic"
 import { reduce } from "./reduce.cic"
 
 export function doAp(mod: Mod, target: Exp, arg: Exp): Exp {
-  match target {
+  match (target) {
     case Exp::Fn(name, ret) =>
       reduce(mod, Exp::Let([new Binding(name, arg)], ret))
 

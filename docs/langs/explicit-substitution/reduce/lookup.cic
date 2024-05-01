@@ -9,5 +9,5 @@ export function lookup(
     (binding) => stringEqual(binding.name, name)
   )
 
-  return maybeMap(found, (binding) => binding.exp)
+  maybeMap(found, (binding) => binding.exp)
 }
