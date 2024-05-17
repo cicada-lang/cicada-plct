@@ -1,7 +1,7 @@
 datatype Exp {
   Var(name: String): Exp
-  Fn(name: String, ret: Arg): Exp
-  Ap(target: Exp, arg: Arg): Exp
+  Fn(name: String, ret: Exp): Exp
+  Ap(target: Exp, arg: Exp): Exp
   Let(bindings: List(Binding), body: Exp): Exp
 }
 
