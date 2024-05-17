@@ -6,6 +6,6 @@ datatype Exp {
 }
 
 class Binding {
-  name: string
+  name: String
   exp: Exp
 }

@@ -1,7 +1,7 @@
 import { Binding, Exp } from "../exp/index.cic"
 
 export function lookup(
-  name: string,
+  name: String,
   bindings: List(Binding),
 ): Maybe(Exp) {
   let found = listFind(
