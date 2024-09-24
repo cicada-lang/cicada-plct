@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import * as Exps from "../../../exp"
-import { parseExp } from "../../index"
-import { deleteUndefined } from "../utils"
+import * as Exps from "../../../exp/index.js"
+import { parseExp } from "../../index.js"
+import { deleteUndefined } from "../utils.js"
 
 test("parse Fn", () => {
   expect(parseExp("(x) => x")).toMatchObject(

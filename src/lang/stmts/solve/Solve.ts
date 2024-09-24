@@ -1,14 +1,13 @@
-import { checkType } from "../../check"
-import { CtxFulfilled, ctxToEnv } from "../../ctx"
-import * as Errors from "../../errors"
-import { evaluate } from "../../evaluate"
-import type { Mod } from "../../mod"
-import { formatSolution } from "../../solution"
-import type { Span } from "../../span"
-import { Stmt } from "../../stmt"
-import * as Values from "../../value"
-
-import { Equation, SolveBinding, unifyEquation } from "../solve"
+import { checkType } from "../../check/index.js"
+import { CtxFulfilled, ctxToEnv } from "../../ctx/index.js"
+import * as Errors from "../../errors/index.js"
+import { evaluate } from "../../evaluate/index.js"
+import type { Mod } from "../../mod/index.js"
+import { formatSolution } from "../../solution/index.js"
+import type { Span } from "../../span/index.js"
+import { Stmt } from "../../stmt/index.js"
+import * as Values from "../../value/index.js"
+import { type Equation, SolveBinding, unifyEquation } from "../solve/index.js"
 
 export class Solve extends Stmt {
   constructor(

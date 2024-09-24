@@ -1,4 +1,4 @@
-import type { Env } from "../env"
+import type { Env } from "../env/index.js"
 
 export function envNames(env: Env, names: Array<string> = []): Array<string> {
   while (env["@kind"] !== "EnvNull") {

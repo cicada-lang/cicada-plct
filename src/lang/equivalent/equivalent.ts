@@ -1,11 +1,11 @@
-import { indent } from "../../utils/indent"
-import type { Ctx } from "../ctx"
-import { equivalentByType, equivalentByValue } from "../equivalent"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import { solutionAdvanceValue } from "../solution"
-import type { Value } from "../value"
-import { formatType, formatValue } from "../value"
+import { indent } from "../../utils/indent.js"
+import type { Ctx } from "../ctx/index.js"
+import { equivalentByType, equivalentByValue } from "../equivalent/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import { solutionAdvanceValue } from "../solution/index.js"
+import type { Value } from "../value/index.js"
+import { formatType, formatValue } from "../value/index.js"
 
 /**
 

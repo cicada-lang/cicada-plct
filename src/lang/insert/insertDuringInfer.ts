@@ -1,8 +1,8 @@
-import type { Ctx } from "../ctx"
-import type * as Exps from "../exp"
-import { Inferred } from "../infer"
-import { insertionApply, solveByArgs } from "../insert"
-import type { Mod } from "../mod"
+import type { Ctx } from "../ctx/index.js"
+import type * as Exps from "../exp/index.js"
+import { Inferred } from "../infer/index.js"
+import { insertionApply, solveByArgs } from "../insert/index.js"
+import type { Mod } from "../mod/index.js"
 
 export function insertDuringInfer(
   mod: Mod,

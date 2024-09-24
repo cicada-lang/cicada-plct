@@ -1,6 +1,6 @@
 import { expect, test } from "vitest"
-import * as Errors from "../../errors"
-import { expectCodeToFail, runCode } from "../utils"
+import * as Errors from "../../errors/index.js"
+import { expectCodeToFail, runCode } from "../utils.js"
 
 test("solve PiImplicit -- occur twice", async () => {
   const output = await runCode(`

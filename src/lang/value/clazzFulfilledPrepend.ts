@@ -1,5 +1,5 @@
-import * as Errors from "../errors"
-import * as Values from "../value"
+import * as Errors from "../errors/index.js"
+import * as Values from "../value/index.js"
 
 export function clazzFulfilledPrepend(
   left: Values.Clazz,

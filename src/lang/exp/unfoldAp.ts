@@ -1,5 +1,5 @@
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
 
 /**
 

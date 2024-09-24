@@ -1,5 +1,5 @@
-import * as Exps from "../exp"
-import { spanUnion } from "../span"
+import * as Exps from "../exp/index.js"
+import { spanUnion } from "../span/index.js"
 
 export function foldClazz(
   bindings: Array<Exps.ClazzBinding>,

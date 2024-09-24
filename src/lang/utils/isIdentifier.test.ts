@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { isIdentifier } from "./isIdentifier"
+import { isIdentifier } from "./isIdentifier.js"
 
 test("isIdentifier", () => {
   expect(isIdentifier("_")).toBe(true)

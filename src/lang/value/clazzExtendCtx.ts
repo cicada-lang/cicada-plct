@@ -1,10 +1,10 @@
-import type { Ctx } from "../ctx"
-import { CtxCons, CtxFulfilled, ctxNames } from "../ctx"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { solutionNames } from "../solution"
-import { freshen } from "../utils/freshen"
-import * as Values from "../value"
+import type { Ctx } from "../ctx/index.js"
+import { CtxCons, CtxFulfilled, ctxNames } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { solutionNames } from "../solution/index.js"
+import { freshen } from "../utils/freshen.js"
+import * as Values from "../value/index.js"
 
 export function clazzExtendCtx(mod: Mod, ctx: Ctx, clazz: Values.Clazz): Ctx {
   switch (clazz["@kind"]) {

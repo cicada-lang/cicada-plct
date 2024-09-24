@@ -1,11 +1,11 @@
-import * as Actions from "../actions"
-import { ClosureSimple } from "../closure"
-import type { Core } from "../core"
-import type { Env } from "../env"
-import { EnvCons, envLookupValue } from "../env"
-import * as Errors from "../errors"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Actions from "../actions/index.js"
+import { ClosureSimple } from "../closure/index.js"
+import type { Core } from "../core/index.js"
+import type { Env } from "../env/index.js"
+import { EnvCons, envLookupValue } from "../env/index.js"
+import * as Errors from "../errors/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function evaluate(env: Env, core: Core): Value {
   switch (core["@kind"]) {

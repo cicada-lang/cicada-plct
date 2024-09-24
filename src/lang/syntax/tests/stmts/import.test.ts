@@ -1,7 +1,7 @@
 import { expect, test } from "vitest"
-import * as Stmts from "../../../stmts"
-import { parseStmts } from "../../index"
-import { deleteUndefined } from "../utils"
+import * as Stmts from "../../../stmts/index.js"
+import { parseStmts } from "../../index.js"
+import { deleteUndefined } from "../utils.js"
 
 test("parse Import", () => {
   expect(parseStmts('import { a, b, c } from "./abc.cic"')).toMatchObject(

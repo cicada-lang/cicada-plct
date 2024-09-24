@@ -1,9 +1,9 @@
-import { indent } from "../../utils/indent"
-import type { Ctx } from "../ctx"
-import { ctxLookupType } from "../ctx"
-import type { Mod } from "../mod"
-import type { Solution } from "../solution"
-import * as Values from "../value"
+import { indent } from "../../utils/indent.js"
+import type { Ctx } from "../ctx/index.js"
+import { ctxLookupType } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Solution } from "../solution/index.js"
+import * as Values from "../value/index.js"
 
 export function formatSolution(
   mod: Mod,

@@ -1,1 +1,1 @@
-export * from "./useGlobals"
+export * from "./useGlobals.js"

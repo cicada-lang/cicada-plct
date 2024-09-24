@@ -1,10 +1,10 @@
-import type { Core } from "../core"
-import type { Ctx } from "../ctx"
-import type * as Exps from "../exp"
-import type { Inferred } from "../infer"
-import { insertionApply, solveByArgs, solveByRetType } from "../insert"
-import type { Mod } from "../mod"
-import type { Value } from "../value"
+import type { Core } from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import type * as Exps from "../exp/index.js"
+import type { Inferred } from "../infer/index.js"
+import { insertionApply, solveByArgs, solveByRetType } from "../insert/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Value } from "../value/index.js"
 
 export function insertDuringCheck(
   mod: Mod,

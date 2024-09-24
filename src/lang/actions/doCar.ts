@@ -1,7 +1,7 @@
-import * as Errors from "../errors"
-import * as Neutrals from "../neutral"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Errors from "../errors/index.js"
+import * as Neutrals from "../neutral/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function doCar(target: Value): Value {
   return tryCar(target) || neutralizeCar(target)

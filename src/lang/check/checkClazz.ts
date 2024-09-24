@@ -1,10 +1,10 @@
-import { check, checkType } from "../check"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import { CtxCons, CtxFulfilled, ctxToEnv } from "../ctx"
-import { evaluate } from "../evaluate"
-import type * as Exps from "../exp"
-import type { Mod } from "../mod"
+import { check, checkType } from "../check/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { CtxCons, CtxFulfilled, ctxToEnv } from "../ctx/index.js"
+import { evaluate } from "../evaluate/index.js"
+import type * as Exps from "../exp/index.js"
+import type { Mod } from "../mod/index.js"
 
 export function checkClazz(mod: Mod, ctx: Ctx, exp: Exps.Clazz): Cores.Clazz {
   switch (exp["@kind"]) {

@@ -1,4 +1,4 @@
-import type { Env } from "../env"
+import type { Env } from "../env/index.js"
 
 export function envDeleteFirst(env: Env, name: string): Env {
   switch (env["@kind"]) {

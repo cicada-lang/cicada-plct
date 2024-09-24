@@ -1,11 +1,11 @@
-import type { Core } from "../core"
-import type { Ctx } from "../ctx"
-import { ctxToEnv } from "../ctx"
-import { evaluate } from "../evaluate"
-import type { Exp } from "../exp"
-import { infer, Inferred } from "../infer"
-import type { Mod } from "../mod"
-import * as Values from "../value"
+import type { Core } from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { ctxToEnv } from "../ctx/index.js"
+import { evaluate } from "../evaluate/index.js"
+import type { Exp } from "../exp/index.js"
+import { infer, Inferred } from "../infer/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Values from "../value/index.js"
 
 export function inferExtraProperties(
   mod: Mod,

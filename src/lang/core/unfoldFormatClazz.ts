@@ -1,6 +1,6 @@
-import type * as Cores from "../core"
-import { formatCore } from "../core"
-import { isIdentifier } from "../utils/isIdentifier"
+import type * as Cores from "../core/index.js"
+import { formatCore } from "../core/index.js"
+import { isIdentifier } from "../utils/isIdentifier.js"
 
 export function unfoldFormatClazz(clazz: Cores.Clazz): {
   bindings: Array<string>

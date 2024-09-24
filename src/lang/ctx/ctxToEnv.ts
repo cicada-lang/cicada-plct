@@ -1,8 +1,8 @@
-import type { Ctx } from "../ctx"
-import type { Env } from "../env"
-import { EnvCons, EnvNull } from "../env"
-import * as Neutrals from "../neutral"
-import { TypedNeutral } from "../value"
+import type { Ctx } from "../ctx/index.js"
+import type { Env } from "../env/index.js"
+import { EnvCons, EnvNull } from "../env/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { TypedNeutral } from "../value/index.js"
 
 export function ctxToEnv(ctx: Ctx): Env {
   switch (ctx["@kind"]) {

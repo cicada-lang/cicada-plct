@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { runCode } from "../utils"
+import { runCode } from "../utils.js"
 
 test("equivalent Clazz -- out of order", async () => {
   const output = await runCode(`

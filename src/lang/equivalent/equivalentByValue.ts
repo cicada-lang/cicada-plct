@@ -1,10 +1,10 @@
-import { indent } from "../../utils/indent"
-import type { Ctx } from "../ctx"
-import { equivalent, equivalentNeutral, equivalentType } from "../equivalent"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import type { Value } from "../value"
-import { formatType, formatValue } from "../value"
+import { indent } from "../../utils/indent.js"
+import type { Ctx } from "../ctx/index.js"
+import { equivalent, equivalentNeutral, equivalentType } from "../equivalent/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Value } from "../value/index.js"
+import { formatType, formatValue } from "../value/index.js"
 
 export function equivalentByValue(
   mod: Mod,

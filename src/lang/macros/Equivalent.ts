@@ -1,8 +1,8 @@
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
-import { Macro } from "../macro"
-import type { Span } from "../span"
-import { spanUnion } from "../span"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
+import { Macro } from "../macro/index.js"
+import type { Span } from "../span/index.js"
+import { spanUnion } from "../span/index.js"
 
 export type EquivalentEntry = {
   via?: Exp

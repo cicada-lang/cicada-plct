@@ -1,12 +1,12 @@
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import { CtxCons, ctxNames } from "../ctx"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { readback, readbackType } from "../readback"
-import { solutionNames } from "../solution"
-import { freshen } from "../utils/freshen"
-import * as Values from "../value"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { CtxCons, ctxNames } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { readback, readbackType } from "../readback/index.js"
+import { solutionNames } from "../solution/index.js"
+import { freshen } from "../utils/freshen.js"
+import * as Values from "../value/index.js"
 
 export function readbackClazz(
   mod: Mod,

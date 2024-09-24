@@ -1,7 +1,7 @@
-import type { Ctx } from "../ctx"
-import type { Exp } from "../exp"
-import { infer, Inferred } from "../infer"
-import type { Mod } from "../mod"
+import type { Ctx } from "../ctx/index.js"
+import type { Exp } from "../exp/index.js"
+import { infer, Inferred } from "../infer/index.js"
+import type { Mod } from "../mod/index.js"
 
 export function inferOrUndefined(
   mod: Mod,

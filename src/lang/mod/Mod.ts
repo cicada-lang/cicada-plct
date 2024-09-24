@@ -1,11 +1,16 @@
-import type { Loader } from "../../loader"
-import type { Ctx } from "../ctx"
-import { ctxDeleteFirst, CtxFulfilled, CtxNull, ctxToEnv } from "../ctx"
-import type { Env } from "../env"
-import { useGlobals } from "../globals"
-import { Solution, solutionCleanup } from "../solution"
-import type { Stmt } from "../stmt"
-import type { Value } from "../value"
+import type { Loader } from "../../loader/index.js"
+import type { Ctx } from "../ctx/index.js"
+import {
+  ctxDeleteFirst,
+  CtxFulfilled,
+  CtxNull,
+  ctxToEnv,
+} from "../ctx/index.js"
+import type { Env } from "../env/index.js"
+import { useGlobals } from "../globals/index.js"
+import { Solution, solutionCleanup } from "../solution/index.js"
+import type { Stmt } from "../stmt/index.js"
+import type { Value } from "../value/index.js"
 
 export interface ModOptions {
   loader: Loader

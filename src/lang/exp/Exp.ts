@@ -1,5 +1,5 @@
-import type { Macro } from "../macro"
-import type { Span } from "../span"
+import type { Macro } from "../macro/index.js"
+import type { Span } from "../span/index.js"
 
 type ExpMeta = { span?: Span }
 

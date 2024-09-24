@@ -1,2 +1,2 @@
-export * from "./Closure"
-export * from "./closureApply"
+export * from "./Closure.js"
+export * from "./closureApply.js"

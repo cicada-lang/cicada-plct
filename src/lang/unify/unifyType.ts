@@ -1,16 +1,21 @@
-import { indent } from "../../utils/indent"
-import type { Closure } from "../closure"
-import { closureApply } from "../closure"
-import type { Ctx } from "../ctx"
-import { CtxCons, ctxNames } from "../ctx"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { solutionAdvanceValue, solutionNames } from "../solution"
-import { unify, unifyClazz, unifyNeutral, unifyPatternVar } from "../unify"
-import { freshen } from "../utils/freshen"
-import * as Values from "../value"
-import { Value, formatType, isClazz } from "../value"
+import { indent } from "../../utils/indent.js"
+import type { Closure } from "../closure/index.js"
+import { closureApply } from "../closure/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { CtxCons, ctxNames } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { solutionAdvanceValue, solutionNames } from "../solution/index.js"
+import {
+  unify,
+  unifyClazz,
+  unifyNeutral,
+  unifyPatternVar,
+} from "../unify/index.js"
+import { freshen } from "../utils/freshen.js"
+import * as Values from "../value/index.js"
+import { type Value, formatType, isClazz } from "../value/index.js"
 
 export function unifyType(mod: Mod, ctx: Ctx, left: Value, right: Value): void {
   left = solutionAdvanceValue(mod, left)

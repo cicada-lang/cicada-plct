@@ -1,13 +1,13 @@
-import * as Cores from "../../core"
-import { evaluate } from "../../evaluate"
-import type { Exp } from "../../exp"
-import * as Exps from "../../exp"
-import { infer } from "../../infer"
-import type { Mod } from "../../mod"
-import { readbackClazz } from "../../readback"
-import type { Span } from "../../span"
-import { Stmt } from "../../stmt"
-import * as Values from "../../value"
+import * as Cores from "../../core/index.js"
+import { evaluate } from "../../evaluate/index.js"
+import type { Exp } from "../../exp/index.js"
+import * as Exps from "../../exp/index.js"
+import { infer } from "../../infer/index.js"
+import type { Mod } from "../../mod/index.js"
+import { readbackClazz } from "../../readback/index.js"
+import type { Span } from "../../span/index.js"
+import { Stmt } from "../../stmt/index.js"
+import * as Values from "../../value/index.js"
 
 export class ClazzExtends extends Stmt {
   constructor(

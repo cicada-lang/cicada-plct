@@ -1,8 +1,7 @@
 import process from "node:process"
 import fs from "fs"
-import watcher from "node-watch"
-import * as Errors from "../lang/errors"
-import { Loader } from "../loader"
+import * as Errors from "../lang/errors/index.js"
+import { Loader } from "../loader/index.js"
 
 export class Runner {
   loader = new Loader()
@@ -40,36 +39,6 @@ export class Runner {
       }
 
       return { error }
-    }
-  }
-
-  async watch(main: URL): Promise<void> {
-    const tracked = [main, ...this.loader.loaded]
-    app.logger.info({ msg: `Watching for changes.`, tracked })
-
-    for (const url of tracked) {
-      if (main.protocol !== "file:") continue
-
-      watcher(url.pathname, async (event, _filename) => {
-        if (event === "remove") {
-          this.loader.delete(url)
-          if (url.href === main.href) {
-            app.logger.info({ tag: event, msg: url.pathname })
-            app.logger.info({ msg: "The main file is removed." })
-          } else {
-            const { error } = await this.run(main)
-            if (error) app.logger.error({ tag: event, msg: url.pathname })
-            else app.logger.info({ tag: event, msg: url.pathname })
-          }
-        }
-
-        if (event === "update") {
-          this.loader.delete(url)
-          const { error } = await this.run(main)
-          if (error) app.logger.error({ tag: event, msg: url.pathname })
-          else app.logger.info({ tag: event, msg: url.pathname })
-        }
-      })
     }
   }
 }

@@ -1,4 +1,4 @@
-import { LangError } from "./LangError"
+import { LangError } from "./LangError.js"
 
 export class InclusionError extends LangError {
   trace: Array<string> = []

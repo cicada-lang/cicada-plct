@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
-import * as matchers from "."
-import type * as Macros from "../../macros"
+import * as matchers from "./index.js"
+import type * as Macros from "../../macros/index.js"
 
 export function equivalent_entry_matcher(
   tree: pt.Tree,

@@ -1,10 +1,10 @@
-import { checkType } from "../../check"
-import { evaluate } from "../../evaluate"
-import type { Exp } from "../../exp"
-import { include } from "../../include"
-import type { Mod } from "../../mod"
-import type { Span } from "../../span"
-import { Stmt } from "../../stmt"
+import { checkType } from "../../check/index.js"
+import { evaluate } from "../../evaluate/index.js"
+import type { Exp } from "../../exp/index.js"
+import { include } from "../../include/index.js"
+import type { Mod } from "../../mod/index.js"
+import type { Span } from "../../span/index.js"
+import { Stmt } from "../../stmt/index.js"
 
 export class Include extends Stmt {
   constructor(

@@ -1,8 +1,8 @@
 import { expect } from "vitest"
-import { Loader } from "../../loader"
-import * as Errors from "../errors"
-import { Mod } from "../mod"
-import { parseStmts } from "../syntax"
+import { Loader } from "../../loader/index.js"
+import * as Errors from "../errors/index.js"
+import { Mod } from "../mod/index.js"
+import { parseStmts } from "../syntax/index.js"
 
 export async function runCode(code: string): Promise<string> {
   const loader = new Loader()

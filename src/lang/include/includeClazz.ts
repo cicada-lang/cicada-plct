@@ -1,13 +1,13 @@
 import _ from "lodash"
-import type { Ctx } from "../ctx"
-import { ctxNames } from "../ctx"
-import { equivalent } from "../equivalent"
-import * as Errors from "../errors"
-import { include } from "../include"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { freshen } from "../utils/freshen"
-import * as Values from "../value"
+import type { Ctx } from "../ctx/index.js"
+import { ctxNames } from "../ctx/index.js"
+import { equivalent } from "../equivalent/index.js"
+import * as Errors from "../errors/index.js"
+import { include } from "../include/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { freshen } from "../utils/freshen.js"
+import * as Values from "../value/index.js"
 
 export function includeClazz(
   mod: Mod,

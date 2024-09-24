@@ -1,6 +1,6 @@
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
-import { spanUnion } from "../span"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
+import { spanUnion } from "../span/index.js"
 
 export function foldAp(target: Exp, args: Array<Exps.Arg>): Exp {
   if (args.length === 0) return target

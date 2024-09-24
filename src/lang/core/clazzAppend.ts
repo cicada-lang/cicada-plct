@@ -1,4 +1,4 @@
-import * as Cores from "../core"
+import * as Cores from "../core/index.js"
 
 export function clazzAppend(
   left: Cores.Clazz,

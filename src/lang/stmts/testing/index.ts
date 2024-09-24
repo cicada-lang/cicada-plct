@@ -1,3 +1,3 @@
-export * from "./Check"
-export * from "./Compute"
-export * from "./Include"
+export * from "./Check.js"
+export * from "./Compute.js"
+export * from "./Include.js"

@@ -1,4 +1,4 @@
-import * as Exps from "../../exp"
+import * as Exps from "../../exp/index.js"
 
 export function piBindingtoFnBindingFrom(
   binding: Exps.PiBinding,

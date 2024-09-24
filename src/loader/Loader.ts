@@ -1,7 +1,7 @@
-import { Fetcher } from "@cicada-lang/framework/lib/fetcher"
-import { Mod } from "../lang/mod"
-import type { Script } from "../script"
-import * as Scripts from "../scripts"
+import { Fetcher } from "@cicada-lang/framework/lib/fetcher/index.js"
+import { Mod } from "../lang/mod/index.js"
+import type { Script } from "../script/index.js"
+import * as Scripts from "../scripts/index.js"
 
 export class Loader {
   private cache: Map<string, Script> = new Map()

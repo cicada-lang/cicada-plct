@@ -1,1 +1,1 @@
-export * from "./Mod"
+export * from "./Mod.js"

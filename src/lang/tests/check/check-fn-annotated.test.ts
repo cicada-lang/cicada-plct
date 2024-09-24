@@ -1,5 +1,5 @@
 import { test } from "vitest"
-import { runCode } from "../utils"
+import { runCode } from "../utils.js"
 
 test("check FnAnnotated", async () => {
   await runCode(`

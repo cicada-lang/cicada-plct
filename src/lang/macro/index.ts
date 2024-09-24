@@ -1,1 +1,1 @@
-export * from "./Macro"
+export * from "./Macro.js"

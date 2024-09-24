@@ -1,7 +1,7 @@
-import { indent } from "../../utils/indent"
-import type { Core } from "../core"
-import * as Cores from "../core"
-import { isIdentifier } from "../utils/isIdentifier"
+import { indent } from "../../utils/indent.js"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import { isIdentifier } from "../utils/isIdentifier.js"
 
 export function formatCore(core: Core): string {
   switch (core["@kind"]) {

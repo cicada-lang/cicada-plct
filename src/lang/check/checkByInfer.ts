@@ -1,11 +1,11 @@
-import type { Core } from "../core"
-import type { Ctx } from "../ctx"
-import * as Errors from "../errors"
-import type { Exp } from "../exp"
-import { include } from "../include"
-import { infer } from "../infer"
-import type { Mod } from "../mod"
-import type { Value } from "../value"
+import type { Core } from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Exp } from "../exp/index.js"
+import { include } from "../include/index.js"
+import { infer } from "../infer/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Value } from "../value/index.js"
 
 export function checkByInfer(mod: Mod, ctx: Ctx, exp: Exp, type: Value): Core {
   const inferred = infer(mod, ctx, exp)

@@ -1,9 +1,9 @@
-import { closureApply } from "../closure"
-import * as Errors from "../errors"
-import * as Neutrals from "../neutral"
-import type { Value } from "../value"
-import * as Values from "../value"
-import { TypedValue } from "../value"
+import { closureApply } from "../closure/index.js"
+import * as Errors from "../errors/index.js"
+import * as Neutrals from "../neutral/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
+import { TypedValue } from "../value/index.js"
 
 export function doAp(target: Value, arg: Value): Value {
   return tryAp(target, arg) || neutralizeAp(target, arg)

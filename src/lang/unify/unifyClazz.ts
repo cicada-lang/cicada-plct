@@ -1,13 +1,13 @@
 import _ from "lodash"
-import type { Ctx } from "../ctx"
-import { ctxNames } from "../ctx"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
-import { solutionNames } from "../solution"
-import { unify, unifyType } from "../unify"
-import { freshen } from "../utils/freshen"
-import * as Values from "../value"
+import type { Ctx } from "../ctx/index.js"
+import { ctxNames } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
+import { solutionNames } from "../solution/index.js"
+import { unify, unifyType } from "../unify/index.js"
+import { freshen } from "../utils/freshen.js"
+import * as Values from "../value/index.js"
 
 export function unifyClazz(
   mod: Mod,

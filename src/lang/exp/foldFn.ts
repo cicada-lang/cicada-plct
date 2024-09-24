@@ -1,6 +1,6 @@
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
-import { spanUnion } from "../span"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
+import { spanUnion } from "../span/index.js"
 
 export function foldFn(bindings: Array<Exps.FnBinding>, ret: Exp): Exp {
   if (bindings.length === 0) return ret

@@ -1,1 +1,1 @@
-export * from "./Equivalent"
+export * from "./Equivalent.js"

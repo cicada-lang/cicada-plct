@@ -1,7 +1,7 @@
-import * as Actions from "../actions"
-import { ClosureNative } from "../closure"
-import * as Values from "../value"
-import { GlobalStore } from "./GlobalStore"
+import * as Actions from "../actions/index.js"
+import { ClosureNative } from "../closure/index.js"
+import * as Values from "../value/index.js"
+import { GlobalStore } from "./GlobalStore.js"
 
 let globals: GlobalStore | undefined = undefined
 

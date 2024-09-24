@@ -1,9 +1,9 @@
-import * as Actions from "../actions"
-import type { Ctx } from "../ctx"
-import { equivalent } from "../equivalent"
-import type { Mod } from "../mod"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Actions from "../actions/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { equivalent } from "../equivalent/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function equivalentProperties(
   mod: Mod,

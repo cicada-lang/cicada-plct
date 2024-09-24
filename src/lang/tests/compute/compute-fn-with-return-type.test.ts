@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { expectCodeToFail, runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils.js"
 
 test("compute Fn with return type", async () => {
   const output = await runCode(`

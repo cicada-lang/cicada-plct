@@ -1,3 +1,3 @@
-export * from "./DefaultScript"
-export * from "./MarkdownScript"
-export * from "./createScript"
+export * from "./DefaultScript.js"
+export * from "./MarkdownScript.js"
+export * from "./createScript.js"

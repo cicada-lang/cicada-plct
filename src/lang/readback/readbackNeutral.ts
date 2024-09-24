@@ -1,9 +1,9 @@
-import type { Core } from "../core"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import type { Mod } from "../mod"
-import type { Neutral } from "../neutral"
-import { readback } from "../readback"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Neutral } from "../neutral/index.js"
+import { readback } from "../readback/index.js"
 
 export function readbackNeutral(mod: Mod, ctx: Ctx, neutral: Neutral): Core {
   switch (neutral["@kind"]) {

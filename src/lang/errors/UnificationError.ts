@@ -1,4 +1,4 @@
-import { LangError } from "./LangError"
+import { LangError } from "./LangError.js"
 
 export class UnificationError extends LangError {
   trace: Array<string> = []

@@ -1,8 +1,8 @@
-import { formatCore } from "../core"
-import type { Ctx } from "../ctx"
-import type { Mod } from "../mod"
-import { readback, readbackType } from "../readback"
-import type { TypedValue } from "../value"
+import { formatCore } from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import { readback, readbackType } from "../readback/index.js"
+import type { TypedValue } from "../value/index.js"
 
 export function formatTypedValue(
   mod: Mod,

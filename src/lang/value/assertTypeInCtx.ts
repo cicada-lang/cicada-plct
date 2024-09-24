@@ -1,7 +1,7 @@
-import type { Ctx } from "../ctx"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import { AlreadyType, formatType, Value } from "../value"
+import type { Ctx } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import { type AlreadyType, formatType, type Value } from "../value/index.js"
 
 export function assertTypeInCtx<Kind extends AlreadyType["@kind"]>(
   mod: Mod,

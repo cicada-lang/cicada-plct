@@ -1,4 +1,4 @@
-import type { Exp } from "../../exp"
+import type { Exp } from "../../exp/index.js"
 
 export type SolveBinding = {
   name: string

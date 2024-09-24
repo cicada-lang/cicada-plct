@@ -1,10 +1,10 @@
-import type { Ctx } from "../ctx"
-import * as Errors from "../errors"
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
-import { infer } from "../infer"
-import type { Mod } from "../mod"
-import * as Values from "../value"
+import type { Ctx } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
+import { infer } from "../infer/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Values from "../value/index.js"
 
 export function prepareProperties(
   mod: Mod,

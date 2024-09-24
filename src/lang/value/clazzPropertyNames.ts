@@ -1,5 +1,5 @@
-import * as Neutrals from "../neutral"
-import * as Values from "../value"
+import * as Neutrals from "../neutral/index.js"
+import * as Values from "../value/index.js"
 
 export function clazzPropertyNames(clazz: Values.Clazz): Array<string> {
   switch (clazz["@kind"]) {

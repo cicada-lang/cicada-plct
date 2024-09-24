@@ -1,9 +1,9 @@
-import { evaluate } from "../../evaluate"
-import type * as Exps from "../../exp"
-import { infer } from "../../infer"
-import type { Mod } from "../../mod"
-import type { Span } from "../../span"
-import { Stmt } from "../../stmt"
+import { evaluate } from "../../evaluate/index.js"
+import type * as Exps from "../../exp/index.js"
+import { infer } from "../../infer/index.js"
+import type { Mod } from "../../mod/index.js"
+import type { Span } from "../../span/index.js"
+import { Stmt } from "../../stmt/index.js"
 
 export class Clazz extends Stmt {
   constructor(

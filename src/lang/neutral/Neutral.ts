@@ -1,4 +1,4 @@
-import type { TypedValue, Value } from "../value"
+import type { TypedValue, Value } from "../value/index.js"
 
 export type Neutral =
   | Var

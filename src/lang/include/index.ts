@@ -1,2 +1,2 @@
-export * from "./include"
-export * from "./includeClazz"
+export * from "./include.js"
+export * from "./includeClazz.js"

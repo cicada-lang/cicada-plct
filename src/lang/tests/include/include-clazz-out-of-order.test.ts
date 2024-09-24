@@ -1,5 +1,5 @@
 import { test } from "vitest"
-import { expectCodeToFail, runCode } from "../utils"
+import { expectCodeToFail, runCode } from "../utils.js"
 
 test("include Clazz -- out of order", async () => {
   await runCode(`

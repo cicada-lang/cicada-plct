@@ -1,5 +1,5 @@
-import type { Env } from "../env"
-import type { Value } from "../value"
+import type { Env } from "../env/index.js"
+import type { Value } from "../value/index.js"
 
 export function envLookupValue(env: Env, name: string): Value | undefined {
   while (env["@kind"] !== "EnvNull") {

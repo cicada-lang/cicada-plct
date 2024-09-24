@@ -1,11 +1,11 @@
-import { ctxLookupType } from "../../ctx"
-import { envLookupValue } from "../../env"
-import * as Errors from "../../errors"
-import type { Mod } from "../../mod"
-import type { Span } from "../../span"
-import { Stmt } from "../../stmt"
-import type { ImportBinding } from "../import"
-import { defineBinding, undoBinding } from "../import"
+import { ctxLookupType } from "../../ctx/index.js"
+import { envLookupValue } from "../../env/index.js"
+import * as Errors from "../../errors/index.js"
+import type { Mod } from "../../mod/index.js"
+import type { Span } from "../../span/index.js"
+import { Stmt } from "../../stmt/index.js"
+import type { ImportBinding } from "../import/index.js"
+import { defineBinding, undoBinding } from "../import/index.js"
 
 export class Import extends Stmt {
   constructor(

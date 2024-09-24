@@ -1,6 +1,6 @@
-import type { Core } from "../core"
-import * as Cores from "../core"
-import { formatCore } from "../core"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import { formatCore } from "../core/index.js"
 
 export function unfoldFormatPi(core: Core): {
   bindings: Array<string>

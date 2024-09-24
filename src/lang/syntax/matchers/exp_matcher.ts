@@ -1,8 +1,8 @@
 import * as pt from "@cicada-lang/partech"
-import * as matchers from "."
-import type { Exp } from "../../exp"
-import * as Exps from "../../exp"
-import * as Macros from "../../macros"
+import * as matchers from "./index.js"
+import type { Exp } from "../../exp/index.js"
+import * as Exps from "../../exp/index.js"
+import * as Macros from "../../macros/index.js"
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({

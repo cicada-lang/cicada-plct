@@ -1,30 +1,30 @@
-import { check, checkClazz, checkType } from "../check"
-import { ClosureNative, ClosureSimple, closureApply } from "../closure"
-import type { Core } from "../core"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
+import { check, checkClazz, checkType } from "../check/index.js"
+import { ClosureNative, ClosureSimple, closureApply } from "../closure/index.js"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
 import {
   CtxCons,
   CtxFulfilled,
   ctxLookupType,
   ctxLookupValue,
   ctxToEnv,
-} from "../ctx"
-import * as Errors from "../errors"
-import { evaluate } from "../evaluate"
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
+} from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import { evaluate } from "../evaluate/index.js"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
 import {
   inferExtraProperties,
   inferFulfillingClazz,
   inferNewArgs,
   inferProperties,
-} from "../infer"
-import { insertDuringInfer } from "../insert"
-import type { Mod } from "../mod"
-import { readbackType } from "../readback"
-import type { Value } from "../value"
-import * as Values from "../value"
+} from "../infer/index.js"
+import { insertDuringInfer } from "../insert/index.js"
+import type { Mod } from "../mod/index.js"
+import { readbackType } from "../readback/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export type Inferred = {
   type: Value

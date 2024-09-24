@@ -1,5 +1,5 @@
-import type { Mod } from "../../mod"
-import type { ImportBinding } from "../import"
+import type { Mod } from "../../mod/index.js"
+import type { ImportBinding } from "../import/index.js"
 
 export function undoBinding(mod: Mod, binding: ImportBinding): void {
   switch (binding["@kind"]) {

@@ -1,4 +1,4 @@
-import type { Core } from "../core"
+import type { Core } from "../core/index.js"
 
 export function freeNames(boundNames: Set<string>, core: Core): Set<string> {
   switch (core["@kind"]) {

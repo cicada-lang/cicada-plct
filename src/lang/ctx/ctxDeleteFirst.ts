@@ -1,4 +1,4 @@
-import type { Ctx } from "../ctx"
+import type { Ctx } from "../ctx/index.js"
 
 export function ctxDeleteFirst(ctx: Ctx, name: string): Ctx {
   switch (ctx["@kind"]) {

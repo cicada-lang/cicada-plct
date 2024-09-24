@@ -1,4 +1,4 @@
-import { App } from "./App"
+import { App } from "./App.js"
 
 declare global {
   var app: App

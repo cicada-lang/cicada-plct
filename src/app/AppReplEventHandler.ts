@@ -1,10 +1,13 @@
-import { ReplEvent, ReplEventHandler } from "@cicada-lang/framework/lib/repl"
+import {
+  type ReplEvent,
+  ReplEventHandler,
+} from "@cicada-lang/framework/lib/repl/index.js"
 import fs from "fs"
 import process from "process"
-import * as Errors from "../lang/errors"
-import { parseStmts } from "../lang/syntax"
-import { Loader } from "../loader"
-import { colors } from "../utils/colors"
+import * as Errors from "../lang/errors/index.js"
+import { parseStmts } from "../lang/syntax/index.js"
+import { Loader } from "../loader/index.js"
+import { colors } from "../utils/colors.js"
 
 export class AppReplEventHandler extends ReplEventHandler {
   pathname = process.cwd() + "/repl"
@@ -23,7 +26,7 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   greeting(): void {
-    console.log(`Welcome to cicada ${app.config.pkg.version}`)
+    console.log(`Welcome to cicada`)
   }
 
   async handle(event: ReplEvent): Promise<void> {

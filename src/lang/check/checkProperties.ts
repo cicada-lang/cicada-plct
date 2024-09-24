@@ -1,13 +1,13 @@
-import { check } from "../check"
-import type { Core } from "../core"
-import type { Ctx } from "../ctx"
-import { CtxFulfilled, ctxToEnv } from "../ctx"
-import { equivalent } from "../equivalent"
-import * as Errors from "../errors"
-import { evaluate } from "../evaluate"
-import type { Exp } from "../exp"
-import type { Mod } from "../mod"
-import * as Values from "../value"
+import { check } from "../check/index.js"
+import type { Core } from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { CtxFulfilled, ctxToEnv } from "../ctx/index.js"
+import { equivalent } from "../equivalent/index.js"
+import * as Errors from "../errors/index.js"
+import { evaluate } from "../evaluate/index.js"
+import type { Exp } from "../exp/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Values from "../value/index.js"
 
 export function checkProperties(
   mod: Mod,

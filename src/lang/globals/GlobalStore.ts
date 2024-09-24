@@ -1,10 +1,10 @@
-import { Loader } from "../../loader"
-import { check, checkType } from "../check"
-import { CtxFulfilled } from "../ctx"
-import { evaluate } from "../evaluate"
-import { Mod } from "../mod"
-import { parseExp } from "../syntax"
-import type { Value } from "../value"
+import { Loader } from "../../loader/index.js"
+import { check, checkType } from "../check/index.js"
+import { CtxFulfilled } from "../ctx/index.js"
+import { evaluate } from "../evaluate/index.js"
+import { Mod } from "../mod/index.js"
+import { parseExp } from "../syntax/index.js"
+import type { Value } from "../value/index.js"
 
 export class GlobalStore {
   claimed: Map<string, Value> = new Map()

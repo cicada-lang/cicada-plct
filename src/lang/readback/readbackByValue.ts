@@ -1,22 +1,22 @@
-import * as Actions from "../actions"
-import { closureApply } from "../closure"
-import type { Core } from "../core"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import { CtxCons, ctxNames } from "../ctx"
-import * as Errors from "../errors"
-import type { Mod } from "../mod"
-import * as Neutrals from "../neutral"
+import * as Actions from "../actions/index.js"
+import { closureApply } from "../closure/index.js"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import { CtxCons, ctxNames } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Mod } from "../mod/index.js"
+import * as Neutrals from "../neutral/index.js"
 import {
   readback,
   readbackNeutral,
   readbackProperties,
   readbackType,
-} from "../readback"
-import { solutionNames } from "../solution"
-import { freshen } from "../utils/freshen"
-import type { Value } from "../value"
-import * as Values from "../value"
+} from "../readback/index.js"
+import { solutionNames } from "../solution/index.js"
+import { freshen } from "../utils/freshen.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function readbackByValue(
   mod: Mod,

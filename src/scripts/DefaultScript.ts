@@ -1,7 +1,7 @@
-import * as Errors from "../lang/errors"
-import type { Mod } from "../lang/mod"
-import { parseStmts } from "../lang/syntax"
-import { Script } from "../script"
+import * as Errors from "../lang/errors/index.js"
+import type { Mod } from "../lang/mod/index.js"
+import { parseStmts } from "../lang/syntax/index.js"
+import { Script } from "../script/index.js"
 
 export class DefaultScript extends Script {
   constructor(

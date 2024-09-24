@@ -1,9 +1,9 @@
-import { closureApply } from "../closure"
-import * as Errors from "../errors"
-import * as Neutrals from "../neutral"
-import type { Value } from "../value"
-import * as Values from "../value"
-import { doCar } from "./doCar"
+import { closureApply } from "../closure/index.js"
+import * as Errors from "../errors/index.js"
+import * as Neutrals from "../neutral/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
+import { doCar } from "./doCar.js"
 
 export function doCdr(target: Value): Value {
   return tryCdr(target) || neutralizeCdr(target)

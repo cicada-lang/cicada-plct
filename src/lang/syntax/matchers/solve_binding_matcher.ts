@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
-import * as matchers from "."
-import type * as Stmts from "../../stmts"
+import * as matchers from "./index.js"
+import type * as Stmts from "../../stmts/index.js"
 
 export function solve_binding_matcher(tree: pt.Tree): Stmts.SolveBinding {
   return pt.matcher<Stmts.SolveBinding>({

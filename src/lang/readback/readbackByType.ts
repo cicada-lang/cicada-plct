@@ -1,9 +1,9 @@
-import type { Core } from "../core"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import type { Mod } from "../mod"
-import { readbackType } from "../readback"
-import type { Value } from "../value"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import { readbackType } from "../readback/index.js"
+import type { Value } from "../value/index.js"
 
 /**
 

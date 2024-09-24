@@ -1,11 +1,11 @@
-import type { Mod } from "src/lang/mod"
-import { check, checkType } from "../../check"
-import type { Ctx } from "../../ctx"
-import { ctxToEnv } from "../../ctx"
-import { evaluate } from "../../evaluate"
-import { infer, inferOrUndefined } from "../../infer"
-import { unify, unifyType } from "../../unify"
-import type { Equation } from "../solve"
+import { check, checkType } from "../../check/index.js"
+import type { Ctx } from "../../ctx/index.js"
+import { ctxToEnv } from "../../ctx/index.js"
+import { evaluate } from "../../evaluate/index.js"
+import { infer, inferOrUndefined } from "../../infer/index.js"
+import type { Mod } from "../../mod/index.js"
+import { unify, unifyType } from "../../unify/index.js"
+import type { Equation } from "../solve/index.js"
 
 export function unifyEquation(mod: Mod, ctx: Ctx, equation: Equation): void {
   switch (equation["@kind"]) {

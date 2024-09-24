@@ -1,6 +1,6 @@
-import * as Errors from "../errors"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Errors from "../errors/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function clazzFulfill(clazz: Values.Clazz, arg: Value): Values.Clazz {
   switch (clazz["@kind"]) {

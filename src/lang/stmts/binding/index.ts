@@ -1,2 +1,2 @@
-export * from "./Let"
-export * from "./LetThe"
+export * from "./Let.js"
+export * from "./LetThe.js"

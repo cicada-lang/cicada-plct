@@ -1,2 +1,2 @@
-export * from "./Clazz"
-export * from "./ClazzExtends"
+export * from "./Clazz.js"
+export * from "./ClazzExtends.js"

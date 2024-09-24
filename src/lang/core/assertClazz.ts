@@ -1,6 +1,6 @@
-import type * as Cores from "../core"
-import type { Core } from "../core"
-import * as Errors from "../errors"
+import type * as Cores from "../core/index.js"
+import type { Core } from "../core/index.js"
+import * as Errors from "../errors/index.js"
 
 export function assertClazz(core: Core): asserts core is Cores.Clazz {
   if (core["@kind"] === "ClazzNull") return

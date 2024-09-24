@@ -1,11 +1,11 @@
-import type { Core } from "../core"
-import * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import * as Errors from "../errors"
-import type { Insertion } from "../insert"
-import type { Mod } from "../mod"
-import { readback } from "../readback"
-import { solutionLookupValue } from "../solution"
+import type { Core } from "../core/index.js"
+import * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import * as Errors from "../errors/index.js"
+import type { Insertion } from "../insert/index.js"
+import type { Mod } from "../mod/index.js"
+import { readback } from "../readback/index.js"
+import { solutionLookupValue } from "../solution/index.js"
 
 export function insertionApply(
   mod: Mod,

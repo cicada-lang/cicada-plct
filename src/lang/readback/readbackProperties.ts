@@ -1,10 +1,10 @@
-import * as Actions from "../actions"
-import type * as Cores from "../core"
-import type { Ctx } from "../ctx"
-import type { Mod } from "../mod"
-import { readback } from "../readback"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Actions from "../actions/index.js"
+import type * as Cores from "../core/index.js"
+import type { Ctx } from "../ctx/index.js"
+import type { Mod } from "../mod/index.js"
+import { readback } from "../readback/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function readbackProperties(
   mod: Mod,

@@ -1,6 +1,6 @@
-import type { Core } from "../core"
-import type { Exp } from "../exp"
-import type * as Values from "../value"
+import type { Core } from "../core/index.js"
+import type { Exp } from "../exp/index.js"
+import type * as Values from "../value/index.js"
 
 export type Insertion =
   | InsertionPatternVar

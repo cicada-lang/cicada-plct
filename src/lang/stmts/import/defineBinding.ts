@@ -1,6 +1,6 @@
-import type { Mod } from "../../mod"
-import type { Value } from "../../value"
-import type { ImportBinding } from "../import"
+import type { Mod } from "../../mod/index.js"
+import type { Value } from "../../value/index.js"
+import type { ImportBinding } from "../import/index.js"
 
 export function defineBinding(
   mod: Mod,

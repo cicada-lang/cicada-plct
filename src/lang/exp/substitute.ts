@@ -1,6 +1,6 @@
-import type { Exp } from "../exp"
-import * as Exps from "../exp"
-import { freshen } from "../utils/freshen"
+import type { Exp } from "../exp/index.js"
+import * as Exps from "../exp/index.js"
+import { freshen } from "../utils/freshen.js"
 
 export function substitute(body: Exp, name: string, exp: Exp): Exp {
   switch (body["@kind"]) {

@@ -1,9 +1,9 @@
-import * as Actions from "../actions"
-import type { Mod } from "../mod"
-import type { Neutral } from "../neutral"
-import { solutionWalk } from "../solution"
-import type { Value } from "../value"
-import * as Values from "../value"
+import * as Actions from "../actions/index.js"
+import type { Mod } from "../mod/index.js"
+import type { Neutral } from "../neutral/index.js"
+import { solutionWalk } from "../solution/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function solutionAdvanceValue(mod: Mod, value: Value): Value {
   if (value["@kind"] === "TypedNeutral") {

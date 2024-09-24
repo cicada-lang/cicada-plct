@@ -1,7 +1,7 @@
-import type { Closure } from "../closure"
-import { EnvCons } from "../env"
-import { evaluate } from "../evaluate"
-import type { Value } from "../value"
+import type { Closure } from "../closure/index.js"
+import { EnvCons } from "../env/index.js"
+import { evaluate } from "../evaluate/index.js"
+import type { Value } from "../value/index.js"
 
 export function closureApply(closure: Closure, arg: Value): Value {
   switch (closure["@kind"]) {

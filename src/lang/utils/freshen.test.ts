@@ -1,5 +1,5 @@
 import { expect, test } from "vitest"
-import { freshen } from "./freshen"
+import { freshen } from "./freshen.js"
 
 test("freshen create new string not in set", () => {
   expect(freshen(["x"], "x")).toBe("x1")

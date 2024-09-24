@@ -1,6 +1,6 @@
-import { Solution, solutionLookupValue } from "../solution"
-import type { Value } from "../value"
-import * as Values from "../value"
+import { Solution, solutionLookupValue } from "../solution/index.js"
+import type { Value } from "../value/index.js"
+import * as Values from "../value/index.js"
 
 export function solutionWalk(solution: Solution, value: Value): Value {
   while (Values.isPatternVar(value)) {
