@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test"
+import { expect, test } from "vitest"
 import * as Errors from "../../errors"
 import { expectCodeToFail, runCode } from "../utils"
 

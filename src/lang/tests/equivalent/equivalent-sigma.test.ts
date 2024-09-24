@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test"
+import { expect, test } from "vitest"
 import { expectCodeToFail, runCode } from "../utils"
 
 test("equivalent Sigma", async () => {

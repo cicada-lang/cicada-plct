@@ -1,4 +1,4 @@
-import { test } from "bun:test"
+import { test } from "vitest"
 import { expectCodeToFail } from "../utils"
 
 test("compute ApImplicit -- scope", async () => {

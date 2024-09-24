@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test"
+import { expect, test } from "vitest"
 import { freshen } from "./freshen"
 
 test("freshen create new string not in set", () => {

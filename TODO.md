@@ -1,3 +1,7 @@
+use "type": "module" in package.json
+
+move std/ and tests/ to docs/
+
 `cic run --watch` should not watch even first run meets error
 
 `Stmts.Test` -- `test { ... }` and `test <description> { ... }`

@@ -1,4 +1,4 @@
-// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`compute ApImplicit -- insertion -- deepWalk required 1`] = `
 "cons("abc", sole): Pair(String, Trivial)

@@ -1,4 +1,4 @@
-// Vitest Snapshot v1, https://bun:test.dev/guide/snapshot.html
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`compute Car -- just car 1`] = `"(implicit A, implicit B, target) => car(target): (implicit A: Type, implicit B: (A) -> Type, exists (A) B(x)) -> A"`;
 

@@ -1,4 +1,4 @@
-import { test } from "bun:test"
+import { test } from "vitest"
 import { runCode } from "../utils"
 
 test("check Sole is Trivial", async () => {

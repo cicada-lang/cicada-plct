@@ -1,4 +1,4 @@
-import { expect } from "bun:test"
+import { expect } from "vitest"
 import { Loader } from "../../loader"
 import * as Errors from "../errors"
 import { Mod } from "../mod"
