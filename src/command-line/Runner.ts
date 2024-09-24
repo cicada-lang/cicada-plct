@@ -1,5 +1,5 @@
-import process from "node:process"
 import fs from "fs"
+import process from "node:process"
 import * as Errors from "../lang/errors/index.js"
 import { Loader } from "../loader/index.js"
 

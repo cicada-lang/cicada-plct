@@ -1,6 +1,6 @@
 import * as pt from "@cicada-lang/partech"
-import * as matchers from "./index.js"
 import * as Exps from "../../exp/index.js"
+import * as matchers from "./index.js"
 
 export function fn_binding_matcher(tree: pt.Tree): Exps.FnBinding {
   return pt.matcher<Exps.FnBinding>({

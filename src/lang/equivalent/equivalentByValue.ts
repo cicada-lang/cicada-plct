@@ -1,6 +1,10 @@
 import { indent } from "../../utils/indent.js"
 import type { Ctx } from "../ctx/index.js"
-import { equivalent, equivalentNeutral, equivalentType } from "../equivalent/index.js"
+import {
+  equivalent,
+  equivalentNeutral,
+  equivalentType,
+} from "../equivalent/index.js"
 import * as Errors from "../errors/index.js"
 import type { Mod } from "../mod/index.js"
 import type { Value } from "../value/index.js"

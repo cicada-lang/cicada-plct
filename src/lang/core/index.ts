@@ -1,6 +1,6 @@
-export * from "./Core.js"
 export * from "./assertClazz.js"
 export * from "./clazzAppend.js"
+export * from "./Core.js"
 export * from "./formatCore.js"
 export * from "./freeNames.js"
 export * from "./freeOccurred.js"

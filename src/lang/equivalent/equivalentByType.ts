@@ -3,7 +3,11 @@ import * as Actions from "../actions/index.js"
 import { closureApply } from "../closure/index.js"
 import type { Ctx } from "../ctx/index.js"
 import { CtxCons, ctxNames } from "../ctx/index.js"
-import { equivalent, equivalentProperties, equivalentType } from "../equivalent/index.js"
+import {
+  equivalent,
+  equivalentProperties,
+  equivalentType,
+} from "../equivalent/index.js"
 import * as Errors from "../errors/index.js"
 import type { Mod } from "../mod/index.js"
 import * as Neutrals from "../neutral/index.js"

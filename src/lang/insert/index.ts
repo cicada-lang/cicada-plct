@@ -1,6 +1,6 @@
-export * from "./Insertion.js"
 export * from "./insertDuringCheck.js"
 export * from "./insertDuringInfer.js"
+export * from "./Insertion.js"
 export * from "./insertionApply.js"
 export * from "./solveByArgs.js"
 export * from "./solveByRetType.js"

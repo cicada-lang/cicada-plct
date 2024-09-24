@@ -1,5 +1,5 @@
-export * from "./Solution.js"
 export * from "./formatSolution.js"
+export * from "./Solution.js"
 export * from "./solutionAdvanceValue.js"
 export * from "./solutionBind.js"
 export * from "./solutionCleanup.js"
