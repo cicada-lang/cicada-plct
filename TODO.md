@@ -1,5 +1,3 @@
-move std/ and tests/ to docs/
-
 `Stmts.Test` -- `test { ... }` and `test <description> { ... }`
 
 - move snapshot tests to `test:cic`
