@@ -56,7 +56,7 @@ let ten = add1(nine)
 
 We can use the `recursion` keyword to define functions that operates over `Nat`.
 
-`add` is one of the most basic function, it adds two `Nat`s togather.
+`add` is one of the most basic function, it adds two `Nat`s together.
 
 ```cicada
 function add(x: Nat, y: Nat): Nat {
@@ -85,7 +85,7 @@ Note that,
 - We often add a `_` prefix for a name taken from pattern matching,
   but not used in the following code.
 
-  - `_prev` is a example of this situation.
+  - `_prev` is an example of this situation.
 
 Let's write some tests.
 
