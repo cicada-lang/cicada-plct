@@ -14,7 +14,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test:ts": "vitest --dir src --run",
-    "test:cic:tests": "test-runner snapshot 'node ./bin/cic.js --no-color' 'docs/tests/**/*.(cic|md)' --exclude 'tests/**/*.(error|todo).(cic|md)'",
+    "test:cic:tests": "test-runner snapshot 'node ./bin/cic.js --no-color' 'docs/tests/**/*.(cic|md)' --exclude 'docs/tests/**/*.(error|todo).(cic|md)'",
     "test:cic:tests-error": "test-runner snapshot-error 'node ./bin/cic.js --no-color' 'docs/tests/**/*.error.(cic|md)'",
     "test:cic:std": "test-runner snapshot 'node ./bin/cic.js --no-color' 'docs/std/**/*.(cic|md)' --exclude 'docs/std/**/*.(error|todo).(cic|md)'",
     "test:cic:std-error": "test-runner snapshot-error 'node ./bin/cic.js --no-color' 'docs/std/**/*.error.(cic|md)'",
