@@ -35,7 +35,7 @@ We can use the `let` statement to do assignment.
 let my_name = "Xie Yuheng"
 ```
 
-We can use the `compute` statement to compute the value of a expression.
+We can use the `compute` statement to compute the value of an expression.
 
 ```cicada
 compute my_name
@@ -98,7 +98,7 @@ because we read `Pair(A, C)` as
 
 > Both A and C are true.
 
-The following two expressions are the same `Type`.
+The following two expressions are of the same `Type`.
 
 ```cicada
 check Pair(String, Trivial): Type
@@ -285,7 +285,7 @@ check same(sole): Equal(Trivial, sole, sole)
 
 If we want to omit all arguments, we can use `refl`, which means "reflection".
 
-- We can omit all arguments, because after all, all the informations are already in the type.
+- We can omit all arguments, because after all, all the informations is already in the type.
 
 ```cicada
 check refl: Equal(String, "abc", "abc")

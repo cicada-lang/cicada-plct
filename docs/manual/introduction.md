@@ -19,7 +19,7 @@ _interactive theorem prover_.
 Source code of this manual is available at
 the `docs/manual/` directory of [cicada repository](https://github.com/cicada-lang/cicada).
 
-Welcame to give feedback :)
+Welcome to give feedback :)
 
 # Manual as Standard Library
 
