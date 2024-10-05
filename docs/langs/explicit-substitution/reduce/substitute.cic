@@ -13,7 +13,7 @@ export function substitute(
     }
 
     case Exp::Fn(name, ret) => {
-      let freshName = freshen(name
+      let freshName = freshen(name)
       Exp::Fn(
         freshName,
         Exp::Let(
