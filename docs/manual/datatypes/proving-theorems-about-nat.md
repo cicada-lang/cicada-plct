@@ -66,7 +66,7 @@ we might need to use `Equal`'s constructors in our proof.
 We have the definition of `Nat`, we already know a lot about it.
 
 And we have the definition of `add`,
-which tall us how the computation of addition is performed,
+which tells us how the computation of addition is performed,
 both in the case of `zero` and in the case of `add1`.
 
 We also know something about the built-in type `Equal`,
